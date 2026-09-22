@@ -70,7 +70,7 @@ script = ExtResource("6_dialogue")
 [node name="OpeningDialogueCue" type="Node" parent="."]
 script = ExtResource("7_cue")
 station_id = &"station_18"
-opening_line = "Wracam na znaną ulicę. Trzy drogi na tablicy, Marta przy oknie — mówię jej prawdę, potem zatwierdzam."
+opening_line = "Przyniosłam odpisy z hali. Marta czeka na znanej ulicy; pokażę jej prognozy z mojego czytnika."
 
 [node name="CrispDiegeticText_Forecasts" type="Node2D" parent="."]
 position = Vector2(84, 118)
@@ -82,7 +82,7 @@ text_color = Color(0.82, 0.6, 0.36, 1)
 [node name="CrispDiegeticText_Window" type="Node2D" parent="."]
 position = Vector2(286, 150)
 script = ExtResource("12_crisp_text")
-text = "WITRYNA MARTY // PRAWDA ALBO JEJ CZESC"
+text = "ODPISY DLA MARTY // ZAPIS I KLUCZ"
 font_size = 9
 text_color = Color(0.82, 0.6, 0.36, 1)
 
@@ -98,14 +98,14 @@ text_color = Color(0.82, 0.6, 0.36, 1)
 [node name="CrispDiegeticText_CommitMid" type="Node2D" parent="."]
 position = Vector2(424, 224)
 script = ExtResource("12_crisp_text")
-text = "SRODEK: ODZYSKANIE"
+text = "ŚRODEK: ODZYSKANIE"
 font_size = 9
 text_color = Color(0.82, 0.6, 0.36, 1)
 
 [node name="CrispDiegeticText_CommitRight" type="Node2D" parent="."]
 position = Vector2(424, 248)
 script = ExtResource("12_crisp_text")
-text = "PRAWO: PRZEJSCIE WZAJEMNE"
+text = "PRAWO: PRZEJŚCIE WZAJEMNE"
 font_size = 9
 text_color = Color(0.82, 0.6, 0.36, 1)
 

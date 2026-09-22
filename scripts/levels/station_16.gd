@@ -72,6 +72,16 @@ func _ready() -> void:
 	_setup_guidance()
 	_connect_props()
 	_setup_audio()
+	var state := get_node_or_null("/root/GameStateManager")
+	if state != null:
+		is_response_transferred = state.decisions.get(FACT_RESPONSE, false) == true
+		var prior_cost := str(state.decisions.get(FACT_COST_CHOICE, ""))
+		is_cost_selected = prior_cost in ["marta_memory", "sample_second"]
+		if is_cost_selected:
+			selected_cost = COST_MARTA_MEMORY if prior_cost == "marta_memory" else COST_SAMPLE_SECOND
+		is_home_echo_confirmed = state.decisions.get(FACT_HOME_ECHO, false) == true
+		if is_home_echo_confirmed:
+			_unlock_exit()
 	if airlock_zone != null and not airlock_zone.body_entered.is_connected(_on_airlock_body_entered):
 		airlock_zone.body_entered.connect(_on_airlock_body_entered)
 	queue_redraw()
@@ -92,10 +102,10 @@ func _setup_guidance() -> void:
 	_register_beat(&"s16_analyzer_contact", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Odpowiedź przechodzi do bezpiecznego analizatora.", "The response enters the safe analyzer.", &"", "")
 	_register_beat(&"s16_small_cost_hypothesis", GuidanceBeat.Tier.L2_CONTEXTUAL_THOUGHT, &"interpretation", &"fallible", "Może wystarczy utrzymać jeden szczegół. Sprawdzę, co zostanie ostrzejsze.", "Maybe one detail can stay sharp. I will check what remains clear.", &"small_cost", "choose_marta_memory_cost")
 	_register_beat(&"s16_cost_plan", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Przeniosę odpowiedź, wybiorę jeden szczegół i potwierdzę echo domu.", "Transfer the response, choose one detail, and confirm the home echo.", &"", "confirm_home_echo")
-	# PKG-0230 (P1-1+P1-4): zdanie wyjscia — 16 → 17: echo wykluczylo zamiane,
+	# PKG-0239: wiadomość jest przesłanką przeciw podmianie, nie przeszukaniem świata;
 	# wiec ktos to wczesniej policzyl. Slad prowadzi tam, gdzie prowadzi sie
 	# rejestry: do hali UCP, do rejestru par.
-	_register_beat(&"s16_exit_to_ledger", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Nikt się nie zamienił. Ktoś to wcześniej policzył — sprawdzę rejestr par w hali UCP.", "Nobody swapped. Someone counted it before — I check the pair ledger in the UCP hall.", &"", "")
+	_register_beat(&"s16_exit_to_ledger", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Marta w domu mnie szukała. Z odpowiedzią i kosztem pójdę do rejestru par w hali UCP.", "Marta was looking for me at home. I will take the reply and its cost to the UCP pair ledger.", &"", "")
 	_register_beat(&"s16_system_hint", GuidanceBeat.Tier.L4_RESCUE_HINT, &"system_hint", &"system", "WSKAZÓWKA: Analizator, jeden wybór kosztu, odbiornik echa.", "HINT: Analyzer, one cost choice, echo receiver.", &"", "")
 	_register_beat(&"s16_home_echo_confirmed", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Echo domu wraca po jednym małym ubytku.", "The home echo returns after one small loss.", &"", "")
 
@@ -198,6 +208,11 @@ func choose_cost_from_player_side() -> bool:
 
 
 func _commit_cost(cost_id: StringName, choice_id: StringName) -> bool:
+	var state := get_node_or_null("/root/GameStateManager")
+	if state == null:
+		return false
+	if state.decisions.has(FACT_COST_CHOICE) or preload("res://scripts/levels/narrative_repair_rules.gd").locked(state.decisions):
+		return false
 	if is_cost_selected:
 		return false
 	if not is_response_transferred:

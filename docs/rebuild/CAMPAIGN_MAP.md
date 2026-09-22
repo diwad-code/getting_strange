@@ -1,12 +1,30 @@
 # Mapa kampanii P9 — 20 odwiedzanych adresów
 
+## Uzupełnienie aktywnej mapy / PKG-0239 / 2026-09-22
+
+Tabela aktywnej trasy uwzględnia korekty audytu. Szczegóły:
+`docs/narrative/NARRATIVE_FIX_IMPLEMENTATION.md`. Nie dodano miejsca,
+urządzenia lub czwartego finału. Numery dawcy 19–41 pozostają historyczne.
+
+„Pierwsza minuta”, „pięć minut” i „trzydzieści minut” to cele projektowe,
+nie zmierzone czasy tej wersji. Sekundy odbioru: brak danych. W 18 Lena
+przenosi kopie z hali i prognozy we własnym czytniku do Marty na znaną
+ulicę. Nie pojawia się tam nowe urządzenie rozwiązujące zagadkę.
+
+Opis ryzyka nie wymaga zgody na wykonanie. Powrót 18→17 służy odpowiedzi
+na wskazaną metodę, nie resetuje odmowy. Po odmowie podłączenia możliwa
+jest jedna nowa propozycja samego odczytu do B. Marta osobno odpowiada
+w sprawie klucza C. Zatwierdzenie 18 zamraża zamiar; istniejące czynności
+42 go realizują. W B ta sama zasuwa zamyka kanał dopiero po odzyskaniu
+miejscowej. Epilog nie oddaje głosu wszechwiedzącemu narratorowi.
+
 Aktualizacja CR-A / PKG-0193: dla treści i writerów 09–13 obowiązuje mapa
 `PKG_0193_CREATIVE_SCENES.md`. 09 używa fotografii (nie osobnej akcji
 porównania dwóch dokumentów). `marta_relationship_disclosed` zachowuje
 rzeczywistego writera w 08; 10 dostarcza wspomnienia i granicę.
 `recognition_evidence_carried` oznacza wyłożenie własnego dokumentu i czytnika;
 nie wymaga ani nie fabrykuje opcjonalnej surowej próbki. Adres w 07/08/13:
-Sadowa 7, mieszkania 12/14. Materiał rozkładu 06 czeka na CR-D.
+Sadowa 7, mieszkania 12/14. Rozmowa 06 sprawdza różnicę trasy i hipotezę objazdu (PKG-0239).
 
 Status: **AKTYWNY KONTRAKT PRODUKTU P9 — BUNDLE-03 / PKG-0156**
 Data: 2026-08-31
@@ -55,7 +73,7 @@ Kolumna „zmiana pytania” podaje pytanie, z którym gracz **wychodzi** z adre
 
 | # | Cel Leny | Rodzina | Działanie gracza | Zmiana pytania | Wejście / wyjście | Materiał legacy | Status |
 |---|---|---|---|---|---|---|---|
-| 01 | zamknąć pomiar trzysekundowej luki i wrócić do Marty | techniczna/przemysłowa | powtórzyć odczyt na jednym stanowisku, zabezpieczyć surową próbkę, odczytać wiadomość Marty | „czy ta luka jest prawdziwa, czy to znów artefakt?” | start kampanii / prawa (śluza) | Station 01 | `ADAPT` |
+| 01 | zamknąć pomiar trzysekundowej luki i wrócić do Marty | techniczna/przemysłowa | wykonać pierwszy odczyt; wybrać powtórkę z próbką albo wyjście po jednym pomiarze; odpowiedzieć Marcie | „czy ta luka jest prawdziwa, czy to znów artefakt?” | start kampanii / prawa (śluza) | Station 01 | `ADAPT` |
 | 02 | wyjść z terenu pomiaru | zewnętrzna/miejska | obejść realne prace serwisowe, wejść po drabinie na nasyp | „ile jeszcze czasu mnie to kosztuje?” | lewa / prawa | Station 02 | `ADAPT` |
 | 03 | sprawdzić dojazd i odpowiedzieć Marcie | tranzytowa | odczytać rozkład, odpisać Marcie, wsiąść | „jak bardzo się spóźnię?” | lewa / wejście do pojazdu | Station 03 | `ADAPT` |
 | 04 | dojechać do dzielnicy | tranzytowa | porównać bufor czytnika z zapisem, spojrzeć na ślad katastrofy Linii 4 | „dlaczego czytnik pamięta lukę, której nie zapisałam?” | wnętrze pojazdu / prawa (wysiadka) | Station 04 | `ADAPT` |
@@ -64,8 +82,8 @@ Kolumna „zmiana pytania” podaje pytanie, z którym gracz **wychodzi** z adre
 
 | # | Cel Leny | Rodzina | Działanie gracza | Zmiana pytania | Wejście / wyjście | Materiał legacy | Status |
 |---|---|---|---|---|---|---|---|
-| 05 | przejść ostatni odcinek do domu | zewnętrzna/miejska | przejść znaną ulicą bez przeszkody, minąć trzy stałe punkty odniesienia | „czy wszystko jest normalne?” (baseline) | lewa / prawa | Station 05 | `ADAPT` |
-| 06 | kupić wodę i potwierdzić trasę | zewnętrzna/miejska | porównać druk rozkładu z pamięcią, kupić coś u sprzedawcy, zadać jedno pytanie kontrolne | „pomyliłam rozkład, czy rozkład się zmienił?” | lewa / prawa | Station 06 (rozkłady) + Station 07 (kiosk) | `ADAPT` |
+| 05 | przejść ostatni odcinek do domu | zewnętrzna/miejska | przejść znaną ulicą; inspekcje ulicy i torby są opcjonalne | „czy wszystko jest normalne?” (baseline) | lewa / prawa | Station 05 | `ADAPT` |
+| 06 | kupić wodę i potwierdzić trasę | zewnętrzna/miejska | porównać druk z pamięcią, kupić wodę, zapytać o rozbieżną trasę Linii 4 i objazd | „pomyliłam rozkład, czy rozkład się zmienił?” | lewa / prawa | Station 06 (rozkłady) + Station 07 (kiosk) | `ADAPT` |
 | 07 | wejść do własnego budynku | zewnętrzna/miejska | porównać numer z dokumentu z tabliczką, użyć domofonu, wpisać kod | „mieszkam pod 12 czy pod 14?” | lewa / próg klatki | Station 08 | `ADAPT` |
 | 08 | ustalić, czy zmieniono numerację | mieszkalna | wejść po schodach, zapytać sąsiadkę bez sugerowania odpowiedzi, przekręcić klucz w zamku 14 | „dlaczego mój klucz tu działa?” | próg / drzwi mieszkania | Station 09 + Station 10 | `ADAPT` |
 
@@ -73,30 +91,30 @@ Kolumna „zmiana pytania” podaje pytanie, z którym gracz **wychodzi** z adre
 
 | # | Cel Leny | Rodzina | Działanie gracza | Zmiana pytania | Wejście / wyjście | Materiał legacy | Status |
 |---|---|---|---|---|---|---|---|
-| 09 | ustalić, kto tu mieszka | mieszkalna | obejrzeć rzeczy dwóch osób, porównać dwie wersje dokumentu adresowego, uszanować granicę cudzej prywatności | „kto przygotował życie, które pasuje do mnie?” | drzwi / wnętrze | Station 11 + Station 13 | `ADAPT` |
+| 09 | ustalić, kto tu mieszka | mieszkalna | obejrzeć rzeczy dwóch osób i fotografię, uszanować granicę cudzej prywatności | „kto przygotował życie, które pasuje do mnie?” | drzwi / wnętrze | Station 11 + Station 13 | `ADAPT` |
 | 10 | uzyskać od Marty niezależny opis dnia | mieszkalna | wykonać zwykłą domową czynność, wysłuchać dwóch wersji wspólnej wyprawy, przyjąć granicę Marty | „Marta mówi o mnie czy o kimś innym?” | wnętrze / prawa (wyjście z domu) | Station 12 + Station 14 + Station 15 + Station 24 | `ADAPT` |
 | 11 | odczytać własną historię pracy | instytucjonalna | przejść kontrolę biometryczną mimo obcego numeru karty, odczytać fizyczny zapis aktywności, skopiować minimalny zakres raportu | „czy instytucja prowadzi inną wersję mojego życia?” | lewa / prawa | Station 16 + Station 17 + Station 18 | `ADAPT` |
 | 12 | sprawdzić, czy Jakub jest żywą osobą | techniczna/przemysłowa | zadać dwa pytania kontrolne przez łącze, spotkać go w warsztacie, przyjąć jego odmowę pokazania blizny | „czy mój brat naprawdę tu żyje?” | lewa / prawa | Station 19 + Station 20 | `ADAPT` |
-| 13 | wybrać model, który tłumaczy wszystkie fakty | mieszkalna (znane miejsce po zmianie) | jawnie zestawić trzy rodziny dowodu przy jednym stole i zadeklarować wniosek | „gdzie jest miejscowa Lena?” | prawa (powrót do 14) / drzwi na klatkę | Station 21 | `ADAPT` |
+| 13 | wybrać model, który tłumaczy wszystkie fakty | mieszkalna (znane miejsce po zmianie) | zestawić trzy rodziny dowodu, przyjąć wniosek i zobowiązać się do poszukiwania | „gdzie jest miejscowa Lena?” | prawa (powrót do 14) / drzwi na klatkę | Station 21 | `ADAPT` |
 
 ### Metoda, koszt i zgoda
 
 | # | Cel Leny | Rodzina | Działanie gracza | Zmiana pytania | Wejście / wyjście | Materiał legacy | Status |
 |---|---|---|---|---|---|---|---|
 | 14 | nauczyć się działania bez używania człowieka | techniczna/przemysłowa | utrzymać jeden stan martwego obwodu, ustąpić drugiemu, odwrócić próbę bezpiecznie | „czym płacę za utrzymanie jednej wersji?” | lewa / właz techniczny w dół (HATCH) | Station 22 + Station 23 | `ADAPT` |
-| 15 | potwierdzić żywy sygnał miejscowej Leny | graniczna/anomalna | odtworzyć fragment próby z 20:40, wysłać trzy impulsy z jednym celowym błędem, odczytać notatkę z warunkiem przerwania | „czy ona odpowiada, czy to echo mojego urządzenia?” | właz / drabina serwisowa w górę | Station 26 + Station 27 + Station 33 | `ADAPT` |
-| 16 | przenieść odpowiedź do bezpiecznego analizatora | graniczna/anomalna | wybrać, co traci ostrość: pamięć spotkania z Martą albo dokładna sekunda próbki; potwierdzić echo domu | „co jeszcze stracę, jeśli będę próbować dalej?” | drabina / prawa | Station 28 + Station 35 | `ADAPT` |
-| 17 | ustalić, kto już zapłacił i kto się zgadza | instytucjonalna | odczytać rejestr par kosztów Linii 4, odrzucić ofertę adaptacji, wynegocjować jawny zakres zgody Jakuba | „kto poniósł koszt mojego bezpieczeństwa?” | lewa / prawa | Station 31 + Station 36 + Station 37 | `ADAPT` |
-| 18 | wybrać metodę możliwą przy aktualnych zgodach | zewnętrzna/miejska (ulica z 05 po zmianie) | zestawić trzy prognozy z aktualnymi zgodami, powiedzieć Marcie prawdę lub jej część, fizycznie zatwierdzić jedną metodę | „którą wartość chronię i czyim kosztem?” | prawa (powrót na ulicę z 05) / przejście do wariantu finału | Station 30 + Station 38 + Station 39 | `ADAPT` |
+| 15 | sprawdzić, czy sygnał odpowiada na celową zmianę | graniczna/anomalna | odtworzyć fragment próby z 20:40, wysłać trzy impulsy z jednym celowym błędem, odczytać notatkę z warunkiem przerwania | „czy ona odpowiada, czy to echo mojego urządzenia?” | właz / drabina serwisowa w górę | Station 26 + Station 27 + Station 33 | `ADAPT` |
+| 16 | przenieść odpowiedź do bezpiecznego analizatora | graniczna/anomalna | oddać pamięć dzisiejszego zdania Marty albo 20:40:07 właściwego nośnika; odczytać echo domu | „co jeszcze stracę, jeśli będę próbować dalej?” | drabina / prawa | Station 28 + Station 35 | `ADAPT` |
+| 17 | ustalić, kto już zapłacił i kto się zgadza | instytucjonalna | odczytać rejestr i ofertę; ustalić zakres; po prognozie wrócić po odpowiedź na jedną metodę | „kto poniósł koszt mojego bezpieczeństwa?” | lewa / prawa | Station 31 + Station 36 + Station 37 | `ADAPT` |
+| 18 | wybrać metodę możliwą przy aktualnych zgodach | zewnętrzna/miejska (ulica z 05 po zmianie) | przynieść kopie z hali, poznać prognozy, wskazać propozycję, uzyskać odpowiedzi i zatwierdzić metodę | „którą wartość chronię i czyim kosztem?” | prawa (powrót na ulicę z 05) / przejście do wariantu finału | Station 30 + Station 38 + Station 39 | `ADAPT` |
 
 ### Konsekwencja i epilog
 
 | # | Cel Leny | Rodzina | Działanie gracza | Zmiana pytania | Wejście / wyjście | Materiał legacy | Status |
 |---|---|---|---|---|---|---|---|
 | 42A | wykonać wymuszony powrót przybyłej Leny | finałowa/epilogiczna | przeprowadzić powrót i zobaczyć, kto zostaje zamknięty między adresami | „co zrobiłam drugiej mnie?” | z 18 / do 43 | Station 42A + Station 40 (impuls) + Station 41 (rozpoznanie) | `ADAPT` |
-| 42B | oddać miejscowej Lenie jej ciało i zamknąć przepływ | finałowa/epilogiczna | zamknąć Rówień i przyjąć własną nieindeksowaną ciągłość | „gdzie jestem teraz ja?” | z 18 / do 43 | Station 42B + Station 40 + Station 41 | `ADAPT` |
+| 42B | oddać miejscowej Lenie jej ciało i zamknąć przepływ | finałowa/epilogiczna | rozpocząć odzyskanie → potwierdzić miejscową przy progu → zamknąć przepływ → odczytać utratę indeksu | „gdzie jestem teraz ja?” | z 18 / do 43 | Station 42B + Station 40 + Station 41 | `ADAPT` |
 | 42C | pozwolić obu Lenom odpowiedzieć | finałowa/epilogiczna | otworzyć wzajemne przejście i przyjąć trwały przeciek pamięci | „co zostanie połączone na stałe?” | z 18 / do 43 | Station 42C + Station 40 + Station 41 | `ADAPT` |
-| 43 | pokazać konsekwencję dla konkretnych osób | finałowa/epilogiczna | przejść krótką przestrzeń i odczytać stan siedmiu podmiotów bez narratora | odpowiedź; brak nowego pytania | z 42X / credits | Station 43 | `ADAPT` |
+| 43 | pokazać konsekwencję dla konkretnych osób | finałowa/epilogiczna | domknąć losy ustanowione w 42 i 43; pięć beatów bez wszechwiedzącego podsumowania | odpowiedź; brak nowego pytania | z 42X / credits | Station 43 | `ADAPT` |
 
 ---
 

@@ -16,9 +16,11 @@ extends Node2D
 ## oferty adaptacji i zapisania jawnego zakresu zgody przy biurku.
 ## PRZESZKODA — koszt porażki: próba przed odczytem rejestru zostawia tylko
 ## informację o brakującym kroku; odmowa zakresu nie zamyka wyjscia z 17,
-## ale zamyka metody w 18 (P0-1, S-02) — stad droga powrotu i renegocjacji.
+## ale zamyka udział w metodach. Nowa propozycja po odmowie: tylko odrębny odczyt do B.
 ## RYTM (P2-2, PKG-0230): punkt zgody to osoba (Jakub przez lacze, P1-3),
 ## nie przedmiot — odstepstwo od trzech rekwizytow w akcie II.
+
+const NarrativeRules := preload("res://scripts/levels/narrative_repair_rules.gd")
 
 const NarrativeGuidanceService := preload("res://scripts/core/narrative_guidance_service.gd")
 const GuidanceBeat := preload("res://scripts/core/guidance_beat.gd")
@@ -64,6 +66,11 @@ var is_exit_unlocked := false
 var is_level_completed := false
 var last_feedback: StringName = &""
 
+var pending_consent_pairs: Array = []
+var _pending_scope: StringName = &""
+var _pending_method := ""
+var _pending_reply := ""
+var _pending_revised := false
 var _desk_phase := 0.0
 
 
@@ -74,6 +81,7 @@ func _ready() -> void:
 	camera = StationCameraRig.bind(self, player)
 	_setup_guidance()
 	_connect_props()
+	_restore_consent_state()
 	if airlock_zone != null and not airlock_zone.body_entered.is_connected(_on_airlock_body_entered):
 		airlock_zone.body_entered.connect(_on_airlock_body_entered)
 	queue_redraw()
@@ -86,14 +94,14 @@ func _setup_guidance() -> void:
 		return
 	_register_beat(&"s17_ledger_source", GuidanceBeat.Tier.L0_COMPOSITION, &"observation", &"factual", "", "", &"", "")
 	_register_beat(&"s17_ledger_contact", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Pary Linii 4. Ktoś utrzymuje zapis, ktoś drugi zapłacił.", "Line 4 pairs. Someone keeps the record, someone else paid.", &"", "")
-	_register_beat(&"s17_adaptation_hypothesis", GuidanceBeat.Tier.L2_CONTEXTUAL_THOUGHT, &"interpretation", &"fallible", "System zaproponuje wpisanie mnie do rejestru. To nie zapłaci za nic.", "The system will offer to file me into the register. That pays for nothing.", &"cheap_adaptation", "reject_adaptation_offer")
-	_register_beat(&"s17_consent_plan", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Odczytam pary, odmówię adaptacji i ustalę z Jakubem zakres.", "Read the pairs, refuse the adaptation, settle the scope with Jakub.", &"", "record_jakub_consent_granted")
+	_register_beat(&"s17_adaptation_hypothesis", GuidanceBeat.Tier.L2_CONTEXTUAL_THOUGHT, &"interpretation", &"fallible", "Czy proponuje mi powrót do pracy, czy zajęcie jej miejsca? Przeczytam warunki.", "Is she offering work, or someone else's place? I will read the terms.", &"cheap_adaptation", "reject_adaptation_offer")
+	_register_beat(&"s17_consent_plan", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Sprawdzę rachunek i ofertę. Potem porozmawiam z Jakubem o tym, w czym może pomóc.", "Read the ledger and offer, then ask Jakub what help he is willing to consider.", &"", "record_jakub_consent_granted")
 	# PKG-0230 (P1-1+P1-4): zdanie wyjscia — 17 → 18: zakres zamyka sprawe
 	# rejestru; dalej ulica, trzy drogi i prawda dla Marty.
-	_register_beat(&"s17_exit_to_street", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Zakres zapisany. Wracam na ulicę — trzy drogi, Marta i prawda do wypowiedzenia.", "Scope recorded. Back to the street — three routes, Marta, and a truth to speak.", &"", "")
-	_register_beat(&"s17_consent_recorded", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Zakres zgody jest zapisany tak, jak padł.", "The consent scope is recorded exactly as stated.", &"", "")
+	_register_beat(&"s17_exit_to_street", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Zabiorę odpisy do Marty na ulicę. Prognozy mam w czytniku. Wrócę z jedną propozycją dla Jakuba.", "I will take the copies to Marta on the street, then return with one proposal for Jakub.", &"", "")
+	_register_beat(&"s17_consent_recorded", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Ten zakres znam. Nie mam zgody na dowolną próbę.", "I know this scope. It is not permission for any trial.", &"", "")
 	_register_beat(&"s17_consent_refused", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "JAKUB: Przyszłaś po odczyt, a teraz każesz mi podpisać protokół in blanco. Nie ze mną, Lena.", "JAKUB: You came for a reading, and now you want me to sign a blank protocol. Not with me, Lena.", &"", "")
-	_register_beat(&"s17_system_hint", GuidanceBeat.Tier.L4_RESCUE_HINT, &"system_hint", &"system", "WSKAZÓWKA: Rejestr par, oferta adaptacji, biurko zakresu zgody.", "HINT: Pair register, adaptation offer, consent scope desk.", &"", "")
+	_register_beat(&"s17_system_hint", GuidanceBeat.Tier.L4_RESCUE_HINT, &"system_hint", &"system", "WSKAZÓWKA: Po prognozie wróć do łącza. Środek biurka przypomina ryzyko bez udzielania zgody.", "HINT: Return to the link with a forecast. The center reviews risk without giving consent.", &"", "")
 
 
 func _register_beat(beat_id: StringName, tier: GuidanceBeat.Tier, thought_kind: StringName, truth_scope: StringName, text_pl: String, text_en: String, hypothesis_id: StringName, predicted_check: String) -> void:
@@ -178,8 +186,6 @@ func record_jakub_consent_refused() -> bool:
 
 
 func choose_consent_from_player_side() -> bool:
-	if is_consent_scope_recorded:
-		return false
 	if props == null or player == null:
 		_record_feedback(&"consent_desk_missing")
 		return false
@@ -195,32 +201,118 @@ func choose_consent_from_player_side() -> bool:
 	return _commit_consent(SCOPE_LIMITED)
 
 func _commit_consent(scope: StringName) -> bool:
-	if is_consent_scope_recorded:
+	var decisions := _decisions()
+	if NarrativeRules.locked(decisions) or not pending_consent_pairs.is_empty():
+		_record_feedback(&"consent_scope_locked")
 		return false
-	if not is_cost_ledger_read:
+	if decisions.get(&"world_recognized", false) != true:
+		return false
+	if not is_cost_ledger_read or not is_adaptation_offer_rejected:
 		_record_feedback(&"cost_ledger_required")
 		return false
-	is_consent_scope_recorded = true
-	jakub_consent_scope = scope
+	if scope not in [SCOPE_GRANTED, SCOPE_LIMITED, SCOPE_REFUSED]:
+		return false
+	if not is_consent_scope_recorded:
+		# Pierwsza rozmowa dopuszcza rolę, nie wykonuje żadnej metody.
+		_pending_scope = scope
+		pending_consent_pairs = preload("res://scripts/levels/creative_scene_lines.gd").LINES.get("consent_scope_desk_" + String(scope), []).duplicate(true)
+		return true
+	var method := str(decisions.get(NarrativeRules.PROPOSED_KEY, ""))
+	if not NarrativeRules.METHODS.has(method) or decisions.get(&"p9.method_commitment.forecasts_compared", false) != true:
+		_record_feedback(&"method_forecast_required")
+		pending_consent_pairs = [["Jakub (łącze)", "Najpierw sprawdź, co zamierzasz zrobić. Mój zakres się nie zmienił."]]
+		return false
+	if not NarrativeRules.response(decisions, method).is_empty():
+		pending_consent_pairs = [["Jakub (łącze)", "Odpowiedziałem na tę propozycję. Nie pytaj mnie o nią ponownie."]]
+		return false
+	if jakub_consent_scope.is_empty():
+		pending_consent_pairs = [["Lena", "Zapisy zgody są sprzeczne. Nie uznam ich za pozwolenie."]]
+		return false
+	var revised := jakub_consent_scope == SCOPE_REFUSED
+	if revised and (method != "close_equal_recover_local" or decisions.has(&"p9.consent_and_cost.revised_reading_response")):
+		pending_consent_pairs = [["Jakub (łącze)", "Nie zgodziłem się na podłączenie. To nadal ta sama granica."]]
+		return false
+	if not revised and not NarrativeRules.scope_allows(decisions, method):
+		pending_consent_pairs = [["Jakub (łącze)", "Mogę odczytać wskazania. Ta metoda wymaga czegoś więcej. Odmawiam."]]
+		return false
+	pending_consent_pairs = NarrativeRules.risk_pairs(method).duplicate(true)
+	if scope == SCOPE_LIMITED:
+		pending_consent_pairs.append(["Lena", "Przyniosłam warunki tej jednej metody. Na razie tylko je odczytujemy."])
+		pending_consent_pairs.append(["WSKAZÓWKA", "Biurko: lewa strona — odmowa; prawa — odpowiedź na tę metodę; środek — odczyt ryzyka."])
+		return true
+	if revised:
+		pending_consent_pairs.append(["Lena", "Odmówiłeś podłączenia. Teraz proszę tylko o odczyt przy odzyskaniu jej, bez kabla do człowieka."])
+	else:
+		pending_consent_pairs.append(["Lena", "To ryzyko tej jednej metody. Zgadzasz się na swój udział, czy kończymy?"])
+	_pending_method = method
+	_pending_revised = revised
+	_pending_reply = "refused" if scope == SCOPE_REFUSED else "accepted"
+	if _pending_reply == "refused":
+		pending_consent_pairs.append(["Jakub (łącze)", "Nie. Znam warunki i nie biorę w tym udziału."])
+		pending_consent_pairs.append(["Lena", "Nie będę powtarzać tej prośby."])
+	else:
+		match method:
+			"force_home":
+				pending_consent_pairs.append(["Jakub (łącze)", "Potwierdzę wskazanie. Za zostawienie jej odpowiadasz ty. Ja mogę przerwać swój udział."])
+			"close_equal_recover_local":
+				pending_consent_pairs.append(["Jakub (łącze)", "Tylko wskazania. Na to się zgadzam. Bez podłączenia do człowieka."])
+			"mutual_passage":
+				pending_consent_pairs.append(["Jakub (łącze)", "Rozumiem, że przeciek może wracać. Biorę udział. Wyłącznik zostaje przy mnie."])
+		pending_consent_pairs.append(["Jakub (łącze)", "Potem wracam do napędu. Ta zmiana nie zrobi się sama."])
+	return true
+
+func _decisions() -> Dictionary:
+	var state := get_node_or_null("/root/GameStateManager")
+	return state.decisions if state != null else {}
+
+func _restore_consent_state() -> void:
+	var decisions := _decisions()
+	is_cost_ledger_read = decisions.get(FACT_LEDGER, false) == true
+	is_adaptation_offer_rejected = decisions.get(FACT_OFFER, "") == "rejected"
+	jakub_consent_scope = StringName(NarrativeRules.scope(decisions))
+	is_consent_scope_recorded = decisions.has(FACT_SCOPE) or decisions.has(FACT_CANONICAL_SCOPE)
+	if is_consent_scope_recorded:
+		_unlock_exit()
+
+func _has_pending_narrative_dialogue(id: String) -> bool:
+	return id == "consent_scope_desk" and not pending_consent_pairs.is_empty()
+
+func _on_narrative_dialogue_finished(id: String) -> void:
+	if id != "consent_scope_desk" or pending_consent_pairs.is_empty():
+		return
+	var decisions := _decisions()
+	if not NarrativeRules.locked(decisions):
+		if not _pending_scope.is_empty():
+			_record(&"p9.consent_and_cost.initial_scope", String(_pending_scope))
+			_write_scope(_pending_scope)
+		elif not _pending_method.is_empty():
+			var stored: Variant = decisions.get(NarrativeRules.RESPONSE_KEY, {})
+			var replies: Dictionary = stored.duplicate(true) if stored is Dictionary else {}
+			if not replies.has(_pending_method):
+				replies[_pending_method] = _pending_reply
+				_record(NarrativeRules.RESPONSE_KEY, replies)
+				if _pending_revised:
+					_record(&"p9.consent_and_cost.revised_reading_response", _pending_reply)
+					if _pending_reply == "accepted":
+						_write_scope(SCOPE_LIMITED)
+	pending_consent_pairs.clear()
+	_pending_scope = &""
+	_pending_method = ""
+	_pending_reply = ""
+	_pending_revised = false
+	_restore_consent_state()
+	queue_redraw()
+
+func _write_scope(scope: StringName) -> void:
 	_record(FACT_SCOPE, String(scope))
 	_record(FACT_CANONICAL_SCOPE, String(scope))
 	_record(FACT_TRACE, "consent_scope_" + String(scope))
 	_record(FACT_P7_TRACE, P7_TRACE_VALUE)
-	if guidance_service:
-		if scope == SCOPE_REFUSED:
-			guidance_service.trigger_beat(&"s17_consent_refused")
-		else:
-			guidance_service.trigger_beat(&"s17_consent_recorded")
-		guidance_service.trigger_beat(&"s17_exit_to_street")
-	# CR-B (PKG-0194): the per-scope conversation (request, Jakub's answer,
-	# his daily goal from Station 12, and the new `limited` line) is delivered
-	# by the local CreativeScenePresentation queue behind this writer, so all
-	# three scopes get equal dramaturgy. The verb keeps facts only.
+	jakub_consent_scope = scope
+	is_consent_scope_recorded = true
 	_report_progress(&"s17_consent_scope_recorded")
 	jakub_consent_scope_recorded.emit(scope)
 	_unlock_exit()
-	queue_redraw()
-	return true
 
 
 func _record_feedback(value: StringName) -> void:
@@ -249,6 +341,8 @@ func _on_airlock_body_entered(_body: Node2D) -> void:
 
 
 func _trigger_level_completion() -> void:
+	if not pending_consent_pairs.is_empty():
+		return
 	if is_level_completed:
 		return
 	is_level_completed = true

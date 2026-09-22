@@ -62,14 +62,14 @@ script = ExtResource("6_dialogue")
 [node name="OpeningDialogueCue" type="Node" parent="."]
 script = ExtResource("7_cue")
 station_id = &"station_42c"
-opening_line = "Dwa czytniki. Świt. Ta sama sekunda po obu stronach."
-opening_line_2 = "W nocy przy słupku otworzyłam przejście. O świcie steruję przybyłą Leną."
+opening_line = "Dwa strojenia czekają na wykonanie. Przejście jeszcze nie jest otwarte."
+opening_line_2 = "Mamy odpowiedzi na tę metodę. Teraz otworzę okno dla obu sygnatur."
 speaker_2 = &"Lena"
 
 [node name="CrispDiegeticText" type="Node2D" parent="."]
 position = Vector2(84, 118)
 script = ExtResource("12_crisp_text")
-text = "PRZEJŚCIE WZAJEMNE // TRWAŁY PRZECIEK // OBIE LENY"
+text = "DWA STROJENIA // WSPÓLNE OKNO"
 font_size = 9
 text_color = Color(0.82, 0.6, 0.36, 1)
 

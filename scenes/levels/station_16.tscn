@@ -66,7 +66,7 @@ script = ExtResource("6_dialogue")
 [node name="OpeningDialogueCue" type="Node" parent="."]
 script = ExtResource("7_cue")
 station_id = &"station_16"
-opening_line = "Żywego sygnału nie odczytam na sprzęcie z pętli. Niosę odpowiedź do analizatora poza obwodem."
+opening_line = "Niosę odpowiedź do analizatora poza obwodem. Sprawdzę, co zachowało się po kontakcie."
 
 [node name="CrispDiegeticText_Analyzer" type="Node2D" parent="."]
 position = Vector2(72, 104)

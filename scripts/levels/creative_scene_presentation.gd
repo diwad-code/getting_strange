@@ -41,7 +41,7 @@ func _on_action(id: String, _prop_type: int) -> void:
 		return # 15: echo arrives later; the conversation is queued on arrival.
 	var state := get_node("/root/GameStateManager")
 	var lines: Array
-	if _station.call("_is_resolved", id):
+	if _station.call("_is_resolved", id) or (_station.has_method("_has_pending_narrative_dialogue") and _station.call("_has_pending_narrative_dialogue", id)):
 		lines = Lines.lines_for(id, state.decisions, _station)
 		var closed := {"relation_photo": &"renumbering", "marta_day": &"intruder", "record_186_days": &"lost_relationship", "jakub_meeting": &"staging", "synthesize": &"different_dates"}
 		if closed.has(id):
@@ -117,7 +117,10 @@ func _on_finished() -> void:
 			rig.set_state(&"work" if _active_id in ["jakub_questions", "jakub_refusal"] else &"listen")
 		elif rig.character_id == &"marta":
 			rig.set_state(&"turn_away" if _active_id == "marta_boundary" else &"idle")
+	var finished_id := _active_id
 	_active_id = ""
+	if _station.has_method("_on_narrative_dialogue_finished"):
+		_station.call("_on_narrative_dialogue_finished", finished_id)
 
 func is_busy() -> bool:
 	return not _pending.is_empty() or not _active_id.is_empty() or _dialogue.is_presenting()

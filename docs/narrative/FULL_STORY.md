@@ -1,5 +1,50 @@
 # Pełny przebieg fabuły: Getting Strange
 
+## Aktywny przebieg po audycie / PKG-0239 / 2026-09-22
+
+Raport wykonania: `docs/narrative/NARRATIVE_FIX_IMPLEMENTATION.md`.
+Numery dawcy niżej nie przywracają starej trasy. Czas przejścia i ogląd
+końcowej prezentacji winiet: **brak danych**.
+
+**01–06.** Jeden odczyt o 20:40; dopiero drugi łamie obietnicę wyjścia
+i zachowuje próbkę. Objazd pozostaje niezależny. W 04 nazwisko brata na
+istniejącym pomniku daje osobisty ślad. Ulicę 05 można przejść bez kontroli
+torby; pominięcie nie tworzy faktu inspekcji. Kiosk 06 sprawdza trasę Linii 4
+i wyjaśnienie objazdem. Nie dopisuje niepodanych w źródłach nazw przystanków.
+
+**09–14.** Domowe konkrety, granica dotyku, cel Jakuba i odmowa blizny
+pozostają. Po syntezie Lena zobowiązuje się szukać miejscowej, nie obiecuje
+sukcesu. Oba zachowania martwego obwodu poprzedzają robocze nazwy.
+
+**15–18.** Log rozdziela próbę miejscowej, niedostateczne zabezpieczenie
+zgody i późniejsze polecenie Wierzbickiej. Selektywna korekta podważa zwykłe
+nagranie, nie daje wszechwiedzy o osobie. Koszt dotyczy własnej pamięci Leny
+albo właściwego nośnika. Echo jest wiadomością z określonej chwili, nie
+przeszukaniem świata. Rejestr wskazuje wiedzę UCP o cenie. Lena przenosi
+kopie z hali na znaną ulicę do Marty. Opisy ryzyka są dostępne także przy
+odmowie udziału. Każda metoda wymaga osobnej odpowiedzi Jakuba; C również
+pełnej wiedzy Marty i osobnej odpowiedzi o synchronizacji. Zgoda powstaje
+po zakończeniu wymiany, nie po samym wskazaniu miejsca rozmowy.
+
+**42A.** Wykonanie powrotu → potwierdzenie zamknięcia miejscowej → osobna
+rozmowa z domową Martą i odczyt zachowanego materiału. Osobno podpisane
+źródła z Równi nie są nową wiadomością w zamkniętym czytniku przybyłej.
+
+**42B.** Pierwsze użycie istniejącej zasuwy rozpoczyna odzyskanie, nie zamyka
+kanału. Przy progu miejscowa odpowiada u siebie i przyznaje własną
+odpowiedzialność. Drugie użycie zasuwy zamyka przepływ. Dopiero potem
+następuje odczyt następstw. Przybyła nie dostaje nowej odpowiedzi domowej
+Marty przez utracony adres; „Jadę” pozostaje niewysłane.
+
+**42C.** Wykonanie przejścia → potwierdzenie powrotów → koszt pamięci.
+Miejscowa nie zostaje uniewinniona przez ratunek. Jakub odkłada narzędzie;
+nie zapewnia, że koszt zniknął. Lena rozpoznaje własne wspomnienie pogrzebu
+brata, nie własny pogrzeb. Pełnej izolacji nie przywrócono.
+
+**43.** Pięć krótkich beatów osób i dokumentów, bez globalnej tezy narratora.
+Losy pozostałych podmiotów zostają ustanowione również w 42. Odczyt nośnika
+nie przywraca utraconej sekundy lub własnego wspomnienia.
+
 > Numeracja (S-13, PKG-0230): aktywna trasa to **01–18 → 42A/B/C → 43**.
 > Sekcje numerowane 19+ niżej opisują **wycofanego dawcę 0.3** (sceny legacy
 > 19–41), nie aktywną trasę. Stare „Station 21” (rozpoznanie) to nowa **13**,
@@ -16,10 +61,10 @@ czytnika. 12: pytania przez łącze → żywy Jakub przerywa naprawę napędu �
 odmawia blizny, dobrowolnie sprawdza urządzenie i wraca do pracy.
 13: własny dokument/czytnik (próbka wyłącznie jeśli zachowana), zapis UCP
 wyłącznie jeśli zdobyty, świadoma synteza po wszystkich dotychczasowych
-warunkach. Po niemej winiecie, także po jej pominięciu: „To nie jest mój
-świat.” → „Więc gdzie jest ona?” → „Nie wiem” → trzeci głos Jakuba przez
-łącze (odczyt sprawdzenia numeru, bez sprowadzania aktora) → zamiar szukania
-miejscowej Leny. Bez sugestii świadomej próby. Przy brakach nie ma tej diagnozy. Szczegółowa mapa writerów i nośników:
+warunkach. Po niemej winiecie, także po jej pominięciu, Jakub potwierdza
+numery na łączu. Dopiero potem Lena mówi: „To nie jest mój świat”.
+Następuje pytanie Marty, niewiedza i przyjęcie zobowiązania poszukiwania
+bez obietnicy wyniku. Bez sugestii świadomej próby. Przy brakach nie ma tej diagnozy. Szczegółowa mapa writerów i nośników:
 `docs/rebuild/PKG_0193_CREATIVE_SCENES.md`. Numeracja niżej opisuje dawcę 0.3.
 
 ## Wykonana adaptacja P9: 14–18 / PKG-0194 (CR-B)
@@ -30,14 +75,16 @@ rozdziela zamiar miejscowej Leny od późniejszej komendy UCP; dwa identyczne
 echa, jawne uzbrojenie celowo błędnej trzeciej próby w tym samym nadajniku,
 selektywna korekta, notatka z warunkiem przerwania po braku odpowiedzi i bez
 uprzedniej zgody. 16: transfer odpowiedzi → alternatywy kosztu → jeden
-konkretny ubytek (urwane zdanie Marty o kurtce albo rozmyta sekunda 20:40:07;
-bez próbki nośnik to bufor, nie pełna próbka) → echo domu przeciw podmianie.
+konkretny ubytek (przybyła nie pamięta jednego zdania z dzisiejszej rozmowy
+z Martą; Marta nadal pamięta i kończy zdanie — albo znika 20:40:07 z próbki
+lub bufora) → wiadomość domowej Marty, która szuka Leny w chwili zapisu.
 17: para zdarzeń Linii 4 (stabilizacja Równi — katastrofa i śmierć Jakuba
-w domu Leny; korelacja to nie dowód winy osobowej) → oferta adaptacji
-i odmowa → prośba Leny i odpowiedź Jakuba z zakresem (granted/limited/
-refused mają równe linie; cel dzienny z 12 wraca). 18: trzy prognozy
-z lukami zależnymi od zgody → prawda Marty (full/partial/withheld, każda
-z treścią i granicą) → zatwierdzenie metody jako prośba Leny. 18 routuje
+w domu Leny; wiedza UCP o związku nie dowodzi osobistego zamiaru zabójstwa)
+→ argument Wierzbickiej i odrzucenie adaptacji → rozmowa o zakresie udziału
+Jakuba. 18: opisy trzech prognoz → propozycja jednej metody → powrót do łącza
+w 17 po odrębną odpowiedź → prawda Marty → dla C osobna odpowiedź o kluczu
+→ zatwierdzenie zamiaru. Uzupełnienie informacji następuje przed wyborem,
+a odmowa nie znika po ponownym wejściu. 18 routuje
 do 42A/B/C. Szczegółowa mapa: `docs/rebuild/PKG_0194_CREATIVE_SCENES_B.md`.
 
 Przyczynowość `leave_on_time` (CR-D §2, uzgodniona przy otwieraniu CR-B):
@@ -56,7 +103,7 @@ dramatycznych. Każda stacja ma cel, przeszkodę, działanie, widoczną zmianę 
 nowe oczekiwanie. Informacja bez działania może być chwilą ciszy wewnątrz
 sekwencji, lecz nie samodzielnym „rozdziałem-poszlaką”.
 
-## Reguły całego przebiegu
+## Reguły przebiegu dawcy 0.3 — historyczna numeracja
 
 - Station 01–05 są zwyczajne. Mają konflikt ludzki i zawodowy, nie zjawisko
   paranormalne.

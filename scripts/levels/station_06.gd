@@ -187,7 +187,7 @@ func ask_kiosk_vendor() -> bool:
 	is_kiosk_vendor_asked = true
 	_record(FACT_RESULT, "paper_matches_vehicle")
 	_record(FACT_QUESTION, true)
-	_record(FACT_ANSWER, "yesterday_purchase")
+	_record(FACT_ANSWER, "vendor_confirms_current_line_four_route")
 	_record(&"unease_pattern_started", true)
 	_record(&"p9.kiosk.vendor_testimony_recorded", true)
 	_resolve_action(&"ask_kiosk_vendor")
@@ -196,7 +196,9 @@ func ask_kiosk_vendor() -> bool:
 	# zakup Marty, imię i zamiar zamknięcia kiosku; bez adresu i wspólnoty.
 	_present([
 		{"speaker": "SPRZEDAWCA", "text": "Marta rano kupiła wodę. Pytała, o której pani wraca."},
-		{"speaker": "LENA", "text": "Dziękuję. Długo dziś jeszcze otwarte?"},
+		{"speaker": "LENA", "text": "Na tym rozkładzie czwórka jedzie inną trasą niż ta, którą pamiętam. Kiedy ją zmienili?"},
+		{"speaker": "SPRZEDAWCA", "text": "Tą z kartki jeździ od dawna. Nie tylko dziś przez objazd. Właśnie taki rozkład sprzedaję."},
+		{"speaker": "LENA", "text": "Czyli nie podmienili kartki na dzisiejsze zamknięcie."},
 		{"speaker": "SPRZEDAWCA", "text": "Zwijam kiosk po tej zmianie. Dobranoc, pani Leno."},
 	])
 	_unlock_exit()

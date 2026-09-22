@@ -16,6 +16,8 @@ extends Node2D
 ## PRZESZKODA — koszt porażki: niepełna próba zostawia fakt informacyjny i nie
 ## zamyka drogi do 43, jeśli 42A jest wybranym wariantem.
 
+const NarrativeRules := preload("res://scripts/levels/narrative_repair_rules.gd")
+
 const NarrativeGuidanceService := preload("res://scripts/core/narrative_guidance_service.gd")
 const GuidanceBeat := preload("res://scripts/core/guidance_beat.gd")
 const MemoryResonancePoint := preload("res://scripts/interactables/memory_resonance_point.gd")
@@ -75,8 +77,8 @@ signal dialogue_advanced(line_index: int)
 ## prezenter) i służy wyłącznie jako fallback edytora i testów (bramka PKG-0107, dokładnie 4 linie).
 const DIALOGUE_LINES: Array[Dictionary] = [
 	{"speaker": "MARTA DOMOWA", "text": "Gdzie byłaś?"},
-	{"speaker": "LENA", "text": "Kładę czytnik na stole. Zamiast odpowiedzi."},
-	{"speaker": "LENA", "text": "Najpierw posłuchaj próbki."},
+	{"speaker": "LENA", "text": "Spotkałam inną Lenę. Nie wróciła ze mną."},
+	{"speaker": "LENA", "text": "Pokażę ci to, co zostało w czytniku."},
 	{"speaker": "EKRAN CZYTNIKA", "text": "Proponowana etykieta: BŁĄD CZUJNIKA."},
 ]
 
@@ -270,7 +272,7 @@ func read_household_consequence() -> bool:
 		_record_feedback(&"consent_scope_required")
 		return false
 	household_consequence = {
-		"marta": marta_truth_state if not marta_truth_state.is_empty() else MARTA_PARTIAL,
+		"marta": marta_truth_state,
 		"jakub": jakub_consent_state,
 		"empty_place": "sealed_other_lena",
 		# PKG-0233 (D5): maly koszt z 16 w slowniku skutku (JSON-safe String;
@@ -368,35 +370,30 @@ func _trigger_level_completion() -> void:
 ## pierścień prawdy). Flagi kroków odtwarzają się pierwszym aktem
 ## (prezentacja bez zapisu, reguła _decided powyżej).
 func _restore_chain_from_decisions() -> void:
+	is_return_executed = _decided(FACT_RETURN)
+	is_cups_inspected = is_return_executed
+	is_other_lena_sealed = _decided(FACT_SEALED)
+	is_chamber_a_witnessed = is_other_lena_sealed
+	is_household_read = _decided(FACT_HOUSEHOLD)
 	var household: Variant = _read_decision(FACT_HOUSEHOLD)
 	if household is Dictionary and not (household as Dictionary).is_empty():
 		household_consequence = (household as Dictionary).duplicate(true)
 
 
 func _has_force_home() -> bool:
-	var namespaced := str(_read_decision(FACT_DONOR_METHOD))
-	var canonical := str(_read_decision(FACT_CANONICAL_METHOD))
-	return namespaced == METHOD_FORCE_HOME or canonical == METHOD_FORCE_HOME
+	return NarrativeRules.committed(_narrative_decisions(), "force_home")
+
+func _narrative_decisions() -> Dictionary:
+	var state := get_node_or_null("/root/GameStateManager")
+	return state.decisions if state != null else {}
 
 
 func _read_marta_truth() -> String:
-	var namespaced := str(_read_decision(FACT_DONOR_MARTA))
-	if namespaced in [MARTA_FULL, MARTA_PARTIAL, MARTA_WITHHELD]:
-		return namespaced
-	var canonical := str(_read_decision(FACT_CANONICAL_MARTA))
-	if canonical in [MARTA_FULL, MARTA_PARTIAL, MARTA_WITHHELD]:
-		return canonical
-	return ""
+	return NarrativeRules.truth(_narrative_decisions())
 
 
 func _read_jakub_consent() -> String:
-	var scoped := str(_read_decision(FACT_DONOR_SCOPE))
-	if scoped in [SCOPE_GRANTED, SCOPE_LIMITED, SCOPE_REFUSED]:
-		return scoped
-	var canonical := str(_read_decision(FACT_CANONICAL_SCOPE))
-	if canonical in [SCOPE_GRANTED, SCOPE_LIMITED, SCOPE_REFUSED]:
-		return canonical
-	return ""
+	return NarrativeRules.scope(_narrative_decisions())
 
 
 func _read_decision(id: StringName) -> Variant:
@@ -607,3 +604,8 @@ func _draw_exit() -> void:
 		Vector2(416.0, 298.0), Vector2(564.0, 294.0),
 		Vector2(572.0, 302.0), Vector2(424.0, 306.0),
 	]), Color(VectorStageStyle.INK, 0.48))
+
+
+func _on_narrative_dialogue_finished(id: String) -> void:
+	if id == "household_consequence" and is_household_read:
+		_record(&"p9.finale.forced_return.home_marta_told", true)

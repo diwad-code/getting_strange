@@ -62,14 +62,14 @@ script = ExtResource("6_dialogue")
 [node name="OpeningDialogueCue" type="Node" parent="."]
 script = ExtResource("7_cue")
 station_id = &"station_42b"
-opening_line = "Przepływ zamknięty. Próg cichy. Ona jest w środku."
-opening_line_2 = "W nocy przy słupku zamknęłam przepływ. O świcie jestem przybyłą Leną, stoję w progu."
+opening_line = "Próg mieszkania 14. Miejscowa jeszcze nie odpowiedziała tutaj."
+opening_line_2 = "Najpierw spróbuję ją odzyskać. Kanał zamknę dopiero po potwierdzeniu jej powrotu."
 speaker_2 = &"Lena"
 
 [node name="CrispDiegeticText" type="Node2D" parent="."]
 position = Vector2(84, 118)
 script = ExtResource("12_crisp_text")
-text = "ZAMKNIĘCIE RÓWNI // ODZYSKANE CIAŁO // NIEINDEKSOWANA OBECNOŚĆ"
+text = "MIESZKANIE 14 // PRÓG // DWIE SYGNATURY"
 font_size = 9
 text_color = Color(0.82, 0.6, 0.36, 1)
 

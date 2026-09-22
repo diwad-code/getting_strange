@@ -54,8 +54,8 @@ func _ready() -> void:
 		airlock_zone.body_entered.connect(_on_airlock_body_entered)
 	# PKG-0221 (D-234): ReturnZone wylacznikiem interactu (trigger_return);
 	# overlap stacji nie progresuje — wlasnego podpiecia brak.
-	_set_action_available(&"check_sample_case", false)
-	_set_action_available(&"cross_street_towards_home", false)
+	_set_action_available(&"check_sample_case", true)
+	_set_action_available(&"cross_street_towards_home", true)
 	queue_redraw()
 
 
@@ -98,7 +98,7 @@ func check_street_route() -> bool:
 
 
 func check_sample_case() -> bool:
-	if not is_street_route_checked or is_sample_case_verified:
+	if is_sample_case_verified:
 		_record_feedback(&"street_check_required")
 		return false
 	is_sample_case_verified = true
@@ -109,7 +109,7 @@ func check_sample_case() -> bool:
 	sample_case_verified.emit()
 	# CR-D (PKG-0196, E02): torba mówi prawdę gałęzi z 01. Bez powtórzonego
 	# pomiaru nie ma w niej surowej próbki — jest spakowany czytnik.
-	var carried_sample := _decision_string(&"p9.opening.choice") != "leave_on_time"
+	var carried_sample := _decision_string(&"p9.opening.choice") == "repeat_sample"
 	_present([
 		{"speaker": "LENA", "text": "Surowa próbka drgań jest w torbie. Sprawdzę cały raport jutro z Martą." if carried_sample else "W torbie spakowany czytnik. Surowego zapisu nie wzięłam — tak wybrałam."},
 	])
@@ -118,11 +118,11 @@ func check_sample_case() -> bool:
 
 
 func cross_street_towards_home() -> bool:
-	if not is_sample_case_verified or is_crossing_completed:
+	if is_crossing_completed:
 		_record_feedback(&"sample_check_required")
 		return false
 	is_crossing_completed = true
-	_record(FACT_TRACE, "reader_secured_without_paranormal_claim")
+	_record(FACT_TRACE, "ordinary_street_crossed")
 	_record(&"ordinary_return_complete", true)
 	_record(&"p9.street.crossing_completed", true)
 	_resolve_action(&"cross_street_towards_home")
@@ -172,9 +172,9 @@ func _setup_guidance() -> void:
 	# PKG-0225 (K6): szyld nocnych prac UCP z nowym wykonawcą (tracker C-05).
 	# Konkret bez tezy (D-214); wzór K4: rejestracja + ślad w _draw.
 	_register_beat(&"s05_ucp_sign", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Szyld nocnych prac UCP. Nowy wykonawca.", "A UCP night-works sign. A new contractor.", &"", "")
-	_register_beat(&"s05_thought", GuidanceBeat.Tier.L2_CONTEXTUAL_THOUGHT, &"interpretation", &"fallible", "Wszystko wygląda normalnie. Sprawdzę torbę przed skrzyżowaniem.", "Everything looks normal. I will check my bag before the crossing.", &"street_baseline", "check_sample_case")
-	_register_beat(&"s05_intent", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Sprawdzę próbkę i przejdę przez pasy.", "I will check the sample and cross at the signal.", &"", "")
-	_register_beat(&"s05_hint", GuidanceBeat.Tier.L4_RESCUE_HINT, &"system_hint", &"system", "WSKAZÓWKA: Sprawdź ulicę, torbę ze sprzętem i przejdź przez pasy.", "HINT: Check the street, inspect your equipment case, and cross the street.", &"", "")
+	_register_beat(&"s05_thought", GuidanceBeat.Tier.L2_CONTEXTUAL_THOUGHT, &"interpretation", &"fallible", "Wszystko wygląda normalnie. Przejdę przez ulicę; wodę kupię za rogiem.", "Everything looks normal. I will cross the street and buy water around the corner.", &"street_baseline", "cross_street_towards_home")
+	_register_beat(&"s05_intent", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Przejdę przez pasy. Wodę kupię po drugiej stronie.", "I will cross at the signal and buy water on the other side.", &"", "")
+	_register_beat(&"s05_hint", GuidanceBeat.Tier.L4_RESCUE_HINT, &"system_hint", &"system", "WSKAZÓWKA: Przejdź przez pasy. Ulicę i torbę możesz zbadać, ale nie musisz.", "HINT: Cross the street. Inspecting the street and bag is optional.", &"", "")
 
 
 func _register_beat(beat_id: StringName, tier: GuidanceBeat.Tier, thought_kind: StringName, truth_scope: StringName, text_pl: String, text_en: String, hypothesis_id: StringName, predicted_check: String) -> void:

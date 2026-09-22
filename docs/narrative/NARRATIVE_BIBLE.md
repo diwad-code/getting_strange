@@ -1,5 +1,46 @@
 # Biblia narracyjna: Getting Strange
 
+## Aktywny kontrakt po audycie / PKG-0239 / 2026-09-22
+
+Trasa: **01–18 → jeden finał 42A/B/C → 43**. Odniesienia do 21/22 i 39–41
+poniżej należą do dawcy 0.3. Rozpoznanie następuje w 13, nazwanie zachowań
+po ich wykonaniu w 14, zamiar w 18, czyn w 42. Raport źródeł i ograniczeń:
+`docs/narrative/NARRATIVE_FIX_IMPLEMENTATION.md`. To nie jest PRODUCT GO.
+
+W 01 Lena obiecała wyjść po **jednym** odczycie. Kontakt o 20:40 następuje
+w obu gałęziach; powtórka daje surową próbkę i łamie obietnicę wyjścia.
+Objazd jest osobnym opóźnieniem. Istniejący pomnik 04 wiąże stratę z nazwiskiem
+Jakuba, bez prologu i bez paranormalnego sygnału w 01–05.
+
+Kaloryfer pozostaje biografią miejscowej Marty. Ubytek 16 dotyczy pamięci
+przybyłej Leny o **jednym zdaniu dzisiejszej rozmowy**, nie pamięci Marty
+ani cudzego wspólnego życia. Alternatywa zabiera 20:40:07 z posiadanego
+nośnika: surowej próbki albo bufora. Poznanie treści z powtórzenia nie
+odtwarza pamięci. Powrót do 01 lub 16 nie zmienia podjętego wyboru.
+
+Rejestr 17 dowodzi wiedzy UCP o powiązanym koszcie, nie zamiaru zabójstwa
+konkretnej osoby. Miejscowa sama zaczęła próbę niezależnego odczytu kosztów;
+późniejsze polecenie Wierzbickiej nie usuwa jej odpowiedzialności. W B/C
+przyznaje, że zaryzykowała kosztem nieznanej osoby, zanim ta odpowiedziała.
+
+Zakres rozmowy z Jakubem nie jest blankietową zgodą. Po prognozie potrzebna
+jest jego odpowiedź na jedną metodę. Odmowa nie znika po powrocie. Po odmowie
+podłączenia dopuszczona jest jedna inna propozycja: sam odczyt do B, bez
+podłączenia człowieka. Nowa odmowa zamyka także tę możliwość. Ograniczony
+udział nie otwiera A/C; brak lub sprzeczność nie daje zgody. Jakub w A
+zgadza się tylko na własny udział, nie za siostrę i nie na jej porzucenie.
+
+Marta może dostać pełny zapis po wcześniejszym przemilczeniu, lecz tylko
+przed zatwierdzeniem. Historia uniku pozostaje. C wymaga osobnej odpowiedzi
+o kluczu i synchronizacji; pełna prawda nie daje zgody ani przebaczenia.
+Obie Marty mają odrębne źródła wiedzy i odrębne rozmowy.
+
+A zachowuje nieobecność miejscowej, poszukiwania miejscowej Marty i władzę
+UCP nad węzłem. B odzyskuje miejscową przed zamknięciem przepływu; przybyła
+traci indeks. C pozostawia trwały, nieprzewidywalny przeciek. Jakub przerywa
+pracę na własnych warunkach. Nikt nie odzyskuje wszystkich wartości naraz.
+Epilog ogranicza wypowiedź do osoby lub identyfikowalnego zapisu.
+
 ## Aktywna adaptacja CR-A / PKG-0193 (2026-09-05)
 
 W aktywnej trasie P9 materiał domu, Marty, UCP, Jakuba i rozpoznania jest
@@ -16,7 +57,7 @@ Data: 2026-08-31
 Decyzje nadrzędne: `ADR-006`, `ADR-007` i
 `docs/decisions/ADR-008-hybrid-product-rebuild.md`
 
-Kanon 0.3 zastępuje 0.2. Zachowuje powolne narastanie oraz bramy Station 21/22,
+Historyczny kanon 0.3 zastępuje 0.2. W dawnej numeracji miał bramy Station 21/22,
 ale dodaje osobistą przyczynę działań Leny, określone relacje, aktywną opozycję,
 rozwiązywalną drugą tajemnicę i konkretne konsekwencje finałów.
 
@@ -30,7 +71,7 @@ spójnego świata pamiętającego życie, którego nie przeżyła — i Jakuba, 
 umarł.
 
 Pierwsza połowa pyta: **co jest nie tak z tym wieczorem i z pamięcią Leny?**
-Station 21 odpowiada: Lena znajduje się w obcej, spójnej ciągłości.
+W aktywnej trasie scena 13 odpowiada: Lena znajduje się w obcej, spójnej ciągłości.
 
 Druga połowa pyta: **co zrobiła miejscowa Lena, gdzie jest i komu wolno zapłacić
 za rozdzielenie światów?** Odpowiedź prowadzi do konkretnego wyboru, nie pełnego
@@ -39,7 +80,7 @@ wykładu o kosmologii.
 Obietnica tytułu pozostaje czasownikiem: zwyczajny świat robi się coraz
 dziwniejszy. Gra nie rozpoczyna się od zwrotu ani paranormalnego stingu.
 
-## 2. Twarde bramy wiedzy i działania
+## 2. Historyczne bramy kanonu 0.3 — nie adresy aktywnej trasy
 
 - Station 01–05: normalność z ludzkim i zawodowym konfliktem, bez jawnej
   anomalii.

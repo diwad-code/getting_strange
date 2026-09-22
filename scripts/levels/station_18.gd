@@ -8,15 +8,11 @@ extends Node2D
 ## Pytanie, z którym gracz wychodzi: „którą metodę wykonuję — i czego mi w niej
 ## brakuje?".
 
-## PRZESZKODA — dlaczego to tu jest: Tablica prognoz stoi na chodniku, bo
-## trzy trasy rozchodzą się z tej samej ulicy; witryna Marty i słupek zatwierdzenia
-## są tu, bo zgoda i koszt muszą być widoczne przed ruchem dalej.
-## PRZESZKODA — czego wymaga od Leny: zestawienia trzech prognoz z aktualnymi
-## zgodami, jawnego stanu prawdy przekazanej Marcie i fizycznego zatwierdzenia
-## jednej metody.
-## PRZESZKODA — koszt porażki: wskazanie bez drugiego podejscia niczego nie
-## zatwierdza; droga niedostepna przy zapisanym zakresie (w tym odmowa)
-## zostawia nazwana luke i kieruje z powrotem do 17 (P0-1/P0-2, S-02/S-03).
+## Lena wraca do Marty na ulicę z 05 z odpisami z hali i własnym czytnikiem.
+## Opis prognozy nie jest zgodą na wykonanie. Z konkretną propozycją wraca
+## do istniejącego łącza z Jakubem. Odmowa nie znika przy ponownym wejściu.
+
+const NarrativeRules := preload("res://scripts/levels/narrative_repair_rules.gd")
 
 const NarrativeGuidanceService := preload("res://scripts/core/narrative_guidance_service.gd")
 const GuidanceBeat := preload("res://scripts/core/guidance_beat.gd")
@@ -96,6 +92,9 @@ var last_feedback: StringName = &""
 ## każdej zmianie stanu; _draw tylko czyta.
 var commit_table_marks: Array[bool] = [false, false, false, false, false, false]
 
+var pending_marta_pairs: Array = []
+var _pending_truth: StringName = &""
+var _pending_sync := ""
 var _lamp_phase := 0.0
 
 
@@ -122,19 +121,19 @@ func _setup_guidance() -> void:
 	if guidance_service == null:
 		return
 	_register_beat(&"s18_street_source", GuidanceBeat.Tier.L0_COMPOSITION, &"observation", &"factual", "", "", &"", "")
-	_register_beat(&"s18_forecast_contact", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Trzy drogi na jednej tablicy. Każda ma inną zależność od zgody Jakuba.", "Three routes on one board. Each depends differently on Jakub's consent.", &"", "")
-	_register_beat(&"s18_single_route_hypothesis", GuidanceBeat.Tier.L2_CONTEXTUAL_THOUGHT, &"interpretation", &"fallible", "Może wystarczy wybrać jedną i iść. Braki pokażą, czy to prawda.", "Maybe picking one and walking is enough. The gaps will show if that is true.", &"single_route_sufficient", "compare_forecast_consent_dependencies")
-	_register_beat(&"s18_commit_plan", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Zestawię trzy prognozy, powiem Marcie prawdę albo jej część i zatwierdzę jedną metodę.", "Compare the three forecasts, tell Marta the truth or part of it, and commit one method.", &"", "commit_force_home")
-	_register_beat(&"s18_method_recorded", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Metoda jest zatwierdzona tak, jak padła, z jawnymi brakami.", "The method is committed exactly as stated, with the gaps named.", &"", "")
+	_register_beat(&"s18_forecast_contact", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Mam trzy prognozy w czytniku. Każda wymaga innego udziału osób.", "Three forecasts in my reader. Each asks for different participation.", &"", "")
+	_register_beat(&"s18_single_route_hypothesis", GuidanceBeat.Tier.L2_CONTEXTUAL_THOUGHT, &"interpretation", &"fallible", "Znam koszt. Muszę jeszcze sprawdzić, czy ludzie zgodzą się w nim uczestniczyć.", "I know the cost. I still need to ask whether people agree to take part.", &"single_route_sufficient", "compare_forecast_consent_dependencies")
+	_register_beat(&"s18_commit_plan", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Pokażę Marcie zapis. Z wybraną prognozą wrócę do łącza z Jakubem, zanim zatwierdzę metodę.", "Show Marta the record, then take one forecast back to Jakub before committing.", &"", "commit_force_home")
+	_register_beat(&"s18_method_recorded", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Wybrałam metodę. Przy czytniku muszę jeszcze ją wykonać.", "I have chosen the method. It still needs to be carried out at the reader.", &"", "")
 	# PKG-0230 (P0-1, S-02): kwestia Leny przy zablokowanym zatwierdzeniu —
 	# odmowa zamyka droge, nie system. Wyjscie: wrocic do 17 i renegocjowac.
-	_register_beat(&"s18_consent_refused_blocks", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Bez jego ręki nie zatwierdzę tej drogi. Wrócę do hali i zapytam jeszcze raz.", "Without his hand on it, I will not commit this route. I will go back to the hall and ask again.", &"", "")
+	_register_beat(&"s18_consent_refused_blocks", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Nie mam odpowiedzi potrzebnych do tej metody. Odmowy nie zmieni samo ponowienie pytania.", "I lack the responses this method requires. Repeating the question will not change a refusal.", &"", "")
 	# PKG-0230 (P0-2, S-03): nazwanie wskazania — nazwa metody pada ZANIM
 	# padnie zatwierdzenie; koszty i luki sa na tablicy i w linii slupka.
-	_register_beat(&"s18_name_force_home", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Wskazuję wymuszenie domu. Tablica mówi, co to kosztuje — drugie podejście do tego miejsca zatwierdza.", "Pointing at forcing home. The board states the cost — a second approach here commits.", &"", "")
-	_register_beat(&"s18_name_close_equal", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Wskazuję zamknięcie z odzyskaniem miejscowej. Tablica mówi, co to kosztuje — drugie podejście do tego miejsca zatwierdza.", "Pointing at closure with the local recovered. The board states the cost — a second approach here commits.", &"", "")
-	_register_beat(&"s18_name_mutual", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Wskazuję przejście wzajemne. Tablica mówi, co to kosztuje — drugie podejście do tego miejsca zatwierdza.", "Pointing at mutual passage. The board states the cost — a second approach here commits.", &"", "")
-	_register_beat(&"s18_system_hint", GuidanceBeat.Tier.L4_RESCUE_HINT, &"system_hint", &"system", "WSKAZÓWKA: Tablica trzech prognoz, witryna Marty, słupek zatwierdzenia metody.", "HINT: Three-forecast board, Marta's window, method commit post.", &"", "")
+	_register_beat(&"s18_name_force_home", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Wymuszenie domu. Mój powrót kosztem miejscowej. Najpierw potrzebuję odpowiedzi Jakuba.", "Forcing home: my return at the local Lena's expense. I need Jakub's response first.", &"", "")
+	_register_beat(&"s18_name_close_equal", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Odzyskanie miejscowej. Jakub ma tylko czytać wskazania, a ja stracę indeks powrotny.", "Local recovery: Jakub only reads indications, and I lose my return index.", &"", "")
+	_register_beat(&"s18_name_mutual", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Przejście wzajemne. Bez odpowiedzi Jakuba i zgody Marty na klucz tego nie wykonam.", "Mutual passage: it requires Jakub's response and Marta's permission for the key.", &"", "")
+	_register_beat(&"s18_system_hint", GuidanceBeat.Tier.L4_RESCUE_HINT, &"system_hint", &"system", "WSKAZÓWKA: Prognoza → rozmowy o tej metodzie → zatwierdzenie. Sam odczyt nie jest zgodą.", "HINT: Forecast → responses to that method → commitment. Reading is not consent.", &"", "")
 
 
 func _register_beat(beat_id: StringName, tier: GuidanceBeat.Tier, thought_kind: StringName, truth_scope: StringName, text_pl: String, text_en: String, hypothesis_id: StringName, predicted_check: String) -> void:
@@ -175,7 +174,7 @@ func _on_prop_resonance_triggered(id: String, prop_type: int, prop: MemoryResona
 
 
 func compare_forecast_consent_dependencies() -> bool:
-	if are_forecasts_compared:
+	if _snapshot_taken() or _any_finale_executed():
 		return false
 	if not _has_donor_context():
 		_record_feedback(&"consent_scope_required")
@@ -209,7 +208,7 @@ func disclose_marta_truth_withheld() -> bool:
 
 
 func choose_marta_truth_from_player_side() -> bool:
-	if is_marta_truth_disclosed:
+	if _snapshot_taken() or _any_finale_executed() or not pending_marta_pairs.is_empty():
 		return false
 	if props == null or player == null:
 		_record_feedback(&"marta_table_missing")
@@ -219,6 +218,15 @@ func choose_marta_truth_from_player_side() -> bool:
 		_record_feedback(&"marta_table_missing")
 		return false
 	var offset := player.global_position.x - table.global_position.x
+	if marta_truth_state == MARTA_FULL and named_method == METHOD_MUTUAL:
+		if _decisions().has(NarrativeRules.SYNC_KEY):
+			pending_marta_pairs = [["Marta", "Już odpowiedziałam w sprawie klucza. To nie zmieniło się od twojego odejścia."]]
+			return true
+		if absf(offset) <= 24.0:
+			pending_marta_pairs = [["Lena", "Synchronizacja wymaga twojego klucza. Przeciek może wracać. Na razie pytam o te warunki."],
+				["WSKAZÓWKA", "Stół: lewa strona — odmowa klucza; prawa — zgoda na synchronizację. Środek nie daje zgody."]]
+			return true
+		return _request_marta_sync(offset > 24.0)
 	if offset < -24.0:
 		return _commit_marta_truth(MARTA_WITHHELD)
 	if offset > 24.0:
@@ -239,6 +247,8 @@ func commit_mutual_passage() -> bool:
 
 
 func select_operation(op: String) -> void:
+	if NarrativeRules.locked(_decisions()):
+		return
 	# PKG-0222 (M10): wylacznie routing — zero auto-domykania donora,
 	# zestawienia, prawdy i metody. Brak inwentarza -> luka (jak 43 unseeded):
 	# istniejacy feedback z mapa na s18.method_uncommitted, bez nowych faktow.
@@ -251,6 +261,9 @@ func select_operation(op: String) -> void:
 
 
 func choose_method_from_player_side() -> bool:
+	if not are_forecasts_compared:
+		_record_feedback(&"forecast_comparison_required")
+		return false
 	if is_method_committed:
 		return false
 	if props == null or player == null:
@@ -269,6 +282,7 @@ func choose_method_from_player_side() -> bool:
 	# commit_* (testy) ida wprost do _commit_method.
 	if named_method != pointed:
 		named_method = pointed
+		_record(NarrativeRules.PROPOSED_KEY, String(pointed))
 		_refresh_commit_table()
 		if guidance_service:
 			guidance_service.trigger_beat(_name_beat_for_method(pointed))
@@ -297,25 +311,76 @@ func _name_beat_for_method(method_id: StringName) -> StringName:
 
 
 func _commit_marta_truth(truth_state: StringName) -> bool:
-	if is_marta_truth_disclosed:
+	if _snapshot_taken() or _any_finale_executed() or not pending_marta_pairs.is_empty():
 		return false
 	if not are_forecasts_compared:
 		_record_feedback(&"forecast_comparison_required")
 		return false
-	is_marta_truth_disclosed = true
-	marta_truth_state = truth_state
-	_refresh_commit_table()
-	_record(FACT_MARTA, String(truth_state))
-	_record(FACT_CANONICAL_MARTA, String(truth_state))
-	if guidance_service:
-		guidance_service.trigger_beat(&"s18_commit_plan")
-	_report_progress(&"s18_marta_truth_disclosed")
-	marta_truth_disclosed.emit(truth_state)
-	queue_redraw()
+	var ranks := {"": -1, "withheld": 0, "partial": 1, "full": 2}
+	if not ranks.has(String(truth_state)) or ranks[String(truth_state)] <= ranks.get(String(marta_truth_state), -1):
+		return false
+	_pending_truth = truth_state
+	pending_marta_pairs = preload("res://scripts/levels/creative_scene_lines.gd").LINES.get("marta_truth_table_" + String(truth_state), []).duplicate(true)
+	if is_marta_truth_disclosed:
+		pending_marta_pairs.push_front(["Lena", "Wcześniej nie pokazałam ci wszystkiego. Dokładam to teraz, zanim cokolwiek zatwierdzę."])
 	return true
+
+func _request_marta_sync(accept: bool) -> bool:
+	var decisions := _decisions()
+	if NarrativeRules.locked(decisions) or marta_truth_state != MARTA_FULL or named_method != METHOD_MUTUAL:
+		return false
+	if decisions.has(NarrativeRules.SYNC_KEY):
+		pending_marta_pairs = [["Marta", "Już odpowiedziałam w sprawie klucza. To nie zmieniło się od twojego odejścia."]]
+		return false
+	_pending_sync = "accepted" if accept else "refused"
+	pending_marta_pairs = [
+		["Lena", "Przejście wzajemne potrzebuje twojego klucza. Przecieku nie potrafimy potem wyłączyć."],
+		["Marta", "Pytasz o synchronizację. Nie o to, czy ci wybaczam."],
+	]
+	if accept:
+		pending_marta_pairs.append(["Marta", "Zgadzam się użyć klucza do tej metody. Chcę, żeby wróciła. Rozmowa z nią nas nie ominie."])
+	else:
+		pending_marta_pairs.append(["Marta", "Nie udostępnię klucza do synchronizacji. W odzyskaniu jej pomogę inaczej."])
+	return true
+
+func _decisions() -> Dictionary:
+	var state := get_node_or_null("/root/GameStateManager")
+	return state.decisions if state != null else {}
+
+func _has_pending_narrative_dialogue(id: String) -> bool:
+	return (id == "marta_truth_table" and not pending_marta_pairs.is_empty()) \
+		or (id == "method_commit_post" and not named_method.is_empty() and not is_method_committed)
+
+func _on_narrative_dialogue_finished(id: String) -> void:
+	if id != "marta_truth_table" or pending_marta_pairs.is_empty():
+		return
+	var decisions := _decisions()
+	if not NarrativeRules.locked(decisions):
+		if not _pending_truth.is_empty():
+			if not decisions.has(&"p9.method_commitment.marta_initial_truth"):
+				_record(&"p9.method_commitment.marta_initial_truth", String(_pending_truth))
+			if _pending_truth != MARTA_FULL:
+				_record(&"p9.method_commitment.marta_was_incomplete", true)
+			_record(FACT_MARTA, String(_pending_truth))
+			_record(FACT_CANONICAL_MARTA, String(_pending_truth))
+			marta_truth_state = _pending_truth
+			is_marta_truth_disclosed = true
+			marta_truth_disclosed.emit(_pending_truth)
+			_report_progress(&"s18_marta_truth_disclosed")
+		elif not _pending_sync.is_empty() and not decisions.has(NarrativeRules.SYNC_KEY):
+			_record(NarrativeRules.SYNC_KEY, _pending_sync)
+	pending_marta_pairs.clear()
+	_pending_truth = &""
+	_pending_sync = ""
+	forecasts = _build_forecasts(_read_jakub_consent())
+	_refresh_commit_table()
+	queue_redraw()
 
 
 func _commit_method(method_id: StringName) -> bool:
+	if not pending_marta_pairs.is_empty() or named_method != method_id:
+		_record_feedback(&"method_proposal_required")
+		return false
 	if is_method_committed:
 		return false
 	# PKG-0233 (D2): migawka decyzji jest zamrozona przy commicie. Zmiana
@@ -340,14 +405,14 @@ func _commit_method(method_id: StringName) -> bool:
 		return false
 	# PKG-0230 (P0-1, S-02): zgoda Jakuba ma moc sprawcza. Droga, ktorej
 	# prognoza jest niedostepna przy zapisanym zakresie, nie zatwierdza sie;
-	# odmowa zamyka wszystkie trzy drogi. Wyjscie ze stanu: wrocic do 17
-	# i renegocjowac zakres (decyzja do potwierdzenia przez wlasciciela).
+	# odmowa zamyka udział. Po odmowie podłączenia dopuszczona jest tylko
+	# odrębna propozycja odczytu do B, z nową odpowiedzią i bez resetu odmowy.
 	jakub_consent_state = _read_jakub_consent()
 	var route_key := _route_key_for_method(method_id)
 	var forecasts_now := _build_forecasts(jakub_consent_state)
 	var entry: Dictionary = forecasts_now.get(route_key, {})
 	if not bool(entry.get("available", false)):
-		_record_feedback(&"jakub_consent_missing")
+		_record_feedback(StringName(entry.get("gap", "method_specific_response_required")))
 		if guidance_service:
 			guidance_service.trigger_beat(&"s18_consent_refused_blocks")
 		_refresh_commit_table()
@@ -390,15 +455,19 @@ func _build_forecasts(consent: String) -> Dictionary:
 
 
 func _forecast_entry(route_id: String, finale: String, allowed: Array, consent: String) -> Dictionary:
-	var available := allowed.has(consent)
-	var gap := "" if available else "jakub_consent_missing"
-	return {
-		"route_id": route_id,
-		"finale": finale,
-		"consent_states": allowed,
-		"available": available,
-		"gap": gap,
-	}
+	var decisions := _decisions()
+	var scope_allowed := allowed.has(consent)
+	var available := NarrativeRules.executable(decisions, route_id)
+	var gap := ""
+	if not scope_allowed:
+		gap = "jakub_consent_missing"
+	elif NarrativeRules.response(decisions, route_id) != "accepted":
+		gap = "method_specific_response_required"
+	elif route_id == "mutual_passage" and not available:
+		gap = "marta_full_record_and_sync_required"
+	return {"route_id": route_id, "finale": finale, "consent_states": allowed,
+		"description_available": true, "scope_allows": scope_allowed,
+		"available": available, "gap": gap}
 
 
 func _route_key_for_method(method_id: StringName) -> String:
@@ -444,6 +513,10 @@ func _build_decision_snapshot(method_id: StringName, finale_id: StringName, fore
 		"method": String(method_id),
 		"marta_truth": String(marta_truth_state),
 		"jakub_consent": jakub_consent_state,
+		"jakub_method_response": NarrativeRules.response(_decisions(), String(method_id)),
+		"marta_sync_response": str(_read_decision(NarrativeRules.SYNC_KEY)),
+		"marta_initial_truth": str(_read_decision(&"p9.method_commitment.marta_initial_truth")),
+		"marta_was_incomplete": _has(&"p9.method_commitment.marta_was_incomplete"),
 		"small_cost": String(cost) if cost != null else "",
 		"evidence": {
 			"sample": _has(&"home_sample_preserved"),
@@ -502,49 +575,34 @@ func _trigger_level_completion() -> void:
 ## wracać. Świeża instancja po ReturnZone odtwarza lokalny stan z decyzji,
 ## żeby ponowny marsz naprzód nie wymagał ponownego commita.
 func _restore_commitment_from_decisions() -> void:
+	are_forecasts_compared = _read_decision(FACT_FORECASTS_COMPARED) == true
+	marta_truth_state = StringName(_read_marta_truth_value())
+	is_marta_truth_disclosed = not marta_truth_state.is_empty()
+	jakub_consent_state = _read_jakub_consent()
+	var proposed := str(_read_decision(NarrativeRules.PROPOSED_KEY))
+	if NarrativeRules.METHODS.has(proposed):
+		named_method = StringName(proposed)
+	forecasts = _build_forecasts(jakub_consent_state) if are_forecasts_compared else {}
 	var method := str(_read_decision(FACT_METHOD))
-	if method.is_empty():
-		method = str(_read_decision(FACT_CANONICAL_METHOD))
-	if method.is_empty():
-		return
-	match StringName(method):
-		METHOD_FORCE_HOME, METHOD_CLOSE_EQUAL, METHOD_MUTUAL:
-			var truth := _read_marta_truth_value()
-			committed_method = StringName(method)
-			named_method = StringName(method)
-			is_method_committed = true
-			are_forecasts_compared = true
-			is_marta_truth_disclosed = true
-			marta_truth_state = StringName(truth) if not truth.is_empty() else &""
-			jakub_consent_state = _read_jakub_consent()
-			forecasts = _build_forecasts(jakub_consent_state)
+	if NarrativeRules.committed(_decisions(), method):
+		committed_method = StringName(method)
+		named_method = committed_method
+		is_method_committed = true
 
 
 func _read_marta_truth_value() -> String:
-	var namespaced := str(_read_decision(FACT_MARTA))
-	if namespaced in ["full", "partial", "withheld"]:
-		return namespaced
-	return str(_read_decision(FACT_CANONICAL_MARTA))
+	return NarrativeRules.truth(_decisions())
 
 
 func _has_donor_context() -> bool:
-	var trace_value := str(_read_decision(FACT_DONOR_TRACE))
-	var offer_value := str(_read_decision(FACT_DONOR_OFFER))
-	jakub_consent_state = _read_jakub_consent()
-	return trace_value == DONOR_TRACE_VALUE \
-		and _has(FACT_DONOR_LEDGER) \
-		and offer_value == DONOR_OFFER_VALUE \
-		and VALID_CONSENT_STATES.has(jakub_consent_state)
+	# Odczyt ryzyka nie wymaga uprzedniej zgody na jego wykonanie.
+	return _has(FACT_DONOR_LEDGER) \
+		and str(_read_decision(FACT_DONOR_OFFER)) == DONOR_OFFER_VALUE \
+		and _read_decision(&"world_recognized") == true
 
 
 func _read_jakub_consent() -> String:
-	var scoped := str(_read_decision(FACT_DONOR_SCOPE))
-	if VALID_CONSENT_STATES.has(scoped):
-		return scoped
-	var canonical := str(_read_decision(FACT_CANONICAL_SCOPE))
-	if VALID_CONSENT_STATES.has(canonical):
-		return canonical
-	return ""
+	return NarrativeRules.scope(_decisions())
 
 
 func _has(key: StringName) -> bool:

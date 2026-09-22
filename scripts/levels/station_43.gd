@@ -16,6 +16,8 @@ signal blackout_inspected
 signal epilogue_completed
 signal exit_unlocked
 
+const NarrativeRules := preload("res://scripts/levels/narrative_repair_rules.gd")
+
 const PrototypePlayer := preload("res://scripts/player/prototype_player.gd")
 
 const FACT_ENTRY := &"p7.conscious_silence_and_presence.final_chamber_witnessed"
@@ -72,24 +74,24 @@ var _pulse_phase: float = 0.0
 # brak zatwierdzenia: miasto bez metody, luka, nic nie podpisane.
 const DEFAULT_DIALOGUE_LINES: Array[Dictionary] = [
 	{
-		"speaker": "ŚWIADECTWO",
-		"text": "Napisy pojawiają się na zwyczajnych elementach miasta: rozkładach jazdy, kartach spraw, tablicach pracowni."
+		"speaker": "CZYTNIK",
+		"text": "Brak potwierdzonej metody."
 	},
 	{
-		"speaker": "TABLICA MIEJSKA",
-		"text": "Rozkład na wiacie: Linia 4 zamknięta do odwołania, odcinek odbudowano. Żadne przejście nie zostało zatwierdzone."
+		"speaker": "CZYTNIK",
+		"text": "Nie ma zapisu wykonania finału."
 	},
 	{
-		"speaker": "ZAPIS",
-		"text": "Brak metody. Marcie: zapis nieustalony. Jakub: zakres nieustalony. Koszt: nieustalony."
+		"speaker": "LENA",
+		"text": "Nie wiem, co zostało rozstrzygnięte."
 	},
 	{
-		"speaker": "EWIDENCJA UCP",
-		"text": "Karta sprawy pozostaje niepodpisana. Miasto funkcjonuje z luką w rejestrze, bez rozstrzygnięcia."
+		"speaker": "KARTA SPRAWY",
+		"text": "Brak podpisanego rozstrzygnięcia."
 	},
 	{
-		"speaker": "ŚWIADECTWO",
-		"text": "Lena odkłada klucze na blat. Żadna metoda nie została zatwierdzona; sprawa trwa bez podpisu."
+		"speaker": "LENA",
+		"text": "Nie dopiszę zakończenia do pustego zapisu."
 	}
 ]
 
@@ -139,6 +141,14 @@ func _read_campaign_state() -> void:
 			else:
 				ending_family = "unseeded"
 
+	var executed_keys := {
+		METHOD_FORCE_HOME: &"p9.finale.forced_return.executed",
+		METHOD_CLOSE_EQUAL: &"p9.finale.close_equal.flow_closed",
+		METHOD_MUTUAL: &"p9.finale.mutual_passage.executed",
+	}
+	if not executed_keys.has(ending_family) or state.decisions.get(executed_keys.get(ending_family, &""), false) != true:
+		ending_family = "unseeded"
+
 	var stab = state.decisions.get("ending_stability", "")
 	if stab != null and not String(stab).is_empty():
 		ending_stability = String(stab)
@@ -179,98 +189,41 @@ func _setup_dialogue_for_branch() -> void:
 	match ending_family:
 		METHOD_FORCE_HOME:
 			dialogue_lines = [
-				{
-					"speaker": "TABLICA MIEJSKA",
-					"text": "Linia 4 zamknięta do odwołania. W rozkładzie na wiacie brakuje jednego nocnego kursu."
-				},
-				{
-					"speaker": "MIESZKANIE 14",
-					"text": "Marta odłożyła klucze na blat. W przedpokoju słychać zegar; nikt nie pyta o to, co wydarzyło się za progiem."
-				},
-				{
-					"speaker": "EWIDENCJA UCP",
-					"text": "Teczka sprawy Leny otrzymała adnotację: »sprawa zamknięta bez dalszych roszczeń«. Miasto żyje dawnym rytmem."
-				},
-				{
-					"speaker": "ŚWIADECTWO",
-					"text": "Przybyła Lena zniknęła z rejestrów. W mieście pozostała luka, której nikt urzędowo nie nazwie."
-				},
-				{
-					"speaker": "ŚWIADECTWO",
-					"text": "Lena oznacza próbkę datą. Rubrykę przyczyny zostawia pustą."
-				}
+				{"speaker": "MARTA DOMOWA", "text": "Zgłoszenia nie wyrzucę. Dopiszę, że wróciłaś."},
+				{"speaker": "LENA", "text": "Wróciłam sama."},
+				{"speaker": "LENA", "text": "Został czytnik."},
+				{"speaker": "ETYKIETA CZYTNIKA", "text": "Przyczyna: [puste]."},
+				{"speaker": "LENA", "text": "Wpiszę datę. Tę rubrykę zostawię pustą."},
 			]
 		METHOD_CLOSE_EQUAL:
 			dialogue_lines = [
-				{
-					"speaker": "TABLICA MIEJSKA",
-					"text": "Komunikat techniczny: »Odcinek torowiska ustabilizowany. Spoiny zalać zaprawą bez zacierania faktury.«"
-				},
-				{
-					"speaker": "MIESZKANIE 14",
-					"text": "Miejscowa Lena wróciła na Sadową. W pracowni stoją dwa kubki, ale pije tylko z jednego."
-				},
-				{
-					"speaker": "ULICA SADOWA",
-					"text": "Marta domowa zostawiła drugie zgłoszenie o zaginięciu. Numeru zwrotnego nie dopisała."
-				},
-				{
-					"speaker": "ŚWIADECTWO",
-					"text": "Płaszczyzna została zamknięta. Miasto nie jest już rozdwojone, lecz nosi bliznę, której nikt nie ukrywa."
-				},
-				{
-					"speaker": "ŚWIADECTWO",
-					"text": "Na obcym przystanku Lena chowa czytnik do torby. Wiadomość `Jadę` zostaje bez adresata."
-				}
+				{"speaker": "SADOWA 7/14 — MARTA", "text": "Zostań. Nie skończyłyśmy rozmowy o tym, co wiedziałaś przed próbą."},
+				{"speaker": "DOMOWE ZGŁOSZENIE MARTY", "text": "Lena Wolska. Zaginęła. Proszę nie zamykać zgłoszenia."},
+				{"speaker": "LENA", "text": "Czytnik chowam do torby."},
+				{"speaker": "LENA", "text": "Przystanek. Nie znam tej ulicy."},
+				{"speaker": "EKRAN CZYTNIKA", "text": "Niewysłane: Jadę. Adresat: brak w sieci."},
 			]
 		METHOD_MUTUAL:
 			dialogue_lines = [
-				{
-					"speaker": "TABLICA MIEJSKA",
-					"text": "Na wiacie przystankowej wiszą dwa równorzędne rozkłady jazdy. Żadna z godzin odjazdu nie została przekreślona."
-				},
-				{
-					"speaker": "MIESZKANIE 14",
-					"text": "Marta rozpoznaje kubek ze zdjęcia. Wie, że po drugiej stronie ktoś patrzy teraz na pustą półkę."
-				},
-				{
-					"speaker": "ZARZĄD MIEJSKI",
-					"text": "Biuletyn UCP podaje: »W tym sektorze zaleca się uzgodnienie kierunku przed przejściem.« Obie kolejności trwają obok siebie."
-				},
-				{
-					"speaker": "ŚWIADECTWO",
-					"text": "Dwie Leny żyją w swoich światach, połączone cienką nicią pamięci i obustronnej zgody."
-				},
-				{
-					"speaker": "ŚWIADECTWO",
-					"text": "Lena odkłada kubek na pustą półkę. Drugi zostaje po jej stronie."
-				}
+				{"speaker": "MARTA DOMOWA", "text": "Sięgnęłam po tamten kubek. Znowu."},
+				{"speaker": "LENA", "text": "Półka jest pusta."},
+				{"speaker": "LENA", "text": "Został czytnik."},
+				{"speaker": "JAKUB (ECHO)", "text": "Nie skończyłem napędu. Dziś już nie włączę imadła."},
+				{"speaker": "MARTA DOMOWA", "text": "Postaw tutaj nasz kubek."},
 			]
 		_:
 			dialogue_lines = DEFAULT_DIALOGUE_LINES.duplicate(true)
 	_payoff_line_into_branch()
 
 
-## PKG-0233 (D5): linia wyplaty w epilogu — prawda Marty, zgoda Jakuba
-## (lub jawna luka) i maly koszt z 16 w jednej linii galezi, z krotkim
-## znacznikiem rodziny. Indeksy 0/1/3 pinuje 0170, rozmiar >= 5 pinuje
-## 0232 — ruszany jest wylacznie indeks 2. Bez tez i bez mnozenia zakonczen.
 func _payoff_line_into_branch() -> void:
-	if dialogue_lines.size() < 3:
+	if dialogue_lines.size() < 3 or ending_family == "unseeded":
 		return
-	var tag := ""
-	match ending_family:
-		METHOD_FORCE_HOME:
-			tag = "Teczka. "
-		METHOD_CLOSE_EQUAL:
-			# Pin 0195: linia 43B niesie konsekwencje domowej Marty
-			# ("drugie zgłoszenie") — znacznik rodziny zostaje.
-			tag = "Marta: drugie zgłoszenie. "
-		METHOD_MUTUAL:
-			tag = "Dwa rozkłady. "
-		_:
-			tag = "Brak metody. "
-	dialogue_lines[2] = {"speaker": "ZAPIS", "text": tag + _truth_clause() + " " + _consent_clause() + " " + _cost_clause()}
+	var state := get_node_or_null("/root/GameStateManager")
+	var decisions: Dictionary = state.decisions if state != null else {}
+	var carrier: Array = NarrativeRules.carrier_pairs(decisions)
+	if not carrier.is_empty():
+		dialogue_lines[2] = {"speaker": carrier[0][0], "text": carrier[0][1]}
 
 
 func _truth_clause() -> String:
@@ -298,7 +251,7 @@ func _consent_clause() -> String:
 func _cost_clause() -> String:
 	match small_cost_state:
 		"marta_memory":
-			return "Koszt: pamięć kurtki zbladła."
+			return "Nie pamiętam dzisiejszego zdania Marty o kurtce."
 		"sample_second":
 			return "Koszt: sekunda zbladła z wykresu."
 	return "Koszt: nieustalony."
@@ -308,9 +261,9 @@ func _setup_guidance() -> void:
 	if not guidance_service:
 		return
 	_register_beat(&"s43_epilogue_source", GuidanceBeat.Tier.L0_COMPOSITION, &"observation", &"factual", "", "", &"", "")
-	_register_beat(&"s43_epilogue", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Epilog. Miasto żyje dalej z dokonanym wyborem i zapisanym stanem podmiotów.", "Epilogue. The city lives on with the choice made and recorded entity states.", &"", "")
-	_register_beat(&"s43_epilogue_hypothesis", GuidanceBeat.Tier.L2_CONTEXTUAL_THOUGHT, &"interpretation", &"fallible", "Zapisane relacje i stan infrastruktury utrwalają wykonany wybór; braki zostają nazwane.", "Recorded relations and infrastructure state preserve the committed choice; the gaps stay named.", &"domestic_presence_with_gaps", "complete_epilogue")
-	_register_beat(&"s43_epilogue_action", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Odczytam tablicę ogłoszeń, przejrzę napisy końcowe i zamknę podróż.", "Read notice board, review credits roll and conclude journey.", &"", "complete_epilogue")
+	_register_beat(&"s43_epilogue", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Czytnik leży przede mną. Nie uzupełnił brakującego zapisu.", "The reader lies in front of me. It has not restored the missing record.", &"", "")
+	_register_beat(&"s43_epilogue_hypothesis", GuidanceBeat.Tier.L2_CONTEXTUAL_THOUGHT, &"interpretation", &"fallible", "Sprawdzę, co zostało na kartce i w czytniku.", "I will check what remains on the paper and in the reader.", &"domestic_presence_with_gaps", "complete_epilogue")
+	_register_beat(&"s43_epilogue_action", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Odczytam ostatni zapis. Potem odłożę czytnik.", "I will read the last entry, then put the reader away.", &"", "complete_epilogue")
 	_register_beat(&"s43_system_hint", GuidanceBeat.Tier.L4_RESCUE_HINT, &"system_hint", &"system", "WSKAZÓWKA: Odczytaj tablicę ogłoszeń i napisy końcowe, by zamknąć grę.", "HINT: Read notice board and credits to complete the game.", &"", "")
 
 
@@ -475,7 +428,7 @@ func _show_dialogue_line(idx: int) -> void:
 		return
 	var line: Dictionary = dialogue_lines[idx]
 	if dialogue_box and dialogue_box.has_method("show_line"):
-		dialogue_box.show_line(line.get("speaker", "ŚWIADECTWO"), line.get("text", ""))
+		dialogue_box.show_line(line.get("speaker", "ŹRÓDŁO NIEUSTALONE"), line.get("text", ""))
 
 
 func unlock_exit() -> void:
