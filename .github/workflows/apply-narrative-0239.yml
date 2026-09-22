@@ -1,0 +1,120 @@
+name: Publish narrative fixes 0239 once
+on:
+  push:
+    branches: [fix/narrative-audit-2026-09-22]
+    paths: [.github/workflows/apply-narrative-0239.yml]
+permissions:
+  contents: write
+jobs:
+  publish:
+    if: github.repository == 'diwad-code/getting_strange'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Verify source hashes and publish only the work branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import base64
+          import gzip
+          import hashlib
+          import json
+          import os
+          from pathlib import PurePosixPath
+          from urllib.request import Request, urlopen
+          REPO = 'diwad-code/getting_strange'
+          BRANCH = 'fix/narrative-audit-2026-09-22'
+          BASE = '081e7711105a184934b80f35f43cf3682fde4e2b'
+          assert os.environ['GITHUB_REPOSITORY'] == REPO
+          assert os.environ['GITHUB_REF'] == 'refs/heads/' + BRANCH
+          TRIGGER = os.environ['GITHUB_SHA']
+          API = 'https://api.github.com/repos/' + REPO
+          TOKEN = os.environ['GH_TOKEN']
+          def api(path, payload=None, method=None):
+              data = None if payload is None else json.dumps(payload, ensure_ascii=False).encode('utf-8')
+              request = Request(API + path, data=data, method=method or ('GET' if data is None else 'POST'),
+                  headers={'Authorization': 'Bearer ' + TOKEN, 'Accept': 'application/vnd.github+json',
+                  'X-GitHub-Api-Version': '2022-11-28', 'User-Agent': 'narrative-0239-publication',
+                  'Content-Type': 'application/json'})
+              with urlopen(request, timeout=45) as response:
+                  return json.load(response)
+          def blob_hash(data):
+              return hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+          def get_blob(sha):
+              result = api('/git/blobs/' + sha)
+              assert result['encoding'] == 'base64'
+              raw = base64.b64decode(result['content'])
+              assert blob_hash(raw) == sha, 'Unexpected blob content: ' + sha
+              return raw
+          # Exact transport corrections; full hashes verify the original intended bytes.
+          first = bytearray(get_blob('b1b17b10cf1b1bbcdff91a362919c6d443542a89'))
+          assert first[3221] == 94
+          first[3221] = 126
+          assert blob_hash(first) == 'e9b9667aca6db8d6e8ebf978669ecf4df5386e5e'
+          second = base64.b64encode(get_blob('5a7c4432b353b5f710633a15dc853fca86992823')).decode()
+          assert len(second) == 16384 and second[4542] == 'f'
+          second = base64.b64decode(second[:4542] + second[4543:] + 'j')
+          assert blob_hash(second) == 'be654707938e5fa1ac967f732ec6ad8f0a4efc8c'
+          third = get_blob('916f054a90b11441e581a6efea810933b41df55c')
+          compressed = bytes(first) + second + third
+          assert len(compressed) == 34820
+          assert hashlib.sha256(compressed).hexdigest() == '84ce4bffddcc00498e926d93e8a690392919100f1665a5efa682c4090ea4c112'
+          patch = json.loads(gzip.decompress(compressed))
+          assert patch['base'] == BASE and patch['branch'] == BRANCH
+          assert len(patch['files']) == 32
+          base_tree_sha = api('/git/commits/' + BASE)['tree']['sha']
+          base_tree = api('/git/trees/' + base_tree_sha + '?recursive=1')
+          assert not base_tree.get('truncated'), 'Base tree was truncated'
+          entries = {entry['path']: entry for entry in base_tree['tree']}
+          postimages = []
+          seen = set()
+          for item in patch['files']:
+              path = item['path']
+              parts = PurePosixPath(path).parts
+              assert parts and parts[0] in ('scripts', 'scenes', 'docs')
+              assert not path.startswith('/') and '..' not in parts and '\\' not in path
+              assert path not in seen, 'Duplicate path'
+              seen.add(path)
+              entry = entries.get(path)
+              if item['before'] is None:
+                  assert entry is None, 'New path already exists: ' + path
+                  original = b''
+              else:
+                  assert entry and entry['type'] == 'blob' and entry['mode'] == '100644'
+                  assert entry['sha'] == item['before'], 'Base version mismatch: ' + path
+                  original = get_blob(item['before'])
+              lines = original.decode('utf-8').splitlines(keepends=True)
+              cursor = 0
+              output = []
+              for first_line, last_line, replacement in item['ops']:
+                  assert isinstance(first_line, int) and isinstance(last_line, int)
+                  assert cursor <= first_line <= last_line <= len(lines)
+                  assert isinstance(replacement, str)
+                  output.extend((''.join(lines[cursor:first_line]), replacement))
+                  cursor = last_line
+              output.append(''.join(lines[cursor:]))
+              updated = ''.join(output).encode('utf-8')
+              assert blob_hash(updated) == item['after'], 'Target version mismatch: ' + path
+              postimages.append((path, updated, item['after']))
+          # All targets are checked before any branch mutation. Only the work branch is written.
+          ref_path = '/git/refs/heads/' + BRANCH
+          assert api('/git/ref/heads/' + BRANCH)['object']['sha'] == TRIGGER, 'Branch moved'
+          trigger_commit = api('/git/commits/' + TRIGGER)
+          assert len(trigger_commit['parents']) == 1 and trigger_commit['parents'][0]['sha'] == BASE
+          new_entries = []
+          for path, data, expected in postimages:
+              stored = api('/git/blobs', {'content': data.decode('utf-8'), 'encoding': 'utf-8'})
+              assert stored['sha'] == expected, 'Stored version mismatch: ' + path
+              new_entries.append({'path': path, 'mode': '100644', 'type': 'blob', 'sha': expected})
+          new_tree = api('/git/trees', {'base_tree': trigger_commit['tree']['sha'], 'tree': new_entries})
+          commit = api('/git/commits', {
+              'message': 'PKG-0239: poprawki narracji, zgody postaci, ciągłości i finałów\n\n32 pliki. Zgodność treści potwierdzona SHA; wykonanie gry niepotwierdzone. Bez scalenia main.',
+              'tree': new_tree['sha'], 'parents': [TRIGGER]})
+          assert api('/git/ref/heads/' + BRANCH)['object']['sha'] == TRIGGER, 'Branch moved before publication'
+          api(ref_path, {'sha': commit['sha'], 'force': False}, method='PATCH')
+          print('NARRATIVE_IMPLEMENTATION_COMMIT=' + commit['sha'])
+          print('VERIFIED_POSTIMAGES=' + str(len(postimages)))
+          print('Temporary workflow remains until connector cleanup. Main was not changed.')
+          PY
