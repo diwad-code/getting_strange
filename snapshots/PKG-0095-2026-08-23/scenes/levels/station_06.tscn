@@ -1,0 +1,140 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_06.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/levels/atmosphere_rig.gd" id="5_atmosphere"]
+[ext_resource type="Script" path="res://scripts/ui/crt_dialogue_box.gd" id="6_dialogue"]
+[ext_resource type="Script" path="res://scripts/ui/station_dialogue_cue.gd" id="7_cue"]
+[ext_resource type="Script" path="res://scripts/visual/vector_stage_environment.gd" id="8_vector_stage"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor"]
+size = Vector2(640, 64)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(60, 116)
+
+[sub_resource type="CircleShape2D" id="Circle_prop_route_map"]
+radius = 42.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_speaker"]
+radius = 44.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_passenger"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_ring"]
+radius = 44.0
+
+[node name="Station06" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="VectorStageEnvironment" type="Node2D" parent="."]
+script = ExtResource("8_vector_stage")
+stage_seed = 6
+station_number = 6
+
+[node name="AtmosphereRig" type="Node2D" parent="."]
+script = ExtResource("5_atmosphere")
+station_number = 6
+
+[node name="CRTDialogueBox" type="CanvasLayer" parent="."]
+script = ExtResource("6_dialogue")
+
+[node name="OpeningDialogueCue" type="Node" parent="."]
+script = ExtResource("7_cue")
+station_id = &"station_06"
+opening_line = "Linia 4 nie jest dziś na rozkładzie. Mimo to autobus pamięta każdy przystanek."
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 344)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Floor"]
+shape = SubResource("Rectangle_floor")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(585, 238)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="BusRouteMap" type="Area2D" parent="Props"]
+position = Vector2(180, 254)
+script = ExtResource("2_resonance")
+resonance_id = "bus_route_map"
+prop_type = 19
+prop_title = "Schemat trasy"
+prop_subtitle = "Linia Zastępcza 4 // Zamknięta Linia 4"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/BusRouteMap"]
+shape = SubResource("Circle_prop_route_map")
+
+[node name="BusSpeaker" type="Area2D" parent="Props"]
+position = Vector2(290, 245)
+script = ExtResource("2_resonance")
+resonance_id = "bus_speaker"
+prop_type = 16
+prop_title = "Głośnik sufitowy"
+prop_subtitle = "Komunikat UCP // Higiena powtórzeń"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/BusSpeaker"]
+shape = SubResource("Circle_prop_speaker")
+
+[node name="ElderlyPassenger" type="Area2D" parent="Props"]
+position = Vector2(390, 260)
+script = ExtResource("2_resonance")
+resonance_id = "elderly_passenger"
+prop_type = 17
+prop_title = "Starszy pasażer"
+prop_subtitle = "Świadek // Zwrot obrączki"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ElderlyPassenger"]
+shape = SubResource("Circle_prop_passenger")
+
+[node name="GoldRing" type="Area2D" parent="Props"]
+position = Vector2(450, 275)
+script = ExtResource("2_resonance")
+resonance_id = "gold_ring"
+prop_type = 18
+prop_title = "Złota obrączka"
+prop_subtitle = "Rekwizyt // Ślad po zaginionej"
+interaction_radius = 44.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/GoldRing"]
+shape = SubResource("Circle_prop_ring")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(80, 296)
+
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")
+target = NodePath("../Player")

@@ -1,0 +1,80 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_costless_shortcut"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"costless_shortcut"
+source_fact = &"p7.jakub_boundary_and_forecasts.ucp_jakub_contrast_proposal_inspected"
+predicted_outcome = "Jeżeli sygnał Jakuba jest bezkosztowym skrótem, wszystkie trzy prognozy zachowają komplet pól niezależnie od zakresu jego zgody."
+required_evidence = [&"p7.jakub_boundary_and_forecasts.force_home_forecast", &"p7.jakub_boundary_and_forecasts.close_equal_recover_local_forecast", &"p7.jakub_boundary_and_forecasts.mutual_passage_forecast"]
+trial_result = &"all_fields_independent_of_consent"
+closure_id = &"p7.jakub_boundary_and_forecasts.route_hypotheses_mapped"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_limited_testimony"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"limited_testimony"
+source_fact = &"p7.jakub_boundary_and_forecasts.jakub_ordinary_life_scope_observed"
+predicted_outcome = "Jeżeli Jakub udostępnia ograniczone świadectwo, tylko jawnie nazwane pole prognozy zależy od jego sygnału, a pozostałe zachowują widoczne braki danych."
+required_evidence = [&"p7.jakub_boundary_and_forecasts.jakub_signal_risk_disclosed", &"p7.jakub_boundary_and_forecasts.force_home_forecast", &"p7.jakub_boundary_and_forecasts.close_equal_recover_local_forecast", &"p7.jakub_boundary_and_forecasts.mutual_passage_forecast"]
+trial_result = &"named_field_depends_on_consent_scope"
+closure_id = &"p7.jakub_boundary_and_forecasts.route_hypotheses_mapped"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_routes_without_signal"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"routes_without_signal"
+source_fact = &"p7.jakub_boundary_and_forecasts.jakub_transmitter_disabled"
+predicted_outcome = "Jeżeli trasy można wyznaczyć bez sygnału Jakuba, trzy prognozy pozostaną uczciwie porównywalne po odmowie, lecz jawnie pokażą pola bez danych."
+required_evidence = [&"p7.jakub_boundary_and_forecasts.jakub_transmitter_disabled", &"p7.jakub_boundary_and_forecasts.force_home_forecast", &"p7.jakub_boundary_and_forecasts.close_equal_recover_local_forecast", &"p7.jakub_boundary_and_forecasts.mutual_passage_forecast"]
+trial_result = &"routes_continue_with_explicit_missing_data"
+closure_id = &"p7.jakub_boundary_and_forecasts.route_hypotheses_mapped"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_granted"]
+script = ExtResource("3_commitment")
+commitment_id = &"granted"
+person_id = &"jakub"
+scope = "Jakub świadomie udostępnia cały nazwany zakres swojego sygnału wyłącznie do trzech bieżących prognoz."
+known_cost = "Jego sygnał staje się parametrem UCP i może ujawnić wzorzec zwyczajnego życia, który nie należy do Leny."
+required_disclosure = [&"p7.jakub_boundary_and_forecasts.jakub_ordinary_life_scope_observed", &"p7.jakub_boundary_and_forecasts.jakub_signal_risk_disclosed"]
+alternative_route = "Jakub może ograniczyć zakres albo odmówić; prognozy pozostają dostępne z jawnymi brakami danych."
+outcome_key = &"p7.jakub_boundary_and_forecasts.jakub_consent_state"
+trace_key = &"p7.jakub_boundary_and_forecasts.trace"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_limited"]
+script = ExtResource("3_commitment")
+commitment_id = &"limited"
+person_id = &"jakub"
+scope = "Jakub udostępnia tylko dokładnie nazwane pole sygnału i wyklucza resztę swojego życia z modelu."
+known_cost = "Jedna zależność prognozy może zostać sprawdzona, a pozostałe pola muszą zachować jawne braki danych."
+required_disclosure = [&"p7.jakub_boundary_and_forecasts.jakub_ordinary_life_scope_observed", &"p7.jakub_boundary_and_forecasts.jakub_signal_risk_disclosed"]
+alternative_route = "Jakub może odmówić całego sygnału; trasy nadal są mapowane z danymi niezależnymi od niego."
+outcome_key = &"p7.jakub_boundary_and_forecasts.jakub_consent_state"
+trace_key = &"p7.jakub_boundary_and_forecasts.trace"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_refused"]
+script = ExtResource("3_commitment")
+commitment_id = &"refused"
+person_id = &"jakub"
+scope = "Sygnał Jakuba pozostaje wyłączony i żaden fragment jego życia nie staje się parametrem prognozy."
+known_cost = "Trzy trasy zachowują jawne pola bez danych i niższą precyzję, bez kary ani długu moralnego."
+required_disclosure = [&"p7.jakub_boundary_and_forecasts.jakub_ordinary_life_scope_observed", &"p7.jakub_boundary_and_forecasts.jakub_signal_risk_disclosed", &"p7.jakub_boundary_and_forecasts.jakub_transmitter_disabled"]
+alternative_route = "Analiza używa wyłącznie danych niezależnych od Jakuba i zachowuje wszystkie trzy hipotezy trasy jako uczciwie kontynuowalne."
+outcome_key = &"p7.jakub_boundary_and_forecasts.jakub_consent_state"
+trace_key = &"p7.jakub_boundary_and_forecasts.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"jakub_boundary_and_forecasts"
+station_ids = [&"station_29", &"station_30"]
+entry_gate = &"p7.interrupted_trial_and_small_cost.trace"
+discrepancy = "Sygnał Jakuba daje najlepszy kierunek prognozy, ale jego zwyczajne życie i granice zgody nie są parametrem należącym do Leny ani UCP."
+required_source_facts = [&"p7.jakub_boundary_and_forecasts.jakub_consent_state", &"p7.jakub_boundary_and_forecasts.force_home_forecast", &"p7.jakub_boundary_and_forecasts.close_equal_recover_local_forecast", &"p7.jakub_boundary_and_forecasts.mutual_passage_forecast", &"p7.jakub_boundary_and_forecasts.route_hypotheses_mapped"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_costless_shortcut"), SubResource("DiagnosticHypothesis_limited_testimony"), SubResource("DiagnosticHypothesis_routes_without_signal")])
+trial_id = &"three_forecasts_consent_dependency"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_granted"), SubResource("DiagnosticCommitment_limited"), SubResource("DiagnosticCommitment_refused")])
+trace_key = &"p7.jakub_boundary_and_forecasts.trace"
+guidance_beat_ids = [&"s29_contrast_source", &"s29_contrast_contact", &"s29_boundary_hypothesis", &"s29_record_consent", &"s29_system_hint", &"s30_forecast_source", &"s30_forecast_contact", &"s30_consent_dependency_hypothesis", &"s30_compare_forecasts", &"s30_system_hint"]
+state_keys = [&"p7.jakub_boundary_and_forecasts.ucp_jakub_contrast_proposal_inspected", &"p7.jakub_boundary_and_forecasts.jakub_ordinary_life_scope_observed", &"p7.jakub_boundary_and_forecasts.jakub_signal_risk_disclosed", &"p7.jakub_boundary_and_forecasts.jakub_transmitter_disabled", &"p7.jakub_boundary_and_forecasts.jakub_consent_state", &"p7.jakub_boundary_and_forecasts.force_home_forecast", &"p7.jakub_boundary_and_forecasts.close_equal_recover_local_forecast", &"p7.jakub_boundary_and_forecasts.mutual_passage_forecast", &"p7.jakub_boundary_and_forecasts.route_hypotheses_mapped", &"p7.jakub_boundary_and_forecasts.trace", &"p7.jakub_boundary_and_forecasts.safe_trial_feedback"]
+migration_revision = 1

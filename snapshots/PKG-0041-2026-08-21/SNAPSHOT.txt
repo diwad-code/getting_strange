@@ -1,0 +1,14 @@
+Snapshot: PKG-0041
+Data: 2026-08-21
+Plikow: 136
+Rozmiar: 1.56 MB
+
+Projekt nie jest wersjonowany (D-016). Ta kopia jest plaskim zamrozeniem
+tresci projektu wykonanym na koniec pakietu, zgodnie z D-017. Nie zawiera
+katalogow skilli, wyjscia generowanego ani historii.
+
+Odtworzenie jest reczne: skopiuj potrzebny plik z powrotem do projektu i
+opisz to jako osobny pakiet w SESSION_LOG.md.
+
+Objete kopia:
+System.Object[]

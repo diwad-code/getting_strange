@@ -1,0 +1,16 @@
+{
+  "name": "Getting Strange — IKP Archives",
+  "short_name": "Getting Strange",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#030508",
+  "theme_color": "#5da398",
+  "description": "Oficjalny portal i symulator fizyki 2D gry Getting Strange (Godot 4.7 / GDScript).",
+  "icons": [
+    {
+      "src": "./assets/reports/movement_lab.png",
+      "sizes": "640x360",
+      "type": "image/png"
+    }
+  ]
+}

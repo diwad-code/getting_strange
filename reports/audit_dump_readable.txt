@@ -1,0 +1,426 @@
+=== 1. GUIDANCE BEATS (82 wpisy) ===
+[station_01] (s01_repeat_reading):
+  PL: Pociąg albo luźny uchwyt. Powtórzę odczyt.
+  EN: Train pass or loose bracket. I will repeat the reading.
+[station_01] (s01_pack_and_exit):
+  PL: Zapis zapisany. Zbieram sprzęt i wychodzę.
+  EN: Log saved. Packing up gear and leaving.
+[station_01] (s01_door_blocked):
+  PL: Zostawię surowy odczyt, jutro będę tu wracać z raportem. Zbieram torbę.
+  EN: I will leave the raw reading; I will return here tomorrow with the report. Packing the bag.
+[station_02] (s02_catwalk_observation):
+  PL: Ścieżka serwisowa jest wolna. Wyjście za komorą.
+  EN: Service walkway is clear. Exit behind the chamber.
+[station_02] (s02_subpanel_checked):
+  PL: Obwód wygaszony na czas robót. Idę kładką.
+  EN: Circuit powered down for maintenance. Taking the catwalk.
+[station_03] (s03_marta_message):
+  PL: Wracam do domu. Marta czeka.
+  EN: Heading home. Marta is waiting.
+[station_03] (s03_board_checked):
+  PL: Opóźnienie na tablicy. Odpiszę krótko, że jadę.
+  EN: Delay on the board. I'll text briefly that I'm on my way.
+[station_04] (s04_train_journey):
+  PL: Wagon kołysze na zwrotnicach. Jeszcze dwa przystanki.
+  EN: Carriage sways across switches. Two stops left.
+[station_04] (s04_stow_reader):
+  PL: Dość pomiarów na dzisiaj. Chowam czytnik.
+  EN: Enough readings for today. Stowing the reader.
+[station_05] (s05_roadwork_observation):
+  PL: Kolejne wykopy. Chodnik rozkopany od poniedziałku.
+  EN: More excavations. Sidewalk dug up since Monday.
+[station_06] (s06_two_schedules_observation):
+  PL: Ta sama data. Dwie trasy.
+  EN: Same date. Two different routes.
+[station_06] (s06_cache_hypothesis):
+  PL: Błąd w druku albo stara tabliczka. Zawsze najpierw szuka się bałaganu w papierach.
+  EN: Misprint or an old plate. You always look for paper chaos first.
+[station_06] (s06_check_paper_intent):
+  PL: Sprawdzę numer wersji na papierze.
+  EN: I'll check the version stamp on the paper.
+[station_07] (s07_shopkeeper_name_obs):
+  PL: Sprzedawca zna moje imię i herbatę Marty.
+  EN: Shopkeeper knows my name and Marta's tea.
+[station_07] (s07_shopkeeper_card_hyp):
+  PL: Imię zobaczył na karcie płatniczej. Najprostsze.
+  EN: Saw the name on the payment card. Most likely.
+[station_07] (s07_address_check_intent):
+  PL: Biorę wodę i sprawdzę adres na domofonie.
+  EN: Taking the water and checking the intercom address.
+[station_08] (s08_name_on_fourteen):
+  PL: Moje nazwisko. Czternaście.
+  EN: My surname. Fourteen.
+[station_08] (s08_numbers_swapped):
+  PL: Ktoś przełożył numery.
+  EN: Somebody swapped the numbers.
+[station_08] (s08_door_then_admin):
+  PL: Najpierw drzwi. Potem administracja.
+  EN: The door first. Administration after.
+[station_09] (s09_three_sources_agree):
+  PL: Zna moje imię. Nie zgadza się tylko numer.
+  EN: She knows my name. Only the number disagrees.
+[station_09] (s09_neighbour_mixes_floors):
+  PL: Myli piętra. Ludzie mylą piętra.
+  EN: She mixes up floors. People do.
+[station_09] (s09_check_the_lock):
+  PL: Sprawdzę zamek. Nie wejdę od razu.
+  EN: I will try the lock. I will not walk straight in.
+[station_10] (s10_key_fits):
+  PL: Zamek ustąpił od razu.
+  EN: The lock gave way at once.
+[station_10] (s10_same_lock_series):
+  PL: Ta sama seria zamków. Zdarza się.
+  EN: Same lock series. It happens.
+[station_10] (s10_bag_by_the_door):
+  PL: Torba przy drzwiach. Wyjdę w trzy kroki.
+  EN: Bag by the door. Three steps back out.
+[station_11] (s11_that_is_marta):
+  PL: To Marta. To ja.
+  EN: That is Marta. That is me.
+[station_11] (s11_marta_would_not):
+  PL: Nie zrobiłaby takiego zdjęcia.
+  EN: She would not take a photo like this.
+[station_11] (s11_reach_marta):
+  PL: Potrzebuję faktu spoza tego mieszkania.
+  EN: I need a fact from outside this flat.
+[station_12] (s12_her_voice):
+  PL: Jej oddech. Jej poprawka w połowie słowa.
+  EN: Her breath. Her mid-word correction.
+[station_12] (s12_missing_months):
+  PL: Brakuje mi kawałka miesięcy, nie rozmowy.
+  EN: It is months I am missing, not one talk.
+[station_12] (s12_two_questions):
+  PL: Zapiszę dwa pytania. Nie oddzwonię na gorąco.
+  EN: Two questions on paper. No hot call back.
+[station_13] (s13_two_addresses):
+  PL: Dwa adresy. Jeden dzień.
+  EN: Two addresses. One day.
+[station_13] (s13_paperwork_lag):
+  PL: Papiery czasem się nakładają przy przeprowadzce.
+  EN: Paperwork overlaps when someone moves.
+[station_13] (s13_ask_marta_for_the_day):
+  PL: Marta opisze dzień bez tych papierów.
+  EN: Marta can describe the day without these papers.
+[station_14] (s14_marta_expects_partner):
+  PL: Marta czeka na partnerkę. Odkłada drugi kubek.
+  EN: Marta expects her partner. She puts away the second mug.
+[station_14] (s14_medical_fear):
+  PL: Marta uważa, że mam wstrząśnienie mózgu lub atak paniki.
+  EN: Marta thinks I have a concussion or panic attack.
+[station_14] (s14_ask_about_field_trip):
+  PL: Zapytam o wyprawę terenową z października.
+  EN: I will ask about the October field expedition.
+[station_15] (s15_diverging_trip):
+  PL: Jedna wyprawa. Dwie różne wersje tego, co stało się po deszczu.
+  EN: One expedition. Two different versions of what happened after the rain.
+[station_15] (s15_rehearsed_story):
+  PL: Marta mogła ułożyć tę historię po latach opowiadań.
+  EN: Marta might have shaped this story over years of retellings.
+[station_15] (s15_go_to_office):
+  PL: Sprawdzę oficjalny grafik w biurze pomiarowym.
+  EN: I will check the official duty roster at the measurement office.
+[station_16] (s16_biometrics_match):
+  PL: Moja dłoń. Mój profil. Obcy numer karty.
+  EN: My hand. My profile. Foreign card number.
+[station_16] (s16_account_manipulation):
+  PL: Ktoś podmienił identyfikator karty w bazie UCP.
+  EN: Someone altered the card identifier in the UCP database.
+[station_16] (s16_open_incident_log):
+  PL: Otworzę raport z dzisiejszej próby.
+  EN: I will open the report on today's trial.
+[station_17] (s17_parallel_test):
+  PL: Dwa pomiary w tej samej sekundzie. Mój czytnik jest poza ich spisem.
+  EN: Two measurements in the exact same second. My reader is absent from their index.
+[station_17] (s17_ucp_containment):
+  PL: Skopiuję nagłówek i wyjdę szybem wentylacji zanim zaryglują sektor.
+  EN: I will copy the header and leave through the ventilation shaft before lockdown.
+[station_18] (s18_no_death_record):
+  PL: Brak aktu zgonu. Dziewięć lat późniejszych wpisów.
+  EN: No death certificate. Nine years of subsequent records.
+[station_18] (s18_ucp_database_forgery):
+  PL: UCP mogło sfabrykować miejskie rejestry.
+  EN: UCP could have fabricated municipal records.
+[station_18] (s18_test_family_knowledge):
+  PL: Nie zadzwonię bez prywatnego pytania kontrolnego.
+  EN: I will not call without a private control question.
+[station_19] (s19_voice_heard):
+  PL: Zna schowek u babci. Nie wie nic o tunelu.
+  EN: He knows grandma's pantry. He knows nothing about the tunnel.
+[station_19] (s19_impersonation_fear):
+  PL: Ktoś mógł zebrać rodzinne wspomnienia z moich notatek.
+  EN: Someone could have gathered family memories from my notes.
+[station_19] (s19_meet_in_public):
+  PL: Spotkamy się na placu warsztatowym z Martą obok.
+  EN: We will meet at the workshop square with Marta present.
+[station_20] (s20_living_brother):
+  PL: Ciało żyje. Ma pracę, zmęczenie i własne granice.
+  EN: The body is alive. He has work, fatigue, and his own boundaries.
+[station_20] (s20_synthesize_sources):
+  PL: Zestawię trzy źródła dowodów na stole pomiarowym.
+  EN: I will synthesize the three sources of evidence on the measurement table.
+[station_21] (s21_three_sources):
+  PL: Trzy niezależne rodziny dowodów.
+  EN: Three independent families of evidence.
+[station_21] (s21_single_world_impossibility):
+  PL: Żaden pojedynczy błąd w jednym świecie nie tłumaczy wszystkich trzech źródeł.
+  EN: No single mistake in one world explains all three sources.
+[station_21] (s21_recognition_truth):
+  PL: To nie jest mój świat. Muszę odnaleźć miejscową Lenę.
+  EN: This is not my world. I must find the local Lena.
+[station_22] (s22_two_signal_modes):
+  PL: Dwa zachowania sygnału w zapisie próby: sztywne zakotwiczenie i podatna uległość.
+  EN: Two signal behaviors in the test log: rigid anchoring and compliant yield.
+[station_22] (s22_reject_ucp):
+  PL: Nie oddam czytnika. Sprawdzę martwy obwód w podziemiach.
+  EN: I will not surrender the reader. I will check the dead circuit below.
+[station_23] (s23_circuit_cost):
+  PL: Zmiana stanu obciąża obwód. Zakotwiczenie ma swój fizyczny koszt.
+  EN: State change loads the circuit. Anchoring has its physical cost.
+[station_23] (s23_explore_substation):
+  PL: Zejdę do głównej magistrali podstacji.
+  EN: I will descend to the main substation trunk.
+[station_24] (s24_marta_boundaries):
+  PL: Marta stawia granice. Ma do tego prawo.
+  EN: Marta sets boundaries. She has every right to.
+[station_25] (s25_switchboard_b):
+  PL: Rozdzielnica B zasila wentylację. Musimy ominąć wyłączniki.
+  EN: Switchboard B powers ventilation. We need to bypass breakers.
+[station_26] (s26_log_204003):
+  PL: Log 20:40:03 pokazuje wzajemny kontakt przed interwencją.
+  EN: Log 20:40:03 shows mutual contact before intervention.
+[station_27] (s27_three_repeats):
+  PL: Wysyłam trzy impulsy. Trzeci ma celowy błąd.
+  EN: Sending three pulses. The third contains an intentional error.
+[station_28] (s28_line4_travel):
+  PL: Jazda Linią 4. Z każdym metrem tunel staje się gęstszy od sygnałów.
+  EN: Travelling on Line 4. With every meter the tunnel grows denser with signals.
+[station_29] (s29_power_grid):
+  PL: Stacja zasilania. Trzy fazy obciążenia pamięciowego.
+  EN: Power substation. Three phases of memory grid load.
+[station_30] (s30_three_models):
+  PL: Trzy modele zasilania. Żaden nie jest darmowy.
+  EN: Three power models. None is free.
+[station_31] (s31_adaptation_refusal):
+  PL: Magazyn dowodów. Ewidencja pasażerów i propozycja uciszenia sprzeczności.
+  EN: Evidence archive. Passenger ledger and the offer to silence contradiction.
+[station_32] (s32_material_memory):
+  PL: Pamięć materiału. Szkło laboratoryjne reaguje na moje dłonie.
+  EN: Material memory. The lab glass responds to my hands.
+[station_33] (s33_abort_condition):
+  PL: Notatka miejscowej Leny: warunek przerwania po trzech sekundach.
+  EN: Local Lena's note: abort condition after three seconds.
+[station_34] (s34_pair_registry):
+  PL: Rejestr par tożsamościowych. Obie Leny widnieją w banku maszynowni.
+  EN: Identity pair registry. Both Lenas appear in the engine bank.
+[station_35] (s35_home_echo):
+  PL: Echo domu. Wiadomość Marty potwierdza, że tamten świat poszedł dalej.
+  EN: Home echo. Marta's message confirms that world has moved on.
+[station_36] (s36_line4_ledger):
+  PL: Rachunek Linii 4. Utrzymanie Równi koreluje z katastrofą w domu.
+  EN: Line 4 ledger. Rowien's stability correlates with disaster back home.
+[station_37] (s37_living_signal):
+  PL: Żywy sygnał. Miejscowa Lena odpowiada, a Jakub pomaga na własnych warunkach.
+  EN: Living signal. Local Lena responds, and Jakub assists on his own terms.
+[station_38] (s38_marta_consent):
+  PL: Strefa decyzji. Marta stawia granice, a Jakub pilnuje rozdzielnicy.
+  EN: Decision zone. Marta sets boundaries, and Jakub watches the switchboard.
+[station_39] (s39_method_selection):
+  PL: Stół zgód i braków. Trzy metody bez moralizowania i bez łatwego wyjścia.
+  EN: Table of consents and gaps. Three methods without moralizing and without easy exits.
+[station_40] (s40_negotiation):
+  PL: Sala negocjacyjna. Wierzbicka broni stabilności, Marta patrzy bez uniku.
+  EN: Negotiation chamber. Wierzbicka defends stability, Marta looks without evasion.
+[station_41] (s41_operational_choice):
+  PL: Komora wyboru. Trzy konsole i fizyczne załączenie odpowiedzialności.
+  EN: Choice chamber. Three consoles and physical commitment of responsibility.
+[station_42a] (s42a_return_echo):
+  PL: Własny pokój. Powrót nastąpił, ale obietnice mają realną cenę.
+  EN: Own room. Return happened, but promises carry a real cost.
+[station_42b] (s42b_reconciliation):
+  PL: Miejsce po niej. Miejscowa Lena wraca do domu, a przybyła Lena staje na obcym przystanku.
+  EN: Her place. Local Lena returns home, and arrival Lena stands at a foreign stop.
+[station_42c] (s42c_testimony):
+  PL: Świadectwo. Dwa tory i most, który przecieka, ale trzyma obie strony.
+  EN: Testimony. Two tracks and a bridge that leaks, but holds both sides.
+[station_43] (s43_epilogue):
+  PL: Epilog. Miasto żyje dalej z dokonanym wyborem i zapisanym stanem sześciu podmiotów.
+  EN: Epilogue. The city lives on with the choice made and the recorded state of six entities.
+
+=== 2. PUNKTY REZONANSU I CRT (79 wpisów) ===
+[L.230]: Sterownia IKP
+[L.2550]: WOLSKA, L.
+[L.2550]: URLOP PRZERWANY
+[L.2557]: URLOP PRZERWANY
+[L.2694]: CAM 04 [REC]
+[L.2707]: UCP // PROTOKÓŁ ZGŁASZANIA
+[L.2757]: PAMIĘĆ WSPÓLNA TO SPOKÓJ
+[L.2849]: LINIA 4 // ROZKŁAD
+[L.2858]: TRASA ZAWIESZONA / AUTOBUS ZASTĘPCZY
+[L.2960]: LINIA ZASTĘPCZA 4
+[L.2992]: BLOK 7 / OS. TARASOWE
+[L.3435]: NIE SZUKAJ ORYGINAŁU
+[L.3445]: NIE SZUKAJ
+[L.3482]: ORYGINAŁU
+[L.3565]: Zostaw drzwi w odbiciu
+[L.3772]: WĘZEŁ 14 - KONTROLA CIĄGŁOŚCI
+[L.4096]: DZIAŁ ZGODNOŚCI UCP
+[L.4139]: PAMIĘĆ TO NIE POMIAR
+[L.4153]: PAMIĘĆ TO NIE POMIAR
+[L.4160]: ZGŁOŚ ROZBIEŻNOŚĆ W PUNKCIE 6
+[L.4205]: PUNKT 6 ->
+[L.4523]: cyjan zatrzymuje jedną krawędź; reszta kadru lekko ciągnie ku niej
+[L.5311]: GABINET KONSULTACYJNY 06 / DR H. WIERZBICKA
+[L.5512]: SALA MODELI
+[L.5593]: SCHEMAT 4-A / ULICA / 140 OSÓB
+[L.5605]: SCHEMAT 4-A
+[L.5637]: SCHEMAT 4-B / ŚCIANA NOŚNA / 17 ŚWIADKÓW
+[L.5649]: SCHEMAT 4-B
+[L.5742]: SALA SZYMONA / 20
+[L.5864]: RAPORT UJĘCIA WODY
+[L.5865]: STATUS: NAPRAWIONE
+[L.5895]: I g a
+[L.5934]: SALA SZYMONA / 20
+[L.6012]: STABILNOŚĆ: 99.8%
+[L.6028]: SKORZYSTANO Z RAPORTU HYDROLOGICZNEGO / AUTOR: ANONIMOWY
+[L.6050]: STATUS: SPÓJNY
+[L.6111]: STREFA TRANZYTOWA / 22
+[L.6145]: LENA W. / 17-D
+[L.6182]: KONTAKT ALARMOWY: MARTA KUREK / STATUS: ZWERYFIKOWANA WIĘŹ
+[L.6199]: MARTA KUREK / KONTAKT
+[L.6201]: KONTAKT: MARTA K.
+[L.6202]: STATUS: ZGŁOSZENIE
+[L.6203]: AUTORYZACJA: ZGODNA
+[L.6327]: 23 / PROJEKTANTKA — ARCHIWUM
+[L.6419]: JEŚLI TO CZYTASZ, ZGODZIŁAM SIĘ NA TWOJE RYZYKO
+[L.6453]: OSOBY OBCIĄŻONE: 11 / W TOKU
+[L.6475]: POLECENIE: NADPISZ WZORZEC
+[L.6478]: OSOBY OBCIĄŻONE
+[L.6525]: 24 / OBSERWACJA — MARTA
+[L.6575]: CAM-14: MIESZKANIE 14 / LIVE
+[L.6624]: KOREKTA M14 / 84% NAPRĘŻENIE
+[L.6668]: UCP-P6 / WIERZBICKA_H
+[L.6684]: DYSPOZYCJA WZORCA: LENA WOLSKA
+[L.6736]: 25 / TRANZYT — WEJŚCIE JAKUBA
+[L.6761]: Jakub siada na podłodze. Nie patrzy na Lenę.
+[L.6874]: SZKŁO / LINIA 4 / ŻEBRO LEWE
+[L.6895]: ANALIZA GESTU DŁONI
+[L.6941]: 26 / STREFA IZOLACJI — PRÓBA ZAMKNIĘCIA
+[L.6980]: IZOLACJA ADAPTACYJNA
+[L.7031]: PAMIĘTAM DLACZEGO PRZYSZŁAM
+[L.7098]: 27 / PRZEJŚCIE SERWISOWE — DŁUG WDZIĘCZNOŚCI
+[L.7177]: STATUS: OCALONY / 12 LAT
+[L.7271]: 28 / SKŁAD TECHNICZNY — TRAMWAJ BEZ PASAŻERÓW
+[L.7311]: LINIA 4 / TRANZYT
+[L.7379]: Ś W I A D E K
+[L.7429]: 29 / PERON TRZYNASTY — PODSTRUKTURA
+[L.7476]: PERON 13
+[L.7489]: P E R O N   1 3
+[L.7616]: 30 / SEKTOR ZASILANIA — ROZDZIELNIA GŁÓWNA
+[L.7791]: 31 / MAGAZYN DOWODÓW — JEDENAŚCIE KRZESEŁ
+[L.7940]: WYBRANO WARIANT, NIE CZŁOWIEKA
+[L.7967]: 32 / ŚLAD W SZKLE — KORYTARZ LUSTER
+[L.8101]: ŚLAD PAMIĘTA KSZTAŁT
+[L.8126]: 33 / SZYB TECHNICZNY — MASZYNOWNIA GŁÓWNA
+[L.8202]: 4.2 BAR
+[L.8319]: 34 / MASZYNOWNIA GŁÓWNA — RDZEŃ WYMIANY
+[L.8374]: RDZEŃ WYMIANY UCP
+[L.9947]: LINIA 4 / DWIE TRASY
+[L.9965]: UCP / KOMUNIKAT BIEŻĄCY
+
+=== 3. ETYKIETY SCEN (.tscn) (77 wpisów) ===
+[scenes/levels/station_01.tscn:83] (text): REJESTRATOR DRGAŃ // TOR 4
+[scenes/levels/station_02.tscn:73] (text): SEKTOR 02 // PRZEJŚCIE TECHNICZNE
+[scenes/levels/station_03.tscn:70] (text): PRZYSTANEK ZACHODNI // LINIA 4 - ZAWIESZONA
+[scenes/levels/station_04.tscn:70] (text): LINIA 4 // KURS ZJAZDOWY • NASTĘPNY PRZYSTANEK: RÓWIEŃ
+[scenes/levels/station_05.tscn:67] (text): UCP // PRACE NOCNE • MODERNIZACJA NAWIERZCHNI
+[scenes/levels/station_06.tscn:70] (text): PRZYSTANEK OSIEDLE // ROZKŁAD JAZDY (LINIA 14 vs LINIA 4)
+[scenes/levels/station_07.tscn:67] (text): KIOSK U PAWLAKA // PRASA • BILETY • ARTYKUŁY SPOŻYWCZE
+[scenes/levels/station_08.tscn:70] (text): SADOWA 7 // DOMOFON
+[scenes/levels/station_08.tscn:77] (text): 10 — NOWICKA   12 — KOWALCZYK   14 — L. WOLSKA
+[scenes/levels/station_08.tscn:84] (text): ZAŚWIADCZENIE: SADOWA 7 M. 12
+[scenes/levels/station_09.tscn:71] (text): PIĘTRO 3 // MIESZKANIA 13–16
+[scenes/levels/station_09.tscn:78] (text): GAŚNICA — UCHWYT PUSTY
+[scenes/levels/station_09.tscn:121] (object_name): Donica z fikusem
+[scenes/levels/station_10.tscn:70] (text): 14
+[scenes/levels/station_10.tscn:77] (text): L. WOLSKA
+[scenes/levels/station_11.tscn:71] (text): ODBITKA 04.11 // LATO
+[scenes/levels/station_11.tscn:78] (text): CZYTNIK TERENOWY // ŁADOWANIE 96%
+[scenes/levels/station_11.tscn:115] (object_name): Komoda w przedpokoju
+[scenes/levels/station_12.tscn:70] (text): SEKRETARKA // 1 NOWA WIADOMOŚĆ
+[scenes/levels/station_12.tscn:77] (text): OSTATNIE POŁĄCZENIE: MARTA K. — 21:14
+[scenes/levels/station_13.tscn:70] (text): ZAŚWIADCZENIE // SADOWA 7 M. 12 // WAŻNE DO 30.11
+[scenes/levels/station_13.tscn:77] (text): UMOWA NAJMU // SADOWA 7 M. 14 // OD 12.11 ROKU UBIEGŁEGO
+[scenes/levels/station_13.tscn:84] (text): CZYTNIK // ZAPIS OFFLINE 21:47
+[scenes/levels/station_14.tscn:67] (text): PRZEDPOKÓJ // SADOWA 7 M. 14 // 22:20
+[scenes/levels/station_14.tscn:74] (text): CZAJNIK // GEST PRZERWANY
+[scenes/levels/station_15.tscn:67] (text): KUCHNIA // WYPRAWA 14.10 // DWA SKUTKI
+[scenes/levels/station_15.tscn:74] (text): TELEFON MIEJSCOWEJ // ZABEZPIECZONY
+[scenes/levels/station_16.tscn:67] (text): TERMINAL UCP-4 // PROFIL BIOMETRYCZNY: ZGODNY // 186 DNI
+[scenes/levels/station_16.tscn:74] (text): PRÓBA 20:40 // ZATWIERDZENIE: DR H. WIERZBICKA
+[scenes/levels/station_17.tscn:67] (text): INCYDENT CIĄGŁOŚCI POMIARU // 20:40:03 // BRAK NUMERU CZYTNIKA
+[scenes/levels/station_17.tscn:74] (text): INTERKOM // DR H. WIERZBICKA // NAKAZ IZOLACJI
+[scenes/levels/station_18.tscn:67] (text): REJESTR MIEJSKI // JAKUB WOLSKI // BRAK AKTU ZGONU
+[scenes/levels/station_18.tscn:74] (text): SZPITAL MIEJSKI // OPERACJA 12.04 // KARTA PRACY L4 AKTYWNA
+[scenes/levels/station_19.tscn:67] (text): POŁĄCZENIE PRZYCHODZĄCE // JAKUB WOLSKI // WARSZTAT L4
+[scenes/levels/station_19.tscn:74] (text): PYTANIA KONTROLNE: SCHOWEK [OK] // TUNEL [ROZBIEŻNY]
+[scenes/levels/station_20.tscn:67] (text): WARSZTAT LINII 4 // DIAGNOSTYKA // NUMER CZYTNIKA: BRAK W BAZIE
+[scenes/levels/station_20.tscn:74] (text): JAKUB WOLSKI // 34 LATA // WIEK ZGODNY Z CIAŁEM
+[scenes/levels/station_21.tscn:67] (text): DOWÓD 1 // CZYTNIK I PRÓBKA // BRAK NUMERU W BAZIE
+[scenes/levels/station_21.tscn:74] (text): DOWÓD 2 // REJESTRY PUBLICZNE // SPÓJNA BIOGRAFIA
+[scenes/levels/station_21.tscn:81] (text): DOWÓD 3 // JAKUB WOLSKI // ROZBIEŻNA PAMIĘĆ
+[scenes/levels/station_21.tscn:88] (text): SYNTEZA // TO NIE JEST MÓJ ŚWIAT
+[scenes/levels/station_22.tscn:67] (text): OFERTA UCP: DEPOZYT CZYTNIKA [ODRZUCONO]
+[scenes/levels/station_22.tscn:74] (text): ZAPIS 20:40 // DWA TRYBY: ZAKOTWICZENIE / ULEGŁOŚĆ
+[scenes/levels/station_23.tscn:67] (text): MARTWY OBWÓD // ZŁĄCZE TESTOWE // BRAK GŁÓWNEGO ZASILANIA
+[scenes/levels/station_23.tscn:74] (text): KOSZT MECHANIKI // PRZECIĄŻENIE TERMICZNE OBWODU
+[scenes/levels/station_24.tscn:79] (text): MIESZKANIE 14 // MONITORING CCTV // PROTOKÓŁ OBSERWACJI
+[scenes/levels/station_25.tscn:80] (text): WĘZEŁ TRANZYTOWY LINII 4 // ROZDZIELNICA B // WYŁĄCZNIKI SEKCJI
+[scenes/levels/station_26.tscn:82] (text): ŚLUZA IZOLACYJNA // REJESTRATOR BUFORA // LOG 20:40:03
+[scenes/levels/station_27.tscn:79] (text): POSTERUNEK ROZRZĄDU // REJESTRACJA PRÓB // KOREKTA ŻYWEGO SYGNAŁU
+[scenes/levels/station_28.tscn:79] (text): SKŁAD TECHNICZNY LINII 4 // WIDOK TRANZYTOWY // PARADOKS PERONU
+[scenes/levels/station_29.tscn:79] (text): PERON 13 // WARIANT ODRZUCONY // BRAMA SEKTORA ZASILANIA
+[scenes/levels/station_30.tscn:84] (text): GŁÓWNY WĘZEŁ ROZDZIELCZY // SEKTOR 4 // TRZY MODELE ZASILANIA
+[scenes/levels/station_30.tscn:123] (object_name): Bateria przekaźników świadka
+[scenes/levels/station_31.tscn:79] (text): MAGAZYN DOWODÓW // SEKTOR EWIDENCJI // DEPOZYT LINII 4
+[scenes/levels/station_32.tscn:84] (text): STANOWISKO ANALITYCZNE // PAMIĘĆ MATERIAŁU // ŚLAD REZONANSU
+[scenes/levels/station_32.tscn:123] (object_name): Obserwowany ślad w szkle
+[scenes/levels/station_33.tscn:83] (text): SZYB WENTYLACYJNY // CIŚNIENIE POWROTNE // POZIOM -40M
+[scenes/levels/station_33.tscn:120] (object_name): Rama dwóch świadectw
+[scenes/levels/station_34.tscn:80] (text): RDZEŃ KORELACYJNY // REJESTR PAR // ALOKACJA BIOGRAFICZNA
+[scenes/levels/station_35.tscn:79] (text): SEKTOR FILTRACJI // ODBIORNIK ECHA DOMU // SEDACJA
+[scenes/levels/station_36.tscn:79] (text): DRENAŻ TRAKCYJNY // RACHUNEK LINII 4 // REJESTR KATASTROF
+[scenes/levels/station_37.tscn:80] (text): KOMORA SYGNAŁOWA // ŻYWY SYGNAŁ // KROSOWNICA TRANSMISYJNA
+[scenes/levels/station_38.tscn:83] (text): STREFA DECYZJI // ZGODY RELACJI // ROZDZIELNICA SYNCHRONIZACJI
+[scenes/levels/station_38.tscn:123] (object_name): Śluza utrzymująca Jakuba
+[scenes/levels/station_39.tscn:79] (text): PULPIT WYBORU METODY // RDZEŃ KORELACYJNY // BILANS KOSZTÓW
+[scenes/levels/station_40.tscn:79] (text): SALA NEGOCJACYJNA // POZIOM 0 // OSTATNI IMPULS I WERYFIKACJA
+[scenes/levels/station_41.tscn:79] (text): KOMORA WYBORU // TRZY METODY ROZSTRZYGNIĘCIA // POZIOM 0
+[scenes/levels/station_42a.tscn:71] (text): POWRÓT // WŁASNY POKÓJ // CENA WYMUSZENIA
+[scenes/levels/station_42b.tscn:71] (text): ZAMKNIĘCIE RÓWNI // MIEJSCE PO NIEJ // ZGODA BEZ DOWODU
+[scenes/levels/station_42c.tscn:71] (text): PRZEJŚCIE WZAJEMNE // DWA TORY // WSPÓLNA OBECNOŚĆ
+[scenes/levels/station_43.tscn:74] (text): EPILOG // ZAPIS NOWEJ CIĄGŁOŚCI // NAPISY NA ELEMENTACH MIASTA
+[scenes/prototype/anchor_lab.tscn:122] (object_name): Chamber 1 Bridge
+[scenes/prototype/anchor_lab.tscn:134] (object_name): Chamber 2 Lift
+[scenes/prototype/anchor_lab.tscn:146] (object_name): Chamber 3 Bridge
+[scenes/prototype/anchor_lab.tscn:160] (object_name): Chamber 3 Gate
+[scenes/prototype/anchor_lab.tscn:169] (object_name): Lab Crate A
+[scenes/prototype/anchor_lab.tscn:179] (object_name): Lab Crate B
+
+=== 4. UI / SETTINGS / MENU (17 wpisów) ===
+[scripts/ui/crt_dialogue_box.gd:18]: dr Wierzbicka
+[scripts/ui/crt_dialogue_box.gd:23]: ŚWIADECTWO
+[scripts/ui/crt_dialogue_box.gd:24]: Świadectwo
+[scripts/ui/crt_dialogue_box.gd:25]: ŚLAD
+[scripts/ui/crt_dialogue_box.gd:26]: POWRÓT
+[scripts/ui/crt_dialogue_box.gd:28]: GETTING STRANGE
+[scripts/ui/crt_portrait.gd:30]: dr 
+[scripts/ui/inner_thought_surface.gd:67]: LENA // MYŚL
+[scripts/ui/inner_thought_surface.gd:102]: WSKAZÓWKA // SYSTEM
+[scripts/ui/inner_thought_surface.gd:106]: LENA // MYŚL
+[scripts/ui/settings_overlay.gd:440]: )) == 
+[scripts/ui/title_screen.gd:59]: GETTING STRANGE
+[scripts/ui/title_screen.gd:186]:   /  
+[scripts/ui/title_screen.gd:200]: %s: %s
+[scripts/ui/title_screen.gd:200]:  / 
+[scripts/ui/title_screen.gd:200]: %s: —
+[scripts/ui/title_screen.gd:223]: GETTING STRANGE

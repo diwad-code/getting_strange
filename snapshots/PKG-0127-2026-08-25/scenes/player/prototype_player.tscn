@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/prototype_player.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/player/lena_visual_rig.gd" id="2_rig"]
+[ext_resource type="Script" path="res://scripts/player/lena_animation_state.gd" id="3_anim"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player"]
+radius = 6.0
+height = 56.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 1
+collision_mask = 1
+floor_snap_length = 2.0
+script = ExtResource("1_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_player")
+
+[node name="LenaVisualRig" type="Node2D" parent="."]
+script = ExtResource("2_rig")
+
+[node name="LenaAnimationState" type="Node" parent="." node_paths=PackedStringArray("player", "visual_rig")]
+script = ExtResource("3_anim")
+player = NodePath("..")
+visual_rig = NodePath("../LenaVisualRig")

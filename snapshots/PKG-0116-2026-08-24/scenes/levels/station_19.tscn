@@ -1,0 +1,177 @@
+[gd_scene load_steps=22 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_19.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/levels/atmosphere_rig.gd" id="5_atmosphere"]
+[ext_resource type="Script" path="res://scripts/ui/crt_dialogue_box.gd" id="6_dialogue"]
+[ext_resource type="Script" path="res://scripts/ui/station_dialogue_cue.gd" id="7_cue"]
+[ext_resource type="Script" path="res://scripts/visual/vector_stage_environment.gd" id="8_vector_stage"]
+[ext_resource type="Script" path="res://scripts/interactables/anchorable_object.gd" id="9_anchorable"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor_main"]
+size = Vector2(640, 80)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_ceiling"]
+size = Vector2(640, 40)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(50, 70)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_model_table"]
+size = Vector2(190, 54)
+
+[sub_resource type="CircleShape2D" id="Circle_prop_table"]
+radius = 55.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_map_left"]
+radius = 45.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_map_right"]
+radius = 45.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_ledger"]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_exit"]
+radius = 60.0
+
+[node name="Station19" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="VectorStageEnvironment" type="Node2D" parent="."]
+script = ExtResource("8_vector_stage")
+stage_seed = 19
+station_number = 19
+
+[node name="AtmosphereRig" type="Node2D" parent="."]
+script = ExtResource("5_atmosphere")
+station_number = 19
+
+[node name="CRTDialogueBox" type="CanvasLayer" parent="."]
+script = ExtResource("6_dialogue")
+
+[node name="OpeningDialogueCue" type="Node" parent="."]
+script = ExtResource("7_cue")
+station_id = &"station_19"
+opening_line = "Dwa różne rzuty tej samej klatki schodowej stoją obok siebie. Żaden nie ma dopisku, że jest kopią."
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="FloorMain" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 320)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorMain"]
+shape = SubResource("Rectangle_floor_main")
+
+[node name="Line4ModelTable" type="AnimatableBody2D" parent="Geometry"]
+position = Vector2(320, 253)
+script = ExtResource("9_anchorable")
+state_a_position = Vector2(320, 253)
+state_b_position = Vector2(320, 253)
+state_a_size = Vector2(190, 54)
+state_b_size = Vector2(118, 54)
+object_name = "Stół modeli Linii 4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Line4ModelTable"]
+shape = SubResource("Rectangle_model_table")
+
+[node name="Ceiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ceiling"]
+shape = SubResource("Rectangle_ceiling")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="ModelDisplayTable" type="Area2D" parent="Props"]
+position = Vector2(310, 240)
+script = ExtResource("2_resonance")
+resonance_id = "prop_model_display_table"
+prop_type = 82
+prop_title = "Stół modeli Linii 4"
+prop_subtitle = "Dwa równoprawne warianty klatki schodowej"
+interaction_radius = 55.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ModelDisplayTable"]
+shape = SubResource("Circle_prop_table")
+
+[node name="StaircaseMapLeft" type="Area2D" parent="Props"]
+position = Vector2(130, 130)
+script = ExtResource("2_resonance")
+resonance_id = "prop_staircase_map_left"
+prop_type = 83
+prop_title = "Schemat 4-A / Ulica"
+prop_subtitle = "Klatka kończy się na ulicy (140 osób)"
+interaction_radius = 45.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StaircaseMapLeft"]
+shape = SubResource("Circle_prop_map_left")
+
+[node name="StaircaseMapRight" type="Area2D" parent="Props"]
+position = Vector2(490, 130)
+script = ExtResource("2_resonance")
+resonance_id = "prop_staircase_map_right"
+prop_type = 84
+prop_title = "Schemat 4-B / Ściana nośna"
+prop_subtitle = "Klatka kończy się na ścianie (17 świadków)"
+interaction_radius = 45.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StaircaseMapRight"]
+shape = SubResource("Circle_prop_map_right")
+
+[node name="ElevenPersonsLedger" type="Area2D" parent="Props"]
+position = Vector2(220, 245)
+script = ExtResource("2_resonance")
+resonance_id = "prop_eleven_persons_ledger"
+prop_type = 85
+prop_title = "Rejestr jedenastu osób"
+prop_subtitle = "Lista osób nieobecnych w oficjalnych tabelach"
+interaction_radius = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ElevenPersonsLedger"]
+shape = SubResource("Circle_prop_ledger")
+
+[node name="ModelRoomExit" type="Area2D" parent="Props"]
+position = Vector2(590, 230)
+script = ExtResource("2_resonance")
+resonance_id = "prop_model_room_exit"
+prop_type = 86
+prop_title = "Przejście do Sali Szymona"
+prop_subtitle = "Przestrzeń 20 — dostęp po rozstrzygnięciu sporu"
+interaction_radius = 60.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ModelRoomExit"]
+shape = SubResource("Circle_prop_exit")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(610, 245)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(50, 240)
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")

@@ -1,0 +1,8 @@
+station_01   cam_y=216  bottom 40 rows sampled, 0 read as clear colour  -> painted
+station_08   cam_y=216  bottom 40 rows sampled, 0 read as clear colour  -> painted
+station_16   cam_y=216  bottom 40 rows sampled, 0 read as clear colour  -> painted
+station_24   cam_y=216  bottom 40 rows sampled, 0 read as clear colour  -> painted
+station_31   cam_y=216  bottom 40 rows sampled, 0 read as clear colour  -> painted
+station_37   cam_y=216  bottom 40 rows sampled, 0 read as clear colour  -> painted
+station_41   cam_y=216  bottom 40 rows sampled, 0 read as clear colour  -> painted
+station_43   cam_y=216  bottom 40 rows sampled, 0 read as clear colour  -> painted

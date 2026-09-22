@@ -1,0 +1,1643 @@
+class_name ProceduralAudio
+extends RefCounted
+
+## Procedural audio generator for Getting Strange.
+## Synthesizes clean 16-bit PCM AudioStreamWAV streams without external audio assets.
+## Timbral character derived from VISUAL_DESIGN.md (clinical institutional order,
+## cool cyan #75C7C3 anchor resonance, oxide cinnabar #C65D58 correction rumble).
+
+const SAMPLE_RATE: int = 44100
+
+
+static func generate_wav(duration: float, generator_func: Callable) -> AudioStreamWAV:
+	var wav := AudioStreamWAV.new()
+	wav.format = AudioStreamWAV.FORMAT_16_BITS
+	wav.mix_rate = SAMPLE_RATE
+	wav.stereo = false
+
+	var total_samples := maxi(1, int(duration * SAMPLE_RATE))
+	var data := PackedByteArray()
+	data.resize(total_samples * 2)
+
+	for i in range(total_samples):
+		var t: float = float(i) / float(SAMPLE_RATE)
+		var sample: float = clampf(float(generator_func.call(t, duration)), -1.0, 1.0)
+		var s16: int = int(sample * 32767.0)
+		data.encode_s16(i * 2, s16)
+
+	wav.data = data
+	return wav
+
+
+## Anchor Sound: Cool cyan resonance (740 Hz F#5 crystalline harmonic chime with latch transient)
+static func create_anchor_sound() -> AudioStreamWAV:
+	var duration := 0.40
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Attack envelope (5ms attack, exponential release)
+		var env := exp(-t * 8.5) if t >= 0.005 else (t / 0.005)
+		
+		# Fundamental and upper harmonic
+		var f0 := 740.0
+		var f1 := 1480.0
+		var tone := 0.75 * sin(t * TAU * f0) + 0.25 * sin(t * TAU * f1)
+		
+		# Short mechanical latch transient at t < 0.015s
+		var click := 0.0
+		if t < 0.015:
+			var click_t := t / 0.015
+			click = (1.0 - click_t) * (sin(t * TAU * 2200.0) * 0.4 + (sin(t * 1337.0) - 0.5) * 0.3)
+		
+		return (tone * 0.7 + click * 0.3) * env * 0.85
+	)
+
+
+## Unanchor Sound: Soft downward release (660 Hz -> 330 Hz relaxation curve)
+static func create_unanchor_sound() -> AudioStreamWAV:
+	var duration := 0.28
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := (1.0 - progress) * (1.0 - progress)
+		# Smooth descending frequency
+		var freq := lerpf(660.0, 310.0, progress * progress)
+		var tone := sin(t * TAU * freq) * 0.8 + sin(t * TAU * freq * 0.5) * 0.2
+		return tone * env * 0.7
+	)
+
+
+## Correction Pulse Sound: Heavy institutional sub-bass rumble (92 Hz -> 44 Hz cinnabar pulse)
+static func create_correction_pulse_sound() -> AudioStreamWAV:
+	var duration := 0.55
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		# Smooth trapezoidal / exponential envelope
+		var attack := minf(1.0, t / 0.02)
+		var decay := exp(-progress * 3.8)
+		var env := attack * decay
+		
+		# Sweeping low frequency
+		var freq := lerpf(92.0, 44.0, progress)
+		var sub := sin(t * TAU * freq)
+		var sub2 := sin(t * TAU * (freq * 0.5)) * 0.5
+		# Subtle industrial texture (filtered noise grain)
+		var noise_texture := sin(t * 8400.0) * cos(t * 4320.0) * 0.15
+		
+		var raw := (sub * 0.65 + sub2 * 0.25 + noise_texture) * env
+		# Soft saturation curve
+		return tanh(raw * 1.4) * 0.95
+	)
+
+
+## Resist Shift Sound: Metallic phase clash resolving to stable anchor tone
+static func create_resist_sound() -> AudioStreamWAV:
+	var duration := 0.42
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := exp(-progress * 6.5) if t >= 0.003 else (t / 0.003)
+		
+		# Beating interference (587 Hz D5 & 622 Hz Eb5) creating tension
+		var beat := sin(t * TAU * 587.0) * 0.5 + sin(t * TAU * 622.0) * 0.5
+		# Stable cyan resolution tone (740 Hz) rising as beating fades
+		var stable := sin(t * TAU * 740.0)
+		var mix_weight := clampf(progress * 2.5, 0.0, 1.0)
+		var tone := lerpf(beat, stable, mix_weight)
+		
+		# Metallic sharp strike transient
+		var strike := 0.0
+		if t < 0.02:
+			strike = (1.0 - t / 0.02) * sin(t * TAU * 1960.0) * 0.5
+			
+		return (tone * 0.75 + strike * 0.25) * env * 0.9
+	)
+
+
+## Goal / Synchronization Sound: Dual harmonic chime (C5 + G5 pure fifth)
+static func create_goal_sound() -> AudioStreamWAV:
+	var duration := 0.60
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 4.5) if t >= 0.005 else (t / 0.005)
+		var c5 := sin(t * TAU * 523.25) * 0.6
+		var g5 := sin(t * TAU * 783.99) * 0.4
+		return (c5 + g5) * env * 0.8
+	)
+
+
+## Linoleum / Concrete Footstep: Dry, subtle institutional tap with low body
+static func create_footstep_linoleum_sound() -> AudioStreamWAV:
+	var duration := 0.07
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 80.0) if t >= 0.002 else (t / 0.002)
+		var body := sin(t * TAU * 220.0) * 0.65 + sin(t * TAU * 340.0) * 0.35
+		var click := 0.0
+		if t < 0.008:
+			click = (1.0 - t / 0.008) * sin(t * TAU * 1600.0) * 0.35
+		return (body * 0.7 + click * 0.3) * env * 0.65
+	)
+
+
+## Metal Footstep: Crisp metallic tap with ringing overtone (lift / steel bridge)
+static func create_footstep_metal_sound() -> AudioStreamWAV:
+	var duration := 0.09
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 55.0) if t >= 0.001 else (t / 0.001)
+		var tone := sin(t * TAU * 1180.0) * 0.45 + sin(t * TAU * 1860.0) * 0.3 + sin(t * TAU * 440.0) * 0.25
+		var click := 0.0
+		if t < 0.008:
+			click = (1.0 - t / 0.008) * sin(t * TAU * 3400.0) * 0.45
+		return (tone * 0.65 + click * 0.35) * env * 0.75
+	)
+
+
+## Landing Impact: Firm cushion thud with surface resonance
+static func create_land_sound(is_metal: bool = false) -> AudioStreamWAV:
+	var duration := 0.14
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 26.0) if t >= 0.003 else (t / 0.003)
+		var low_impact := sin(t * TAU * 115.0) * 0.65 + sin(t * TAU * 180.0) * 0.35
+		var overtone := 0.0
+		if is_metal:
+			overtone = (sin(t * TAU * 880.0) * 0.35 + sin(t * TAU * 1420.0) * 0.25) * exp(-t * 35.0)
+		else:
+			overtone = sin(t * TAU * 400.0) * 0.2 * exp(-t * 45.0)
+		return (low_impact * 0.7 + overtone * 0.3) * env * 0.85
+	)
+
+
+## Airlock Lockdown & Containment Seal: Rising magnetic charge + pneumatic hydraulic latch
+static func create_airlock_seal_sound() -> AudioStreamWAV:
+	var duration := 0.85
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var sample := 0.0
+		
+		# Phase 1: Magnetic resonance frequency sweep (0.0s .. 0.60s)
+		if t < 0.60:
+			var p1 := t / 0.60
+			var env1 := minf(1.0, t / 0.04) * (1.0 - p1 * 0.3)
+			var freq := lerpf(330.0, 880.0, p1 * p1)
+			var mag := sin(t * TAU * freq) * 0.6 + sin(t * TAU * (freq * 1.5)) * 0.25
+			var flutter := sin(t * TAU * 40.0) * 0.15
+			sample += (mag + flutter) * env1 * 0.55
+		
+		# Phase 2: Heavy pneumatic latch & mechanical seal impact at t >= 0.45s
+		if t >= 0.45:
+			var p2 := (t - 0.45) / 0.40
+			var env2 := exp(-p2 * 9.0) if p2 >= 0.005 else (p2 / 0.005)
+			var thud := sin((t - 0.45) * TAU * 95.0) * 0.6 + sin((t - 0.45) * TAU * 240.0) * 0.4
+			var metallic_clack := 0.0
+			if p2 < 0.04:
+				metallic_clack = (1.0 - p2 / 0.04) * sin((t - 0.45) * TAU * 2200.0) * 0.5
+			var hiss := (sin(t * 12345.0) * cos(t * 7890.0)) * 0.25 * exp(-p2 * 5.0)
+			sample += (thud * 0.5 + metallic_clack * 0.3 + hiss * 0.2) * env2 * 0.8
+			
+		return clampf(sample, -1.0, 1.0)
+	)
+
+
+## Memory Resonance Sound: Warm amber harmonic tone (A4 440 Hz + C#5 554.37 Hz) with gentle phase drift
+static func create_memory_resonance_sound() -> AudioStreamWAV:
+	var duration := 0.65
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 3.8) if t >= 0.015 else (t / 0.015)
+		var progress := t / dur
+		
+		# Warm harmonic dual-frequency resonance (warm major third)
+		var f_a := 440.0 + sin(t * TAU * 1.5) * 1.2
+		var f_csharp := 554.37 + cos(t * TAU * 2.0) * 1.5
+		var f_sub := 220.0
+		
+		var tone_a := sin(t * TAU * f_a) * 0.45
+		var tone_csharp := sin(t * TAU * f_csharp) * 0.35
+		var tone_sub := sin(t * TAU * f_sub) * 0.20
+		
+		# Subtle warm filament grain / soft hum
+		var tape_grain := (sin(t * 7800.0) * cos(t * 3900.0)) * 0.06 * exp(-progress * 2.0)
+		
+		var raw := (tone_a + tone_csharp + tone_sub + tape_grain) * env
+		return clampf(raw * 0.9, -1.0, 1.0)
+	)
+
+
+## Switch Toggle Sound: Crisp institutional mechanical toggle latch (820 Hz transient + 180 Hz body)
+static func create_switch_toggle_sound() -> AudioStreamWAV:
+	var duration := 0.08
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 70.0) if t >= 0.001 else (t / 0.001)
+		# Mechanical lever snap
+		var lever := sin(t * TAU * 820.0) * 0.6 + sin(t * TAU * 1640.0) * 0.25
+		var body := sin(t * TAU * 180.0) * 0.4
+		var snap := 0.0
+		if t < 0.005:
+			snap = (1.0 - t / 0.005) * sin(t * TAU * 3600.0) * 0.5
+		return (lever * 0.5 + body * 0.3 + snap * 0.2) * env * 0.85
+	)
+
+
+## Vacuum Hum Sound: Low-frequency turbine and vacuum chamber hum loop
+static func create_vacuum_hum_sound() -> AudioStreamWAV:
+	var duration := 0.50
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var f1 := 55.0
+		var f2 := 110.0
+		var f3 := 165.0
+		var tone := sin(t * TAU * f1) * 0.5 + sin(t * TAU * f2) * 0.3 + sin(t * TAU * f3) * 0.15
+		var air_flow := (sin(t * 4320.0) * cos(t * 2160.0)) * 0.08
+		return clampf((tone + air_flow) * 0.7, -1.0, 1.0)
+	)
+
+
+## Correlation Hum Sound: High-energy dual carrier harmonic resonance (220 Hz + 330 Hz with pure fifth and sub-bass)
+static func create_correlation_hum_sound() -> AudioStreamWAV:
+	var duration := 0.60
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var sub := sin(t * TAU * 55.0) * 0.25
+		var c1 := sin(t * TAU * 220.0) * 0.40
+		var c2 := sin(t * TAU * 330.0) * 0.30
+		var harmonic := sin(t * TAU * 660.0) * 0.15
+		var crystal := sin(t * TAU * 880.0) * 0.08
+		# Electromagnetic flux fluctuation
+		var flux := sin(t * TAU * 8.0) * 0.08
+		var raw := (sub + c1 + c2 + harmonic + crystal) * (1.0 + flux)
+		return clampf(raw * 0.8, -1.0, 1.0)
+	)
+
+
+## Strip Chart Printer Sound: Mechanical paper feed stepper motor chirp + thermal print strike clicks
+static func create_printer_strip_sound() -> AudioStreamWAV:
+	var duration := 0.45
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 5.0) if t >= 0.01 else (t / 0.01)
+		# Stepper motor step pulse series (every 0.04s)
+		var step_cycle := fmod(t, 0.045)
+		var step_env := exp(-step_cycle * 90.0)
+		var stepper := sin(step_cycle * TAU * 1150.0) * step_env * 0.65
+		# Printhead thermal impact hiss
+		var noise := (sin(t * 14500.0) * cos(t * 6200.0)) * 0.25 * exp(-t * 6.0)
+		var raw := (stepper * 0.7 + noise * 0.3) * env
+		return clampf(raw * 0.85, -1.0, 1.0)
+	)
+
+
+## Galvanometer Needle Spike Sound: Overload deflection strike with mechanical damping bounce
+static func create_needle_spike_sound() -> AudioStreamWAV:
+	var duration := 0.12
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 40.0) if t >= 0.001 else (t / 0.001)
+		# Sharp tap on gauge stop
+		var strike := sin(t * TAU * 1380.0) * 0.7 + sin(t * TAU * 2760.0) * 0.3
+		var bounce := 0.0
+		if t >= 0.025:
+			var t_b := t - 0.025
+			bounce = sin(t_b * TAU * 920.0) * exp(-t_b * 60.0) * 0.35
+		var raw := (strike * 0.75 + bounce * 0.25) * env
+		return clampf(raw * 0.9, -1.0, 1.0)
+	)
+
+
+## Desk Telephone Pulse / Ring Sound: Institutional European dual-tone beep & flutter
+static func create_phone_ring_pulse_sound() -> AudioStreamWAV:
+	var duration := 0.35
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 6.0) if t >= 0.005 else (t / 0.005)
+		# Dual frequency 425 Hz carrier with 25 Hz amplitude flutter
+		var carrier := sin(t * TAU * 425.0) * 0.65 + sin(t * TAU * 850.0) * 0.20
+		var flutter := 0.6 + 0.4 * sin(t * TAU * 25.0)
+		# High frequency electronic message alert chirp (1680 Hz + 2100 Hz)
+		var alert_chirp := (sin(t * TAU * 1680.0) * 0.3 + sin(t * TAU * 2100.0) * 0.2) * exp(-t * 18.0)
+		var raw := (carrier * flutter + alert_chirp) * env
+		return clampf(raw * 0.85, -1.0, 1.0)
+	)
+
+
+## Card Reader Authorization / Discordant Access Chime: Dual electronic ping + solenoid latch click
+static func create_card_reader_beep_sound() -> AudioStreamWAV:
+	var duration := 0.26
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var sample := 0.0
+		# Tone 1: 987 Hz B5 ping (0.00s .. 0.10s)
+		if t < 0.11:
+			var p1 := t / 0.11
+			var env1 := exp(-p1 * 8.0) if t >= 0.002 else (t / 0.002)
+			sample += sin(t * TAU * 987.77) * env1 * 0.55
+		# Tone 2: 1318 Hz E6 chime (0.08s .. 0.26s)
+		if t >= 0.08:
+			var p2 := (t - 0.08) / 0.18
+			var env2 := exp(-p2 * 7.5) if p2 >= 0.002 else (p2 / 0.002)
+			# Slight discordant minor second undertone (1380 Hz) symbolizing "urlop przerwany" anomaly
+			var tone2 := sin((t - 0.08) * TAU * 1318.5) * 0.5 + sin((t - 0.08) * TAU * 1380.0) * 0.15
+			sample += tone2 * env2 * 0.55
+		# Mechanical solenoid latch click at t < 0.015s
+		if t < 0.015:
+			sample += (1.0 - t / 0.015) * sin(t * TAU * 2800.0) * 0.3
+		return clampf(sample, -1.0, 1.0)
+	)
+
+
+## Fluorescent Ballast Hum: Institutional corridor ambient hum with 100 Hz ballast buzz
+static func create_fluorescent_hum_sound() -> AudioStreamWAV:
+	var duration := 0.60
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var f1 := 100.0 # 50Hz full-wave rectified mains ballast
+		var f2 := 200.0
+		var f3 := 300.0
+		var buzz := sin(t * TAU * f1) * 0.50 + sin(t * TAU * f2) * 0.30 + sin(t * TAU * f3) * 0.15
+		var filament_tick := sin(t * TAU * 12.5) * 0.08
+		var gas_noise := (sin(t * 8900.0) * cos(t * 4450.0)) * 0.05
+		var raw := (buzz + filament_tick + gas_noise) * 0.65
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Camera Relay Cutoff Click: Sharp electromagnetic switch disconnect + filament snap (Scene 04)
+static func create_camera_click_sound() -> AudioStreamWAV:
+	var duration := 0.18
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 35.0) if t >= 0.001 else (t / 0.001)
+		# Heavy relay coil pop (180 Hz) + sharp ceramic snap (1850 Hz)
+		var coil := sin(t * TAU * 180.0) * 0.65
+		var snap := sin(t * TAU * 1850.0) * 0.35 + (sin(t * 6200.0) - 0.5) * 0.25
+		# Filament discharge ping
+		var discharge := sin(t * TAU * 3200.0) * exp(-t * 70.0) * 0.2
+		var raw := (coil + snap + discharge) * env
+		return clampf(raw * 0.95, -1.0, 1.0)
+	)
+
+
+## Turnstile Unlatch Sound: Mechanical solenoid clunk + ratchet tooth release
+static func create_turnstile_unlatch_sound() -> AudioStreamWAV:
+	var duration := 0.22
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 22.0) if t >= 0.002 else (t / 0.002)
+		# Solenoid strike (340 Hz)
+		var strike := sin(t * TAU * 340.0) * 0.60
+		# High frequency mechanical pawl friction
+		var pawl := sin(t * TAU * 2200.0) * 0.25 + (sin(t * 9100.0) - 0.5) * 0.20
+		# Delayed tooth rebound at t = 0.035
+		var rebound := 0.0
+		if t >= 0.035:
+			var tr := t - 0.035
+			rebound = sin(tr * TAU * 680.0) * exp(-tr * 45.0) * 0.35
+		var raw := (strike + pawl + rebound) * env
+		return clampf(raw * 0.90, -1.0, 1.0)
+	)
+
+
+## Dialogue Blip Sound: Soft tactile terminal text pulse
+static func create_dialogue_blip_sound(is_lena: bool = true) -> AudioStreamWAV:
+	var duration := 0.05
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 90.0) if t >= 0.001 else (t / 0.001)
+		# Lena: 587 Hz warm amber harmonic; Guard: 330 Hz deeper institutional chime
+		var freq := 587.33 if is_lena else 329.63
+		var tone := sin(t * TAU * freq) * 0.75 + sin(t * TAU * freq * 2.0) * 0.25
+		return clampf(tone * env * 0.6, -1.0, 1.0)
+	)
+
+
+## Crosswalk Acoustic Beacon / Signal Sound: 500 Hz locator pulses + optional formant whisper "Lena" (Scene 05)
+static func create_crosswalk_signal_sound(with_name_whisper: bool = false) -> AudioStreamWAV:
+	var duration := 0.65 if with_name_whisper else 0.40
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var sample := 0.0
+		
+		# 1. Standard European acoustic pedestrian locator pulses (2 beeps: t=0.0..0.08s and t=0.18..0.26s)
+		var p1_env := (exp(-t * 35.0) if t >= 0.002 else (t / 0.002)) if t < 0.12 else 0.0
+		var p2_t := t - 0.18
+		var p2_env := (exp(-p2_t * 35.0) if p2_t >= 0.002 else (p2_t / 0.002)) if (t >= 0.18 and t < 0.30) else 0.0
+		
+		var f_locator := 500.0
+		var locator_tone := sin(t * TAU * f_locator) * 0.6 + sin(t * TAU * (f_locator * 2.0)) * 0.25
+		sample += locator_tone * (p1_env + p2_env) * 0.75
+		
+		# 2. Formant-filtered whisper resonance ("Le-na") on activation per FULL_STORY 05
+		if with_name_whisper and t >= 0.22:
+			var w_t := t - 0.22
+			var w_dur := 0.42
+			var progress := clampf(w_t / w_dur, 0.0, 1.0)
+			var w_env := sin(progress * PI) * exp(-progress * 1.5)
+			
+			# Syllable 1: "Le" (t=0..0.20): F1 ~450 Hz, F2 ~1800 Hz, F3 ~2400 Hz
+			# Syllable 2: "na" (t=0.20..0.42): F1 ~750 Hz, F2 ~1200 Hz, F3 ~2200 Hz
+			var is_syl1 := progress < 0.48
+			var f1 := 450.0 if is_syl1 else 750.0
+			var f2 := 1800.0 if is_syl1 else 1200.0
+			var f3 := 2400.0 if is_syl1 else 2200.0
+			
+			var formant := sin(w_t * TAU * f1) * 0.40 + sin(w_t * TAU * f2) * 0.30 + sin(w_t * TAU * f3) * 0.15
+			var breath := (sin(w_t * 7890.0) * cos(w_t * 3450.0)) * 0.18
+			sample += (formant + breath) * w_env * 0.60
+		
+		return clampf(sample, -1.0, 1.0)
+	)
+
+
+## Rain on Wet Asphalt Sound: Ambient rain texture with micro-droplet impact transients
+static func create_rain_asphalt_sound() -> AudioStreamWAV:
+	var duration := 0.90
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Base continuous rain hiss (low-pass filtered white noise simulation)
+		var n1 := sin(t * 11340.0) * cos(t * 5420.0) * 0.35
+		var n2 := sin(t * 7820.0) * sin(t * 3210.0) * 0.25
+		var sub_rumble := sin(t * TAU * 65.0) * 0.12
+		
+		# Micro droplet puddle impact clicks (rhythmic splatter texture)
+		var clicks := 0.0
+		var intervals: Array[float] = [0.08, 0.23, 0.41, 0.59, 0.77]
+		for click_time in intervals:
+			if t >= click_time and t < click_time + 0.02:
+				var ct := (t - click_time) / 0.02
+				clicks += (1.0 - ct) * sin((t - click_time) * TAU * 2600.0) * 0.15
+		
+		var raw := (n1 + n2 + sub_rumble + clicks) * 0.75
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Tram Catenary & Electric Traction Sound: 50 Hz mains hum + 620 Hz traction motor whine + rail flange
+static func create_tram_traction_sound() -> AudioStreamWAV:
+	var duration := 0.80
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# 50 Hz / 100 Hz European catenary mains hum
+		var mains := sin(t * TAU * 50.0) * 0.45 + sin(t * TAU * 100.0) * 0.30
+		# 620 Hz electric inverter / traction motor whine with slight flutter
+		var f_traction := 620.0 + sin(t * TAU * 2.5) * 8.0
+		var traction := sin(t * TAU * f_traction) * 0.35 + sin(t * TAU * (f_traction * 2.0)) * 0.15
+		# High frequency rail flange friction (~1420 Hz with soft noise)
+		var rail_hiss := (sin(t * 8920.0) * cos(t * 4460.0)) * 0.08
+		var flange := sin(t * TAU * 1420.0) * 0.12 * (0.6 + 0.4 * sin(t * TAU * 8.0))
+		
+		var raw := (mains + traction + rail_hiss + flange) * 0.65
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Bus Diesel Engine Hum Sound: 42 Hz fundamental diesel combustion rumble with chassis vibration (Scene 06)
+static func create_bus_engine_sound(is_decelerating: bool = false) -> AudioStreamWAV:
+	var duration := 1.00
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Diesel engine cylinder strokes: ~42 Hz idle / cruising, ~28 Hz when decelerating
+		var base_f := 28.0 if is_decelerating else 42.0
+		# Subtle rhythmic engine throb (4-cylinder cycle)
+		var throb := 1.0 + 0.18 * sin(t * TAU * (base_f * 0.5))
+		
+		var f0 := sin(t * TAU * base_f) * 0.50
+		var f1 := sin(t * TAU * (base_f * 2.0)) * 0.30
+		var f2 := sin(t * TAU * (base_f * 3.0)) * 0.15
+		var sub := sin(t * TAU * (base_f * 0.5)) * 0.25
+		
+		# Low-pass chassis vibration texture
+		var vibration := (sin(t * 240.0) * cos(t * 110.0)) * 0.10
+		
+		var raw := (f0 + f1 + f2 + sub + vibration) * throb * 0.70
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Bus Rain on Window Pane Sound: Droplets pattering against vibrating bus glass with wind wash (Scene 06)
+static func create_bus_rain_window_sound() -> AudioStreamWAV:
+	var duration := 0.85
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Glass resonance / wind wash
+		var glass_wash := sin(t * 6800.0) * cos(t * 3100.0) * 0.22
+		var wind_sub := sin(t * TAU * 85.0) * 0.10
+		
+		# Sharp micro droplets tapping against glass surface
+		var taps := 0.0
+		var tap_moments: Array[float] = [0.05, 0.17, 0.31, 0.44, 0.58, 0.72]
+		for tap_t in tap_moments:
+			if t >= tap_t and t < tap_t + 0.015:
+				var local_t := (t - tap_t) / 0.015
+				taps += (1.0 - local_t) * sin((t - tap_t) * TAU * 3400.0) * 0.25
+		
+		var raw := (glass_wash + wind_sub + taps) * 0.75
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Bus PA / Intercom Announcement Chime: Two-tone institutional chime (F#5 740 Hz -> C#5 554 Hz) with speaker hiss (Scene 06)
+static func create_bus_announcement_sound() -> AudioStreamWAV:
+	var duration := 0.70
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var sample := 0.0
+		
+		# Chime 1: 740 Hz (F#5) from t=0.0..0.28s
+		if t < 0.30:
+			var env1 := exp(-t * 12.0) if t >= 0.003 else (t / 0.003)
+			var tone1 := sin(t * TAU * 740.0) * 0.65 + sin(t * TAU * 1480.0) * 0.20
+			sample += tone1 * env1 * 0.70
+		
+		# Chime 2: 554.37 Hz (C#5) from t=0.22..0.65s
+		if t >= 0.20:
+			var t2 := t - 0.20
+			var env2 := exp(-t2 * 10.0) if t2 >= 0.003 else (t2 / 0.003)
+			var tone2 := sin(t2 * TAU * 554.37) * 0.65 + sin(t2 * TAU * 1108.74) * 0.20
+			sample += tone2 * env2 * 0.70
+		
+		# Speaker static / bandpass hiss
+		var pa_hiss := (sin(t * 14200.0) * cos(t * 7800.0)) * 0.06 * (1.0 - exp(-t * 20.0))
+		sample += pa_hiss
+		
+		return clampf(sample, -1.0, 1.0)
+	)
+
+
+## Bus Pneumatic Door Sound: Compressed air exhaust release whoosh + mechanical folding latch (Scene 06)
+static func create_bus_door_pneumatic_sound() -> AudioStreamWAV:
+	var duration := 0.50
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		# Air hiss / release whoosh
+		var air_env := (exp(-progress * 4.5) if progress >= 0.02 else (progress / 0.02))
+		var freq_sweep := lerpf(1800.0, 420.0, progress)
+		var air := (sin(t * TAU * freq_sweep) * 0.35 + sin(t * 9200.0) * 0.40) * air_env
+		
+		# Mechanical folding latch transient at t=0.25..0.30
+		var latch := 0.0
+		if t >= 0.25 and t < 0.32:
+			var lt := (t - 0.25) / 0.07
+			latch = (1.0 - lt) * (sin((t - 0.25) * TAU * 880.0) * 0.5 + sin((t - 0.25) * TAU * 2200.0) * 0.3)
+		
+		var raw := (air * 0.70 + latch * 0.30)
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Gold Ring Chime Sound: Pure warm gold metallic resonance with micro-harmonic beat (Scene 06)
+static func create_ring_chime_sound() -> AudioStreamWAV:
+	var duration := 0.60
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 7.0) if t >= 0.002 else (t / 0.002)
+		# Dual harmonic shimmer (1046.5 Hz C6 + 1318.5 Hz E6 with micro-phase drift)
+		var tone1 := sin(t * TAU * 1046.50) * 0.55
+		var tone2 := sin(t * TAU * 1318.51 + sin(t * TAU * 3.0) * 0.2) * 0.35
+		var tone3 := sin(t * TAU * 2093.00) * 0.10
+		
+		var raw := (tone1 + tone2 + tone3) * env * 0.80
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Terrazzo / Lastryko Stair Footstep Sound: Dense mineral impact with enclosed stairwell acoustic slapback (Scene 07)
+static func create_stair_footstep_sound() -> AudioStreamWAV:
+	var duration := 0.18
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 32.0) if t >= 0.002 else (t / 0.002)
+		# Mineral tap transient (280 Hz + 480 Hz)
+		var tap := sin(t * TAU * 280.0) * 0.55 + sin(t * TAU * 480.0) * 0.30
+		# Concrete stairwell acoustic cavity resonance (180 Hz with subtle decay tail)
+		var stair_reverb := sin(t * TAU * 180.0) * 0.25 * exp(-t * 18.0)
+		var friction := (sin(t * 7200.0) * cos(t * 3600.0)) * 0.12 * env
+		
+		var raw := (tap * env + stair_reverb + friction) * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Heavy Wooden/Laminate Apartment Door Sound: Hinge friction creak + brass latch unlatch (Scene 07)
+static func create_apartment_door_sound() -> AudioStreamWAV:
+	var duration := 0.75
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var sample := 0.0
+		
+		# Latch unlatch click at t=0.0..0.08s
+		if t < 0.10:
+			var latch_env := exp(-t * 50.0) if t >= 0.001 else (t / 0.001)
+			var latch := sin(t * TAU * 1650.0) * 0.50 + sin(t * TAU * 2400.0) * 0.30
+			sample += latch * latch_env * 0.60
+		
+		# Slow wooden door hinge creak (FM modulated friction 480 Hz -> 680 Hz) from t=0.05..0.70s
+		if t >= 0.05:
+			var t_creak := t - 0.05
+			var creak_env := sin((t_creak / 0.65) * PI) * exp(-t_creak * 2.2)
+			var mod_freq := 520.0 + sin(t_creak * TAU * 14.0) * 120.0
+			var creak := sin(t_creak * TAU * mod_freq) * 0.45 + sin(t_creak * TAU * (mod_freq * 1.5)) * 0.20
+			# Low wooden body rumble
+			var body := sin(t_creak * TAU * 110.0) * 0.20 * creak_env
+			sample += (creak + body) * creak_env * 0.65
+		
+		return clampf(sample, -1.0, 1.0)
+	)
+
+
+## Marta Kurek Dialogue Vocal Blip Sound: Warm matte 440 Hz tone with rich sub-harmonic warmth (Scene 07)
+static func create_dialogue_marta_blip_sound() -> AudioStreamWAV:
+	var duration := 0.075
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := sin((t / dur) * PI)
+		# 440.0 Hz A4 fundamental + 220.0 Hz warm sub + 880.0 Hz overtone
+		var f0 := sin(t * TAU * 440.0) * 0.55
+		var sub := sin(t * TAU * 220.0) * 0.30
+		var overtone := sin(t * TAU * 880.0) * 0.15
+		
+		var raw := (f0 + sub + overtone) * env * 0.75
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Staircase Timer Switch / Relay Snap Sound: Bimetallic switch snap + electromagnetic pulse (Scene 07)
+static func create_stair_timer_switch_sound() -> AudioStreamWAV:
+	var duration := 0.12
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 40.0) if t >= 0.001 else (t / 0.001)
+		# High frequency mechanical snap (1250 Hz + 2800 Hz)
+		var snap := sin(t * TAU * 1250.0) * 0.60 + sin(t * TAU * 2800.0) * 0.25
+		# 50 Hz mains pulse from staircase lighting relay coil
+		var coil_hum := sin(t * TAU * 50.0) * 0.35 * exp(-t * 22.0)
+		
+		var raw := (snap * env + coil_hum) * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Parquet / Wooden Floor Footstep Sound: Warm wooden resonance and subtle plank creak (Scene 08)
+static func create_parquet_footstep_sound() -> AudioStreamWAV:
+	var duration := 0.16
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 28.0) if t >= 0.002 else (t / 0.002)
+		# Warm wooden body fundamental (190 Hz + 310 Hz)
+		var body := sin(t * TAU * 190.0) * 0.50 + sin(t * TAU * 310.0) * 0.35
+		# Wood grain friction & surface texture
+		var grain := (sin(t * 6200.0) * cos(t * 3100.0)) * 0.12 * env
+		# Subtle micro-creak at onset
+		var creak := sin(t * TAU * 640.0) * 0.15 * exp(-t * 45.0)
+		
+		var raw := (body + grain + creak) * env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Mechanical Cipher Drawer Lock Unlatch Sound: Tumbler click + brass bolt slide + wooden drawer glide (Scene 08)
+static func create_drawer_lock_unlatch_sound() -> AudioStreamWAV:
+	var duration := 0.40
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var sample := 0.0
+		
+		# Phase 1: Precision tumbler dial click (t=0.0..0.08s)
+		if t < 0.08:
+			var tumbler_env := exp(-t * 60.0) if t >= 0.001 else (t / 0.001)
+			var tumbler := sin(t * TAU * 950.0) * 0.60 + sin(t * TAU * 2400.0) * 0.30
+			sample += tumbler * tumbler_env * 0.65
+		
+		# Phase 2: Brass spring-loaded locking bolt release slide (t=0.06..0.22s)
+		if t >= 0.06 and t < 0.24:
+			var tb := (t - 0.06) / 0.18
+			var bolt_env := sin(tb * PI) * exp(-tb * 3.5)
+			var bolt_sweep := lerpf(1450.0, 820.0, tb)
+			var bolt := sin((t - 0.06) * TAU * bolt_sweep) * 0.50 + (sin(t * 8800.0) * cos(t * 4400.0)) * 0.20
+			sample += bolt * bolt_env * 0.55
+		
+		# Phase 3: Heavy wooden drawer glide friction along runners (t=0.15..0.40s)
+		if t >= 0.15:
+			var td := (t - 0.15) / 0.25
+			var glide_env := sin(td * PI) * exp(-td * 2.0)
+			var glide_rumble := sin((t - 0.15) * TAU * 220.0) * 0.40
+			var wood_friction := (sin(t * 4800.0) * cos(t * 2400.0)) * 0.25
+			sample += (glide_rumble + wood_friction) * glide_env * 0.45
+		
+		return clampf(sample, -1.0, 1.0)
+	)
+
+
+## Technical Paper / Calculation Sheets Rustle Sound: Multi-frequency paper texture flutter (Scene 08)
+static func create_paper_rustle_sound() -> AudioStreamWAV:
+	var duration := 0.45
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := sin((t / dur) * PI) * exp(-t * 2.2)
+		# Multi-band crisp paper friction flutter
+		var flutter1 := sin(t * TAU * 1120.0) * (sin(t * 14500.0) * 0.5 + 0.5) * 0.35
+		var flutter2 := sin(t * TAU * 2840.0) * (cos(t * 9600.0) * 0.5 + 0.5) * 0.25
+		var air_noise := (sin(t * 18200.0) * cos(t * 9100.0)) * 0.35
+		# Low page flip body transient
+		var page_body := sin(t * TAU * 340.0) * 0.20 * exp(-t * 15.0)
+		
+		var raw := (flutter1 + flutter2 + air_noise + page_body) * env * 0.80
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Kettle Water Boil / Simmer Loop Sound: Gentle water bubbling and stove thermal hum (Scene 08)
+static func create_kettle_boil_sound() -> AudioStreamWAV:
+	var duration := 0.50
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Low bubble pulses (85 Hz + 140 Hz + 210 Hz)
+		var bubble1 := sin(t * TAU * 85.0 + sin(t * TAU * 12.0) * 1.5) * 0.35
+		var bubble2 := sin(t * TAU * 140.0 + cos(t * TAU * 18.0) * 1.2) * 0.25
+		var bubble3 := sin(t * TAU * 210.0 + sin(t * TAU * 24.0) * 0.8) * 0.15
+		# Simmering water hiss
+		var hiss := (sin(t * 8400.0) * cos(t * 4200.0)) * 0.18
+		
+		var raw := (bubble1 + bubble2 + bubble3 + hiss) * 0.70
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Kettle Steam Whistle Sound: Soft harmonic retro kettle whistle with steam micro-flutter (Scene 08)
+static func create_kettle_whistle_sound() -> AudioStreamWAV:
+	var duration := 0.65
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := minf(1.0, t / 0.08) * exp(-t * 1.8)
+		# Dual harmonic steam whistle with 5.5 Hz vibrato flutter
+		var vib := sin(t * TAU * 5.5) * 12.0
+		var tone1 := sin(t * TAU * (1150.0 + vib)) * 0.55
+		var tone2 := sin(t * TAU * (1380.0 + vib * 1.2)) * 0.30
+		var steam_air := (sin(t * 12000.0) * cos(t * 6000.0)) * 0.15
+		
+		var raw := (tone1 + tone2 + steam_air) * env * 0.75
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Ceramic Tile Footstep Sound: Mineral tap and glassy bathroom tile reverberation (Scene 09)
+static func create_tile_footstep_sound() -> AudioStreamWAV:
+	var duration := 0.18
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 22.0) if t >= 0.001 else (t / 0.001)
+		# Mineral ceramic tile body (450 Hz + 780 Hz)
+		var body := sin(t * TAU * 450.0) * 0.45 + sin(t * TAU * 780.0) * 0.35
+		# Glassy tile glaze click transient in first 12ms
+		var glaze := 0.0
+		if t < 0.012:
+			var gt := t / 0.012
+			glaze = (1.0 - gt) * (sin(t * TAU * 3200.0) * 0.50 + (sin(t * 14200.0) - 0.5) * 0.30)
+		# Damp bathroom acoustic room reflection resonance (1250 Hz)
+		var room_reverb := sin(t * TAU * 1250.0) * 0.18 * exp(-t * 14.0)
+		
+		var raw := (body + glaze + room_reverb) * env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Water Pipe Hiss / Plumbing Resonance Sound: Pressurized flow in cast-iron & chrome pipes (Scene 09)
+static func create_water_pipe_hiss_sound() -> AudioStreamWAV:
+	var duration := 0.50
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Cast iron pipe metallic resonance (110 Hz + 320 Hz + 640 Hz)
+		var pipe1 := sin(t * TAU * 110.0) * 0.35
+		var pipe2 := sin(t * TAU * 320.0) * 0.25
+		var pipe3 := sin(t * TAU * 640.0) * 0.15
+		# Water turbulent flow noise modulated by gentle 3 Hz pipe pressure pulse
+		var flow_mod := sin(t * TAU * 3.0) * 0.15 + 0.85
+		var flow_noise := (sin(t * 7200.0) * cos(t * 3600.0)) * 0.25 * flow_mod
+		
+		var raw := (pipe1 + pipe2 + pipe3 + flow_noise) * 0.75
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Glass Scratch Sound: Sharp stylus / razor blade scratching mirror silvering (Scene 09)
+static func create_glass_scratch_sound() -> AudioStreamWAV:
+	var duration := 0.38
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := sin((t / dur) * PI) * exp(-t * 1.8)
+		# Rapid chatter modulation representing microscopic glass fracture
+		var chatter := sin(t * TAU * 85.0) * 120.0
+		# Dual high frequency friction squeal (2400 Hz + 3800 Hz)
+		var squeal1 := sin(t * TAU * (2400.0 + chatter)) * 0.45
+		var squeal2 := sin(t * TAU * (3800.0 + chatter * 1.5)) * 0.35
+		# Glass surface micro-friction noise
+		var glass_grit := (sin(t * 16800.0) * cos(t * 8400.0)) * 0.20
+		
+		var raw := (squeal1 + squeal2 + glass_grit) * env * 0.80
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Mirror Shimmer Sound: Temporal lag phase dissonance (A5 880 Hz + B5 987 Hz with 0.4 Hz phase drift) (Scene 09)
+static func create_mirror_shimmer_sound() -> AudioStreamWAV:
+	var duration := 0.60
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := minf(1.0, t / 0.05) * (1.0 - t / dur)
+		# 0.4 Hz phase drift beating between A5 (880 Hz) and B5 (987 Hz)
+		var drift := sin(t * TAU * 0.4) * 0.3 + 0.7
+		var tone_a := sin(t * TAU * 880.0) * 0.45
+		var tone_b := sin(t * TAU * 987.0 + sin(t * TAU * 0.4) * 0.8) * 0.35 * drift
+		# Cyan crystalline overtone (1760 Hz) and deep sub foundation (220 Hz)
+		var overtone := sin(t * TAU * 1760.0) * 0.15
+		var sub := sin(t * TAU * 220.0) * 0.20
+		
+		var raw := (tone_a + tone_b + overtone + sub) * env * 0.75
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Bakelite Bell Sound: Mechanical dual brass gong telephone ringer (1020 Hz + 1240 Hz with 20 Hz clapper modulation) (Scene 10)
+static func create_bakelite_bell_sound() -> AudioStreamWAV:
+	var duration := 0.45
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := exp(-progress * 3.5) if t >= 0.002 else (t / 0.002)
+		# Clapper rapid hammer oscillation (20 Hz AM tremolo)
+		var clapper := 0.5 + 0.5 * sin(t * TAU * 20.0)
+		var gong1 := sin(t * TAU * 1020.0) * 0.55
+		var gong2 := sin(t * TAU * 1240.0) * 0.40
+		var strike_transient := (sin(t * TAU * 3400.0) * 0.25) if t < 0.015 else 0.0
+		var metallic_chime := sin(t * TAU * 2040.0) * 0.15 * exp(-progress * 6.0)
+		var raw := ((gong1 + gong2) * clapper + strike_transient + metallic_chime) * env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Handset Pickup Sound: Mechanical telephone cradle switchhook release (850 Hz transient + 180 Hz body) (Scene 10)
+static func create_handset_pickup_sound() -> AudioStreamWAV:
+	var duration := 0.16
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 35.0) if t >= 0.001 else (t / 0.001)
+		var hook_click := sin(t * TAU * 850.0) * 0.55 + sin(t * TAU * 1950.0) * 0.30
+		var bakelite_body := sin(t * TAU * 180.0) * 0.45
+		var spring_ping := sin(t * TAU * 2600.0) * exp(-t * 50.0) * 0.25
+		var raw := (hook_click + bakelite_body + spring_ping) * env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Reel Tape Motor Hum Sound: Tape drive capstan motor hum (120 Hz) & tape scrape flutter (3200 Hz) (Scene 10)
+static func create_tape_motor_hum_sound() -> AudioStreamWAV:
+	var duration := 0.50
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var motor_hum := sin(t * TAU * 120.0) * 0.40 + sin(t * TAU * 240.0) * 0.20 + sin(t * TAU * 60.0) * 0.25
+		var flutter_mod := sin(t * TAU * 8.5) * 0.2 + 0.8
+		var tape_scrape := (sin(t * 12800.0) * cos(t * 6400.0)) * 0.18 * flutter_mod
+		var head_resonance := sin(t * TAU * 3200.0) * 0.12 * flutter_mod
+		var raw := (motor_hum + tape_scrape + head_resonance) * 0.75
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Jakub Wolski Dialogue Vocal Blip Sound: Rough male voice in carbon microphone telephone handset (370 Hz with 185/740 Hz overtones) (Scene 10)
+static func create_dialogue_jakub_blip_sound() -> AudioStreamWAV:
+	var duration := 0.08
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := sin((t / dur) * PI)
+		# Jakub fundamental: 370.0 Hz (rough male baritone) + sub 185.0 Hz + telephone carbon harmonics
+		var f0 := sin(t * TAU * 370.0) * 0.55
+		var sub := sin(t * TAU * 185.0) * 0.25
+		var harmonic1 := sin(t * TAU * 740.0) * 0.20
+		var harmonic2 := sin(t * TAU * 1480.0) * 0.15
+		# Carbon granule mic distortion / sibilance
+		var carbon_grit := (sin(t * 9800.0) * cos(t * 4200.0)) * 0.12
+		var raw := (f0 + sub + harmonic1 + harmonic2 + carbon_grit) * env * 0.80
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Morning Courtyard Ambience Sound: Cool morning breeze, mist and distant city rumble (80 Hz sub + 950 Hz wash) (Scene 11)
+static func create_morning_ambience_sound() -> AudioStreamWAV:
+	var duration := 1.00
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Distant city rumble (80 Hz with slow 0.5 Hz thermal breathing)
+		var city_sub := sin(t * TAU * 80.0) * (0.8 + 0.2 * sin(t * TAU * 0.5)) * 0.35
+		var sub2 := sin(t * TAU * 40.0) * 0.20
+		
+		# Cool morning wind wash filtered around 950 Hz
+		var wind_mod := 0.7 + 0.3 * sin(t * TAU * 1.2)
+		var wind := (sin(t * 950.0 * TAU) * cos(t * 475.0 * TAU)) * 0.25 * wind_mod
+		var air_noise := (sin(t * 13400.0) * cos(t * 6700.0)) * 0.12 * wind_mod
+		
+		var raw := (city_sub + sub2 + wind + air_noise) * 0.75
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## UCP Field Stabilizer Beam Sound: Quiet modulated resonance pulse of UCP field apparatus (330 Hz + 660 Hz with 4 Hz AM) (Scene 11)
+static func create_ucp_stabilizer_beam_sound() -> AudioStreamWAV:
+	var duration := 0.65
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := sin((t / dur) * PI) * exp(-t * 0.8)
+		# 4 Hz field pulse modulation
+		var am := 0.65 + 0.35 * sin(t * TAU * 4.0)
+		
+		var f0 := sin(t * TAU * 330.0) * 0.55
+		var f1 := sin(t * TAU * 660.0) * 0.30
+		var f2 := sin(t * TAU * 990.0) * 0.15
+		var crystal_shimmer := sin(t * TAU * 1980.0) * 0.08
+		
+		var raw := (f0 + f1 + f2 + crystal_shimmer) * am * env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Masonry Smoothing Sound: Subtle mineral rustle of mortar seam fading and brick wall smoothing into solid plane (Scene 11)
+static func create_masonry_smooth_sound() -> AudioStreamWAV:
+	var duration := 0.55
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := sin(progress * PI) * exp(-progress * 1.5)
+		
+		# Downward frequency sweep from 1800 Hz down to 600 Hz representing mortar grain settling
+		var f_sweep := lerpf(1800.0, 600.0, progress * progress)
+		var mineral_tone := sin(t * TAU * f_sweep) * 0.40
+		
+		# Granular mortar / brick dust friction noise
+		var grit_noise := (sin(t * 15600.0) * cos(t * 7800.0)) * 0.35 * (1.0 - progress * 0.5)
+		var masonry_body := sin(t * TAU * 220.0) * 0.25 * progress
+		
+		var raw := (mineral_tone + grit_noise + masonry_body) * env * 0.80
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Elderly Resident Dialogue Blip Sound: Quiet, trembling elderly voice (480 Hz with 6 Hz vibrato) (Scene 11)
+static func create_dialogue_elderly_woman_sound() -> AudioStreamWAV:
+	var duration := 0.075
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := sin((t / dur) * PI)
+		# 6 Hz natural tremor / vibrato
+		var trem := sin(t * TAU * 6.0) * 18.0
+		var f0 := sin(t * TAU * (480.0 + trem)) * 0.55
+		var sub := sin(t * TAU * (240.0 + trem * 0.5)) * 0.25
+		var overtone := sin(t * TAU * (960.0 + trem * 2.0)) * 0.20
+		
+		var raw := (f0 + sub + overtone) * env * 0.75
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Subterranean Metro / Traction Hum Sound: Distant deep tunnel rumble (55 Hz with 110 Hz concrete resonance) (Scene 12)
+static func create_subway_hum_sound() -> AudioStreamWAV:
+	var duration := 1.2
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Slow atmospheric breathing envelope
+		var env := sin((t / dur) * PI) * 0.95
+		
+		# Low frequency ground wave (55 Hz base + 110 Hz harmonic)
+		var sub := sin(t * TAU * 55.0) * 0.50
+		var harmonic := sin(t * TAU * 110.0 + sin(t * TAU * 0.8) * 0.3) * 0.30
+		var infra := sin(t * TAU * 27.5) * 0.25
+		
+		# Distant rail steel resonance / friction wash
+		var rail_friction := (sin(t * 4200.0) * cos(t * 1800.0)) * 0.08
+		
+		var raw := (sub + harmonic + infra + rail_friction) * env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Neon Sign Flickering & Gas Hum Sound: 120 Hz ballast hum + 2800 Hz high frequency ionization sparkle (Scene 12)
+static func create_neon_flicker_sound() -> AudioStreamWAV:
+	var duration := 0.70
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := 0.85 + 0.15 * sin(t * TAU * 14.0)
+		
+		# 120 Hz AC line double-harmonic hum
+		var hum := sin(t * TAU * 120.0) * 0.40 + sin(t * TAU * 240.0) * 0.25
+		
+		# High frequency tube ionization shimmer & micro-sparkles
+		var gas_shimmer := sin(t * TAU * 2800.0 + sin(t * TAU * 60.0) * 2.0) * 0.20
+		var arc_spikes := (sin(t * 16400.0) * cos(t * 8200.0)) * 0.15 * (1.0 if sin(t * 45.0) > 0.6 else 0.2)
+		
+		var raw := (hum + gas_shimmer + arc_spikes) * env * 0.75
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Industrial CRT Terminal Keypress Sound: Crisp mechanical switch transient (980 Hz) + heavy chassis body (240 Hz) (Scene 12)
+static func create_terminal_keypress_sound() -> AudioStreamWAV:
+	var duration := 0.09
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := exp(-t * 55.0) if t >= 0.001 else (t / 0.001)
+		
+		# Mechanical click snap (980 Hz + 1960 Hz)
+		var snap := sin(t * TAU * 980.0) * 0.60 + sin(t * TAU * 1960.0) * 0.25
+		# Damped chassis body resonance (240 Hz)
+		var body := sin(t * TAU * 240.0) * 0.35 * exp(-t * 28.0)
+		
+		var raw := (snap * env + body) * 0.90
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Underground PA Chime Sound: Two-tone institutional reverberant gong (784 Hz G5 -> 587 Hz D5) (Scene 12)
+static func create_pa_chime_sound() -> AudioStreamWAV:
+	var duration := 0.85
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var sample := 0.0
+		
+		# Tone 1: 784.0 Hz (G5) from t=0.0..0.35s
+		if t < 0.40:
+			var env1 := exp(-t * 9.0) if t >= 0.002 else (t / 0.002)
+			var tone1 := sin(t * TAU * 784.0) * 0.60 + sin(t * TAU * 1568.0) * 0.20
+			sample += tone1 * env1 * 0.70
+		
+		# Tone 2: 587.33 Hz (D5) from t=0.25..0.85s
+		if t >= 0.25:
+			var t2 := t - 0.25
+			var env2 := exp(-t2 * 7.5) if t2 >= 0.002 else (t2 / 0.002)
+			var tone2 := sin(t2 * TAU * 587.33) * 0.60 + sin(t2 * TAU * 1174.66) * 0.20
+			sample += tone2 * env2 * 0.70
+		
+		# Subterranean tile echo reverb tail
+		var tile_reverb := sin(t * TAU * 392.0) * 0.12 * exp(-t * 4.0)
+		sample += tile_reverb
+		
+		return clampf(sample, -1.0, 1.0)
+	)
+
+
+## Drafting Lamp Hum Sound: Quiet transformer ballast hum (60 Hz + 120 Hz) with warm incandescent filament body (420 Hz) (Scene 13)
+static func create_drafting_lamp_hum_sound() -> AudioStreamWAV:
+	var duration := 0.90
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var env := sin((t / dur) * PI) * 0.92
+		
+		# 60 Hz fundamental line hum + 120 Hz octave
+		var hum := sin(t * TAU * 60.0) * 0.45 + sin(t * TAU * 120.0) * 0.28
+		
+		# 420 Hz warm acoustic body resonance with subtle thermal flutter
+		var warm_tone := sin(t * TAU * 420.0 + sin(t * TAU * 2.5) * 0.4) * 0.25
+		
+		# High frequency tube filament hiss
+		var filament_shimmer := (sin(t * 7800.0) * cos(t * 3600.0)) * 0.06
+		
+		var raw := (hum + warm_tone + filament_shimmer) * env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Photograph Slide Sound: Crisp paper friction transient (1450 Hz / 3100 Hz) into metal mounting frame (Scene 13)
+static func create_photo_slide_sound() -> AudioStreamWAV:
+	var duration := 0.32
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		# Double-phase envelope: initial slide friction (0..0.22s) + frame seat click (0.22..0.32s)
+		var env := exp(-t * 12.0) if t >= 0.003 else (t / 0.003)
+		
+		# Multi-frequency fibrous paper texture (1450 Hz & 3100 Hz)
+		var paper_friction := (sin(t * TAU * 1450.0 + sin(t * 850.0)) * 0.45 + sin(t * TAU * 3100.0) * 0.30)
+		
+		# Frame seat latch at t=0.22s
+		var seat_click := 0.0
+		if t >= 0.20:
+			var t_seat := t - 0.20
+			var env_seat := exp(-t_seat * 45.0) if t_seat >= 0.001 else (t_seat / 0.001)
+			seat_click = (sin(t_seat * TAU * 1850.0) * 0.55 + sin(t_seat * TAU * 820.0) * 0.35) * env_seat
+		
+		var raw := (paper_friction * env * 0.65 + seat_click * 0.80)
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Shadow Whisper Sound: Eerie temporal emergence on photographic emulsion (880 Hz tone with 3.5 Hz phase modulation) (Scene 13)
+static func create_shadow_whisper_sound() -> AudioStreamWAV:
+	var duration := 1.40
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Swelling and undulating envelope
+		var env := sin((t / dur) * PI)
+		env = pow(env, 0.8) # broader bell curve
+		
+		# Core 880 Hz tone (A5) with slow 3.5 Hz phase tremor / subtle pitch drift
+		var phase_mod := sin(t * TAU * 3.5) * 0.8
+		var f0 := 880.0 + phase_mod * 12.0
+		var tone_core := sin(t * TAU * f0) * 0.40
+		
+		# Subharmonic dark resonance (440 Hz / 220 Hz)
+		var tone_dark := sin(t * TAU * 440.0) * 0.25 + sin(t * TAU * 220.0 + sin(t * 1.8)) * 0.20
+		
+		# High frequency silver-halide crystal whisper / dark emulsion rustle
+		var halide_whisper := (sin(t * 12400.0) * cos(t * 4800.0)) * 0.12 * (0.5 + 0.5 * sin(t * TAU * 7.0))
+		
+		var raw := (tone_core + tone_dark + halide_whisper) * env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Relay Alignment Click Sound: Precise multi-pole stepping relay sync click (1120 Hz snap + 340 Hz coil echo) (Scene 13)
+static func create_relay_alignment_click_sound() -> AudioStreamWAV:
+	var duration := 0.20
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Sharp magnetic strike
+		var env_snap := exp(-t * 60.0) if t >= 0.001 else (t / 0.001)
+		var snap := sin(t * TAU * 1120.0) * 0.65 + sin(t * TAU * 2240.0) * 0.30
+		
+		# 340 Hz electromagnetic coil damping ringing
+		var env_coil := exp(-t * 22.0)
+		var coil := sin(t * TAU * 340.0) * 0.35 * env_coil
+		
+		# Micro contact bounce at t = 0.018s
+		var bounce := 0.0
+		if t >= 0.018 and t < 0.05:
+			var tb := t - 0.018
+			bounce = sin(tb * TAU * 1680.0) * exp(-tb * 80.0) * 0.30
+		
+		var raw := (snap * env_snap + coil + bounce) * 0.90
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Metal Scratch Chime Sound: Resonant structural metallic tone with micro-friction of the scratch (740 Hz + 1480 Hz cyan decay) (Scene 14)
+static func create_metal_scratch_chime_sound() -> AudioStreamWAV:
+	var duration := 0.48
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		# Crisp attack with long pure resonance
+		var env := exp(-progress * 5.2) if t >= 0.002 else (t / 0.002)
+		
+		# 740 Hz fundamental (F#5) with octave 1480 Hz harmonic
+		var f0 := 740.0
+		var f1 := 1480.0
+		var tone_pure := sin(t * TAU * f0) * 0.70 + sin(t * TAU * f1) * 0.30
+		
+		# Scratch micro-friction transient at onset (2400 Hz / 3800 Hz)
+		var scratch := 0.0
+		if t < 0.025:
+			var st := t / 0.025
+			scratch = (1.0 - st) * (sin(t * TAU * 2400.0) * 0.50 + (sin(t * 15800.0) * cos(t * 7200.0)) * 0.35)
+		
+		# Subtle cyan micro-phase drift
+		var phase_drift := sin(t * TAU * 1.5) * 0.1
+		var tone := sin(t * TAU * f0 + phase_drift) * 0.65 + sin(t * TAU * f1) * 0.25
+		
+		var raw := (tone * 0.75 + scratch * 0.35) * env * 0.90
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Tape Degradation Filter Sound: Degraded magnetic tape playback with muffled voice warmth, flutter and loss of highs (Scene 14)
+static func create_tape_degradation_filter_sound() -> AudioStreamWAV:
+	var duration := 1.80
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		# Bell envelope with smooth tape fade
+		var env := sin(progress * PI)
+		env = pow(env, 0.7)
+		
+		# Voice warmth band (240 Hz fundamental / 480 Hz formant)
+		var voice_f0 := 240.0 + sin(t * TAU * 4.5) * 6.0
+		var voice := sin(t * TAU * voice_f0) * 0.45 + sin(t * TAU * (voice_f0 * 2.0)) * 0.25
+		
+		# Wow & flutter (12 Hz speed instability)
+		var flutter := sin(t * TAU * 12.0) * 0.15
+		
+		# Low-pass filtered magnetic tape grain (1800 Hz cutoff effect)
+		var tape_grain := (sin(t * 4200.0) * cos(t * 1800.0)) * 0.15 * (1.0 - progress * 0.4)
+		
+		# Muffled high frequency loss (exponential dampening of higher alikwots)
+		var raw := (voice + flutter + tape_grain) * env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Seam Clamp Sound: Heavy mechanical clamp of hydraulic seam stabilizer (280/840 Hz with metallic impact) (Scene 14)
+static func create_seam_clamp_sound() -> AudioStreamWAV:
+	var duration := 0.36
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Multi-stage envelope: hydraulic pressure build (0..0.04s) + solid lock strike (0.04..0.36s)
+		var raw := 0.0
+		if t < 0.04:
+			# Hydraulic pressure build
+			var pt := t / 0.04
+			raw = sin(t * TAU * 180.0) * pt * 0.60
+		else:
+			# Heavy steel clamp impact
+			var st := t - 0.04
+			var env_lock := exp(-st * 24.0) if st >= 0.001 else (st / 0.001)
+			var f_body := sin(st * TAU * 280.0) * 0.60
+			var f_ring := sin(st * TAU * 840.0) * 0.35
+			var f_latch := sin(st * TAU * 1650.0) * 0.20 * exp(-st * 60.0)
+			raw = (f_body + f_ring + f_latch) * env_lock * 0.95
+		
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Conduit Shaft Wind Sound: Atmospheric airflow rush in vertical substructure shaft (45/90 Hz with 1600 Hz whistle) (Scene 14)
+static func create_conduit_shaft_wind_sound() -> AudioStreamWAV:
+	var duration := 1.60
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		# Smooth continuous wind swell envelope
+		var env := sin(progress * PI)
+		env = pow(env, 0.6)
+		
+		# Deep shaft sub-bass resonance (45 Hz fundamental + 90 Hz hollow body)
+		var sub := sin(t * TAU * 45.0 + sin(t * TAU * 0.8) * 0.5) * 0.50
+		var hollow := sin(t * TAU * 90.0) * 0.30
+		
+		# Shaft aerodynamic cavity whistle (1600 Hz with slow pressure modulation)
+		var whistle_f := 1600.0 + sin(t * TAU * 2.2) * 80.0
+		var whistle := sin(t * TAU * whistle_f) * 0.12
+		
+		# Broad filtered airflow turbulence
+		var airflow := (sin(t * 3200.0) * cos(t * 1400.0)) * 0.18
+		
+		var raw := (sub + hollow + whistle + airflow) * env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Catwalk Footstep Sound: Metallic impact and ring of industrial open-steel grating / catwalk (Scene 15)
+static func create_catwalk_footstep_sound() -> AudioStreamWAV:
+	var duration := 0.22
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Fast percussive attack (0.002s) with ringing truss resonance
+		var env := exp(-t * 26.0) if t >= 0.002 else (t / 0.002)
+		
+		# Fundamental grating clang (620 Hz) and high metallic ring (1440 Hz / 2880 Hz)
+		var f0 := sin(t * TAU * 620.0) * 0.55
+		var f1 := sin(t * TAU * 1440.0) * 0.30 * exp(-t * 35.0)
+		var f2 := sin(t * TAU * 2880.0) * 0.15 * exp(-t * 50.0)
+		
+		# Footstep heel strike transient
+		var transient := (sin(t * 7800.0) * cos(t * 3200.0)) * 0.25 * exp(-t * 80.0)
+		
+		var raw := (f0 + f1 + f2 + transient) * env * 0.90
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Water Drip Puddle Sound: Percussive droplet impact falling into shallow technical puddle (Scene 15)
+static func create_water_drip_puddle_sound() -> AudioStreamWAV:
+	var duration := 0.32
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Rapid ascending frequency droplet pitch (bubble compression)
+		var drop_env := exp(-t * 22.0) if t >= 0.003 else (t / 0.003)
+		var freq := lerpf(1150.0, 2300.0, minf(1.0, t / 0.04))
+		var drop_tone := sin(t * TAU * freq) * 0.70
+		
+		# Secondary water surface ring / ripple resonance (580 Hz)
+		var ripple := sin(t * TAU * 580.0) * 0.25 * exp(-t * 12.0)
+		
+		# Micro-splash transient at impact
+		var splash := (sin(t * 9200.0) * cos(t * 4600.0)) * 0.20 * exp(-t * 60.0)
+		
+		var raw := (drop_tone + ripple + splash) * drop_env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Pressure Valve Release Sound: Hissing steam/gas decompression with latch mechanical snap (Scene 15)
+static func create_pressure_valve_release_sound() -> AudioStreamWAV:
+	var duration := 1.25
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		# Multi-stage envelope: mechanical latch pop at t < 0.03s + turbulent steam exhaust
+		var raw := 0.0
+		if t < 0.03:
+			# Valve latch trigger snap
+			var lt := t / 0.03
+			raw = (sin(t * TAU * 950.0) * 0.5 + sin(t * TAU * 2400.0) * 0.4) * (1.0 - lt)
+		
+		# Steam noise hiss (shaped bandpass filter 800..4200 Hz)
+		var steam_env := exp(-progress * 2.8) if progress >= 0.05 else (progress / 0.05)
+		var hiss := (sin(t * 4200.0) * cos(t * 1850.0) * sin(t * 880.0)) * 0.75
+		var low_whoosh := sin(t * TAU * 160.0) * 0.25
+		
+		raw += (hiss + low_whoosh) * steam_env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Resonance Pulse Sound: Low electromagnetic transmission conduit hum with beating (Scene 15)
+static func create_resonance_pulse_sound() -> AudioStreamWAV:
+	var duration := 1.50
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := sin(progress * PI)
+		env = pow(env, 0.5)
+		
+		# 52 Hz fundamental with 3 Hz beating oscillation (52 Hz and 55 Hz)
+		var f0 := 52.0
+		var f_beat := 55.0
+		var sub := (sin(t * TAU * f0) * 0.55 + sin(t * TAU * f_beat) * 0.35)
+		
+		# First harmonic with subtle phase rotation
+		var f_harm := sin(t * TAU * 104.0) * 0.20
+		
+		# Conduit metal casing shimmer
+		var shimmer := sin(t * TAU * 740.0) * 0.08 * (sin(t * TAU * 6.0) * 0.5 + 0.5)
+		
+		var raw := (sub + f_harm + shimmer) * env * 0.90
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Ceramic Cup Clink Sound: Porcelain cup tapping against saucer with crystalline ringing (Scene 16)
+static func create_ceramic_cup_clink_sound() -> AudioStreamWAV:
+	var duration := 0.38
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		# Rapid 2ms impact attack with crystalline exponential decay
+		var env := exp(-t * 16.0) if t >= 0.002 else (t / 0.002)
+		
+		# Porcelain harmonics (1450 Hz fundamental, 2900 Hz octave, 4350 Hz glassy overtone)
+		var f0 := 1450.0
+		var ring := sin(t * TAU * f0) * 0.60 + sin(t * TAU * (f0 * 2.0)) * 0.30 + sin(t * TAU * (f0 * 3.0)) * 0.15
+		
+		# Ceramic cup body resonance (720 Hz)
+		var body := sin(t * TAU * 720.0) * 0.25 * exp(-t * 24.0)
+		
+		# Sharp contact tap transient
+		var tap := 0.0
+		if t < 0.008:
+			var tt := t / 0.008
+			tap = (1.0 - tt) * (sin(t * TAU * 3600.0) * 0.4 + (sin(t * 7800.0) - 0.5) * 0.3)
+		
+		var raw := (ring * 0.65 + body * 0.20 + tap * 0.15) * env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Tea Pour Steam Sound: Gentle boiling water stream and rising steam breath (Scene 16)
+static func create_tea_pour_steam_sound() -> AudioStreamWAV:
+	var duration := 1.15
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := sin(progress * PI)
+		env = pow(env, 0.7)
+		
+		# Liquid stream bubbling texture (350..950 Hz modulated band)
+		var liquid_f := lerpf(420.0, 780.0, sin(t * 18.0) * 0.5 + 0.5)
+		var liquid := sin(t * TAU * liquid_f) * sin(t * TAU * 38.0) * 0.45
+		
+		# Micro droplet bubbling
+		var bubble := (sin(t * 1850.0) * cos(t * 920.0)) * 0.30
+		
+		# Soft steam breath noise (1200..3200 Hz filtered hiss)
+		var steam := (sin(t * 3200.0) * cos(t * 1600.0) * sin(t * 800.0)) * 0.35
+		
+		var raw := (liquid + bubble + steam) * env * 0.80
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Kitchen Clock Tick Sound: Mechanical escapement tick with wooden clock housing (Scene 16)
+static func create_kitchen_clock_tick_sound() -> AudioStreamWAV:
+	var duration := 0.24
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var raw := 0.0
+		# Primary tick escapement snap at t < 0.04s (820 Hz transient)
+		if t < 0.04:
+			var t1 := t / 0.04
+			var snap := (1.0 - t1) * (sin(t * TAU * 820.0) * 0.70 + sin(t * TAU * 1640.0) * 0.30)
+			raw += snap * 0.75
+		
+		# Secondary recoil "tock" latch at t = 0.045..0.09s (640 Hz)
+		if t >= 0.045 and t < 0.09:
+			var t2 := (t - 0.045) / 0.045
+			var tock := (1.0 - t2) * sin((t - 0.045) * TAU * 640.0) * 0.55
+			raw += tock * 0.60
+		
+		# Wooden case resonance (210 Hz damped thump)
+		var wood_env := exp(-t * 28.0)
+		var wood := sin(t * TAU * 210.0) * 0.35 * wood_env
+		raw += wood
+		
+		return clampf(raw * 0.85, -1.0, 1.0)
+	)
+
+
+## Dossier Paper Turn Sound: Shuffling case dossier papers and thick folder cardboard (Scene 16)
+static func create_dossier_paper_turn_sound() -> AudioStreamWAV:
+	var duration := 0.48
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := exp(-progress * 3.2) if progress >= 0.08 else (progress / 0.08)
+		
+		# Fibrous paper rubbing texture (700..3400 Hz noise modulation)
+		var paper_grain := (sin(t * 3400.0) * cos(t * 1700.0) * sin(t * 850.0)) * 0.55
+		
+		# Heavy folder cardboard crease / page flip impulse around t = 0.12s
+		var flip_impulse := 0.0
+		if t >= 0.08 and t < 0.20:
+			var ft := (t - 0.08) / 0.12
+			flip_impulse = sin(ft * PI) * (sin(t * TAU * 480.0) * 0.45 + sin(t * TAU * 960.0) * 0.25)
+		
+		var raw := (paper_grain * 0.65 + flip_impulse * 0.45) * env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Ticket Dispenser Sound: Mechanical paper feed and perforation tear-off (960/1920 Hz transient with paper friction) (Scene 17)
+static func create_dispenser_ticket_sound() -> AudioStreamWAV:
+	var duration := 0.42
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var raw := 0.0
+		# Roller stepper motor feed (t = 0..0.22s)
+		if t < 0.22:
+			var ft := t / 0.22
+			var stepper := (sin(t * TAU * 360.0) * 0.45 + sin(t * TAU * 720.0) * 0.25)
+			var roller_friction := (sin(t * 4800.0) * cos(t * 2400.0)) * 0.20
+			raw += (stepper + roller_friction) * sin(ft * PI) * 0.70
+		
+		# Paper perforation tear / guillotine cutter snap at t = 0.20..0.42s
+		if t >= 0.18:
+			var ct := t - 0.18
+			var cut_env := exp(-ct * 35.0) if ct >= 0.001 else (ct / 0.001)
+			var cut_snap := sin(ct * TAU * 960.0) * 0.60 + sin(ct * TAU * 1920.0) * 0.35
+			var paper_rip := (sin(ct * 6400.0) * cos(ct * 3200.0)) * 0.30 * exp(-ct * 20.0)
+			raw += (cut_snap + paper_rip) * cut_env * 0.85
+		
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Clinic Intercom Chime Sound: Institutional 3-tone calling chime (F5 698.46 Hz -> A5 880.0 Hz -> C6 1046.5 Hz) (Scene 17)
+static func create_clinic_intercom_chime_sound() -> AudioStreamWAV:
+	var duration := 1.10
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var sample := 0.0
+		
+		# Tone 1: 698.46 Hz (F5) from t = 0.00..0.35s
+		if t < 0.45:
+			var env1 := exp(-t * 8.5) if t >= 0.002 else (t / 0.002)
+			var tone1 := sin(t * TAU * 698.46) * 0.65 + sin(t * TAU * 1396.92) * 0.20
+			sample += tone1 * env1 * 0.65
+		
+		# Tone 2: 880.0 Hz (A5) from t = 0.24..0.65s
+		if t >= 0.24 and t < 0.75:
+			var t2 := t - 0.24
+			var env2 := exp(-t2 * 8.0) if t2 >= 0.002 else (t2 / 0.002)
+			var tone2 := sin(t2 * TAU * 880.0) * 0.65 + sin(t2 * TAU * 1760.0) * 0.20
+			sample += tone2 * env2 * 0.65
+		
+		# Tone 3: 1046.5 Hz (C6) from t = 0.48..1.10s
+		if t >= 0.48:
+			var t3 := t - 0.48
+			var env3 := exp(-t3 * 6.5) if t3 >= 0.002 else (t3 / 0.002)
+			var tone3 := sin(t3 * TAU * 1046.5) * 0.70 + sin(t3 * TAU * 2093.0) * 0.25
+			sample += tone3 * env3 * 0.70
+		
+		# Institutional ceramic tile hall reverberation tail
+		var hall_reverb := sin(t * TAU * 523.25) * 0.10 * exp(-t * 3.5)
+		sample += hall_reverb
+		
+		return clampf(sample, -1.0, 1.0)
+	)
+
+
+## Pneumatic Tube Whoosh Sound: Aerodynamic suction surge and brass capsule arrival latch (280..1800 Hz) (Scene 17)
+static func create_pneumatic_tube_whoosh_sound() -> AudioStreamWAV:
+	var duration := 1.35
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var raw := 0.0
+		
+		# Suction vacuum build & transit whoosh (t = 0..0.85s)
+		if t < 0.95:
+			var whoosh_env := sin((t / 0.95) * PI)
+			whoosh_env = pow(whoosh_env, 0.7)
+			var vacuum_sub := sin(t * TAU * 120.0 + sin(t * TAU * 4.0) * 0.4) * 0.45
+			var air_whoosh := (sin(t * 2800.0) * cos(t * 1200.0)) * 0.35 * (0.6 + 0.4 * sin(t * TAU * 14.0))
+			raw += (vacuum_sub + air_whoosh) * whoosh_env * 0.75
+		
+		# Brass carrier capsule arrival impact & latch seal at t = 0.82..1.35s
+		if t >= 0.82:
+			var at := t - 0.82
+			var env_latch := exp(-at * 26.0) if at >= 0.001 else (at / 0.001)
+			var brass_ring := sin(at * TAU * 820.0) * 0.55 + sin(at * TAU * 1640.0) * 0.30
+			var damper_thump := sin(at * TAU * 180.0) * 0.40 * exp(-at * 40.0)
+			var seal_hiss := (sin(at * 4800.0) * cos(at * 2400.0)) * 0.25 * exp(-at * 15.0)
+			raw += (brass_ring + damper_thump + seal_hiss) * env_latch * 0.90
+		
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Wierzbicka Diagnostic Printer Sound: Dot-matrix / needle diagnostic printer tracking sensory responses (720/1440 Hz transient with 18 steps/s cadence) (Scene 17)
+static func create_wierzbicka_printer_sound() -> AudioStreamWAV:
+	var duration := 1.20
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := exp(-progress * 1.5) if progress >= 0.02 else (progress / 0.02)
+		
+		# 18 needle pin impact strikes per second
+		var strike_phase := fmod(t * 18.0, 1.0)
+		var strike_env := exp(-strike_phase * 45.0) if strike_phase >= 0.02 else (strike_phase / 0.02)
+		var needle_tone := sin(t * TAU * 720.0) * 0.60 + sin(t * TAU * 1440.0) * 0.35
+		var needle_transient := (sin(t * 5600.0) * cos(t * 2800.0)) * 0.30
+		
+		# Stepper motor carriage lateral advance (110 Hz buzz)
+		var carriage_buzz := sin(t * TAU * 110.0) * 0.20
+		
+		var raw := (needle_tone * strike_env * 0.75 + needle_transient * strike_env * 0.35 + carriage_buzz) * env * 0.85
+		return clampf(raw, -1.0, 1.0)
+	)
+
+
+## Sensory Galvanometer Tick Sound: micro-impulse of the sensory galvanometer recording Lena's lie (1650 Hz impulse with 380 Hz damping) (Scene 18)
+static func create_sensory_galvanometer_tick_sound() -> AudioStreamWAV:
+	var duration := 0.18
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := exp(-progress * 28.0) if progress >= 0.005 else (progress / 0.005)
+		var tick := sin(t * TAU * 1650.0) * 0.70
+		var damp_env := exp(-t * 48.0)
+		var body := sin(t * TAU * 380.0) * 0.35 * damp_env
+		var click := 0.0
+		if t < 0.008:
+			click = (1.0 - t / 0.008) * sin(t * TAU * 3200.0) * 0.25
+		return clampf((tick * env + body + click) * 0.80, -1.0, 1.0)
+	)
+
+
+## Substructure Strain Groan Sound: deep metallic groan of structural tension in Podstruktura (34/68 Hz sub-bass with 220 Hz cast iron resonance) (Scene 18)
+static func create_substructure_strain_groan_sound() -> AudioStreamWAV:
+	var duration := 1.80
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := smoothstep(0.0, 0.3, progress) * (1.0 - smoothstep(0.65, 1.0, progress))
+		var sub := sin(t * TAU * 34.0) * 0.55 + sin(t * TAU * 68.0) * 0.30
+		var iron := sin(t * TAU * 220.0) * 0.20 * exp(-t * 0.8)
+		var creak_mod := sin(t * TAU * 1.3) * 0.5 + 0.5
+		var creak := sin(t * TAU * 560.0) * 0.12 * creak_mod
+		return clampf((sub + iron + creak) * env * 0.78, -1.0, 1.0)
+	)
+
+
+## Map Node Pulse Sound: crystalline illumination tone of sensory memory map node (880 Hz A5 with cyan modulation) (Scene 18)
+static func create_map_node_pulse_sound() -> AudioStreamWAV:
+	var duration := 0.55
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := (1.0 - exp(-t * 35.0)) * exp(-progress * 5.5)
+		var chime := sin(t * TAU * 880.0) * 0.65 + sin(t * TAU * 1760.0) * 0.25
+		var cyan_mod := sin(t * TAU * 2.8) * 0.15 + 0.85
+		chime *= cyan_mod
+		var click := 0.0
+		if t < 0.006:
+			click = (1.0 - t / 0.006) * sin(t * TAU * 4200.0) * 0.20
+		return clampf((chime + click) * env * 0.82, -1.0, 1.0)
+	)
+
+
+## Wierzbicka Stamp Sound: mechanical compliance approval stamp (massive snap 420 Hz with impact 1200 Hz) (Scene 18)
+static func create_wierzbicka_stamp_sound() -> AudioStreamWAV:
+	var duration := 0.35
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var impact_env := exp(-t * 22.0) if t >= 0.003 else (t / 0.003)
+		var stamp_body := sin(t * TAU * 420.0) * 0.70 * impact_env
+		var snap_env := exp(-t * 65.0) if t >= 0.001 else (t / 0.001)
+		var snap := sin(t * TAU * 1200.0) * 0.45 * snap_env
+		var thud := 0.0
+		if t < 0.025:
+			thud = sin(t * TAU * 90.0) * 0.35 * exp(-t * 120.0)
+		var tail_env := exp(-progress * 12.0) * (1.0 - exp(-t * 50.0))
+		var ink_pad := sin(t * TAU * 280.0) * 0.18 * tail_env
+		return clampf((stamp_body + snap + thud + ink_pad) * 0.85, -1.0, 1.0)
+	)
+
+
+## Model Table Resonance Sound: 528 Hz crystalline resonance with dual beating frequencies and cyan shimmer (Scene 19)
+static func create_model_table_resonance_sound() -> AudioStreamWAV:
+	var duration := 0.85
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := exp(-progress * 3.8) * (1.0 - exp(-t * 80.0))
+		var f1 := 528.0 # C5 Solfeggio / crystalline model frequency
+		var f2 := 532.0 # 4 Hz slow acoustic beat representing two equivalent models
+		var tone := sin(t * TAU * f1) * 0.55 + sin(t * TAU * f2) * 0.45
+		var harmonic := sin(t * TAU * (f1 * 2.0)) * 0.20 * exp(-progress * 5.0)
+		var shimmer := sin(t * TAU * 3.2) * 0.12 + 0.88
+		var glass_click := 0.0
+		if t < 0.008:
+			glass_click = (1.0 - t / 0.008) * sin(t * TAU * 3800.0) * 0.25
+		return clampf((tone * shimmer + harmonic + glass_click) * env * 0.80, -1.0, 1.0)
+	)
+
+
+## Paper Map Rustle Sound: architectural schematic map handling (900..3600 Hz cardboard/paper friction) (Scene 19)
+static func create_paper_map_rustle_sound() -> AudioStreamWAV:
+	var duration := 0.45
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := sin(progress * PI) * (1.0 - exp(-t * 40.0))
+		var noise := sin(t * 18453.7) * 0.35 + sin(t * 31415.9) * 0.30 + sin(t * 7421.3) * 0.35
+		var fiber_friction := sin(t * TAU * 1450.0) * 0.30 + sin(t * TAU * 2850.0) * 0.25
+		var snap := 0.0
+		if t >= 0.08 and t <= 0.11:
+			var st := (t - 0.08) / 0.03
+			snap = sin(st * PI) * sin(t * TAU * 3400.0) * 0.30
+		return clampf((noise * 0.45 + fiber_friction * 0.35 + snap) * env * 0.78, -1.0, 1.0)
+	)
+
+
+## Ledger Page Turn Sound: turning page in 11-person dossier (700..2800 Hz friction + 440 Hz fold snap) (Scene 19)
+static func create_ledger_page_turn_sound() -> AudioStreamWAV:
+	var duration := 0.50
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := exp(-progress * 4.2) * (1.0 - exp(-t * 50.0))
+		var scrape := (sin(t * 12345.6) * 0.4 + sin(t * 23456.7) * 0.3 + sin(t * 34567.8) * 0.3) * 0.40
+		var paper_body := sin(t * TAU * 880.0) * 0.25 + sin(t * TAU * 1760.0) * 0.15
+		var fold_snap := 0.0
+		if t >= 0.04 and t <= 0.07:
+			var ft := (t - 0.04) / 0.03
+			fold_snap = sin(ft * PI) * sin(t * TAU * 440.0) * 0.45
+		return clampf((scrape + paper_body + fold_snap) * env * 0.82, -1.0, 1.0)
+	)
+
+
+## Model Room Door Release Sound: heavy locking bolt release toward Space 20 (680 Hz bolt slide + 1340 Hz latch snap) (Scene 19)
+static func create_model_room_door_release_sound() -> AudioStreamWAV:
+	var duration := 0.60
+	return generate_wav(duration, func(t: float, dur: float) -> float:
+		var progress := t / dur
+		var env := exp(-progress * 4.5) * (1.0 - exp(-t * 60.0))
+		var bolt_slide := sin(t * TAU * 680.0) * 0.45 * exp(-t * 12.0)
+		var latch_snap := 0.0
+		if t >= 0.05 and t <= 0.08:
+			var lt := (t - 0.05) / 0.03
+			latch_snap = sin(lt * PI) * sin(t * TAU * 1340.0) * 0.55
+		var motor_hum := sin(t * TAU * 120.0) * 0.20 * (1.0 - progress)
+		var air_bleed := (sin(t * 15321.4) * 0.5 + sin(t * 27654.1) * 0.5) * 0.18 * exp(-progress * 6.0)
+		return clampf((bolt_slide + latch_snap + motor_hum + air_bleed) * env * 0.85, -1.0, 1.0)
+	)
+

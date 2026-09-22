@@ -1,0 +1,147 @@
+path	phase	last_line
+res://reports/pkg_0195/visual_final/s42a_100_000_line.png	line	Lena: Ten sam stół. Świt. Jedno miejsce puste.
+res://reports/pkg_0195/visual_final/s42a_100_001_rest.png	rest	Lena: Ten sam stół. Świt. Jedno miejsce puste.
+res://reports/pkg_0195/visual_final/s42a_100_002_line.png	line	Lena: Numer domowy. Brak drugiej odpowiedzi.
+res://reports/pkg_0195/visual_final/s42a_100_003_line.png	line	Lena: Kładę czytnik na stole. Zamiast odpowiedzi.
+res://reports/pkg_0195/visual_final/s42a_100_004_line.png	line	EKRAN CZYTNIKA: Proponowana etykieta: BŁĄD CZUJNIKA.
+res://reports/pkg_0195/visual_final/s42a_100_005_line.png	line	Lena: Najpierw wykonanie. Skutek odczytam potem.
+res://reports/pkg_0195/visual_final/s42a_100_006_rest.png	rest	Lena: Najpierw wykonanie. Skutek odczytam potem.
+res://reports/pkg_0195/visual_final/s42a_100_007_line.png	line	Lena: Kanał zamknięty. Po drugiej stronie cisza, nie głos.
+res://reports/pkg_0195/visual_final/s42a_100_008_line.png	line	Lena: Nie wymyślę jej odpowiedzi. Została między adresami.
+res://reports/pkg_0195/visual_final/s42a_100_009_rest.png	rest	Lena: Nie wymyślę jej odpowiedzi. Została między adresami.
+res://reports/pkg_0195/visual_final/s42a_100_010_vignette.png	vignette	Lena: Nie wymyślę jej odpowiedzi. Została między adresami.
+res://reports/pkg_0195/visual_final/s42a_100_011_line.png	line	Marta domowa: Gdzie byłaś?
+res://reports/pkg_0195/visual_final/s42a_100_012_line.png	line	Lena: Najpierw posłuchaj próbki.
+res://reports/pkg_0195/visual_final/s42a_100_013_line.png	line	APEL Z RÓWNI: Przy zgłoszeniu o zaginięciu Marta zostawiła drugie. Nadal szuka partnerki.
+res://reports/pkg_0195/visual_final/s42a_100_014_line.png	line	ZAPIS SERWISOWY: Jakub oddał napęd przed końcem zmiany. Cenę zamknięcia zna z pierwszej ręki.
+res://reports/pkg_0195/visual_final/s42a_100_015_line.png	line	RAPORT UCP: Incydent wygładzony. Kontrola utrzymana.
+res://reports/pkg_0195/visual_final/s42a_100_016_rest.png	rest	RAPORT UCP: Incydent wygładzony. Kontrola utrzymana.
+res://reports/pkg_0195/visual_final/s42b_100_017_line.png	line	Lena: Przepływ zamknięty. Próg cichy. Ona jest w środku.
+res://reports/pkg_0195/visual_final/s42b_100_018_rest.png	rest	Lena: Przepływ zamknięty. Próg cichy. Ona jest w środku.
+res://reports/pkg_0195/visual_final/s42b_100_019_line.png	line	Lena: Jej adres wrócił. Mój zniknął.
+res://reports/pkg_0195/visual_final/s42b_100_020_line.png	line	Lena: Wygaszam domową sygnaturę. Wzmacniam lokalną odpowiedź.
+res://reports/pkg_0195/visual_final/s42b_100_021_line.png	line	Lena: Dopiero po jej powrocie zamknę kanał.
+res://reports/pkg_0195/visual_final/s42b_100_022_rest.png	rest	Lena: Dopiero po jej powrocie zamknę kanał.
+res://reports/pkg_0195/visual_final/s42b_100_023_line.png	line	Marta: Co wiedziałaś przed testem?
+res://reports/pkg_0195/visual_final/s42b_100_024_line.png	line	Miejscowa Lena: Próbę zrobiłam sama. UCP dopisało resztę.
+res://reports/pkg_0195/visual_final/s42b_100_025_line.png	line	Marta: Poznaję twój oddech. Klucz dostaniesz, kiedy odpowiesz.
+res://reports/pkg_0195/visual_final/s42b_100_026_rest.png	rest	Marta: Poznaję twój oddech. Klucz dostaniesz, kiedy odpowiesz.
+res://reports/pkg_0195/visual_final/s42b_100_027_vignette.png	vignette	Marta: Poznaję twój oddech. Klucz dostaniesz, kiedy odpowiesz.
+res://reports/pkg_0195/visual_final/s42b_100_028_line.png	line	Lena: Jestem na wiacie z linii 03. Czytnik nie ma tu adresu.
+res://reports/pkg_0195/visual_final/s42b_100_029_line.png	line	EKRAN CZYTNIKA: Wysłana wiadomość: Jadę. Adresat: brak w sieci.
+res://reports/pkg_0195/visual_final/s42b_100_030_line.png	line	WIADOMOŚĆ DOMOWA: Marta zostawiła zgłoszenie bez szczegółu próby.
+res://reports/pkg_0195/visual_final/s42b_100_031_line.png	line	ZAPIS SERWISOWY: Jakub oddał napęd przed końcem zmiany. Dalej pracuje w swoim zakresie.
+res://reports/pkg_0195/visual_final/s42b_100_032_line.png	line	ZAPIS UCP: Eksport kosztów z tego węzła zamknięty.
+res://reports/pkg_0195/visual_final/s42b_100_033_rest.png	rest	ZAPIS UCP: Eksport kosztów z tego węzła zamknięty.
+res://reports/pkg_0195/visual_final/s42c_100_034_line.png	line	Lena: Dwa czytniki. Świt. Ta sama sekunda po obu stronach.
+res://reports/pkg_0195/visual_final/s42c_100_035_rest.png	rest	Lena: Dwa czytniki. Świt. Ta sama sekunda po obu stronach.
+res://reports/pkg_0195/visual_final/s42c_100_036_line.png	line	Lena: Dwa adresy. Most nie zgasł.
+res://reports/pkg_0195/visual_final/s42c_100_037_line.png	line	Lena: Dwa zsynchronizowane strojenia. Okno zostaje do obu sygnałów.
+res://reports/pkg_0195/visual_final/s42c_100_038_line.png	line	Lena: Otwieram, nie zabieram.
+res://reports/pkg_0195/visual_final/s42c_100_039_rest.png	rest	Lena: Otwieram, nie zabieram.
+res://reports/pkg_0195/visual_final/s42c_100_040_line.png	line	Jakub: Przy imadle — przez chwilę prosektorium. Potem znowu imadło.
+res://reports/pkg_0195/visual_final/s42c_100_041_line.png	line	Lena: To mój pogrzeb w twojej głowie. Nie twój.
+res://reports/pkg_0195/visual_final/s42c_100_042_line.png	line	Jakub: Wracam do napędu. To mija.
+res://reports/pkg_0195/visual_final/s42c_100_043_line.png	line	EKRAN CZYTNIKA: Oba czytniki: ta sama brakująca sekunda po rozdzieleniu.
+res://reports/pkg_0195/visual_final/s42c_100_044_rest.png	rest	EKRAN CZYTNIKA: Oba czytniki: ta sama brakująca sekunda po rozdzieleniu.
+res://reports/pkg_0195/visual_final/s42c_100_045_vignette.png	vignette	EKRAN CZYTNIKA: Oba czytniki: ta sama brakująca sekunda po rozdzieleniu.
+res://reports/pkg_0195/visual_final/s42c_100_046_line.png	line	Marta domowa: Milczysz.
+res://reports/pkg_0195/visual_final/s42c_100_047_line.png	line	Lena: Przyjdę z zapisem. Nie z legendą.
+res://reports/pkg_0195/visual_final/s42c_100_048_line.png	line	Marta: A kto odpowie za przeciek?
+res://reports/pkg_0195/visual_final/s42c_100_049_line.png	line	Miejscowa Lena: Obie. Przed własnymi domami.
+res://reports/pkg_0195/visual_final/s42c_100_050_line.png	line	DWA ZAPISY: Ten sam ubytek po obu stronach. UCP nie ma wyłączności na opis.
+res://reports/pkg_0195/visual_final/s42c_100_051_line.png	line	EKRAN CZYTNIKA: Dalszy dryf: wspólny ubytek czasu po rozdzieleniu.
+res://reports/pkg_0195/visual_final/s42c_100_052_rest.png	rest	EKRAN CZYTNIKA: Dalszy dryf: wspólny ubytek czasu po rozdzieleniu.
+res://reports/pkg_0195/visual_final/s42c_100_053_line.png	line	Lena: Dwa czytniki. Świt. Ta sama sekunda po obu stronach.
+res://reports/pkg_0195/visual_final/s42c_100_054_rest.png	rest	Lena: Dwa czytniki. Świt. Ta sama sekunda po obu stronach.
+res://reports/pkg_0195/visual_final/s42c_100_055_line.png	line	Lena: Dwa adresy. Most nie zgasł.
+res://reports/pkg_0195/visual_final/s42c_100_056_line.png	line	Lena: Dwa zsynchronizowane strojenia. Okno zostaje do obu sygnałów.
+res://reports/pkg_0195/visual_final/s42c_100_057_line.png	line	Lena: Otwieram, nie zabieram.
+res://reports/pkg_0195/visual_final/s42c_100_058_rest.png	rest	Lena: Otwieram, nie zabieram.
+res://reports/pkg_0195/visual_final/s42c_100_059_line.png	line	Jakub: Przy imadle — przez chwilę prosektorium. Potem znowu imadło.
+res://reports/pkg_0195/visual_final/s42c_100_060_line.png	line	Lena: To mój pogrzeb w twojej głowie. Nie twój.
+res://reports/pkg_0195/visual_final/s42c_100_061_line.png	line	Jakub: Wracam do napędu. To mija.
+res://reports/pkg_0195/visual_final/s42c_100_062_line.png	line	EKRAN CZYTNIKA: Oba czytniki: ta sama brakująca sekunda po rozdzieleniu.
+res://reports/pkg_0195/visual_final/s42c_100_063_rest.png	rest	EKRAN CZYTNIKA: Oba czytniki: ta sama brakująca sekunda po rozdzieleniu.
+res://reports/pkg_0195/visual_final/s42c_100_064_vignette.png	vignette	EKRAN CZYTNIKA: Oba czytniki: ta sama brakująca sekunda po rozdzieleniu.
+res://reports/pkg_0195/visual_final/s42c_100_065_line.png	line	Marta domowa: Milczysz.
+res://reports/pkg_0195/visual_final/s42c_100_066_line.png	line	Lena: Przyjdę z zapisem. Nie z legendą.
+res://reports/pkg_0195/visual_final/s42c_100_067_line.png	line	Marta: A kto odpowie za przeciek?
+res://reports/pkg_0195/visual_final/s42c_100_068_line.png	line	Miejscowa Lena: Obie. Przed własnymi domami.
+res://reports/pkg_0195/visual_final/s42c_100_069_line.png	line	DWA ZAPISY: Ten sam ubytek po obu stronach. UCP nie ma wyłączności na opis.
+res://reports/pkg_0195/visual_final/s42c_100_070_line.png	line	EKRAN CZYTNIKA: Dalszy dryf: wspólny ubytek czasu po rozdzieleniu.
+res://reports/pkg_0195/visual_final/s42c_100_071_rest.png	rest	EKRAN CZYTNIKA: Dalszy dryf: wspólny ubytek czasu po rozdzieleniu.
+res://reports/pkg_0195/visual_final/s42c_100_072_line.png	line	Marta domowa: Milczysz.
+res://reports/pkg_0195/visual_final/s42c_100_073_line.png	line	Lena: Przyjdę z zapisem. Nie z legendą.
+res://reports/pkg_0195/visual_final/s42c_100_074_line.png	line	Marta: A kto odpowie za przeciek?
+res://reports/pkg_0195/visual_final/s42c_100_075_line.png	line	Miejscowa Lena: Obie. Przed własnymi domami.
+res://reports/pkg_0195/visual_final/s42c_100_076_line.png	line	DWA ZAPISY: Ten sam ubytek po obu stronach. UCP nie ma wyłączności na opis.
+res://reports/pkg_0195/visual_final/s42c_100_077_line.png	line	EKRAN CZYTNIKA: Dalszy dryf: wspólny ubytek czasu po rozdzieleniu.
+res://reports/pkg_0195/visual_final/s42c_100_078_rest.png	rest	EKRAN CZYTNIKA: Dalszy dryf: wspólny ubytek czasu po rozdzieleniu.
+res://reports/pkg_0195/visual_final/s42a_100_079_line.png	line	Lena: Ten sam stół. Świt. Jedno miejsce puste.
+res://reports/pkg_0195/visual_final/s42a_100_080_rest.png	rest	Lena: Ten sam stół. Świt. Jedno miejsce puste.
+res://reports/pkg_0195/visual_final/s42a_100_081_line.png	line	Lena: Brakuje mi wcześniejszego źródła. Mogę wrócić i je sprawdzić.
+res://reports/pkg_0195/visual_final/s42a_100_082_rest.png	rest	Lena: Brakuje mi wcześniejszego źródła. Mogę wrócić i je sprawdzić.
+res://reports/pkg_0195/visual_final/s43force_home_100_083_board.png	board	MIESZKANIE 14: Marta odłożyła klucze na blat. W przedpokoju słychać zegar; nikt nie pyta o to, co wydarzyło się za progiem.
+res://reports/pkg_0195/visual_final/s43force_home_100_084_board.png	board	EWIDENCJA UCP: Teczka sprawy Leny otrzymała adnotację: »sprawa zamknięta bez dalszych roszczeń«. Miasto żyje dawnym rytmem.
+res://reports/pkg_0195/visual_final/s43force_home_100_085_totitle.png	totitle	EWIDENCJA UCP: Teczka sprawy Leny otrzymała adnotację: »sprawa zamknięta bez dalszych roszczeń«. Miasto żyje dawnym rytmem.
+res://reports/pkg_0195/visual_final/s43close_equal_recover_local_100_086_board.png	board	MIESZKANIE 14: Miejscowa Lena wróciła na Sadową. W pracowni stoją dwa kubki, ale pije tylko z jednego.
+res://reports/pkg_0195/visual_final/s43close_equal_recover_local_100_087_board.png	board	ULICA SADOWA: Marta domowa zostawiła drugie zgłoszenie o zaginięciu. Numeru zwrotnego nie dopisała.
+res://reports/pkg_0195/visual_final/s43close_equal_recover_local_100_088_totitle.png	totitle	ULICA SADOWA: Marta domowa zostawiła drugie zgłoszenie o zaginięciu. Numeru zwrotnego nie dopisała.
+res://reports/pkg_0195/visual_final/s43mutual_passage_100_089_board.png	board	MIESZKANIE 14: Marta rozpoznaje kubek ze zdjęcia. Wie, że po drugiej stronie ktoś patrzy teraz na pustą półkę.
+res://reports/pkg_0195/visual_final/s43mutual_passage_100_090_board.png	board	ZARZĄD MIEJSKI: Biuletyn UCP podaje: »W tym sektorze zaleca się uzgodnienie kierunku przed przejściem.« Obie kolejności trwają obok siebie.
+res://reports/pkg_0195/visual_final/s43mutual_passage_100_091_totitle.png	totitle	ZARZĄD MIEJSKI: Biuletyn UCP podaje: »W tym sektorze zaleca się uzgodnienie kierunku przed przejściem.« Obie kolejności trwają obok siebie.
+res://reports/pkg_0195/visual_final/s43unseeded_100_092_board.png	board	POWRÓT: Radio podaje: »Linia 4 zamknięta do odwołania. Prosimy korzystać z wyznaczonego obejścia.« W mieście Leny ta linia według niej nigdy nie istniała.
+res://reports/pkg_0195/visual_final/s43unseeded_100_093_board.png	board	UZGODNIENIE: Karta zgłoszenia podaje: »Pęknięcie oznaczone. Data kontroli: po przybyciu osoby zgłaszającej.« Marta dopisuje datę ręcznie, bez komentarza.
+res://reports/pkg_0195/visual_final/s43unseeded_100_094_totitle.png	totitle	UZGODNIENIE: Karta zgłoszenia podaje: »Pęknięcie oznaczone. Data kontroli: po przybyciu osoby zgłaszającej.« Marta dopisuje datę ręcznie, bez komentarza.
+res://reports/pkg_0195/visual_final/s42b_85_095_line.png	line	Lena: Przepływ zamknięty. Próg cichy. Ona jest w środku.
+res://reports/pkg_0195/visual_final/s42b_85_096_rest.png	rest	Lena: Przepływ zamknięty. Próg cichy. Ona jest w środku.
+res://reports/pkg_0195/visual_final/s42b_85_097_line.png	line	Lena: Jej adres wrócił. Mój zniknął.
+res://reports/pkg_0195/visual_final/s42b_85_098_line.png	line	Lena: Wygaszam domową sygnaturę. Wzmacniam lokalną odpowiedź.
+res://reports/pkg_0195/visual_final/s42b_85_099_line.png	line	Lena: Dopiero po jej powrocie zamknę kanał.
+res://reports/pkg_0195/visual_final/s42b_85_100_rest.png	rest	Lena: Dopiero po jej powrocie zamknę kanał.
+res://reports/pkg_0195/visual_final/s42b_85_101_line.png	line	Marta: Co wiedziałaś przed testem?
+res://reports/pkg_0195/visual_final/s42b_85_102_line.png	line	Miejscowa Lena: Próbę zrobiłam sama. UCP dopisało resztę.
+res://reports/pkg_0195/visual_final/s42b_85_103_line.png	line	Marta: Poznaję twój oddech. Klucz dostaniesz, kiedy odpowiesz.
+res://reports/pkg_0195/visual_final/s42b_85_104_rest.png	rest	Marta: Poznaję twój oddech. Klucz dostaniesz, kiedy odpowiesz.
+res://reports/pkg_0195/visual_final/s42b_85_105_vignette.png	vignette	Marta: Poznaję twój oddech. Klucz dostaniesz, kiedy odpowiesz.
+res://reports/pkg_0195/visual_final/s42b_85_106_line.png	line	Lena: Jestem na wiacie z linii 03. Czytnik nie ma tu adresu.
+res://reports/pkg_0195/visual_final/s42b_85_107_line.png	line	EKRAN CZYTNIKA: Wysłana wiadomość: Jadę. Adresat: brak w sieci.
+res://reports/pkg_0195/visual_final/s42b_85_108_line.png	line	WIADOMOŚĆ DOMOWA: Marta zostawiła zgłoszenie bez szczegółu próby.
+res://reports/pkg_0195/visual_final/s42b_85_109_line.png	line	ZAPIS SERWISOWY: Jakub oddał napęd przed końcem zmiany. Dalej pracuje w swoim zakresie.
+res://reports/pkg_0195/visual_final/s42b_85_110_line.png	line	ZAPIS UCP: Eksport kosztów z tego węzła zamknięty.
+res://reports/pkg_0195/visual_final/s42b_85_111_rest.png	rest	ZAPIS UCP: Eksport kosztów z tego węzła zamknięty.
+res://reports/pkg_0195/visual_final/s42b_100_112_line.png	line	Lena: Przepływ zamknięty. Próg cichy. Ona jest w środku.
+res://reports/pkg_0195/visual_final/s42b_100_113_rest.png	rest	Lena: Przepływ zamknięty. Próg cichy. Ona jest w środku.
+res://reports/pkg_0195/visual_final/s42b_100_114_line.png	line	Lena: Jej adres wrócił. Mój zniknął.
+res://reports/pkg_0195/visual_final/s42b_100_115_line.png	line	Lena: Wygaszam domową sygnaturę. Wzmacniam lokalną odpowiedź.
+res://reports/pkg_0195/visual_final/s42b_100_116_line.png	line	Lena: Dopiero po jej powrocie zamknę kanał.
+res://reports/pkg_0195/visual_final/s42b_100_117_rest.png	rest	Lena: Dopiero po jej powrocie zamknę kanał.
+res://reports/pkg_0195/visual_final/s42b_100_118_line.png	line	Marta: Co wiedziałaś przed testem?
+res://reports/pkg_0195/visual_final/s42b_100_119_line.png	line	Miejscowa Lena: Próbę zrobiłam sama. UCP dopisało resztę.
+res://reports/pkg_0195/visual_final/s42b_100_120_line.png	line	Marta: Poznaję twój oddech. Klucz dostaniesz, kiedy odpowiesz.
+res://reports/pkg_0195/visual_final/s42b_100_121_rest.png	rest	Marta: Poznaję twój oddech. Klucz dostaniesz, kiedy odpowiesz.
+res://reports/pkg_0195/visual_final/s42b_100_122_vignette.png	vignette	Marta: Poznaję twój oddech. Klucz dostaniesz, kiedy odpowiesz.
+res://reports/pkg_0195/visual_final/s42b_100_123_line.png	line	Lena: Jestem na wiacie z linii 03. Czytnik nie ma tu adresu.
+res://reports/pkg_0195/visual_final/s42b_100_124_line.png	line	EKRAN CZYTNIKA: Wysłana wiadomość: Jadę. Adresat: brak w sieci.
+res://reports/pkg_0195/visual_final/s42b_100_125_line.png	line	WIADOMOŚĆ DOMOWA: Marta zostawiła zgłoszenie bez szczegółu próby.
+res://reports/pkg_0195/visual_final/s42b_100_126_line.png	line	ZAPIS SERWISOWY: Jakub oddał napęd przed końcem zmiany. Dalej pracuje w swoim zakresie.
+res://reports/pkg_0195/visual_final/s42b_100_127_line.png	line	ZAPIS UCP: Eksport kosztów z tego węzła zamknięty.
+res://reports/pkg_0195/visual_final/s42b_100_128_rest.png	rest	ZAPIS UCP: Eksport kosztów z tego węzła zamknięty.
+res://reports/pkg_0195/visual_final/s42b_115_129_line.png	line	Lena: Przepływ zamknięty. Próg cichy. Ona jest w środku.
+res://reports/pkg_0195/visual_final/s42b_115_130_rest.png	rest	Lena: Przepływ zamknięty. Próg cichy. Ona jest w środku.
+res://reports/pkg_0195/visual_final/s42b_115_131_line.png	line	Lena: Jej adres wrócił. Mój zniknął.
+res://reports/pkg_0195/visual_final/s42b_115_132_line.png	line	Lena: Wygaszam domową sygnaturę. Wzmacniam lokalną odpowiedź.
+res://reports/pkg_0195/visual_final/s42b_115_133_line.png	line	Lena: Dopiero po jej powrocie zamknę kanał.
+res://reports/pkg_0195/visual_final/s42b_115_134_rest.png	rest	Lena: Dopiero po jej powrocie zamknę kanał.
+res://reports/pkg_0195/visual_final/s42b_115_135_line.png	line	Marta: Co wiedziałaś przed testem?
+res://reports/pkg_0195/visual_final/s42b_115_136_line.png	line	Miejscowa Lena: Próbę zrobiłam sama. UCP dopisało resztę.
+res://reports/pkg_0195/visual_final/s42b_115_137_line.png	line	Marta: Poznaję twój oddech. Klucz dostaniesz, kiedy odpowiesz.
+res://reports/pkg_0195/visual_final/s42b_115_138_rest.png	rest	Marta: Poznaję twój oddech. Klucz dostaniesz, kiedy odpowiesz.
+res://reports/pkg_0195/visual_final/s42b_115_139_vignette.png	vignette	Marta: Poznaję twój oddech. Klucz dostaniesz, kiedy odpowiesz.
+res://reports/pkg_0195/visual_final/s42b_115_140_line.png	line	Lena: Jestem na wiacie z linii 03. Czytnik nie ma tu adresu.
+res://reports/pkg_0195/visual_final/s42b_115_141_line.png	line	EKRAN CZYTNIKA: Wysłana wiadomość: Jadę. Adresat: brak w sieci.
+res://reports/pkg_0195/visual_final/s42b_115_142_line.png	line	WIADOMOŚĆ DOMOWA: Marta zostawiła zgłoszenie bez szczegółu próby.
+res://reports/pkg_0195/visual_final/s42b_115_143_line.png	line	ZAPIS SERWISOWY: Jakub oddał napęd przed końcem zmiany. Dalej pracuje w swoim zakresie.
+res://reports/pkg_0195/visual_final/s42b_115_144_line.png	line	ZAPIS UCP: Eksport kosztów z tego węzła zamknięty.
+res://reports/pkg_0195/visual_final/s42b_115_145_rest.png	rest	ZAPIS UCP: Eksport kosztów z tego węzła zamknięty.

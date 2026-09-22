@@ -1,0 +1,14 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0165 FAILURE: Odczyt ledgeru nie może przejść w tej samej iteracji po resecie
+PKG-0165 FAILURE: Oferta adaptacji przed ledgerem musi być bezpieczna
+PKG-0165 FAILURE: Wczesna oferta musi dać informację o braku ledgeru
+PKG-0165 FAILURE: Zgoda przed ledgerem musi być bezpieczna
+PKG-0165 FAILURE: Wczesna zgoda musi dać informację o braku ledgeru
+PKG-0165 FAILURE: Wczesna oferta nie może zapisać faktu oferty
+PKG-0165 FAILURE: Wczesna zgoda nie może zapisać zakresu
+PKG-0165 FAILURE: Odczyt ledgeru po donor faktach musi przejść
+PKG-0165 FAILURE: Ledger sam nie może otworzyć wyjścia
+PKG-0165 FAIL: 9 failure(s)
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)

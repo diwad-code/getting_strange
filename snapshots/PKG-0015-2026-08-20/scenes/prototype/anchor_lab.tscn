@@ -1,0 +1,200 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://scripts/prototype/anchor_lab.gd" id="1_lab"]
+[ext_resource type="Script" path="res://scripts/interactables/anchorable_object.gd" id="2_anchorable"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/interactables/movable_anchorable_prop.gd" id="5_movable_prop"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor_ch1_start"]
+size = Vector2(160, 40)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor_ch1_end"]
+size = Vector2(320, 40)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_boundary"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor_ch2_start"]
+size = Vector2(180, 40)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_mezzanine_ch2"]
+size = Vector2(300, 160)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_mezzanine_ch3_start"]
+size = Vector2(140, 160)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_mezzanine_ch3_mid"]
+size = Vector2(140, 160)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_mezzanine_ch3_end"]
+size = Vector2(180, 160)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_bridge_ch1"]
+size = Vector2(160, 16)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_lift_ch2"]
+size = Vector2(120, 16)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_bridge_ch3"]
+size = Vector2(140, 16)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_gate_ch3"]
+size = Vector2(16, 70)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_kill_global"]
+size = Vector2(2400, 100)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_goal"]
+size = Vector2(40, 70)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_crate_ch2"]
+size = Vector2(28, 28)
+
+[node name="AnchorLab" type="Node2D"]
+script = ExtResource("1_lab")
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="FloorStart" type="StaticBody2D" parent="Geometry"]
+position = Vector2(80, 340)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorStart"]
+shape = SubResource("Rectangle_floor_ch1_start")
+
+[node name="FloorCh1End" type="StaticBody2D" parent="Geometry"]
+position = Vector2(480, 340)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorCh1End"]
+shape = SubResource("Rectangle_floor_ch1_end")
+
+[node name="WallStart" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallStart"]
+shape = SubResource("Rectangle_wall_boundary")
+
+[node name="FloorCh2Start" type="StaticBody2D" parent="Geometry"]
+position = Vector2(730, 340)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorCh2Start"]
+shape = SubResource("Rectangle_floor_ch2_start")
+
+[node name="LedgeCh2End" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1130, 280)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/LedgeCh2End"]
+shape = SubResource("Rectangle_mezzanine_ch2")
+
+[node name="FloorCh3Start" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1350, 280)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorCh3Start"]
+shape = SubResource("Rectangle_mezzanine_ch3_start")
+
+[node name="FloorCh3Mid" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1650, 280)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorCh3Mid"]
+shape = SubResource("Rectangle_mezzanine_ch3_mid")
+
+[node name="FloorCh3End" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1830, 280)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorCh3End"]
+shape = SubResource("Rectangle_mezzanine_ch3_end")
+
+[node name="WallEnd" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1930, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallEnd"]
+shape = SubResource("Rectangle_wall_boundary")
+
+[node name="Anchorables" type="Node2D" parent="."]
+
+[node name="Chamber1Bridge" type="AnimatableBody2D" parent="Anchorables"]
+position = Vector2(240, 320)
+script = ExtResource("2_anchorable")
+state_a_position = Vector2(240, 320)
+state_b_position = Vector2(240, 420)
+state_a_size = Vector2(160, 16)
+state_b_size = Vector2(160, 16)
+object_name = "Chamber 1 Bridge"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchorables/Chamber1Bridge"]
+shape = SubResource("Rectangle_bridge_ch1")
+
+[node name="Chamber2Lift" type="AnimatableBody2D" parent="Anchorables"]
+position = Vector2(900, 320)
+script = ExtResource("2_anchorable")
+state_a_position = Vector2(900, 320)
+state_b_position = Vector2(900, 200)
+state_a_size = Vector2(120, 16)
+state_b_size = Vector2(120, 16)
+object_name = "Chamber 2 Lift"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchorables/Chamber2Lift"]
+shape = SubResource("Rectangle_lift_ch2")
+
+[node name="Chamber3Bridge" type="AnimatableBody2D" parent="Anchorables"]
+position = Vector2(1500, 200)
+script = ExtResource("2_anchorable")
+state_a_position = Vector2(1500, 200)
+state_b_position = Vector2(1500, 330)
+state_a_size = Vector2(140, 16)
+state_b_size = Vector2(140, 16)
+object_name = "Chamber 3 Bridge"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchorables/Chamber3Bridge"]
+shape = SubResource("Rectangle_bridge_ch3")
+
+[node name="Chamber3Gate" type="AnimatableBody2D" parent="Anchorables"]
+position = Vector2(1730, 165)
+script = ExtResource("2_anchorable")
+state_a_position = Vector2(1730, 165)
+state_b_position = Vector2(1730, 70)
+state_a_size = Vector2(16, 70)
+state_b_size = Vector2(16, 70)
+state_b_solid = false
+interaction_radius = 54.0
+object_name = "Chamber 3 Gate"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchorables/Chamber3Gate"]
+shape = SubResource("Rectangle_gate_ch3")
+
+[node name="Chamber2Crate" type="CharacterBody2D" parent="Anchorables"]
+position = Vector2(800, 304)
+script = ExtResource("5_movable_prop")
+crate_size = Vector2(28, 28)
+object_name = "Lab Crate A"
+metadata/_spawn_position = Vector2(800, 304)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchorables/Chamber2Crate"]
+shape = SubResource("Rectangle_crate_ch2")
+
+[node name="KillZone" type="Area2D" parent="."]
+position = Vector2(960, 440)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("Rectangle_kill_global")
+
+[node name="Goal" type="Area2D" parent="."]
+position = Vector2(1850, 165)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
+shape = SubResource("Rectangle_goal")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(60, 296)
+
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")
+target = NodePath("../Player")
+
+[connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]
+[connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]

@@ -1,0 +1,161 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_29.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/levels/atmosphere_rig.gd" id="5_atmosphere"]
+[ext_resource type="Script" path="res://scripts/ui/crt_dialogue_box.gd" id="6_dialogue"]
+[ext_resource type="Script" path="res://scripts/ui/station_dialogue_cue.gd" id="7_cue"]
+[ext_resource type="Script" path="res://scripts/visual/vector_stage_environment.gd" id="8_vector_stage"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor_main"]
+size = Vector2(640, 80)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_ceiling"]
+size = Vector2(640, 40)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(50, 70)
+
+[sub_resource type="CircleShape2D" id="Circle_prop_tracks"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_neon"]
+radius = 45.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_well"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_beacon"]
+radius = 46.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_exit"]
+radius = 60.0
+
+[node name="Station29" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="VectorStageEnvironment" type="Node2D" parent="."]
+script = ExtResource("8_vector_stage")
+stage_seed = 29
+station_number = 29
+
+[node name="AtmosphereRig" type="Node2D" parent="."]
+script = ExtResource("5_atmosphere")
+station_number = 29
+
+[node name="CRTDialogueBox" type="CanvasLayer" parent="."]
+script = ExtResource("6_dialogue")
+
+[node name="OpeningDialogueCue" type="Node" parent="."]
+script = ExtResource("7_cue")
+station_id = &"station_29"
+opening_line = "Peron trzynasty zachował tablicę odrzuconego wariantu. Za kratą zaczyna się właściwa Podstruktura."
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="FloorMain" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 320)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorMain"]
+shape = SubResource("Rectangle_floor_main")
+
+[node name="Ceiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ceiling"]
+shape = SubResource("Rectangle_ceiling")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="AbandonedTracks" type="Area2D" parent="Props"]
+position = Vector2(130, 255)
+script = ExtResource("2_resonance")
+resonance_id = "prop_abandoned_tracks"
+prop_type = 132
+prop_title = "Zardzewiałe szyny i kozioł oporowy Linii 4"
+prop_subtitle = "Koniec oficjalnej sieci tranzytowej / plama oleju"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/AbandonedTracks"]
+shape = SubResource("Circle_prop_tracks")
+
+[node name="FlickeringNeon" type="Area2D" parent="Props"]
+position = Vector2(240, 190)
+script = ExtResource("2_resonance")
+resonance_id = "prop_flickering_neon"
+prop_type = 133
+prop_title = "Migoczący neon stacyjny »PERON 13«"
+prop_subtitle = "Emaliowana tablica z lat 70. z brzęczącym transformatorem"
+interaction_radius = 45.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/FlickeringNeon"]
+shape = SubResource("Circle_prop_neon")
+
+[node name="SubstructureWell" type="Area2D" parent="Props"]
+position = Vector2(360, 245)
+script = ExtResource("2_resonance")
+resonance_id = "prop_substructure_well"
+prop_type = 134
+prop_title = "Szyb wentylacyjny Podstruktury"
+prop_subtitle = "Infradźwiękowy szum kompensatorów naprężeń i kapiący kondensat"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/SubstructureWell"]
+shape = SubResource("Circle_prop_well")
+
+[node name="JakubBeacon" type="Area2D" parent="Props"]
+position = Vector2(470, 240)
+script = ExtResource("2_resonance")
+resonance_id = "prop_jakub_beacon"
+prop_type = 135
+prop_title = "Jakub z przemysłową latarką roboczą"
+prop_subtitle = "Snop światła oświetlający wejście do korytarzy zasilania"
+interaction_radius = 46.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/JakubBeacon"]
+shape = SubResource("Circle_prop_beacon")
+
+[node name="Station29Exit" type="Area2D" parent="Props"]
+position = Vector2(590, 250)
+script = ExtResource("2_resonance")
+resonance_id = "prop_station_29_exit"
+prop_type = 136
+prop_title = "Brama rewizyjna Sektora Zasilania"
+prop_subtitle = "Krata z łańcuchem prowadząca do Rozdzielni Głównej (Przestrzeń 30)"
+interaction_radius = 60.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Station29Exit"]
+shape = SubResource("Circle_prop_exit")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(610, 245)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(50, 240)
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")

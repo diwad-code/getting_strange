@@ -1,0 +1,979 @@
+DOCS PASS: 46 required files and handoff contracts
+== Documentation contract ==
+DOCS PASS: 46 required files and handoff contracts
+== Godot headless import ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Inicjalizacja projektu (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Skanowanie struktury plik├│w...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Wczytywanie globalnych nazw klas...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Weryfikowanie GDExtension...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Tworzenie skrypt├│w auto┼éadowania...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Inicjalizacja wtyczek...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Uruchamianie skanu systemu plik├│w...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Rejestrowanie globalnych klas... (11 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Station17[39m[0m
+[   8% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  16% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  41% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  75% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  83% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Wczytywanie edytora (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Wczytywanie uk┼éadu edytora...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Wczytywanie dok├│w...[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | Przywracanie scen...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | Wczytywanie centralnego uk┼éadu edytora...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | Wczytywanie uk┼éadu okien wtyczek...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | Uk┼éad edytora gotowy.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+== Getting Strange smoke test ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+MOVEMENT PROFILE: A
+TEST: movement_lab completed
+TEST: anchor_lab completed
+TEST: station_01 completed
+TEST: station_02 completed
+TEST: station_03 completed
+TEST: station_04 completed
+TEST: station_05 completed
+TEST: station_06 completed
+TEST: station_07 completed
+TEST: station_08 completed
+TEST: station_09 completed
+TEST: station_10 completed
+TEST: station_11 completed
+TEST: station_12 completed
+TEST: station_13 completed
+TEST: station_14 completed
+TEST: station_15 completed
+TEST: station_16 completed
+TEST: station_17 completed
+TEST: station_18 completed
+TEST: station_19 completed
+TEST: station_20 completed
+TEST: station_21 completed
+TEST: station_22 completed
+TEST: station_23 completed
+TEST: station_24 completed
+TEST: station_25 completed
+TEST: station_26 completed
+TEST: station_27 completed
+TEST: station_28 completed
+TEST: station_29 completed
+TEST: station_30 completed
+TEST: station_31 completed
+TEST: station_32 completed
+TEST: station_33 completed
+TEST: station_34 completed
+TEST: station_35 completed
+TEST: station_36 completed
+TEST: station_37 completed
+TEST: station_38 completed
+TEST: station_39 completed
+TEST: station_40 completed
+TEST: station_41 completed
+TEST: station_42a completed
+TEST: station_42b completed
+TEST: station_42c completed
+TEST: station_43 completed
+SMOKE PASS: project, scene, input and player physics
+WARNING: 14 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== Traversal contract lint ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TRAVERSAL LINT PASS: campaign scenes carry no arcade-platforming geometry
+== PKG-0095 Act II gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0095 SMOKE PASS: Act II Vector-Stage and campaign unlock chain
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0096 Act IIb gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0096 SMOKE PASS: Act IIb Vector-Stage and campaign unlock chain 16..20
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0097 Act IIc gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0097 SMOKE PASS: Act IIc Vector-Stage and campaign unlock chain 21..25
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0099 Act II playable slice gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0099 SMOKE PASS: Act II playable slice, anchoring and unlock chain 11..15
+== PKG-0100 Act I playable slice gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0100 SMOKE PASS: Act I Vector-Stage state pass, obstacles and chain 01..10
+WARNING: 2 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0101 Act IIb visibility and obstacle gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0101 SMOKE PASS: Act IIb Vector-Stage state pass, diegetic obstacles and chain 16..20
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0102 Act IIc route visibility and obstacle gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0102 SMOKE PASS: Act IIc Vector-Stage route, single R2 gate and chain 21..25
+== PKG-0103 Act III route visibility and obstacle gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0103 SMOKE PASS: Act III Vector-Stage route, R5/R1 mechanisms and production chain
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0104 Act IIIb route visibility and obstacle gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0104 SMOKE PASS: Act IIIb Vector-Stage route, R6/R1 mechanisms and production chain
+== PKG-0105 Act IIIc route visibility and obstacle gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0105 SMOKE PASS: Act IIIc Vector-Stage route, R3 rescue mechanism and production chain
+== PKG-0106 Act IV choice chamber and silence gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0106 SMOKE PASS: Station 41 Vector-Stage choice chamber, conscious silence and production chain
+WARNING: 12 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0107 finale Vector-Stage and silence gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0107 SMOKE PASS: finale Vector-Stage, finale branches, conscious silence and production chain
+== PKG-0113 release-readiness truth and visual remediation gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0113 SMOKE PASS: 43-space smoke invocation, Vector-Stage practicals, CRT portrait and fitted pause UI
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0114 production shell and end-to-end campaign gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: GameStateManager ignored malformed campaign save; using a clean campaign.
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] reload_campaign_from_disk (res://scripts/core/game_state_manager.gd:1122)
+       [1] _check_malformed_save_fallback (res://tests/pkg_0114_smoke_test.gd:244)
+       [2] _run (res://tests/pkg_0114_smoke_test.gd:54)
+       [3] _check_continue_after_epilogue (res://tests/pkg_0114_smoke_test.gd:235)
+       [4] _return_to_title (res://tests/pkg_0114_smoke_test.gd:262)
+       [5] _wait_for_title (res://tests/pkg_0114_smoke_test.gd:283)
+PKG-0114 SMOKE PASS: production shell, save entry points and full 01..43 topology
+== PKG-0115 R1 settings, remap, focus and localization gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: GameStateManager ignored unsupported settings schema; using defaults.
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _apply_loaded_settings (res://scripts/core/game_state_manager.gd:774)
+       [1] reload_settings_from_disk (res://scripts/core/game_state_manager.gd:738)
+       [2] _check_settings_persistence_and_fallback (res://tests/pkg_0115_smoke_test.gd:141)
+PKG-0115 SMOKE PASS: settings, remap, focus, pad bindings and PL/EN UI
+== PKG-0117 inherited Foundation component gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0117: _initialize called
+PKG-0117: _run_all_tests started
+TEST: LenaVisualRig & Animation State...
+TEST: WorldPixelCompositor...
+TEST: CrispDiegeticText...
+TEST: NarrativeGuidanceService & InnerThoughtSurface...
+TEST: Station 01 (Wieczorny odczyt)...
+TEST: Station 01 PASSED
+TEST: Station 02 (┼Ücie┼╝ka serwisowa)...
+TEST: Station 02 PASSED
+TEST: Station 03 (Przystanek)...
+TEST: Station 03 PASSED
+TEST: Station 04 (Wn─Ötrze wagonu)...
+TEST: Station 04 PASSED
+TEST: Station 05 (Ulica powrotna)...
+TEST: Station 05 PASSED
+TEST: Station 06 (Sprzeczny rozk┼éad)...
+TEST: Station 06 PASSED
+TEST: Station 07 (Kiosk u Pawlaka / Klatka)...
+TEST: Station 07 PASSED
+PKG-0117: TECHNICZNE TESTY REKONCYLIACJI ZAKO┼âCZONE SUKCESEM (0 B┼ü─śD├ôW).
+== PKG-0118 Foundation Slice 01-07 Canon 0.3 gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+== PKG-0118 Foundation Slice 01-07 Canon 0.3 Gate ==
+TEST: LenaVisualRig 13 states & proportions...
+TEST: WorldPixelCompositor...
+TEST: CrispDiegeticText & no draw_string in Layer 0...
+TEST: NarrativeGuidanceService & fallible beats...
+TEST: Station 01 (Wieczorny odczyt / Ostatni odczyt)...
+TEST: Station 01 PASSED
+TEST: Station 02 (Obej┼Ťcie serwisowe)...
+  Station 02 scene loaded
+  Station 02 instantiated
+  Station 02 added to root
+  Station 02 physics frame done
+  Station 02 queued free
+TEST: Station 02 PASSED
+TEST: Station 03 (Wiadomo┼Ť─ç Marty)...
+  Station 03 packed scene loaded
+  Station 03 instantiated
+  Station 03 added to root
+  Station 03 physics frame finished
+  Station 03 queued free
+TEST: Station 03 PASSED
+TEST: Station 04 (Przejazd wagonem)...
+TEST: Station 04 PASSED
+TEST: Station 05 (Znana ulica)...
+TEST: Station 05 PASSED
+TEST: Station 06 (Dwa rozk┼éady)...
+TEST: Station 06 PASSED
+TEST: Station 07 (Herbata dla Marty / Kiosk)...
+TEST: Station 07 PASSED
+TEST: Act I knowledge lint...
+PKG-0118 PASS: Foundation Slice 01-07 Canon 0.3, LenaVisualRig, Pixel-Stage & Guidance verified
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0119 Station 08-13 Canon 0.3 gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+== PKG-0119 Station 08-13 Canon 0.3 Gate ==
+TEST: brak draw_string() w Layer 0 dla stacji 08..13...
+TEST: lint wiedzy Sekwencji II/III...
+TEST: nag┼é├│wki trzech pyta┼ä o przeszkod─Ö...
+TEST: architektura Pixel-Stage w scenach 08..13...
+TEST: Station 08 (Numer czterna┼Ťcie)...
+TEST: Station 08 PASSED
+TEST: Station 09 (S─ůsiadka z trzeciego)...
+TEST: Station 09 PASSED
+TEST: Station 10 (Klucz)...
+TEST: Station 10 PASSED
+TEST: Station 11 (Dwie osoby na zdj─Öciu)...
+TEST: Station 11 PASSED
+TEST: Station 12 (Wiadomo┼Ť─ç g┼éosowa)...
+TEST: Station 12 PASSED
+TEST: Station 13 (Dwie wa┼╝ne wersje)...
+TEST: Station 13 PASSED
+TEST: ┼éa┼äcuch kampanii 08..14...
+PKG-0119 PASS: Station 08-13 Canon 0.3, Pixel-Stage, guidance i hipotezy zweryfikowane
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0120 Station 14-23 Canon 0.3 gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+== PKG-0120 Station 14-23 Canon 0.3 Gate ==
+TEST: brak draw_string() w Layer 0 dla stacji 14..23...
+TEST: lint wiedzy w stacjach 14..20 (zakaz przedwczesnych poj─Ö─ç)...
+TEST: nag┼é├│wki trzech pyta┼ä o przeszkod─Ö dla stacji 14..23...
+TEST: architektura Pixel-Stage w scenach 14..23...
+TEST: Station 14 (Pr├│g Marty)...
+TEST: Station 14 PASSED
+TEST: Station 15 (Pr├│ba wzajemnego sygna┼éu, P9 BUNDLE-22)...
+TEST: Station 15 PASSED
+TEST: Station 16 (bezpieczny analizator i ma┼éy koszt)...
+TEST: Station 16 PASSED
+TEST: Station 17 (Rejestr par koszt├│w i jawny zakres zgody)...
+TEST: Station 17 PASSED
+TEST: Station 18 (Brak aktu zgonu)...
+TEST: Station 18 PASSED
+TEST: Station 19 (Dwa pytania kontrolne)...
+TEST: Station 19 PASSED
+TEST: Station 20 (Cz┼éowiek po tej dacie)...
+TEST: Station 20 PASSED
+TEST: Station 21 (Trzy ┼║r├│d┼éa / Rozpoznanie)...
+TEST: Station 21 PASSED
+TEST: Station 22 (Odchylenie w rejestrze / dwie hipotezy)...
+TEST: Station 22 PASSED
+TEST: Station 23 (Martwy obw├│d / pr├│ba A-B)...
+TEST: Station 23 PASSED
+TEST: ┼éa┼äcuch kampanii 14..24...
+PKG-0120 PASS: Station 14-23 Canon 0.3, Pixel-Stage, guidance i rozpoznanie zweryfikowane
+== PKG-0121 Station 24-30 Canon 0.3 gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+== PKG-0121 Station 24-30 Canon 0.3 Gate ==
+TEST: brak draw_string() w Layer 0 dla stacji 24..30...
+TEST: nag┼é├│wki trzech pyta┼ä o przeszkod─Ö dla stacji 24..30...
+TEST: architektura Pixel-Stage w scenach 24..30...
+TEST: Station 24 (Nie jeste┼Ť jej zast─Öpstwem / jawna granica Marty)...
+TEST: Station 24 PASSED
+TEST: Station 25 (W─Öze┼é pod Lini─ů 4 / obie drogi techniczne)...
+TEST: Station 25 PASSED
+TEST: Station 26 (rekonstrukcja przerwanej pr├│by)...
+TEST: Station 27 (dwie identyczne odpowiedzi i korekta b┼é─Ödu)...
+TEST: Station 28 (jawna cena i Anchor ┼Ťladu)...
+TEST: Station 29 (jawna granica i ograniczona zgoda Jakuba)...
+TEST: Station 30 (trzy prognozy i zale┼╝no┼Ťci zgody)...
+TEST: ┼éa┼äcuch kampanii 24..31...
+PKG-0121 PASS: Station 24-30 Canon 0.3, Pixel-Stage, guidance i prognozy zweryfikowane
+== PKG-0122 Station 31-37 Canon 0.3 gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+== PKG-0122 Station 31-37 Canon 0.3 / P7 Gate ==
+TEST: brak draw_string() w Layer 0 dla stacji 31..37...
+TEST: nag┼é├│wki trzech pyta┼ä o przeszkod─Ö dla stacji 31..37...
+TEST: architektura Pixel-Stage w scenach 31..37...
+TEST: Station 31 (Magazyn Dowod├│w / Dwie┼Ťcie krzese┼é)...
+TEST: Station 31 PASSED
+TEST: Station 32 (Szk┼éo laboratoryjne / Pami─Ö─ç materia┼éu)...
+TEST: Station 32 PASSED
+TEST: Station 33 (Szyb wentylacyjny / Notatki z warunkiem przerwania)...
+TEST: Station 33 PASSED
+TEST: Station 34 (Maszynownia G┼é├│wna / Rdze┼ä korelacyjny)...
+TEST: Station 34 PASSED
+TEST: Station 35 (Sektor Filtracji / Baseny Sedacyjne)...
+TEST: Station 35 PASSED
+TEST: Station 36 (Drena┼╝ trakcyjny / Para katastrof)...
+TEST: Station 36 PASSED
+TEST: Station 37 (Komora Sygna┼éowa / W─Öze┼é nadawczy)...
+TEST: Station 37 PASSED
+TEST: ┼éa┼äcuch kampanii 31..38...
+PKG-0122 PASS: Station 31-37 Canon 0.3, Pixel-Stage, guidance i rejestr par zweryfikowane
+WARNING: 6 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0123 Station 38-43 and Final Content Lock 3.0 gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+--- PKG-0123 Smoke Test: Sequence X & Content Lock 3.0 ---
+Testing script contracts, obstacle lint, and zero draw_string in Layer 0...
+Testing scene node stacks for Pixel-Stage architecture...
+Testing interactive flows across Stations 38-43...
+Testing full campaign branching and completion logic...
+PKG-0123: ALL TESTS PASSED.
+== PKG-0124 Release Candidate 1 and Distribution gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+--- PKG-0124 Smoke Test: Release Candidate 1 & Distribution Verification ---
+1. Testing export presets, project configuration and build artifacts...
+2. Testing licenses documentation and release notes...
+3. Testing bilingual localization parity and settings overlay...
+4. Testing 60 Hz determinism, zero draw_string, and node stacks on all 43 campaign scenes...
+5. Testing TitleScreen shell, settings interaction and campaign reset...
+PKG-0124: ALL RELEASE CANDIDATE TESTS PASSED (0 FAILURES).
+== PKG-0125 Feminine Lena, Diegetic Climbing, Bidirectionality and Scale gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+--- PKG-0125 Smoke Test: Feminine Lena, Diegetic Climbing, Bidirectionality & Scale ---
+1. Testing InputMap semantic actions for climbing...
+2. Testing LenaVisualRig 3.0 feminine silhouette and 14 states...
+3. Testing LadderZone component and climbing interaction...
+4. Testing ServiceLift mechanical platform...
+5. Testing bidirectional navigation & backtracking in GameStateManager...
+6. Testing all 43 campaign scenes for scale, nodes, and zero draw_string in Layer 0...
+PKG-0125: ALL TESTS PASSED (0 FAILURES).
+== PKG-0126 Atmospheric Soundscapes, Vector Lighting, Micro-particles and CRT Pacing gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+--- PKG-0126 Smoke Test: Soundscapes, Vector Lighting, Micro-particles & CRT Pacing ---
+1. Testing PKG-0126 procedural audio synthesizers...
+2. Testing AtmosphereRig lighting profiles and station categories...
+3. Testing microdynamic dust and vent steam particles...
+4. Testing CRTDialogueBox pacing, auto_advance and speaker color registry...
+5. Testing Player trigger_unease atmosphere integration...
+6. Testing Finale scenes 40, 41, 42a, 42b, 42c, 43 AtmosphereRig integration...
+PKG-0126: ALL TESTS PASSED (0 FAILURES).
+WARNING: 6 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0127 RAM Lifecycle, Sound Cache, Bidirectional Topology and Presentation Contrast gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+--- PKG-0127 Smoke Test: RAM Lifecycle, Sound Cache, Bidirectional Topology & Presentation Contrast ---
+1. Testing ProceduralAudio sound cache, cache hits, and cache eviction...
+2. Testing AtmosphereRig lifecycle, audio players, and _exit_tree cleanup...
+3. Testing bidirectional navigation graph, backtrack lookups, and continuity save/restore...
+4. Testing CanvasLayer hierarchy (Layer 10, 16, 20, 100, 110) and text scaling...
+5. Testing CRT dialogue speaker color registry and contrast metrics...
+6. Testing all 45 campaign scenes for node stacks, resource lifecycle and clean freeing...
+6. All 45 scenes verified successfully.
+PKG-0127: ALL TESTS PASSED (0 FAILURES).
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0128 Golden Master audit, soak simulation and integrity gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+--- PKG-0128 Smoke Test: Golden Master Audit, Soak Simulation & Integrity Certification ---
+1. Testing InputMap action parity (Keyboard & Gamepad) and gameplay script cleanliness...
+2. Testing bilingual localization integrity (PL/EN completeness & key symmetry)...
+3. Testing Station 43 Credits, Dialogue and Zero-Asset Licensing conformance...
+4. Testing GameStateManager multi-cycle reset, persistence and finale routing...
+   Cycle 1: State reset, progress, branching, and save/load...
+   Cycle 2: State reset, progress, branching, and save/load...
+5. Running 2-Cycle Long-Session Soak Simulation across all 45 scenes...
+   === Soak Cycle 1 / 2: Instantiating and validating all 45 scenes ===
+   Cycle 1 completed. Active procedural audio cache size: 44 items
+   === Soak Cycle 2 / 2: Instantiating and validating all 45 scenes ===
+   Cycle 2 completed. Active procedural audio cache size: 44 items
+5. Long-Session Soak Simulation: 2 full cycles across 45 scenes completed cleanly.
+PKG-0128: ALL TESTS PASSED (0 FAILURES). GOLDEN MASTER CERTIFIED.
+WARNING: 6 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0129 Global Traversal Geometry, Diegetic Ladders & Lifts gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+
+--- PKG-0129 Smoke Test: Traversal Geometry, Ladders & Lifts Certification ---
+1. Testing LadderZone climbing mechanics, audio cues, and visual rig states...
+2. Testing ServiceLift mechanical platform movement and physics sync...
+3. Testing Global Traversal Geometry & Reachability across all 45 campaign scenes...
+   All 45 campaign scenes geometry and traversal verified (6 ladder scenes, 2 lift scenes).
+4. Testing Station 01 remediation: OperatorDesk, ConsoleBench, and OperatorLadder...
+
+PKG-0129: ALL TESTS PASSED (0 FAILURES). TRAVERSAL CANON FULLY CERTIFIED.
+== PKG-0130 Frame budget, particle determinism and pixel-grid camera gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+
+--- PKG-0130 Smoke Test: Frame Budget, Particle Determinism & Pixel Camera ---
+1. Testing ParticleBudget contract and emitter factory coverage...
+2. Testing AtmosphereRig shared light textures and particle teardown...
+3. Testing CinematicCamera pixel-grid coherence and drift...
+4. Testing CinematicCamera clamped vertical follow for ladders and lifts...
+5. Testing ServiceLift cached motor audio...
+6. Testing frame budget across all 45 campaign scenes...
+   45 scenes inside frame budget. Worst live particle load: 62 (station_25).
+
+PKG-0130: ALL TESTS PASSED (0 FAILURES). FRAME BUDGET AND PIXEL COHERENCE CERTIFIED.
+== PKG-0130 Frame budget audit (45 campaign scenes) ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+================================================================================
+       PKG-0130 FRAME BUDGET & FRAME TIMING AUDIT: 45 CAMPAIGN SCENES           
+================================================================================
+Active budgets per scene: emitting systems <= 6, live particles <= 128,
+                          lights <= 8, canvas layers <= 8, playing voices <= 4.
+Pool budgets per scene:   emitters <= 20, audio players <= 20.
+Timing budget:            <= 3.00 ms/frame attributable to the scene over 60 frames.
+Particle simulation cap:  30 Hz, fract_delta off (deterministic).
+
+Headless idle baseline: 6.900 ms/frame (empty tree, subtracted from every sample).
+
+--- station_01 ---
+  nodes=70 | emitters 1 active / 3 pooled | particles 28 live / 56 pooled
+  lights=3 | canvas layers=[5, 10, 10, 16, 20] | audio 2 playing / 6 pooled
+  frame cost: 6.881 ms/frame raw, 0.000 ms attributable to the scene (60 frames)
+--- station_02 ---
+  nodes=67 | emitters 1 active / 3 pooled | particles 28 live / 56 pooled
+  lights=3 | canvas layers=[5, 10, 16, 20] | audio 2 playing / 6 pooled
+  frame cost: 6.892 ms/frame raw, 0.000 ms attributable to the scene (60 frames)
+--- station_03 ---
+  nodes=63 | emitters 1 active / 3 pooled | particles 28 live / 56 pooled
+  lights=3 | canvas layers=[5, 10, 16, 20] | audio 2 playing / 6 pooled
+  frame cost: 6.902 ms/frame raw, 0.002 ms attributable to the scene (60 frames)
+--- station_04 ---
+  nodes=64 | emitters 1 active / 3 pooled | particles 28 live / 56 pooled
+  lights=3 | canvas layers=[5, 10, 16, 20] | audio 1 playing / 6 pooled
+  frame cost: 8.141 ms/frame raw, 1.241 ms attributable to the scene (60 frames)
+--- station_05 ---
+  nodes=66 | emitters 1 active / 3 pooled | particles 28 live / 56 pooled
+  lights=4 | canvas layers=[5, 10, 10, 16, 20] | audio 2 playing / 6 pooled
+  frame cost: 8.309 ms/frame raw, 1.409 ms attributable to the scene (60 frames)
+--- station_06 ---
+  nodes=65 | emitters 1 active / 3 pooled | particles 28 live / 56 pooled
+  lights=3 | canvas layers=[5, 10, 10, 16, 20] | audio 1 playing / 6 pooled
+  frame cost: 8.357 ms/frame raw, 1.456 ms attributable to the scene (60 frames)
+--- station_07 ---
+  nodes=73 | emitters 1 active / 3 pooled | particles 28 live / 56 pooled
+  lights=3 | canvas layers=[5, 10, 10, 10, 16, 20] | audio 2 playing / 6 pooled
+  frame cost: 8.400 ms/frame raw, 1.500 ms attributable to the scene (60 frames)
+--- station_08 ---
+  nodes=83 | emitters 1 active / 3 pooled | particles 28 live / 56 pooled
+  lights=4 | canvas layers=[5, 10, 10, 10, 16, 20] | audio 1 playing / 6 pooled
+  frame cost: 8.325 ms/frame raw, 1.425 ms attributable to the scene (60 frames)
+--- station_09 ---
+  nodes=82 | emitters 1 active / 8 pooled | particles 28 live / 116 pooled
+  lights=4 | canvas layers=[5, 10, 10, 16, 20] | audio 2 playing / 10 pooled
+  frame cost: 8.316 ms/frame raw, 1.416 ms attributable to the scene (60 frames)
+--- station_10 ---
+  nodes=77 | emitters 1 active / 6 pooled | particles 28 live / 98 pooled
+  lights=4 | canvas layers=[5, 10, 10, 16, 20] | audio 2 playing / 9 pooled
+  frame cost: 8.346 ms/frame raw, 1.446 ms attributable to the scene (60 frames)
+--- station_11 ---
+  nodes=82 | emitters 1 active / 8 pooled | particles 28 live / 116 pooled
+  lights=4 | canvas layers=[5, 10, 10, 16, 20] | audio 1 playing / 10 pooled
+  frame cost: 8.042 ms/frame raw, 1.142 ms attributable to the scene (60 frames)
+--- station_12 ---
+  nodes=79 | emitters 1 active / 6 pooled | particles 28 live / 98 pooled
+  lights=4 | canvas layers=[5, 10, 10, 16, 20] | audio 1 playing / 9 pooled
+  frame cost: 7.857 ms/frame raw, 0.957 ms attributable to the scene (60 frames)
+--- station_13 ---
+  nodes=83 | emitters 1 active / 6 pooled | particles 28 live / 98 pooled
+  lights=4 | canvas layers=[5, 10, 10, 10, 16, 20] | audio 2 playing / 9 pooled
+  frame cost: 7.919 ms/frame raw, 1.018 ms attributable to the scene (60 frames)
+--- station_14 ---
+  nodes=80 | emitters 2 active / 7 pooled | particles 44 live / 108 pooled
+  lights=3 | canvas layers=[5, 10, 10, 16, 20] | audio 2 playing / 9 pooled
+  frame cost: 8.012 ms/frame raw, 1.112 ms attributable to the scene (60 frames)
+--- station_15 ---
+  nodes=85 | emitters 2 active / 7 pooled | particles 44 live / 114 pooled
+  lights=3 | canvas layers=[5, 10, 10, 16, 20] | audio 2 playing / 11 pooled
+  frame cost: 8.408 ms/frame raw, 1.507 ms attributable to the scene (60 frames)
+--- station_16 ---
+  nodes=87 | emitters 2 active / 9 pooled | particles 44 live / 136 pooled
+  lights=3 | canvas layers=[5, 10, 10, 16, 20] | audio 1 playing / 11 pooled
+  frame cost: 7.938 ms/frame raw, 1.038 ms attributable to the scene (60 frames)
+--- station_17 ---
+  nodes=74 | emitters 2 active / 7 pooled | particles 44 live / 114 pooled
+  lights=3 | canvas layers=[5, 10, 10, 16, 20] | audio 2 playing / 9 pooled
+  frame cost: 7.840 ms/frame raw, 0.940 ms attributable to the scene (60 frames)
+--- station_18 ---
+  nodes=83 | emitters 2 active / 9 pooled | particles 44 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 10, 16, 20] | audio 2 playing / 11 pooled
+  frame cost: 8.082 ms/frame raw, 1.181 ms attributable to the scene (60 frames)
+--- station_19 ---
+  nodes=83 | emitters 2 active / 9 pooled | particles 44 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 10, 16, 20] | audio 2 playing / 11 pooled
+  frame cost: 8.325 ms/frame raw, 1.424 ms attributable to the scene (60 frames)
+--- station_20 ---
+  nodes=83 | emitters 2 active / 9 pooled | particles 44 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 10, 16, 20] | audio 1 playing / 11 pooled
+  frame cost: 7.982 ms/frame raw, 1.081 ms attributable to the scene (60 frames)
+--- station_21 ---
+  nodes=91 | emitters 2 active / 9 pooled | particles 44 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 10, 10, 10, 16, 20] | audio 2 playing / 11 pooled
+  frame cost: 7.834 ms/frame raw, 0.933 ms attributable to the scene (60 frames)
+--- station_22 ---
+  nodes=83 | emitters 2 active / 9 pooled | particles 44 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 10, 16, 20] | audio 2 playing / 11 pooled
+  frame cost: 8.047 ms/frame raw, 1.147 ms attributable to the scene (60 frames)
+--- station_23 ---
+  nodes=94 | emitters 2 active / 13 pooled | particles 44 live / 186 pooled
+  lights=4 | canvas layers=[5, 10, 10, 16, 20] | audio 2 playing / 13 pooled
+  frame cost: 8.340 ms/frame raw, 1.440 ms attributable to the scene (60 frames)
+--- station_24 ---
+  nodes=83 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 10, 16, 20] | audio 3 playing / 11 pooled
+  frame cost: 8.318 ms/frame raw, 1.418 ms attributable to the scene (60 frames)
+--- station_25 ---
+  nodes=86 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 10, 16, 20] | audio 3 playing / 12 pooled
+  frame cost: 8.327 ms/frame raw, 1.427 ms attributable to the scene (60 frames)
+--- station_26 ---
+  nodes=81 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 16, 20] | audio 3 playing / 11 pooled
+  frame cost: 8.210 ms/frame raw, 1.310 ms attributable to the scene (60 frames)
+--- station_27 ---
+  nodes=79 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 16, 20] | audio 3 playing / 11 pooled
+  frame cost: 8.385 ms/frame raw, 1.485 ms attributable to the scene (60 frames)
+--- station_28 ---
+  nodes=85 | emitters 3 active / 11 pooled | particles 62 live / 164 pooled
+  lights=4 | canvas layers=[5, 10, 16, 20] | audio 2 playing / 12 pooled
+  frame cost: 8.331 ms/frame raw, 1.431 ms attributable to the scene (60 frames)
+--- station_29 ---
+  nodes=79 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 16, 20] | audio 3 playing / 11 pooled
+  frame cost: 8.332 ms/frame raw, 1.432 ms attributable to the scene (60 frames)
+--- station_30 ---
+  nodes=81 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 16, 20] | audio 3 playing / 11 pooled
+  frame cost: 8.053 ms/frame raw, 1.153 ms attributable to the scene (60 frames)
+--- station_31 ---
+  nodes=80 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 16, 20] | audio 4 playing / 12 pooled
+  frame cost: 8.332 ms/frame raw, 1.431 ms attributable to the scene (60 frames)
+--- station_32 ---
+  nodes=87 | emitters 3 active / 11 pooled | particles 62 live / 164 pooled
+  lights=4 | canvas layers=[5, 10, 16, 20] | audio 4 playing / 13 pooled
+  frame cost: 8.359 ms/frame raw, 1.458 ms attributable to the scene (60 frames)
+--- station_33 ---
+  nodes=85 | emitters 3 active / 11 pooled | particles 62 live / 164 pooled
+  lights=4 | canvas layers=[5, 10, 16, 20] | audio 4 playing / 13 pooled
+  frame cost: 8.072 ms/frame raw, 1.171 ms attributable to the scene (60 frames)
+--- station_34 ---
+  nodes=83 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 16, 20] | audio 4 playing / 13 pooled
+  frame cost: 8.016 ms/frame raw, 1.116 ms attributable to the scene (60 frames)
+--- station_35 ---
+  nodes=80 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 16, 20] | audio 3 playing / 12 pooled
+  frame cost: 7.999 ms/frame raw, 1.098 ms attributable to the scene (60 frames)
+--- station_36 ---
+  nodes=80 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 16, 20] | audio 3 playing / 12 pooled
+  frame cost: 7.883 ms/frame raw, 0.983 ms attributable to the scene (60 frames)
+--- station_37 ---
+  nodes=82 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 16, 20] | audio 3 playing / 12 pooled
+  frame cost: 8.341 ms/frame raw, 1.441 ms attributable to the scene (60 frames)
+--- station_38 ---
+  nodes=83 | emitters 2 active / 11 pooled | particles 44 live / 164 pooled
+  lights=2 | canvas layers=[5, 10, 16, 20] | audio 3 playing / 13 pooled
+  frame cost: 8.008 ms/frame raw, 1.107 ms attributable to the scene (60 frames)
+--- station_39 ---
+  nodes=78 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=2 | canvas layers=[5, 10, 16, 20] | audio 4 playing / 12 pooled
+  frame cost: 8.332 ms/frame raw, 1.431 ms attributable to the scene (60 frames)
+--- station_40 ---
+  nodes=80 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=4 | canvas layers=[5, 10, 16, 20] | audio 4 playing / 12 pooled
+  frame cost: 8.124 ms/frame raw, 1.224 ms attributable to the scene (60 frames)
+--- station_41 ---
+  nodes=81 | emitters 3 active / 9 pooled | particles 62 live / 142 pooled
+  lights=5 | canvas layers=[5, 10, 16, 20] | audio 4 playing / 12 pooled
+  frame cost: 7.751 ms/frame raw, 0.850 ms attributable to the scene (60 frames)
+--- station_42a ---
+  nodes=65 | emitters 2 active / 5 pooled | particles 46 live / 84 pooled
+  lights=3 | canvas layers=[5, 10, 16, 20] | audio 3 playing / 8 pooled
+  frame cost: 8.328 ms/frame raw, 1.427 ms attributable to the scene (60 frames)
+--- station_42b ---
+  nodes=65 | emitters 2 active / 5 pooled | particles 46 live / 84 pooled
+  lights=3 | canvas layers=[5, 10, 16, 20] | audio 3 playing / 8 pooled
+  frame cost: 7.982 ms/frame raw, 1.082 ms attributable to the scene (60 frames)
+--- station_42c ---
+  nodes=65 | emitters 2 active / 5 pooled | particles 46 live / 84 pooled
+  lights=3 | canvas layers=[5, 10, 16, 20] | audio 2 playing / 8 pooled
+  frame cost: 7.874 ms/frame raw, 0.974 ms attributable to the scene (60 frames)
+--- station_43 ---
+  nodes=77 | emitters 2 active / 6 pooled | particles 46 live / 98 pooled
+  lights=3 | canvas layers=[5, 10, 10, 10, 16, 20] | audio 3 playing / 9 pooled
+  frame cost: 7.996 ms/frame raw, 1.096 ms attributable to the scene (60 frames)
+
+================================================================================
+SUMMARY
+  Scenes audited: 45
+  Emitting particle systems across campaign: 94
+  Live particles across campaign: 2086
+  Pooled (dormant) emitters across campaign: 337
+  Light2D instances across campaign: 163
+  Playing audio voices across campaign: 110
+  Pooled audio players across campaign: 451
+  Shared radial light textures cached: 18
+  Cached procedural PCM buffers: 44
+  Worst scene-attributable frame cost: 1.507 ms (station_15)
+================================================================================
+FRAME BUDGET AUDIT: PASS ÔÇö every campaign scene stays inside its object and timing budget.
+== PKG-0132 Lena 4.0, scale, return and 18px step gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+--- PKG-0132 Smoke Test: Lena 4.0, scale, return, 18px step ---
+1. LenaVisualRig 4.0 sprite contract...
+2. previous_level_requested on stations 02-43...
+3. geometry_audit 18 px threshold and no new exe...
+4. GSM previous station and ReturnZone...
+PKG-0132: ALL TESTS PASSED (0 FAILURES).
+WARNING: 2 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0133 walk gait, Station 01 exit and resolved interact gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+--- PKG-0133 Smoke Test: walk gait, Station 01 exit, resolved interact ---
+1. sprint InputMap (Shift + LB)...
+2. visual walk at profile speed; run only with sprint flag...
+3. Station 01 opens after three bounded opening actions...
+PKG-0133: ALL TESTS PASSED (0 FAILURES).
+== PKG-0134 campaign playability walk and interact gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+--- PKG-0134 Smoke Test: campaign playability ---
+0. Standard keyboard extras and CRT portraits...
+1. 18 px curb step exists on PrototypePlayer...
+1b. Walking a flat floor must not hop...
+2. ExitClearance disables Station 02 door...
+3. All 45 stations have Player, AirlockZone, level_completed...
+4. Station 26 isolation partition opens on unlock...
+PKG-0134: ALL TESTS PASSED (0 FAILURES).
+== PKG-0135 capture, one_way remediation and backtrack gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+--- PKG-0135 Smoke Test: capture, one_way 09/11, 05->04->03 backtrack ---
+1. Visual capture files exist in reports/...
+2. Station 09 StairwellPlanter is <=18px, no one_way, traversable without jumping...
+2. Station 09 PASS
+3. Station 11 HallwaySideboard is <=18px, no one_way, traversable without jumping...
+S11 Frame 20: pos=(108.0, 269.0), on_floor=true, on_wall=false
+S11 Frame 40: pos=(148.0, 269.0), on_floor=true, on_wall=false
+S11 Frame 60: pos=(188.0, 269.0), on_floor=true, on_wall=false
+S11 Frame 80: pos=(228.0, 269.0), on_floor=true, on_wall=false
+S11 Frame 100: pos=(268.0, 269.0), on_floor=true, on_wall=false
+S11 Frame 120: pos=(308.0, 269.0), on_floor=true, on_wall=false
+S11 Frame 140: pos=(348.0, 269.0), on_floor=true, on_wall=false
+S11 Frame 160: pos=(387.5, 251.2), on_floor=true, on_wall=false
+S11 Frame 180: pos=(429.6, 251.0), on_floor=true, on_wall=false
+S11 Frame 200: pos=(469.7, 266.3), on_floor=false, on_wall=false
+S11 Frame 212: pos=(493.7, 268.9), on_floor=true, on_wall=false
+3. Station 11 PASS
+4. Backtrack chain 05 -> 04 -> 03 with ReturnZone and non-wall right spawn...
+4. Backtrack chain PASS
+5. Enforcing D-125: zero new .exe binaries in tree...
+PKG-0135: ALL TESTS PASSED (0 FAILURES).
+== PKG-0136 Lena 4.1 locomotion, station exits and frame layout gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+1. Uniform 64x104 sprite canvas with baked pivot...
+2. Rig draws every state 1:1 on the baked pivot...
+3. Locomotion phase is driven by distance, not by wall clock...
+4. start / stop / turn stay presentation-only...
+5. Stations 03-05 airlock (forward) vs return (back)...
+6. Dialogue framing offset and inner-voice suppression...
+7. D-125: no new .exe in the tree...
+PKG-0136: ALL TESTS PASSED (0 FAILURES).
+== PKG-0137 campaign framing budget, label clearance, exits and displacement-driven gait gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+1. Stage apron covers the dialogue framing budget...
+2. Locomotion cycle follows ground covered, not intended velocity...
+3. Framing, labels and exits on all 45 campaign scenes...
+PKG-0137: ALL TESTS PASSED (0 FAILURES).
+== PKG-0138 player-verb narrative playthrough, guidance and backtrack gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+================================================================================
+  PKG-0138 SMOKE TEST: Narrative Playthrough, Guidance & Backtrack Gate
+================================================================================
+1. Testing NarrativeGuidanceService beat contracts and stall triggers...
+2. Testing soft-lock resilience (Station 13 drawer & Station 38 anchor)...
+3. Testing bidirectional spawn & backtrack via ReturnZone...
+4. Testing player-verb narrative playthrough across campaign sample...
+  PASS: station_01 player-verb playthrough
+  PASS: station_07 player-verb playthrough
+  PASS: station_10 player-verb playthrough
+  PASS: station_13 player-verb playthrough
+  PASS: station_15 player-verb playthrough
+  PASS: station_16 player-verb playthrough
+  PASS: station_17 player-verb playthrough
+  PASS: station_18 player-verb playthrough
+  PASS: station_19 player-verb playthrough
+  PASS: station_20 player-verb playthrough
+  PASS: station_21 player-verb playthrough
+  PASS: station_22 player-verb playthrough
+  PASS: station_23 player-verb playthrough
+  PASS: station_24 player-verb playthrough
+  PASS: station_30 player-verb playthrough
+  PASS: station_31 player-verb playthrough
+  PASS: station_37 player-verb playthrough
+  PASS: station_38 player-verb playthrough
+  PASS: station_41 player-verb playthrough
+  PASS: station_42a player-verb playthrough
+  PASS: station_43 player-verb playthrough
+================================================================================
+PKG-0138 SMOKE PASS: 100% pure narrative playthrough, guidance & backtrack verified.
+== PKG-0139 procedural soundscape per act, footstep materiality and CRT dialogue blip gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+================================================================================
+  PKG-0139 SMOKE TEST: Soundscapes, Surface Materiality & Dialogue Modulation
+================================================================================
+1. Testing PKG-0139 procedural audio synthesizers...
+2. Testing PrototypePlayer 5-surface footstep & landing system...
+3. Testing CRTDialogueBox speaker-specific dialogue blips...
+4. Testing AtmosphereRig Act soundscape configuration across campaign...
+================================================================================
+PKG-0139 SMOKE PASS: Procedural soundscapes, surface materiality & dialogue modulation verified.
+WARNING: 2 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0140 Anchor/Yield audiovisual coupling, interaction haptics and camera easing gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+================================================================================
+  PKG-0140 SMOKE TEST: Anchor/Yield coupling, interaction haptics, camera easing
+================================================================================
+1. Syntezatory sprzezenia Anchor/Yield i haptyki...
+2. Obwiednia AnchorResonance...
+3. AnchorableObject ÔÇö tor audiowizualny...
+4. MovableAnchorableProp ÔÇö chwyt, przesuwanie, uleglosc...
+5. MemoryResonancePoint ÔÇö haptyka i kontaktowy odczyt...
+6. CinematicCamera ÔÇö tlumienie transportu pionowego i centrowanie...
+7. ReturnZone ÔÇö zadanie centrowania kadru...
+8. Kampania ÔÇö stacje z rekwizytami zakotwiczalnymi...
+================================================================================
+PKG-0140 SMOKE PASS: sprzezenie Anchor/Yield, haptyka interakcji i kadr kamery zweryfikowane.
+== PKG-0141 unified cinematic camera (45 scenes) and reduced-motion accessibility gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+================================================================================
+  PKG-0141 SMOKE TEST: unified cinematic camera (45 scenes) + reduced motion
+================================================================================
+1. Kontrakt scen: nazwa wezla kamery w 45 plikach .tscn...
+   45 plikow scen: jedna nazwa wezla, jeden cel.
+2. Kontrakt runtime: cel i komory na 45 zaladowanych stacjach...
+   45 stacji: cel podpiety, komory ustawione, kadr na siatce 2 px.
+3. Budzet kadrowania na stacjach finalowych 33ÔÇô43...
+   13 stacji finalowych: kadr dialogowy miesci sie w malowanym fartuchu.
+4. Transport pionowy: tlumienie kadru na stacjach 25 i 34...
+   Stacje 25 i 34: tlumienie transportu pionowego narasta i opada plynnie.
+5. Tryb ograniczonego ruchu: kontrakt modulu...
+6. Tryb ograniczonego ruchu: wstrzas kamery i snap 2 px...
+7. Tryb ograniczonego ruchu: oddech pola kotwiczenia...
+8. Tryb ograniczonego ruchu: swiatlo i mikro-czastki AtmosphereRig...
+9. Tryb ograniczonego ruchu: trwalosc, ustawienia i lokalizacja...
+   Opcja jest w ustawieniach, zlokalizowana i trwala.
+10. Tryb ograniczonego ruchu: trwalosc miedzy scenami...
+   Tryb przezywa zmiane sceny bez zadnego okablowania w stacji.
+--------------------------------------------------------------------------------
+PKG-0141: ALL TESTS PASSED (0 FAILURES).
+== PKG-0142 Station 01 right edge and visual-mode parity gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+================================================================================
+  PKG-0142 SMOKE TEST: Station 01 visual contract + 45-scene camera parity
+================================================================================
+1. Station 01 right-edge role, label band and collider invariants...
+2. PKG-0141 camera contract on all 45 scenes (normal mode)...
+   45 scen (normal): Camera, Player, komora i snap 2 px.
+3. PKG-0141 camera contract on all 45 scenes (reduced-motion mode)...
+   45 scen (reduced): Camera, Player, komora i snap 2 px.
+4. Reduced motion preserves stage, framing and atmosphere nodes...
+--------------------------------------------------------------------------------
+PKG-0142: ALL TESTS PASSED (0 FAILURES).
+WARNING: 6 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0145 P7 diagnostic vertical slice gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0145 PASS: P7 vertical-slice contracts
+WARNING: 2 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0146 P7 S01-S05 diagnostic wave gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0146 PASS: P7 S01ÔÇôS05 diagnostic contracts
+WARNING: 2 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0147 P7 S06-S07 diagnostic wave gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0147 PASS: P7 S06ÔÇôS07 diagnostic contracts
+== PKG-0148 P7 S09-S10 diagnostic wave gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0148 PASS: P7 S09ÔÇôS10 diagnostic contracts
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0149 P7 S11-S13 diagnostic wave gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+=== PKG-0149 Smoke Test: S11-S13 Diagnostic Waves (Stations 31-38) ===
+Testing Sequence resources (S11, S12, S13)...
+Testing GameStateManager S11-S13 migrations...
+Testing script obstacle comments and zero draw_string in Layer 0...
+Testing scene node stacks for Pixel-Stage...
+Testing Station 31 diagnostic flow & negative controls...
+Testing Station 32 diagnostic flow & negative controls...
+Testing Station 33 diagnostic flow & negative controls...
+Testing Station 34 diagnostic flow & negative controls...
+Testing Station 35 diagnostic flow & negative controls...
+Testing Station 36 diagnostic flow & negative controls...
+Testing Station 37 diagnostic flow & negative controls...
+Testing Station 38 diagnostic flow & negative controls...
+PKG-0149: ALL TESTS PASSED.
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0150 P7 S14-S15 diagnostic wave gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+=== PKG-0150 Smoke Test: S14-S15 Diagnostic Waves (Stations 39-43) ===
+PKG-0150 Smoke Test: 100% PASS on all S14-S15 contracts.
+WARNING: 6 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0151 final P7 audit gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+=== PKG-0151 Smoke Test: Full P7 audit, 45 scenes, 3 finale branches ===
+PKG-0151 Smoke Test: 100% PASS on final P7 audit gate.
+WARNING: 6 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0152 P8 release surface audit gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+=== PKG-0152 Smoke Test: P8 release surface audit ===
+PKG-0152 SMOKE PASS: release docs, export surface, quarantine and runtime shell audit
+WARNING: 6 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0153 P8 runtime release surface gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+=== PKG-0153 Smoke Test: P8 runtime release surface ===
+PKG-0153 SMOKE PASS: runtime release surface, Station 43 manifests and title version sync
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0154 P8 export rehearsal hardening gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+=== PKG-0154 Smoke Test: export rehearsal hardening ===
+PKG-0154 SMOKE PASS: export preset quarantine and template preflight are enforced
+== PKG-0156 P9 product reset lock gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+=== PKG-0156 Smoke Test: PHASE-01 Product Reset Lock ===
+PKG-0156 SMOKE PASS: product reset lock documents are complete and consistent
+== PKG-0157 P9 first five minutes gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+=== PKG-0157 Smoke Test: PHASE-02 First Five Minutes (BUNDLE-06..10) ===
+Testing BUNDLE-06: Shell product promise...
+Testing BUNDLE-07: Station 01 human worksite...
+Testing BUNDLE-08: Station 02 outdoor service detour...
+Testing BUNDLE-09: Station 03 believable transit stop...
+Testing BUNDLE-10: Station 04 transit ride...
+Testing GATE-INT: Interaction budget <= 3 on Station 01..04...
+Testing end-to-end player-verb campaign walkthrough 01 -> 02 -> 03 -> 04...
+PKG-0157 SMOKE PASS: First Five Minutes (BUNDLE-06..10), GATE-01, GATE-05 and GATE-INT verified.
+WARNING: 10 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0158 P9 first thirty minutes gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+=== PKG-0158 Smoke Test: PHASE-03 First Thirty Minutes (BUNDLE-11..15) ===
+Testing BUNDLE-11: Station 05 home street baseline...
+Testing BUNDLE-12: Station 06 kiosk contradiction...
+Testing BUNDLE-13: Station 07 building exterior...
+Testing BUNDLE-14: Station 08 stairwell and threshold...
+Testing GATE-INT: Interaction budget <= 3 on Station 01..08...
+Testing GATE-30: 4 independent sources of contradiction and 4 location families...
+Testing end-to-end player-verb campaign walkthrough 01 -> 02 -> 03 -> 04 -> 05 -> 06 -> 07 -> 08...
+PKG-0158 SMOKE PASS: First Thirty Minutes (BUNDLE-11..15), GATE-30, GATE-INT verified.
+WARNING: 19 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0159 P9 opening remediation and evidence recertification gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+=== PKG-0159 Smoke Test: opening remediation and recertification ===
+PKG-0159 PASS: dual opening choice, title promise, downstream divergence and real stair traversal verified.
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0160 P9 personal mystery and family repayment gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+=== PKG-0160 Smoke Test: personal mystery ===
+WARNING: Loaded resource as image file, this will not work on export: 'res://assets/characters/portraits/marta.png'. Instead, import the image file as an Image resource and load it normally as a resource.
+   at: load_from_file (core/io/image.cpp:2780)
+   GDScript backtrace (most recent call first):
+       [0] _test_marta_visual_identity (res://tests/pkg_0160_smoke_test.gd:79)
+       [1] _run (res://tests/pkg_0160_smoke_test.gd:18)
+PKG-0160 PASS: 09ÔÇô13 deliver bounded personal evidence and explicit synthesis.
+== PKG-0162 P9 dead-circuit mechanic lesson gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0162 PASS: P9 BUNDLE-21 dead-circuit mechanic lesson contracts
+WARNING: 12 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0163 P9 mutual signal test gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0163 PASS: P9 BUNDLE-22 mutual signal test contracts
+WARNING: 10 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+== PKG-0164 P9 safe analyzer and small cost gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0164 PASS: P9 BUNDLE-23 Station 16 analyzer, cost and home echo contracts
+== PKG-0165 P9 cost ledger and consent scope gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0165 PASS: P9 BUNDLE-24 Station 17 cost ledger and explicit consent scope contracts
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+Verification passed.
+Verification passed.
+0

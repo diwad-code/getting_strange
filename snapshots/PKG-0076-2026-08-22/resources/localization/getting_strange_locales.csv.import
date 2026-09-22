@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://chi3djxvkqll7"
+
+[deps]
+
+files=["res://resources/localization/getting_strange_locales.pl.translation", "res://resources/localization/getting_strange_locales.en.translation"]
+
+source_file="res://resources/localization/getting_strange_locales.csv"
+dest_files=["res://resources/localization/getting_strange_locales.pl.translation", "res://resources/localization/getting_strange_locales.en.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

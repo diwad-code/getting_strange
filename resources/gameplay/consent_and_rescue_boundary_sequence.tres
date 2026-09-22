@@ -1,0 +1,69 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_full_truth_collaboration"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"full_truth_collaboration"
+source_fact = &"p7.consent_and_rescue_boundary.living_signal_bridged"
+predicted_outcome = "Jeżeli Marta i Jakub otrzymają pełną prawdę, ich zgoda określi precyzyjny zakres bezpiecznej synchronizacji bez długu moralnego."
+required_evidence = [&"p7.consent_and_rescue_boundary.living_signal_bridged", &"p7.consent_and_rescue_boundary.marta_truth_disclosed"]
+trial_result = &"marta_full_truth_consented"
+closure_id = &"p7.consent_and_rescue_boundary.marta_truth_disclosed"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_partial_disclosure_bridge"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"partial_disclosure_bridge"
+source_fact = &"p7.consent_and_rescue_boundary.living_signal_bridged"
+predicted_outcome = "Jeżeli prawda zostanie wygładzona, most synchronizacji zadziała, lecz Marta ograniczy pomoc wyłącznie do ratunku partnerki."
+required_evidence = [&"p7.consent_and_rescue_boundary.living_signal_bridged", &"p7.consent_and_rescue_boundary.jakub_switched_consent_recorded"]
+trial_result = &"marta_partial_truth_consented"
+closure_id = &"p7.consent_and_rescue_boundary.marta_truth_disclosed"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_independent_rescue_route"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"independent_rescue_route"
+source_fact = &"p7.consent_and_rescue_boundary.rescue_bulkhead_inspected"
+predicted_outcome = "Jeżeli relacje odmówią użycia ich zasobów, procedura ratunkowa musi oprzeć się wyłącznie na aparaturze Leny."
+required_evidence = [&"p7.consent_and_rescue_boundary.rescue_bulkhead_inspected", &"p7.consent_and_rescue_boundary.rescue_tether_anchored"]
+trial_result = &"rescue_bulkhead_secured_independently"
+closure_id = &"p7.consent_and_rescue_boundary.rescue_tether_anchored"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_jakub_switched_consent"]
+script = ExtResource("3_commitment")
+commitment_id = &"jakub_switched_consent"
+person_id = &"jakub"
+scope = "Zgoda Jakuba z 10-sekundowym wyłącznikiem manualnym na rozdzielnicy."
+known_cost = "Konieczność ręcznego pilnowania wyłącznika i ryzyko przerwania transferu."
+required_disclosure = [&"p7.consent_and_rescue_boundary.living_signal_bridged", &"p7.consent_and_rescue_boundary.jakub_switched_consent_recorded"]
+alternative_route = "Można wymusić transfer bez wyłącznika, lecz stanowi to naruszenie autonomii Jakuba."
+outcome_key = &"p7.consent_and_rescue_boundary.commitment"
+trace_key = &"p7.consent_and_rescue_boundary.trace"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_marta_truth_commitment"]
+script = ExtResource("3_commitment")
+commitment_id = &"marta_truth_commitment"
+person_id = &"marta"
+scope = "Ujawnienie prawdy Marcie o koszcie Linii 4 i roli miejscowej Leny."
+known_cost = "Ból i zmiana dynamiki zaufania w relacji Marty do obu wariantów Leny."
+required_disclosure = [&"p7.consent_and_rescue_boundary.marta_truth_disclosed", &"p7.consent_and_rescue_boundary.rescue_tether_anchored"]
+alternative_route = "Zatajenie prawdy przed Martą zaoferowałoby spokój za cenę fałszu."
+outcome_key = &"p7.consent_and_rescue_boundary.commitment"
+trace_key = &"p7.consent_and_rescue_boundary.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"consent_and_rescue_boundary"
+station_ids = [&"station_37", &"station_38"]
+entry_gate = &"p7.pair_cost_and_echo.trace"
+discrepancy = "Najsilniejsza ścieżka używa Jakuba, a Marta ma własną granicę wobec procedury miejscowej Leny."
+required_source_facts = [&"p7.consent_and_rescue_boundary.living_signal_bridged", &"p7.consent_and_rescue_boundary.jakub_switched_consent_recorded", &"p7.consent_and_rescue_boundary.marta_truth_disclosed", &"p7.consent_and_rescue_boundary.rescue_tether_anchored"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_full_truth_collaboration"), SubResource("DiagnosticHypothesis_partial_disclosure_bridge"), SubResource("DiagnosticHypothesis_independent_rescue_route")])
+trial_id = &"consent_and_rescue_boundary_synthesis"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_jakub_switched_consent"), SubResource("DiagnosticCommitment_marta_truth_commitment")])
+trace_key = &"p7.consent_and_rescue_boundary.trace"
+guidance_beat_ids = [&"s37_oscilloscope_source", &"s37_oscilloscope_contact", &"s37_bridge_hypothesis", &"s37_bridge_signal", &"s37_system_hint", &"s38_calculator_source", &"s38_calculator_contact", &"s38_truth_hypothesis", &"s38_secure_rescue", &"s38_system_hint"]
+state_keys = [&"p7.consent_and_rescue_boundary.oscilloscope_inspected", &"p7.consent_and_rescue_boundary.patchbay_inspected", &"p7.consent_and_rescue_boundary.transmitting_antenna_inspected", &"p7.consent_and_rescue_boundary.mixing_pulpit_inspected", &"p7.consent_and_rescue_boundary.living_signal_bridged", &"p7.consent_and_rescue_boundary.jakub_switched_consent_recorded", &"p7.consent_and_rescue_boundary.balance_calculator_inspected", &"p7.consent_and_rescue_boundary.accident_field_inspected", &"p7.consent_and_rescue_boundary.jakub_shadow_inspected", &"p7.consent_and_rescue_boundary.rescue_bulkhead_inspected", &"p7.consent_and_rescue_boundary.rescue_tether_anchored", &"p7.consent_and_rescue_boundary.marta_truth_disclosed", &"p7.consent_and_rescue_boundary.commitment", &"p7.consent_and_rescue_boundary.trace", &"p7.consent_and_rescue_boundary.safe_trial_feedback"]
+migration_revision = 1

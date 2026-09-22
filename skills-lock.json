@@ -1,0 +1,455 @@
+{
+  "version": 1,
+  "skills": {
+    "add-3d-assets": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/add-3d-assets/SKILL.md",
+      "computedHash": "2517ddf3019263138e300dbcc8687c3e62628b3bd09457cf76f549910d3176bc"
+    },
+    "add-assets": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/add-assets/SKILL.md",
+      "computedHash": "78f055d138f8da6c80189c498f5cb762c722cd0e25dde48a5136d64a2b3ad5ea"
+    },
+    "add-audio": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/add-audio/SKILL.md",
+      "computedHash": "73d47f8498375e2719301c17a5d22276858ccc3e91cccc31bd0b04e41a9b1771"
+    },
+    "add-feature": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/add-feature/SKILL.md",
+      "computedHash": "978af2951e2a53b990749c8e575a5820d3e8e0570b35a385c89448470a42d619"
+    },
+    "add-multiplayer": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/add-multiplayer/SKILL.md",
+      "computedHash": "dfa4366a29130703a73570cfdd96d547ea897a19dba561500985d5211ae519c8"
+    },
+    "camera-systems": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/camera-systems/SKILL.md",
+      "computedHash": "1f44b2163b2100583fe3f82300e759936045393fbefc7c058d3b9a7d1ad7ec85"
+    },
+    "create-game-assets": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/create-game-assets/SKILL.md",
+      "computedHash": "68d5cb83ab462a2a29e77559d9add636fa1fc91d4f732c02b03995362bbc4117"
+    },
+    "design-game": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/design-game/SKILL.md",
+      "computedHash": "81269ceaa9f5797ad4d8510d81090845be8ce703ae7e192472a7e3cd419e7cd2"
+    },
+    "dialogue-systems": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/dialogue-systems/SKILL.md",
+      "computedHash": "a56dd3ff67814ae2e21a006611b988df929a399ce2ab042e0617531b867aa527"
+    },
+    "documentation-writer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/documentation-writer/SKILL.md",
+      "computedHash": "ee53d65b163cd7eb953a930c95841cfe398cc2c0bd24c06508bbaa07c432be35"
+    },
+    "fantasy-world-building": {
+      "source": "wordflowlab/novel-writer-skills",
+      "sourceType": "github",
+      "skillPath": "templates/skills/genre-knowledge/fantasy/SKILL.md",
+      "computedHash": "83a57df81a78fd21dbe455d154872733e18818d65d2290da5d03e41685c857d1"
+    },
+    "fetch-tweet": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/fetch-tweet/SKILL.md",
+      "computedHash": "3497d28d74d9511bc2f284a349139cede132ad954fd434af0dbaafa78047bf35"
+    },
+    "forgotten-elements-reminder": {
+      "source": "wordflowlab/novel-writer-skills",
+      "sourceType": "github",
+      "skillPath": "templates/skills/quality-assurance/forgotten-elements/SKILL.md",
+      "computedHash": "52553a38486c86b5be2578bc36270c5c2c88212e58f95aab701e2cd4b627653a"
+    },
+    "game-3d-assets": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/game-3d-assets/SKILL.md",
+      "computedHash": "150d4c40f89f4d0ba19fd3e2108e17c964a0cda27803f4c3ec595f49b25f97ec"
+    },
+    "game-ai": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/game-ai/SKILL.md",
+      "computedHash": "aaf0562a4b8a375af9dbdff7dc489a9f54bb4e2ab2096425a96a5979a8b5e8a8"
+    },
+    "game-architecture": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/game-architecture/SKILL.md",
+      "computedHash": "e7d56f1b637bca15a2f8c35c1780225f97e8df99fad39ae6377398dfeb9178a0"
+    },
+    "game-assets": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/game-assets/SKILL.md",
+      "computedHash": "11874de3054e82b21db3b090e45f65555b7540b22b8de98f692a38d7324acda8"
+    },
+    "game-audio": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/game-audio/SKILL.md",
+      "computedHash": "eb2ba3da86b490c299638b201efbdc014ca6f45108e5cae9b7ebcdae7c01c22e"
+    },
+    "game-deploy": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/game-deploy/SKILL.md",
+      "computedHash": "331c802655e52957dd6c76ab75cec3afc309e311efbae8f3a42ca66113e09763"
+    },
+    "game-designer": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/game-designer/SKILL.md",
+      "computedHash": "428491168b0dfcb32eb58e71b76ffbc7988a3558d5c2a554c90ef3d0e9ddb993"
+    },
+    "game-feel": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/game-feel/SKILL.md",
+      "computedHash": "03b9da7e669419e69dfeea8abe0a542e051b2ea1ef8e18cd8a39cb32855416b3"
+    },
+    "game-qa": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/game-qa/SKILL.md",
+      "computedHash": "db82414223e6c25758e3861c16b09ffdb2a3e6c93baedf28f0631d116d6b45e9"
+    },
+    "game-ui-ux": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/game-ui-ux/SKILL.md",
+      "computedHash": "4aeb677be89029728154d40bb1d98e07d809f019ff8cd0e9188fb4a1f9d51255"
+    },
+    "getting-started-guide": {
+      "source": "wordflowlab/novel-writer-skills",
+      "sourceType": "github",
+      "skillPath": "templates/skills/quality-assurance/getting-started/SKILL.md",
+      "computedHash": "a02d335b12726ac9328e0ceac672c606c02db0238a92338ea14734cf4d0cbcad"
+    },
+    "godot-2d-movement": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-2d-movement/SKILL.md",
+      "computedHash": "f28d9c9e662bab12395aa3e4b0bc0e927fcf12cfff941aaddc60893c378f449d"
+    },
+    "godot-3d-essentials": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-3d-essentials/SKILL.md",
+      "computedHash": "32ed59af79003b4c0d350db4d640f0a4d87e09def7368dbfbf8655762120693f"
+    },
+    "godot-animation": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-animation/SKILL.md",
+      "computedHash": "e67a25f0a1ea1af9d87905a294d9271920843fd953f8fe56bd6888beccda7bd9"
+    },
+    "godot-audio": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-audio/SKILL.md",
+      "computedHash": "fed1da4d4d45c4c70d2978a428370d1fec87c094bfc1491396dc2fa00ae4d1b5"
+    },
+    "godot-csharp": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-csharp/SKILL.md",
+      "computedHash": "76b425294f41ba63d6df7a3d10b3d1176c046822e7f2b78c0504a14b8d5b6a86"
+    },
+    "godot-export": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-export/SKILL.md",
+      "computedHash": "dab6cb16235b7fbc45e013a816d0208fb0006098580e8958dd89df1ad283afc7"
+    },
+    "godot-gdscript": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-gdscript/SKILL.md",
+      "computedHash": "e3e01a0fa737b52e9cb4d9e9761900b39684e5212afea3a93608c3e99fa5f839"
+    },
+    "godot-multiplayer": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-multiplayer/SKILL.md",
+      "computedHash": "f05268478f033009c03a448b1d1bf05ffcbc03e122870738990109eb499f3093"
+    },
+    "godot-nodes-scenes": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-nodes-scenes/SKILL.md",
+      "computedHash": "c8da9c0defe579eea5e89956d8337085a3ce9e5d8cef9293b219a88b4b6e0cc2"
+    },
+    "godot-physics": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-physics/SKILL.md",
+      "computedHash": "848d04c8543ee0273afbc2bd109b1eb764c47541f27be99efb33ea2b7e2de01c"
+    },
+    "godot-resources": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-resources/SKILL.md",
+      "computedHash": "63a1c4e0354b0965e922117c7fa6d778e2bdfab2ddee2ff46eb61c208925104b"
+    },
+    "godot-shaders": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-shaders/SKILL.md",
+      "computedHash": "8d77e198fc65c6d7ba304a1efb68499835bab892c0add0c961f8cd2c8c72e415"
+    },
+    "godot-signals-groups": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-signals-groups/SKILL.md",
+      "computedHash": "3e9afc9c3c261c2ba7deb9ad349cbb11a59b33b85a253096c98c7df94b9bfec9"
+    },
+    "godot-tilemap": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-tilemap/SKILL.md",
+      "computedHash": "8db8011518f3d78cedfd6d8fda5f9b3cce65b55525f6579a3b33add71d462966"
+    },
+    "godot-ui-control": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-ui-control/SKILL.md",
+      "computedHash": "522dec0a123c1f780d542406a44a8f81770777ab5f2be8d1bd43bde995fdf6c7"
+    },
+    "improve-game": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/improve-game/SKILL.md",
+      "computedHash": "b07a0967b4de766eff01a2e5009e7f1a39c392399d37200d48f3136b3fa0f4d2"
+    },
+    "input-systems": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/input-systems/SKILL.md",
+      "computedHash": "c9609575811a55c267851db018c27e29a3b2bd0a8da09462ef3a8b154c5e9b33"
+    },
+    "level-design": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/level-design/SKILL.md",
+      "computedHash": "30d5498877bacdfb4cb0fd2b287be802e65c4a1d068248c971b0eea756778ee9"
+    },
+    "make-game": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/make-game/SKILL.md",
+      "computedHash": "11fbc4f4334e54918b5557a05bf02a60c64f3045df54d6787f0a70506dde9882"
+    },
+    "meshyai": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/meshyai/SKILL.md",
+      "computedHash": "a4e9aebf5d20e00882e60880fc9f85c088e31bbe531a2f7bfb253531479c8f35"
+    },
+    "monetize-game": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/monetize-game/SKILL.md",
+      "computedHash": "96a2e8d61ca1339cd82ff3694f704535b60700111a0cd6fc821fdabf5613525b"
+    },
+    "mystery-novel-conventions": {
+      "source": "wordflowlab/novel-writer-skills",
+      "sourceType": "github",
+      "skillPath": "templates/skills/genre-knowledge/mystery/SKILL.md",
+      "computedHash": "e7688c7a276c2c32ae79743cfdddd75a61aa0663817abfe7b56cbe376470f0a9"
+    },
+    "natural-dialogue-techniques": {
+      "source": "wordflowlab/novel-writer-skills",
+      "sourceType": "github",
+      "skillPath": "templates/skills/writing-techniques/dialogue-techniques/SKILL.md",
+      "computedHash": "52aaf8a3ae5e535a532f0353da8f4aadd16cfd27f10f9b79c1e09d0d248301a5"
+    },
+    "novel-architect": {
+      "source": "junaid18183/novel-architect-skills",
+      "sourceType": "github",
+      "skillPath": "skills/novel-architect/SKILL.md",
+      "computedHash": "301fb79d5a4ac4b62eaf304b2c493c76591d12abb48fcdc64dde03c741d002f6"
+    },
+    "novel-creator": {
+      "source": "mave99a/novel-skill",
+      "sourceType": "github",
+      "skillPath": "skills/novel-creator/SKILL.md",
+      "computedHash": "8210ae464d681414d3708789578e7d59034b39e57df8c2a41f7d18f2135ac3c2"
+    },
+    "novel-writer-workflow-guide": {
+      "source": "wordflowlab/novel-writer-skills",
+      "sourceType": "github",
+      "skillPath": "templates/skills/quality-assurance/workflow-guide/SKILL.md",
+      "computedHash": "3fb8b2797f009162d4d0a9f069b07b5210e26346a910e2564d616582578b12fe"
+    },
+    "performance-optimization": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/performance-optimization/SKILL.md",
+      "computedHash": "9788da8674ddd2c5a895dad3a1ba54e815d3843060ad01366a5354c39f0ecde4"
+    },
+    "phaser": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/phaser/SKILL.md",
+      "computedHash": "db2dacd817400cb9f5f87132081909ed8d3a11663c0ee126562b8d7204b097c2"
+    },
+    "physics-tuning": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/physics-tuning/SKILL.md",
+      "computedHash": "69b3297e108853df60a23e9ce5528950a5d0d7057de2f0a2bc60a66129b642f0"
+    },
+    "pre-write-checklist": {
+      "source": "wordflowlab/novel-writer-skills",
+      "sourceType": "github",
+      "skillPath": "templates/skills/quality-assurance/pre-write-checklist/SKILL.md",
+      "computedHash": "fd674c3fae1e1b870d497aea6c9fbadfdf4672e0dae428a93c4f8fe8da1ff17c"
+    },
+    "procedural-gen": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/procedural-gen/SKILL.md",
+      "computedHash": "a66b0ec9c81bdefd6829d3386aac61d9b34fc1d3c99cd160354043e23e434f2d"
+    },
+    "promo-video": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/promo-video/SKILL.md",
+      "computedHash": "257f1562d7f30fb0a72b60f94e5eac84777347fd3df32ab381f2bac14ece1238"
+    },
+    "qa-game": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/qa-game/SKILL.md",
+      "computedHash": "91a3634eaddb74be97404a3ad702cdd3a1abc71b209c80f57c407ecc4a556617"
+    },
+    "quick-game": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/quick-game/SKILL.md",
+      "computedHash": "fc1448a55ed316a9c64073338f0b22102cac6a75c6e4731c405d8bc7dd8c6413"
+    },
+    "record-promo": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/record-promo/SKILL.md",
+      "computedHash": "53057c8a36069d20990f57354254c0de49a1450a1732d5c5575473299b1a2331"
+    },
+    "requirement-detector": {
+      "source": "wordflowlab/novel-writer-skills",
+      "sourceType": "github",
+      "skillPath": "templates/skills/quality-assurance/requirement-detector/SKILL.md",
+      "computedHash": "25649cc6707b17ce8e370a4c335a99b7415f423290ef7bd1d6d7a3029345730f"
+    },
+    "retrodiffusion": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/retrodiffusion/SKILL.md",
+      "computedHash": "c2d91fdae5bf711d5b423eed1a1b7bba132cdfceddb4ffca54a8a9a7249e5b48"
+    },
+    "review-game": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/review-game/SKILL.md",
+      "computedHash": "3ebb884d4a2631aa942144ab9550a408c60694382cc722d36ca620c9dbfc2790"
+    },
+    "save-systems": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/save-systems/SKILL.md",
+      "computedHash": "ee4c0bf8fac8e9aa5fc109d0e18331d846e2146d521849c636ca065627eacd47"
+    },
+    "scaffold-gateables": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/scaffold-gateables/SKILL.md",
+      "computedHash": "10014851c07760dee7646449a91ee5fcdb1907f72f04d19e90000761eec0d9da"
+    },
+    "scene-structure-techniques": {
+      "source": "wordflowlab/novel-writer-skills",
+      "sourceType": "github",
+      "skillPath": "templates/skills/writing-techniques/scene-structure/SKILL.md",
+      "computedHash": "6780f5e9f61771211b8a8f3f28dda5af4c70ab4fcfbb7900e50b51525cc1067a"
+    },
+    "setting-detector": {
+      "source": "wordflowlab/novel-writer-skills",
+      "sourceType": "github",
+      "skillPath": "templates/skills/quality-assurance/setting-detector/SKILL.md",
+      "computedHash": "4b0944bfe599a22bb65aa4b76f95b6ef5da69a38202970bbb034702a474e9e72"
+    },
+    "shader-programming": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/shader-programming/SKILL.md",
+      "computedHash": "19fbb1bc4715179388a9c8fcf92f2534cb821f655ca76120c19f3c6bb86de4bf"
+    },
+    "story-consistency-monitor": {
+      "source": "wordflowlab/novel-writer-skills",
+      "sourceType": "github",
+      "skillPath": "templates/skills/quality-assurance/consistency-checker/SKILL.md",
+      "computedHash": "ba0cf13ec171fe9a0f418f13bb54799e93d440059e052a5e98c52fed7e5bc114"
+    },
+    "style-detector": {
+      "source": "wordflowlab/novel-writer-skills",
+      "sourceType": "github",
+      "skillPath": "templates/skills/quality-assurance/style-detector/SKILL.md",
+      "computedHash": "aceb285847ab4308d65753fff9160da1a52ac9f52719716cbc016a6bac32ea7c"
+    },
+    "threejs-game": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/threejs-game/SKILL.md",
+      "computedHash": "a6211f9e3116bfe784f6181615e16b50e02c2c473ad8dc5a053f70252436ee3b"
+    },
+    "threejs-perf": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/threejs-perf/SKILL.md",
+      "computedHash": "c3c91183ed1d5e00e45b955de49202b7f6ce3fb9cf3fa79ef86b9b0478ee1a22"
+    },
+    "use-template": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/use-template/SKILL.md",
+      "computedHash": "864029912216fb5859bf5534ecf5e08ef5685a2c5b867c281d8894db619f0c4c"
+    },
+    "viral-game": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/viral-game/SKILL.md",
+      "computedHash": "c3cb1b9cefc82d21585a298e17e1281f211db4a0e2733974240c22dd43214aea"
+    },
+    "webnovel-write": {
+      "source": "lingfengqaq/webnovel-writer",
+      "sourceType": "github",
+      "skillPath": "webnovel-writer/skills/webnovel-write/SKILL.md",
+      "computedHash": "43547e74e88bd6744e3514e8d472450bca623c6ff6dd94accdcbac732fc7fa8a"
+    },
+    "worldlabs": {
+      "source": "playableintelligence/game-creator",
+      "sourceType": "github",
+      "skillPath": "skills/worldlabs/SKILL.md",
+      "computedHash": "ba6f7817428861c753b190bb39eb7a4facd1289ca6d489911eb8cd71896c7630"
+    }
+  }
+}

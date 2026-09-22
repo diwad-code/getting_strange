@@ -1,0 +1,30 @@
+PKG-0146 CAPTURE DIFF REPORT
+Programmatic frame evidence from the normal-driver capture. No line below claims comprehension, appeal or comfort.
+
+CONTENT CHECK (non-blank, 640x360)
+  normal/station_01_gap_only.png                   content_sum=2457.9
+  normal/station_01_sample_committed.png           content_sum=2455.8
+  normal/station_01_gap_only.png                   content_sum=2457.9
+  normal/station_01_sample_committed.png           content_sum=2455.8
+  normal/station_04_reader_trial_committed.png     content_sum=2331.6
+  normal/station_06_public_route_compared.png      content_sum=2134.1
+  normal/station_08_intercom_completed.png         content_sum=2298.1
+  normal/station_10_cautious_entry.png             content_sum=2194.6
+  normal/station_12_questions_prepared.png         content_sum=2652.1
+  normal/station_14_threshold_respected.png        content_sum=1933.2
+
+STATE PAIR DIFFERENCES (must be clearly distinct)
+  S01 gap vs committed       DISTINCT  changed=183 mean=0.0016 max=0.9294
+
+NORMAL vs REDUCED (amplitude-only expectation; facts remain visible)
+  S01 gap N/R              changed=2723 mean=0.0047 max=0.4824
+  S01 committed N/R        changed=1689 mean=0.0039 max=0.2627
+  S04 trial N/R            changed=13 mean=0.0005 max=0.2039
+  S06 route N/R            changed=611 mean=0.0023 max=0.2118
+  S08 intercom N/R         changed=6213 mean=0.0059 max=0.1922
+  S10 entry N/R            changed=1690 mean=0.0029 max=0.1098
+  S12 questions N/R        changed=1743 mean=0.0043 max=1.2196
+  S14 threshold N/R        changed=308 mean=0.0031 max=0.3647
+
+BOUNDARY
+Diff checks distinguish rendered state surfaces, not human readability of any single frame.

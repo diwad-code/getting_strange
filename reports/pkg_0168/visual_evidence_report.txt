@@ -1,0 +1,13 @@
+PKG-0168 VISUAL EVIDENCE REPORT
+Renderer: Intel(R) Iris(R) Xe Graphics
+Viewport: 640x360; normal Windows display driver; script was not headless.
+Three textless M2 frames of Station 42B: neutral, flow closed, local Lena recovered.
+One M3 true-grayscale structure frame after household consequence on the limited/withheld path.
+Hash distinctness and grayscale checks are structural evidence only; no line claims
+human comprehension, emotion, comfort or PRODUCT GO (D-012, ADR-003).
+
+CAPTURED FRAMES
+neutral            mono=false hidden=4  hash=3192906838 res://reports/pkg_0168/station_42b_neutral.png
+flow_closed        mono=false hidden=4  hash=2711175793 res://reports/pkg_0168/station_42b_flow_closed.png
+local_recovered    mono=false hidden=4  hash=738577960 res://reports/pkg_0168/station_42b_local_recovered.png
+structure_mono     mono=true  hidden=4  hash=1071334993 res://reports/pkg_0168/station_42b_structure_mono.png

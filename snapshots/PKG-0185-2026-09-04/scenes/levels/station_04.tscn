@@ -1,0 +1,135 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_04.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/opening_action_point.gd" id="2_action"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/levels/atmosphere_rig.gd" id="5_atmosphere"]
+[ext_resource type="Script" path="res://scripts/ui/crt_dialogue_box.gd" id="6_dialogue"]
+[ext_resource type="Script" path="res://scripts/ui/station_dialogue_cue.gd" id="7_cue"]
+[ext_resource type="Script" path="res://scripts/visual/world_pixel_compositor.gd" id="8_compositor"]
+[ext_resource type="Script" path="res://scripts/core/narrative_guidance_service.gd" id="9_guidance"]
+[ext_resource type="Script" path="res://scripts/ui/inner_thought_surface.gd" id="10_thought"]
+[ext_resource type="Script" path="res://scripts/visual/crisp_diegetic_text.gd" id="11_crisp_text"]
+[ext_resource type="Script" path="res://scripts/environment/return_zone.gd" id="12_return_zone"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor"]
+size = Vector2(640, 64)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_rear_wall"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_front_frame"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_exit_doors"]
+size = Vector2(58, 105)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(54, 126)
+
+[node name="Station04" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="AtmosphereRig" type="Node2D" parent="."]
+script = ExtResource("5_atmosphere")
+station_number = 4
+
+[node name="WorldPixelCompositor" type="CanvasLayer" parent="."]
+script = ExtResource("8_compositor")
+
+[node name="NarrativeGuidanceService" type="Node" parent="."]
+script = ExtResource("9_guidance")
+
+[node name="InnerThoughtSurface" type="CanvasLayer" parent="." node_paths=PackedStringArray("guidance_service")]
+script = ExtResource("10_thought")
+guidance_service = NodePath("../NarrativeGuidanceService")
+
+[node name="CRTDialogueBox" type="CanvasLayer" parent="."]
+script = ExtResource("6_dialogue")
+
+[node name="OpeningDialogueCue" type="Node" parent="."]
+script = ExtResource("7_cue")
+station_id = &"station_04"
+opening_line = "Wagon jedzie. Marta nadal czeka, a czytnik nie chce puścić Linii 4."
+
+[node name="CrispDiegeticText_MartaWaiting" type="Node2D" parent="."]
+position = Vector2(74, 108)
+script = ExtResource("11_crisp_text")
+text = "MARTA // CZEKA W DOMU"
+font_size = 10
+text_color = Color(0.85, 0.71, 0.43, 1)
+
+[node name="CarriageRoof" type="Node2D" parent="."]
+
+[node name="WindowBank" type="Node2D" parent="."]
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 328)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Floor"]
+shape = SubResource("Rectangle_floor")
+
+[node name="CarriageRearWall" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/CarriageRearWall"]
+shape = SubResource("Rectangle_rear_wall")
+
+[node name="CarriageFrontFrame" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/CarriageFrontFrame"]
+shape = SubResource("Rectangle_front_frame")
+
+[node name="ExitDoors" type="AnimatableBody2D" parent="."]
+position = Vector2(592, 204)
+sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDoors"]
+shape = SubResource("Rectangle_exit_doors")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(620, 238)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")
+
+[node name="ReturnZone" type="Area2D" parent="."]
+script = ExtResource("12_return_zone")
+collision_layer = 0
+collision_mask = 1
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="ReaderBuffer" type="Area2D" parent="Props"]
+position = Vector2(188, 272)
+script = ExtResource("2_action")
+action_id = &"observe_reader_buffer"
+interaction_radius = 36.0
+
+[node name="MemorialWindow" type="Area2D" parent="Props"]
+position = Vector2(406, 266)
+script = ExtResource("2_action")
+action_id = &"watch_line_four_memorial"
+interaction_radius = 42.0
+initially_available = false
+
+[node name="CarryCase" type="Area2D" parent="Props"]
+position = Vector2(472, 274)
+script = ExtResource("2_action")
+action_id = &"stow_reader_for_marta"
+interaction_radius = 36.0
+initially_available = false
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(70, 296)
+
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")
+target = NodePath("../Player")

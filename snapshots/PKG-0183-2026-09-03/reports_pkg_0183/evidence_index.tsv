@@ -1,0 +1,14 @@
+requirement	created_utc	command_or_procedure	result	artifact	source_mtime_note	limits
+ENV	2026-09-03T20:52:27Z	godot --version; OSVersion	4.7.2.stable.official.ed1daf0bf; Windows NT 10.0.26200.0	reports/pkg_0183/environment.json; godot_version.txt	n/a	Intel Iris Xe workstation
+A-INVENTORY	2026-09-03	tools/audit_pkg_0183.ps1	935 files; 36 missing from 0182	reports/pkg_0183/inventory.tsv; inventory_diff.tsv; inventory_counts.json	after 0182 freeze	excludes .godot/reports/snapshots/web/skills
+A-CHRONOLOGY	2026-09-03	compare final.log vs sources	0182 closed; 0183 tools newer	reports/pkg_0183/chronology.tsv	0182 final 20:42:28Z	0183 edits after start
+B-BASELINE	2026-09-03	pwsh tools/verify.ps1	exit 0; Verification passed.; 0 ObjectDB; 3 allowlisted WARNING	reports/pkg_0183/baseline.log; baseline.exitcode	pre-repair	0179 false PASS visible in log
+B-RED	2026-09-03	godot --script tests/pkg_0183_smoke_test.gd	exit 1; 10 failures including /43 and missing awaits	reports/pkg_0183/pkg_0183_smoke_red.log	before production edits	intended RED
+B-GREEN	2026-09-03	same smoke after fixes	exit 0; PKG-0183 SMOKE PASS	reports/pkg_0183/pkg_0183_smoke_green.log	after repairs	malformed-save WARNING allowlisted
+B-0179	2026-09-03	pkg_0179 after await + ThresholdZone fix	exit 0; no SCRIPT ERROR	reports/pkg_0183/pkg_0179_retest2.log	after bool() fix	now actually executes hygiene
+B-POLICY	2026-09-03	tools/test_godot_log_policy.ps1	GODOT LOG POLICY PASS	reports/pkg_0183/log_policy_retest.log	after SCRIPT WARNING rule	exact allowlist
+C-ROUTES	2026-09-03	pkg_0177 -- --pkg0183-route=	pending while running	reports/pkg_0183/runtime_routes/	after 0177 flag	player verbs from title
+D-CAPTURE	2026-09-03	tools/capture_pkg_0183.gd normal driver	pending	reports/pkg_0183/visual/; capture.log	after repairs	not a verb proof
+E-TEXT	2026-09-03	static LocalizationManager + pause	PAUSE_STATUS /20	scripts/core/localization_manager.gd	after copy fix	no human comprehension claim
+F-SOAK	2026-09-03	pkg_0183 3-cycle soak	object_count stable across cycles	reports/pkg_0183/runtime_routes/soak_3_cycles.tsv	after soak gate	instantiate not Nowa gra
+G-FINAL	pending	tools/verify.ps1	pending	reports/pkg_0183/final.log	must post-date last source edit	required for PASS

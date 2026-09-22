@@ -1,0 +1,80 @@
+test	verify_invoked	setup	teardown	save_isolation	player_verbs	negative_control	warning_policy	contract	status	evidence
+tests\pkg_0091_smoke_test.gd	False	True	True	False	False	True	tools/godot_log_policy.ps1	source assertions	PASS	superseded historical gate retained for archaeology
+tests\pkg_0094_smoke_test.gd	False	True	True	True	False	True	tools/godot_log_policy.ps1	source assertions	PASS	superseded historical gate retained for archaeology
+tests\pkg_0095_smoke_test.gd	True	True	True	True	False	False	tools/godot_log_policy.ps1	source assertions	PASS	tools/verify.ps1
+tests\pkg_0096_smoke_test.gd	True	True	True	True	False	False	tools/godot_log_policy.ps1	source assertions	PASS	tools/verify.ps1
+tests\pkg_0097_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0097 gate: Act IIc Vector-Stage conversion (Station 21..25) and the real	PASS	tools/verify.ps1
+tests\pkg_0099_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0099 gate: the playable vertical slice of Act II (Station 11..15).	PASS	tools/verify.ps1
+tests\pkg_0100_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0100 gate: Act I visual state pass and one diegetic obstacle per Station 06..10.	PASS	tools/verify.ps1
+tests\pkg_0101_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0101 gate: Station 16..20 Vector-Stage visibility and diegetic obstacle contracts.	PASS	tools/verify.ps1
+tests\pkg_0102_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0102 gate: Station 21..25 Vector-Stage route visibility and the single	PASS	tools/verify.ps1
+tests\pkg_0103_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0103 gate: Station 26..30 Act III Vector-Stage surfaces and the two	PASS	tools/verify.ps1
+tests\pkg_0104_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0104 gate: Station 31..35 Act IIIb Vector-Stage surfaces and the two	PASS	tools/verify.ps1
+tests\pkg_0105_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0105 gate: Station 36..40 Act IIIc Vector-Stage surfaces and the one	PASS	tools/verify.ps1
+tests\pkg_0106_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0106 gate: Station 41 Vector-Stage choice chamber, shared presentation	PASS	tools/verify.ps1
+tests\pkg_0107_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0107 gate: Station 42A..42C and 43 finale Vector-Stage presentation,	PASS	tools/verify.ps1
+tests\pkg_0113_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0113 technical gate for the release-readiness truth pass and the largest	PASS	tools/verify.ps1
+tests\pkg_0114_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0114 R0 gate.	PASS	tools/verify.ps1
+tests\pkg_0115_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0115 R1 gate.	PASS	tools/verify.ps1
+tests\pkg_0117_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0117 Smoke Test — rekoncyliacja zastanych komponentów Foundation	PASS	tools/verify.ps1
+tests\pkg_0118_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0118 Smoke Test — Foundation Slice 01–07 według kanonu 0.3	PASS	tools/verify.ps1
+tests\pkg_0119_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0119 Smoke Test — Station 08..13, Sekwencja II/III (Rysa i cudzy dom) według Kanonu 0.3	PASS	tools/verify.ps1
+tests\pkg_0120_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0120 Smoke Test — Station 14..23, Sekwencje IV/V/VI (Marta, UCP, niemożliwy brat i rozpoznanie) według Kanonu 0.3	PASS	tools/verify.ps1
+tests\pkg_0121_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0121 Smoke Test — Station 24..30, Sekwencje VI/VII (Węzeł pod Linią 4, żywa odpowiedź i pierwsze koszty) według Kanonu 0.3	PASS	tools/verify.ps1
+tests\pkg_0122_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0122 Smoke Test — Station 31..37, Sekwencje S11/S12/S13 (Podstruktura, Magazyn Dowodów i rejestr par) według P7	PASS	tools/verify.ps1
+tests\pkg_0123_smoke_test.gd	True	False	True	True	False	True	tools/godot_log_policy.ps1	source assertions	PASS	tools/verify.ps1
+tests\pkg_0124_smoke_test.gd	True	False	True	False	False	True	tools/godot_log_policy.ps1	source assertions	PASS	tools/verify.ps1
+tests\pkg_0125_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0125 Smoke Test	PASS	tools/verify.ps1
+tests\pkg_0126_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0126 Smoke Test	PASS	tools/verify.ps1
+tests\pkg_0127_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0127 Smoke Test	PASS	tools/verify.ps1
+tests\pkg_0128_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0128 Smoke Test	PASS	tools/verify.ps1
+tests\pkg_0129_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0129 Smoke Test: Global Traversal Geometry, Diegetic Ladders & Lifts, and Traversal Certification	PASS	tools/verify.ps1
+tests\pkg_0130_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0130 Smoke Test: Frame Budget, Particle Determinism and Pixel-Grid Camera Coherence	PASS	tools/verify.ps1
+tests\pkg_0132_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	source assertions	PASS	tools/verify.ps1
+tests\pkg_0133_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	source assertions	PASS	tools/verify.ps1
+tests\pkg_0134_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	source assertions	PASS	tools/verify.ps1
+tests\pkg_0135_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0135 Smoke Test: capture preview, one_way 09/11 remediation, 05->04->03 backtrack	PASS	tools/verify.ps1
+tests\pkg_0136_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0136 Smoke Test — Lena 4.1 locomotion + frame layout.	PASS	tools/verify.ps1
+tests\pkg_0137_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0137 Smoke Test — live playthrough contract for the whole campaign.	PASS	tools/verify.ps1
+tests\pkg_0138_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0138 Smoke Test — narrative playthrough and player-verb gate across 01..43.	PASS	tools/verify.ps1
+tests\pkg_0139_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0139 Smoke Test — Procedural soundscapes, surface materiality, and CRT blip modulation.	PASS	tools/verify.ps1
+tests\pkg_0140_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0140 Smoke Test — sprzezenie audiowizualne Anchor / Yield, haptyka	PASS	tools/verify.ps1
+tests\pkg_0141_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0141 Smoke Test — unifikacja kamery kinowej na 45 stacjach i tryb	PASS	tools/verify.ps1
+tests\pkg_0142_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0142 Smoke Test — Station 01 right-edge composition and visual-mode	PASS	tools/verify.ps1
+tests\pkg_0145_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0145 contract gate — P7 vertical slice Station 22–25.	PASS	tools/verify.ps1
+tests\pkg_0146_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0146 contract gate — P7 early diagnostic waves S01–S05 (Station 01–14).	PASS	tools/verify.ps1
+tests\pkg_0147_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0147 contract gate — P7 diagnostic waves S06–S07 (Station 15–21).	PASS	tools/verify.ps1
+tests\pkg_0148_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0148 contract gate — P7 diagnostic waves S09–S10 (Station 26–30).	PASS	tools/verify.ps1
+tests\pkg_0149_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0149 contract gate — P7 diagnostic waves S11–S13 (Station 31–38).	PASS	tools/verify.ps1
+tests\pkg_0150_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0150 contract gate — P7 diagnostic waves S14–S15 (Station 39–43).	PASS	tools/verify.ps1
+tests\pkg_0151_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0151 final P7 audit gate.	PASS	tools/verify.ps1
+tests\pkg_0152_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	source assertions	PASS	tools/verify.ps1
+tests\pkg_0153_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	source assertions	PASS	tools/verify.ps1
+tests\pkg_0154_smoke_test.gd	True	True	False	False	False	True	tools/godot_log_policy.ps1	source assertions	PASS	tools/verify.ps1
+tests\pkg_0156_smoke_test.gd	True	True	False	False	False	True	tools/godot_log_policy.ps1	Documentation-contract gate for the P9 product rebuild documents.	PASS	tools/verify.ps1
+tests\pkg_0157_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	Tests Shell product promise, Station 01 worksite, Station 02 detour,	PASS	tools/verify.ps1
+tests\pkg_0158_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	Tests Station 05 home street baseline, Station 06 kiosk contradiction,	PASS	tools/verify.ps1
+tests\pkg_0159_smoke_test.gd	True	True	True	True	True	True	tools/godot_log_policy.ps1	This gate uses semantic InputMap movement/interact events for the opening and	PASS	tools/verify.ps1
+tests\pkg_0160_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	source assertions	PASS	tools/verify.ps1
+tests\pkg_0162_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0162 gate — P9 BUNDLE-21, first dead-circuit Anchor/Yield lesson in Station 14.	PASS	tools/verify.ps1
+tests\pkg_0163_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0163 gate — P9 BUNDLE-22, Station 15 mutual signal test (family 6).	PASS	tools/verify.ps1
+tests\pkg_0164_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0164 gate — P9 BUNDLE-23, Station 16 safe analyzer and small cost.	PASS	tools/verify.ps1
+tests\pkg_0165_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0165 gate — P9 BUNDLE-24, Station 17 cost ledger and explicit consent scope.	PASS	tools/verify.ps1
+tests\pkg_0166_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0166 gate — P9 BUNDLE-25, Station 18 three forecasts, consent gaps and	PASS	tools/verify.ps1
+tests\pkg_0167_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0167 gate — P9 PHASE-06, Station 42A forced return of the arrived Lena.	PASS	tools/verify.ps1
+tests\pkg_0168_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0168 gate — P9 PHASE-06, Station 42B closure of the Plane and recovered local Lena.	PASS	tools/verify.ps1
+tests\pkg_0169_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0169 gate — P9 PHASE-06, Station 42C mutual passage and memory leak threshold.	PASS	tools/verify.ps1
+tests\pkg_0170_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0170 gate — P9 PHASE-06, Station 43 administrative closure, credits and epilogue.	PASS	tools/verify.ps1
+tests\pkg_0171_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0171 gate — P9 PHASE-07 / BUNDLE-25: Clean Cutover, Legacy Shims Cleanup,	PASS	tools/verify.ps1
+tests\pkg_0172_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0172 gate — P9 PHASE-08 / BUNDLE-26: GATE-CAST	PASS	tools/verify.ps1
+tests\pkg_0173_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0173 gate — P9 PHASE-08 / BUNDLE-27: GATE-ANIM	PASS	tools/verify.ps1
+tests\pkg_0174_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0174 gate — P9 PHASE-08 / BUNDLE-28: GATE-THRESH + GATE-SCALE (apertures).	PASS	tools/verify.ps1
+tests\pkg_0175_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	PKG-0175 gate — P9 PHASE-08 / BUNDLE-29: GATE-FLOW.	PASS	tools/verify.ps1
+tests\pkg_0176_smoke_test.gd	True	True	True	True	True	True	tools/godot_log_policy.ps1	PKG-0176 gate — P9 PHASE-08 / BUNDLE-30: GATE-INTRO.	PASS	tools/verify.ps1
+tests\pkg_0177_smoke_test.gd	True	True	False	True	True	True	tools/godot_log_policy.ps1	PKG-0177 gate — P9 PHASE-08 / BUNDLE-31: Integracja, 14 bramek i CHECKPOINT-06.	PASS	tools/verify.ps1
+tests\pkg_0179_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0179 verification gate: 360 quality, audit remediation and environmental innovation.	PASS	tools/verify.ps1
+tests\pkg_0180_smoke_test.gd	True	True	True	False	False	True	tools/godot_log_policy.ps1	PKG-0180 verification gate: Master Polish, Ambient Soundscape Pass & Executive Sign-off.	PASS	tools/verify.ps1
+tests\pkg_0182_smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	source assertions	PASS	tools/verify.ps1
+tests\smoke_test.gd	True	True	True	True	False	True	tools/godot_log_policy.ps1	source assertions	PASS	tools/verify.ps1
+tests\traversal_lint_test.gd	True	True	False	False	False	True	tools/godot_log_policy.ps1	Traversal contract lint (D-099, docs/TRAVERSAL_AND_OBSTACLE_DESIGN.md).	PASS	tools/verify.ps1
+tools/test_godot_log_policy.ps1	True	True	True	True	False	True	self-test	fail closed on errors, leaks, orphans and unreviewed warnings	PASS	reports/pkg_0182/final.log

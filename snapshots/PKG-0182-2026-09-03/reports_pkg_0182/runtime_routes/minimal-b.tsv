@@ -1,0 +1,21 @@
+station_id	sim_seconds	wall_ms	result	note
+station_01	28.05	22483	PASS	Cold open layer B + sample secured + Marta message read + ThresholdZone entry
+station_02	34.75	6368	PASS	Player-verb threshold traversal; optional readings intentionally skipped (minimal route)
+station_03	41.90	6838	PASS	Player-verb threshold traversal; optional readings intentionally skipped (minimal route)
+station_04	49.03	6838	PASS	Player-verb threshold traversal; optional readings intentionally skipped (minimal route)
+station_05	55.70	6362	PASS	Player-verb threshold traversal; optional readings intentionally skipped (minimal route)
+station_06	62.38	6376	PASS	Player-verb threshold traversal; optional readings intentionally skipped (minimal route)
+station_07	69.07	6362	PASS	Player-verb threshold traversal; optional readings intentionally skipped (minimal route)
+station_08	75.75	6362	PASS	Player-verb threshold traversal; optional readings intentionally skipped (minimal route)
+station_09	82.55	6375	PASS	Player-verb threshold traversal; optional readings intentionally skipped (minimal route)
+station_10	89.30	6375	PASS	Player-verb threshold traversal; optional readings intentionally skipped (minimal route)
+station_11	96.08	6362	PASS	Player-verb threshold traversal; optional readings intentionally skipped (minimal route)
+station_12	102.83	6369	PASS	Player-verb threshold traversal; optional readings intentionally skipped (minimal route)
+station_13	109.57	6362	PASS	Player-verb threshold traversal; optional readings intentionally skipped (minimal route)
+station_14	116.45	6445	PASS	Player-verb traversal completed
+station_15	124.48	7521	PASS	Player-verb traversal completed
+station_16	142.57	17567	PASS	Player-verb traversal completed
+station_17	150.18	7141	PASS	Player-verb traversal completed
+station_18	157.80	7128	PASS	Player-verb traversal completed
+station_42b	163.57	5368	PASS	Player-verb traversal completed
+station_43	171.72	6776	PASS	Player-verb traversal completed

@@ -1,0 +1,7 @@
+PKG-0174 visual evidence
+Intel display capture, not headless.
+- door_station_01.png :: DEF-4/7: technical door aperture at human scale
+- vehicle_station_03.png :: DEF-4: Line 4 vehicle threshold
+- door_station_08.png :: DEF-7: residential door 109x45
+- hatch_station_14.png :: DEF-4: hatch family on the dead-circuit station
+- threshold_pose_sheet.png :: enter_door / board_vehicle / idle

@@ -1,0 +1,16 @@
+=== PKG-0172 VISUAL CAPTURE EVIDENCE REPORT ===
+Date: 2026-09-02
+Logical resolution: 640x360
+Driver: normal Windows display (not llvmpipe)
+Total captures: 5
+
+GATE-CAST visual check:
+- Marta / Jakub / Wierzbicka must read as 64x104 sprites, not circle+trapezoid figures.
+- Standing height beside Lena must sit in 84-92 px.
+- Marta portrait in CRT and world sprite are the same person (pink hair, septum, dress).
+
+- File: cast_marta_station_10.png | Scene: station_10 | Size: 640x360 | Description: DEF-9/DEF-3: Marta CharacterVisualRig at Station 10
+- File: cast_wierzbicka_station_11.png | Scene: station_11 | Size: 640x360 | Description: DEF-9/DEF-3: Wierzbicka CharacterVisualRig at Station 11
+- File: cast_jakub_station_12.png | Scene: station_12 | Size: 640x360 | Description: DEF-9/DEF-3: Jakub CharacterVisualRig at Station 12
+- File: cast_marta_station_42b.png | Scene: station_42b | Size: 640x360 | Description: DEF-9: Marta on 42B doorstep via CharacterVisualRig
+- File: cast_marta_station_42c.png | Scene: station_42c | Size: 640x360 | Description: DEF-9: Marta on 42C threshold via CharacterVisualRig

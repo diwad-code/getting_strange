@@ -1,0 +1,183 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_17.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/levels/atmosphere_rig.gd" id="5_atmosphere"]
+[ext_resource type="Script" path="res://scripts/ui/crt_dialogue_box.gd" id="6_dialogue"]
+[ext_resource type="Script" path="res://scripts/ui/station_dialogue_cue.gd" id="7_cue"]
+[ext_resource type="Script" path="res://scripts/visual/vector_stage_environment.gd" id="8_vector_stage"]
+[ext_resource type="Script" path="res://scripts/visual/world_pixel_compositor.gd" id="9_compositor"]
+[ext_resource type="Script" path="res://scripts/core/narrative_guidance_service.gd" id="10_guidance"]
+[ext_resource type="Script" path="res://scripts/ui/inner_thought_surface.gd" id="11_thought"]
+[ext_resource type="Script" path="res://scripts/visual/crisp_diegetic_text.gd" id="12_crisp_text"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor"]
+size = Vector2(640, 80)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_ceiling"]
+size = Vector2(640, 30)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(60, 120)
+
+[sub_resource type="CircleShape2D" id="Circle_prop_medium"]
+radius = 44.0
+
+[node name="Station17" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="VectorStageEnvironment" type="Node2D" parent="."]
+script = ExtResource("8_vector_stage")
+stage_seed = 17
+station_number = 17
+
+[node name="AtmosphereRig" type="Node2D" parent="."]
+script = ExtResource("5_atmosphere")
+station_number = 17
+
+[node name="WorldPixelCompositor" type="CanvasLayer" parent="."]
+script = ExtResource("9_compositor")
+
+[node name="NarrativeGuidanceService" type="Node" parent="."]
+script = ExtResource("10_guidance")
+
+[node name="InnerThoughtSurface" type="CanvasLayer" parent="." node_paths=PackedStringArray("guidance_service")]
+script = ExtResource("11_thought")
+guidance_service = NodePath("../NarrativeGuidanceService")
+
+[node name="CRTDialogueBox" type="CanvasLayer" parent="."]
+script = ExtResource("6_dialogue")
+
+[node name="OpeningDialogueCue" type="Node" parent="."]
+script = ExtResource("7_cue")
+station_id = &"station_17"
+opening_line = "Proszę odłożyć czytnik."
+
+[node name="CrispDiegeticText_Incident" type="Node2D" parent="."]
+position = Vector2(100, 130)
+script = ExtResource("12_crisp_text")
+text = "INCYDENT CIĄGŁOŚCI POMIARU // 20:40:03 // BRAK NUMERU CZYTNIKA"
+font_size = 9
+text_color = Color(0.82, 0.6, 0.36, 1)
+
+[node name="CrispDiegeticText_Intercom" type="Node2D" parent="."]
+position = Vector2(330, 150)
+script = ExtResource("12_crisp_text")
+text = "INTERKOM // DR H. WIERZBICKA // NAKAZ IZOLACJI"
+font_size = 9
+text_color = Color(0.77, 0.36, 0.35, 1)
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="FloorMain" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 328)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorMain"]
+shape = SubResource("Rectangle_floor")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="Ceiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ceiling"]
+shape = SubResource("Rectangle_ceiling")
+
+[node name="PneumaticDossierCapsule" type="AnimatableBody2D" parent="Geometry"]
+position = Vector2(490, 240)
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(590, 238)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="IncidentConsole" type="Area2D" parent="Props"]
+position = Vector2(150, 250)
+script = ExtResource("2_resonance")
+resonance_id = "incident_console"
+prop_type = 3
+prop_title = "Konsola incydentu"
+prop_subtitle = "Dwa pomiary w tej samej sekundzie"
+interaction_radius = 44.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/IncidentConsole"]
+shape = SubResource("Circle_prop_medium")
+
+[node name="DataStorageDrive" type="Area2D" parent="Props"]
+position = Vector2(240, 250)
+script = ExtResource("2_resonance")
+resonance_id = "data_storage_drive"
+prop_type = 74
+prop_title = "Dysk pamięci podręcznej"
+prop_subtitle = "Kopiowanie nagłówka raportu"
+interaction_radius = 44.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/DataStorageDrive"]
+shape = SubResource("Circle_prop_medium")
+
+[node name="IntercomSpeaker" type="Area2D" parent="Props"]
+position = Vector2(340, 230)
+script = ExtResource("2_resonance")
+resonance_id = "intercom_speaker"
+prop_type = 16
+prop_title = "Głośnik interkomu"
+prop_subtitle = "Głos dr Heleny Wierzbickiej"
+interaction_radius = 44.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/IntercomSpeaker"]
+shape = SubResource("Circle_prop_medium")
+
+[node name="VentilationLever" type="Area2D" parent="Props"]
+position = Vector2(450, 250)
+script = ExtResource("2_resonance")
+resonance_id = "ventilation_lever"
+prop_type = 60
+prop_title = "Dźwignia rygla wentylacji"
+prop_subtitle = "Awaryjne otwarcie szybu"
+interaction_radius = 44.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/VentilationLever"]
+shape = SubResource("Circle_prop_medium")
+
+[node name="ServiceExitHatch" type="Area2D" parent="Props"]
+position = Vector2(510, 250)
+script = ExtResource("2_resonance")
+resonance_id = "service_exit_hatch"
+prop_type = 56
+prop_title = "Właz serwisowy"
+prop_subtitle = "Droga ucieczki przed blokadą"
+interaction_radius = 44.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ServiceExitHatch"]
+shape = SubResource("Circle_prop_medium")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(60, 296)
+
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")
+target = NodePath("../Player")

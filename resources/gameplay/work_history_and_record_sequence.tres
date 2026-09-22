@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_memory_manipulation"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"memory_manipulation"
+source_fact = &"p7.work_history_and_record.expedition_detail_compared"
+predicted_outcome = "Jeżeli zmieniono pamięć jednej osoby, niezależny zapis instytucjonalny nie pokaże długiej, spójnej chronologii obecności."
+required_evidence = [&"p7.work_history_and_record.expedition_detail_compared", &"p7.work_history_and_record.activity_history_read"]
+trial_result = &"persistent_chronology_confirmed"
+closure_id = &"p7.work_history_and_record.institution_trial_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_falsified_record"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"falsified_record"
+source_fact = &"p7.work_history_and_record.card_number_compared"
+predicted_outcome = "Jeżeli sfałszowano jeden rekord, biometryka i fizyczny grafik nie potwierdzą tego samego przydziału."
+required_evidence = [&"p7.work_history_and_record.card_number_compared", &"p7.work_history_and_record.biometric_profile_matched"]
+trial_result = &"persistent_chronology_confirmed"
+closure_id = &"p7.work_history_and_record.institution_trial_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_consistent_foreign_biography"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"consistent_foreign_biography"
+source_fact = &"p7.work_history_and_record.activity_history_read"
+predicted_outcome = "Jeżeli zapis opisuje spójną obcą biografię, historia terenowa, biometryka i log audytu zgodzą się na przestrzeni miesięcy."
+required_evidence = [&"p7.work_history_and_record.expedition_detail_compared", &"p7.work_history_and_record.biometric_profile_matched", &"p7.work_history_and_record.activity_history_read"]
+trial_result = &"persistent_chronology_confirmed"
+closure_id = &"p7.work_history_and_record.institution_trial_result"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_report_scope"]
+script = ExtResource("3_commitment")
+commitment_id = &"copy_report_minimum_scope"
+person_id = &"marta"
+scope = "Do testu wystarcza nagłówek raportu instytucjonalnego; prywatny telefon i notatki Marty pozostają poza zakresem kopiowania."
+known_cost = "Lena rezygnuje ze skrótu przez prywatne dane Marty i musi wynieść wyłącznie nagłówek, zanim sektor zostanie zaryglowany."
+required_disclosure = [&"p7.work_history_and_record.incident_report_read", &"p7.work_history_and_record.signature_compared"]
+alternative_route = "Lena może zostawić raport na miejscu i wyjść drogą serwisową; zachowa czas, ale straci jedyne trwałe źródło instytucjonalne."
+outcome_key = &"p7.work_history_and_record.report_scope"
+trace_key = &"p7.work_history_and_record.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"work_history_and_record"
+station_ids = [&"station_15", &"station_16", &"station_17"]
+entry_gate = &"p7.marta_threshold.trace"
+discrepancy = "Wspólna wyprawa ma dwa różne skutki, a instytucjonalna historia pracy trwa miesiącami bez przerwy."
+required_source_facts = [&"p7.work_history_and_record.expedition_detail_compared", &"p7.work_history_and_record.biometric_profile_matched", &"p7.work_history_and_record.card_number_compared", &"p7.work_history_and_record.activity_history_read", &"p7.work_history_and_record.institution_trial_result"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_memory_manipulation"), SubResource("DiagnosticHypothesis_falsified_record"), SubResource("DiagnosticHypothesis_consistent_foreign_biography")])
+trial_id = &"field_biometrics_audit_comparison"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_report_scope")])
+trace_key = &"p7.work_history_and_record.trace"
+guidance_beat_ids = [&"s15_own_work_record", &"s16_institution_trial", &"s17_report_scope"]
+state_keys = [&"p7.work_history_and_record.expedition_detail_compared", &"p7.work_history_and_record.own_record_requested", &"p7.work_history_and_record.biometric_profile_matched", &"p7.work_history_and_record.card_number_compared", &"p7.work_history_and_record.activity_history_read", &"p7.work_history_and_record.institution_trial_result", &"p7.work_history_and_record.incident_report_read", &"p7.work_history_and_record.signature_compared", &"p7.work_history_and_record.report_scope", &"p7.work_history_and_record.trace"]
+migration_revision = 1

@@ -1,0 +1,182 @@
+[gd_scene load_steps=24 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_41.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/levels/atmosphere_rig.gd" id="5_atmosphere"]
+[ext_resource type="Script" path="res://scripts/ui/crt_dialogue_box.gd" id="6_dialogue"]
+[ext_resource type="Script" path="res://scripts/ui/station_dialogue_cue.gd" id="7_cue"]
+[ext_resource type="Script" path="res://scripts/visual/vector_stage_environment.gd" id="8_vector_stage"]
+[ext_resource type="Script" path="res://scripts/visual/world_pixel_compositor.gd" id="9_compositor"]
+[ext_resource type="Script" path="res://scripts/core/narrative_guidance_service.gd" id="10_guidance"]
+[ext_resource type="Script" path="res://scripts/ui/inner_thought_surface.gd" id="11_thought"]
+[ext_resource type="Script" path="res://scripts/visual/crisp_diegetic_text.gd" id="12_crisp_text"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor_main"]
+size = Vector2(640, 80)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_ceiling"]
+size = Vector2(640, 48)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(50, 70)
+
+[sub_resource type="CircleShape2D" id="Circle_prop_topography"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_console_a"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_console_b"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_console_c"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_exit"]
+radius = 60.0
+
+[node name="Station41" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="VectorStageEnvironment" type="Node2D" parent="."]
+script = ExtResource("8_vector_stage")
+stage_seed = 41
+station_number = 41
+
+[node name="AtmosphereRig" type="Node2D" parent="."]
+script = ExtResource("5_atmosphere")
+station_number = 41
+
+[node name="WorldPixelCompositor" type="CanvasLayer" parent="."]
+script = ExtResource("9_compositor")
+
+[node name="NarrativeGuidanceService" type="Node" parent="."]
+script = ExtResource("10_guidance")
+
+[node name="InnerThoughtSurface" type="CanvasLayer" parent="." node_paths=PackedStringArray("guidance_service")]
+script = ExtResource("11_thought")
+guidance_service = NodePath("../NarrativeGuidanceService")
+
+[node name="CRTDialogueBox" type="CanvasLayer" parent="."]
+script = ExtResource("6_dialogue")
+
+[node name="OpeningDialogueCue" type="Node" parent="."]
+script = ExtResource("7_cue")
+station_id = &"station_41"
+opening_line = "Komora wyboru operacyjnego. Trzy stanowiska załączenia odpowiedzialności."
+
+[node name="CrispDiegeticText" type="Node2D" parent="."]
+position = Vector2(60, 95)
+script = ExtResource("12_crisp_text")
+text = "KOMORA WYBORU // TRZY METODY ROZSTRZYGNIĘCIA // POZIOM 0"
+font_size = 9
+text_color = Color(0.46, 0.78, 0.76, 1)
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="FloorMain" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 320)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorMain"]
+shape = SubResource("Rectangle_floor_main")
+
+[node name="Ceiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ceiling"]
+shape = SubResource("Rectangle_ceiling")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="TopographyDisplay" type="Area2D" parent="Props"]
+position = Vector2(130, 246)
+script = ExtResource("2_resonance")
+resonance_id = "prop_topography_display"
+prop_type = 195
+prop_title = "Wyświetlacz topografii korelacyjnej"
+prop_subtitle = "Schemat rozproszenia sygnałów i powiązań pomiędzy światami"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/TopographyDisplay"]
+shape = SubResource("Circle_prop_topography")
+
+[node name="ConsoleReturnA" type="Area2D" parent="Props"]
+position = Vector2(220, 246)
+script = ExtResource("2_resonance")
+resonance_id = "prop_console_return_a"
+prop_type = 192
+prop_title = "Konsola Operacji A: Powrót"
+prop_subtitle = "Wymuszenie powrotu Leny do świata domowego; izolacja miejscowej Leny"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ConsoleReturnA"]
+shape = SubResource("Circle_prop_console_a")
+
+[node name="ConsoleReconciliationB" type="Area2D" parent="Props"]
+position = Vector2(330, 246)
+script = ExtResource("2_resonance")
+resonance_id = "prop_console_reconciliation_b"
+prop_type = 193
+prop_title = "Konsola Operacji B: Zamknięcie Równi"
+prop_subtitle = "Przyjęcie Równi i oddanie miejsca miejscowej Lenie; odcięcie domowego świata"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ConsoleReconciliationB"]
+shape = SubResource("Circle_prop_console_b")
+
+[node name="ConsoleTestimonyC" type="Area2D" parent="Props"]
+position = Vector2(440, 246)
+script = ExtResource("2_resonance")
+resonance_id = "prop_console_testimony_c"
+prop_type = 194
+prop_title = "Konsola Operacji C: Przejście Wzajemne"
+prop_subtitle = "Zsynchronizowany powrót obu Len; zachowanie mostu ze sprzecznym śladem"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ConsoleTestimonyC"]
+shape = SubResource("Circle_prop_console_c")
+
+[node name="Station41Exit" type="Area2D" parent="Props"]
+position = Vector2(560, 242)
+script = ExtResource("2_resonance")
+resonance_id = "prop_station_41_exit"
+prop_type = 196
+prop_title = "Wrota rozstrzygnięcia finałowego"
+prop_subtitle = "Przejście do manifestacji wybranej metody"
+interaction_radius = 60.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Station41Exit"]
+shape = SubResource("Circle_prop_exit")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(65, 248)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(610, 245)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")

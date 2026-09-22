@@ -1,0 +1,69 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_error_copy"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"error_copy"
+source_fact = &"p7.three_place_proofs.municipal_registry_read"
+predicted_outcome = "Jeżeli to kopia jednego błędu, poprawka w jednym rejestrze usunie rozbieżność w drugim i numer sprawy przestanie się zgadzać."
+required_evidence = [&"p7.three_place_proofs.municipal_registry_read", &"p7.three_place_proofs.hospital_registry_read", &"p7.three_place_proofs.disaster_case_read"]
+trial_result = &"two_systems_and_nine_years"
+closure_id = &"p7.three_place_proofs.public_trial_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_impostor"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"impostor"
+source_fact = &"p7.three_place_proofs.family_answer"
+predicted_outcome = "Jeżeli rozmówca jest oszustem, nie poda rodzinnego szczegółu spoza bazy i nie będzie miał zawodowego dostępu do lokalnej bazy serwisowej."
+required_evidence = [&"p7.three_place_proofs.family_answer", &"p7.three_place_proofs.divergent_answer", &"p7.three_place_proofs.reader_scan_volunteered"]
+trial_result = &"reader_absent_local_base"
+closure_id = &"p7.three_place_proofs.relational_trial_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_consistent_foreign_continuity"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"consistent_foreign_continuity"
+source_fact = &"p7.three_place_proofs.public_trial_result"
+predicted_outcome = "Jeżeli ciągłość jest obca, każde z trzech źródeł unieważni inną prostszą hipotezę i żadne pojedyncze wyjaśnienie nie obejmie wszystkich."
+required_evidence = [&"p7.three_place_proofs.public_trial_result", &"p7.three_place_proofs.voice_trial_result", &"p7.three_place_proofs.relational_trial_result"]
+trial_result = &"single_world_explanation_fails"
+closure_id = &"p7.three_place_proofs.synthesis_result"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_jakub_boundary"]
+script = ExtResource("3_commitment")
+commitment_id = &"respect_jakub_boundary"
+person_id = &"jakub"
+scope = "Jakub odpowiada na pytania i sam otwiera lokalną bazę serwisową; nie pokazuje blizny i nie zgadza się na dalsze badanie ciała."
+known_cost = "Lena traci najprostszy fizyczny dowód i musi oprzeć wynik na jego zawodowym dostępie oraz publicznych rekordach."
+required_disclosure = [&"p7.three_place_proofs.jakub_met", &"p7.three_place_proofs.scar_refusal_respected"]
+alternative_route = "Lena może zrezygnować z prośby o skan i wyjść z samym dowodem publicznym; wtedy hipoteza oszusta pozostaje otwarta."
+outcome_key = &"p7.three_place_proofs.relational_trial_result"
+trace_key = &"p7.three_place_proofs.trace"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_local_search"]
+script = ExtResource("3_commitment")
+commitment_id = &"commit_local_lena_search"
+person_id = &"local_lena"
+scope = "Marta pyta o osobę, której brakuje pod tym adresem; Lena przyjmuje wspólny cel jej odnalezienia."
+known_cost = "Lena porzuca wygodną wersję własnej pomyłki i bierze odpowiedzialność za los drugiej osoby, zanim pozna drogę powrotu."
+required_disclosure = [&"p7.three_place_proofs.synthesis_result"]
+alternative_route = "Lena może przyjąć sam wynik faktu i nie podjąć poszukiwania; zostaje wtedy bez wspólnego celu z Martą i bez drogi do tej osoby."
+outcome_key = &"p7.three_place_proofs.synthesis_result"
+trace_key = &"p7.three_place_proofs.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"three_place_proofs"
+station_ids = [&"station_18", &"station_19", &"station_20", &"station_21"]
+entry_gate = &"p7.work_history_and_record.trace"
+discrepancy = "Publiczne rekordy, żywy Jakub i przywieziona próbka nie mieszczą się w jednym fałszerstwie."
+required_source_facts = [&"p7.three_place_proofs.public_trial_result", &"p7.three_place_proofs.voice_trial_result", &"p7.three_place_proofs.relational_trial_result", &"p7.three_place_proofs.synthesis_result"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_error_copy"), SubResource("DiagnosticHypothesis_impostor"), SubResource("DiagnosticHypothesis_consistent_foreign_continuity")])
+trial_id = &"three_family_synthesis"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_jakub_boundary"), SubResource("DiagnosticCommitment_local_search")])
+trace_key = &"p7.three_place_proofs.trace"
+guidance_beat_ids = [&"s18_public_trial", &"s19_control_answers", &"s20_relational_trial", &"s21_three_family_synthesis"]
+state_keys = [&"p7.three_place_proofs.municipal_registry_read", &"p7.three_place_proofs.hospital_registry_read", &"p7.three_place_proofs.disaster_case_read", &"p7.three_place_proofs.public_trial_result", &"p7.three_place_proofs.employment_card_verified", &"p7.three_place_proofs.microphone_shielded", &"p7.three_place_proofs.family_answer", &"p7.three_place_proofs.divergent_answer", &"p7.three_place_proofs.voice_trial_result", &"p7.three_place_proofs.jakub_met", &"p7.three_place_proofs.scar_refusal_respected", &"p7.three_place_proofs.reader_scan_volunteered", &"p7.three_place_proofs.relational_trial_result", &"p7.three_place_proofs.reader_family_placed", &"p7.three_place_proofs.public_family_placed", &"p7.three_place_proofs.relational_family_placed", &"p7.three_place_proofs.synthesis_result", &"p7.three_place_proofs.trace"]
+migration_revision = 1

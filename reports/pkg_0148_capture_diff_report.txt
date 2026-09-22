@@ -1,0 +1,51 @@
+PKG-0148 CAPTURE DIFF REPORT
+Programmatic frame evidence only. No line claims comprehension, appeal, emotion or comfort.
+
+CONTENT CHECK (must be non-blank and 640x360)
+  normal/station_26_interrupted_log.png                  NONBLANK content_sum=2090.7
+  normal/station_26_intervention_reconstructed.png       NONBLANK content_sum=2131.3
+  normal/station_27_identical_pulse_pair.png             NONBLANK content_sum=2333.4
+  normal/station_27_error_correction_compared.png        NONBLANK content_sum=2356.1
+  normal/station_28_price_disclosed.png                  NONBLANK content_sum=1904.7
+  normal/station_28_home_trace_anchored.png              NONBLANK content_sum=1907.0
+  normal/station_28_shared_drift_yielded.png             NONBLANK content_sum=1917.8
+  normal/station_29_boundary_evidence.png                NONBLANK content_sum=2128.8
+  normal/station_29_consent_refused.png                  NONBLANK content_sum=2131.6
+  normal/station_30_three_forecasts.png                  NONBLANK content_sum=2233.4
+  normal/station_30_dependencies_compared.png            NONBLANK content_sum=2239.2
+  reduced/station_26_interrupted_log.png                 NONBLANK content_sum=2099.9
+  reduced/station_26_intervention_reconstructed.png      NONBLANK content_sum=2122.0
+  reduced/station_27_identical_pulse_pair.png            NONBLANK content_sum=2344.0
+  reduced/station_27_error_correction_compared.png       NONBLANK content_sum=2358.8
+  reduced/station_28_price_disclosed.png                 NONBLANK content_sum=1900.2
+  reduced/station_28_home_trace_anchored.png             NONBLANK content_sum=1910.0
+  reduced/station_28_shared_drift_yielded.png            NONBLANK content_sum=1909.3
+  reduced/station_29_boundary_evidence.png               NONBLANK content_sum=2121.0
+  reduced/station_29_consent_refused.png                 NONBLANK content_sum=2123.1
+  reduced/station_30_three_forecasts.png                 NONBLANK content_sum=2225.1
+  reduced/station_30_dependencies_compared.png           NONBLANK content_sum=2225.8
+
+STATE PAIR DIFFERENCES (DISTINCT requires changed > 50)
+  S09 log vs reconstruction        DISTINCT changed=5044 mean=0.0164 max=1.7176
+  S09 pair vs correction           DISTINCT changed=880 mean=0.0101 max=2.4118
+  S09 price vs Anchor              DISTINCT changed=1195 mean=0.0111 max=1.6157
+  S09 price vs Yield               DISTINCT changed=1134 mean=0.0104 max=1.6157
+  S09 Anchor vs Yield              DISTINCT changed=1654 mean=0.0051 max=1.3922
+  S10 boundary vs refusal          DISTINCT changed=366 mean=0.0029 max=1.8667
+  S10 forecasts vs dependency map  DISTINCT changed=485 mean=0.0038 max=1.7176
+
+NORMAL vs REDUCED (reported, not required to differ)
+  station_26_interrupted_log.png         changed=2407 mean=0.0030 max=0.5490
+  station_26_intervention_reconstructed.png changed=1644 mean=0.0036 max=0.3255
+  station_27_identical_pulse_pair.png    changed=1561 mean=0.0031 max=0.2980
+  station_27_error_correction_compared.png changed=467 mean=0.0017 max=0.2941
+  station_28_price_disclosed.png         changed=431 mean=0.0022 max=0.3686
+  station_28_home_trace_anchored.png     changed=426 mean=0.0016 max=0.4039
+  station_28_shared_drift_yielded.png    changed=1619 mean=0.0031 max=0.3569
+  station_29_boundary_evidence.png       changed=448 mean=0.0030 max=0.3020
+  station_29_consent_refused.png         changed=545 mean=0.0031 max=0.2941
+  station_30_three_forecasts.png         changed=1088 mean=0.0026 max=0.2941
+  station_30_dependencies_compared.png   changed=2880 mean=0.0041 max=0.2941
+
+BOUNDARY
+Diff proves rendered surfaces differ; it does not prove human readability or reception.

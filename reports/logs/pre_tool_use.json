@@ -1,0 +1,53 @@
+[
+  {
+    "session_id": "6cbd9186-47f1-4082-9170-2106c9bce1dd",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\6cbd9186-47f1-4082-9170-2106c9bce1dd.jsonl",
+    "cwd": "C:\\getting_strange\\reports",
+    "prompt_id": "9bafbda3-b6b9-4660-a776-8436bd209cfd",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "C:\\getting_strange\\tools\\capture_pkg_0137.gd",
+      "content": "extends SceneTree\n\n## PKG-0137 capture \u00e2\u20ac\u201d evidence for the driven playthrough.\n##\n## One framed shot per act with the dialogue panel open, which is the state the\n## D-133 offset applies in, plus a scanline read of the bottom of the frame.\n## Before the D-136 apron those bottom rows were the engine clear colour; the\n## report line next to each shot is what makes that claim checkable.\n##\n## Run windowed (no --headless): the capture needs a rendering device.\n\nconst OUT := \"res://reports\"\n## One per act, plus the flat-profile stations called out in FRAME_LAYOUT_AUDIT \u00c2\u00a74.\nconst SHOTS := [\n\t\"station_01\", \"station_08\", \"station_16\", \"station_24\",\n\t\"station_31\", \"station_37\", \"station_41\", \"station_43\",\n]\nconst CLEAR := Color(0.027, 0.035, 0.047)\n\n\nfunc _initialize() -> void:\n\tcall_deferred(&\"_capture\")\n\n\nfunc _capture() -> void:\n\troot.size = Vector2i(640, 360)\n\tvar out := ProjectSettings.globalize_path(OUT)\n\tDirAccess.make_dir_recursive_absolute(out)\n\tvar lines: Array[String] = []\n\tfor id in SHOTS:\n\t\tlines.append(await _shoot(out, id))\n\tvar f := FileAccess.open(\"res://reports/pkg_0137_capture_report.txt\", FileAccess.WRITE)\n\tif f:\n\t\tf.store_string(\"\\n\".join(lines) + \"\\n\")\n\t\tf.close()\n\tfor line in lines:\n\t\tprint(line)\n\tprint(\"PKG-0137 CAPTURE DONE\")\n\tquit(0)\n\n\nfunc _shoot(out: String, id: String) -> String:\n\tvar packed := load(\"res://scenes/levels/%s.tscn\" % id) as PackedScene\n\tif packed == null:\n\t\treturn \"%s MISSING\" % id\n\tvar st := packed.instantiate() as Node2D\n\troot.add_child(st)\n\tfor _i in 8:\n\t\tawait process_frame\n\tvar box := _find(st, func(n): return n is CanvasLayer and n.has_method(\"is_presenting\"))\n\tif box and not bool(box.call(\"is_presenting\")):\n\t\tbox.call(\"present\", [{\n\t\t\t\"speaker\": \"LENA\",\n\t\t\t\"text\": \"Kadr dialogowy nie mo\u0139\u013de ods\u0139\u201aoni\u00c4\u2021 pustki pod planem gry.\",\n\t\t}])\n\t# Long enough for the camera easing to reach the framed position.\n\tfor _i in 90:\n\t\tawait physics_frame\n\tfor _i in 4:\n\t\tawait process_frame\n\tawait RenderingServer.frame_post_draw\n\n\tvar img := root.get_texture().get_image()\n\tvar cam := _find(st, func(n): return n is Camera2D) as Camera2D\n\tvar cam_y: float = cam.global_position.y if cam else -1.0\n\tvar void_rows := 0\n\tvar sampled := 0\n\tif img:\n\t\timg.convert(Image.FORMAT_RGBA8)\n\t\tfor y in range(img.get_height() - 40, img.get_height()):\n\t\t\tsampled += 1\n\t\t\tvar voidish := true\n\t\t\tfor x in [40, 160, 320, 480, 600]:\n\t\t\t\tif img.get_pixel(x, y).srgb_to_linear().distance_to(CLEAR.srgb_to_linear()) > 0.01:\n\t\t\t\t\tvoidish = false\n\t\t\t\t\tbreak\n\t\t\tif voidish:\n\t\t\t\tvoid_rows += 1\n\t\timg.save_png(out.path_join(\"pkg_0137_%s_framed.png\" % id))\n\n\tst.free()\n\tfor _i in 2:\n\t\tawait process_frame\n\treturn \"%-12s cam_y=%.0f  bottom %d rows sampled, %d read as clear colour  -> %s\" % [\n\t\tid, cam_y, sampled, void_rows, \"VOID\" if void_rows > 0 else \"painted\"\n\t]\n\n\nfunc _find(node: Node, pred: Callable) -> Node:\n\tif pred.call(node):\n\t\treturn node\n\tfor c in node.get_children():\n\t\tvar f: Node = _find(c, pred)\n\t\tif f:\n\t\t\treturn f\n\treturn null\n"
+    },
+    "tool_use_id": "toolu_01FoXALKP81oqzGR9NcJhHZM"
+  },
+  {
+    "session_id": "6cbd9186-47f1-4082-9170-2106c9bce1dd",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\6cbd9186-47f1-4082-9170-2106c9bce1dd.jsonl",
+    "cwd": "C:\\getting_strange\\reports",
+    "prompt_id": "9bafbda3-b6b9-4660-a776-8436bd209cfd",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "python - <<'PY'\np='scenes/levels/station_08.tscn'\ns=open(p,encoding='utf-8').read()\nold='''[node name=\"CrispDiegeticText_Certificate\" type=\"Node2D\" parent=\".\"]\nposition = Vector2(58, 192)'''\nnew='''[node name=\"CrispDiegeticText_Certificate\" type=\"Node2D\" parent=\".\"]\nposition = Vector2(58, 172)'''\nassert old in s, \"anchor not found\"\ns=s.replace(old,new)\nopen(p,'w',encoding='utf-8').write(s)\nprint(\"station_08 Certificate label 192 -> 172\")\nPY",
+      "description": "Lift station_08 certificate label off the actor"
+    },
+    "tool_use_id": "toolu_0199AptumEbgDXDwi9XH1wDa"
+  },
+  {
+    "session_id": "6cbd9186-47f1-4082-9170-2106c9bce1dd",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\6cbd9186-47f1-4082-9170-2106c9bce1dd.jsonl",
+    "cwd": "C:\\getting_strange\\reports",
+    "prompt_id": "9bafbda3-b6b9-4660-a776-8436bd209cfd",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cd /c/getting_strange && python - <<'PY'\np='scenes/levels/station_08.tscn'\ns=open(p,encoding='utf-8').read()\nold='''[node name=\"CrispDiegeticText_Certificate\" type=\"Node2D\" parent=\".\"]\nposition = Vector2(58, 192)'''\nnew='''[node name=\"CrispDiegeticText_Certificate\" type=\"Node2D\" parent=\".\"]\nposition = Vector2(58, 172)'''\nassert old in s, \"anchor not found\"\ns=s.replace(old,new)\nopen(p,'w',encoding='utf-8').write(s)\nprint(\"station_08 Certificate label 192 -> 172\")\nPY",
+      "description": "Lift station_08 certificate label off the actor"
+    },
+    "tool_use_id": "toolu_01K4EfC5n2f7TJyi5mZ94Jsc"
+  }
+]

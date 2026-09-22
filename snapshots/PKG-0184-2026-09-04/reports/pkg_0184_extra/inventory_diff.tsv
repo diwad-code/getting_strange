@@ -1,0 +1,14 @@
+path	class	vs_0182	vs_0183	reason
+docs\PLAYTEST_PANEL_FIXES_PROMPT.md	NEW_IN_0184	absent	absent	missing from PKG-0183 inventory
+docs\rebuild\PKG_0183_INDEPENDENT_RED_TEAM_REPORT.md	NEW_IN_0184	absent	absent	missing from PKG-0183 inventory
+tests\pkg_0183_smoke_test.gd	NEW_IN_0184	absent	absent	missing from PKG-0183 inventory
+tests\pkg_0183_smoke_test.gd.uid	NEW_IN_0184	absent	absent	missing from PKG-0183 inventory
+tests\pkg_0184_smoke_test.gd	NEW_IN_0184	absent	absent	PKG-0184 new test
+tools\audio_pkg_0184.gd	NEW_IN_0184	absent	absent	PKG-0184 new harness
+tools\audit_pkg_0184.ps1	NEW_IN_0184	absent	absent	PKG-0184 new harness
+tools\capture_pkg_0183.gd	NEW_IN_0184	absent	absent	missing from PKG-0183 inventory
+tools\capture_pkg_0183.gd.uid	NEW_IN_0184	absent	absent	missing from PKG-0183 inventory
+tools\capture_pkg_0184.gd	NEW_IN_0184	absent	absent	PKG-0184 new harness
+tools\performance_pkg_0183.gd	NEW_IN_0184	absent	absent	missing from PKG-0183 inventory
+tools\performance_pkg_0183.gd.uid	NEW_IN_0184	absent	absent	missing from PKG-0183 inventory
+tools\performance_pkg_0184.gd	NEW_IN_0184	absent	absent	PKG-0184 new harness

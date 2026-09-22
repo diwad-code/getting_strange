@@ -1,0 +1,93 @@
+﻿# === Wygenerowano przez publish-to-github ===
+
+# Zależności
+node_modules/
+vendor/
+
+# Build
+dist/
+build/
+out/
+bin/
+obj/
+.next/
+.nuxt/
+
+# Logi (w tym logi skryptu publish)
+*.log
+
+# Zmienne środowiskowe / sekrety
+.env
+.env.*
+!.env.example
+
+# IDE / edytory
+.vs/
+.vscode/
+.idea/
+
+# System
+Thumbs.db
+.DS_Store
+
+# Tymczasowe
+tmp/
+temp/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# .NET
+*.user
+*.suo
+*.cache
+
+# Coverage
+coverage/
+.coverage
+
+# Gradle / Android
+.gradle/
+local.properties
+
+# Dodano automatycznie przez publish script
+.opencode/node_modules/
+.opencode/node_modules/effect/dist/
+assets/characters/vendor/
+.opencode/node_modules/msgpackr/dist/
+.gemini/config/skills/capability-evolver/src/webui/client/vendor/
+.gemini/antigravity/skills/capability-evolver/src/webui/client/vendor/
+.gemini/skills/capability-evolver/src/webui/client/vendor/
+.agents/skills/capability-evolver/src/webui/client/vendor/
+.agent/skills/capability-evolver/src/webui/client/vendor/
+skills/capability-evolver/src/webui/client/vendor/
+archive_retired_web/dist/
+.opencode/node_modules/@opencode-ai/sdk/dist/
+.opencode/node_modules/yaml/dist/
+.opencode/node_modules/@ai-sdk/provider/dist/
+.opencode/node_modules/yaml/browser/dist/
+.opencode/node_modules/multipasta/dist/
+.opencode/node_modules/find-my-way-ts/dist/
+.opencode/node_modules/@opencode-ai/plugin/dist/
+.opencode/node_modules/uuid/dist/
+.agents/skills/serio-po-polsku/scripts/__pycache__/
+.omp/skills/serio-po-polsku/scripts/__pycache__/
+.opencode/node_modules/@standard-schema/spec/dist/
+tools/__pycache__/
+snapshots/PKG-0193-2026-09-05/tools/__pycache__/
+.agents/skills/skill-creator/scripts/__pycache__/
+skills/skill-creator/scripts/__pycache__/
+.agent/skills/skill-creator/scripts/__pycache__/
+.gemini/skills/skill-creator/scripts/__pycache__/
+.gemini/config/skills/skill-creator/scripts/__pycache__/
+.gemini/antigravity/skills/skill-creator/scripts/__pycache__/
+.opencode/node_modules/which/bin/
+.opencode/node_modules/msgpackr-extract/bin/
+.opencode/node_modules/uuid/dist-node/bin/
+
+# Dodano automatycznie przez publish script
+Godot_v4.6.3-stable_win64.exe

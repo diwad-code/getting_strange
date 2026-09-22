@@ -1,0 +1,27 @@
+PKG-0158 VISUAL CAPTURE REPORT
+Technical evidence for PHASE-03 First Thirty Minutes (BUNDLE-11..15).
+Rendered in 640x360 with normal Windows display driver. Normal and reduced-motion states.
+
+CAPTURED FRAMES
+normal  station_05     initial_street                   res://reports/pkg_0158/normal/station_05_initial_street.png
+normal  station_05     street_crossing_completed        res://reports/pkg_0158/normal/station_05_street_crossing_completed.png
+normal  station_06     initial_kiosk                    res://reports/pkg_0158/normal/station_06_initial_kiosk.png
+normal  station_06     vendor_contradiction_heard       res://reports/pkg_0158/normal/station_06_vendor_contradiction_heard.png
+normal  station_07     initial_facade                   res://reports/pkg_0158/normal/station_07_initial_facade.png
+normal  station_07     intercom_code_unlocked           res://reports/pkg_0158/normal/station_07_intercom_code_unlocked.png
+normal  station_08     initial_stairwell                res://reports/pkg_0158/normal/station_08_initial_stairwell.png
+normal  station_08     apartment_fourteen_unlocked      res://reports/pkg_0158/normal/station_08_apartment_fourteen_unlocked.png
+reduced station_05     initial_street                   res://reports/pkg_0158/reduced/station_05_initial_street.png
+reduced station_05     street_crossing_completed        res://reports/pkg_0158/reduced/station_05_street_crossing_completed.png
+reduced station_06     initial_kiosk                    res://reports/pkg_0158/reduced/station_06_initial_kiosk.png
+reduced station_06     vendor_contradiction_heard       res://reports/pkg_0158/reduced/station_06_vendor_contradiction_heard.png
+reduced station_07     initial_facade                   res://reports/pkg_0158/reduced/station_07_initial_facade.png
+reduced station_07     intercom_code_unlocked           res://reports/pkg_0158/reduced/station_07_intercom_code_unlocked.png
+reduced station_08     initial_stairwell                res://reports/pkg_0158/reduced/station_08_initial_stairwell.png
+reduced station_08     apartment_fourteen_unlocked      res://reports/pkg_0158/reduced/station_08_apartment_fourteen_unlocked.png
+
+VERIFICATION NOTES
+- Station 05: Open sky >=25%, 3 depth planes, no ceiling, streetlamp, street sign, pedestrian crossing.
+- Station 06: Open sky >=25%, kiosk structure, newspaper racks, timetable stand, vendor silhouette.
+- Station 07: Open sky >=25%, building facade, address plaque 14 vs document 12, intercom directory, opening door.
+- Station 08: Low residential ceiling, two-tone oil lamperia, warm sconces, stair steps <=18px, neighbour, apartment 14 door.

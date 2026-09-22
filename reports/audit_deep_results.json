@@ -1,0 +1,51 @@
+{
+  "dobre_praktyki": [
+    {
+      "loc": "c:/getting_strange/scripts/levels\\station_01.gd:115",
+      "text": "Zapis zapisany. Zbieram sprzęt i wychodzę.",
+      "note": "Wysoka naturalność i konkretność; rejestr codzienny i sytuacyjny bez sztuczności."
+    },
+    {
+      "loc": "c:/getting_strange/scripts/levels\\station_03.gd:109",
+      "text": "Wracam do domu. Marta czeka.",
+      "note": "Wysoka naturalność i konkretność; rejestr codzienny i sytuacyjny bez sztuczności."
+    },
+    {
+      "loc": "c:/getting_strange/scripts/levels\\station_03.gd:119",
+      "text": "Opóźnienie na tablicy. Odpiszę krótko, że jadę.",
+      "note": "Wysoka naturalność i konkretność; rejestr codzienny i sytuacyjny bez sztuczności."
+    },
+    {
+      "loc": "c:/getting_strange/scripts/levels\\station_04.gd:110",
+      "text": "Wagon kołysze na zwrotnicach. Jeszcze dwa przystanki.",
+      "note": "Wysoka naturalność i konkretność; rejestr codzienny i sytuacyjny bez sztuczności."
+    },
+    {
+      "loc": "c:/getting_strange/scripts/levels\\station_14.gd:155",
+      "text": "Marta czeka na partnerkę. Odkłada drugi kubek.",
+      "note": "Wysoka naturalność i konkretność; rejestr codzienny i sytuacyjny bez sztuczności."
+    },
+    {
+      "loc": "c:/getting_strange/scripts/levels\\station_31.gd:90",
+      "text": "Te, które już są stabilne. Pani Wolski jest tutaj. Marta czeka w mieszkaniu czternaście. Wystarczy odłożyć obcy czytnik.",
+      "note": "Wysoka naturalność i konkretność; rejestr codzienny i sytuacyjny bez sztuczności."
+    },
+    {
+      "loc": "c:/getting_strange/scripts/levels\\station_35.gd:89",
+      "text": "Marta czekała. Ja znowu mierzyłam. Mój świat nie czekał zamrożony — zgłoszono moje zaginięcie.",
+      "note": "Wysoka naturalność i konkretność; rejestr codzienny i sytuacyjny bez sztuczności."
+    }
+  ],
+  "uwagi_stylistyczne_p08_kalki": [
+    {
+      "loc": "c:/getting_strange/scripts/levels\\station_01.gd:115",
+      "text": "Zapis zapisany. Zbieram sprzęt i wychodzę.",
+      "issue": "Pleonazm/tautologia leksykalna („zapis zapisany”). Lepsze: „Odczyt zapisany”, „Zapis ukończony”, „Zapisano”."
+    }
+  ],
+  "uwagi_gramatyczne_p09": [],
+  "uwagi_orto_interpunkcja_p10": [],
+  "uwagi_analityzm_p02": [],
+  "uwagi_uniformizacja_p01": [],
+  "uwagi_rejestr_p11_p06": []
+}

@@ -1,0 +1,4 @@
+import os
+with open('docs/NEXT_SESSION_PROMPT.md', 'w', encoding='utf-8') as f:
+    f.write('# CEL SESJI\n\nThe previous session completed PKG-0135 (Capture okiem, one_way collision removal on 09/11, and 05->04->03 backtrack via ReturnZone). We also fixed the ReturnZone syntax errors and updated the tests.\n\nNow, you should move on to the next phase of work. Please review CURRENT_STATE.md and check what the next logical package should be, or ask the user what to focus on next.\n\n# SRODOWISKO I BASELINE\nGame runs on Godot 4.7. No git, save everything to disk immediately.\n\n# KONTEKST TECHNICZNY\nWe just completed PKG-0135 and fixed the tests. Test suite passes successfully.\n\n# KRYTERIA AKCEPTACJI\n1. Analyze CURRENT_STATE.md and suggest next steps\n2. User confirms\n\n# KONIEC PAKIETU JEST OBOWIAZKOWY\nRequired header to pass validation.\n')
+

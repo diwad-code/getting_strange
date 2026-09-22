@@ -1,0 +1,26 @@
+PKG-0145 VISUAL CAPTURE REPORT
+Technical evidence only: rendered state, layer presence and normal/reduced output. No line claims comprehension, fun, emotional credibility or comfort.
+Logical size: 640x360. Normal Windows rendering device. Public P7 station APIs drove each state.
+
+CAPTURED STATES
+normal  station_22   hypotheses           res://reports/pkg_0145/normal/station_22_hypotheses.png
+normal  station_23   anchor               res://reports/pkg_0145/normal/station_23_anchor.png
+normal  station_23   yield                res://reports/pkg_0145/normal/station_23_yield.png
+normal  station_24   limited_access       res://reports/pkg_0145/normal/station_24_limited_access.png
+normal  station_24   declined             res://reports/pkg_0145/normal/station_24_declined.png
+normal  station_25   paired_with_notes    res://reports/pkg_0145/normal/station_25_paired_with_notes.png
+normal  station_25   technical_route      res://reports/pkg_0145/normal/station_25_technical_route.png
+reduced station_22   hypotheses           res://reports/pkg_0145/reduced/station_22_hypotheses.png
+reduced station_23   anchor               res://reports/pkg_0145/reduced/station_23_anchor.png
+reduced station_23   yield                res://reports/pkg_0145/reduced/station_23_yield.png
+reduced station_24   limited_access       res://reports/pkg_0145/reduced/station_24_limited_access.png
+reduced station_24   declined             res://reports/pkg_0145/reduced/station_24_declined.png
+reduced station_25   paired_with_notes    res://reports/pkg_0145/reduced/station_25_paired_with_notes.png
+reduced station_25   technical_route      res://reports/pkg_0145/reduced/station_25_technical_route.png
+
+INSPECTION SCOPE
+Station 22: two signal observations and opened hypotheses.
+Station 23: Anchor and Yield states with their separate local costs.
+Station 24: limited access and declined boundary states.
+Station 25: paired-with-notes and technical-route buffer traces.
+Reduced-motion frames retain the same state facts while peripheral amplitude is reduced by the existing accessibility system.

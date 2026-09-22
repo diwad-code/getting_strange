@@ -1,0 +1,19 @@
+=== PKG-0171 VISUAL CAPTURE EVIDENCE REPORT ===
+Date: 2026-09-02
+Logical resolution: 640x360
+Total captures: 14
+
+- File: family_domestic_interior_station_01.png | Scene: station_01 | Size: 640x360 | Description: Family 1: Domestic Interior (station_01)
+- File: defect_def4_stairs_station_02.png | Scene: station_02 | Size: 640x360 | Description: DEF-4: Stairwell geometry (station_02)
+- File: family_street_urban_station_04.png | Scene: station_04 | Size: 640x360 | Description: Family 2: Street Urban (station_04)
+- File: defect_def9_kiosk_station_06.png | Scene: station_06 | Size: 640x360 | Description: DEF-9 Debt: Kiosk counter vendor (station_06)
+- File: family_bazaar_station_07.png | Scene: station_07 | Size: 640x360 | Description: Family 3: Bazaar (station_07)
+- File: defect_def5_ladder_station_09.png | Scene: station_09 | Size: 640x360 | Description: DEF-5: Warehouse ladder (station_09)
+- File: family_technical_decay_station_10.png | Scene: station_10 | Size: 640x360 | Description: Family 4: Technical Decay / Marta placement (station_10)
+- File: defect_def9_wierzbicka_station_11.png | Scene: station_11 | Size: 640x360 | Description: DEF-9: Wierzbicka placement point (station_11)
+- File: defect_def9_jakub_station_12.png | Scene: station_12 | Size: 640x360 | Description: DEF-9: Jakub placement point (station_12)
+- File: family_institutional_station_14.png | Scene: station_14 | Size: 640x360 | Description: Family 5: Institutional archive / lift (station_14)
+- File: family_subterranean_transit_station_16.png | Scene: station_16 | Size: 640x360 | Description: Family 6: Subterranean transit (station_16)
+- File: family_choice_threshold_station_18.png | Scene: station_18 | Size: 640x360 | Description: Family 7: Choice threshold (station_18)
+- File: family_threshold_anomalous_station_42a.png | Scene: station_42a | Size: 640x360 | Description: Threshold Anomalous variant A (station_42a)
+- File: family_epilogue_station_43.png | Scene: station_43 | Size: 640x360 | Description: Epilogue / River Vistula dawn (station_43)

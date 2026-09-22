@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1016" />
+      <stop offset="100%" stop-color="#040608" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f2994a" />
+      <stop offset="100%" stop-color="#d49a62" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#56ccf2" />
+      <stop offset="100%" stop-color="#2f80ed" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="256" height="256" rx="32" fill="url(#bgGrad)" stroke="#1a2634" stroke-width="4" />
+
+  <!-- Vector-Stage Proscenium Grid Gridlines -->
+  <line x1="24" y1="24" x2="232" y2="24" stroke="#16222f" stroke-width="2" />
+  <line x1="24" y1="232" x2="232" y2="232" stroke="#16222f" stroke-width="2" />
+  <line x1="24" y1="24" x2="24" y2="232" stroke="#16222f" stroke-width="2" />
+  <line x1="232" y1="24" x2="232" y2="232" stroke="#16222f" stroke-width="2" />
+
+  <!-- Diagonal Facet Construction -->
+  <polygon points="40,200 128,48 216,200" fill="none" stroke="#223344" stroke-width="1.5" stroke-dasharray="4 4" />
+  <polygon points="40,200 128,150 216,200" fill="#0f1722" stroke="#2d4257" stroke-width="2" />
+
+  <!-- Line 4 Divergent Tram Tracks (Split Continuity) -->
+  <path d="M 128,216 L 128,160 Q 128,120 72,80" fill="none" stroke="url(#cyanGrad)" stroke-width="4" stroke-linecap="round" />
+  <path d="M 128,216 L 128,160 Q 128,120 184,80" fill="none" stroke="url(#amberGrad)" stroke-width="4" stroke-linecap="round" />
+
+  <!-- Track Cross-Ties (Diegetic Measurement Markers) -->
+  <line x1="120" y1="200" x2="136" y2="200" stroke="#8da0b3" stroke-width="2" />
+  <line x1="120" y1="180" x2="136" y2="180" stroke="#8da0b3" stroke-width="2" />
+  <line x1="104" y1="130" x2="118" y2="142" stroke="#56ccf2" stroke-width="2" />
+  <line x1="152" y1="130" x2="138" y2="142" stroke="#f2994a" stroke-width="2" />
+
+  <!-- Core Resonance Node (Station 21 Recognition Point) -->
+  <circle cx="128" cy="150" r="10" fill="#0b1016" stroke="#ffffff" stroke-width="3" />
+  <circle cx="128" cy="150" r="4" fill="#56ccf2" />
+
+  <!-- Lena Vector Silhouette / Human Marker -->
+  <circle cx="128" cy="74" r="12" fill="url(#amberGrad)" />
+  <polygon points="128,90 114,136 142,136" fill="url(#amberGrad)" opacity="0.9" />
+
+  <!-- Monogram Brand Typography -->
+  <text x="128" y="244" font-family="monospace, sans-serif" font-size="12" font-weight="bold" fill="#8da0b3" text-anchor="middle" letter-spacing="3">GETTING STRANGE</text>
+</svg>

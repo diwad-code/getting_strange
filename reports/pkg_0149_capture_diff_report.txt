@@ -1,0 +1,71 @@
+PKG-0149 CAPTURE DIFF REPORT
+Programmatic frame evidence only. No line claims comprehension, appeal, emotion or comfort.
+
+CONTENT CHECK (must be non-blank and 640x360)
+  normal/station_31_chairs_inspected.png                 NONBLANK content_sum=2058.0
+  normal/station_31_adaptation_rejected.png              NONBLANK content_sum=2075.9
+  normal/station_32_steamed_and_cracked.png              NONBLANK content_sum=2135.9
+  normal/station_32_material_memory_anchored.png         NONBLANK content_sum=2148.1
+  normal/station_33_ladder_and_gauge.png                 NONBLANK content_sum=2073.3
+  normal/station_33_intent_reconstructed.png             NONBLANK content_sum=2108.9
+  normal/station_34_reactor_and_desk.png                 NONBLANK content_sum=2227.9
+  normal/station_34_pair_registry_unlocked.png           NONBLANK content_sum=2245.4
+  normal/station_35_cooling_pool.png                     NONBLANK content_sum=2667.3
+  normal/station_35_home_echo_verified.png               NONBLANK content_sum=2691.9
+  normal/station_36_drain_current.png                    NONBLANK content_sum=2265.8
+  normal/station_36_cost_ledger_revealed.png             NONBLANK content_sum=2266.5
+  normal/station_37_oscilloscope_and_patchbay.png        NONBLANK content_sum=2266.3
+  normal/station_37_living_signal_bridged.png            NONBLANK content_sum=2284.9
+  normal/station_38_calculator_and_accident.png          NONBLANK content_sum=1733.7
+  normal/station_38_truth_disclosed_full.png             NONBLANK content_sum=1758.8
+  normal/station_38_truth_disclosed_withheld.png         NONBLANK content_sum=1761.8
+  reduced/station_31_chairs_inspected.png                NONBLANK content_sum=2045.5
+  reduced/station_31_adaptation_rejected.png             NONBLANK content_sum=2061.8
+  reduced/station_32_steamed_and_cracked.png             NONBLANK content_sum=2121.3
+  reduced/station_32_material_memory_anchored.png        NONBLANK content_sum=2144.9
+  reduced/station_33_ladder_and_gauge.png                NONBLANK content_sum=2070.3
+  reduced/station_33_intent_reconstructed.png            NONBLANK content_sum=2092.2
+  reduced/station_34_reactor_and_desk.png                NONBLANK content_sum=2221.9
+  reduced/station_34_pair_registry_unlocked.png          NONBLANK content_sum=2238.9
+  reduced/station_35_cooling_pool.png                    NONBLANK content_sum=2653.5
+  reduced/station_35_home_echo_verified.png              NONBLANK content_sum=2669.3
+  reduced/station_36_drain_current.png                   NONBLANK content_sum=2254.9
+  reduced/station_36_cost_ledger_revealed.png            NONBLANK content_sum=2259.4
+  reduced/station_37_oscilloscope_and_patchbay.png       NONBLANK content_sum=2246.5
+  reduced/station_37_living_signal_bridged.png           NONBLANK content_sum=2267.0
+  reduced/station_38_calculator_and_accident.png         NONBLANK content_sum=1729.5
+  reduced/station_38_truth_disclosed_full.png            NONBLANK content_sum=1752.7
+  reduced/station_38_truth_disclosed_withheld.png        NONBLANK content_sum=1752.6
+
+STATE PAIR DIFFERENCES (DISTINCT requires changed > 50)
+  S11 chairs vs rejection              DISTINCT changed=2380 mean=0.0138 max=2.4000
+  S11 glass vs anchored memory         DISTINCT changed=2495 mean=0.0122 max=1.9804
+  S11 shaft vs intent reconstructed    DISTINCT changed=3137 mean=0.0127 max=1.7882
+  S12 reactor vs registry              DISTINCT changed=834 mean=0.0075 max=1.7098
+  S12 pool vs echo                     DISTINCT changed=1830 mean=0.0135 max=2.4000
+  S12 current vs cost ledger           DISTINCT changed=959 mean=0.0095 max=1.6157
+  S13 oscilloscope vs bridge           DISTINCT changed=1239 mean=0.0109 max=2.4000
+  S13 receiver vs full truth           DISTINCT changed=1077 mean=0.0109 max=2.4000
+  S13 receiver vs withheld truth       DISTINCT changed=1181 mean=0.0119 max=1.7294
+
+NORMAL vs REDUCED (reported, not required to differ)
+  station_31_chairs_inspected.png            changed=1446 mean=0.0061 max=2.4000
+  station_31_adaptation_rejected.png         changed=2723 mean=0.0049 max=2.4000
+  station_32_steamed_and_cracked.png         changed=1751 mean=0.0042 max=1.8431
+  station_32_material_memory_anchored.png    changed=690 mean=0.0025 max=1.8431
+  station_33_ladder_and_gauge.png            changed=612 mean=0.0023 max=1.6980
+  station_33_intent_reconstructed.png        changed=3614 mean=0.0045 max=0.3255
+  station_34_reactor_and_desk.png            changed=751 mean=0.0026 max=2.4000
+  station_34_pair_registry_unlocked.png      changed=831 mean=0.0025 max=2.4000
+  station_35_cooling_pool.png                changed=2027 mean=0.0040 max=2.4000
+  station_35_home_echo_verified.png          changed=4914 mean=0.0066 max=2.4000
+  station_36_drain_current.png               changed=1404 mean=0.0029 max=2.4000
+  station_36_cost_ledger_revealed.png        changed=1408 mean=0.0026 max=0.1961
+  station_37_oscilloscope_and_patchbay.png   changed=3822 mean=0.0056 max=2.4000
+  station_37_living_signal_bridged.png       changed=3935 mean=0.0050 max=0.7647
+  station_38_calculator_and_accident.png     changed=67 mean=0.0011 max=2.4000
+  station_38_truth_disclosed_full.png        changed=90 mean=0.0012 max=2.4000
+  station_38_truth_disclosed_withheld.png    changed=70 mean=0.0022 max=2.4000
+
+BOUNDARY
+Diff proves rendered surfaces differ; it does not prove human readability or reception.

@@ -1,0 +1,60 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_signal_echo"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"signal_echo"
+source_fact = &"p7.mutual_test.signal_echo_observed"
+predicted_outcome = "Po utrzymaniu parametru sygnał powtórzy zapis urządzenia, a nie odpowie sąsiednim stanem."
+required_evidence = [&"p7.mutual_test.signal_echo_observed", &"p7.mutual_test.adjacent_state_observed"]
+trial_result = &"anchor"
+closure_id = &"p7.mutual_test.dead_circuit_outcome"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_adjacent_state_response"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"adjacent_state_response"
+source_fact = &"p7.mutual_test.adjacent_state_observed"
+predicted_outcome = "Po uległości drugi tor odpowie zmianą stanu, a znacznik adresu utraci ostrość."
+required_evidence = [&"p7.mutual_test.signal_echo_observed", &"p7.mutual_test.adjacent_state_observed"]
+trial_result = &"yield"
+closure_id = &"p7.mutual_test.dead_circuit_outcome"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_marta_limited_access"]
+script = ExtResource("3_commitment")
+commitment_id = &"marta_limited_access"
+person_id = &"marta"
+scope = "Notatki i telefon miejscowej Leny wyłącznie do odczytu dzisiejszego testu."
+known_cost = "UCP może połączyć ślad bufora z prywatnymi notatkami Marty."
+required_disclosure = [&"p7.mutual_test.marta_scope_disclosed", &"p7.mutual_test.marta_risk_disclosed", &"p7.mutual_test.marta_cost_disclosed"]
+alternative_route = "Jakub może przeprowadzić drogą techniczną bez użycia notatek."
+outcome_key = &"p7.mutual_test.marta_boundary"
+trace_key = &"p7.mutual_test.ucp_buffer_trace"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_marta_declines_access"]
+script = ExtResource("3_commitment")
+commitment_id = &"marta_declines_access"
+person_id = &"marta"
+scope = "Notatki i telefon miejscowej Leny pozostają zamknięte."
+known_cost = "Droga techniczna daje ślad bufora bez prywatnego kontekstu Marty."
+required_disclosure = [&"p7.mutual_test.marta_scope_disclosed", &"p7.mutual_test.marta_risk_disclosed", &"p7.mutual_test.marta_cost_disclosed"]
+alternative_route = "Jakub prowadzi cykle wentylacji, rygli i zasilania bez notatek Marty."
+outcome_key = &"p7.mutual_test.marta_boundary"
+trace_key = &"p7.mutual_test.ucp_buffer_trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"mutual_test"
+station_ids = [&"station_22", &"station_23", &"station_24", &"station_25"]
+entry_gate = &"world_recognized"
+discrepancy = "Sygnał utrzymuje relację albo odpowiada sąsiednim stanem, lecz oba odczyty nie mogą być równocześnie bezkosztowe."
+required_source_facts = [&"world_recognized", &"p7.mutual_test.signal_echo_observed", &"p7.mutual_test.adjacent_state_observed"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_signal_echo"), SubResource("DiagnosticHypothesis_adjacent_state_response")])
+trial_id = &"dead_circuit_a_b"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_marta_limited_access"), SubResource("DiagnosticCommitment_marta_declines_access")])
+trace_key = &"p7.mutual_test.ucp_buffer_trace"
+guidance_beat_ids = [&"s22_compare_signal_states", &"s23_discriminating_trial", &"s24_marta_scope", &"s25_technical_route"]
+state_keys = [&"p7.mutual_test.signal_echo_observed", &"p7.mutual_test.adjacent_state_observed", &"p7.mutual_test.dead_circuit_outcome", &"p7.mutual_test.dead_circuit_cost", &"p7.mutual_test.marta_boundary", &"p7.mutual_test.ucp_buffer_trace"]
+migration_revision = 1

@@ -1,0 +1,13 @@
+PKG-0164 VISUAL EVIDENCE REPORT
+Renderer: Intel(R) Iris(R) Xe Graphics
+Viewport: 640x360; normal Windows display driver; script was not headless.
+Three textless M2 frames of Station 16: neutral, analyzer transfer, selected Marta memory cost.
+One M3 true-grayscale structure frame after sample-second cost and home echo confirmation.
+Hash distinctness and grayscale checks are structural evidence only; no line claims
+human comprehension, emotion, comfort or PRODUCT GO (D-012, ADR-003).
+
+CAPTURED FRAMES
+neutral            mono=false hidden=6  hash=2364778518 res://reports/pkg_0164/station_16_neutral.png
+analyzer_transfer  mono=false hidden=6  hash=1141093698 res://reports/pkg_0164/station_16_analyzer_transfer.png
+marta_cost         mono=false hidden=6  hash=1409403082 res://reports/pkg_0164/station_16_marta_cost.png
+structure_mono     mono=true  hidden=6  hash=3582274235 res://reports/pkg_0164/station_16_structure_mono.png

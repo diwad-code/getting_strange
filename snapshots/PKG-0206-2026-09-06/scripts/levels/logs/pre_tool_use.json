@@ -1,0 +1,189 @@
+[
+  {
+    "session_id": "22ce459d-f9bc-4b58-ae73-c65ca5bac5bc",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\22ce459d-f9bc-4b58-ae73-c65ca5bac5bc.jsonl",
+    "cwd": "C:\\getting_strange\\scripts\\levels",
+    "prompt_id": "a1afccfd-2096-45e6-8269-f72431584f57",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cd scripts/levels && sed -n '395,567p' station_11.gd",
+      "description": "Read station_11 draw section"
+    },
+    "tool_use_id": "toolu_01UgApC1h1oKDxA66WRUZjYZ"
+  },
+  {
+    "session_id": "22ce459d-f9bc-4b58-ae73-c65ca5bac5bc",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\22ce459d-f9bc-4b58-ae73-c65ca5bac5bc.jsonl",
+    "cwd": "C:\\getting_strange\\scripts\\levels",
+    "prompt_id": "a1afccfd-2096-45e6-8269-f72431584f57",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "sed -n '395,567p' station_11.gd",
+      "description": "Read station_11 draw section"
+    },
+    "tool_use_id": "toolu_01XXHVgc6tsyLjSCSeLB7rSA"
+  },
+  {
+    "session_id": "22ce459d-f9bc-4b58-ae73-c65ca5bac5bc",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\22ce459d-f9bc-4b58-ae73-c65ca5bac5bc.jsonl",
+    "cwd": "C:\\getting_strange\\scripts\\levels",
+    "prompt_id": "a1afccfd-2096-45e6-8269-f72431584f57",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cat scripts/visual/vector_stage_style.gd; echo \"====ENV====\"; sed -n '1,120p' scripts/visual/vector_stage_environment.gd",
+      "description": "Read vector stage style and environment"
+    },
+    "tool_use_id": "toolu_013jDXN191JpRcaPZffc3smg"
+  },
+  {
+    "session_id": "22ce459d-f9bc-4b58-ae73-c65ca5bac5bc",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\22ce459d-f9bc-4b58-ae73-c65ca5bac5bc.jsonl",
+    "cwd": "C:\\getting_strange\\scripts\\levels",
+    "prompt_id": "a1afccfd-2096-45e6-8269-f72431584f57",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cd /c/getting_strange && cat scripts/visual/vector_stage_style.gd",
+      "description": "Read vector stage style"
+    },
+    "tool_use_id": "toolu_01P9LFp47bWJAczZswCGagoS"
+  },
+  {
+    "session_id": "dcee420e-57a4-4172-93df-acc04ee2ce71",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\dcee420e-57a4-4172-93df-acc04ee2ce71.jsonl",
+    "cwd": "C:\\getting_strange\\scripts\\levels",
+    "prompt_id": "aaf0cf8d-a024-4bc8-ad53-2e0ffbd612c3",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cd scripts/levels; for n in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23; do echo \"--- $n ---\"; grep -n -A8 \"^func _setup_camera\" station_$n.gd; done 2>&1 | head -120",
+      "description": "Inspect _setup_camera bodies 01-23"
+    },
+    "tool_use_id": "toolu_01XKDVDn57mYXz42HdeTSVp6"
+  },
+  {
+    "session_id": "dcee420e-57a4-4172-93df-acc04ee2ce71",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\dcee420e-57a4-4172-93df-acc04ee2ce71.jsonl",
+    "cwd": "C:\\getting_strange\\scripts\\levels",
+    "prompt_id": "aaf0cf8d-a024-4bc8-ad53-2e0ffbd612c3",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "python --version 2>&1; python3 --version 2>&1",
+      "description": "Check python"
+    },
+    "tool_use_id": "toolu_01GZsB6QAuus9MbyT12kQubx"
+  },
+  {
+    "session_id": "dcee420e-57a4-4172-93df-acc04ee2ce71",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\dcee420e-57a4-4172-93df-acc04ee2ce71.jsonl",
+    "cwd": "C:\\getting_strange\\scripts\\levels",
+    "prompt_id": "aaf0cf8d-a024-4bc8-ad53-2e0ffbd612c3",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "grep \"^== \\|Verification passed\\|failed with exit\" \"C:/Users/admin/AppData/Local/Temp/claude/C--getting-strange/dcee420e-57a4-4172-93df-acc04ee2ce71/scratchpad/baseline_verify.log\" | tail -3",
+      "description": "Verify progress"
+    },
+    "tool_use_id": "toolu_01XmKzwUQCxN7GY8j27ASjnQ"
+  },
+  {
+    "session_id": "dcee420e-57a4-4172-93df-acc04ee2ce71",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\dcee420e-57a4-4172-93df-acc04ee2ce71.jsonl",
+    "cwd": "C:\\getting_strange\\scripts\\levels",
+    "prompt_id": "aaf0cf8d-a024-4bc8-ad53-2e0ffbd612c3",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cat > \"C:/Users/admin/AppData/Local/Temp/claude/C--getting-strange/dcee420e-57a4-4172-93df-acc04ee2ce71/scratchpad/unify_camera.py\" <<'PYEOF'\nimport re, pathlib, sys\n\nROOT = pathlib.Path(r\"C:\\getting_strange\")\nLEVELS = ROOT / \"scripts\" / \"levels\"\nSCENES = ROOT / \"scenes\" / \"levels\"\n\nSTATIONS = [\"%02d\" % n for n in range(1, 42)] + [\"42a\", \"42b\", \"42c\", \"43\"]\n\nCANON_DECL = \"@onready var camera: CinematicCamera = StationCameraRig.resolve(self)\"\n\nCANON_FUNC = \"\"\"\n\n## PKG-0141 (D-150). Jedna sciezka kamery dla calej kampanii: nazwa wezla,\n## granice komory i kolejnosc podpiec zyja w `StationCameraRig`, nie w 45 kopiach.\nfunc _setup_camera() -> void:\n\\tcamera = StationCameraRig.bind(self, player)\n\"\"\"\n\nOLD_BODY = \"\"\"func _setup_camera() -> void:\n\\tif not is_instance_valid(camera):\n\\t\\tcamera = CinematicCamera.new()\n\\t\\tcamera.name = \"Camera\"\n\\t\\tadd_child(camera)\n\\tcamera.target = player\n\\tcamera.setup_chambers([Rect2(Vector2.ZERO, VIEW_SIZE)])\n\"\"\"\n\nNEW_BODY = \"\"\"## PKG-0141 (D-150). Jedna sciezka kamery dla calej kampanii: nazwa wezla,\n## granice komory i kolejnosc podpiec zyja w `StationCameraRig`, nie w 45 kopiach.\nfunc _setup_camera() -> void:\n\\tcamera = StationCameraRig.bind(self, player)\n\"\"\"\n\nPARK_BLOCK = \"\\tif camera:\\n\\t\\tcamera.position = Vector2(320.0, 180.0)\\n\"\n\ndecl_re = re.compile(r\"^@onready var camera:.*$\", re.M)\n\nreport = []\nfor st in STATIONS:\n    gd = LEVELS / f\"station_{st}.gd\"\n    src = gd.read_text(encoding=\"utf-8\")\n    orig = src\n\n    # 1. canonical declaration\n    n_decl = len(decl_re.findall(src))\n    if n_decl != 1:\n        sys.exit(f\"station_{st}: expected 1 camera declaration, found {n_decl}\")\n    src = decl_re.sub(CANON_DECL, src)\n\n    # 2. body\n    if OLD_BODY in src:\n        src = src.replace(OLD_BODY, NEW_BODY)\n        mode = \"rewired\"\n    elif PARK_BLOCK in src:\n        assert src.count(PARK_BLOCK) == 1, st\n        src = src.replace(PARK_BLOCK, \"\\t_setup_camera()\\n\")\n        if not src.endswith(\"\\n\"):\n            src += \"\\n\"\n        src = src.rstrip(\"\\n\") + \"\\n\" + CANON_FUNC\n        mode = \"bound\"\n    else:\n        sys.exit(f\"station_{st}: no known camera block\")\n\n    if src != orig:\n        gd.write_text(src, encoding=\"utf-8\", newline=\"\\n\")\n    report.append(f\"station_{st}: {mode}\")\n\n# 3. scenes: unify node name Camera2D -> Camera, ensure target NodePath\nfor st in STATIONS:\n    tscn = SCENES / f\"station_{st}.tscn\"\n    src = tscn.read_text(encoding=\"utf-8\")\n    orig = src\n    src = src.replace(\n        '[node name=\"Camera2D\" type=\"Camera2D\" parent=\".\"]',\n        '[node name=\"Camera\" type=\"Camera2D\" parent=\".\" node_paths=PackedStringArray(\"target\")]',\n    )\n    src = src.replace(\n        '[node name=\"Camera\" type=\"Camera2D\" parent=\".\"]',\n        '[node name=\"Camera\" type=\"Camera2D\" parent=\".\" node_paths=PackedStringArray(\"target\")]',\n    )\n    # ensure the target assignment follows the camera's script line\n    m = re.search(\n        r'(\\[node name=\"Camera\" type=\"Camera2D\" parent=\"\\.\" node_paths=PackedStringArray\\(\"target\"\\)\\]\\n'\n        r'position = Vector2\\(320, 180\\)\\n'\n        r'script = ExtResource\\(\"[^\"]+\"\\)\\n)',\n        src,\n    )\n    if m is None:\n        sys.exit(f\"station_{st}.tscn: camera block not in expected shape\")\n    block = m.group(1)\n    tail = src[m.end():]\n    if not tail.startswith('target = NodePath(\"../Player\")'):\n        src = src[: m.end()] + 'target = NodePath(\"../Player\")\\n' + tail\n    if src != orig:\n        tscn.write_text(src, encoding=\"utf-8\", newline=\"\\n\")\n\nprint(\"\\n\".join(report))\nprint(\"scenes unified: %d\" % len(STATIONS))\nPYEOF\necho written",
+      "description": "Write camera unification transform"
+    },
+    "tool_use_id": "toolu_015bdE4yoWsaTkjXbApDoidu"
+  },
+  {
+    "session_id": "dcee420e-57a4-4172-93df-acc04ee2ce71",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\dcee420e-57a4-4172-93df-acc04ee2ce71.jsonl",
+    "cwd": "C:\\getting_strange\\scripts\\levels",
+    "prompt_id": "aaf0cf8d-a024-4bc8-ad53-2e0ffbd612c3",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "grep \"^== \\|Verification passed\\|failed with exit\" \"C:/Users/admin/AppData/Local/Temp/claude/C--getting-strange/dcee420e-57a4-4172-93df-acc04ee2ce71/scratchpad/baseline_verify.log\" | tail -3",
+      "description": "Verify progress"
+    },
+    "tool_use_id": "toolu_01Y7pCSE9vTsWeYLAP2bg7is"
+  },
+  {
+    "session_id": "dcee420e-57a4-4172-93df-acc04ee2ce71",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\dcee420e-57a4-4172-93df-acc04ee2ce71.jsonl",
+    "cwd": "C:\\getting_strange\\scripts\\levels",
+    "prompt_id": "aaf0cf8d-a024-4bc8-ad53-2e0ffbd612c3",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "grep -n \"emitting\" scripts/interactables/anchorable_object.gd scripts/interactables/memory_resonance_point.gd scripts/interactables/movable_anchorable_prop.gd scripts/player/prototype_player.gd scripts/levels/atmosphere_rig.gd",
+      "description": "All emitting assignments"
+    },
+    "tool_use_id": "toolu_0196PbUbQhCfNhrzkkFoLQee"
+  },
+  {
+    "session_id": "dcee420e-57a4-4172-93df-acc04ee2ce71",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\dcee420e-57a4-4172-93df-acc04ee2ce71.jsonl",
+    "cwd": "C:\\getting_strange\\scripts\\levels",
+    "prompt_id": "aaf0cf8d-a024-4bc8-ad53-2e0ffbd612c3",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cd /c/getting_strange && grep -n \"emitting\" scripts/interactables/anchorable_object.gd scripts/interactables/memory_resonance_point.gd scripts/interactables/movable_anchorable_prop.gd scripts/player/prototype_player.gd scripts/levels/atmosphere_rig.gd",
+      "description": "All emitting assignments"
+    },
+    "tool_use_id": "toolu_0121prcJVKoRRHuJtvhcn675"
+  }
+]

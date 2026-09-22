@@ -1,0 +1,370 @@
+== Documentation contract ==
+DOCS PASS: 26 required files and handoff contracts
+== Web Showcase validation ==
+== Web Showcase Static & Contract Validation ==
+WEB RUNTIME SMOKE: PASS (all bundles evaluate, 49 globals, 100 dossiers)
+WEB PASS: All HTML, CSS, JS, Locales, PWA Manifest, and Assets validated successfully.
+== Godot headless import ==
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Inicjalizacja projektu (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Skanowanie struktury plików...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Wczytywanie globalnych nazw klas...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Weryfikowanie GDExtension...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Tworzenie skryptów autoładowania...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Inicjalizacja wtyczek...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Uruchamianie skanu systemu plików...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Akcje skanowania... (92 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | anchor_lab.png[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | anchor_lab_ch2.png[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | anchor_lab_ch3.png[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | anchor_lab_ch3_locked.png[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | anchor_lab_ch3_solved.png[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | movement_lab.png[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | station_01.png[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | station_01_active.png[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | station_02.png[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | station_02_correlation.png[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | station_03.png[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | station_03_desk.png[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | station_04.png[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | station_04_bramka.png[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | station_05.png[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | station_05_crosswalk.png[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | station_06.png[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | station_06_arrival.png[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | station_07.png[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | station_07_door.png[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | station_08.png[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | station_08_desk.png[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | station_09.png[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | station_09_mirror.png[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | station_10.png[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | station_10_phone.png[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | station_11.png[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | station_11_intervention.png[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | station_12.png[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | station_12_terminal.png[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | station_13.png[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | station_13_photo.png[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | station_14.png[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | station_14_anchored.png[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | station_15.png[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | station_15_reflection.png[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | station_16.png[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | station_16_choice.png[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | station_17.png[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | station_17_interview.png[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | station_18.png[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | station_18_interview.png[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | station_19.png[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | station_19_models.png[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | station_20.png[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | station_20_szymon.png[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | station_21.png[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | station_21_szymon.png[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | station_22.png[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | station_22_yield.png[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | station_23.png[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | station_23_terminal.png[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | station_24.png[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | station_24_cctv.png[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | station_25.png[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | station_25_jakub.png[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | station_26.png[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | station_26_isolation.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | station_27.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | station_27_dialogue.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | station_28.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | station_28_transit.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | station_29.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | station_29_platform.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | station_30.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | station_30_power.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | station_31.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | station_31_chairs.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | station_32.png[39m[0m
+[  74% ] [90m[1m_update_scan_actions[22m | station_32_glass.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | station_33.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | station_33_shaft.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | station_34.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | station_34_core.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | station_35.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | station_35_sedation.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | station_36.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | station_36_drain.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | station_37.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | station_37_signal.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | station_38.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | station_38_rescue.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | station_39.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | station_39_triad.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | station_40.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | station_40_proposal.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | station_41.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | station_41_execution.png[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | station_42a.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | station_42b.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | station_42c.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | station_43.png[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Ponowne) importowanie zasobów (92 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[   1% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[   2% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[   3% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[   4% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[   5% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[   6% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[   7% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[   8% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[   9% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  10% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  11% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  12% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  13% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  15% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  16% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  17% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  18% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  19% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  20% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  21% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  22% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  23% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  24% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  25% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  26% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  27% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  29% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  30% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  31% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  32% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  33% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  34% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  35% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  36% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  37% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  38% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  39% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  40% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  41% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  43% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  44% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  45% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  46% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  47% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  48% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  49% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  50% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  51% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  52% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  53% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  54% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  55% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  56% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  58% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  59% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  60% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  61% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  62% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  63% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  64% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  65% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  66% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  67% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  68% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  69% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  70% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  72% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  73% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  74% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  75% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  76% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  77% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  78% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  79% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  80% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  81% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  82% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  83% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  84% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  86% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  87% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  88% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  89% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  90% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  91% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  92% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  93% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  94% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  95% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  96% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[  97% ] [90m[1mreimport[22m | Przygotowywanie plików do ponownego importu...[39m[0m
+[   0% ] [90m[1mreimport[22m | Wykonywanie operacji przed importem...[39m[0m
+[   0% ] [90m[1mreimport[22m | station_32.png[39m[0m
+[   1% ] [90m[1mreimport[22m | station_31_chairs.png[39m[0m
+[   2% ] [90m[1mreimport[22m | station_31.png[39m[0m
+[   3% ] [90m[1mreimport[22m | station_30_power.png[39m[0m
+[   4% ] [90m[1mreimport[22m | station_30.png[39m[0m
+[   5% ] [90m[1mreimport[22m | station_29_platform.png[39m[0m
+[   6% ] [90m[1mreimport[22m | station_29.png[39m[0m
+[   7% ] [90m[1mreimport[22m | station_28_transit.png[39m[0m
+[   8% ] [90m[1mreimport[22m | station_28.png[39m[0m
+[   9% ] [90m[1mreimport[22m | station_27_dialogue.png[39m[0m
+[  10% ] [90m[1mreimport[22m | station_27.png[39m[0m
+[  11% ] [90m[1mreimport[22m | station_26_isolation.png[39m[0m
+[  12% ] [90m[1mreimport[22m | station_26.png[39m[0m
+[  13% ] [90m[1mreimport[22m | station_25_jakub.png[39m[0m
+[  15% ] [90m[1mreimport[22m | station_25.png[39m[0m
+[  16% ] [90m[1mreimport[22m | station_24_cctv.png[39m[0m
+[  17% ] [90m[1mreimport[22m | station_24.png[39m[0m
+[  18% ] [90m[1mreimport[22m | station_23_terminal.png[39m[0m
+[  19% ] [90m[1mreimport[22m | station_23.png[39m[0m
+[  20% ] [90m[1mreimport[22m | station_22_yield.png[39m[0m
+[  21% ] [90m[1mreimport[22m | station_22.png[39m[0m
+[  22% ] [90m[1mreimport[22m | station_21_szymon.png[39m[0m
+[  23% ] [90m[1mreimport[22m | station_21.png[39m[0m
+[  24% ] [90m[1mreimport[22m | station_43.png[39m[0m
+[  25% ] [90m[1mreimport[22m | station_42c.png[39m[0m
+[  26% ] [90m[1mreimport[22m | station_42b.png[39m[0m
+[  27% ] [90m[1mreimport[22m | station_42a.png[39m[0m
+[  29% ] [90m[1mreimport[22m | station_41_execution.png[39m[0m
+[  30% ] [90m[1mreimport[22m | station_41.png[39m[0m
+[  31% ] [90m[1mreimport[22m | station_40_proposal.png[39m[0m
+[  32% ] [90m[1mreimport[22m | station_40.png[39m[0m
+[  33% ] [90m[1mreimport[22m | station_39_triad.png[39m[0m
+[  34% ] [90m[1mreimport[22m | station_39.png[39m[0m
+[  35% ] [90m[1mreimport[22m | station_38_rescue.png[39m[0m
+[  36% ] [90m[1mreimport[22m | station_38.png[39m[0m
+[  37% ] [90m[1mreimport[22m | station_37_signal.png[39m[0m
+[  38% ] [90m[1mreimport[22m | station_37.png[39m[0m
+[  39% ] [90m[1mreimport[22m | station_36_drain.png[39m[0m
+[  40% ] [90m[1mreimport[22m | station_36.png[39m[0m
+[  41% ] [90m[1mreimport[22m | station_35_sedation.png[39m[0m
+[  43% ] [90m[1mreimport[22m | station_35.png[39m[0m
+[  44% ] [90m[1mreimport[22m | station_34_core.png[39m[0m
+[  45% ] [90m[1mreimport[22m | station_34.png[39m[0m
+[  46% ] [90m[1mreimport[22m | station_33_shaft.png[39m[0m
+[  47% ] [90m[1mreimport[22m | station_33.png[39m[0m
+[  48% ] [90m[1mreimport[22m | station_32_glass.png[39m[0m
+[  49% ] [90m[1mreimport[22m | station_09.png[39m[0m
+[  50% ] [90m[1mreimport[22m | station_08_desk.png[39m[0m
+[  51% ] [90m[1mreimport[22m | station_08.png[39m[0m
+[  52% ] [90m[1mreimport[22m | station_07_door.png[39m[0m
+[  53% ] [90m[1mreimport[22m | station_07.png[39m[0m
+[  54% ] [90m[1mreimport[22m | station_06_arrival.png[39m[0m
+[  55% ] [90m[1mreimport[22m | station_06.png[39m[0m
+[  56% ] [90m[1mreimport[22m | station_05_crosswalk.png[39m[0m
+[  58% ] [90m[1mreimport[22m | station_05.png[39m[0m
+[  59% ] [90m[1mreimport[22m | station_04_bramka.png[39m[0m
+[  60% ] [90m[1mreimport[22m | station_04.png[39m[0m
+[  61% ] [90m[1mreimport[22m | station_03_desk.png[39m[0m
+[  62% ] [90m[1mreimport[22m | station_03.png[39m[0m
+[  63% ] [90m[1mreimport[22m | station_02_correlation.png[39m[0m
+[  64% ] [90m[1mreimport[22m | station_02.png[39m[0m
+[  65% ] [90m[1mreimport[22m | station_01_active.png[39m[0m
+[  66% ] [90m[1mreimport[22m | station_01.png[39m[0m
+[  67% ] [90m[1mreimport[22m | movement_lab.png[39m[0m
+[  68% ] [90m[1mreimport[22m | anchor_lab_ch3_solved.png[39m[0m
+[  69% ] [90m[1mreimport[22m | anchor_lab_ch3_locked.png[39m[0m
+[  70% ] [90m[1mreimport[22m | anchor_lab_ch3.png[39m[0m
+[  72% ] [90m[1mreimport[22m | anchor_lab_ch2.png[39m[0m
+[  73% ] [90m[1mreimport[22m | anchor_lab.png[39m[0m
+[  74% ] [90m[1mreimport[22m | station_20_szymon.png[39m[0m
+[  75% ] [90m[1mreimport[22m | station_20.png[39m[0m
+[  76% ] [90m[1mreimport[22m | station_19_models.png[39m[0m
+[  77% ] [90m[1mreimport[22m | station_19.png[39m[0m
+[  78% ] [90m[1mreimport[22m | station_18_interview.png[39m[0m
+[  79% ] [90m[1mreimport[22m | station_18.png[39m[0m
+[  80% ] [90m[1mreimport[22m | station_17_interview.png[39m[0m
+[  81% ] [90m[1mreimport[22m | station_17.png[39m[0m
+[  82% ] [90m[1mreimport[22m | station_16_choice.png[39m[0m
+[  83% ] [90m[1mreimport[22m | station_16.png[39m[0m
+[  84% ] [90m[1mreimport[22m | station_15_reflection.png[39m[0m
+[  86% ] [90m[1mreimport[22m | station_15.png[39m[0m
+[  87% ] [90m[1mreimport[22m | station_14_anchored.png[39m[0m
+[  88% ] [90m[1mreimport[22m | station_14.png[39m[0m
+[  89% ] [90m[1mreimport[22m | station_13_photo.png[39m[0m
+[  90% ] [90m[1mreimport[22m | station_13.png[39m[0m
+[  91% ] [90m[1mreimport[22m | station_12_terminal.png[39m[0m
+[  92% ] [90m[1mreimport[22m | station_12.png[39m[0m
+[  93% ] [90m[1mreimport[22m | station_11_intervention.png[39m[0m
+[  94% ] [90m[1mreimport[22m | station_11.png[39m[0m
+[  95% ] [90m[1mreimport[22m | station_10_phone.png[39m[0m
+[  96% ] [90m[1mreimport[22m | station_10.png[39m[0m
+[  97% ] [90m[1mreimport[22m | station_09_mirror.png[39m[0m
+[  98% ] [90m[1mreimport[22m | Finalizowanie importu zasobów...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Ponowne) importowanie zasobów (92 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Wykonywanie operacji po imporcie...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Wczytywanie edytora (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Wczytywanie układu edytora...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Wczytywanie doków...[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | Przywracanie scen...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | Wczytywanie centralnego układu edytora...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | Wczytywanie układu okien wtyczek...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | Układ edytora gotowy.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+== Getting Strange smoke test ==
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+MOVEMENT PROFILE: A
+TEST: movement_lab completed
+TEST: anchor_lab completed
+TEST: station_01 completed
+TEST: station_02 completed
+TEST: station_03 completed
+TEST: station_04 completed
+TEST: station_05 completed
+TEST: station_06 completed
+TEST: station_07 completed
+TEST: station_08 completed
+TEST: station_09 completed
+TEST: station_10 completed
+TEST: station_11 completed
+TEST: station_12 completed
+TEST: station_13 completed
+TEST: station_14 completed
+TEST: station_15 completed
+TEST: station_16 completed
+TEST: station_17 completed
+TEST: station_18 completed
+TEST: station_19 completed
+TEST: station_20 completed
+TEST: station_21 completed
+TEST: station_22 completed
+TEST: station_23 completed
+TEST: station_24 completed
+TEST: station_25 completed
+TEST: station_26 completed
+TEST: station_27 completed
+TEST: station_28 completed
+TEST: station_29 completed
+TEST: station_30 completed
+TEST: station_31 completed
+TEST: station_32 completed
+TEST: station_33 completed
+TEST: station_34 completed
+TEST: station_35 completed
+TEST: station_36 completed
+TEST: station_37 completed
+TEST: station_38 completed
+TEST: station_39 completed
+TEST: station_40 completed
+TEST: station_41 completed
+TEST: station_42a completed
+TEST: station_42b completed
+TEST: station_42c completed
+TEST: station_43 completed
+SMOKE PASS: project, scene, input and player physics
+WARNING: 6 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2535)
+Verification passed.

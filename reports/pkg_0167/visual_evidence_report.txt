@@ -1,0 +1,13 @@
+PKG-0167 VISUAL EVIDENCE REPORT
+Renderer: Intel(R) Iris(R) Xe Graphics
+Viewport: 640x360; normal Windows display driver; script was not headless.
+Three textless M2 frames of Station 42A: neutral, return executed, sealed other Lena.
+One M3 true-grayscale structure frame after household consequence on the limited/withheld path.
+Hash distinctness and grayscale checks are structural evidence only; no line claims
+human comprehension, emotion, comfort or PRODUCT GO (D-012, ADR-003).
+
+CAPTURED FRAMES
+neutral            mono=false hidden=4  hash=184961240 res://reports/pkg_0167/station_42a_neutral.png
+return_executed    mono=false hidden=4  hash=2931933356 res://reports/pkg_0167/station_42a_return_executed.png
+sealed_other       mono=false hidden=4  hash=2067519089 res://reports/pkg_0167/station_42a_sealed_other.png
+structure_mono     mono=true  hidden=4  hash=1884996479 res://reports/pkg_0167/station_42a_structure_mono.png

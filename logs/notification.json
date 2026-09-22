@@ -1,0 +1,59 @@
+[
+  {
+    "session_id": "f4da67b2-4f73-45ca-ac1f-780abf8a29bc",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\f4da67b2-4f73-45ca-ac1f-780abf8a29bc.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\f4da67b2-4f73-45ca-ac1f-780abf8a29bc\\scratchpad",
+    "prompt_id": "d926166f-d7d5-4724-9bbe-ee90689ccdc7",
+    "hook_event_name": "Notification",
+    "message": "Claude needs your permission to use AskUserQuestion",
+    "notification_type": "permission_prompt"
+  },
+  {
+    "session_id": "f9fa0a51-bd54-42c4-8446-70d84f886f06",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\f9fa0a51-bd54-42c4-8446-70d84f886f06.jsonl",
+    "cwd": "C:\\getting_strange",
+    "prompt_id": "e0ec1e3a-d496-42b0-831d-bef89a748840",
+    "hook_event_name": "Notification",
+    "message": "Claude Code login successful",
+    "notification_type": "auth_success"
+  },
+  {
+    "session_id": "e99297f5-a8ad-40d1-ae5f-e62b2ef85def",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\e99297f5-a8ad-40d1-ae5f-e62b2ef85def.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "55875d88-0eb2-4cff-bcce-a5f1e4832dca",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\55875d88-0eb2-4cff-bcce-a5f1e4832dca.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\55875d88-0eb2-4cff-bcce-a5f1e4832dca\\scratchpad",
+    "prompt_id": "a6356751-701b-4772-a9cd-e75dfe48044b",
+    "hook_event_name": "Notification",
+    "message": "Claude needs your permission to use AskUserQuestion",
+    "notification_type": "permission_prompt"
+  },
+  {
+    "session_id": "0a014373-5705-4868-a89b-14dc583f7253",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\0a014373-5705-4868-a89b-14dc583f7253.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\0a014373-5705-4868-a89b-14dc583f7253\\scratchpad",
+    "prompt_id": "d011482d-6c8b-4ae5-af66-1ab017430ae5",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "026fc740-fd69-42f1-8933-383f25df3255",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\026fc740-fd69-42f1-8933-383f25df3255.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\026fc740-fd69-42f1-8933-383f25df3255\\scratchpad",
+    "prompt_id": "d937779e-251e-45e3-9351-f6faa13f69b3",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  }
+]

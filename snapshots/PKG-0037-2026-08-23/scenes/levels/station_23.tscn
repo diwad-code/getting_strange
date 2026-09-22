@@ -1,0 +1,140 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_23.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor_main"]
+size = Vector2(640, 80)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_ceiling"]
+size = Vector2(640, 40)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(50, 70)
+
+[sub_resource type="CircleShape2D" id="Circle_prop_terminal"]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_model"]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_ledger"]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_console"]
+radius = 45.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_exit"]
+radius = 60.0
+
+[node name="Station23" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="FloorMain" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 320)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorMain"]
+shape = SubResource("Rectangle_floor_main")
+
+[node name="Ceiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ceiling"]
+shape = SubResource("Rectangle_ceiling")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="DesignerTerminal" type="Area2D" parent="Props"]
+position = Vector2(140, 240)
+script = ExtResource("2_resonance")
+resonance_id = "prop_designer_terminal"
+prop_type = 102
+prop_title = "Stacja robocza CRT"
+prop_subtitle = "Interfejs nadpisywania wzorca i mapa awarii dzielnicowych"
+interaction_radius = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/DesignerTerminal"]
+shape = SubResource("Circle_prop_terminal")
+
+[node name="SubstructureModel" type="Area2D" parent="Props"]
+position = Vector2(260, 245)
+script = ExtResource("2_resonance")
+resonance_id = "prop_substructure_model"
+prop_type = 103
+prop_title = "Architektoniczny model Podstruktury"
+prop_subtitle = "Notatka: JEŚLI TO CZYTASZ, ZGODZIŁAM SIĘ NA TWOJE RYZYKO"
+interaction_radius = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/SubstructureModel"]
+shape = SubResource("Circle_prop_model")
+
+[node name="BurdenedLedger" type="Area2D" parent="Props"]
+position = Vector2(380, 240)
+script = ExtResource("2_resonance")
+resonance_id = "prop_burdened_ledger"
+prop_type = 104
+prop_title = "Rejestr osób obciążonych"
+prop_subtitle = "Archiwum długu sprzeczności UCP (obywatele bez świadków)"
+interaction_radius = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/BurdenedLedger"]
+shape = SubResource("Circle_prop_ledger")
+
+[node name="ShadowInteractiveConsole" type="Area2D" parent="Props"]
+position = Vector2(490, 240)
+script = ExtResource("2_resonance")
+resonance_id = "prop_shadow_console"
+prop_type = 105
+prop_title = "Interaktywna konsola Śladu"
+prop_subtitle = "Polecenie nadpisania wzorca i uciekający kursor (D-16)"
+interaction_radius = 45.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ShadowInteractiveConsole"]
+shape = SubResource("Circle_prop_console")
+
+[node name="Station23Exit" type="Area2D" parent="Props"]
+position = Vector2(590, 230)
+script = ExtResource("2_resonance")
+resonance_id = "prop_station_23_exit"
+prop_type = 106
+prop_title = "Śluza tranzytowa do Przestrzeni 24"
+prop_subtitle = "Marta pod obserwacją (monitoring mieszkania 14)"
+interaction_radius = 60.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Station23Exit"]
+shape = SubResource("Circle_prop_exit")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(610, 245)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(50, 240)
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")

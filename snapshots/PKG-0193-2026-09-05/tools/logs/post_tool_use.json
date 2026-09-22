@@ -1,0 +1,27 @@
+[
+  {
+    "session_id": "6cbd9186-47f1-4082-9170-2106c9bce1dd",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\6cbd9186-47f1-4082-9170-2106c9bce1dd.jsonl",
+    "cwd": "C:\\getting_strange\\tools",
+    "prompt_id": "9bafbda3-b6b9-4660-a776-8436bd209cfd",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cd /c/getting_strange/tools && for f in pkg_0137_probe pkg_0137_void_probe pkg_0137_return_probe pkg_0137_leak_probe pkg_0137_s38_probe pkg_0137_gate_probe pkg_0137_exit_probe; do rm -f \"$f.gd\" \"$f.gd.uid\" && echo \"removed $f\"; done; ls pkg_0137* capture_pkg_0137* 2>/dev/null",
+      "description": "Remove one-off diagnostic probes"
+    },
+    "tool_response": {
+      "stdout": "removed pkg_0137_probe\nremoved pkg_0137_void_probe\nremoved pkg_0137_return_probe\nremoved pkg_0137_leak_probe\nremoved pkg_0137_s38_probe\nremoved pkg_0137_gate_probe\nremoved pkg_0137_exit_probe\ncapture_pkg_0137.gd\npkg_0137_backtrack_probe.gd\npkg_0137_playthrough_audit.gd",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false,
+      "noOutputExpected": false
+    },
+    "tool_use_id": "toolu_01S6ntPofej1qZPeWjNCk7J1",
+    "duration_ms": 221
+  }
+]

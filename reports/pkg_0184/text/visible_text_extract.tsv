@@ -1,0 +1,174 @@
+source	key	kind	text
+scripts\core\localization_manager.gd	UI_START_EXPERIMENT	ui_key	ROZPOCZNIJ POMIAR (21:45)
+scripts\core\localization_manager.gd	UI_MOVEMENT_PROFILE	ui_key	PROFIL RUCHU:
+scripts\core\localization_manager.gd	UI_PROFILE_A	ui_key	PROFIL A: BAZOWY (IKP STANDARD)
+scripts\core\localization_manager.gd	UI_PROFILE_B	ui_key	PROFIL B: SPRĘŻYSTY (SZYBKI)
+scripts\core\localization_manager.gd	UI_PROFILE_C	ui_key	PROFIL C: INERCYJNY (MASA)
+scripts\core\localization_manager.gd	UI_RESTART_HINT	ui_key	[R] RESTART KOMORY
+scripts\core\localization_manager.gd	UI_ANCHOR_HINT	ui_key	[E] ZAKOTWICZENIE  //  [F] KOREKTA
+scripts\core\localization_manager.gd	UI_INTERACT_HINT	ui_key	[E] INTERAKCJA
+scripts\core\localization_manager.gd	TITLE_SUBTITLE	ui_key	OSOBISTY THRILLER // POWRÓT PRZEZ LINIĘ 4
+scripts\core\localization_manager.gd	TITLE_PERSONAL_PROMISE	ui_key	Marta czeka na Lenę. Trzy sekundy z Linii 4 nie chcą zniknąć.
+scripts\core\localization_manager.gd	TITLE_RETURN_PROMISE	ui_key	LINIA 4  //  OSTATNI ODCZYT  //  POWRÓT
+scripts\core\localization_manager.gd	COLD_OPEN_SKIP	ui_key	POMIŃ ▸
+scripts\core\localization_manager.gd	MENU_NEW_GAME	ui_key	NOWA GRA
+scripts\core\localization_manager.gd	MENU_CONTINUE	ui_key	KONTYNUUJ
+scripts\core\localization_manager.gd	MENU_REPLAY_EPILOGUE	ui_key	POWTÓRZ EPILOG
+scripts\core\localization_manager.gd	MENU_SETTINGS	ui_key	USTAWIENIA
+scripts\core\localization_manager.gd	MENU_QUIT	ui_key	ZAKOŃCZ
+scripts\core\localization_manager.gd	STATUS_SAVE_ACTIVE	ui_key	WZNÓW // %s%s
+scripts\core\localization_manager.gd	STATUS_SAVE_NONE	ui_key	ZACZNIJ // OSTATNI ODCZYT PRZY LINII 4
+scripts\core\localization_manager.gd	STATUS_COMPLETED_SUFFIX	ui_key	  //  UKOŃCZONA  //  %s
+scripts\core\localization_manager.gd	CONTROLS_HEADER	ui_key	RUSZ SIĘ / ZBADAJ
+scripts\core\localization_manager.gd	INPUT_ACTION_MOVE_LEFT	ui_key	W LEWO
+scripts\core\localization_manager.gd	INPUT_ACTION_MOVE_RIGHT	ui_key	W PRAWO
+scripts\core\localization_manager.gd	INPUT_ACTION_JUMP	ui_key	SKOK
+scripts\core\localization_manager.gd	INPUT_ACTION_INTERACT	ui_key	INTERAKCJA
+scripts\core\localization_manager.gd	INPUT_ACTION_PAUSE	ui_key	PAUZA
+scripts\core\localization_manager.gd	INPUT_ACTION_RESTART	ui_key	RESTART
+scripts\core\localization_manager.gd	INPUT_ACTION_TRIGGER_CORRECTION	ui_key	KOREKTA
+scripts\core\localization_manager.gd	BUILD_LABEL	ui_key	WER. %s  //  PC  //  %dx%d  //  FIZYKA %d Hz
+scripts\core\localization_manager.gd	SETTINGS_TITLE	ui_key	USTAWIENIA  //  RUNTIME
+scripts\core\localization_manager.gd	SETTINGS_LANGUAGE	ui_key	JĘZYK
+scripts\core\localization_manager.gd	SETTINGS_LANGUAGE_HINT	ui_key	Przełącz teksty shellu i UI.
+scripts\core\localization_manager.gd	SETTINGS_MASTER_VOLUME	ui_key	GŁOŚNOŚĆ MASTER
+scripts\core\localization_manager.gd	SETTINGS_TEXT_SPEED	ui_key	TEMPO TEKSTU  //  ZNAKI/S
+scripts\core\localization_manager.gd	SETTINGS_TEXT_SCALE	ui_key	SKALA TEKSTU
+scripts\core\localization_manager.gd	SETTINGS_FULLSCREEN	ui_key	TRYB PEŁNOEKRANOWY
+scripts\core\localization_manager.gd	SETTINGS_REDUCED_MOTION	ui_key	OGRANICZONY RUCH
+scripts\core\localization_manager.gd	SETTINGS_REDUCED_MOTION_HINT	ui_key	Tłumi migotanie świetlówek, pulsowanie pola kotwiczenia, wstrząs kamery i mikro-cząstki. Nic nie znika ze świata.
+scripts\core\localization_manager.gd	SETTINGS_REMAP	ui_key	STEROWANIE  //  REMAP
+scripts\core\localization_manager.gd	SETTINGS_HINT	ui_key	Zmiany zapisują się natychmiast. Dialogi pozostają w języku źródłowym.
+scripts\core\localization_manager.gd	SETTINGS_REMAP_TITLE	ui_key	STEROWANIE  //  REMAP AKCJI
+scripts\core\localization_manager.gd	SETTINGS_REMAP_HINT	ui_key	Wybierz akcję, potem naciśnij klawisz lub przycisk pada.
+scripts\core\localization_manager.gd	SETTINGS_REMAP_PENDING	ui_key	NACIŚNIJ KLAWISZ LUB PRZYCISK PADA DLA: %s\nESC / B = ANULUJ
+scripts\core\localization_manager.gd	SETTINGS_REMAP_WAITING	ui_key	OCZEKIWANIE…
+scripts\core\localization_manager.gd	SETTINGS_REMAP_SAVED	ui_key	ZAPISANO: %s
+scripts\core\localization_manager.gd	SETTINGS_REMAP_CONFLICT	ui_key	KONFLIKT: %s JUŻ UŻYWA TEGO WEJŚCIA
+scripts\core\localization_manager.gd	SETTINGS_REMAP_UNSUPPORTED	ui_key	TYLKO KLAWISZ LUB PRZYCISK PADA
+scripts\core\localization_manager.gd	SETTINGS_RESTORE_DEFAULTS	ui_key	DOMYŚLNE MAPOWANIA
+scripts\core\localization_manager.gd	SETTINGS_REMAP_DEFAULTS_RESTORED	ui_key	PRZYWRÓCONO DOMYŚLNE MAPOWANIA
+scripts\core\localization_manager.gd	UI_BACK	ui_key	POWRÓT
+scripts\core\localization_manager.gd	PAUSE_TITLE	ui_key	KAMPANIA  //  PAUZA
+scripts\core\localization_manager.gd	PAUSE_RESUME	ui_key	WZNÓW
+scripts\core\localization_manager.gd	PAUSE_CHECKPOINT	ui_key	CHECKPOINT
+scripts\core\localization_manager.gd	PAUSE_SETTINGS	ui_key	USTAWIENIA
+scripts\core\localization_manager.gd	PAUSE_TEST_MODE	ui_key	TRYB TESTOWY: %s
+scripts\core\localization_manager.gd	PAUSE_RESET_SAVE	ui_key	RESET ZAPISU
+scripts\core\localization_manager.gd	PAUSE_STATUS	ui_key	ODKRYTE: %d/%d   |   TRYB TESTOWY: %s
+scripts\core\localization_manager.gd	PAUSE_FOOTER	ui_key	PAUZA: POWRÓT  //  INTERAKCJA: WYBÓR
+scripts\core\localization_manager.gd	PAUSE_STATION_TOOLTIP	ui_key	Adres %s
+scripts\core\localization_manager.gd	CRT_CONTINUE	ui_key	INTERAKCJA  >
+scripts\core\localization_manager.gd	CRT_CHANNEL	ui_key	KANAŁ ŚWIADKA  //  ZAPIS AKTYWNY
+scripts\core\localization_manager.gd	SAVE_ACTIVE	ui_key	ZAPIS AKTYWNY
+scripts\core\localization_manager.gd	SAVE_RELOADED	ui_key	ZAPIS WCZYTANY
+scripts\core\localization_manager.gd	SAVE_RESET	ui_key	ZAPIS ZRESETOWANY
+scripts\core\localization_manager.gd	UI_START_EXPERIMENT	ui_key	START EXPERIMENT (21:45)
+scripts\core\localization_manager.gd	UI_MOVEMENT_PROFILE	ui_key	MOVEMENT PROFILE:
+scripts\core\localization_manager.gd	UI_PROFILE_A	ui_key	PROFILE A: BASELINE (IKP STANDARD)
+scripts\core\localization_manager.gd	UI_PROFILE_B	ui_key	PROFILE B: SNAPPY (FAST)
+scripts\core\localization_manager.gd	UI_PROFILE_C	ui_key	PROFILE C: INERTIAL (HEAVY)
+scripts\core\localization_manager.gd	UI_RESTART_HINT	ui_key	[R] RESTART CHAMBER
+scripts\core\localization_manager.gd	UI_ANCHOR_HINT	ui_key	[E] ANCHOR  //  [F] CORRECTION
+scripts\core\localization_manager.gd	UI_INTERACT_HINT	ui_key	[E] INTERACT
+scripts\core\localization_manager.gd	TITLE_SUBTITLE	ui_key	PERSONAL THRILLER // A RETURN ON LINE 4
+scripts\core\localization_manager.gd	TITLE_PERSONAL_PROMISE	ui_key	Lena is going back to Marta. Three seconds from Line 4 refuse to disappear.
+scripts\core\localization_manager.gd	TITLE_RETURN_PROMISE	ui_key	LINE 4  //  LAST READING  //  RETURN
+scripts\core\localization_manager.gd	COLD_OPEN_SKIP	ui_key	SKIP ▸
+scripts\core\localization_manager.gd	MENU_NEW_GAME	ui_key	NEW GAME
+scripts\core\localization_manager.gd	MENU_CONTINUE	ui_key	CONTINUE
+scripts\core\localization_manager.gd	MENU_REPLAY_EPILOGUE	ui_key	REPLAY EPILOGUE
+scripts\core\localization_manager.gd	MENU_SETTINGS	ui_key	SETTINGS
+scripts\core\localization_manager.gd	MENU_QUIT	ui_key	QUIT
+scripts\core\localization_manager.gd	STATUS_SAVE_ACTIVE	ui_key	RESUME // %s%s
+scripts\core\localization_manager.gd	STATUS_SAVE_NONE	ui_key	BEGIN // LAST READING AT LINE 4
+scripts\core\localization_manager.gd	STATUS_COMPLETED_SUFFIX	ui_key	  //  COMPLETE  //  %s
+scripts\core\localization_manager.gd	CONTROLS_HEADER	ui_key	MOVE / INVESTIGATE
+scripts\core\localization_manager.gd	INPUT_ACTION_MOVE_LEFT	ui_key	MOVE LEFT
+scripts\core\localization_manager.gd	INPUT_ACTION_MOVE_RIGHT	ui_key	MOVE RIGHT
+scripts\core\localization_manager.gd	INPUT_ACTION_JUMP	ui_key	JUMP
+scripts\core\localization_manager.gd	INPUT_ACTION_INTERACT	ui_key	INTERACT
+scripts\core\localization_manager.gd	INPUT_ACTION_PAUSE	ui_key	PAUSE
+scripts\core\localization_manager.gd	INPUT_ACTION_RESTART	ui_key	RESTART
+scripts\core\localization_manager.gd	INPUT_ACTION_TRIGGER_CORRECTION	ui_key	CORRECTION
+scripts\core\localization_manager.gd	BUILD_LABEL	ui_key	VER. %s  //  PC  //  %dx%d  //  %d Hz PHYSICS
+scripts\core\localization_manager.gd	SETTINGS_TITLE	ui_key	SETTINGS  //  RUNTIME
+scripts\core\localization_manager.gd	SETTINGS_LANGUAGE	ui_key	LANGUAGE
+scripts\core\localization_manager.gd	SETTINGS_LANGUAGE_HINT	ui_key	Switch shell and UI text.
+scripts\core\localization_manager.gd	SETTINGS_MASTER_VOLUME	ui_key	MASTER VOLUME
+scripts\core\localization_manager.gd	SETTINGS_TEXT_SPEED	ui_key	TEXT SPEED  //  CHARS/S
+scripts\core\localization_manager.gd	SETTINGS_TEXT_SCALE	ui_key	TEXT SCALE
+scripts\core\localization_manager.gd	SETTINGS_FULLSCREEN	ui_key	FULLSCREEN MODE
+scripts\core\localization_manager.gd	SETTINGS_REDUCED_MOTION	ui_key	REDUCED MOTION
+scripts\core\localization_manager.gd	SETTINGS_REDUCED_MOTION_HINT	ui_key	Damps fluorescent flicker, anchor field breathing, camera shake and micro-particles. Nothing leaves the world.
+scripts\core\localization_manager.gd	SETTINGS_REMAP	ui_key	CONTROLS  //  REMAP
+scripts\core\localization_manager.gd	SETTINGS_HINT	ui_key	Changes save immediately. Dialogue remains in its source language.
+scripts\core\localization_manager.gd	SETTINGS_REMAP_TITLE	ui_key	CONTROLS  //  ACTION REMAP
+scripts\core\localization_manager.gd	SETTINGS_REMAP_HINT	ui_key	Choose an action, then press a key or controller button.
+scripts\core\localization_manager.gd	SETTINGS_REMAP_PENDING	ui_key	PRESS A KEY OR CONTROLLER BUTTON FOR: %s\nESC / B = CANCEL
+scripts\core\localization_manager.gd	SETTINGS_REMAP_WAITING	ui_key	WAITING…
+scripts\core\localization_manager.gd	SETTINGS_REMAP_SAVED	ui_key	SAVED: %s
+scripts\core\localization_manager.gd	SETTINGS_REMAP_CONFLICT	ui_key	CONFLICT: %s ALREADY USES THIS INPUT
+scripts\core\localization_manager.gd	SETTINGS_REMAP_UNSUPPORTED	ui_key	KEY OR CONTROLLER BUTTONS ONLY
+scripts\core\localization_manager.gd	SETTINGS_RESTORE_DEFAULTS	ui_key	DEFAULT MAPPINGS
+scripts\core\localization_manager.gd	SETTINGS_REMAP_DEFAULTS_RESTORED	ui_key	DEFAULT MAPPINGS RESTORED
+scripts\core\localization_manager.gd	UI_BACK	ui_key	BACK
+scripts\core\localization_manager.gd	PAUSE_TITLE	ui_key	CAMPAIGN  //  PAUSE
+scripts\core\localization_manager.gd	PAUSE_RESUME	ui_key	RESUME
+scripts\core\localization_manager.gd	PAUSE_CHECKPOINT	ui_key	CHECKPOINT
+scripts\core\localization_manager.gd	PAUSE_SETTINGS	ui_key	SETTINGS
+scripts\core\localization_manager.gd	PAUSE_TEST_MODE	ui_key	TEST MODE: %s
+scripts\core\localization_manager.gd	PAUSE_RESET_SAVE	ui_key	RESET SAVE
+scripts\core\localization_manager.gd	PAUSE_STATUS	ui_key	DISCOVERED: %d/%d   |   TEST MODE: %s
+scripts\core\localization_manager.gd	PAUSE_FOOTER	ui_key	PAUSE: BACK  //  INTERACT: SELECT
+scripts\core\localization_manager.gd	PAUSE_STATION_TOOLTIP	ui_key	Address %s
+scripts\core\localization_manager.gd	CRT_CONTINUE	ui_key	INTERACT  >
+scripts\core\localization_manager.gd	CRT_CHANNEL	ui_key	WITNESS CHANNEL  //  SAVE ACTIVE
+scripts\core\localization_manager.gd	SAVE_ACTIVE	ui_key	SAVE ACTIVE
+scripts\core\localization_manager.gd	SAVE_RELOADED	ui_key	SAVE RELOADED
+scripts\core\localization_manager.gd	SAVE_RESET	ui_key	SAVE RESET
+scenes\levels\station_01.tscn	opening_line	opening_line	Jeszcze jeden odczyt drgań przy Linii 4. Potem jadę do Marty.
+scenes\levels\station_02.tscn	opening_line	opening_line	Skrót zamknęli do robót. Nasyp serwisowy prowadzi na przystanek.
+scenes\levels\station_03.tscn	opening_line	opening_line	Przystanek Linii 4. Marta czeka; kurs ma przyjechać za trzy minuty.
+scenes\levels\station_04.tscn	opening_line	opening_line	Wagon jedzie. Marta nadal czeka, a czytnik nie chce puścić Linii 4.
+scenes\levels\station_05.tscn	opening_line	opening_line	Moja ulica. Za rogiem Sadowa i dom.
+scenes\levels\station_06.tscn	opening_line	opening_line	Kiosk i rozkład. Kupię wodę i sprawdzę godziny.
+scenes\levels\station_07.tscn	opening_line	opening_line	Sadowa. Tabliczka na murze mówi 14, moje dokumenty mówią 12.
+scenes\levels\station_08.tscn	opening_line	opening_line	Klatka schodowa. Ciepłe światło, zapach herbaty zza drzwi.
+scenes\levels\station_09.tscn	opening_line	opening_line	Cudzy salon. Dwie filiżanki są jeszcze ciepłe.
+scenes\levels\station_10.tscn	opening_line	opening_line	Marta jest w domu. Klucz pasuje do czternastki.
+scenes\levels\station_11.tscn	opening_line	opening_line	Nie ruszam prywatnych rzeczy. Porównam ślady, nie biografię.
+scenes\levels\station_12.tscn	opening_line	opening_line	Sekretarka miga. Zamknę balkon, zanim odsłucham.
+scenes\levels\station_13.tscn	opening_line	opening_line	Dwa dokumenty, dwa adresy. Zestawię je przy stole.
+scenes\levels\station_14.tscn	opening_line	opening_line	Maszyna pracuje własnym cyklem. Zobaczę, co utrzyma.
+scenes\levels\station_15.tscn	opening_line	opening_line	Pętla odpowiada własnym rytmem. Sprawdzam, czyje to echo.
+scenes\levels\station_16.tscn	opening_line	opening_line	Bezpieczny analizator pokaże, co zostaje po odpowiedzi.
+scenes\levels\station_17.tscn	opening_line	opening_line	Najpierw rejestr par. Potem rozmowa o zgodzie.
+scenes\levels\station_18.tscn	opening_line	opening_line	Tablica trzech dróg. Marta przy oknie.
+scenes\levels\station_19.tscn	opening_line	opening_line	Najpierw osłonię mikrofon.
+scenes\levels\station_20.tscn	opening_line	opening_line	Odsunę wózek i porozmawiam.
+scenes\levels\station_21.tscn	opening_line	opening_line	Trzy pola. Ułożę źródła.
+scenes\levels\station_22.tscn	opening_line	opening_line	UCP proponuje depozyt czytnika. Najpierw porównam dwa zachowania sygnału.
+scenes\levels\station_23.tscn	opening_line	opening_line	Martwy obwód. Sekcja odcięta.
+scenes\levels\station_24.tscn	opening_line	opening_line	Marta nie oddaje pudełka. Najpierw muszę pokazać dokładnie, o co proszę i co może zniknąć.
+scenes\levels\station_25.tscn	opening_line	opening_line	Jakub sprawdza cykle wentylacji. Nie pyta o własny sygnał. Pyta, czy widzę kolejność maszyn.
+scenes\levels\station_26.tscn	opening_line	opening_line	KONTAKT WZAJEMNY — 20:40:03.
+scenes\levels\station_27.tscn	opening_line	opening_line	Dwie równe. Trzecia z błędem.
+scenes\levels\station_28.tscn	opening_line	opening_line	Techniczny skład Linii 4 jedzie przez Podstrukturę. Za oknami ta sama sekunda pokazuje trzy różne wersje.
+scenes\levels\station_29.tscn	opening_line	opening_line	Peron trzynasty zachował tablicę odrzuconego wariantu. Za kratą zaczyna się właściwa Podstruktura.
+scenes\levels\station_30.tscn	opening_line	opening_line	Trzy prognozy rozdzielają znane koszty od pól, których nie wolno uzupełnić bez zgody.
+scenes\levels\station_31.tscn	opening_line	opening_line	Magazyn dowodów. Ewidencja przedmiotów z Linii 4.
+scenes\levels\station_32.tscn	opening_line	opening_line	Szkło laboratoryjne. Ślad kondensacji i pamięć materiału.
+scenes\levels\station_33.tscn	opening_line	opening_line	Szyb wentylacyjny. Notatki miejscowej Leny i ciśnienie powrotne.
+scenes\levels\station_34.tscn	opening_line	opening_line	Rdzeń korelacyjny. Rejestr par i alokacja tożsamości.
+scenes\levels\station_35.tscn	opening_line	opening_line	Sektor filtracji. Baseny sedacyjne i echo zaginionego domu.
+scenes\levels\station_36.tscn	opening_line	opening_line	Drenaż trakcyjny. Para katastrof i rachunek Linii 4.
+scenes\levels\station_37.tscn	opening_line	opening_line	Komora sygnałowa. Żywy sygnał i granica Jakuba.
+scenes\levels\station_38.tscn	opening_line	opening_line	Jakub nie jest współrzędną powrotu; jego teraźniejszość ma własny ciężar.
+scenes\levels\station_39.tscn	opening_line	opening_line	Trzy konfiguracje referencyjne. Podstruktura nie narzuca jednego oryginału.
+scenes\levels\station_40.tscn	opening_line	opening_line	Powrót na powierzchnię. Sala Negocjacyjna UCP zamyka ostatnie prognozy.
+scenes\levels\station_41.tscn	opening_line	opening_line	Komora wyboru operacyjnego. Trzy stanowiska załączenia odpowiedzialności.
+scenes\levels\station_42a.tscn	opening_line	opening_line	Ten sam stół. Świt. Jedno miejsce puste.
+scenes\levels\station_42b.tscn	opening_line	opening_line	Przepływ zamknięty. Próg cichy. Ona jest w środku.
+scenes\levels\station_42c.tscn	opening_line	opening_line	Dwa czytniki. Świt. Ta sama sekunda po obu stronach.
+scenes\levels\station_43.tscn	opening_line	opening_line	Epilog. Miasto żyje dalej z dokonanym wyborem i utrwaloną ciągłością.

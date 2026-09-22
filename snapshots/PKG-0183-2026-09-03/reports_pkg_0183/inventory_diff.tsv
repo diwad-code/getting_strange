@@ -1,0 +1,37 @@
+path	class	reason
+AGENTS.md	MISSING_FROM_0182	PKG-0182 inventory omitted root runtime/config files outside its rg roots
+assets\characters\jakub\raw\.gdignore	MISSING_FROM_0182	missing from PKG-0182 inventory
+assets\characters\lena\_source_v40\.gdignore	MISSING_FROM_0182	missing from PKG-0182 inventory
+assets\characters\lena\logs\.gdignore	MISSING_FROM_0182	missing from PKG-0182 inventory
+assets\characters\lena\raw\.gdignore	MISSING_FROM_0182	missing from PKG-0182 inventory
+assets\characters\lena\raw\pkg_0173\.gdignore	MISSING_FROM_0182	missing from PKG-0182 inventory
+assets\characters\lena\raw\pkg_0174\.gdignore	MISSING_FROM_0182	missing from PKG-0182 inventory
+assets\characters\marta\raw\.gdignore	MISSING_FROM_0182	missing from PKG-0182 inventory
+assets\characters\portraits\raw\.gdignore	MISSING_FROM_0182	missing from PKG-0182 inventory
+assets\characters\wierzbicka\raw\.gdignore	MISSING_FROM_0182	missing from PKG-0182 inventory
+icon.svg	MISSING_FROM_0182	PKG-0182 inventory omitted root runtime/config files outside its rg roots
+README.md	MISSING_FROM_0182	PKG-0182 inventory omitted root runtime/config files outside its rg roots
+resources\gameplay\address_and_record_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\archive_countermodel_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\branch_clarity_and_irreversible_choice_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\conscious_silence_and_presence_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\consent_and_rescue_boundary_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\foreign_daily_life_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\interrupted_trial_and_small_cost_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\jakub_boundary_and_forecasts_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\marta_threshold_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\mutual_test_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\pair_cost_and_echo_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\return_under_control_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\sample_and_promise_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\three_place_proofs_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\gameplay\work_history_and_record_sequence.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\localization\getting_strange_locales.csv	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\localization\getting_strange_locales.csv.import	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\localization\getting_strange_locales.en.translation	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\localization\getting_strange_locales.pl.translation	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\movement\profile_a.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\movement\profile_b.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+resources\movement\profile_c.tres	MISSING_FROM_0182	PKG-0182 inventory omitted resources/ runtime data
+tools\audit_pkg_0183.ps1	MISSING_FROM_0182	missing from PKG-0182 inventory
+VISUAL_DESIGN.md	MISSING_FROM_0182	PKG-0182 inventory omitted root runtime/config files outside its rg roots

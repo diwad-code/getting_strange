@@ -1,0 +1,137 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_02.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/player/discontinuous_shadow.gd" id="5_shadow"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor"]
+size = Vector2(640, 64)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_ceiling"]
+size = Vector2(640, 36)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_bench"]
+size = Vector2(130, 28)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_door"]
+size = Vector2(16, 116)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(40, 116)
+
+[sub_resource type="CircleShape2D" id="Circle_printer"]
+radius = 38.0
+
+[sub_resource type="CircleShape2D" id="Circle_console"]
+radius = 42.0
+
+[sub_resource type="CircleShape2D" id="Circle_calibration"]
+radius = 36.0
+
+[node name="Station02" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 328)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Floor"]
+shape = SubResource("Rectangle_floor")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="Ceiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ceiling"]
+shape = SubResource("Rectangle_ceiling")
+
+[node name="ConsoleBench" type="StaticBody2D" parent="Geometry"]
+position = Vector2(150, 282)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/ConsoleBench"]
+shape = SubResource("Rectangle_bench")
+
+[node name="ChamberDoor" type="AnimatableBody2D" parent="."]
+position = Vector2(585, 238)
+sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChamberDoor"]
+shape = SubResource("Rectangle_door")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(615, 238)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="StripPrinter" type="Area2D" parent="Props"]
+position = Vector2(115, 255)
+script = ExtResource("2_resonance")
+resonance_id = "strip_printer"
+prop_type = 4
+prop_title = "Rejestrator taśmowy (WYNIK ZGODNY)"
+prop_subtitle = "Drukarka parametrów IKP"
+interaction_radius = 38.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StripPrinter"]
+shape = SubResource("Circle_printer")
+
+[node name="CorrelationConsole" type="Area2D" parent="Props"]
+position = Vector2(160, 255)
+script = ExtResource("2_resonance")
+resonance_id = "correlation_console"
+prop_type = 3
+prop_title = "Konsola korelacji próżniowej"
+prop_subtitle = "Protokół pomiarowy 02"
+interaction_radius = 42.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/CorrelationConsole"]
+shape = SubResource("Circle_console")
+
+[node name="OpticalCalibration" type="Area2D" parent="Props"]
+position = Vector2(210, 257)
+script = ExtResource("2_resonance")
+resonance_id = "optical_calibration"
+prop_type = 1
+prop_title = "Kalibracja osi optycznej"
+prop_subtitle = "Obwód referencyjny L1/L2"
+interaction_radius = 36.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/OpticalCalibration"]
+shape = SubResource("Circle_calibration")
+
+[node name="DiscontinuousShadow" type="Node2D" parent="." node_paths=PackedStringArray("target_player")]
+script = ExtResource("5_shadow")
+target_player = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(60, 296)
+
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")
+target = NodePath("../Player")

@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_renumbering"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"renumbering"
+source_fact = &"p7.foreign_daily_life.floor_record_observed"
+predicted_outcome = "Jeżeli zmieniła się tylko numeracja, sąsiadka i zużycie klucza nie powinny zgodnie przypisywać Lenie obcej historii."
+required_evidence = [&"p7.foreign_daily_life.floor_record_observed", &"p7.foreign_daily_life.neighbour_account"]
+trial_result = &"key_matches_foreign_history"
+closure_id = &"p7.foreign_daily_life.key_trial_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_intruder"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"intruder"
+source_fact = &"p7.foreign_daily_life.key_wear_observed"
+predicted_outcome = "Jeżeli Lena jest intruzem, prywatne ustawienie sprzętu i fotografia nie będą zgodne z jej ciałem i pracą."
+required_evidence = [&"p7.foreign_daily_life.key_wear_observed", &"p7.foreign_daily_life.private_photograph_observed"]
+trial_result = &"life_matches_body_not_memory"
+closure_id = &"p7.foreign_daily_life.private_material_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_lost_relationship"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"lost_relationship"
+source_fact = &"p7.foreign_daily_life.private_photograph_observed"
+predicted_outcome = "Jeżeli relacja została utracona przez lukę pamięci, fotografia i ustawienie czytnika pokażą ciągłość życia, której Lena nie może sobie przywłaszczyć."
+required_evidence = [&"p7.foreign_daily_life.equipment_wear_observed", &"p7.foreign_daily_life.reader_arrangement_observed"]
+trial_result = &"life_matches_body_not_memory"
+closure_id = &"p7.foreign_daily_life.private_material_result"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_respect_private_material"]
+script = ExtResource("3_commitment")
+commitment_id = &"respect_private_material"
+person_id = &"lena"
+scope = "Lena zostawia prywatny materiał na miejscu i niesie dalej wyłącznie fakt różnicy adresu oraz fotografii."
+known_cost = "Nie uzyskuje skrótu przez czytanie cudzych notatek ani przez uznanie mieszkania za własne."
+required_disclosure = [&"p7.foreign_daily_life.private_material_result", &"p7.foreign_daily_life.key_trial_result"]
+alternative_route = "Może wyjść z mniejszą ilością informacji, ale nie może wymusić pełnego dostępu do prywatnego życia."
+outcome_key = &"p7.foreign_daily_life.private_material_respected"
+trace_key = &"p7.foreign_daily_life.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"foreign_daily_life"
+station_ids = [&"station_09", &"station_10", &"station_11"]
+entry_gate = &"p7.address_and_record.trace"
+discrepancy = "Sąsiadka, działający klucz i fotografia rozpoznają Lenę, ale pamięć Leny opisuje inne życie."
+required_source_facts = [&"p7.foreign_daily_life.floor_record_observed", &"p7.foreign_daily_life.neighbour_account", &"p7.foreign_daily_life.key_wear_observed", &"p7.foreign_daily_life.private_photograph_observed"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_renumbering"), SubResource("DiagnosticHypothesis_intruder"), SubResource("DiagnosticHypothesis_lost_relationship")])
+trial_id = &"key_wear_neighbour_private_material"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_respect_private_material")])
+trace_key = &"p7.foreign_daily_life.trace"
+guidance_beat_ids = [&"s09_neighbour_question", &"s10_key_wear", &"s11_private_material"]
+state_keys = [&"p7.foreign_daily_life.floor_record_observed", &"p7.foreign_daily_life.neighbour_account", &"p7.foreign_daily_life.key_wear_observed", &"p7.foreign_daily_life.key_trial_result", &"p7.foreign_daily_life.private_material_result", &"p7.foreign_daily_life.private_material_respected", &"p7.foreign_daily_life.trace"]
+migration_revision = 1

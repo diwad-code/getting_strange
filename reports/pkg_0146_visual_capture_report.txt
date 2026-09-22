@@ -1,0 +1,31 @@
+PKG-0146 VISUAL CAPTURE REPORT
+Technical evidence only: rendered state, layer presence and normal/reduced output. No line claims comprehension, fun, emotional credibility or comfort.
+Logical size: 640x360. Normal Windows rendering device. Public P7 station APIs drove each state.
+
+CAPTURED STATES
+normal  station_01   gap_only               res://reports/pkg_0146/normal/station_01_gap_only.png
+normal  station_01   sample_committed       res://reports/pkg_0146/normal/station_01_sample_committed.png
+normal  station_04   reader_trial_committed res://reports/pkg_0146/normal/station_04_reader_trial_committed.png
+normal  station_06   public_route_compared  res://reports/pkg_0146/normal/station_06_public_route_compared.png
+normal  station_08   intercom_completed     res://reports/pkg_0146/normal/station_08_intercom_completed.png
+normal  station_10   cautious_entry         res://reports/pkg_0146/normal/station_10_cautious_entry.png
+normal  station_12   questions_prepared     res://reports/pkg_0146/normal/station_12_questions_prepared.png
+normal  station_14   threshold_respected    res://reports/pkg_0146/normal/station_14_threshold_respected.png
+reduced station_01   gap_only               res://reports/pkg_0146/reduced/station_01_gap_only.png
+reduced station_01   sample_committed       res://reports/pkg_0146/reduced/station_01_sample_committed.png
+reduced station_04   reader_trial_committed res://reports/pkg_0146/reduced/station_04_reader_trial_committed.png
+reduced station_06   public_route_compared  res://reports/pkg_0146/reduced/station_06_public_route_compared.png
+reduced station_08   intercom_completed     res://reports/pkg_0146/reduced/station_08_intercom_completed.png
+reduced station_10   cautious_entry         res://reports/pkg_0146/reduced/station_10_cautious_entry.png
+reduced station_12   questions_prepared     res://reports/pkg_0146/reduced/station_12_questions_prepared.png
+reduced station_14   threshold_respected    res://reports/pkg_0146/reduced/station_14_threshold_respected.png
+
+INSPECTION SCOPE
+Station 01: gap observation vs committed sample state.
+Station 04: reader repeat and wagon clock compared, exit unlocked.
+Station 06: paper and offline route compared against the arriving vehicle.
+Station 08: certificate, directory and intercom test completed.
+Station 10: key wear, key trial and cautious entry committed.
+Station 12: balcony closed, message heard, caller verified, questions prepared.
+Station 14: bag placed, three details disclosed and independent day description obtained.
+Reduced-motion frames retain the same state facts while peripheral amplitude is reduced by the existing accessibility system.

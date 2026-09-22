@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_offline_cache"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"offline_cache"
+source_fact = &"p7.address_and_record.offline_route_observed"
+predicted_outcome = "Jeżeli aplikacja ma stary cache, papierowy rozkład i nadjeżdżający pojazd zgodzą się bez niej."
+required_evidence = [&"p7.address_and_record.paper_route_observed", &"p7.address_and_record.offline_route_observed"]
+trial_result = &"paper_matches_vehicle"
+closure_id = &"p7.address_and_record.public_route_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_renumbered_route"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"renumbered_route"
+source_fact = &"p7.address_and_record.paper_route_observed"
+predicted_outcome = "Jeżeli numerację zmieniono, aktualny nośnik publiczny pokaże ten sam kierunek co pojazd, lecz nie ten sam zapis offline."
+required_evidence = [&"p7.address_and_record.paper_route_observed", &"p7.address_and_record.public_route_result"]
+trial_result = &"paper_matches_vehicle"
+closure_id = &"p7.address_and_record.public_route_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_record_assigned_elsewhere"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"record_assigned_elsewhere"
+source_fact = &"p7.address_and_record.shopkeeper_answer"
+predicted_outcome = "Jeżeli dane należą do innego życia, domofon rozpozna ciało i adres inaczej niż dokument, bez potrzeby wpisywania zagadkowego kodu."
+required_evidence = [&"p7.address_and_record.shopkeeper_answer", &"p7.address_and_record.public_route_result"]
+trial_result = &"body_and_address_accept"
+closure_id = &"p7.address_and_record.intercom_result"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_cautious_contact"]
+script = ExtResource("3_commitment")
+commitment_id = &"cautious_contact_without_claim"
+person_id = &"lena"
+scope = "Lena prosi domofon o wpuszczenie jako osoba z działającym kluczem, nie jako właścicielka cudzej biografii."
+known_cost = "Wejście nie rozwiązuje pytania, czy mieszkanie i relacja są jej własne."
+required_disclosure = [&"p7.address_and_record.public_route_result", &"p7.address_and_record.shopkeeper_answer"]
+alternative_route = "Lena może odłożyć wejście i zostać przy zewnętrznych źródłach, lecz wtedy nie uzyska rozstrzygającego testu domofonu."
+outcome_key = &"p7.address_and_record.intercom_result"
+trace_key = &"p7.address_and_record.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"address_and_record"
+station_ids = [&"station_06", &"station_07", &"station_08"]
+entry_gate = &"p7.return_under_control.trace"
+discrepancy = "Papier, zapis offline i działający adres opisują różne, lecz wiarygodne porządki tej samej trasy."
+required_source_facts = [&"p7.address_and_record.paper_route_observed", &"p7.address_and_record.offline_route_observed", &"p7.address_and_record.shopkeeper_answer", &"p7.address_and_record.intercom_result"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_offline_cache"), SubResource("DiagnosticHypothesis_renumbered_route"), SubResource("DiagnosticHypothesis_record_assigned_elsewhere")])
+trial_id = &"compare_public_route_then_intercom"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_cautious_contact")])
+trace_key = &"p7.address_and_record.trace"
+guidance_beat_ids = [&"s06_compare_public_route", &"s07_shopkeeper_question", &"s08_test_intercom"]
+state_keys = [&"p7.address_and_record.paper_route_observed", &"p7.address_and_record.offline_route_observed", &"p7.address_and_record.public_route_result", &"p7.address_and_record.shopkeeper_answer", &"p7.address_and_record.intercom_result", &"p7.address_and_record.trace"]
+migration_revision = 1

@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_reader_cache"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"reader_cache"
+source_fact = &"p7.return_under_control.reader_repeat_observed"
+predicted_outcome = "Jeżeli luka jest cache'em, restart czytnika bez zmiany trasy powinien ją wyczyścić."
+required_evidence = [&"p7.return_under_control.reader_repeat_observed", &"p7.return_under_control.wagon_clock_observed"]
+trial_result = &"repeat_persists_without_route_change"
+closure_id = &"p7.return_under_control.repeat_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_local_reader_fault"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"local_reader_fault"
+source_fact = &"p7.return_under_control.wagon_clock_observed"
+predicted_outcome = "Jeżeli to lokalna wada czytnika, niezależny zegar wagonu nie zachowa wspólnego odchylenia."
+required_evidence = [&"p7.return_under_control.reader_repeat_observed", &"p7.return_under_control.wagon_clock_observed"]
+trial_result = &"repeat_persists_without_route_change"
+closure_id = &"p7.return_under_control.repeat_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_sample_linked_repeat"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"sample_linked_repeat"
+source_fact = &"p7.sample_and_promise.trace"
+predicted_outcome = "Jeżeli powtórka jest związana z próbką, wróci bez zmiany trasy i da się porównać z ruchem wagonu."
+required_evidence = [&"p7.sample_and_promise.trace", &"p7.return_under_control.reader_repeat_observed"]
+trial_result = &"repeat_persists_without_route_change"
+closure_id = &"p7.return_under_control.repeat_result"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_secure_reader"]
+script = ExtResource("3_commitment")
+commitment_id = &"secure_reader_without_paranormal_claim"
+person_id = &"lena"
+scope = "Czytnik zostaje odłożony z zachowanym stanem do późniejszego porównania, bez nazwania zjawiska, którego Lena jeszcze nie rozumie."
+known_cost = "Lena rezygnuje z dalszego mierzenia podczas powrotu i nie otrzymuje wygodnego wyjaśnienia luki."
+required_disclosure = [&"p7.return_under_control.repeat_result", &"p7.return_under_control.wagon_clock_observed"]
+alternative_route = "Lena może iść ulicą bez badania dodatkowych urządzeń, lecz potrzebuje zabezpieczyć stan czytnika przed wyjściem."
+outcome_key = &"p7.return_under_control.reader_secured"
+trace_key = &"p7.return_under_control.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"return_under_control"
+station_ids = [&"station_04", &"station_05"]
+entry_gate = &"p7.sample_and_promise.trace"
+discrepancy = "Czytnik ponownie pokazuje lukę podczas zwykłego przejazdu, lecz zegar i ruch wagonu pozostają niezależnym kontekstem."
+required_source_facts = [&"p7.sample_and_promise.trace", &"p7.return_under_control.reader_repeat_observed", &"p7.return_under_control.wagon_clock_observed"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_reader_cache"), SubResource("DiagnosticHypothesis_local_reader_fault"), SubResource("DiagnosticHypothesis_sample_linked_repeat")])
+trial_id = &"repeat_reader_without_route_change"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_secure_reader")])
+trace_key = &"p7.return_under_control.trace"
+guidance_beat_ids = [&"s04_reader_repeat", &"s04_compare_wagon_clock", &"s05_secure_reader"]
+state_keys = [&"p7.return_under_control.reader_repeat_observed", &"p7.return_under_control.wagon_clock_observed", &"p7.return_under_control.repeat_result", &"p7.return_under_control.reader_secured", &"p7.return_under_control.trace"]
+migration_revision = 1

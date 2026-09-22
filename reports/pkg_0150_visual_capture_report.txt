@@ -1,0 +1,36 @@
+=== PKG-0150 Visual Capture Report (P7 S14-S15 Stations 39-43) ===
+Timestamp: 2026-08-30T22:53:07
+Total captures: 32
+Failures: 0
+ - [normal] station_39 / configs_inspected -> res://reports/pkg_0150/normal/station_39_configs_inspected.png
+ - [normal] station_39 / matrix_reviewed -> res://reports/pkg_0150/normal/station_39_matrix_reviewed.png
+ - [normal] station_40 / witnesses_inspected -> res://reports/pkg_0150/normal/station_40_witnesses_inspected.png
+ - [normal] station_40 / negotiation_confronted -> res://reports/pkg_0150/normal/station_40_negotiation_confronted.png
+ - [normal] station_41 / topography_inspected -> res://reports/pkg_0150/normal/station_41_topography_inspected.png
+ - [normal] station_41 / operation_committed_a -> res://reports/pkg_0150/normal/station_41_operation_committed_a.png
+ - [normal] station_41 / operation_committed_b -> res://reports/pkg_0150/normal/station_41_operation_committed_b.png
+ - [normal] station_41 / operation_committed_c -> res://reports/pkg_0150/normal/station_41_operation_committed_c.png
+ - [normal] station_42a / cups_inspected -> res://reports/pkg_0150/normal/station_42a_cups_inspected.png
+ - [normal] station_42a / chamber_a_witnessed -> res://reports/pkg_0150/normal/station_42a_chamber_a_witnessed.png
+ - [normal] station_42b / doorstep_inspected -> res://reports/pkg_0150/normal/station_42b_doorstep_inspected.png
+ - [normal] station_42b / chamber_b_witnessed -> res://reports/pkg_0150/normal/station_42b_chamber_b_witnessed.png
+ - [normal] station_42c / tram_inspected -> res://reports/pkg_0150/normal/station_42c_tram_inspected.png
+ - [normal] station_42c / chamber_c_witnessed -> res://reports/pkg_0150/normal/station_42c_chamber_c_witnessed.png
+ - [normal] station_43 / notice_and_credits -> res://reports/pkg_0150/normal/station_43_notice_and_credits.png
+ - [normal] station_43 / epilogue_completed -> res://reports/pkg_0150/normal/station_43_epilogue_completed.png
+ - [reduced] station_39 / configs_inspected -> res://reports/pkg_0150/reduced/station_39_configs_inspected.png
+ - [reduced] station_39 / matrix_reviewed -> res://reports/pkg_0150/reduced/station_39_matrix_reviewed.png
+ - [reduced] station_40 / witnesses_inspected -> res://reports/pkg_0150/reduced/station_40_witnesses_inspected.png
+ - [reduced] station_40 / negotiation_confronted -> res://reports/pkg_0150/reduced/station_40_negotiation_confronted.png
+ - [reduced] station_41 / topography_inspected -> res://reports/pkg_0150/reduced/station_41_topography_inspected.png
+ - [reduced] station_41 / operation_committed_a -> res://reports/pkg_0150/reduced/station_41_operation_committed_a.png
+ - [reduced] station_41 / operation_committed_b -> res://reports/pkg_0150/reduced/station_41_operation_committed_b.png
+ - [reduced] station_41 / operation_committed_c -> res://reports/pkg_0150/reduced/station_41_operation_committed_c.png
+ - [reduced] station_42a / cups_inspected -> res://reports/pkg_0150/reduced/station_42a_cups_inspected.png
+ - [reduced] station_42a / chamber_a_witnessed -> res://reports/pkg_0150/reduced/station_42a_chamber_a_witnessed.png
+ - [reduced] station_42b / doorstep_inspected -> res://reports/pkg_0150/reduced/station_42b_doorstep_inspected.png
+ - [reduced] station_42b / chamber_b_witnessed -> res://reports/pkg_0150/reduced/station_42b_chamber_b_witnessed.png
+ - [reduced] station_42c / tram_inspected -> res://reports/pkg_0150/reduced/station_42c_tram_inspected.png
+ - [reduced] station_42c / chamber_c_witnessed -> res://reports/pkg_0150/reduced/station_42c_chamber_c_witnessed.png
+ - [reduced] station_43 / notice_and_credits -> res://reports/pkg_0150/reduced/station_43_notice_and_credits.png
+ - [reduced] station_43 / epilogue_completed -> res://reports/pkg_0150/reduced/station_43_epilogue_completed.png

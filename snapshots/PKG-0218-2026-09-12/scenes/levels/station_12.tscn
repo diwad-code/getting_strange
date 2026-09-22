@@ -1,0 +1,191 @@
+[gd_scene load_steps=22 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_12.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/levels/atmosphere_rig.gd" id="5_atmosphere"]
+[ext_resource type="Script" path="res://scripts/ui/crt_dialogue_box.gd" id="6_dialogue"]
+[ext_resource type="Script" path="res://scripts/ui/station_dialogue_cue.gd" id="7_cue"]
+[ext_resource type="Script" path="res://scripts/visual/vector_stage_environment.gd" id="8_vector_stage"]
+[ext_resource type="Script" path="res://scripts/visual/world_pixel_compositor.gd" id="9_compositor"]
+[ext_resource type="Script" path="res://scripts/core/narrative_guidance_service.gd" id="10_guidance"]
+[ext_resource type="Script" path="res://scripts/ui/inner_thought_surface.gd" id="11_thought"]
+[ext_resource type="Script" path="res://scripts/visual/crisp_diegetic_text.gd" id="12_crisp_text"]
+[ext_resource type="Script" path="res://scripts/environment/return_zone.gd" id="13_returnzone"]
+[ext_resource type="Script" path="res://scripts/characters/character_visual_rig.gd" id="14_cast"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor"]
+size = Vector2(640, 64)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_ceiling"]
+size = Vector2(640, 30)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_balcony_door"]
+size = Vector2(48, 112)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(60, 120)
+
+[sub_resource type="CircleShape2D" id="Circle_prop_medium"]
+radius = 44.0
+
+[node name="Station12" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="WorkshopBlockout" type="Node2D" parent="."]
+
+[node name="Jakub" type="Node2D" parent="WorkshopBlockout"]
+z_index = 6
+position = Vector2(340, 277)
+script = ExtResource("14_cast")
+character_id = &"jakub"
+initial_state = &"work"
+
+[node name="VectorStageEnvironment" type="Node2D" parent="."]
+visible = false
+script = ExtResource("8_vector_stage")
+stage_seed = 12
+station_number = 12
+
+[node name="AtmosphereRig" type="Node2D" parent="."]
+script = ExtResource("5_atmosphere")
+station_number = 12
+
+[node name="WorldPixelCompositor" type="CanvasLayer" parent="."]
+script = ExtResource("9_compositor")
+
+[node name="NarrativeGuidanceService" type="Node" parent="."]
+script = ExtResource("10_guidance")
+
+[node name="InnerThoughtSurface" type="CanvasLayer" parent="." node_paths=PackedStringArray("guidance_service")]
+script = ExtResource("11_thought")
+guidance_service = NodePath("../NarrativeGuidanceService")
+
+[node name="CRTDialogueBox" type="CanvasLayer" parent="."]
+script = ExtResource("6_dialogue")
+
+[node name="OpeningDialogueCue" type="Node" parent="."]
+script = ExtResource("7_cue")
+station_id = &"station_12"
+opening_line = "Przy wejściu jest łącze. Za maszyną ktoś pracuje przy imadle."
+
+[node name="CrispDiegeticText_Machine" type="Node2D" parent="."]
+position = Vector2(206, 122)
+script = ExtResource("12_crisp_text")
+text = "ŁĄCZE WARSZTATOWE // SERWIS LINII 4"
+font_size = 10
+text_color = Color(0.82, 0.6, 0.36, 1)
+
+[node name="CrispDiegeticText_CallerId" type="Node2D" parent="."]
+position = Vector2(360, 160)
+script = ExtResource("12_crisp_text")
+text = "NAPĘD // ODBIÓR PO ZMIANIE"
+font_size = 9
+text_color = Color(0.84, 0.88, 0.89, 1)
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="FloorMain" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 328)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorMain"]
+shape = SubResource("Rectangle_floor")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="Ceiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ceiling"]
+shape = SubResource("Rectangle_ceiling")
+
+[node name="BalconyDoor" type="AnimatableBody2D" parent="Geometry"]
+position = Vector2(540, 230)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/BalconyDoor"]
+shape = SubResource("Rectangle_balcony_door")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(590, 238)
+collision_layer = 0
+collision_mask = 1
+
+[node name="ReturnZone" type="Area2D" parent="."]
+position = Vector2(15, 238)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("13_returnzone")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnZone"]
+shape = SubResource("Rectangle_airlock")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="AnsweringMachine" type="Area2D" parent="Props"]
+position = Vector2(246, 250)
+script = ExtResource("2_resonance")
+resonance_id = "jakub_questions"
+prop_type = 37
+prop_title = "Łącze warsztatowe"
+prop_subtitle = "Dwa pytania kontrolne"
+interaction_radius = 46.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/AnsweringMachine"]
+shape = SubResource("Circle_prop_medium")
+
+[node name="PhoneHandset" type="Area2D" parent="Props"]
+position = Vector2(300, 254)
+script = ExtResource("2_resonance")
+resonance_id = "jakub_meeting"
+prop_type = 36
+prop_title = "Jakub przy imadle"
+prop_subtitle = "Nie jest nagraniem"
+interaction_radius = 42.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/PhoneHandset"]
+shape = SubResource("Circle_prop_medium")
+
+[node name="CallerIdList" type="Area2D" parent="Props"]
+position = Vector2(404, 240)
+script = ExtResource("2_resonance")
+resonance_id = "jakub_refusal"
+prop_type = 8
+prop_title = "Osłonięta blizna"
+prop_subtitle = "Mówi: nie pokażę"
+interaction_radius = 42.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/CallerIdList"]
+shape = SubResource("Circle_prop_medium")
+
+
+[node name="WorkshopBackdrop" type="Node2D" parent="Props"]
+
+[node name="ToolRackBackdrop" type="Node2D" parent="Props"]
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(70, 296)
+
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")
+target = NodePath("../Player")

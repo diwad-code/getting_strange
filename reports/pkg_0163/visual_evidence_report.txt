@@ -1,0 +1,13 @@
+PKG-0163 VISUAL EVIDENCE REPORT
+Renderer: Intel(R) Iris(R) Xe Graphics
+Viewport: 640x360; normal Windows display driver; script was not headless.
+Three textless M2 frames of Station 15: neutral, control echo, confirmed response.
+One M3 true-grayscale structure frame of the boundary family (duplicated loop
+receiver, one inconsistent light, one sourceless response sound in runtime).
+Hash distinctness is structural evidence only; this capture does not prove
+human comprehension, emotion or PRODUCT GO (D-012, ADR-003).
+
+neutral        hash=210583415 res://reports/pkg_0163/station_15_neutral.png
+control_echo   hash=952824699 res://reports/pkg_0163/station_15_control_echo.png
+confirmed      hash=3001154718 res://reports/pkg_0163/station_15_confirmed.png
+structure_mono hash=1939101134 res://reports/pkg_0163/station_15_structure_mono.png

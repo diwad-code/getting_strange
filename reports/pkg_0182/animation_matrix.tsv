@@ -1,0 +1,66 @@
+asset	character	state	frames	width	height	pivot	foot	seam	interruption	reduced_motion	status
+assets\characters\jakub\gesture.png	jakub	gesture	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\jakub\idle.png	jakub	idle	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\jakub\listen.png	jakub	listen	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\jakub\seated.png	jakub	seated	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\jakub\talk_0.png	jakub	talk_0	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\jakub\talk_1.png	jakub	talk_1	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\jakub\turn_away.png	jakub	turn_away	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\jakub\work.png	jakub	work	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\board_vehicle_0.png	lena	board_vehicle_0	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\board_vehicle_1.png	lena	board_vehicle_1	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\climb_0.png	lena	climb_0	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\climb_1.png	lena	climb_1	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\climb_back_0.png	lena	climb_back_0	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\climb_back_1.png	lena	climb_back_1	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\climb_back_2.png	lena	climb_back_2	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\climb_back_3.png	lena	climb_back_3	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\enter_door_0.png	lena	enter_door_0	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\enter_door_1.png	lena	enter_door_1	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\enter_door_2.png	lena	enter_door_2	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\examine.png	lena	examine	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\idle.png	lena	idle	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\interact.png	lena	interact	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\jump_fall.png	lena	jump_fall	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\jump_rise.png	lena	jump_rise	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\ladder_dismount.png	lena	ladder_dismount	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\ladder_mount.png	lena	ladder_mount	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\land_0.png	lena	land_0	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\land_1.png	lena	land_1	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\run_0.png	lena	run_0	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	same pose	PASS
+assets\characters\lena\run_1.png	lena	run_1	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	same pose	PASS
+assets\characters\lena\run_2.png	lena	run_2	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	same pose	PASS
+assets\characters\lena\run_3.png	lena	run_3	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	same pose	PASS
+assets\characters\lena\seam_gesture.png	lena	seam_gesture	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\start.png	lena	start	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\step_down_0.png	lena	step_down_0	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\step_up_0.png	lena	step_up_0	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\step_up_1.png	lena	step_up_1	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	timing shortened; fact preserved	PASS
+assets\characters\lena\stop.png	lena	stop	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\turn.png	lena	turn	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\unease_reaction.png	lena	unease_reaction	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\lena\walk_0.png	lena	walk_0	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	same pose	PASS
+assets\characters\lena\walk_1.png	lena	walk_1	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	same pose	PASS
+assets\characters\lena\walk_2.png	lena	walk_2	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	same pose	PASS
+assets\characters\lena\walk_3.png	lena	walk_3	1	64	104	32,96	y=96 contract	strip-inspected	state-machine contract	same pose	PASS
+assets\characters\marta\gesture.png	marta	gesture	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\marta\idle.png	marta	idle	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\marta\listen.png	marta	listen	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\marta\seated.png	marta	seated	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\marta\talk_0.png	marta	talk_0	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\marta\talk_1.png	marta	talk_1	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\marta\turn_away.png	marta	turn_away	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\marta\work.png	marta	work	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\portraits\jakub.png	portraits	jakub	1	1024	1024	NOT_APPLICABLE: portrait	NOT_APPLICABLE	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\portraits\lena.png	portraits	lena	1	1024	1024	NOT_APPLICABLE: portrait	NOT_APPLICABLE	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\portraits\marta.png	portraits	marta	1	1024	1024	NOT_APPLICABLE: portrait	NOT_APPLICABLE	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\portraits\szymon.png	portraits	szymon	1	1024	1024	NOT_APPLICABLE: portrait	NOT_APPLICABLE	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\portraits\wierzbicka.png	portraits	wierzbicka	1	1024	1024	NOT_APPLICABLE: portrait	NOT_APPLICABLE	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\wierzbicka\gesture.png	wierzbicka	gesture	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\wierzbicka\idle.png	wierzbicka	idle	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\wierzbicka\listen.png	wierzbicka	listen	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\wierzbicka\seated.png	wierzbicka	seated	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\wierzbicka\talk_0.png	wierzbicka	talk_0	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\wierzbicka\talk_1.png	wierzbicka	talk_1	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\wierzbicka\turn_away.png	wierzbicka	turn_away	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS
+assets\characters\wierzbicka\work.png	wierzbicka	work	1	64	104	32,96	y=96 contract	NOT_APPLICABLE: single pose	state-machine contract	same pose	PASS

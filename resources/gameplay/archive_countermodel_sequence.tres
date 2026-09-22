@@ -1,0 +1,69 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_correction_protects_all"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"correction_protects_all"
+source_fact = &"p7.archive_countermodel.wierzbicka_proposal_inspected"
+predicted_outcome = "Jeżeli korekta UCP chroni wszystkich mieszkańców Równi, wykasowanie obcych wspomnień przywróci spójność bez strat w materialnym depozycie."
+required_evidence = [&"p7.archive_countermodel.passenger_chairs_inspected", &"p7.archive_countermodel.twelfth_chair_inspected"]
+trial_result = &"depot_contains_twelfth_chair_discrepancy"
+closure_id = &"p7.archive_countermodel.adaptation_offer_rejected"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_selective_evidence_erasure"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"selective_evidence_erasure"
+source_fact = &"p7.archive_countermodel.twelfth_chair_inspected"
+predicted_outcome = "Jeżeli UCP selektywnie usuwa świadectwo katastrofy, dwunaste krzesło przechowuje tożsamość wymazaną z oficjalnej ewidencji pasażerów."
+required_evidence = [&"p7.archive_countermodel.twelfth_chair_inspected", &"p7.archive_countermodel.passenger_ledger_compared"]
+trial_result = &"ledger_omits_twelfth_identity"
+closure_id = &"p7.archive_countermodel.adaptation_offer_rejected"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_local_lena_unilateral_test"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"local_lena_unilateral_test"
+source_fact = &"p7.archive_countermodel.abort_note_inspected"
+predicted_outcome = "Jeżeli miejscowa Lena działała bez zgody obu stron, jej notatka w skrzynce kablowej zawierała warunek przerwania po 3 s przy braku odpowiedzi."
+required_evidence = [&"p7.archive_countermodel.abort_note_inspected", &"p7.archive_countermodel.depth_gauge_inspected"]
+trial_result = &"abort_condition_found_in_cable_trunk"
+closure_id = &"p7.archive_countermodel.local_lena_intent_found"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_preserve_material_trace"]
+script = ExtResource("3_commitment")
+commitment_id = &"preserve_material_trace"
+person_id = &"lena"
+scope = "Lena odrzuca ofertę adaptacji i zachowuje materialny depozyt oraz ślad fali w szkle."
+known_cost = "Brak adaptacji utrzymuje dekompensację pamięci i ryzyko dalszej ingerencji UCP."
+required_disclosure = [&"p7.archive_countermodel.passenger_chairs_inspected", &"p7.archive_countermodel.twelfth_chair_inspected", &"p7.archive_countermodel.adaptation_offer_rejected"]
+alternative_route = "Można by przyjąć adaptację UCP, lecz zniszczyłoby to domowy indeks próbki."
+outcome_key = &"p7.archive_countermodel.commitment"
+trace_key = &"p7.archive_countermodel.trace"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_reconstruct_local_intent"]
+script = ExtResource("3_commitment")
+commitment_id = &"reconstruct_local_intent"
+person_id = &"lena"
+scope = "Lena rekonstruuje procedurę miejscowej Leny i ujawnia warunek przerwania bez upiększania jej motywacji."
+known_cost = "Miejscowa Lena przestaje być niewinną ofiarą; jej odpowiedzialność staje się jawna."
+required_disclosure = [&"p7.archive_countermodel.abort_note_inspected", &"p7.archive_countermodel.local_lena_intent_found"]
+alternative_route = "Ukrycie intencji miejscowej Leny uniemożliwiłoby uczciwą rozmowę z Martą w Station 38."
+outcome_key = &"p7.archive_countermodel.commitment"
+trace_key = &"p7.archive_countermodel.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"archive_countermodel"
+station_ids = [&"station_31", &"station_32", &"station_33"]
+entry_gate = &"p7.jakub_boundary_and_forecasts.trace"
+discrepancy = "UCP oferuje stabilność, lecz krzesła, szkło i abort-note nie pasują do jej neutralnego modelu."
+required_source_facts = [&"p7.archive_countermodel.adaptation_offer_rejected", &"p7.archive_countermodel.material_memory_anchored", &"p7.archive_countermodel.local_lena_intent_found"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_correction_protects_all"), SubResource("DiagnosticHypothesis_selective_evidence_erasure"), SubResource("DiagnosticHypothesis_local_lena_unilateral_test")])
+trial_id = &"archive_countermodel_synthesis"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_preserve_material_trace"), SubResource("DiagnosticCommitment_reconstruct_local_intent")])
+trace_key = &"p7.archive_countermodel.trace"
+guidance_beat_ids = [&"s31_archive_source", &"s31_archive_contact", &"s31_adaptation_hypothesis", &"s31_reject_adaptation", &"s31_system_hint", &"s32_glass_source", &"s32_glass_contact", &"s32_memory_hypothesis", &"s32_anchor_trace", &"s32_system_hint", &"s33_shaft_source", &"s33_shaft_contact", &"s33_abort_hypothesis", &"s33_reconstruct_intent", &"s33_system_hint"]
+state_keys = [&"p7.archive_countermodel.passenger_chairs_inspected", &"p7.archive_countermodel.wierzbicka_proposal_inspected", &"p7.archive_countermodel.twelfth_chair_inspected", &"p7.archive_countermodel.passenger_ledger_compared", &"p7.archive_countermodel.adaptation_offer_rejected", &"p7.archive_countermodel.steamed_pane_inspected", &"p7.archive_countermodel.cracked_pane_inspected", &"p7.archive_countermodel.condensation_trace_etched", &"p7.archive_countermodel.polished_pane_inspected", &"p7.archive_countermodel.material_memory_anchored", &"p7.archive_countermodel.depth_gauge_inspected", &"p7.archive_countermodel.ladder_inspected", &"p7.archive_countermodel.abort_note_inspected", &"p7.archive_countermodel.work_light_inspected", &"p7.archive_countermodel.local_lena_intent_found", &"p7.archive_countermodel.commitment", &"p7.archive_countermodel.trace", &"p7.archive_countermodel.safe_trial_feedback"]
+migration_revision = 1

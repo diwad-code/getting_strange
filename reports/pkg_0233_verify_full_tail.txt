@@ -1,0 +1,30 @@
+﻿== PKG-0218 apron palette and line gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+1. Stage apron must cover 09 and every route/finale/epilogue scene...
+2. Station 09 must speak only VectorStageStyle with a canon palette...
+3. Station 09 construction lines must be >= 2 px; neighbours audited...
+ERROR: PKG-0218: station_13 must keep zero 1.0 strokes (read-only audit)
+   audit 08 x1.0=1, 10 x1.0=4, 13 x1.0=2 (info only)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/pkg_0218_apron_palette_line_pin_test.gd:48)
+       [1] _test_lines (res://tests/pkg_0218_apron_palette_line_pin_test.gd:154)
+       [2] _run (res://tests/pkg_0218_apron_palette_line_pin_test.gd:87)
+4. Detectors must catch injected regressions (fail-closed)...
+PKG-0218 APRON PALETTE LINE FAIL (1)
+  - station_13 must keep zero 1.0 strokes (read-only audit)
+pwsh : Exception: C:\getting_strange\tools\verify.ps1:51
+At line:1 char:1
++ pwsh -NoProfile -File .\tools\verify.ps1 *> reports/pkg_0233_verify_f ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Exceptio...rify.ps1:51:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Line |
+  51 |          throw "$Name failed with exit code $exitCode"
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | PKG-0218 apron palette and line gate 
+failed with exit code 1
+FINAL_EXIT:1
+

@@ -1,0 +1,13 @@
+claim_id	pkg0182_claim	independent_method_1	independent_method_2	result	notes
+C-0183-01	PKG-0182 closed before 0183	CURRENT_STATE + SESSION_LOG + snapshot PKG-0182-2026-09-03 + reports/pkg_0182/final.log	final.log 2026-09-03T20:42:28Z vs last 0182 source	PASS	0183 start condition met
+C-0183-02	Coverage 898 files / 100% runtime	Fresh inventory 935 files including resources/	inventory_diff.tsv 36 missing from 0182	FAIL-THEN-FIXED	0182 omitted resources/ and some root files; 0183 inventory is the independent manifest
+C-0183-03	ObjectDB leaks gone / verifier fail-closed	Baseline verify.ps1 0 ObjectDB lines, 3 allowlisted WARNING	Log policy self-test plus SCRIPT WARNING negative	PASS	Inherited leak fix holds on this workstation; policy now also rejects SCRIPT WARNING
+C-0183-04	pkg_0182 soak object_count returns to 1991	Read soak_3_cycles.tsv	Read cycle_ok in pkg_0182_smoke_test.gd	FALSE-PASS	Delta logged, not asserted; 0183 soak now fails if after drifts
+C-0183-05	256 generators 0 clipped	Post-clamp PCM cannot exceed 1.0	generate_wav used clampf before encode	FALSE-PASS	Headroom moved into generate_wav
+C-0183-06	Player-verb M1 20 addresses 3 finales	Baseline verify ran pkg_0177 full-a 187.9 s	Independent --pkg0183-route= full-a/minimal-b/mixed-c	PENDING-RUNTIME	Traces written to reports/pkg_0183/runtime_routes/
+C-0183-07	Language ledger PASS including PAUSE_STATUS	TXT-00603/00652 marked PASS with /43	Runtime LocalizationManager + pause label	FALSE-PASS	Fixed to %d/%d over 20
+C-0183-08	PKG-0179 ObjectDB hygiene certified	Baseline 0179 printed PASS with no test steps	Source: three awaits missing	FALSE-PASS	Await added; SCRIPT ERROR in ThresholdZone then fixed
+C-0183-09	14 product gates TECHNICAL PASS	pkg_0177 summary is a hardcoded dict	M1 still runs player verbs from Nowa gra	PARTIAL	M1 path is real; 14-gate table remains a status rollup, not a measurement
+C-0183-10	Fun / emotion / comprehension	No external playtests	ADR-003	OPEN-NO-EVIDENCE	Unchanged
+C-0183-11	Physical pad ergonomics	No controller	InputMap has keyboard+pad bindings including D-pad strafe	BLOCKED	Bindings exist; feel untested
+C-0183-12	physics 60 Hz	Engine.physics_ticks_per_second==60	project.godot now pins the setting	PASS	Was default-only; now explicit

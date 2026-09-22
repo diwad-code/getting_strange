@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MovementProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/movement_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+move_speed = 96.0
+ground_acceleration = 620.0
+ground_deceleration = 720.0
+air_acceleration = 300.0
+air_deceleration = 260.0
+jump_velocity = -252.0
+gravity = 720.0
+coyote_time = 0.1
+jump_buffer_time = 0.15
+jump_release_multiplier = 0.45
+fall_gravity_multiplier = 1.35
+max_fall_speed = 360.0

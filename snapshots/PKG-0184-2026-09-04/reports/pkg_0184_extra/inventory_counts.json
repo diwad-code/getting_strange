@@ -1,0 +1,16 @@
+{
+  "inventory_files": 948,
+  "scenes_tscn": 50,
+  "scripts_gd": 94,
+  "tests_gd": 80,
+  "tools_files": 202,
+  "docs_files": 89,
+  "assets_files": 230,
+  "resources_files": 22,
+  "new_in_0184": 13,
+  "only_in_0183": 0,
+  "tests_not_in_verify": 2,
+  "text_candidates": 173,
+  "pkg0182_inventory_exists": "true",
+  "pkg0183_inventory_exists": "true"
+}

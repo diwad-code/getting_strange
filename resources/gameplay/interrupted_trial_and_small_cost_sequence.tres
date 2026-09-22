@@ -1,0 +1,69 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_own_echo"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"own_echo"
+source_fact = &"p7.interrupted_trial_and_small_cost.ucp_intervention_reconstructed"
+predicted_outcome = "Jeżeli odpowiedź jest własnym echem aparatury, powtórzy dwa zgodne impulsy i celowy błąd bez wybiórczej korekty."
+required_evidence = [&"p7.interrupted_trial_and_small_cost.ucp_intervention_reconstructed", &"p7.interrupted_trial_and_small_cost.local_lena_signal_confirmed"]
+trial_result = &"error_repeated_without_correction"
+closure_id = &"p7.interrupted_trial_and_small_cost.local_lena_signal_confirmed"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_live_signal"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"live_signal"
+source_fact = &"p7.interrupted_trial_and_small_cost.local_lena_signal_confirmed"
+predicted_outcome = "Jeżeli po drugiej stronie działa żywy sygnał miejscowej Leny, odpowiedź pozostawi dwa identyczne impulsy i skoryguje wyłącznie trzeci, celowo błędny."
+required_evidence = [&"p7.interrupted_trial_and_small_cost.ucp_intervention_reconstructed", &"p7.interrupted_trial_and_small_cost.local_lena_signal_confirmed"]
+trial_result = &"only_deliberate_error_corrected"
+closure_id = &"p7.interrupted_trial_and_small_cost.local_lena_signal_confirmed"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_later_ucp_intervention"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"later_ucp_intervention"
+source_fact = &"p7.interrupted_trial_and_small_cost.ucp_intervention_reconstructed"
+predicted_outcome = "Jeżeli UCP interweniowała później, przesunięcie trzech zegarów odtworzy jej wejście po pobraniu próbki, niezależnie od odpowiedzi sygnału."
+required_evidence = [&"p7.interrupted_trial_and_small_cost.ucp_intervention_reconstructed"]
+trial_result = &"three_clock_offset_reconstructs_ucp"
+closure_id = &"p7.interrupted_trial_and_small_cost.ucp_intervention_reconstructed"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_home_trace_anchor"]
+script = ExtResource("3_commitment")
+commitment_id = &"home_trace_anchor"
+person_id = &"lena"
+scope = "Anchor utrzymuje jeden ślad domu w stałym adresie po wykonanej próbie sygnału."
+known_cost = "Pierwszy szczegół spotkania z Martą zaciera się: marta_first_meeting_detail_blurred."
+required_disclosure = [&"p7.interrupted_trial_and_small_cost.ucp_intervention_reconstructed", &"p7.interrupted_trial_and_small_cost.local_lena_signal_confirmed", &"p7.interrupted_trial_and_small_cost.small_cost_manifested"]
+alternative_route = "Yield może dopuścić wspólny dryf zamiast utrzymywania jednego śladu, kosztem dokładnej sekundy próbki."
+outcome_key = &"p7.interrupted_trial_and_small_cost.commitment"
+trace_key = &"p7.interrupted_trial_and_small_cost.trace"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_shared_drift_yield"]
+script = ExtResource("3_commitment")
+commitment_id = &"shared_drift_yield"
+person_id = &"lena"
+scope = "Yield dopuszcza wspólny dryf dwóch odczytów po wykonanej próbie sygnału."
+known_cost = "Dokładna sekunda pobrania próbki przepada: sample_exact_second_lost."
+required_disclosure = [&"p7.interrupted_trial_and_small_cost.ucp_intervention_reconstructed", &"p7.interrupted_trial_and_small_cost.local_lena_signal_confirmed", &"p7.interrupted_trial_and_small_cost.small_cost_manifested"]
+alternative_route = "Anchor może utrzymać jeden ślad domu w stałym adresie, kosztem szczegółu pierwszego spotkania z Martą."
+outcome_key = &"p7.interrupted_trial_and_small_cost.commitment"
+trace_key = &"p7.interrupted_trial_and_small_cost.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"interrupted_trial_and_small_cost"
+station_ids = [&"station_26", &"station_27", &"station_28"]
+entry_gate = &"p7.three_place_proofs.trace"
+discrepancy = "Log UCP umieszcza interwencję po czasie próbki, a odpowiedź na impuls może być zarówno żywym sygnałem, jak i własnym echem aparatury."
+required_source_facts = [&"p7.interrupted_trial_and_small_cost.ucp_intervention_reconstructed", &"p7.interrupted_trial_and_small_cost.local_lena_signal_confirmed", &"p7.interrupted_trial_and_small_cost.small_cost_manifested"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_own_echo"), SubResource("DiagnosticHypothesis_live_signal"), SubResource("DiagnosticHypothesis_later_ucp_intervention")])
+trial_id = &"three_clocks_and_selective_error_correction"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_home_trace_anchor"), SubResource("DiagnosticCommitment_shared_drift_yield")])
+trace_key = &"p7.interrupted_trial_and_small_cost.trace"
+guidance_beat_ids = [&"s26_interrupted_log_source", &"s26_interrupted_log_contact", &"s26_clock_hypothesis", &"s26_three_clock_reconstruction", &"s26_system_hint", &"s27_pulse_source", &"s27_pulse_contact", &"s27_echo_hypothesis", &"s27_error_correction_trial", &"s27_system_hint", &"s28_transfer_source", &"s28_transfer_contact", &"s28_cost_hypothesis", &"s28_commitment", &"s28_system_hint"]
+state_keys = [&"p7.interrupted_trial_and_small_cost.ucp_intervention_reconstructed", &"p7.interrupted_trial_and_small_cost.local_lena_signal_confirmed", &"p7.interrupted_trial_and_small_cost.small_cost_manifested", &"p7.interrupted_trial_and_small_cost.commitment", &"p7.interrupted_trial_and_small_cost.trace", &"p7.interrupted_trial_and_small_cost.safe_trial_feedback"]
+migration_revision = 1

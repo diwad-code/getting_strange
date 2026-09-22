@@ -1,0 +1,13 @@
+PKG-0170 VISUAL EVIDENCE REPORT
+Renderer: Intel(R) Iris(R) Xe Graphics
+Viewport: 640x360; normal Windows display driver; script was not headless.
+Three textless M2 frames of Station 43: initial, notice and credits inspected, blackout epilogue.
+One M3 true-grayscale structure frame showing the Family 7 transit shelter / platform at dawn.
+Hash distinctness and grayscale checks are structural evidence only; no line claims
+human comprehension, emotion, comfort or PRODUCT GO (D-012, ADR-003).
+
+CAPTURED FRAMES
+initial                mono=false hidden=8  hash=1580715461 res://reports/pkg_0170/station_43_initial.png
+notice_and_credits     mono=false hidden=8  hash=359599733 res://reports/pkg_0170/station_43_notice_and_credits.png
+blackout_epilogue      mono=false hidden=8  hash=290675078 res://reports/pkg_0170/station_43_blackout_epilogue.png
+structure_mono         mono=true  hidden=8  hash=1310645376 res://reports/pkg_0170/station_43_structure_mono.png

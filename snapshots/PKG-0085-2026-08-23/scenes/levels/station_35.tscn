@@ -1,0 +1,140 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_35.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor_main"]
+size = Vector2(640, 80)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_ceiling"]
+size = Vector2(640, 48)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(50, 70)
+
+[sub_resource type="CircleShape2D" id="Circle_prop_basin"]
+radius = 52.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_valve"]
+radius = 46.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_chemical"]
+radius = 46.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_monitor"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_exit"]
+radius = 60.0
+
+[node name="Station35" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="FloorMain" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 316)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorMain"]
+shape = SubResource("Rectangle_floor_main")
+
+[node name="Ceiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ceiling"]
+shape = SubResource("Rectangle_ceiling")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="SedationBasinPool" type="Area2D" parent="Props"]
+position = Vector2(140, 246)
+script = ExtResource("2_resonance")
+resonance_id = "prop_sedation_basin"
+prop_type = 162
+prop_title = "Basen sedacyjny z osadem poznawczym"
+prop_subtitle = "Fosforyzująca mętna ciecz, w której spoczywają odrzucone warianty pamięci i przedmioty"
+interaction_radius = 52.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/SedationBasinPool"]
+shape = SubResource("Circle_prop_basin")
+
+[node name="SludgeDrainValveWheel" type="Area2D" parent="Props"]
+position = Vector2(245, 246)
+script = ExtResource("2_resonance")
+resonance_id = "prop_sludge_valve"
+prop_type = 163
+prop_title = "Koło zaworu spustowego osadu"
+prop_subtitle = "Żeliwne koło sterujące zrzutem odfiltrowanej sedacji do kanałów burzowych"
+interaction_radius = 46.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/SludgeDrainValveWheel"]
+shape = SubResource("Circle_prop_valve")
+
+[node name="ChemicalSedationSampler" type="Area2D" parent="Props"]
+position = Vector2(345, 246)
+script = ExtResource("2_resonance")
+resonance_id = "prop_chemical_sampler"
+prop_type = 164
+prop_title = "Próbnik chemiczny roztworu sedacyjnego"
+prop_subtitle = "Szklane cylindry z wirującym odczynnikiem UCP stosowanym w miejskich wodociągach"
+interaction_radius = 46.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ChemicalSedationSampler"]
+shape = SubResource("Circle_prop_chemical")
+
+[node name="JakubSedationMonitor" type="Area2D" parent="Props"]
+position = Vector2(445, 246)
+script = ExtResource("2_resonance")
+resonance_id = "prop_jakub_monitor"
+prop_type = 165
+prop_title = "Monitor stężenia i nasycenia Jakuba"
+prop_subtitle = "Wykres spektrometryczny wykazujący 312% normy krytycznej w filtrach"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/JakubSedationMonitor"]
+shape = SubResource("Circle_prop_monitor")
+
+[node name="Station35Exit" type="Area2D" parent="Props"]
+position = Vector2(560, 242)
+script = ExtResource("2_resonance")
+resonance_id = "prop_sluice_exit"
+prop_type = 166
+prop_title = "Zasuwa śluzy odpływowej ku Przestrzeni 36"
+prop_subtitle = "Właz zrzutowy prowadzący do Kanału Odpływowego / Zimnego Ścieku pod Starą Pętlą"
+interaction_radius = 60.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Station35Exit"]
+shape = SubResource("Circle_prop_exit")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(65, 248)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(610, 245)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")

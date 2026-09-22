@@ -1,0 +1,5 @@
+[31;1mException: [0mC:\getting_strange\tools\verify.ps1:43[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m  43 | [0m         [36;1mthrow "$Name reported an engine or script error"[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mGetting Strange smoke test reported an engine or script error[0m

@@ -1,0 +1,1543 @@
+{
+  "beats": [
+    {
+      "station": "station_01",
+      "beat_id": "s01_repeat_reading",
+      "text_pl": "Pociąg albo luźny uchwyt. Powtórzę odczyt.",
+      "text_en": "Train pass or loose bracket. I will repeat the reading.",
+      "source": "c:/getting_strange/scripts/levels\\station_01.gd"
+    },
+    {
+      "station": "station_01",
+      "beat_id": "s01_pack_and_exit",
+      "text_pl": "Odczyt zapisany. Zbieram sprzęt i wychodzę.",
+      "text_en": "Log saved. Packing up gear and leaving.",
+      "source": "c:/getting_strange/scripts/levels\\station_01.gd"
+    },
+    {
+      "station": "station_01",
+      "beat_id": "s01_door_blocked",
+      "text_pl": "Zostawię surowy odczyt, jutro będę tu wracać z raportem. Zbieram torbę.",
+      "text_en": "I will leave the raw reading; I will return here tomorrow with the report. Packing the bag.",
+      "source": "c:/getting_strange/scripts/levels\\station_01.gd"
+    },
+    {
+      "station": "station_02",
+      "beat_id": "s02_catwalk_observation",
+      "text_pl": "Ścieżka serwisowa jest wolna. Wyjście z tyłu komory.",
+      "text_en": "Service walkway is clear. Exit behind the chamber.",
+      "source": "c:/getting_strange/scripts/levels\\station_02.gd"
+    },
+    {
+      "station": "station_02",
+      "beat_id": "s02_subpanel_checked",
+      "text_pl": "Obwód wygaszony na czas robót. Idę kładką.",
+      "text_en": "Circuit powered down for maintenance. Taking the catwalk.",
+      "source": "c:/getting_strange/scripts/levels\\station_02.gd"
+    },
+    {
+      "station": "station_03",
+      "beat_id": "s03_marta_message",
+      "text_pl": "Wracam do domu. Marta czeka.",
+      "text_en": "Heading home. Marta is waiting.",
+      "source": "c:/getting_strange/scripts/levels\\station_03.gd"
+    },
+    {
+      "station": "station_03",
+      "beat_id": "s03_board_checked",
+      "text_pl": "Opóźnienie na tablicy. Odpiszę krótko, że jadę.",
+      "text_en": "Delay on the board. I'll text briefly that I'm on my way.",
+      "source": "c:/getting_strange/scripts/levels\\station_03.gd"
+    },
+    {
+      "station": "station_04",
+      "beat_id": "s04_train_journey",
+      "text_pl": "Wagon kołysze na zwrotnicach. Jeszcze dwa przystanki.",
+      "text_en": "Carriage sways across switches. Two stops left.",
+      "source": "c:/getting_strange/scripts/levels\\station_04.gd"
+    },
+    {
+      "station": "station_04",
+      "beat_id": "s04_stow_reader",
+      "text_pl": "Dość pomiarów na dzisiaj. Chowam czytnik.",
+      "text_en": "Enough readings for today. Stowing the reader.",
+      "source": "c:/getting_strange/scripts/levels\\station_04.gd"
+    },
+    {
+      "station": "station_05",
+      "beat_id": "s05_roadwork_observation",
+      "text_pl": "Kolejne wykopy. Chodnik rozkopany od poniedziałku.",
+      "text_en": "More excavations. Sidewalk dug up since Monday.",
+      "source": "c:/getting_strange/scripts/levels\\station_05.gd"
+    },
+    {
+      "station": "station_06",
+      "beat_id": "s06_two_schedules_observation",
+      "text_pl": "Ta sama data. Dwie trasy.",
+      "text_en": "Same date. Two different routes.",
+      "source": "c:/getting_strange/scripts/levels\\station_06.gd"
+    },
+    {
+      "station": "station_06",
+      "beat_id": "s06_cache_hypothesis",
+      "text_pl": "Błąd w druku albo stara tabliczka. Zawsze najpierw szuka się bałaganu w papierach.",
+      "text_en": "Misprint or an old plate. You always look for paper chaos first.",
+      "source": "c:/getting_strange/scripts/levels\\station_06.gd"
+    },
+    {
+      "station": "station_06",
+      "beat_id": "s06_check_paper_intent",
+      "text_pl": "Sprawdzę datę na papierze.",
+      "text_en": "I'll check the version stamp on the paper.",
+      "source": "c:/getting_strange/scripts/levels\\station_06.gd"
+    },
+    {
+      "station": "station_07",
+      "beat_id": "s07_shopkeeper_name_obs",
+      "text_pl": "Sprzedawca zna moje imię i herbatę Marty.",
+      "text_en": "Shopkeeper knows my name and Marta's tea.",
+      "source": "c:/getting_strange/scripts/levels\\station_07.gd"
+    },
+    {
+      "station": "station_07",
+      "beat_id": "s07_shopkeeper_card_hyp",
+      "text_pl": "Imię zobaczył na karcie płatniczej. Najprostsze.",
+      "text_en": "Saw the name on the payment card. Most likely.",
+      "source": "c:/getting_strange/scripts/levels\\station_07.gd"
+    },
+    {
+      "station": "station_07",
+      "beat_id": "s07_address_check_intent",
+      "text_pl": "Biorę wodę i sprawdzę adres na domofonie.",
+      "text_en": "Taking the water and checking the intercom address.",
+      "source": "c:/getting_strange/scripts/levels\\station_07.gd"
+    },
+    {
+      "station": "station_08",
+      "beat_id": "s08_name_on_fourteen",
+      "text_pl": "Moje nazwisko. Czternaście.",
+      "text_en": "My surname. Fourteen.",
+      "source": "c:/getting_strange/scripts/levels\\station_08.gd"
+    },
+    {
+      "station": "station_08",
+      "beat_id": "s08_numbers_swapped",
+      "text_pl": "Ktoś przełożył numery.",
+      "text_en": "Somebody swapped the numbers.",
+      "source": "c:/getting_strange/scripts/levels\\station_08.gd"
+    },
+    {
+      "station": "station_08",
+      "beat_id": "s08_door_then_admin",
+      "text_pl": "Najpierw drzwi. Potem administracja.",
+      "text_en": "The door first. Administration after.",
+      "source": "c:/getting_strange/scripts/levels\\station_08.gd"
+    },
+    {
+      "station": "station_09",
+      "beat_id": "s09_three_sources_agree",
+      "text_pl": "Zna moje imię. Nie zgadza się tylko numer.",
+      "text_en": "She knows my name. Only the number disagrees.",
+      "source": "c:/getting_strange/scripts/levels\\station_09.gd"
+    },
+    {
+      "station": "station_09",
+      "beat_id": "s09_neighbour_mixes_floors",
+      "text_pl": "Myli piętra. Ludzie mylą piętra.",
+      "text_en": "She mixes up floors. People do.",
+      "source": "c:/getting_strange/scripts/levels\\station_09.gd"
+    },
+    {
+      "station": "station_09",
+      "beat_id": "s09_check_the_lock",
+      "text_pl": "Sprawdzę zamek. Nie wejdę od razu.",
+      "text_en": "I will try the lock. I will not walk straight in.",
+      "source": "c:/getting_strange/scripts/levels\\station_09.gd"
+    },
+    {
+      "station": "station_10",
+      "beat_id": "s10_key_fits",
+      "text_pl": "Zamek ustąpił od razu.",
+      "text_en": "The lock gave way at once.",
+      "source": "c:/getting_strange/scripts/levels\\station_10.gd"
+    },
+    {
+      "station": "station_10",
+      "beat_id": "s10_same_lock_series",
+      "text_pl": "Ta sama seria zamków. Zdarza się.",
+      "text_en": "Same lock series. It happens.",
+      "source": "c:/getting_strange/scripts/levels\\station_10.gd"
+    },
+    {
+      "station": "station_10",
+      "beat_id": "s10_bag_by_the_door",
+      "text_pl": "Torba przy drzwiach. Wyjdę w trzy kroki.",
+      "text_en": "Bag by the door. Three steps back out.",
+      "source": "c:/getting_strange/scripts/levels\\station_10.gd"
+    },
+    {
+      "station": "station_11",
+      "beat_id": "s11_that_is_marta",
+      "text_pl": "To Marta. To ja.",
+      "text_en": "That is Marta. That is me.",
+      "source": "c:/getting_strange/scripts/levels\\station_11.gd"
+    },
+    {
+      "station": "station_11",
+      "beat_id": "s11_marta_would_not",
+      "text_pl": "Nie zrobiłaby takiego zdjęcia.",
+      "text_en": "She would not take a photo like this.",
+      "source": "c:/getting_strange/scripts/levels\\station_11.gd"
+    },
+    {
+      "station": "station_11",
+      "beat_id": "s11_reach_marta",
+      "text_pl": "Potrzebuję faktu spoza tego mieszkania.",
+      "text_en": "I need a fact from outside this flat.",
+      "source": "c:/getting_strange/scripts/levels\\station_11.gd"
+    },
+    {
+      "station": "station_12",
+      "beat_id": "s12_her_voice",
+      "text_pl": "Jej oddech. Jej poprawka w połowie słowa.",
+      "text_en": "Her breath. Her mid-word correction.",
+      "source": "c:/getting_strange/scripts/levels\\station_12.gd"
+    },
+    {
+      "station": "station_12",
+      "beat_id": "s12_missing_months",
+      "text_pl": "Brakuje mi kawałka miesięcy, nie rozmowy.",
+      "text_en": "It is months I am missing, not one talk.",
+      "source": "c:/getting_strange/scripts/levels\\station_12.gd"
+    },
+    {
+      "station": "station_12",
+      "beat_id": "s12_two_questions",
+      "text_pl": "Zapiszę dwa pytania. Nie oddzwonię na gorąco.",
+      "text_en": "Two questions on paper. No hot call back.",
+      "source": "c:/getting_strange/scripts/levels\\station_12.gd"
+    },
+    {
+      "station": "station_13",
+      "beat_id": "s13_two_addresses",
+      "text_pl": "Dwa adresy. Jeden dzień.",
+      "text_en": "Two addresses. One day.",
+      "source": "c:/getting_strange/scripts/levels\\station_13.gd"
+    },
+    {
+      "station": "station_13",
+      "beat_id": "s13_paperwork_lag",
+      "text_pl": "Papiery czasem się nakładają przy przeprowadzce.",
+      "text_en": "Paperwork overlaps when someone moves.",
+      "source": "c:/getting_strange/scripts/levels\\station_13.gd"
+    },
+    {
+      "station": "station_13",
+      "beat_id": "s13_ask_marta_for_the_day",
+      "text_pl": "Marta opisze dzień z pamięci.",
+      "text_en": "Marta can describe the day without these papers.",
+      "source": "c:/getting_strange/scripts/levels\\station_13.gd"
+    },
+    {
+      "station": "station_14",
+      "beat_id": "s14_marta_expects_partner",
+      "text_pl": "Marta czeka na partnerkę. Odkłada drugi kubek.",
+      "text_en": "Marta expects her partner. She puts away the second mug.",
+      "source": "c:/getting_strange/scripts/levels\\station_14.gd"
+    },
+    {
+      "station": "station_14",
+      "beat_id": "s14_medical_fear",
+      "text_pl": "Marta uważa, że mam wstrząśnienie mózgu lub atak paniki.",
+      "text_en": "Marta thinks I have a concussion or panic attack.",
+      "source": "c:/getting_strange/scripts/levels\\station_14.gd"
+    },
+    {
+      "station": "station_14",
+      "beat_id": "s14_ask_about_field_trip",
+      "text_pl": "Zapytam o wyprawę terenową z października.",
+      "text_en": "I will ask about the October field expedition.",
+      "source": "c:/getting_strange/scripts/levels\\station_14.gd"
+    },
+    {
+      "station": "station_15",
+      "beat_id": "s15_diverging_trip",
+      "text_pl": "Jedna wyprawa. Dwie różne wersje tego, co stało się po deszczu.",
+      "text_en": "One expedition. Two different versions of what happened after the rain.",
+      "source": "c:/getting_strange/scripts/levels\\station_15.gd"
+    },
+    {
+      "station": "station_15",
+      "beat_id": "s15_rehearsed_story",
+      "text_pl": "Marta mogła ułożyć tę historię po latach opowiadań.",
+      "text_en": "Marta might have shaped this story over years of retellings.",
+      "source": "c:/getting_strange/scripts/levels\\station_15.gd"
+    },
+    {
+      "station": "station_15",
+      "beat_id": "s15_go_to_office",
+      "text_pl": "Sprawdzę oficjalny grafik w biurze pomiarowym.",
+      "text_en": "I will check the official duty roster at the measurement office.",
+      "source": "c:/getting_strange/scripts/levels\\station_15.gd"
+    },
+    {
+      "station": "station_16",
+      "beat_id": "s16_biometrics_match",
+      "text_pl": "Moja dłoń. Mój profil. Obcy numer karty.",
+      "text_en": "My hand. My profile. Foreign card number.",
+      "source": "c:/getting_strange/scripts/levels\\station_16.gd"
+    },
+    {
+      "station": "station_16",
+      "beat_id": "s16_account_manipulation",
+      "text_pl": "Ktoś podmienił identyfikator karty w bazie UCP.",
+      "text_en": "Someone altered the card identifier in the UCP database.",
+      "source": "c:/getting_strange/scripts/levels\\station_16.gd"
+    },
+    {
+      "station": "station_16",
+      "beat_id": "s16_open_incident_log",
+      "text_pl": "Otworzę raport z dzisiejszej próby.",
+      "text_en": "I will open the report on today's trial.",
+      "source": "c:/getting_strange/scripts/levels\\station_16.gd"
+    },
+    {
+      "station": "station_17",
+      "beat_id": "s17_parallel_test",
+      "text_pl": "Dwa pomiary w tej samej sekundzie. Mój czytnik jest poza ich spisem.",
+      "text_en": "Two measurements in the exact same second. My reader is absent from their index.",
+      "source": "c:/getting_strange/scripts/levels\\station_17.gd"
+    },
+    {
+      "station": "station_17",
+      "beat_id": "s17_ucp_containment",
+      "text_pl": "Skopiuję nagłówek i wyjdę szybem wentylacji, zanim zaryglują sektor.",
+      "text_en": "I will copy the header and leave through the ventilation shaft before lockdown.",
+      "source": "c:/getting_strange/scripts/levels\\station_17.gd"
+    },
+    {
+      "station": "station_18",
+      "beat_id": "s18_no_death_record",
+      "text_pl": "Brak aktu zgonu. Dziewięć lat późniejszych wpisów.",
+      "text_en": "No death certificate. Nine years of subsequent records.",
+      "source": "c:/getting_strange/scripts/levels\\station_18.gd"
+    },
+    {
+      "station": "station_18",
+      "beat_id": "s18_ucp_database_forgery",
+      "text_pl": "UCP mogło sfabrykować miejskie rejestry.",
+      "text_en": "UCP could have fabricated municipal records.",
+      "source": "c:/getting_strange/scripts/levels\\station_18.gd"
+    },
+    {
+      "station": "station_18",
+      "beat_id": "s18_test_family_knowledge",
+      "text_pl": "Nie zadzwonię bez prywatnego pytania kontrolnego.",
+      "text_en": "I will not call without a private control question.",
+      "source": "c:/getting_strange/scripts/levels\\station_18.gd"
+    },
+    {
+      "station": "station_19",
+      "beat_id": "s19_voice_heard",
+      "text_pl": "Zna schowek u babci. Nie wie nic o tunelu.",
+      "text_en": "He knows grandma's pantry. He knows nothing about the tunnel.",
+      "source": "c:/getting_strange/scripts/levels\\station_19.gd"
+    },
+    {
+      "station": "station_19",
+      "beat_id": "s19_impersonation_fear",
+      "text_pl": "Ktoś mógł zebrać rodzinne wspomnienia z moich notatek.",
+      "text_en": "Someone could have gathered family memories from my notes.",
+      "source": "c:/getting_strange/scripts/levels\\station_19.gd"
+    },
+    {
+      "station": "station_19",
+      "beat_id": "s19_meet_in_public",
+      "text_pl": "Spotkamy się na placu warsztatowym z Martą obok.",
+      "text_en": "We will meet at the workshop square with Marta present.",
+      "source": "c:/getting_strange/scripts/levels\\station_19.gd"
+    },
+    {
+      "station": "station_20",
+      "beat_id": "s20_living_brother",
+      "text_pl": "Ciało żyje. Ma pracę, zmęczenie i własne granice.",
+      "text_en": "The body is alive. He has work, fatigue, and his own boundaries.",
+      "source": "c:/getting_strange/scripts/levels\\station_20.gd"
+    },
+    {
+      "station": "station_20",
+      "beat_id": "s20_synthesize_sources",
+      "text_pl": "Zestawię trzy źródła dowodów na stole pomiarowym.",
+      "text_en": "I will synthesize the three sources of evidence on the measurement table.",
+      "source": "c:/getting_strange/scripts/levels\\station_20.gd"
+    },
+    {
+      "station": "station_21",
+      "beat_id": "s21_three_sources",
+      "text_pl": "Trzy niezależne rodziny dowodów.",
+      "text_en": "Three independent families of evidence.",
+      "source": "c:/getting_strange/scripts/levels\\station_21.gd"
+    },
+    {
+      "station": "station_21",
+      "beat_id": "s21_single_world_impossibility",
+      "text_pl": "Żaden pojedynczy błąd w jednym świecie nie tłumaczy wszystkich trzech źródeł.",
+      "text_en": "No single mistake in one world explains all three sources.",
+      "source": "c:/getting_strange/scripts/levels\\station_21.gd"
+    },
+    {
+      "station": "station_21",
+      "beat_id": "s21_recognition_truth",
+      "text_pl": "To nie jest mój świat. Muszę odnaleźć miejscową Lenę.",
+      "text_en": "This is not my world. I must find the local Lena.",
+      "source": "c:/getting_strange/scripts/levels\\station_21.gd"
+    },
+    {
+      "station": "station_22",
+      "beat_id": "s22_two_signal_modes",
+      "text_pl": "Dwa zachowania sygnału w zapisie próby: sztywne zakotwiczenie i podatna uległość.",
+      "text_en": "Two signal behaviors in the test log: rigid anchoring and compliant yield.",
+      "source": "c:/getting_strange/scripts/levels\\station_22.gd"
+    },
+    {
+      "station": "station_22",
+      "beat_id": "s22_reject_ucp",
+      "text_pl": "Nie oddam czytnika. Sprawdzę martwy obwód w podziemiach.",
+      "text_en": "I will not surrender the reader. I will check the dead circuit below.",
+      "source": "c:/getting_strange/scripts/levels\\station_22.gd"
+    },
+    {
+      "station": "station_23",
+      "beat_id": "s23_circuit_cost",
+      "text_pl": "Zmiana stanu obciąża obwód. Zakotwiczenie ma swój fizyczny koszt.",
+      "text_en": "State change loads the circuit. Anchoring has its physical cost.",
+      "source": "c:/getting_strange/scripts/levels\\station_23.gd"
+    },
+    {
+      "station": "station_23",
+      "beat_id": "s23_explore_substation",
+      "text_pl": "Zejdę do głównej magistrali podstacji.",
+      "text_en": "I will descend to the main substation trunk.",
+      "source": "c:/getting_strange/scripts/levels\\station_23.gd"
+    },
+    {
+      "station": "station_24",
+      "beat_id": "s24_marta_boundaries",
+      "text_pl": "Marta stawia granice. Ma do tego prawo.",
+      "text_en": "Marta sets boundaries. She has every right to.",
+      "source": "c:/getting_strange/scripts/levels\\station_24.gd"
+    },
+    {
+      "station": "station_25",
+      "beat_id": "s25_switchboard_b",
+      "text_pl": "Rozdzielnica B zasila wentylację. Musimy ominąć wyłączniki.",
+      "text_en": "Switchboard B powers ventilation. We need to bypass breakers.",
+      "source": "c:/getting_strange/scripts/levels\\station_25.gd"
+    },
+    {
+      "station": "station_26",
+      "beat_id": "s26_log_204003",
+      "text_pl": "Log 20:40:03 pokazuje wzajemny kontakt przed interwencją.",
+      "text_en": "Log 20:40:03 shows mutual contact before intervention.",
+      "source": "c:/getting_strange/scripts/levels\\station_26.gd"
+    },
+    {
+      "station": "station_27",
+      "beat_id": "s27_three_repeats",
+      "text_pl": "Wysyłam trzy impulsy. Trzeci ma celowy błąd.",
+      "text_en": "Sending three pulses. The third contains an intentional error.",
+      "source": "c:/getting_strange/scripts/levels\\station_27.gd"
+    },
+    {
+      "station": "station_28",
+      "beat_id": "s28_line4_travel",
+      "text_pl": "Jazda Linią 4. Z każdym metrem tunel staje się gęstszy od sygnałów.",
+      "text_en": "Travelling on Line 4. With every meter the tunnel grows denser with signals.",
+      "source": "c:/getting_strange/scripts/levels\\station_28.gd"
+    },
+    {
+      "station": "station_29",
+      "beat_id": "s29_power_grid",
+      "text_pl": "Stacja zasilania. Trzy fazy obciążenia pamięciowego.",
+      "text_en": "Power substation. Three phases of memory grid load.",
+      "source": "c:/getting_strange/scripts/levels\\station_29.gd"
+    },
+    {
+      "station": "station_30",
+      "beat_id": "s30_three_models",
+      "text_pl": "Trzy modele zasilania. Żaden nie jest darmowy.",
+      "text_en": "Three power models. None is free.",
+      "source": "c:/getting_strange/scripts/levels\\station_30.gd"
+    },
+    {
+      "station": "station_31",
+      "beat_id": "s31_adaptation_refusal",
+      "text_pl": "Magazyn dowodów. Ewidencja pasażerów i propozycja uciszenia sprzeczności.",
+      "text_en": "Evidence archive. Passenger ledger and the offer to silence contradiction.",
+      "source": "c:/getting_strange/scripts/levels\\station_31.gd"
+    },
+    {
+      "station": "station_32",
+      "beat_id": "s32_material_memory",
+      "text_pl": "Pamięć materiału. Szkło laboratoryjne reaguje na moje dłonie.",
+      "text_en": "Material memory. The lab glass responds to my hands.",
+      "source": "c:/getting_strange/scripts/levels\\station_32.gd"
+    },
+    {
+      "station": "station_33",
+      "beat_id": "s33_abort_condition",
+      "text_pl": "Notatka miejscowej Leny: warunek przerwania po trzech sekundach.",
+      "text_en": "Local Lena's note: abort condition after three seconds.",
+      "source": "c:/getting_strange/scripts/levels\\station_33.gd"
+    },
+    {
+      "station": "station_34",
+      "beat_id": "s34_pair_registry",
+      "text_pl": "Rejestr par tożsamościowych. Obie Leny widnieją w banku maszynowni.",
+      "text_en": "Identity pair registry. Both Lenas appear in the engine bank.",
+      "source": "c:/getting_strange/scripts/levels\\station_34.gd"
+    },
+    {
+      "station": "station_35",
+      "beat_id": "s35_home_echo",
+      "text_pl": "Echo domu. Wiadomość Marty potwierdza, że tamten świat poszedł dalej.",
+      "text_en": "Home echo. Marta's message confirms that world has moved on.",
+      "source": "c:/getting_strange/scripts/levels\\station_35.gd"
+    },
+    {
+      "station": "station_36",
+      "beat_id": "s36_line4_ledger",
+      "text_pl": "Rachunek Linii 4. Utrzymanie Równi koreluje z katastrofą w domu.",
+      "text_en": "Line 4 ledger. Rowien's stability correlates with disaster back home.",
+      "source": "c:/getting_strange/scripts/levels\\station_36.gd"
+    },
+    {
+      "station": "station_37",
+      "beat_id": "s37_living_signal",
+      "text_pl": "Żywy sygnał. Miejscowa Lena odpowiada, a Jakub pomaga na własnych warunkach.",
+      "text_en": "Living signal. Local Lena responds, and Jakub assists on his own terms.",
+      "source": "c:/getting_strange/scripts/levels\\station_37.gd"
+    },
+    {
+      "station": "station_38",
+      "beat_id": "s38_marta_consent",
+      "text_pl": "Strefa decyzji. Marta stawia granice, a Jakub pilnuje rozdzielnicy.",
+      "text_en": "Decision zone. Marta sets boundaries, and Jakub watches the switchboard.",
+      "source": "c:/getting_strange/scripts/levels\\station_38.gd"
+    },
+    {
+      "station": "station_39",
+      "beat_id": "s39_method_selection",
+      "text_pl": "Stół zgód i braków. Trzy metody bez moralizowania i bez łatwego wyjścia.",
+      "text_en": "Table of consents and gaps. Three methods without moralizing and without easy exits.",
+      "source": "c:/getting_strange/scripts/levels\\station_39.gd"
+    },
+    {
+      "station": "station_40",
+      "beat_id": "s40_negotiation",
+      "text_pl": "Sala negocjacyjna. Wierzbicka broni stabilności, Marta patrzy bez uniku.",
+      "text_en": "Negotiation chamber. Wierzbicka defends stability, Marta looks without evasion.",
+      "source": "c:/getting_strange/scripts/levels\\station_40.gd"
+    },
+    {
+      "station": "station_41",
+      "beat_id": "s41_operational_choice",
+      "text_pl": "Komora wyboru. Trzy konsole i fizyczne załączenie odpowiedzialności.",
+      "text_en": "Choice chamber. Three consoles and physical commitment of responsibility.",
+      "source": "c:/getting_strange/scripts/levels\\station_41.gd"
+    },
+    {
+      "station": "station_42a",
+      "beat_id": "s42a_return_echo",
+      "text_pl": "Własny pokój. Powrót nastąpił, ale obietnice mają realną cenę.",
+      "text_en": "Own room. Return happened, but promises carry a real cost.",
+      "source": "c:/getting_strange/scripts/levels\\station_42a.gd"
+    },
+    {
+      "station": "station_42b",
+      "beat_id": "s42b_reconciliation",
+      "text_pl": "Miejsce po niej. Miejscowa Lena wraca do domu, a przybyła Lena staje na obcym przystanku.",
+      "text_en": "Her place. Local Lena returns home, and arrival Lena stands at a foreign stop.",
+      "source": "c:/getting_strange/scripts/levels\\station_42b.gd"
+    },
+    {
+      "station": "station_42c",
+      "beat_id": "s42c_testimony",
+      "text_pl": "Świadectwo. Dwa tory i most, który przecieka, ale trzyma obie strony.",
+      "text_en": "Testimony. Two tracks and a bridge that leaks, but holds both sides.",
+      "source": "c:/getting_strange/scripts/levels\\station_42c.gd"
+    },
+    {
+      "station": "station_43",
+      "beat_id": "s43_epilogue",
+      "text_pl": "Epilog. Miasto żyje dalej z dokonanym wyborem i zapisanym stanem sześciu podmiotów.",
+      "text_en": "Epilogue. The city lives on with the choice made and the recorded state of six entities.",
+      "source": "c:/getting_strange/scripts/levels\\station_43.gd"
+    }
+  ],
+  "resonance": [
+    {
+      "line": 230,
+      "text": "Sterownia IKP",
+      "context": "@export var prop_subtitle: String = \"Sterownia IKP\""
+    },
+    {
+      "line": 2550,
+      "text": "WOLSKA, L.",
+      "context": "# Data readout lines on LCD: \"WOLSKA, L.\" and \"URLOP PRZERWANY\""
+    },
+    {
+      "line": 2550,
+      "text": "URLOP PRZERWANY",
+      "context": "# Data readout lines on LCD: \"WOLSKA, L.\" and \"URLOP PRZERWANY\""
+    },
+    {
+      "line": 2557,
+      "text": "URLOP PRZERWANY",
+      "context": "# \"URLOP PRZERWANY\" (Pulsing cinnabar / amber alert banner)"
+    },
+    {
+      "line": 2694,
+      "text": "CAM 04 [REC]",
+      "context": "# Camera status overlay text: \"CAM 04 [REC]\""
+    },
+    {
+      "line": 2707,
+      "text": "UCP // PROTOKÓŁ ZGŁASZANIA",
+      "context": "# Blue/grey header: \"UCP // PROTOKÓŁ ZGŁASZANIA\""
+    },
+    {
+      "line": 2757,
+      "text": "PAMIĘĆ WSPÓLNA TO SPOKÓJ",
+      "context": "# Slogan typography lines (\"PAMIĘĆ WSPÓLNA TO SPOKÓJ\")"
+    },
+    {
+      "line": 2849,
+      "text": "LINIA 4 // ROZKŁAD",
+      "context": "# Header strip: \"LINIA 4 // ROZKŁAD\""
+    },
+    {
+      "line": 2858,
+      "text": "TRASA ZAWIESZONA / AUTOBUS ZASTĘPCZY",
+      "context": "# Red strike-through warning tape: \"TRASA ZAWIESZONA / AUTOBUS ZASTĘPCZY\""
+    },
+    {
+      "line": 2960,
+      "text": "LINIA ZASTĘPCZA 4",
+      "context": "# Institutional overhead route board: \"LINIA ZASTĘPCZA 4\" (44x16 px)"
+    },
+    {
+      "line": 2992,
+      "text": "BLOK 7 / OS. TARASOWE",
+      "context": "# Header strip: \"BLOK 7 / OS. TARASOWE\""
+    },
+    {
+      "line": 3435,
+      "text": "NIE SZUKAJ ORYGINAŁU",
+      "context": "# Scratched inscription on mirror glass: \"NIE SZUKAJ ORYGINAŁU\" (Clue R-02)"
+    },
+    {
+      "line": 3445,
+      "text": "NIE SZUKAJ",
+      "context": "# Line 1: \"NIE SZUKAJ\" (symbolic geometric line groups)"
+    },
+    {
+      "line": 3482,
+      "text": "ORYGINAŁU",
+      "context": "# Line 2: \"ORYGINAŁU\" (with amber & cyan highlights)"
+    },
+    {
+      "line": 3565,
+      "text": "Zostaw drzwi w odbiciu",
+      "context": "# Architectural sightline guide marker (Marta's instruction D-03: \"Zostaw drzwi w odbiciu\")"
+    },
+    {
+      "line": 3772,
+      "text": "WĘZEŁ 14 - KONTROLA CIĄGŁOŚCI",
+      "context": "# 4. Sticky note on bottom right: \"WĘZEŁ 14 - KONTROLA CIĄGŁOŚCI\""
+    },
+    {
+      "line": 4096,
+      "text": "DZIAŁ ZGODNOŚCI UCP",
+      "context": "# Header label: \"DZIAŁ ZGODNOŚCI UCP\""
+    },
+    {
+      "line": 4139,
+      "text": "PAMIĘĆ TO NIE POMIAR",
+      "context": "# Institutional Poster: \"PAMIĘĆ TO NIE POMIAR\" (26x36 px)"
+    },
+    {
+      "line": 4153,
+      "text": "PAMIĘĆ TO NIE POMIAR",
+      "context": "# Key Graphic Headline: \"PAMIĘĆ TO NIE POMIAR\""
+    },
+    {
+      "line": 4160,
+      "text": "ZGŁOŚ ROZBIEŻNOŚĆ W PUNKCIE 6",
+      "context": "# Subtext: \"ZGŁOŚ ROZBIEŻNOŚĆ W PUNKCIE 6\""
+    },
+    {
+      "line": 4205,
+      "text": "PUNKT 6 ->",
+      "context": "# Arrow: \"PUNKT 6 ->\""
+    },
+    {
+      "line": 4523,
+      "text": "cyjan zatrzymuje jedną krawędź; reszta kadru lekko ciągnie ku niej",
+      "context": "# Cyan locked edge: \"cyjan zatrzymuje jedną krawędź; reszta kadru lekko ciągnie ku niej\""
+    },
+    {
+      "line": 5311,
+      "text": "GABINET KONSULTACYJNY 06 / DR H. WIERZBICKA",
+      "context": "# Enamel door plaque: \"GABINET KONSULTACYJNY 06 / DR H. WIERZBICKA\""
+    },
+    {
+      "line": 5512,
+      "text": "SALA MODELI",
+      "context": "# \"SALA MODELI\" enamel label"
+    },
+    {
+      "line": 5593,
+      "text": "SCHEMAT 4-A / ULICA / 140 OSÓB",
+      "context": "# Left version: \"SCHEMAT 4-A / ULICA / 140 OSÓB\""
+    },
+    {
+      "line": 5605,
+      "text": "SCHEMAT 4-A",
+      "context": "# Header line: \"SCHEMAT 4-A\""
+    },
+    {
+      "line": 5637,
+      "text": "SCHEMAT 4-B / ŚCIANA NOŚNA / 17 ŚWIADKÓW",
+      "context": "# Right version: \"SCHEMAT 4-B / ŚCIANA NOŚNA / 17 ŚWIADKÓW\""
+    },
+    {
+      "line": 5649,
+      "text": "SCHEMAT 4-B",
+      "context": "# Header line: \"SCHEMAT 4-B\""
+    },
+    {
+      "line": 5742,
+      "text": "SALA SZYMONA / 20",
+      "context": "# Placard: \"SALA SZYMONA / 20\""
+    },
+    {
+      "line": 5864,
+      "text": "RAPORT UJĘCIA WODY",
+      "context": "draw_line(Vector2(-8.0, -1.5), Vector2(6.0, -1.5), Color(\"4a5e54\", 0.8), 0.8) # \"RAPORT UJĘCIA WODY\""
+    },
+    {
+      "line": 5865,
+      "text": "STATUS: NAPRAWIONE",
+      "context": "draw_line(Vector2(-8.0, 1.0), Vector2(4.0, 1.0), Color(\"2e7a5c\", 0.9), 0.8) # \"STATUS: NAPRAWIONE\""
+    },
+    {
+      "line": 5895,
+      "text": "I g a",
+      "context": "# Magnified micro-traces of graphite: faint \"I g a\""
+    },
+    {
+      "line": 5934,
+      "text": "SALA SZYMONA / 20",
+      "context": "# Placard: \"SALA SZYMONA / 20\""
+    },
+    {
+      "line": 6012,
+      "text": "STABILNOŚĆ: 99.8%",
+      "context": "draw_line(Vector2(-7.0, 2.5), Vector2(5.0, 2.5), Color(\"75c7c3\", 0.7), 0.7) # \"STABILNOŚĆ: 99.8%\""
+    },
+    {
+      "line": 6028,
+      "text": "SKORZYSTANO Z RAPORTU HYDROLOGICZNEGO / AUTOR: ANONIMOWY",
+      "context": "# (\"SKORZYSTANO Z RAPORTU HYDROLOGICZNEGO / AUTOR: ANONIMOWY\")"
+    },
+    {
+      "line": 6050,
+      "text": "STATUS: SPÓJNY",
+      "context": "draw_line(Vector2(-5.0, -1.5), Vector2(4.0, -1.5), Color(\"2e7a5c\", 0.9), 0.7) # \"STATUS: SPÓJNY\""
+    },
+    {
+      "line": 6111,
+      "text": "STREFA TRANZYTOWA / 22",
+      "context": "# Top illuminated indicator bar: \"STREFA TRANZYTOWA / 22\""
+    },
+    {
+      "line": 6145,
+      "text": "LENA W. / 17-D",
+      "context": "# Readout text / glow line: \"LENA W. / 17-D\""
+    },
+    {
+      "line": 6182,
+      "text": "KONTAKT ALARMOWY: MARTA KUREK / STATUS: ZWERYFIKOWANA WIĘŹ",
+      "context": "# (\"KONTAKT ALARMOWY: MARTA KUREK / STATUS: ZWERYFIKOWANA WIĘŹ\")"
+    },
+    {
+      "line": 6199,
+      "text": "MARTA KUREK / KONTAKT",
+      "context": "# Screen text scanlines (Simulating \"MARTA KUREK / KONTAKT\")"
+    },
+    {
+      "line": 6201,
+      "text": "KONTAKT: MARTA K.",
+      "context": "draw_line(Vector2(-9.0, -10.0), Vector2(7.0, -10.0), line_color, 0.8) # \"KONTAKT: MARTA K.\""
+    },
+    {
+      "line": 6202,
+      "text": "STATUS: ZGŁOSZENIE",
+      "context": "draw_line(Vector2(-9.0, -7.0), Vector2(3.0, -7.0), Color(\"a8b2ac\", 0.7), 0.7)  # \"STATUS: ZGŁOSZENIE\""
+    },
+    {
+      "line": 6203,
+      "text": "AUTORYZACJA: ZGODNA",
+      "context": "draw_line(Vector2(-9.0, -4.0), Vector2(8.0, -4.0), Color(\"75c7c3\", 0.8), 0.8)  # \"AUTORYZACJA: ZGODNA\""
+    },
+    {
+      "line": 6327,
+      "text": "23 / PROJEKTANTKA — ARCHIWUM",
+      "context": "# Top archive placard: \"23 / PROJEKTANTKA — ARCHIWUM\""
+    },
+    {
+      "line": 6419,
+      "text": "JEŚLI TO CZYTASZ, ZGODZIŁAM SIĘ NA TWOJE RYZYKO",
+      "context": "# Handwritten paper note on stand: \"JEŚLI TO CZYTASZ, ZGODZIŁAM SIĘ NA TWOJE RYZYKO\""
+    },
+    {
+      "line": 6453,
+      "text": "OSOBY OBCIĄŻONE: 11 / W TOKU",
+      "context": "# Upper digital status readout: \"OSOBY OBCIĄŻONE: 11 / W TOKU\""
+    },
+    {
+      "line": 6475,
+      "text": "POLECENIE: NADPISZ WZORZEC",
+      "context": "# Top Header: \"POLECENIE: NADPISZ WZORZEC\""
+    },
+    {
+      "line": 6478,
+      "text": "OSOBY OBCIĄŻONE",
+      "context": "# Middle Section: \"OSOBY OBCIĄŻONE\" list item"
+    },
+    {
+      "line": 6525,
+      "text": "24 / OBSERWACJA — MARTA",
+      "context": "# Top archive placard: \"24 / OBSERWACJA — MARTA\""
+    },
+    {
+      "line": 6575,
+      "text": "CAM-14: MIESZKANIE 14 / LIVE",
+      "context": "# Timestamp & Camera ID: \"CAM-14: MIESZKANIE 14 / LIVE\""
+    },
+    {
+      "line": 6624,
+      "text": "KOREKTA M14 / 84% NAPRĘŻENIE",
+      "context": "# Lower status indicator LED & placard: \"KOREKTA M14 / 84% NAPRĘŻENIE\""
+    },
+    {
+      "line": 6668,
+      "text": "UCP-P6 / WIERZBICKA_H",
+      "context": "# Transmit indicator lamp: \"UCP-P6 / WIERZBICKA_H\""
+    },
+    {
+      "line": 6684,
+      "text": "DYSPOZYCJA WZORCA: LENA WOLSKA",
+      "context": "# Console title banner: \"DYSPOZYCJA WZORCA: LENA WOLSKA\""
+    },
+    {
+      "line": 6736,
+      "text": "25 / TRANZYT — WEJŚCIE JAKUBA",
+      "context": "# Top archive placard: \"25 / TRANZYT — WEJŚCIE JAKUBA\""
+    },
+    {
+      "line": 6761,
+      "text": "Jakub siada na podłodze. Nie patrzy na Lenę.",
+      "context": "# Jakub sitting on the floor per D-09 didascalia (\"Jakub siada na podłodze. Nie patrzy na Lenę.\")"
+    },
+    {
+      "line": 6874,
+      "text": "SZKŁO / LINIA 4 / ŻEBRO LEWE",
+      "context": "# Callout measurement line to margin: \"SZKŁO / LINIA 4 / ŻEBRO LEWE\""
+    },
+    {
+      "line": 6895,
+      "text": "ANALIZA GESTU DŁONI",
+      "context": "# Header placard: \"ANALIZA GESTU DŁONI\""
+    },
+    {
+      "line": 6941,
+      "text": "26 / STREFA IZOLACJI — PRÓBA ZAMKNIĘCIA",
+      "context": "# Top archive placard: \"26 / STREFA IZOLACJI — PRÓBA ZAMKNIĘCIA\""
+    },
+    {
+      "line": 6980,
+      "text": "IZOLACJA ADAPTACYJNA",
+      "context": "# Status indicator badge: \"IZOLACJA ADAPTACYJNA\""
+    },
+    {
+      "line": 7031,
+      "text": "PAMIĘTAM DLACZEGO PRZYSZŁAM",
+      "context": "# Deep carved anchor inscription traces (\"PAMIĘTAM DLACZEGO PRZYSZŁAM\")"
+    },
+    {
+      "line": 7098,
+      "text": "27 / PRZEJŚCIE SERWISOWE — DŁUG WDZIĘCZNOŚCI",
+      "context": "# Top archive placard: \"27 / PRZEJŚCIE SERWISOWE — DŁUG WDZIĘCZNOŚCI\""
+    },
+    {
+      "line": 7177,
+      "text": "STATUS: OCALONY / 12 LAT",
+      "context": "# Red badge status stamp: \"STATUS: OCALONY / 12 LAT\""
+    },
+    {
+      "line": 7271,
+      "text": "28 / SKŁAD TECHNICZNY — TRAMWAJ BEZ PASAŻERÓW",
+      "context": "# Top archive placard: \"28 / SKŁAD TECHNICZNY — TRAMWAJ BEZ PASAŻERÓW\""
+    },
+    {
+      "line": 7311,
+      "text": "LINIA 4 / TRANZYT",
+      "context": "# Illuminated route placard: \"LINIA 4 / TRANZYT\""
+    },
+    {
+      "line": 7379,
+      "text": "Ś W I A D E K",
+      "context": "# The Trace arranging letters: \"Ś W I A D E K\" across passing station placards"
+    },
+    {
+      "line": 7429,
+      "text": "29 / PERON TRZYNASTY — PODSTRUKTURA",
+      "context": "# Destination sign: \"29 / PERON TRZYNASTY — PODSTRUKTURA\""
+    },
+    {
+      "line": 7476,
+      "text": "PERON 13",
+      "context": "# Flickering 1970s Neon Station Sign \"PERON 13\": 50x18 px"
+    },
+    {
+      "line": 7489,
+      "text": "P E R O N   1 3",
+      "context": "# Turquoise / Cyan glowing neon tube lettering: \"P E R O N   1 3\""
+    },
+    {
+      "line": 7616,
+      "text": "30 / SEKTOR ZASILANIA — ROZDZIELNIA GŁÓWNA",
+      "context": "# Archive & Sector placard: \"30 / SEKTOR ZASILANIA — ROZDZIELNIA GŁÓWNA\""
+    },
+    {
+      "line": 7791,
+      "text": "31 / MAGAZYN DOWODÓW — JEDENAŚCIE KRZESEŁ",
+      "context": "# Archive & Sector placard: \"31 / MAGAZYN DOWODÓW — JEDENAŚCIE KRZESEŁ\""
+    },
+    {
+      "line": 7940,
+      "text": "WYBRANO WARIANT, NIE CZŁOWIEKA",
+      "context": "# Right page red handwritten inscription: \"WYBRANO WARIANT, NIE CZŁOWIEKA\""
+    },
+    {
+      "line": 7967,
+      "text": "32 / ŚLAD W SZKLE — KORYTARZ LUSTER",
+      "context": "# Archive & Sector placard: \"32 / ŚLAD W SZKLE — KORYTARZ LUSTER\""
+    },
+    {
+      "line": 8101,
+      "text": "ŚLAD PAMIĘTA KSZTAŁT",
+      "context": "# Inscribed text on glass bottom: \"ŚLAD PAMIĘTA KSZTAŁT\""
+    },
+    {
+      "line": 8126,
+      "text": "33 / SZYB TECHNICZNY — MASZYNOWNIA GŁÓWNA",
+      "context": "# Placard: \"33 / SZYB TECHNICZNY — MASZYNOWNIA GŁÓWNA\""
+    },
+    {
+      "line": 8202,
+      "text": "4.2 BAR",
+      "context": "# Text markings: \"-40m\" and \"4.2 BAR\""
+    },
+    {
+      "line": 8319,
+      "text": "34 / MASZYNOWNIA GŁÓWNA — RDZEŃ WYMIANY",
+      "context": "# Placard: \"34 / MASZYNOWNIA GŁÓWNA — RDZEŃ WYMIANY\""
+    },
+    {
+      "line": 8374,
+      "text": "RDZEŃ WYMIANY UCP",
+      "context": "# Top indicator banner \"RDZEŃ WYMIANY UCP\""
+    },
+    {
+      "line": 9947,
+      "text": "LINIA 4 / DWIE TRASY",
+      "context": "# Direction display \"LINIA 4 / DWIE TRASY\""
+    },
+    {
+      "line": 9965,
+      "text": "UCP / KOMUNIKAT BIEŻĄCY",
+      "context": "# Header bar \"UCP / KOMUNIKAT BIEŻĄCY\""
+    }
+  ],
+  "tscn": [
+    {
+      "scene": "scenes/levels/station_01.tscn",
+      "line": 83,
+      "key": "text",
+      "text": "REJESTRATOR DRGAŃ // TOR 4"
+    },
+    {
+      "scene": "scenes/levels/station_02.tscn",
+      "line": 73,
+      "key": "text",
+      "text": "SEKTOR 02 // PRZEJŚCIE TECHNICZNE"
+    },
+    {
+      "scene": "scenes/levels/station_03.tscn",
+      "line": 70,
+      "key": "text",
+      "text": "PRZYSTANEK ZACHODNI // LINIA 4 — ZAWIESZONA"
+    },
+    {
+      "scene": "scenes/levels/station_04.tscn",
+      "line": 70,
+      "key": "text",
+      "text": "LINIA 4 // KURS ZJAZDOWY • NASTĘPNY PRZYSTANEK: RÓWIEŃ"
+    },
+    {
+      "scene": "scenes/levels/station_05.tscn",
+      "line": 67,
+      "key": "text",
+      "text": "UCP // PRACE NOCNE • MODERNIZACJA NAWIERZCHNI"
+    },
+    {
+      "scene": "scenes/levels/station_06.tscn",
+      "line": 70,
+      "key": "text",
+      "text": "PRZYSTANEK OSIEDLE // ROZKŁAD JAZDY (LINIA 14 vs LINIA 4)"
+    },
+    {
+      "scene": "scenes/levels/station_07.tscn",
+      "line": 67,
+      "key": "text",
+      "text": "KIOSK U PAWLAKA // PRASA • BILETY • ARTYKUŁY SPOŻYWCZE"
+    },
+    {
+      "scene": "scenes/levels/station_08.tscn",
+      "line": 70,
+      "key": "text",
+      "text": "SADOWA 7 // DOMOFON"
+    },
+    {
+      "scene": "scenes/levels/station_08.tscn",
+      "line": 77,
+      "key": "text",
+      "text": "10 — NOWICKA   12 — KOWALCZYK   14 — L. WOLSKA"
+    },
+    {
+      "scene": "scenes/levels/station_08.tscn",
+      "line": 84,
+      "key": "text",
+      "text": "ZAŚWIADCZENIE: SADOWA 7 M. 12"
+    },
+    {
+      "scene": "scenes/levels/station_09.tscn",
+      "line": 71,
+      "key": "text",
+      "text": "PIĘTRO 3 // MIESZKANIA 13–16"
+    },
+    {
+      "scene": "scenes/levels/station_09.tscn",
+      "line": 78,
+      "key": "text",
+      "text": "GAŚNICA — UCHWYT PUSTY"
+    },
+    {
+      "scene": "scenes/levels/station_09.tscn",
+      "line": 121,
+      "key": "object_name",
+      "text": "Donica z fikusem"
+    },
+    {
+      "scene": "scenes/levels/station_10.tscn",
+      "line": 70,
+      "key": "text",
+      "text": "14"
+    },
+    {
+      "scene": "scenes/levels/station_10.tscn",
+      "line": 77,
+      "key": "text",
+      "text": "L. WOLSKA"
+    },
+    {
+      "scene": "scenes/levels/station_11.tscn",
+      "line": 71,
+      "key": "text",
+      "text": "ODBITKA 04.11 // LATO"
+    },
+    {
+      "scene": "scenes/levels/station_11.tscn",
+      "line": 78,
+      "key": "text",
+      "text": "CZYTNIK TERENOWY // ŁADOWANIE 96%"
+    },
+    {
+      "scene": "scenes/levels/station_11.tscn",
+      "line": 115,
+      "key": "object_name",
+      "text": "Komoda w przedpokoju"
+    },
+    {
+      "scene": "scenes/levels/station_12.tscn",
+      "line": 70,
+      "key": "text",
+      "text": "SEKRETARKA // 1 NOWA WIADOMOŚĆ"
+    },
+    {
+      "scene": "scenes/levels/station_12.tscn",
+      "line": 77,
+      "key": "text",
+      "text": "OSTATNIE POŁĄCZENIE: MARTA K. — 21:14"
+    },
+    {
+      "scene": "scenes/levels/station_13.tscn",
+      "line": 70,
+      "key": "text",
+      "text": "ZAŚWIADCZENIE // SADOWA 7 M. 12 // WAŻNE DO 30.11"
+    },
+    {
+      "scene": "scenes/levels/station_13.tscn",
+      "line": 77,
+      "key": "text",
+      "text": "UMOWA NAJMU // SADOWA 7 M. 14 // OD 12.11 ROKU UBIEGŁEGO"
+    },
+    {
+      "scene": "scenes/levels/station_13.tscn",
+      "line": 84,
+      "key": "text",
+      "text": "CZYTNIK // ZAPIS OFFLINE 21:47"
+    },
+    {
+      "scene": "scenes/levels/station_14.tscn",
+      "line": 67,
+      "key": "text",
+      "text": "PRZEDPOKÓJ // SADOWA 7 M. 14 // 22:20"
+    },
+    {
+      "scene": "scenes/levels/station_14.tscn",
+      "line": 74,
+      "key": "text",
+      "text": "CZAJNIK // GEST PRZERWANY"
+    },
+    {
+      "scene": "scenes/levels/station_15.tscn",
+      "line": 67,
+      "key": "text",
+      "text": "KUCHNIA // WYPRAWA 14.10 // DWA SKUTKI"
+    },
+    {
+      "scene": "scenes/levels/station_15.tscn",
+      "line": 74,
+      "key": "text",
+      "text": "TELEFON MIEJSCOWEJ // ZABEZPIECZONY"
+    },
+    {
+      "scene": "scenes/levels/station_16.tscn",
+      "line": 67,
+      "key": "text",
+      "text": "TERMINAL UCP-4 // PROFIL BIOMETRYCZNY: ZGODNY // 186 DNI"
+    },
+    {
+      "scene": "scenes/levels/station_16.tscn",
+      "line": 74,
+      "key": "text",
+      "text": "PRÓBA 20:40 // ZATWIERDZENIE: DR H. WIERZBICKA"
+    },
+    {
+      "scene": "scenes/levels/station_17.tscn",
+      "line": 67,
+      "key": "text",
+      "text": "INCYDENT CIĄGŁOŚCI POMIARU // 20:40:03 // BRAK NUMERU CZYTNIKA"
+    },
+    {
+      "scene": "scenes/levels/station_17.tscn",
+      "line": 74,
+      "key": "text",
+      "text": "INTERKOM // DR H. WIERZBICKA // NAKAZ IZOLACJI"
+    },
+    {
+      "scene": "scenes/levels/station_18.tscn",
+      "line": 67,
+      "key": "text",
+      "text": "REJESTR MIEJSKI // JAKUB WOLSKI // BRAK AKTU ZGONU"
+    },
+    {
+      "scene": "scenes/levels/station_18.tscn",
+      "line": 74,
+      "key": "text",
+      "text": "SZPITAL MIEJSKI // OPERACJA 12.04 // KARTA PRACY L4 AKTYWNA"
+    },
+    {
+      "scene": "scenes/levels/station_19.tscn",
+      "line": 67,
+      "key": "text",
+      "text": "POŁĄCZENIE PRZYCHODZĄCE // JAKUB WOLSKI // WARSZTAT L4"
+    },
+    {
+      "scene": "scenes/levels/station_19.tscn",
+      "line": 74,
+      "key": "text",
+      "text": "PYTANIA KONTROLNE: SCHOWEK [OK] // TUNEL [ROZBIEŻNY]"
+    },
+    {
+      "scene": "scenes/levels/station_20.tscn",
+      "line": 67,
+      "key": "text",
+      "text": "WARSZTAT LINII 4 // DIAGNOSTYKA // NUMER CZYTNIKA: BRAK W BAZIE"
+    },
+    {
+      "scene": "scenes/levels/station_20.tscn",
+      "line": 74,
+      "key": "text",
+      "text": "JAKUB WOLSKI // 34 LATA // WIEK ZGODNY Z CIAŁEM"
+    },
+    {
+      "scene": "scenes/levels/station_21.tscn",
+      "line": 67,
+      "key": "text",
+      "text": "DOWÓD 1 // CZYTNIK I PRÓBKA // BRAK NUMERU W BAZIE"
+    },
+    {
+      "scene": "scenes/levels/station_21.tscn",
+      "line": 74,
+      "key": "text",
+      "text": "DOWÓD 2 // REJESTRY PUBLICZNE // SPÓJNA BIOGRAFIA"
+    },
+    {
+      "scene": "scenes/levels/station_21.tscn",
+      "line": 81,
+      "key": "text",
+      "text": "DOWÓD 3 // JAKUB WOLSKI // ROZBIEŻNA PAMIĘĆ"
+    },
+    {
+      "scene": "scenes/levels/station_21.tscn",
+      "line": 88,
+      "key": "text",
+      "text": "SYNTEZA // TO NIE JEST MÓJ ŚWIAT"
+    },
+    {
+      "scene": "scenes/levels/station_22.tscn",
+      "line": 67,
+      "key": "text",
+      "text": "OFERTA UCP: DEPOZYT CZYTNIKA [ODRZUCONO]"
+    },
+    {
+      "scene": "scenes/levels/station_22.tscn",
+      "line": 74,
+      "key": "text",
+      "text": "ZAPIS 20:40 // DWA TRYBY: ZAKOTWICZENIE / ULEGŁOŚĆ"
+    },
+    {
+      "scene": "scenes/levels/station_23.tscn",
+      "line": 67,
+      "key": "text",
+      "text": "MARTWY OBWÓD // ZŁĄCZE TESTOWE // BRAK GŁÓWNEGO ZASILANIA"
+    },
+    {
+      "scene": "scenes/levels/station_23.tscn",
+      "line": 74,
+      "key": "text",
+      "text": "KOSZT MECHANIKI // PRZECIĄŻENIE TERMICZNE OBWODU"
+    },
+    {
+      "scene": "scenes/levels/station_24.tscn",
+      "line": 79,
+      "key": "text",
+      "text": "MIESZKANIE 14 // MONITORING CCTV // PROTOKÓŁ OBSERWACJI"
+    },
+    {
+      "scene": "scenes/levels/station_25.tscn",
+      "line": 80,
+      "key": "text",
+      "text": "WĘZEŁ TRANZYTOWY LINII 4 // ROZDZIELNICA B // WYŁĄCZNIKI SEKCJI"
+    },
+    {
+      "scene": "scenes/levels/station_26.tscn",
+      "line": 82,
+      "key": "text",
+      "text": "ŚLUZA IZOLACYJNA // REJESTRATOR BUFORA // LOG 20:40:03"
+    },
+    {
+      "scene": "scenes/levels/station_27.tscn",
+      "line": 79,
+      "key": "text",
+      "text": "POSTERUNEK ROZRZĄDU // REJESTRACJA PRÓB // KOREKTA ŻYWEGO SYGNAŁU"
+    },
+    {
+      "scene": "scenes/levels/station_28.tscn",
+      "line": 79,
+      "key": "text",
+      "text": "SKŁAD TECHNICZNY LINII 4 // WIDOK TRANZYTOWY // PARADOKS PERONU"
+    },
+    {
+      "scene": "scenes/levels/station_29.tscn",
+      "line": 79,
+      "key": "text",
+      "text": "PERON 13 // WARIANT ODRZUCONY // BRAMA SEKTORA ZASILANIA"
+    },
+    {
+      "scene": "scenes/levels/station_30.tscn",
+      "line": 84,
+      "key": "text",
+      "text": "GŁÓWNY WĘZEŁ ROZDZIELCZY // SEKTOR 4 // TRZY MODELE ZASILANIA"
+    },
+    {
+      "scene": "scenes/levels/station_30.tscn",
+      "line": 123,
+      "key": "object_name",
+      "text": "Bateria przekaźników świadka"
+    },
+    {
+      "scene": "scenes/levels/station_31.tscn",
+      "line": 79,
+      "key": "text",
+      "text": "MAGAZYN DOWODÓW // SEKTOR EWIDENCJI // DEPOZYT LINII 4"
+    },
+    {
+      "scene": "scenes/levels/station_32.tscn",
+      "line": 84,
+      "key": "text",
+      "text": "STANOWISKO ANALITYCZNE // PAMIĘĆ MATERIAŁU // ŚLAD REZONANSU"
+    },
+    {
+      "scene": "scenes/levels/station_32.tscn",
+      "line": 123,
+      "key": "object_name",
+      "text": "Obserwowany ślad w szkle"
+    },
+    {
+      "scene": "scenes/levels/station_33.tscn",
+      "line": 83,
+      "key": "text",
+      "text": "SZYB WENTYLACYJNY // CIŚNIENIE POWROTNE // POZIOM -40M"
+    },
+    {
+      "scene": "scenes/levels/station_33.tscn",
+      "line": 120,
+      "key": "object_name",
+      "text": "Rama dwóch świadectw"
+    },
+    {
+      "scene": "scenes/levels/station_34.tscn",
+      "line": 80,
+      "key": "text",
+      "text": "RDZEŃ KORELACYJNY // REJESTR PAR // ALOKACJA BIOGRAFICZNA"
+    },
+    {
+      "scene": "scenes/levels/station_35.tscn",
+      "line": 79,
+      "key": "text",
+      "text": "SEKTOR FILTRACJI // ODBIORNIK ECHA DOMU // SEDACJA"
+    },
+    {
+      "scene": "scenes/levels/station_36.tscn",
+      "line": 79,
+      "key": "text",
+      "text": "DRENAŻ TRAKCYJNY // RACHUNEK LINII 4 // REJESTR KATASTROF"
+    },
+    {
+      "scene": "scenes/levels/station_37.tscn",
+      "line": 80,
+      "key": "text",
+      "text": "KOMORA SYGNAŁOWA // ŻYWY SYGNAŁ // KROSOWNICA TRANSMISYJNA"
+    },
+    {
+      "scene": "scenes/levels/station_38.tscn",
+      "line": 83,
+      "key": "text",
+      "text": "STREFA DECYZJI // ZGODY RELACJI // ROZDZIELNICA SYNCHRONIZACJI"
+    },
+    {
+      "scene": "scenes/levels/station_38.tscn",
+      "line": 123,
+      "key": "object_name",
+      "text": "Śluza utrzymująca Jakuba"
+    },
+    {
+      "scene": "scenes/levels/station_39.tscn",
+      "line": 79,
+      "key": "text",
+      "text": "PULPIT WYBORU METODY // RDZEŃ KORELACYJNY // BILANS KOSZTÓW"
+    },
+    {
+      "scene": "scenes/levels/station_40.tscn",
+      "line": 79,
+      "key": "text",
+      "text": "SALA NEGOCJACYJNA // POZIOM 0 // OSTATNI IMPULS I WERYFIKACJA"
+    },
+    {
+      "scene": "scenes/levels/station_41.tscn",
+      "line": 79,
+      "key": "text",
+      "text": "KOMORA WYBORU // TRZY METODY ROZSTRZYGNIĘCIA // POZIOM 0"
+    },
+    {
+      "scene": "scenes/levels/station_42a.tscn",
+      "line": 71,
+      "key": "text",
+      "text": "POWRÓT // WŁASNY POKÓJ // CENA WYMUSZENIA"
+    },
+    {
+      "scene": "scenes/levels/station_42b.tscn",
+      "line": 71,
+      "key": "text",
+      "text": "ZAMKNIĘCIE RÓWNI // MIEJSCE PO NIEJ // ZGODA BEZ DOWODU"
+    },
+    {
+      "scene": "scenes/levels/station_42c.tscn",
+      "line": 71,
+      "key": "text",
+      "text": "PRZEJŚCIE WZAJEMNE // DWA TORY // WSPÓLNA OBECNOŚĆ"
+    },
+    {
+      "scene": "scenes/levels/station_43.tscn",
+      "line": 74,
+      "key": "text",
+      "text": "EPILOG // ZAPIS NOWEJ CIĄGŁOŚCI // NAPISY NA ELEMENTACH MIASTA"
+    },
+    {
+      "scene": "scenes/prototype/anchor_lab.tscn",
+      "line": 122,
+      "key": "object_name",
+      "text": "Chamber 1 Bridge"
+    },
+    {
+      "scene": "scenes/prototype/anchor_lab.tscn",
+      "line": 134,
+      "key": "object_name",
+      "text": "Chamber 2 Lift"
+    },
+    {
+      "scene": "scenes/prototype/anchor_lab.tscn",
+      "line": 146,
+      "key": "object_name",
+      "text": "Chamber 3 Bridge"
+    },
+    {
+      "scene": "scenes/prototype/anchor_lab.tscn",
+      "line": 160,
+      "key": "object_name",
+      "text": "Chamber 3 Gate"
+    },
+    {
+      "scene": "scenes/prototype/anchor_lab.tscn",
+      "line": 169,
+      "key": "object_name",
+      "text": "Lab Crate A"
+    },
+    {
+      "scene": "scenes/prototype/anchor_lab.tscn",
+      "line": 179,
+      "key": "object_name",
+      "text": "Lab Crate B"
+    }
+  ],
+  "ui": [
+    {
+      "file": "scripts/ui/crt_dialogue_box.gd",
+      "line": 18,
+      "text": "dr Wierzbicka",
+      "context": "&\"dr Wierzbicka\": Color(\"e0ab77\"),"
+    },
+    {
+      "file": "scripts/ui/crt_dialogue_box.gd",
+      "line": 23,
+      "text": "ŚWIADECTWO",
+      "context": "&\"ŚWIADECTWO\": Color(\"88cfc8\"),"
+    },
+    {
+      "file": "scripts/ui/crt_dialogue_box.gd",
+      "line": 24,
+      "text": "Świadectwo",
+      "context": "&\"Świadectwo\": Color(\"88cfc8\"),"
+    },
+    {
+      "file": "scripts/ui/crt_dialogue_box.gd",
+      "line": 25,
+      "text": "ŚLAD",
+      "context": "&\"ŚLAD\": Color(\"c65d58\"),"
+    },
+    {
+      "file": "scripts/ui/crt_dialogue_box.gd",
+      "line": 26,
+      "text": "POWRÓT",
+      "context": "&\"POWRÓT\": Color(\"d29a63\"),"
+    },
+    {
+      "file": "scripts/ui/crt_dialogue_box.gd",
+      "line": 28,
+      "text": "GETTING STRANGE",
+      "context": "&\"GETTING STRANGE\": Color(\"88cfc8\"),"
+    },
+    {
+      "file": "scripts/ui/crt_portrait.gd",
+      "line": 30,
+      "text": "dr ",
+      "context": "key = key.replace(\"dr \", \"\").replace(\"dr.\", \"\")"
+    },
+    {
+      "file": "scripts/ui/inner_thought_surface.gd",
+      "line": 67,
+      "text": "LENA // MYŚL",
+      "context": "_header_label.text = \"LENA // MYŚL\""
+    },
+    {
+      "file": "scripts/ui/inner_thought_surface.gd",
+      "line": 102,
+      "text": "WSKAZÓWKA // SYSTEM",
+      "context": "_header_label.text = \"WSKAZÓWKA // SYSTEM\""
+    },
+    {
+      "file": "scripts/ui/inner_thought_surface.gd",
+      "line": 106,
+      "text": "LENA // MYŚL",
+      "context": "_header_label.text = \"LENA // MYŚL\""
+    },
+    {
+      "file": "scripts/ui/settings_overlay.gd",
+      "line": 440,
+      "text": ")) == ",
+      "context": "if String(result.get(\"reason\", \"\")) == \"conflict\":"
+    },
+    {
+      "file": "scripts/ui/title_screen.gd",
+      "line": 59,
+      "text": "GETTING STRANGE",
+      "context": "_add_label(_title_panel, \"TitleLabel\", \"GETTING STRANGE\", Vector2(24.0, 16.0), Vector2(300.0, 28.0), 23, VectorStageStyle.HUMAN_AMBER)"
+    },
+    {
+      "file": "scripts/ui/title_screen.gd",
+      "line": 186,
+      "text": "  /  ",
+      "context": "_action_prompt(&\"move_left\", _tr(\"INPUT_ACTION_MOVE_LEFT\")) + \"  /  \" + _action_prompt(&\"move_right\", _tr(\"INPUT_ACTION_MOVE_RIGHT\")),"
+    },
+    {
+      "file": "scripts/ui/title_screen.gd",
+      "line": 200,
+      "text": "%s: %s",
+      "context": "return \"%s: %s\" % [label, \" / \".join(prompts)] if not prompts.is_empty() else \"%s: —\" % label"
+    },
+    {
+      "file": "scripts/ui/title_screen.gd",
+      "line": 200,
+      "text": " / ",
+      "context": "return \"%s: %s\" % [label, \" / \".join(prompts)] if not prompts.is_empty() else \"%s: —\" % label"
+    },
+    {
+      "file": "scripts/ui/title_screen.gd",
+      "line": 200,
+      "text": "%s: —",
+      "context": "return \"%s: %s\" % [label, \" / \".join(prompts)] if not prompts.is_empty() else \"%s: —\" % label"
+    },
+    {
+      "file": "scripts/ui/title_screen.gd",
+      "line": 223,
+      "text": "GETTING STRANGE",
+      "context": "(_title_panel.get_node(\"TitleLabel\") as Label).text = \"GETTING STRANGE\""
+    }
+  ]
+}

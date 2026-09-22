@@ -1,0 +1,616 @@
+[
+  {
+    "session_id": "972eee8d-fb27-405c-9436-0d7cf37984f1",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\972eee8d-fb27-405c-9436-0d7cf37984f1.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "b4f68952-ea03-40a4-9797-8662907a5fc9",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\b4f68952-ea03-40a4-9797-8662907a5fc9.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "197421f7-7336-4c14-a8ed-8453c37bde96",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\197421f7-7336-4c14-a8ed-8453c37bde96.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "e36c833e-337b-455d-aad3-fd073eb13d34",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\e36c833e-337b-455d-aad3-fd073eb13d34.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "2a4cd5db-9a2d-444b-bde6-3bccd19f0c3c",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\2a4cd5db-9a2d-444b-bde6-3bccd19f0c3c.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "9ca516e1-aeab-415c-a18c-7a709688dbe0",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\9ca516e1-aeab-415c-a18c-7a709688dbe0.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "e36c833e-337b-455d-aad3-fd073eb13d34",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\e36c833e-337b-455d-aad3-fd073eb13d34.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "resume",
+    "session_title": "Getting Strange narrative audit"
+  },
+  {
+    "session_id": "0ffb5f60-0608-47bd-b42f-b9715de82706",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\0ffb5f60-0608-47bd-b42f-b9715de82706.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "16eac615-5983-43dc-98bb-a9f4114511fb",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\16eac615-5983-43dc-98bb-a9f4114511fb.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "77d2626c-0683-41df-a0e0-6559555e6d2f",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\77d2626c-0683-41df-a0e0-6559555e6d2f.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "e65dabaa-6c16-44b7-958c-a2373a33f67a",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\e65dabaa-6c16-44b7-958c-a2373a33f67a.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "8dc8a5b4-bad9-4c63-8dc7-0e754e9e796b",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\8dc8a5b4-bad9-4c63-8dc7-0e754e9e796b.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "5309c507-c265-4929-9a15-a0b8055980ef",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\5309c507-c265-4929-9a15-a0b8055980ef.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "22ce459d-f9bc-4b58-ae73-c65ca5bac5bc",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\22ce459d-f9bc-4b58-ae73-c65ca5bac5bc.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "9889d544-4603-45d2-9d61-1153e8be221e",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\9889d544-4603-45d2-9d61-1153e8be221e.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "325feb95-6177-4cb7-9878-d680fee15279",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\c--getting-strange\\325feb95-6177-4cb7-9878-d680fee15279.jsonl",
+    "cwd": "c:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "d8bf84f2-c412-48ab-a5d4-7af970602fed",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\c--getting-strange\\d8bf84f2-c412-48ab-a5d4-7af970602fed.jsonl",
+    "cwd": "c:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "be7222de-8ae5-4fb3-91ae-5809b921daab",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\c--getting-strange\\be7222de-8ae5-4fb3-91ae-5809b921daab.jsonl",
+    "cwd": "c:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "28e472a6-e089-4473-ad44-1b4d94ea27fc",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\c--getting-strange\\28e472a6-e089-4473-ad44-1b4d94ea27fc.jsonl",
+    "cwd": "c:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "6973db93-ddcc-4de2-a001-391b971140a9",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\6973db93-ddcc-4de2-a001-391b971140a9.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "f19508d9-fa7f-4b7a-a42c-3fbe8d841f0f",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\f19508d9-fa7f-4b7a-a42c-3fbe8d841f0f.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "a11d09b5-d402-4ac1-9bec-6e52d5046dd8",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\a11d09b5-d402-4ac1-9bec-6e52d5046dd8.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "633f5374-5f17-4278-9e7d-43727889ae57",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\633f5374-5f17-4278-9e7d-43727889ae57.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "40ad04a3-c221-44d0-ae99-0f3412bf370b",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\40ad04a3-c221-44d0-ae99-0f3412bf370b.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "6cbd9186-47f1-4082-9170-2106c9bce1dd",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\6cbd9186-47f1-4082-9170-2106c9bce1dd.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "b19e9d37-06da-41d4-bd34-760b4aee816b",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\b19e9d37-06da-41d4-bd34-760b4aee816b.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "bd8a9f2e-aab7-4468-837c-6b689c220f61",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\bd8a9f2e-aab7-4468-837c-6b689c220f61.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "6cbd9186-47f1-4082-9170-2106c9bce1dd",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\6cbd9186-47f1-4082-9170-2106c9bce1dd.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "resume",
+    "session_title": "Wykonanie promptu NEXT_SESSION_PROMPT"
+  },
+  {
+    "session_id": "370f8224-a48b-4a74-993a-2d4e70a4b32e",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\370f8224-a48b-4a74-993a-2d4e70a4b32e.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "7902cff5-7552-451f-bce5-ca15d03d9367",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\7902cff5-7552-451f-bce5-ca15d03d9367.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "dcee420e-57a4-4172-93df-acc04ee2ce71",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\dcee420e-57a4-4172-93df-acc04ee2ce71.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "ad4c365e-abaa-4577-a8ce-7a82198f0261",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\ad4c365e-abaa-4577-a8ce-7a82198f0261.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "9c3af887-1f93-4781-b6d8-2e139a87c495",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\9c3af887-1f93-4781-b6d8-2e139a87c495.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "9509e585-b2b8-461f-a52a-8542e9a3d1f2",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\9509e585-b2b8-461f-a52a-8542e9a3d1f2.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "befb3cfa-5027-49a2-90ec-0e7d9a025bd2",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\befb3cfa-5027-49a2-90ec-0e7d9a025bd2.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup",
+    "model": "claude-opus-5"
+  },
+  {
+    "session_id": "06117166-0eb0-4955-b212-ac5c827aa0ad",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\06117166-0eb0-4955-b212-ac5c827aa0ad.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\06117166-0eb0-4955-b212-ac5c827aa0ad\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "f4da67b2-4f73-45ca-ac1f-780abf8a29bc",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\f4da67b2-4f73-45ca-ac1f-780abf8a29bc.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\f4da67b2-4f73-45ca-ac1f-780abf8a29bc\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "3031b29a-1359-434b-b40f-7bd8f7e343b4",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\3031b29a-1359-434b-b40f-7bd8f7e343b4.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\3031b29a-1359-434b-b40f-7bd8f7e343b4\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "6fd1d135-234d-4b59-a14c-4906202a3287",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\6fd1d135-234d-4b59-a14c-4906202a3287.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\6fd1d135-234d-4b59-a14c-4906202a3287\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "459fe3ab-d9e8-48cf-a784-97a02bedd9b1",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\459fe3ab-d9e8-48cf-a784-97a02bedd9b1.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\459fe3ab-d9e8-48cf-a784-97a02bedd9b1\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "6fd1d135-234d-4b59-a14c-4906202a3287",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\6fd1d135-234d-4b59-a14c-4906202a3287.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\6fd1d135-234d-4b59-a14c-4906202a3287\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "resume",
+    "session_title": "Next session prompt",
+    "seconds_since_last_response": 635,
+    "context_tokens": 494882,
+    "prompt_cache_likely_expired": false,
+    "estimated_cache_write_usd": 4.9488
+  },
+  {
+    "session_id": "6fd1d135-234d-4b59-a14c-4906202a3287",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\6fd1d135-234d-4b59-a14c-4906202a3287.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\6fd1d135-234d-4b59-a14c-4906202a3287\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "resume",
+    "session_title": "Next session prompt",
+    "seconds_since_last_response": 30346,
+    "context_tokens": 494882,
+    "prompt_cache_likely_expired": true,
+    "estimated_cache_write_usd": 4.9488
+  },
+  {
+    "session_id": "9f476987-101d-4e91-a75c-bb57fcb50ecd",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\9f476987-101d-4e91-a75c-bb57fcb50ecd.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\9f476987-101d-4e91-a75c-bb57fcb50ecd\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "6fd1d135-234d-4b59-a14c-4906202a3287",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\6fd1d135-234d-4b59-a14c-4906202a3287.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\6fd1d135-234d-4b59-a14c-4906202a3287\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "resume",
+    "session_title": "Next session prompt",
+    "seconds_since_last_response": 31137,
+    "context_tokens": 494882,
+    "prompt_cache_likely_expired": true,
+    "estimated_cache_write_usd": 4.9488
+  },
+  {
+    "session_id": "6fd1d135-234d-4b59-a14c-4906202a3287",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\6fd1d135-234d-4b59-a14c-4906202a3287.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\6fd1d135-234d-4b59-a14c-4906202a3287\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "resume",
+    "session_title": "Next session prompt",
+    "seconds_since_last_response": 34100,
+    "context_tokens": 494882,
+    "prompt_cache_likely_expired": true,
+    "estimated_cache_write_usd": 4.9488
+  },
+  {
+    "session_id": "fad8925d-53ba-49a1-a3c4-9f2451bb3db2",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\fad8925d-53ba-49a1-a3c4-9f2451bb3db2.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\fad8925d-53ba-49a1-a3c4-9f2451bb3db2\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "9c39ec4e-ceb1-402e-9469-1ed0e7e0f87e",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\9c39ec4e-ceb1-402e-9469-1ed0e7e0f87e.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\9c39ec4e-ceb1-402e-9469-1ed0e7e0f87e\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "15488f09-b07d-4972-876b-ce6250cfe86f",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\15488f09-b07d-4972-876b-ce6250cfe86f.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\15488f09-b07d-4972-876b-ce6250cfe86f\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "00388b82-fe6f-41f7-b29b-3146dd140cb3",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\00388b82-fe6f-41f7-b29b-3146dd140cb3.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\00388b82-fe6f-41f7-b29b-3146dd140cb3\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "f9fa0a51-bd54-42c4-8446-70d84f886f06",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\f9fa0a51-bd54-42c4-8446-70d84f886f06.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "startup",
+    "model": "claude-opus-5[1m]"
+  },
+  {
+    "session_id": "c8979e50-7ef6-4ca1-888c-0efce2852158",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\c8979e50-7ef6-4ca1-888c-0efce2852158.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "clear"
+  },
+  {
+    "session_id": "e99297f5-a8ad-40d1-ae5f-e62b2ef85def",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\e99297f5-a8ad-40d1-ae5f-e62b2ef85def.jsonl",
+    "cwd": "C:\\getting_strange",
+    "hook_event_name": "SessionStart",
+    "source": "clear"
+  },
+  {
+    "session_id": "aeace320-5b72-422f-8b1a-3dbec163598f",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\aeace320-5b72-422f-8b1a-3dbec163598f.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\aeace320-5b72-422f-8b1a-3dbec163598f\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "702d6231-24c8-4473-8d40-62eb644e5144",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\702d6231-24c8-4473-8d40-62eb644e5144.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\702d6231-24c8-4473-8d40-62eb644e5144\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "73d90ac6-562c-4371-aa54-d95209ca7762",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\73d90ac6-562c-4371-aa54-d95209ca7762.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\73d90ac6-562c-4371-aa54-d95209ca7762\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "8d8ba2f2-d8ce-48bb-b8ee-b8ca63ab2440",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\8d8ba2f2-d8ce-48bb-b8ee-b8ca63ab2440.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\8d8ba2f2-d8ce-48bb-b8ee-b8ca63ab2440\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "55875d88-0eb2-4cff-bcce-a5f1e4832dca",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\55875d88-0eb2-4cff-bcce-a5f1e4832dca.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\55875d88-0eb2-4cff-bcce-a5f1e4832dca\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "c19fe936-b11e-4a06-bcfc-698064b36724",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\c19fe936-b11e-4a06-bcfc-698064b36724.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\c19fe936-b11e-4a06-bcfc-698064b36724\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "b8a52399-4ce2-48b8-a868-5319751e7daa",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\b8a52399-4ce2-48b8-a868-5319751e7daa.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\b8a52399-4ce2-48b8-a868-5319751e7daa\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "50551d8c-cad8-4b41-bac3-80ef63fee710",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\50551d8c-cad8-4b41-bac3-80ef63fee710.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\50551d8c-cad8-4b41-bac3-80ef63fee710\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "b8a52399-4ce2-48b8-a868-5319751e7daa",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\b8a52399-4ce2-48b8-a868-5319751e7daa.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\b8a52399-4ce2-48b8-a868-5319751e7daa\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "resume",
+    "session_title": "Hej",
+    "seconds_since_last_response": 12217,
+    "context_tokens": 96872,
+    "prompt_cache_likely_expired": true,
+    "estimated_cache_write_usd": 0.3875
+  },
+  {
+    "session_id": "b8a52399-4ce2-48b8-a868-5319751e7daa",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\b8a52399-4ce2-48b8-a868-5319751e7daa.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\b8a52399-4ce2-48b8-a868-5319751e7daa\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "resume",
+    "session_title": "Hej",
+    "seconds_since_last_response": 15783,
+    "context_tokens": 96872,
+    "prompt_cache_likely_expired": true,
+    "estimated_cache_write_usd": 0.3875
+  },
+  {
+    "session_id": "73e723ac-1cf1-457f-a523-20e0a9d57287",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\73e723ac-1cf1-457f-a523-20e0a9d57287.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\73e723ac-1cf1-457f-a523-20e0a9d57287\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "55875d88-0eb2-4cff-bcce-a5f1e4832dca",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\55875d88-0eb2-4cff-bcce-a5f1e4832dca.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\55875d88-0eb2-4cff-bcce-a5f1e4832dca\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "resume",
+    "session_title": "Getting Strange \u00e2\u20ac\u201d pakiet cinematik PKG-NNNN",
+    "seconds_since_last_response": 16775,
+    "context_tokens": 114421,
+    "prompt_cache_likely_expired": true,
+    "estimated_cache_write_usd": 0.4577
+  },
+  {
+    "session_id": "8f750f13-4c0c-487a-b039-7f29e123aa1d",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\8f750f13-4c0c-487a-b039-7f29e123aa1d.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\8f750f13-4c0c-487a-b039-7f29e123aa1d\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "1be7f25b-33bc-464b-8f39-39ed848ac211",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\1be7f25b-33bc-464b-8f39-39ed848ac211.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\1be7f25b-33bc-464b-8f39-39ed848ac211\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "e061b84c-157a-4d72-8491-0c80063ddeac",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\e061b84c-157a-4d72-8491-0c80063ddeac.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\e061b84c-157a-4d72-8491-0c80063ddeac\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "70bd7e5e-d8f8-489c-8f8f-0e6358d16aa2",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\70bd7e5e-d8f8-489c-8f8f-0e6358d16aa2.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\70bd7e5e-d8f8-489c-8f8f-0e6358d16aa2\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "a8942952-6c60-40a5-8624-e4b4ec526ba3",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\a8942952-6c60-40a5-8624-e4b4ec526ba3.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\a8942952-6c60-40a5-8624-e4b4ec526ba3\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "70bd7e5e-d8f8-489c-8f8f-0e6358d16aa2",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\70bd7e5e-d8f8-489c-8f8f-0e6358d16aa2.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\70bd7e5e-d8f8-489c-8f8f-0e6358d16aa2\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "resume",
+    "session_title": "Next session prompt",
+    "seconds_since_last_response": 11206,
+    "context_tokens": 510223,
+    "prompt_cache_likely_expired": true,
+    "estimated_cache_write_usd": 2.0409
+  },
+  {
+    "session_id": "70bd7e5e-d8f8-489c-8f8f-0e6358d16aa2",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\70bd7e5e-d8f8-489c-8f8f-0e6358d16aa2.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\70bd7e5e-d8f8-489c-8f8f-0e6358d16aa2\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "resume",
+    "session_title": "Next session prompt",
+    "seconds_since_last_response": 41136,
+    "context_tokens": 510223,
+    "prompt_cache_likely_expired": true,
+    "estimated_cache_write_usd": 2.0409
+  },
+  {
+    "session_id": "456ff0a1-6c83-4271-99b6-7324b396d67b",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\456ff0a1-6c83-4271-99b6-7324b396d67b.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\456ff0a1-6c83-4271-99b6-7324b396d67b\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "0a014373-5705-4868-a89b-14dc583f7253",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\0a014373-5705-4868-a89b-14dc583f7253.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\0a014373-5705-4868-a89b-14dc583f7253\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup",
+    "model": "claude-opus-5"
+  },
+  {
+    "session_id": "0525954d-53e1-4aed-b320-0f6a1bb0f8d3",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\0525954d-53e1-4aed-b320-0f6a1bb0f8d3.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\0525954d-53e1-4aed-b320-0f6a1bb0f8d3\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup",
+    "model": "claude-opus-5"
+  },
+  {
+    "session_id": "026fc740-fd69-42f1-8933-383f25df3255",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\026fc740-fd69-42f1-8933-383f25df3255.jsonl",
+    "cwd": "C:\\getting_strange",
+    "scratchpad_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\claude\\C--getting-strange\\026fc740-fd69-42f1-8933-383f25df3255\\scratchpad",
+    "hook_event_name": "SessionStart",
+    "source": "startup",
+    "model": "claude-opus-5"
+  }
+]

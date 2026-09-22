@@ -1,0 +1,21 @@
+PKG-0160 VISUAL EVIDENCE REPORT
+Renderer: Intel(R) Iris(R) Xe Graphics
+Viewport: 640x360; normal Windows display driver; script was not headless.
+M3: seven grayscale, textless structural family frames; hash distinctness is structural evidence only.
+Normal frames: Station 09–13 personal-mystery staging plus Station 20/40 Marta identity continuity.
+This capture does not prove human recognition, empathy, pacing or PRODUCT GO.
+
+normal station_09   hidden=0  hash=2602324030 res://reports/pkg_0160/normal/station_09_structure.png
+normal station_10   hidden=0  hash=2159664881 res://reports/pkg_0160/normal/station_10_structure.png
+normal station_11   hidden=0  hash=1150747684 res://reports/pkg_0160/normal/station_11_structure.png
+normal station_12   hidden=0  hash=3617763648 res://reports/pkg_0160/normal/station_12_structure.png
+normal station_13   hidden=0  hash=177298881 res://reports/pkg_0160/normal/station_13_structure.png
+normal station_20   hidden=0  hash=1964539853 res://reports/pkg_0160/normal/station_20_structure.png
+normal station_40   hidden=0  hash=1368704343 res://reports/pkg_0160/normal/station_40_structure.png
+mono   station_01   hidden=9  hash=707468689 res://reports/pkg_0160/mono/station_01_structure.png
+mono   station_02   hidden=7  hash=592334343 res://reports/pkg_0160/mono/station_02_structure.png
+mono   station_03   hidden=6  hash=1410262756 res://reports/pkg_0160/mono/station_03_structure.png
+mono   station_09   hidden=6  hash=3873658189 res://reports/pkg_0160/mono/station_09_structure.png
+mono   station_11   hidden=6  hash=1404266634 res://reports/pkg_0160/mono/station_11_structure.png
+mono   station_12   hidden=6  hash=401019860 res://reports/pkg_0160/mono/station_12_structure.png
+mono   station_15   hidden=6  hash=1960620410 res://reports/pkg_0160/mono/station_15_structure.png

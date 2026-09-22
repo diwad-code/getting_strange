@@ -1,0 +1,35 @@
+PKG-0148 VISUAL CAPTURE REPORT
+Technical evidence only: rendered state, layer presence and normal/reduced output. No line claims comprehension, fun, emotion or comfort.
+Logical size: 640x360. Normal Windows rendering device. Eleven states were driven through public P7 station APIs.
+
+CAPTURED STATES
+normal  station_26   interrupted_log              res://reports/pkg_0148/normal/station_26_interrupted_log.png
+normal  station_26   intervention_reconstructed   res://reports/pkg_0148/normal/station_26_intervention_reconstructed.png
+normal  station_27   identical_pulse_pair         res://reports/pkg_0148/normal/station_27_identical_pulse_pair.png
+normal  station_27   error_correction_compared    res://reports/pkg_0148/normal/station_27_error_correction_compared.png
+normal  station_28   price_disclosed              res://reports/pkg_0148/normal/station_28_price_disclosed.png
+normal  station_28   home_trace_anchored          res://reports/pkg_0148/normal/station_28_home_trace_anchored.png
+normal  station_28   shared_drift_yielded         res://reports/pkg_0148/normal/station_28_shared_drift_yielded.png
+normal  station_29   boundary_evidence            res://reports/pkg_0148/normal/station_29_boundary_evidence.png
+normal  station_29   consent_refused              res://reports/pkg_0148/normal/station_29_consent_refused.png
+normal  station_30   three_forecasts              res://reports/pkg_0148/normal/station_30_three_forecasts.png
+normal  station_30   dependencies_compared        res://reports/pkg_0148/normal/station_30_dependencies_compared.png
+reduced station_26   interrupted_log              res://reports/pkg_0148/reduced/station_26_interrupted_log.png
+reduced station_26   intervention_reconstructed   res://reports/pkg_0148/reduced/station_26_intervention_reconstructed.png
+reduced station_27   identical_pulse_pair         res://reports/pkg_0148/reduced/station_27_identical_pulse_pair.png
+reduced station_27   error_correction_compared    res://reports/pkg_0148/reduced/station_27_error_correction_compared.png
+reduced station_28   price_disclosed              res://reports/pkg_0148/reduced/station_28_price_disclosed.png
+reduced station_28   home_trace_anchored          res://reports/pkg_0148/reduced/station_28_home_trace_anchored.png
+reduced station_28   shared_drift_yielded         res://reports/pkg_0148/reduced/station_28_shared_drift_yielded.png
+reduced station_29   boundary_evidence            res://reports/pkg_0148/reduced/station_29_boundary_evidence.png
+reduced station_29   consent_refused              res://reports/pkg_0148/reduced/station_29_consent_refused.png
+reduced station_30   three_forecasts              res://reports/pkg_0148/reduced/station_30_three_forecasts.png
+reduced station_30   dependencies_compared        res://reports/pkg_0148/reduced/station_30_dependencies_compared.png
+
+INSPECTION SCOPE
+Station 26: interrupted UCP log before and after three-clock reconstruction.
+Station 27: identical pulse pair before deliberate-error correction is compared.
+Station 28: disclosed transfer price, Anchor cost and Yield cost as separate states.
+Station 29: boundary evidence before Jakub's explicit, continuable refusal.
+Station 30: three forecasts before and after consent dependencies are compared.
+Reduced-motion frames retain the same state facts while the existing accessibility system reduces peripheral motion.

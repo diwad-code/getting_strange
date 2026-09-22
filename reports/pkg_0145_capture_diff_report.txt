@@ -1,0 +1,35 @@
+PKG-0145 CAPTURE DIFF REPORT
+Programmatic frame evidence from the normal-driver capture. No line below claims comprehension, appeal or comfort.
+
+CONTENT CHECK (non-blank, 640x360)
+  normal/station_22_hypotheses.png           content_sum=2363.9
+  normal/station_23_anchor.png               content_sum=2473.2
+  normal/station_23_yield.png                content_sum=2471.4
+  normal/station_24_limited_access.png       content_sum=1941.5
+  normal/station_24_declined.png             content_sum=1948.2
+  normal/station_25_paired_with_notes.png    content_sum=2396.9
+  normal/station_25_technical_route.png      content_sum=2394.4
+  reduced/station_22_hypotheses.png          content_sum=2363.1
+  reduced/station_23_anchor.png              content_sum=2483.7
+  reduced/station_23_yield.png               content_sum=2482.2
+  reduced/station_24_limited_access.png      content_sum=1954.4
+  reduced/station_24_declined.png            content_sum=1954.4
+  reduced/station_25_paired_with_notes.png   content_sum=2414.1
+  reduced/station_25_technical_route.png     content_sum=2411.3
+
+STATE PAIR DIFFERENCES (must be clearly distinct)
+  S23 Anchor vs Yield            DISTINCT  changed=380 mean=0.0020 max=1.3255
+  S24 limited vs declined        DISTINCT  changed=235 mean=0.0023 max=2.4000
+  S25 paired vs technical        DISTINCT  changed=94 mean=0.0016 max=2.4000
+
+NORMAL vs REDUCED (amplitude-only expectation; facts remain visible)
+  S22 hypotheses N/R         changed=2041 mean=0.0051 max=2.4000
+  S23 anchor N/R             changed=2940 mean=0.0044 max=0.3922
+  S23 yield N/R              changed=3015 mean=0.0042 max=0.4510
+  S24 limited N/R            changed=2859 mean=0.0036 max=0.3529
+  S24 declined N/R           changed=2286 mean=0.0037 max=2.4000
+  S25 paired N/R             changed=4174 mean=0.0047 max=2.4000
+  S25 technical N/R          changed=4762 mean=0.0056 max=2.4000
+
+BOUNDARY
+Diff checks distinguish rendered state surfaces, not human readability of any single frame.

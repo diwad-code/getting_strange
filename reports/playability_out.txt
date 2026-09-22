@@ -1,0 +1,62 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+================================================================================
+     CAMPAIGN PLAYABILITY AUDIT: walk, interact, exit, return — 45 scenes     
+================================================================================
+--- station_01 --- PASS | props=9 | unlock=true | x=422→608 | before=blocked | notes=-
+--- station_02 --- PASS | props=3 | unlock=true | x=421→608 | before=blocked | notes=-
+--- station_03 --- PASS | props=3 | unlock=true | x=422→608 | before=blocked | notes=-
+--- station_04 --- PASS | props=3 | unlock=true | x=422→608 | before=blocked | notes=-
+--- station_05 --- PASS | props=3 | unlock=true | x=422→608 | before=blocked | notes=-
+--- station_06 --- PASS | props=3 | unlock=true | x=432→578 | before=blocked | notes=-
+--- station_07 --- PASS | props=3 | unlock=true | x=421→523 | before=blocked | notes=-
+--- station_08 --- PASS | props=3 | unlock=true | x=422→593 | before=blocked | notes=-
+--- station_09 --- PASS | props=3 | unlock=true | x=422→588 | before=blocked | notes=-
+--- station_10 --- PASS | props=3 | unlock=true | x=422→588 | before=blocked | notes=-
+--- station_11 --- PASS | props=5 | unlock=true | x=422→596 | before=blocked | notes=-
+--- station_12 --- GATE | props=5 | unlock=false | x=422→582 | before=blocked | notes=-
+--- station_13 --- PASS | props=6 | unlock=true | x=422→588 | before=blocked | notes=-
+--- station_14 --- GATE | props=5 | unlock=false | x=412→583 | before=blocked | notes=-
+--- station_15 --- GATE | props=5 | unlock=false | x=412→583 | before=blocked | notes=-
+--- station_16 --- PASS | props=5 | unlock=true | x=412→583 | before=blocked | notes=-
+--- station_17 --- PASS | props=5 | unlock=true | x=412→583 | before=blocked | notes=-
+--- station_18 --- PASS | props=5 | unlock=true | x=412→583 | before=blocked | notes=-
+--- station_19 --- GATE | props=5 | unlock=false | x=412→583 | before=blocked | notes=-
+--- station_20 --- GATE | props=5 | unlock=false | x=412→583 | before=blocked | notes=-
+--- station_21 --- GATE | props=5 | unlock=false | x=412→583 | before=blocked | notes=-
+--- station_22 --- PASS | props=5 | unlock=true | x=412→583 | before=blocked | notes=-
+--- station_23 --- PASS | props=5 | unlock=true | x=412→583 | before=blocked | notes=-
+--- station_24 --- PASS | props=5 | unlock=true | x=402→602 | before=blocked | notes=-
+--- station_25 --- PASS | props=5 | unlock=true | x=402→602 | before=blocked | notes=-
+--- station_26 --- BLOCK | props=5 | unlock=true | x=340→340 | before=blocked | notes=-
+--- station_27 --- PASS | props=5 | unlock=true | x=402→602 | before=blocked | notes=-
+--- station_28 --- PASS | props=5 | unlock=true | x=402→602 | before=blocked | notes=-
+--- station_29 --- PASS | props=5 | unlock=true | x=402→602 | before=blocked | notes=-
+--- station_30 --- PASS | props=5 | unlock=true | x=402→602 | before=blocked | notes=-
+--- station_31 --- PASS | props=5 | unlock=true | x=402→602 | before=blocked | notes=-
+--- station_32 --- PASS | props=5 | unlock=true | x=402→602 | before=blocked | notes=-
+--- station_33 --- PASS | props=5 | unlock=true | x=401→602 | before=blocked | notes=-
+--- station_34 --- PASS | props=5 | unlock=true | x=402→602 | before=blocked | notes=-
+--- station_35 --- PASS | props=5 | unlock=true | x=402→602 | before=blocked | notes=-
+--- station_36 --- PASS | props=5 | unlock=true | x=402→602 | before=blocked | notes=-
+--- station_37 --- PASS | props=5 | unlock=true | x=402→602 | before=blocked | notes=-
+--- station_38 --- PASS | props=5 | unlock=true | x=417→603 | before=blocked | notes=-
+--- station_39 --- PASS | props=5 | unlock=true | x=417→603 | before=blocked | notes=-
+--- station_40 --- PASS | props=5 | unlock=true | x=417→603 | before=blocked | notes=-
+--- station_41 --- PASS | props=5 | unlock=true | x=417→603 | before=blocked | notes=-
+--- station_42a --- PASS | props=2 | unlock=true | x=417→603 | before=blocked | notes=-
+--- station_42b --- PASS | props=2 | unlock=true | x=417→603 | before=blocked | notes=-
+--- station_42c --- PASS | props=2 | unlock=true | x=417→603 | before=blocked | notes=-
+--- station_43 --- PASS | props=3 | unlock=true | x=417→603 | before=blocked | notes=-
+================================================================================
+PHYSICS BLOCKS: 1
+  BLOCK  station_26 cannot reach exit x=610 (at x=340, hit=x=339.9)
+STORY/DIALOGUE GATES (physics open): 6
+  GATE   station_12 physically open, story flag still locked after props+unlock calls
+  GATE   station_14 physically open, story flag still locked after props+unlock calls
+  GATE   station_15 physically open, story flag still locked after props+unlock calls
+  GATE   station_19 physically open, story flag still locked after props+unlock calls
+  GATE   station_20 physically open, story flag still locked after props+unlock calls
+  GATE   station_21 physically open, story flag still locked after props+unlock calls
+CONTRACT GAPS: 0
+PLAYABILITY AUDIT FAIL: see BLOCK/GAP lines.

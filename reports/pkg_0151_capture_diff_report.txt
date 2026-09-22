@@ -1,0 +1,35 @@
+PKG-0151 visual capture diff report
+Generated at: 2026-08-30T23:58:23
+
+=== Visual State Comparison ===
+ - S01 vs S02 committed: changed_samples=18922 mean_delta=0.1425
+ - S03 vs S05 committed: changed_samples=34075 mean_delta=0.2284
+ - S07 recognition vs S08 buffer: changed_samples=26477 mean_delta=0.2141
+ - S09 cost vs S10 forecasts: changed_samples=30750 mean_delta=0.2918
+ - S11 intent vs S12 ledger: changed_samples=28895 mean_delta=0.2853
+ - S13 truth vs S14 method A: changed_samples=33528 mean_delta=0.3159
+ - S14 method A vs B: changed_samples=1227 mean_delta=0.0135
+ - S14 method B vs C: changed_samples=1055 mean_delta=0.0105
+ - S15 chamber A vs B: changed_samples=29688 mean_delta=0.2898
+ - S15 chamber B vs C: changed_samples=26709 mean_delta=0.2367
+ - S15 chamber C vs epilogue: changed_samples=38458 mean_delta=0.3494
+
+=== Normal vs Reduced Motion Comparison ===
+ - station_01_sample_committed.png: changed_samples=34536 mean_delta=0.3158
+ - station_04_reader_trial_committed.png: changed_samples=35855 mean_delta=0.2956
+ - station_08_intercom_completed.png: changed_samples=30429 mean_delta=0.2702
+ - station_14_threshold_respected.png: changed_samples=32084 mean_delta=0.2267
+ - station_21_synthesis_executed.png: changed_samples=29376 mean_delta=0.2771
+ - station_25_paired_with_notes.png: changed_samples=30501 mean_delta=0.3197
+ - station_28_shared_drift_yielded.png: changed_samples=21032 mean_delta=0.1909
+ - station_30_dependencies_compared.png: changed_samples=30337 mean_delta=0.2828
+ - station_33_intent_reconstructed.png: changed_samples=28199 mean_delta=0.2506
+ - station_36_cost_ledger_revealed.png: changed_samples=32488 mean_delta=0.2931
+ - station_38_truth_disclosed_full.png: changed_samples=23391 mean_delta=0.1786
+ - station_41_operation_committed_a.png: changed_samples=26434 mean_delta=0.2693
+ - station_41_operation_committed_b.png: changed_samples=26430 mean_delta=0.2700
+ - station_41_operation_committed_c.png: changed_samples=26473 mean_delta=0.2706
+ - station_42a_chamber_a_witnessed.png: changed_samples=29964 mean_delta=0.2728
+ - station_42b_chamber_b_witnessed.png: changed_samples=31963 mean_delta=0.3272
+ - station_42c_chamber_c_witnessed.png: changed_samples=29818 mean_delta=0.2699
+ - station_43_epilogue_completed.png: changed_samples=13 mean_delta=0.0009

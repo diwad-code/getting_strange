@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_sensor_fault"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"sensor_fault"
+source_fact = &"p7.sample_and_promise.gap_observed"
+predicted_outcome = "Po sprawdzeniu mocowania czujnik przestanie gubić czas, jeśli sama głowica jest uszkodzona."
+required_evidence = [&"p7.sample_and_promise.gap_observed", &"p7.sample_and_promise.mount_checked"]
+trial_result = &"gap_retained_after_mount_check"
+closure_id = &"p7.sample_and_promise.measurement_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_mount_fault"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"mount_fault"
+source_fact = &"p7.sample_and_promise.mount_checked"
+predicted_outcome = "Prawidłowo osadzony czujnik usunie lukę tylko wtedy, gdy przyczyną było mocowanie."
+required_evidence = [&"p7.sample_and_promise.gap_observed", &"p7.sample_and_promise.raw_record_checked"]
+trial_result = &"gap_retained_after_mount_check"
+closure_id = &"p7.sample_and_promise.measurement_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_raw_record_valid"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"raw_record_valid"
+source_fact = &"p7.sample_and_promise.raw_record_checked"
+predicted_outcome = "Surowy zapis zachowa lukę po powtórce i jego czas da się porównać z rzeczywistym obejściem serwisowym."
+required_evidence = [&"p7.sample_and_promise.mount_checked", &"p7.sample_and_promise.raw_record_checked"]
+trial_result = &"gap_retained_after_mount_check"
+closure_id = &"p7.sample_and_promise.measurement_result"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_preserve_sample"]
+script = ExtResource("3_commitment")
+commitment_id = &"preserve_sample_and_notify_marta"
+person_id = &"lena"
+scope = "Surowa próbka i rzeczywisty czas opóźnienia zostają zachowane oraz przekazane Marcie bez udawania, że pomiar nie zabrał czasu."
+known_cost = "Lena przyznaje, że znowu spóźnia się do Marty, zamiast ukryć zawodowy odruch."
+required_disclosure = [&"p7.sample_and_promise.measurement_result", &"p7.sample_and_promise.route_time_confirmed"]
+alternative_route = "Można pójść dalej bez komentarza, ale wtedy sekwencja nie uzyskuje śladu ani wyjścia."
+outcome_key = &"p7.sample_and_promise.time_notice_sent"
+trace_key = &"p7.sample_and_promise.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"sample_and_promise"
+station_ids = [&"station_01", &"station_02", &"station_03"]
+entry_gate = &""
+discrepancy = "Rejestrator gubi trzy sekundy mimo działającego pomiaru i prawidłowego czasu przejścia."
+required_source_facts = [&"p7.sample_and_promise.gap_observed", &"p7.sample_and_promise.mount_checked", &"p7.sample_and_promise.raw_record_checked", &"p7.sample_and_promise.route_time_confirmed"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_sensor_fault"), SubResource("DiagnosticHypothesis_mount_fault"), SubResource("DiagnosticHypothesis_raw_record_valid")])
+trial_id = &"repeat_measurement_after_mount_check"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_preserve_sample")])
+trace_key = &"p7.sample_and_promise.trace"
+guidance_beat_ids = [&"s01_measurement_gap", &"s01_repeat_measurement", &"s02_compare_route_time", &"s03_notify_marta"]
+state_keys = [&"p7.sample_and_promise.gap_observed", &"p7.sample_and_promise.mount_checked", &"p7.sample_and_promise.raw_record_checked", &"p7.sample_and_promise.measurement_result", &"p7.sample_and_promise.route_time_confirmed", &"p7.sample_and_promise.time_notice_sent", &"p7.sample_and_promise.trace"]
+migration_revision = 1

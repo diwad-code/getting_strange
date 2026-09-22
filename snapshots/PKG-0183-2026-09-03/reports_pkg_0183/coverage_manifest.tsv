@@ -1,0 +1,945 @@
+surface_id	path	kind	status	method	evidence
+FILE:AGENTS.md	AGENTS.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\gesture.png	assets\characters\jakub\gesture.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\gesture.png.import	assets\characters\jakub\gesture.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\idle.png	assets\characters\jakub\idle.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\idle.png.import	assets\characters\jakub\idle.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\listen.png	assets\characters\jakub\listen.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\listen.png.import	assets\characters\jakub\listen.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\raw\.gdignore	assets\characters\jakub\raw\.gdignore	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\raw\40365fc3-dcfa-4186-b3c8-69990741a739.jpeg	assets\characters\jakub\raw\40365fc3-dcfa-4186-b3c8-69990741a739.jpeg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\seated.png	assets\characters\jakub\seated.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\seated.png.import	assets\characters\jakub\seated.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\talk_0.png	assets\characters\jakub\talk_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\talk_0.png.import	assets\characters\jakub\talk_0.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\talk_1.png	assets\characters\jakub\talk_1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\talk_1.png.import	assets\characters\jakub\talk_1.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\turn_away.png	assets\characters\jakub\turn_away.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\turn_away.png.import	assets\characters\jakub\turn_away.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\work.png	assets\characters\jakub\work.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\jakub\work.png.import	assets\characters\jakub\work.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\.gdignore	assets\characters\lena\_source_v40\.gdignore	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\climb.png	assets\characters\lena\_source_v40\climb.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\examine.png	assets\characters\lena\_source_v40\examine.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\idle.png	assets\characters\lena\_source_v40\idle.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\interact.png	assets\characters\lena\_source_v40\interact.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\jump_fall.png	assets\characters\lena\_source_v40\jump_fall.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\jump_rise.png	assets\characters\lena\_source_v40\jump_rise.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\land.png	assets\characters\lena\_source_v40\land.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\run_0.png	assets\characters\lena\_source_v40\run_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\run_1.png	assets\characters\lena\_source_v40\run_1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\run_2.png	assets\characters\lena\_source_v40\run_2.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\run_3.png	assets\characters\lena\_source_v40\run_3.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\seam_gesture.png	assets\characters\lena\_source_v40\seam_gesture.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\start.png	assets\characters\lena\_source_v40\start.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\stop.png	assets\characters\lena\_source_v40\stop.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\turn.png	assets\characters\lena\_source_v40\turn.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\unease_reaction.png	assets\characters\lena\_source_v40\unease_reaction.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\walk_0.png	assets\characters\lena\_source_v40\walk_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\walk_1.png	assets\characters\lena\_source_v40\walk_1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\walk_2.png	assets\characters\lena\_source_v40\walk_2.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\walk_3.png	assets\characters\lena\_source_v40\walk_3.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\_source_v40\walk_4.png	assets\characters\lena\_source_v40\walk_4.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\board_vehicle_0.png	assets\characters\lena\board_vehicle_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\board_vehicle_0.png.import	assets\characters\lena\board_vehicle_0.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\board_vehicle_1.png	assets\characters\lena\board_vehicle_1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\board_vehicle_1.png.import	assets\characters\lena\board_vehicle_1.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\climb_0.png	assets\characters\lena\climb_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\climb_0.png.import	assets\characters\lena\climb_0.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\climb_1.png	assets\characters\lena\climb_1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\climb_1.png.import	assets\characters\lena\climb_1.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\climb_back_0.png	assets\characters\lena\climb_back_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\climb_back_0.png.import	assets\characters\lena\climb_back_0.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\climb_back_1.png	assets\characters\lena\climb_back_1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\climb_back_1.png.import	assets\characters\lena\climb_back_1.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\climb_back_2.png	assets\characters\lena\climb_back_2.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\climb_back_2.png.import	assets\characters\lena\climb_back_2.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\climb_back_3.png	assets\characters\lena\climb_back_3.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\climb_back_3.png.import	assets\characters\lena\climb_back_3.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\enter_door_0.png	assets\characters\lena\enter_door_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\enter_door_0.png.import	assets\characters\lena\enter_door_0.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\enter_door_1.png	assets\characters\lena\enter_door_1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\enter_door_1.png.import	assets\characters\lena\enter_door_1.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\enter_door_2.png	assets\characters\lena\enter_door_2.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\enter_door_2.png.import	assets\characters\lena\enter_door_2.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\examine.png	assets\characters\lena\examine.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\examine.png.import	assets\characters\lena\examine.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\idle.png	assets\characters\lena\idle.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\idle.png.import	assets\characters\lena\idle.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\interact.png	assets\characters\lena\interact.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\interact.png.import	assets\characters\lena\interact.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\jump_fall.png	assets\characters\lena\jump_fall.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\jump_fall.png.import	assets\characters\lena\jump_fall.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\jump_rise.png	assets\characters\lena\jump_rise.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\jump_rise.png.import	assets\characters\lena\jump_rise.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\ladder_dismount.png	assets\characters\lena\ladder_dismount.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\ladder_dismount.png.import	assets\characters\lena\ladder_dismount.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\ladder_mount.png	assets\characters\lena\ladder_mount.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\ladder_mount.png.import	assets\characters\lena\ladder_mount.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\land_0.png	assets\characters\lena\land_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\land_0.png.import	assets\characters\lena\land_0.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\land_1.png	assets\characters\lena\land_1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\land_1.png.import	assets\characters\lena\land_1.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\logs\.gdignore	assets\characters\lena\logs\.gdignore	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\logs\post_tool_use.json	assets\characters\lena\logs\post_tool_use.json	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\logs\pre_tool_use.json	assets\characters\lena\logs\pre_tool_use.json	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\.gdignore	assets\characters\lena\raw\.gdignore	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\13967004-1a58-4467-aa27-0c7607211b9a.png	assets\characters\lena\raw\13967004-1a58-4467-aa27-0c7607211b9a.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\13967004-1a58-4467-aa27-0c7607211b9a.png.import	assets\characters\lena\raw\13967004-1a58-4467-aa27-0c7607211b9a.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\269c4db3-4d69-4b57-8cd4-0a430d974f57.png	assets\characters\lena\raw\269c4db3-4d69-4b57-8cd4-0a430d974f57.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\269c4db3-4d69-4b57-8cd4-0a430d974f57.png.import	assets\characters\lena\raw\269c4db3-4d69-4b57-8cd4-0a430d974f57.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\3e713ffc-b0cb-4ce8-b9c6-e1f4bb0c703a.png	assets\characters\lena\raw\3e713ffc-b0cb-4ce8-b9c6-e1f4bb0c703a.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\3e713ffc-b0cb-4ce8-b9c6-e1f4bb0c703a.png.import	assets\characters\lena\raw\3e713ffc-b0cb-4ce8-b9c6-e1f4bb0c703a.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\3f3a139b-9f4b-45fe-93c3-13b21ddbc49c.png	assets\characters\lena\raw\3f3a139b-9f4b-45fe-93c3-13b21ddbc49c.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\3f3a139b-9f4b-45fe-93c3-13b21ddbc49c.png.import	assets\characters\lena\raw\3f3a139b-9f4b-45fe-93c3-13b21ddbc49c.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\45bd5b5d-e6e8-44bf-a2b1-96d3cadc95b0.png	assets\characters\lena\raw\45bd5b5d-e6e8-44bf-a2b1-96d3cadc95b0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\45bd5b5d-e6e8-44bf-a2b1-96d3cadc95b0.png.import	assets\characters\lena\raw\45bd5b5d-e6e8-44bf-a2b1-96d3cadc95b0.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\46437334-c377-4972-963e-da6b56359d5f.png	assets\characters\lena\raw\46437334-c377-4972-963e-da6b56359d5f.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\46437334-c377-4972-963e-da6b56359d5f.png.import	assets\characters\lena\raw\46437334-c377-4972-963e-da6b56359d5f.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\5639cc4c-7e10-41da-ad32-8e69c538a007.png	assets\characters\lena\raw\5639cc4c-7e10-41da-ad32-8e69c538a007.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\5639cc4c-7e10-41da-ad32-8e69c538a007.png.import	assets\characters\lena\raw\5639cc4c-7e10-41da-ad32-8e69c538a007.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\6866ef5a-cb1b-4b76-aad9-b68ef9fc7223.png	assets\characters\lena\raw\6866ef5a-cb1b-4b76-aad9-b68ef9fc7223.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\6866ef5a-cb1b-4b76-aad9-b68ef9fc7223.png.import	assets\characters\lena\raw\6866ef5a-cb1b-4b76-aad9-b68ef9fc7223.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\6d61c9dd-790a-47b2-9bdf-9f05ea26cbb1.png	assets\characters\lena\raw\6d61c9dd-790a-47b2-9bdf-9f05ea26cbb1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\6d61c9dd-790a-47b2-9bdf-9f05ea26cbb1.png.import	assets\characters\lena\raw\6d61c9dd-790a-47b2-9bdf-9f05ea26cbb1.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\711d3ded-a500-4535-8464-da17ffe35202.png	assets\characters\lena\raw\711d3ded-a500-4535-8464-da17ffe35202.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\711d3ded-a500-4535-8464-da17ffe35202.png.import	assets\characters\lena\raw\711d3ded-a500-4535-8464-da17ffe35202.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\8445d31c-31cd-4542-96cc-a1151bf8d7f7.png	assets\characters\lena\raw\8445d31c-31cd-4542-96cc-a1151bf8d7f7.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\8445d31c-31cd-4542-96cc-a1151bf8d7f7.png.import	assets\characters\lena\raw\8445d31c-31cd-4542-96cc-a1151bf8d7f7.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\9b091b5e-0351-405b-bb23-f07a1a962e5e.png	assets\characters\lena\raw\9b091b5e-0351-405b-bb23-f07a1a962e5e.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\9b091b5e-0351-405b-bb23-f07a1a962e5e.png.import	assets\characters\lena\raw\9b091b5e-0351-405b-bb23-f07a1a962e5e.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\a3891791-c927-4871-8d3c-bdbe80e0a58c.png	assets\characters\lena\raw\a3891791-c927-4871-8d3c-bdbe80e0a58c.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\a3891791-c927-4871-8d3c-bdbe80e0a58c.png.import	assets\characters\lena\raw\a3891791-c927-4871-8d3c-bdbe80e0a58c.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\a800947e-7900-4ebb-a6f3-9ae32f2ff523.png	assets\characters\lena\raw\a800947e-7900-4ebb-a6f3-9ae32f2ff523.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\a800947e-7900-4ebb-a6f3-9ae32f2ff523.png.import	assets\characters\lena\raw\a800947e-7900-4ebb-a6f3-9ae32f2ff523.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\a98316a3-c822-4aea-bf10-eb2fd4533b9f.png	assets\characters\lena\raw\a98316a3-c822-4aea-bf10-eb2fd4533b9f.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\a98316a3-c822-4aea-bf10-eb2fd4533b9f.png.import	assets\characters\lena\raw\a98316a3-c822-4aea-bf10-eb2fd4533b9f.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\c42cfb50-ec66-41b2-b98d-7879a4d2ebf9.png	assets\characters\lena\raw\c42cfb50-ec66-41b2-b98d-7879a4d2ebf9.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\c42cfb50-ec66-41b2-b98d-7879a4d2ebf9.png.import	assets\characters\lena\raw\c42cfb50-ec66-41b2-b98d-7879a4d2ebf9.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\e4ed15e8-8dd2-4961-8d55-59fa800b3163.png	assets\characters\lena\raw\e4ed15e8-8dd2-4961-8d55-59fa800b3163.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\e4ed15e8-8dd2-4961-8d55-59fa800b3163.png.import	assets\characters\lena\raw\e4ed15e8-8dd2-4961-8d55-59fa800b3163.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0173\.gdignore	assets\characters\lena\raw\pkg_0173\.gdignore	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0173\climb_back_0.jpg	assets\characters\lena\raw\pkg_0173\climb_back_0.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0173\climb_back_1.jpg	assets\characters\lena\raw\pkg_0173\climb_back_1.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0173\climb_back_2.jpg	assets\characters\lena\raw\pkg_0173\climb_back_2.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0173\climb_back_3.jpg	assets\characters\lena\raw\pkg_0173\climb_back_3.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0173\ladder_dismount.jpg	assets\characters\lena\raw\pkg_0173\ladder_dismount.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0173\ladder_mount.jpg	assets\characters\lena\raw\pkg_0173\ladder_mount.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0173\step_down_0.jpg	assets\characters\lena\raw\pkg_0173\step_down_0.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0173\step_up_0.jpg	assets\characters\lena\raw\pkg_0173\step_up_0.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0173\step_up_1.jpg	assets\characters\lena\raw\pkg_0173\step_up_1.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0174\.gdignore	assets\characters\lena\raw\pkg_0174\.gdignore	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0174\board_vehicle_0.jpg	assets\characters\lena\raw\pkg_0174\board_vehicle_0.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0174\board_vehicle_1.jpg	assets\characters\lena\raw\pkg_0174\board_vehicle_1.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0174\enter_door_0.jpg	assets\characters\lena\raw\pkg_0174\enter_door_0.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0174\enter_door_1.jpg	assets\characters\lena\raw\pkg_0174\enter_door_1.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0174\enter_door_2.jpg	assets\characters\lena\raw\pkg_0174\enter_door_2.jpg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0176\ccc20a7e-0ca8-4016-9c09-1c044614d50d.png	assets\characters\lena\raw\pkg_0176\ccc20a7e-0ca8-4016-9c09-1c044614d50d.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\pkg_0176\prompt_cold_open_crouch.txt	assets\characters\lena\raw\pkg_0176\prompt_cold_open_crouch.txt	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\prompt_climb.txt	assets\characters\lena\raw\prompt_climb.txt	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\prompt_examine.txt	assets\characters\lena\raw\prompt_examine.txt	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\prompt_idle.txt	assets\characters\lena\raw\prompt_idle.txt	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\prompt_interact.txt	assets\characters\lena\raw\prompt_interact.txt	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\prompt_jump_fall.txt	assets\characters\lena\raw\prompt_jump_fall.txt	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\prompt_jump_rise.txt	assets\characters\lena\raw\prompt_jump_rise.txt	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\prompt_land.txt	assets\characters\lena\raw\prompt_land.txt	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\prompt_run.txt	assets\characters\lena\raw\prompt_run.txt	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\prompt_walk_1.txt	assets\characters\lena\raw\prompt_walk_1.txt	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\prompt_walk_2.txt	assets\characters\lena\raw\prompt_walk_2.txt	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\prompt_walk_3.txt	assets\characters\lena\raw\prompt_walk_3.txt	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\raw\prompt_walk.txt	assets\characters\lena\raw\prompt_walk.txt	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\run_0.png	assets\characters\lena\run_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\run_0.png.import	assets\characters\lena\run_0.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\run_1.png	assets\characters\lena\run_1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\run_1.png.import	assets\characters\lena\run_1.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\run_2.png	assets\characters\lena\run_2.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\run_2.png.import	assets\characters\lena\run_2.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\run_3.png	assets\characters\lena\run_3.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\run_3.png.import	assets\characters\lena\run_3.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\seam_gesture.png	assets\characters\lena\seam_gesture.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\seam_gesture.png.import	assets\characters\lena\seam_gesture.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\start.png	assets\characters\lena\start.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\start.png.import	assets\characters\lena\start.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\step_down_0.png	assets\characters\lena\step_down_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\step_down_0.png.import	assets\characters\lena\step_down_0.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\step_up_0.png	assets\characters\lena\step_up_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\step_up_0.png.import	assets\characters\lena\step_up_0.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\step_up_1.png	assets\characters\lena\step_up_1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\step_up_1.png.import	assets\characters\lena\step_up_1.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\stop.png	assets\characters\lena\stop.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\stop.png.import	assets\characters\lena\stop.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\turn.png	assets\characters\lena\turn.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\turn.png.import	assets\characters\lena\turn.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\unease_reaction.png	assets\characters\lena\unease_reaction.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\unease_reaction.png.import	assets\characters\lena\unease_reaction.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\walk_0.png	assets\characters\lena\walk_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\walk_0.png.import	assets\characters\lena\walk_0.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\walk_1.png	assets\characters\lena\walk_1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\walk_1.png.import	assets\characters\lena\walk_1.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\walk_2.png	assets\characters\lena\walk_2.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\walk_2.png.import	assets\characters\lena\walk_2.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\walk_3.png	assets\characters\lena\walk_3.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\lena\walk_3.png.import	assets\characters\lena\walk_3.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\gesture.png	assets\characters\marta\gesture.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\gesture.png.import	assets\characters\marta\gesture.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\idle.png	assets\characters\marta\idle.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\idle.png.import	assets\characters\marta\idle.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\listen.png	assets\characters\marta\listen.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\listen.png.import	assets\characters\marta\listen.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\raw\.gdignore	assets\characters\marta\raw\.gdignore	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\raw\cdf1c0d4-96ee-42bf-a4a6-659eb29dc70f.jpeg	assets\characters\marta\raw\cdf1c0d4-96ee-42bf-a4a6-659eb29dc70f.jpeg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\seated.png	assets\characters\marta\seated.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\seated.png.import	assets\characters\marta\seated.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\talk_0.png	assets\characters\marta\talk_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\talk_0.png.import	assets\characters\marta\talk_0.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\talk_1.png	assets\characters\marta\talk_1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\talk_1.png.import	assets\characters\marta\talk_1.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\turn_away.png	assets\characters\marta\turn_away.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\turn_away.png.import	assets\characters\marta\turn_away.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\work.png	assets\characters\marta\work.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\marta\work.png.import	assets\characters\marta\work.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\portraits\jakub.png	assets\characters\portraits\jakub.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\portraits\jakub.png.import	assets\characters\portraits\jakub.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\portraits\lena.png	assets\characters\portraits\lena.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\portraits\lena.png.import	assets\characters\portraits\lena.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\portraits\marta.png	assets\characters\portraits\marta.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\portraits\marta.png.import	assets\characters\portraits\marta.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\portraits\raw\.gdignore	assets\characters\portraits\raw\.gdignore	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\portraits\raw\1fc34b6f-c7dc-4949-a217-e1229b368a54.jpeg	assets\characters\portraits\raw\1fc34b6f-c7dc-4949-a217-e1229b368a54.jpeg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\portraits\szymon.png	assets\characters\portraits\szymon.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\portraits\szymon.png.import	assets\characters\portraits\szymon.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\portraits\wierzbicka.png	assets\characters\portraits\wierzbicka.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\portraits\wierzbicka.png.import	assets\characters\portraits\wierzbicka.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\gesture.png	assets\characters\wierzbicka\gesture.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\gesture.png.import	assets\characters\wierzbicka\gesture.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\idle.png	assets\characters\wierzbicka\idle.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\idle.png.import	assets\characters\wierzbicka\idle.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\listen.png	assets\characters\wierzbicka\listen.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\listen.png.import	assets\characters\wierzbicka\listen.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\raw\.gdignore	assets\characters\wierzbicka\raw\.gdignore	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\raw\7d5423b5-5331-4a42-a462-be69f8776b48.jpeg	assets\characters\wierzbicka\raw\7d5423b5-5331-4a42-a462-be69f8776b48.jpeg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\seated.png	assets\characters\wierzbicka\seated.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\seated.png.import	assets\characters\wierzbicka\seated.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\talk_0.png	assets\characters\wierzbicka\talk_0.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\talk_0.png.import	assets\characters\wierzbicka\talk_0.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\talk_1.png	assets\characters\wierzbicka\talk_1.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\talk_1.png.import	assets\characters\wierzbicka\talk_1.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\turn_away.png	assets\characters\wierzbicka\turn_away.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\turn_away.png.import	assets\characters\wierzbicka\turn_away.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\work.png	assets\characters\wierzbicka\work.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\characters\wierzbicka\work.png.import	assets\characters\wierzbicka\work.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\cold_open\shot2_rail_hands.png	assets\cold_open\shot2_rail_hands.png	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:assets\cold_open\shot2_rail_hands.png.import	assets\cold_open\shot2_rail_hands.png.import	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\art\lena_model_sheet.md	docs\art\lena_model_sheet.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\AUDIT_IMPLEMENTATION_PLAN.md	docs\AUDIT_IMPLEMENTATION_PLAN.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\CREATIVE_REBUILD_PLAN.md	docs\CREATIVE_REBUILD_PLAN.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\CURRENT_STATE.md	docs\CURRENT_STATE.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\DECISION_LOG.md	docs\DECISION_LOG.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\decisions\ADR-001-godot-pc-first.md	docs\decisions\ADR-001-godot-pc-first.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\decisions\ADR-002-evidence-gated-prototypes.md	docs\decisions\ADR-002-evidence-gated-prototypes.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\decisions\ADR-003-evidence-model-without-external-testers.md	docs\decisions\ADR-003-evidence-model-without-external-testers.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\decisions\ADR-004-ai-autonomy.md	docs\decisions\ADR-004-ai-autonomy.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\decisions\ADR-005-mechanics-threshold-pivot.md	docs\decisions\ADR-005-mechanics-threshold-pivot.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\decisions\ADR-006-controlled-creative-rebuild.md	docs\decisions\ADR-006-controlled-creative-rebuild.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\decisions\ADR-007-character-first-narrative-revolution.md	docs\decisions\ADR-007-character-first-narrative-revolution.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\decisions\ADR-008-hybrid-product-rebuild.md	docs\decisions\ADR-008-hybrid-product-rebuild.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\FRAME_LAYOUT_AUDIT.md	docs\FRAME_LAYOUT_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\GAMEPLAY_DEPTH_VISION.md	docs\GAMEPLAY_DEPTH_VISION.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\IMPLEMENTATION_PLAN_AUDIT_AND_RELEASE_READINESS.md	docs\IMPLEMENTATION_PLAN_AUDIT_AND_RELEASE_READINESS.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\INDEX.md	docs\INDEX.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\INSPIRATION_BOUNDARIES.md	docs\INSPIRATION_BOUNDARIES.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\LENA_CHARACTER_AND_ANIMATION.md	docs\LENA_CHARACTER_AND_ANIMATION.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\LICENSES.md	docs\LICENSES.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\NARRATIVE_SKILL_AUDIT_0_2.md	docs\NARRATIVE_SKILL_AUDIT_0_2.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\narrative\CONTINUITY_TRACKER.md	docs\narrative\CONTINUITY_TRACKER.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\narrative\DIALOGUE_SCRIPT.md	docs\narrative\DIALOGUE_SCRIPT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\narrative\FULL_STORY.md	docs\narrative\FULL_STORY.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\narrative\MECHANICS_AUDIT_H-002A.md	docs\narrative\MECHANICS_AUDIT_H-002A.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\narrative\NARRATIVE_BIBLE.md	docs\narrative\NARRATIVE_BIBLE.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\NEXT_SESSION_PROMPT.md	docs\NEXT_SESSION_PROMPT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\P7_GAMEPLAY_DEPTH_IMPLEMENTATION_PLAN.md	docs\P7_GAMEPLAY_DEPTH_IMPLEMENTATION_PLAN.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PIXEL_PRESENTATION_ARCHITECTURE.md	docs\PIXEL_PRESENTATION_ARCHITECTURE.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PKG_0130_FRAME_BUDGET_REPORT.md	docs\PKG_0130_FRAME_BUDGET_REPORT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PKG_0137_PLAYTHROUGH_REPORT.md	docs\PKG_0137_PLAYTHROUGH_REPORT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PKG_0138_PLAYTHROUGH_REPORT.md	docs\PKG_0138_PLAYTHROUGH_REPORT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PKG_0142_VISUAL_CERTIFICATION.md	docs\PKG_0142_VISUAL_CERTIFICATION.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PLAYER_GUIDANCE_AND_INNER_VOICE.md	docs\PLAYER_GUIDANCE_AND_INNER_VOICE.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PLAYTEST_01.md	docs\PLAYTEST_01.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PLAYTHROUGH_TRAVERSAL_AUDIT.md	docs\PLAYTHROUGH_TRAVERSAL_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PLUS_SESSION_PROMPT_2_A.md	docs\PLUS_SESSION_PROMPT_2_A.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PLUS_SESSION_PROMPT_2_B.mm	docs\PLUS_SESSION_PROMPT_2_B.mm	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PLUS_SESSION_PROMPT_2.md	docs\PLUS_SESSION_PROMPT_2.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PLUS_SESSION_PROMPT.md	docs\PLUS_SESSION_PROMPT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PRESENTATION_DEFECT_AUDIT.md	docs\PRESENTATION_DEFECT_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PRODUCT_BRIEF.md	docs\PRODUCT_BRIEF.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PROJECT_BIBLE.md	docs\PROJECT_BIBLE.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PROJECT_REBUILD_BOARD_PROMPT.md	docs\PROJECT_REBUILD_BOARD_PROMPT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PROJECT_REBUILD_EXECUTION_PLAN.md	docs\PROJECT_REBUILD_EXECUTION_PLAN.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\PROTOTYPE_01_MOVEMENT_LAB.md	docs\PROTOTYPE_01_MOVEMENT_LAB.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\rebuild\ACCEPTANCE_MATRIX.md	docs\rebuild\ACCEPTANCE_MATRIX.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\rebuild\AUDIT_IMPLEMENTATION_PLAN.md	docs\rebuild\AUDIT_IMPLEMENTATION_PLAN.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\rebuild\CAMPAIGN_MAP.md	docs\rebuild\CAMPAIGN_MAP.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\rebuild\CAST_AND_NPC_BIBLE.md	docs\rebuild\CAST_AND_NPC_BIBLE.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\rebuild\COLD_OPEN_SPEC.md	docs\rebuild\COLD_OPEN_SPEC.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\rebuild\COMPREHENSIVE_GAME_AUDIT_AND_EVOLUTION_PLAN.md	docs\rebuild\COMPREHENSIVE_GAME_AUDIT_AND_EVOLUTION_PLAN.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\rebuild\EXECUTIVE_RELEASE_ASSESSMENT.md	docs\rebuild\EXECUTIVE_RELEASE_ASSESSMENT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\rebuild\LOCATION_FAMILY_BIBLE.md	docs\rebuild\LOCATION_FAMILY_BIBLE.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\rebuild\PKG_0182_COMPREHENSIVE_AUDIT_REPORT.md	docs\rebuild\PKG_0182_COMPREHENSIVE_AUDIT_REPORT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\rebuild\PLAYER_CONTRACT.md	docs\rebuild\PLAYER_CONTRACT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\rebuild\PRESENTATION_REPAIR_PLAN.md	docs\rebuild\PRESENTATION_REPAIR_PLAN.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\rebuild\PROGRESSION_FLOW_CONTRACT.md	docs\rebuild\PROGRESSION_FLOW_CONTRACT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\rebuild\THRESHOLD_AND_ENTRY_CONTRACT.md	docs\rebuild\THRESHOLD_AND_ENTRY_CONTRACT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\RELEASE_NOTES.md	docs\RELEASE_NOTES.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\RESEARCH_FOUNDATIONS.md	docs\RESEARCH_FOUNDATIONS.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\RISKS_AND_HYPOTHESES.md	docs\RISKS_AND_HYPOTHESES.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\ROADMAP.md	docs\ROADMAP.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\SESSION_LOG.md	docs\SESSION_LOG.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\TECHNICAL_DIRECTION.md	docs\TECHNICAL_DIRECTION.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\templates\HANDOFF_TEMPLATE.md	docs\templates\HANDOFF_TEMPLATE.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\TRAVERSAL_ACT_I_AUDIT.md	docs\TRAVERSAL_ACT_I_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\TRAVERSAL_ACT_II_AUDIT.md	docs\TRAVERSAL_ACT_II_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\TRAVERSAL_ACT_IIB_AUDIT.md	docs\TRAVERSAL_ACT_IIB_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\TRAVERSAL_ACT_IIC_AUDIT.md	docs\TRAVERSAL_ACT_IIC_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\TRAVERSAL_ACT_III_AUDIT.md	docs\TRAVERSAL_ACT_III_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\TRAVERSAL_ACT_IIIB_AUDIT.md	docs\TRAVERSAL_ACT_IIIB_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\TRAVERSAL_ACT_IIIC_AUDIT.md	docs\TRAVERSAL_ACT_IIIC_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\TRAVERSAL_ACT_IV_AUDIT.md	docs\TRAVERSAL_ACT_IV_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\TRAVERSAL_ACT_IV_FINAL_AUDIT.md	docs\TRAVERSAL_ACT_IV_FINAL_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\TRAVERSAL_AND_OBSTACLE_DESIGN.md	docs\TRAVERSAL_AND_OBSTACLE_DESIGN.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\VECTOR_STAGE_ACT_I_AUDIT.md	docs\VECTOR_STAGE_ACT_I_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\VECTOR_STAGE_ACT_II_AUDIT.md	docs\VECTOR_STAGE_ACT_II_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\VECTOR_STAGE_ACT_IIB_AUDIT.md	docs\VECTOR_STAGE_ACT_IIB_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\VECTOR_STAGE_ACT_IIC_AUDIT.md	docs\VECTOR_STAGE_ACT_IIC_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\VECTOR_STAGE_ART_DIRECTION_AUDIT.md	docs\VECTOR_STAGE_ART_DIRECTION_AUDIT.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\VECTOR_STAGE_BUDGET_PROVENANCE_AUDIT_H-005.md	docs\VECTOR_STAGE_BUDGET_PROVENANCE_AUDIT_H-005.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\VECTOR_STAGE_COST_AUDIT_H-005.md	docs\VECTOR_STAGE_COST_AUDIT_H-005.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\VECTOR_STAGE_READABILITY_AUDIT_H-012.md	docs\VECTOR_STAGE_READABILITY_AUDIT_H-012.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\VECTOR_STAGE_REPEATABILITY_AUDIT_H-005.md	docs\VECTOR_STAGE_REPEATABILITY_AUDIT_H-005.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\WORKFLOW.md	docs\WORKFLOW.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:docs\WORLD_SCALE.md	docs\WORLD_SCALE.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:export_presets.cfg	export_presets.cfg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:icon.svg	icon.svg	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:project.godot	project.godot	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:README.md	README.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:resources\gameplay\address_and_record_sequence.tres	resources\gameplay\address_and_record_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\archive_countermodel_sequence.tres	resources\gameplay\archive_countermodel_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\branch_clarity_and_irreversible_choice_sequence.tres	resources\gameplay\branch_clarity_and_irreversible_choice_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\conscious_silence_and_presence_sequence.tres	resources\gameplay\conscious_silence_and_presence_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\consent_and_rescue_boundary_sequence.tres	resources\gameplay\consent_and_rescue_boundary_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\foreign_daily_life_sequence.tres	resources\gameplay\foreign_daily_life_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\interrupted_trial_and_small_cost_sequence.tres	resources\gameplay\interrupted_trial_and_small_cost_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\jakub_boundary_and_forecasts_sequence.tres	resources\gameplay\jakub_boundary_and_forecasts_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\marta_threshold_sequence.tres	resources\gameplay\marta_threshold_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\mutual_test_sequence.tres	resources\gameplay\mutual_test_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\pair_cost_and_echo_sequence.tres	resources\gameplay\pair_cost_and_echo_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\return_under_control_sequence.tres	resources\gameplay\return_under_control_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\sample_and_promise_sequence.tres	resources\gameplay\sample_and_promise_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\three_place_proofs_sequence.tres	resources\gameplay\three_place_proofs_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\gameplay\work_history_and_record_sequence.tres	resources\gameplay\work_history_and_record_sequence.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\localization\getting_strange_locales.csv	resources\localization\getting_strange_locales.csv	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\localization\getting_strange_locales.csv.import	resources\localization\getting_strange_locales.csv.import	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\localization\getting_strange_locales.en.translation	resources\localization\getting_strange_locales.en.translation	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\localization\getting_strange_locales.pl.translation	resources\localization\getting_strange_locales.pl.translation	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\movement\profile_a.tres	resources\movement\profile_a.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\movement\profile_b.tres	resources\movement\profile_b.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:resources\movement\profile_c.tres	resources\movement\profile_c.tres	file	PASS	RESOURCE-LOAD+RUNTIME-REFERENCE	tests/pkg_0183_smoke_test.gd
+FILE:scenes\levels\station_01.tscn	scenes\levels\station_01.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_02.tscn	scenes\levels\station_02.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_03.tscn	scenes\levels\station_03.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_04.tscn	scenes\levels\station_04.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_05.tscn	scenes\levels\station_05.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_06.tscn	scenes\levels\station_06.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_07.tscn	scenes\levels\station_07.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_08.tscn	scenes\levels\station_08.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_09.tscn	scenes\levels\station_09.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_10.tscn	scenes\levels\station_10.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_11.tscn	scenes\levels\station_11.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_12.tscn	scenes\levels\station_12.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_13.tscn	scenes\levels\station_13.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_14.tscn	scenes\levels\station_14.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_15.tscn	scenes\levels\station_15.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_16.tscn	scenes\levels\station_16.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_17.tscn	scenes\levels\station_17.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_18.tscn	scenes\levels\station_18.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_19.tscn	scenes\levels\station_19.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_20.tscn	scenes\levels\station_20.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_21.tscn	scenes\levels\station_21.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_22.tscn	scenes\levels\station_22.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_23.tscn	scenes\levels\station_23.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_24.tscn	scenes\levels\station_24.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_25.tscn	scenes\levels\station_25.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_26.tscn	scenes\levels\station_26.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_27.tscn	scenes\levels\station_27.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_28.tscn	scenes\levels\station_28.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_29.tscn	scenes\levels\station_29.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_30.tscn	scenes\levels\station_30.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_31.tscn	scenes\levels\station_31.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_32.tscn	scenes\levels\station_32.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_33.tscn	scenes\levels\station_33.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_34.tscn	scenes\levels\station_34.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_35.tscn	scenes\levels\station_35.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_36.tscn	scenes\levels\station_36.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_37.tscn	scenes\levels\station_37.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_38.tscn	scenes\levels\station_38.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_39.tscn	scenes\levels\station_39.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_40.tscn	scenes\levels\station_40.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_41.tscn	scenes\levels\station_41.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_42a.tscn	scenes\levels\station_42a.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_42b.tscn	scenes\levels\station_42b.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_42c.tscn	scenes\levels\station_42c.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\levels\station_43.tscn	scenes\levels\station_43.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\player\prototype_player.tscn	scenes\player\prototype_player.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\prototype\anchor_lab.tscn	scenes\prototype\anchor_lab.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\prototype\movement_lab.tscn	scenes\prototype\movement_lab.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\shell\cold_open.tscn	scenes\shell\cold_open.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scenes\shell\title_screen.tscn	scenes\shell\title_screen.tscn	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\audio\procedural_audio.gd	scripts\audio\procedural_audio.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\audio\procedural_audio.gd.uid	scripts\audio\procedural_audio.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\audio\station_audio_voices.gd	scripts\audio\station_audio_voices.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\audio\station_audio_voices.gd.uid	scripts\audio\station_audio_voices.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\camera\cinematic_camera.gd	scripts\camera\cinematic_camera.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\camera\cinematic_camera.gd.uid	scripts\camera\cinematic_camera.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\camera\station_camera_rig.gd	scripts\camera\station_camera_rig.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\camera\station_camera_rig.gd.uid	scripts\camera\station_camera_rig.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\campaign\cold_open_facts.gd	scripts\campaign\cold_open_facts.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\campaign\cold_open_facts.gd.uid	scripts\campaign\cold_open_facts.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\campaign\gap_ledger.gd	scripts\campaign\gap_ledger.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\campaign\gap_ledger.gd.uid	scripts\campaign\gap_ledger.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\characters\character_visual_rig.gd	scripts\characters\character_visual_rig.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\characters\character_visual_rig.gd.uid	scripts\characters\character_visual_rig.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\core\game_state_manager.gd	scripts\core\game_state_manager.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\core\game_state_manager.gd.uid	scripts\core\game_state_manager.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\core\guidance_beat.gd	scripts\core\guidance_beat.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\core\guidance_beat.gd.uid	scripts\core\guidance_beat.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\core\localization_manager.gd	scripts\core\localization_manager.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\core\localization_manager.gd.uid	scripts\core\localization_manager.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\core\motion_accessibility.gd	scripts\core\motion_accessibility.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\core\motion_accessibility.gd.uid	scripts\core\motion_accessibility.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\core\narrative_guidance_service.gd	scripts\core\narrative_guidance_service.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\core\narrative_guidance_service.gd.uid	scripts\core\narrative_guidance_service.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\environment\exit_clearance.gd	scripts\environment\exit_clearance.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\environment\exit_clearance.gd.uid	scripts\environment\exit_clearance.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\environment\ladder_zone.gd	scripts\environment\ladder_zone.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\environment\ladder_zone.gd.uid	scripts\environment\ladder_zone.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\environment\return_zone.gd	scripts\environment\return_zone.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\environment\return_zone.gd.uid	scripts\environment\return_zone.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\environment\service_lift.gd	scripts\environment\service_lift.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\environment\service_lift.gd.uid	scripts\environment\service_lift.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\environment\threshold_binder.gd	scripts\environment\threshold_binder.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\environment\threshold_binder.gd.uid	scripts\environment\threshold_binder.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\environment\threshold_zone.gd	scripts\environment\threshold_zone.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\environment\threshold_zone.gd.uid	scripts\environment\threshold_zone.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\gameplay\diagnostic_commitment_definition.gd	scripts\gameplay\diagnostic_commitment_definition.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\gameplay\diagnostic_commitment_definition.gd.uid	scripts\gameplay\diagnostic_commitment_definition.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\gameplay\diagnostic_hypothesis_definition.gd	scripts\gameplay\diagnostic_hypothesis_definition.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\gameplay\diagnostic_hypothesis_definition.gd.uid	scripts\gameplay\diagnostic_hypothesis_definition.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\gameplay\diagnostic_sequence_definition.gd	scripts\gameplay\diagnostic_sequence_definition.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\gameplay\diagnostic_sequence_definition.gd.uid	scripts\gameplay\diagnostic_sequence_definition.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\interactables\anchor_exclusivity_controller.gd	scripts\interactables\anchor_exclusivity_controller.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\interactables\anchor_exclusivity_controller.gd.uid	scripts\interactables\anchor_exclusivity_controller.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\interactables\anchorable_object.gd	scripts\interactables\anchorable_object.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\interactables\anchorable_object.gd.uid	scripts\interactables\anchorable_object.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\interactables\memory_resonance_point.gd	scripts\interactables\memory_resonance_point.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\interactables\memory_resonance_point.gd.uid	scripts\interactables\memory_resonance_point.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\interactables\movable_anchorable_prop.gd	scripts\interactables\movable_anchorable_prop.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\interactables\movable_anchorable_prop.gd.uid	scripts\interactables\movable_anchorable_prop.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\interactables\opening_action_point.gd	scripts\interactables\opening_action_point.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\interactables\opening_action_point.gd.uid	scripts\interactables\opening_action_point.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\atmosphere_rig.gd	scripts\levels\atmosphere_rig.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\atmosphere_rig.gd.uid	scripts\levels\atmosphere_rig.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\logs\post_tool_use.json	scripts\levels\logs\post_tool_use.json	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\logs\pre_tool_use.json	scripts\levels\logs\pre_tool_use.json	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_01.gd	scripts\levels\station_01.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_01.gd.uid	scripts\levels\station_01.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_02.gd	scripts\levels\station_02.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_02.gd.uid	scripts\levels\station_02.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_03.gd	scripts\levels\station_03.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_03.gd.uid	scripts\levels\station_03.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_04.gd	scripts\levels\station_04.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_04.gd.uid	scripts\levels\station_04.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_05.gd	scripts\levels\station_05.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_05.gd.uid	scripts\levels\station_05.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_06.gd	scripts\levels\station_06.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_06.gd.uid	scripts\levels\station_06.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_07.gd	scripts\levels\station_07.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_07.gd.uid	scripts\levels\station_07.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_08.gd	scripts\levels\station_08.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_08.gd.uid	scripts\levels\station_08.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_09.gd	scripts\levels\station_09.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_09.gd.uid	scripts\levels\station_09.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_10.gd	scripts\levels\station_10.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_10.gd.uid	scripts\levels\station_10.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_11.gd	scripts\levels\station_11.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_11.gd.uid	scripts\levels\station_11.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_12.gd	scripts\levels\station_12.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_12.gd.uid	scripts\levels\station_12.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_13.gd	scripts\levels\station_13.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_13.gd.uid	scripts\levels\station_13.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_14.gd	scripts\levels\station_14.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_14.gd.uid	scripts\levels\station_14.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_15.gd	scripts\levels\station_15.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_15.gd.uid	scripts\levels\station_15.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_16.gd	scripts\levels\station_16.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_16.gd.uid	scripts\levels\station_16.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_17.gd	scripts\levels\station_17.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_17.gd.uid	scripts\levels\station_17.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_18.gd	scripts\levels\station_18.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_18.gd.uid	scripts\levels\station_18.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_19.gd	scripts\levels\station_19.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_19.gd.uid	scripts\levels\station_19.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_20.gd	scripts\levels\station_20.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_20.gd.uid	scripts\levels\station_20.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_21.gd	scripts\levels\station_21.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_21.gd.uid	scripts\levels\station_21.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_22.gd	scripts\levels\station_22.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_22.gd.uid	scripts\levels\station_22.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_23.gd	scripts\levels\station_23.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_23.gd.uid	scripts\levels\station_23.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_24.gd	scripts\levels\station_24.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_24.gd.uid	scripts\levels\station_24.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_25.gd	scripts\levels\station_25.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_25.gd.uid	scripts\levels\station_25.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_26.gd	scripts\levels\station_26.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_26.gd.uid	scripts\levels\station_26.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_27.gd	scripts\levels\station_27.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_27.gd.uid	scripts\levels\station_27.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_28.gd	scripts\levels\station_28.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_28.gd.uid	scripts\levels\station_28.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_29.gd	scripts\levels\station_29.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_29.gd.uid	scripts\levels\station_29.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_30.gd	scripts\levels\station_30.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_30.gd.uid	scripts\levels\station_30.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_31.gd	scripts\levels\station_31.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_31.gd.uid	scripts\levels\station_31.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_32.gd	scripts\levels\station_32.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_32.gd.uid	scripts\levels\station_32.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_33.gd	scripts\levels\station_33.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_33.gd.uid	scripts\levels\station_33.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_34.gd	scripts\levels\station_34.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_34.gd.uid	scripts\levels\station_34.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_35.gd	scripts\levels\station_35.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_35.gd.uid	scripts\levels\station_35.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_36.gd	scripts\levels\station_36.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_36.gd.uid	scripts\levels\station_36.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_37.gd	scripts\levels\station_37.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_37.gd.uid	scripts\levels\station_37.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_38.gd	scripts\levels\station_38.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_38.gd.uid	scripts\levels\station_38.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_39.gd	scripts\levels\station_39.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_39.gd.uid	scripts\levels\station_39.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_40.gd	scripts\levels\station_40.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_40.gd.uid	scripts\levels\station_40.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_41.gd	scripts\levels\station_41.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_41.gd.uid	scripts\levels\station_41.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_42a.gd	scripts\levels\station_42a.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_42a.gd.uid	scripts\levels\station_42a.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_42b.gd	scripts\levels\station_42b.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_42b.gd.uid	scripts\levels\station_42b.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_42c.gd	scripts\levels\station_42c.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_42c.gd.uid	scripts\levels\station_42c.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\levels\station_43.gd	scripts\levels\station_43.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\levels\station_43.gd.uid	scripts\levels\station_43.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\player\discontinuous_shadow.gd	scripts\player\discontinuous_shadow.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\player\discontinuous_shadow.gd.uid	scripts\player\discontinuous_shadow.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\player\lena_animation_state.gd	scripts\player\lena_animation_state.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\player\lena_animation_state.gd.uid	scripts\player\lena_animation_state.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\player\lena_visual_rig.gd	scripts\player\lena_visual_rig.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\player\lena_visual_rig.gd.uid	scripts\player\lena_visual_rig.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\player\movement_profile_catalog.gd	scripts\player\movement_profile_catalog.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\player\movement_profile_catalog.gd.uid	scripts\player\movement_profile_catalog.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\player\movement_profile.gd	scripts\player\movement_profile.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\player\movement_profile.gd.uid	scripts\player\movement_profile.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\player\prototype_player.gd	scripts\player\prototype_player.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\player\prototype_player.gd.uid	scripts\player\prototype_player.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\prototype\anchor_lab.gd	scripts\prototype\anchor_lab.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\prototype\anchor_lab.gd.uid	scripts\prototype\anchor_lab.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\prototype\movement_lab.gd	scripts\prototype\movement_lab.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\prototype\movement_lab.gd.uid	scripts\prototype\movement_lab.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\ui\cold_open.gd	scripts\ui\cold_open.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\ui\cold_open.gd.uid	scripts\ui\cold_open.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\ui\crt_dialogue_box.gd	scripts\ui\crt_dialogue_box.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\ui\crt_dialogue_box.gd.uid	scripts\ui\crt_dialogue_box.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\ui\crt_portrait.gd	scripts\ui\crt_portrait.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\ui\crt_portrait.gd.uid	scripts\ui\crt_portrait.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\ui\inner_thought_surface.gd	scripts\ui\inner_thought_surface.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\ui\inner_thought_surface.gd.uid	scripts\ui\inner_thought_surface.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\ui\settings_overlay.gd	scripts\ui\settings_overlay.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\ui\settings_overlay.gd.uid	scripts\ui\settings_overlay.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\ui\station_dialogue_cue.gd	scripts\ui\station_dialogue_cue.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\ui\station_dialogue_cue.gd.uid	scripts\ui\station_dialogue_cue.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\ui\title_screen.gd	scripts\ui\title_screen.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\ui\title_screen.gd.uid	scripts\ui\title_screen.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\visual\anchor_resonance.gd	scripts\visual\anchor_resonance.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\visual\anchor_resonance.gd.uid	scripts\visual\anchor_resonance.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\visual\crisp_diegetic_text.gd	scripts\visual\crisp_diegetic_text.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\visual\crisp_diegetic_text.gd.uid	scripts\visual\crisp_diegetic_text.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\visual\particle_budget.gd	scripts\visual\particle_budget.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\visual\particle_budget.gd.uid	scripts\visual\particle_budget.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\visual\vector_stage_environment.gd	scripts\visual\vector_stage_environment.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\visual\vector_stage_environment.gd.uid	scripts\visual\vector_stage_environment.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\visual\vector_stage_style.gd	scripts\visual\vector_stage_style.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\visual\vector_stage_style.gd.uid	scripts\visual\vector_stage_style.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\visual\vibration_trace_display.gd	scripts\visual\vibration_trace_display.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\visual\vibration_trace_display.gd.uid	scripts\visual\vibration_trace_display.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:scripts\visual\world_pixel_compositor.gd	scripts\visual\world_pixel_compositor.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:scripts\visual\world_pixel_compositor.gd.uid	scripts\visual\world_pixel_compositor.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0091_smoke_test.gd	tests\pkg_0091_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0091_smoke_test.gd.uid	tests\pkg_0091_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0094_smoke_test.gd	tests\pkg_0094_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0094_smoke_test.gd.uid	tests\pkg_0094_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0095_smoke_test.gd	tests\pkg_0095_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0095_smoke_test.gd.uid	tests\pkg_0095_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0096_smoke_test.gd	tests\pkg_0096_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0096_smoke_test.gd.uid	tests\pkg_0096_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0097_smoke_test.gd	tests\pkg_0097_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0097_smoke_test.gd.uid	tests\pkg_0097_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0099_smoke_test.gd	tests\pkg_0099_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0099_smoke_test.gd.uid	tests\pkg_0099_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0100_smoke_test.gd	tests\pkg_0100_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0100_smoke_test.gd.uid	tests\pkg_0100_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0101_smoke_test.gd	tests\pkg_0101_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0101_smoke_test.gd.uid	tests\pkg_0101_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0102_smoke_test.gd	tests\pkg_0102_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0102_smoke_test.gd.uid	tests\pkg_0102_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0103_smoke_test.gd	tests\pkg_0103_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0103_smoke_test.gd.uid	tests\pkg_0103_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0104_smoke_test.gd	tests\pkg_0104_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0104_smoke_test.gd.uid	tests\pkg_0104_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0105_smoke_test.gd	tests\pkg_0105_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0105_smoke_test.gd.uid	tests\pkg_0105_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0106_smoke_test.gd	tests\pkg_0106_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0106_smoke_test.gd.uid	tests\pkg_0106_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0107_smoke_test.gd	tests\pkg_0107_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0107_smoke_test.gd.uid	tests\pkg_0107_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0113_smoke_test.gd	tests\pkg_0113_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0113_smoke_test.gd.uid	tests\pkg_0113_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0114_smoke_test.gd	tests\pkg_0114_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0114_smoke_test.gd.uid	tests\pkg_0114_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0115_smoke_test.gd	tests\pkg_0115_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0115_smoke_test.gd.uid	tests\pkg_0115_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0117_smoke_test.gd	tests\pkg_0117_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0117_smoke_test.gd.uid	tests\pkg_0117_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0118_smoke_test.gd	tests\pkg_0118_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0118_smoke_test.gd.uid	tests\pkg_0118_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0119_smoke_test.gd	tests\pkg_0119_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0119_smoke_test.gd.uid	tests\pkg_0119_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0120_smoke_test.gd	tests\pkg_0120_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0120_smoke_test.gd.uid	tests\pkg_0120_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0121_smoke_test.gd	tests\pkg_0121_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0121_smoke_test.gd.uid	tests\pkg_0121_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0122_smoke_test.gd	tests\pkg_0122_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0122_smoke_test.gd.uid	tests\pkg_0122_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0123_smoke_test.gd	tests\pkg_0123_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0123_smoke_test.gd.uid	tests\pkg_0123_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0124_smoke_test.gd	tests\pkg_0124_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0124_smoke_test.gd.uid	tests\pkg_0124_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0125_smoke_test.gd	tests\pkg_0125_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0125_smoke_test.gd.uid	tests\pkg_0125_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0126_smoke_test.gd	tests\pkg_0126_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0126_smoke_test.gd.uid	tests\pkg_0126_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0127_smoke_test.gd	tests\pkg_0127_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0127_smoke_test.gd.uid	tests\pkg_0127_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0128_smoke_test.gd	tests\pkg_0128_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0128_smoke_test.gd.uid	tests\pkg_0128_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0129_smoke_test.gd	tests\pkg_0129_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0129_smoke_test.gd.uid	tests\pkg_0129_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0130_smoke_test.gd	tests\pkg_0130_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0130_smoke_test.gd.uid	tests\pkg_0130_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0132_smoke_test.gd	tests\pkg_0132_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0132_smoke_test.gd.uid	tests\pkg_0132_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0133_smoke_test.gd	tests\pkg_0133_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0133_smoke_test.gd.uid	tests\pkg_0133_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0134_smoke_test.gd	tests\pkg_0134_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0134_smoke_test.gd.uid	tests\pkg_0134_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0135_smoke_test.gd	tests\pkg_0135_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0135_smoke_test.gd.uid	tests\pkg_0135_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0136_smoke_test.gd	tests\pkg_0136_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0136_smoke_test.gd.uid	tests\pkg_0136_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0137_smoke_test.gd	tests\pkg_0137_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0137_smoke_test.gd.uid	tests\pkg_0137_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0138_smoke_test.gd	tests\pkg_0138_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0138_smoke_test.gd.uid	tests\pkg_0138_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0139_smoke_test.gd	tests\pkg_0139_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0139_smoke_test.gd.uid	tests\pkg_0139_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0140_smoke_test.gd	tests\pkg_0140_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0140_smoke_test.gd.uid	tests\pkg_0140_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0141_smoke_test.gd	tests\pkg_0141_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0141_smoke_test.gd.uid	tests\pkg_0141_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0142_smoke_test.gd	tests\pkg_0142_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0142_smoke_test.gd.uid	tests\pkg_0142_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0145_smoke_test.gd	tests\pkg_0145_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0145_smoke_test.gd.uid	tests\pkg_0145_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0146_smoke_test.gd	tests\pkg_0146_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0146_smoke_test.gd.uid	tests\pkg_0146_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0147_smoke_test.gd	tests\pkg_0147_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0147_smoke_test.gd.uid	tests\pkg_0147_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0148_smoke_test.gd	tests\pkg_0148_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0148_smoke_test.gd.uid	tests\pkg_0148_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0149_smoke_test.gd	tests\pkg_0149_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0149_smoke_test.gd.uid	tests\pkg_0149_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0150_smoke_test.gd	tests\pkg_0150_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0150_smoke_test.gd.uid	tests\pkg_0150_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0151_smoke_test.gd	tests\pkg_0151_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0151_smoke_test.gd.uid	tests\pkg_0151_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0152_smoke_test.gd	tests\pkg_0152_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0152_smoke_test.gd.uid	tests\pkg_0152_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0153_smoke_test.gd	tests\pkg_0153_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0153_smoke_test.gd.uid	tests\pkg_0153_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0154_smoke_test.gd	tests\pkg_0154_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0154_smoke_test.gd.uid	tests\pkg_0154_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0156_smoke_test.gd	tests\pkg_0156_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0156_smoke_test.gd.uid	tests\pkg_0156_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0157_smoke_test.gd	tests\pkg_0157_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0157_smoke_test.gd.uid	tests\pkg_0157_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0158_smoke_test.gd	tests\pkg_0158_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0158_smoke_test.gd.uid	tests\pkg_0158_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0159_smoke_test.gd	tests\pkg_0159_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0159_smoke_test.gd.uid	tests\pkg_0159_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0160_smoke_test.gd	tests\pkg_0160_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0160_smoke_test.gd.uid	tests\pkg_0160_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0162_smoke_test.gd	tests\pkg_0162_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0162_smoke_test.gd.uid	tests\pkg_0162_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0163_smoke_test.gd	tests\pkg_0163_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0163_smoke_test.gd.uid	tests\pkg_0163_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0164_smoke_test.gd	tests\pkg_0164_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0164_smoke_test.gd.uid	tests\pkg_0164_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0165_smoke_test.gd	tests\pkg_0165_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0165_smoke_test.gd.uid	tests\pkg_0165_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0166_smoke_test.gd	tests\pkg_0166_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0166_smoke_test.gd.uid	tests\pkg_0166_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0167_smoke_test.gd	tests\pkg_0167_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0167_smoke_test.gd.uid	tests\pkg_0167_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0168_smoke_test.gd	tests\pkg_0168_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0168_smoke_test.gd.uid	tests\pkg_0168_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0169_smoke_test.gd	tests\pkg_0169_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0169_smoke_test.gd.uid	tests\pkg_0169_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0170_smoke_test.gd	tests\pkg_0170_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0170_smoke_test.gd.uid	tests\pkg_0170_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0171_smoke_test.gd	tests\pkg_0171_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0171_smoke_test.gd.uid	tests\pkg_0171_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0172_smoke_test.gd	tests\pkg_0172_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0172_smoke_test.gd.uid	tests\pkg_0172_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0173_smoke_test.gd	tests\pkg_0173_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0173_smoke_test.gd.uid	tests\pkg_0173_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0174_smoke_test.gd	tests\pkg_0174_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0174_smoke_test.gd.uid	tests\pkg_0174_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0175_smoke_test.gd	tests\pkg_0175_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0175_smoke_test.gd.uid	tests\pkg_0175_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0176_smoke_test.gd	tests\pkg_0176_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0176_smoke_test.gd.uid	tests\pkg_0176_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0177_smoke_test.gd	tests\pkg_0177_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0177_smoke_test.gd.uid	tests\pkg_0177_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0179_smoke_test.gd	tests\pkg_0179_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0179_smoke_test.gd.uid	tests\pkg_0179_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0180_smoke_test.gd	tests\pkg_0180_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0180_smoke_test.gd.uid	tests\pkg_0180_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\pkg_0182_smoke_test.gd	tests\pkg_0182_smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\pkg_0182_smoke_test.gd.uid	tests\pkg_0182_smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\smoke_test.gd	tests\smoke_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\smoke_test.gd.uid	tests\smoke_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tests\traversal_lint_test.gd	tests\traversal_lint_test.gd	file	PASS	VERIFY-MAP+SOURCE	reports/pkg_0183/verify_test_map.tsv
+FILE:tests\traversal_lint_test.gd.uid	tests\traversal_lint_test.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\_convert_portraits.py	tools\_convert_portraits.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\_dbg12.gd.uid	tools\_dbg12.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\audit_h005.gd	tools\audit_h005.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\audit_h005.gd.uid	tools\audit_h005.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\audit_h012.gd	tools\audit_h012.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\audit_h012.gd.uid	tools\audit_h012.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\audit_pkg_0182.ps1	tools\audit_pkg_0182.ps1	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\audit_pkg_0183.ps1	tools\audit_pkg_0183.ps1	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\campaign_playability_audit.gd	tools\campaign_playability_audit.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\campaign_playability_audit.gd.uid	tools\campaign_playability_audit.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_act1_vector_stage.gd	tools\capture_act1_vector_stage.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_act1_vector_stage.gd.uid	tools\capture_act1_vector_stage.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_act2_vector_stage.gd	tools\capture_act2_vector_stage.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_act2_vector_stage.gd.uid	tools\capture_act2_vector_stage.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_act2b_vector_stage.gd	tools\capture_act2b_vector_stage.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_act2b_vector_stage.gd.uid	tools\capture_act2b_vector_stage.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_act2c_vector_stage.gd	tools\capture_act2c_vector_stage.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_act2c_vector_stage.gd.uid	tools\capture_act2c_vector_stage.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0099.gd	tools\capture_pkg_0099.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0099.gd.uid	tools\capture_pkg_0099.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0100.gd	tools\capture_pkg_0100.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0100.gd.uid	tools\capture_pkg_0100.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0101.gd	tools\capture_pkg_0101.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0101.gd.uid	tools\capture_pkg_0101.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0102.gd	tools\capture_pkg_0102.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0102.gd.uid	tools\capture_pkg_0102.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0103.gd	tools\capture_pkg_0103.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0103.gd.uid	tools\capture_pkg_0103.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0104.gd	tools\capture_pkg_0104.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0104.gd.uid	tools\capture_pkg_0104.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0105.gd	tools\capture_pkg_0105.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0105.gd.uid	tools\capture_pkg_0105.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0106.gd	tools\capture_pkg_0106.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0106.gd.uid	tools\capture_pkg_0106.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0107.gd	tools\capture_pkg_0107.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0107.gd.uid	tools\capture_pkg_0107.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0113.gd	tools\capture_pkg_0113.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0113.gd.uid	tools\capture_pkg_0113.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0114.gd	tools\capture_pkg_0114.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0114.gd.uid	tools\capture_pkg_0114.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0115.gd	tools\capture_pkg_0115.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0115.gd.uid	tools\capture_pkg_0115.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0132.gd	tools\capture_pkg_0132.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0132.gd.uid	tools\capture_pkg_0132.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0135.gd	tools\capture_pkg_0135.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0135.gd.uid	tools\capture_pkg_0135.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0136.gd	tools\capture_pkg_0136.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0136.gd.uid	tools\capture_pkg_0136.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0137.gd	tools\capture_pkg_0137.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0137.gd.uid	tools\capture_pkg_0137.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0138.gd	tools\capture_pkg_0138.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0138.gd.uid	tools\capture_pkg_0138.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0142.gd	tools\capture_pkg_0142.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0142.gd.uid	tools\capture_pkg_0142.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0145.gd	tools\capture_pkg_0145.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0145.gd.uid	tools\capture_pkg_0145.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0146.gd	tools\capture_pkg_0146.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0146.gd.uid	tools\capture_pkg_0146.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0147.gd	tools\capture_pkg_0147.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0147.gd.uid	tools\capture_pkg_0147.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0148.gd	tools\capture_pkg_0148.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0148.gd.uid	tools\capture_pkg_0148.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0149.gd	tools\capture_pkg_0149.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0149.gd.uid	tools\capture_pkg_0149.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0150.gd	tools\capture_pkg_0150.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0150.gd.uid	tools\capture_pkg_0150.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0151.gd	tools\capture_pkg_0151.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0151.gd.uid	tools\capture_pkg_0151.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0153.gd	tools\capture_pkg_0153.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0153.gd.uid	tools\capture_pkg_0153.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0157.gd	tools\capture_pkg_0157.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0157.gd.uid	tools\capture_pkg_0157.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0158.gd	tools\capture_pkg_0158.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0158.gd.uid	tools\capture_pkg_0158.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0159.gd	tools\capture_pkg_0159.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0159.gd.uid	tools\capture_pkg_0159.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0160.gd	tools\capture_pkg_0160.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0160.gd.uid	tools\capture_pkg_0160.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0162.gd	tools\capture_pkg_0162.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0162.gd.uid	tools\capture_pkg_0162.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0163.gd	tools\capture_pkg_0163.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0163.gd.uid	tools\capture_pkg_0163.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0164.gd	tools\capture_pkg_0164.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0164.gd.uid	tools\capture_pkg_0164.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0165.gd	tools\capture_pkg_0165.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0165.gd.uid	tools\capture_pkg_0165.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0166.gd	tools\capture_pkg_0166.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0166.gd.uid	tools\capture_pkg_0166.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0167.gd	tools\capture_pkg_0167.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0167.gd.uid	tools\capture_pkg_0167.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0168.gd	tools\capture_pkg_0168.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0168.gd.uid	tools\capture_pkg_0168.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0169.gd	tools\capture_pkg_0169.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0169.gd.uid	tools\capture_pkg_0169.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0170.gd	tools\capture_pkg_0170.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0170.gd.uid	tools\capture_pkg_0170.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0171.gd	tools\capture_pkg_0171.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0171.gd.uid	tools\capture_pkg_0171.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0172.gd	tools\capture_pkg_0172.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0172.gd.uid	tools\capture_pkg_0172.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0173.gd	tools\capture_pkg_0173.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0173.gd.uid	tools\capture_pkg_0173.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0174.gd	tools\capture_pkg_0174.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0174.gd.uid	tools\capture_pkg_0174.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0175.gd	tools\capture_pkg_0175.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0175.gd.uid	tools\capture_pkg_0175.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0176.gd	tools\capture_pkg_0176.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0176.gd.uid	tools\capture_pkg_0176.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0177.gd	tools\capture_pkg_0177.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0177.gd.uid	tools\capture_pkg_0177.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_pkg_0182.gd	tools\capture_pkg_0182.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_pkg_0182.gd.uid	tools\capture_pkg_0182.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture_preview.gd	tools\capture_preview.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\capture_preview.gd.uid	tools\capture_preview.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\capture.ps1	tools\capture.ps1	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\check_airlock.py	tools\check_airlock.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\diff_pkg_0145_capture.gd	tools\diff_pkg_0145_capture.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\diff_pkg_0145_capture.gd.uid	tools\diff_pkg_0145_capture.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\diff_pkg_0146_capture.gd	tools\diff_pkg_0146_capture.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\diff_pkg_0146_capture.gd.uid	tools\diff_pkg_0146_capture.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\diff_pkg_0147_capture.gd	tools\diff_pkg_0147_capture.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\diff_pkg_0147_capture.gd.uid	tools\diff_pkg_0147_capture.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\diff_pkg_0148_capture.gd	tools\diff_pkg_0148_capture.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\diff_pkg_0148_capture.gd.uid	tools\diff_pkg_0148_capture.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\diff_pkg_0149_capture.gd	tools\diff_pkg_0149_capture.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\diff_pkg_0149_capture.gd.uid	tools\diff_pkg_0149_capture.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\diff_pkg_0150_capture.gd	tools\diff_pkg_0150_capture.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\diff_pkg_0150_capture.gd.uid	tools\diff_pkg_0150_capture.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\diff_pkg_0151_capture.gd	tools\diff_pkg_0151_capture.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\diff_pkg_0151_capture.gd.uid	tools\diff_pkg_0151_capture.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\export_builds.ps1	tools\export_builds.ps1	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_scenes.py	tools\fix_scenes.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_smoke_test_0305_strings.py	tools\fix_smoke_test_0305_strings.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_smoke_test_0305_strings2.py	tools\fix_smoke_test_0305_strings2.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_smoke_test_0305.py	tools\fix_smoke_test_0305.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_smoke_test_return_zone.py	tools\fix_smoke_test_return_zone.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_smoke_test_return_zone2.py	tools\fix_smoke_test_return_zone2.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_smoke_test_return_zone3.py	tools\fix_smoke_test_return_zone3.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_smoke_test_return_zone4.py	tools\fix_smoke_test_return_zone4.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_smoke_test_return_zone5.py	tools\fix_smoke_test_return_zone5.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_station_prop10.py	tools\fix_station_prop10.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_station_prop11.py	tools\fix_station_prop11.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_station_prop2.py	tools\fix_station_prop2.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_station_prop3.py	tools\fix_station_prop3.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_station_prop4.py	tools\fix_station_prop4.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_station_prop5.py	tools\fix_station_prop5.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_station_prop6.py	tools\fix_station_prop6.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_station_prop7.py	tools\fix_station_prop7.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_station_prop8.py	tools\fix_station_prop8.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_station_prop9.py	tools\fix_station_prop9.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_station_props.py	tools\fix_station_props.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\fix_stations.py	tools\fix_stations.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\frame_budget_audit.gd	tools\frame_budget_audit.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\frame_budget_audit.gd.uid	tools\frame_budget_audit.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\geometry_audit.gd	tools\geometry_audit.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\geometry_audit.gd.uid	tools\geometry_audit.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\godot_log_policy.ps1	tools\godot_log_policy.ps1	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\logs\post_tool_use.json	tools\logs\post_tool_use.json	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\logs\pre_tool_use.json	tools\logs\pre_tool_use.json	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\look_smoke_test.py	tools\look_smoke_test.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\look_smoke_test2.py	tools\look_smoke_test2.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\patch_pkg_0174_stations.py	tools\patch_pkg_0174_stations.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\patch_smoke_test_0174.py	tools\patch_smoke_test_0174.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\performance_pkg_0182.gd	tools\performance_pkg_0182.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\performance_pkg_0182.gd.uid	tools\performance_pkg_0182.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\pkg_0137_backtrack_probe.gd	tools\pkg_0137_backtrack_probe.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\pkg_0137_backtrack_probe.gd.uid	tools\pkg_0137_backtrack_probe.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\pkg_0137_playthrough_audit.gd	tools\pkg_0137_playthrough_audit.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\pkg_0137_playthrough_audit.gd.uid	tools\pkg_0137_playthrough_audit.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\pkg_0138_playthrough_audit.gd	tools\pkg_0138_playthrough_audit.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\pkg_0138_playthrough_audit.gd.uid	tools\pkg_0138_playthrough_audit.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\process_cold_open_plate.py	tools\process_cold_open_plate.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\process_lena_sprites.py	tools\process_lena_sprites.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\process_lena_threshold_sprites.py	tools\process_lena_threshold_sprites.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\process_lena_traversal_sprites.py	tools\process_lena_traversal_sprites.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\process_npc_sprites.py	tools\process_npc_sprites.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\render_frame_timing.gd	tools\render_frame_timing.gd	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\render_frame_timing.gd.uid	tools\render_frame_timing.gd.uid	file	NOT_APPLICABLE	GODOT-GENERATED-METADATA	paired source audited separately
+FILE:tools\repair_smoke_test.py	tools\repair_smoke_test.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\retired\update_marta_portrait.py	tools\retired\update_marta_portrait.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\run_gate.ps1	tools\run_gate.ps1	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\run_movement_profile.ps1	tools\run_movement_profile.ps1	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\shrink_furniture_colliders.py	tools\shrink_furniture_colliders.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\snapshot.ps1	tools\snapshot.ps1	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\test_godot_log_policy.ps1	tools\test_godot_log_policy.ps1	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\unify_portrait_style.py	tools\unify_portrait_style.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\update_smoke_test.py	tools\update_smoke_test.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\update_stations_return_zone.py	tools\update_stations_return_zone.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\update_stations_return_zone2.py	tools\update_stations_return_zone2.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\update_stations_return_zone3.py	tools\update_stations_return_zone3.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\verify_docs.ps1	tools\verify_docs.ps1	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\verify.ps1	tools\verify.ps1	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\write_logs.py	tools\write_logs.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:tools\write_prompt.py	tools\write_prompt.py	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+FILE:VISUAL_DESIGN.md	VISUAL_DESIGN.md	file	PASS	STATIC-INSPECTION+SHA256	reports/pkg_0183/inventory.tsv
+ROUTE:minimal-b	20-address M1 skip optional readings, finale 42B	route	PASS	PLAYER-VERB-M1	reports/pkg_0183/runtime_routes/minimal-b.tsv (171.7 s)
+ROUTE:full-a	20-address M1 full readings, finale 42A	route	PASS	PLAYER-VERB-M1	reports/pkg_0183/runtime_routes/full-a.tsv (188.0 s)
+ROUTE:mixed-c	20-address M1 mixed, finale 42C	route	PASS	PLAYER-VERB-M1	reports/pkg_0183/runtime_routes/mixed-c.tsv (181.4 s)
+PAUSE:status-20	Pause discovered/total uses 20-address selector	ui	PASS	STATIC+RUNTIME	tests/pkg_0183_smoke_test.gd
+GATE:0179-await	PKG-0179 coroutines actually execute	test	PASS	STATIC+RETEST	tests/pkg_0179_smoke_test.gd; reports/pkg_0183/pkg_0179_retest2.log
+AUDIO:generate-wav-headroom	tanh headroom inside generate_wav	audio	PASS	STATIC+PCM-SAMPLE	scripts/audio/procedural_audio.gd; tests/pkg_0183_smoke_test.gd
+INPUT:dpad-strafe	D-pad left/right on move actions	input	PASS	STATIC-INSPECTION	project.godot
+PHYS:ticks-pinned	physics_ticks_per_second=60 in project.godot	config	PASS	STATIC-INSPECTION	project.godot
+PAD:ergonomics	Physical controller feel	input	BLOCKED	NO-HARDWARE	no gamepad attached

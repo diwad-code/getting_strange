@@ -1,0 +1,20 @@
+claim_id	requirement	pkg0182_claim	pkg0183_result	pkg0184_fresh	verdict	limitation
+C-0184-01	Sequential 0182→0183→0184	0182 closed with snapshot	0183 closed after 0182; snapshot PKG-0183-2026-09-03	0184 started 2026-09-04; reports/pkg_0184 empty at start; no concurrent writer	PASS	0183 report timestamp precedes its final.log (documented)
+C-0184-02	Runtime inventory complete	898 files	935 including resources/	948 files; 13 new vs 0183 (0184 harnesses + 0183 files omitted from 0183 inventory)	PASS	File hash ≠ contract run
+C-0184-03	verify.ps1 fail-closed	ObjectDB ignored	0 ObjectDB; SCRIPT WARNING fail-closed	Baseline 1038.2s exit 0; 5 allowlisted WARNING; 0 ObjectDB/SCRIPT ERROR	PASS	Workstation-only
+C-0184-04	0179 actually executes	Certified ObjectDB hygiene	Unawaited; then await added	Await still present; 6 numbered steps now print; pkg_0179_retest.log PASS 2.3s	PASS	Steps were missing from logs even after await
+C-0184-05	Pause copy 20 addresses	Language ledger PASS with /43	FALSE-PASS then FIXED %d/%d	PAUSE_STATUS still %d/%d; formatted /20 in 0184 smoke	PASS	—
+C-0184-06	Player-verb M1 20 addresses 3 finales	full 187.90s / min 171.72s / mixed 181.43s	Independent traces	Independent --pkg0184-route= full-a 187.93s 42A; minimal-b 171.45s 42B; mixed-c 181.27s 42C; 20/20 PASS	PASS	Does not prove comprehension
+C-0184-07	14 product gates	Hardcoded 0177 table + M1	PARTIAL: table rollup, M1 real	Table still hardcoded; M1 re-run independently; 0184 does not treat the dict as measurement	PARTIAL-AS-ROLLUP	Contract axis uses M1 not the dict
+C-0184-08	Visual 22 addresses distinct key_object	22/22 after spawn fix	97 frames recertified	98 Windows frames; 0 duplicate normal/key_object MD5; cold_open luma 0.1024 not black	PASS	Heuristic not beauty
+C-0184-09	Audio no hard clip	256 gens 0 clipped after post-clamp	tanh in generate_wav	254 no-required-arg gens 0 clipped peak<1.0; generate_wav tanh present	PASS	Many generators still pre-clamp (P3 meters weaker)
+C-0184-10	Soak object_count stable	Logged 1991, not asserted	Asserted	3 cycles after=2000 cache=0 PASS	PASS	Workstation
+C-0184-11	Shell PL/EN	Title buttons localized	Not rechecked ReturnPromise	ReturnPromise was hardcoded PL; FIXED TITLE_RETURN_PROMISE; skip COLD_OPEN_SKIP	PASS	BUILD_LABEL still shows 640x360 / Hz (P3 jargon)
+C-0184-12	Opening 10–13 vs CAMPAIGN_MAP	Not audited	P3 leftover P7 lines	Openings rewritten to live scene (Marta/traces/balcony/documents); gameplay remains P7 hybrid	PARTIAL	P3 residual: CAMPAIGN_MAP goals vs P7 station scripts
+C-0184-13	CSV locale registered	Omitted from inventory	Unused donor	Still unregistered; smoke asserts it stays out (stale [C/SHIFT] Anchor binding)	PASS-AS-EXCLUSION	P3 donor remains on disk
+C-0184-14	pkg_0091/0094	Not invoked	NOT_INVOKED	Independent run FAIL (stale VectorStageEnvironment on 05–08)	NOT_INVOKED	Must not be cited as PASS
+C-0184-15	Playtest lead: black after NOWA GRA	Panel imagined from a still	Not recertified in 0183	cold_open t0/initial luma 0.1024 on Windows; not 100% black. Title→A transition frame not separately timed	PASS-NOT-REPRODUCED	Transition dump during scene change remains unmeasured
+C-0184-16	Fun / emotion / comprehension	OPEN-NO-EVIDENCE	OPEN-NO-EVIDENCE	OPEN-NO-EVIDENCE	OPEN-NO-EVIDENCE	D-012, ADR-003
+C-0184-17	Physical pad	BLOCKED	BLOCKED	BLOCKED	BLOCKED	No controller attached
+C-0184-18	Release / GATE-REL	BLOCKED D-168	BLOCKED D-168	BLOCKED D-168	BLOCKED	Owner instruction required
+C-0184-19	No web / git / new exe	Scope guards	Scope guards	0184 smoke + 0177 D-168 scan	PASS	archive_retired_web untouched

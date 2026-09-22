@@ -1,0 +1,35 @@
+PKG-0147 CAPTURE DIFF REPORT
+Programmatic frame evidence from the normal-driver capture. No line below claims comprehension, appeal or comfort.
+
+CONTENT CHECK (non-blank, 640x360)
+  normal/station_15_notes_only.png                 content_sum=2142.7
+  normal/station_15_record_requested.png           content_sum=2142.3
+  normal/station_21_synthesis_pending.png          content_sum=2281.6
+  normal/station_21_synthesis_executed.png         content_sum=2273.8
+  normal/station_15_notes_only.png                 content_sum=2142.7
+  normal/station_15_record_requested.png           content_sum=2142.3
+  normal/station_16_institution_trial.png          content_sum=2057.8
+  normal/station_17_report_scope_committed.png     content_sum=3996.6
+  normal/station_18_public_trial.png               content_sum=2707.0
+  normal/station_19_control_answers_compared.png   content_sum=2663.2
+  normal/station_20_relational_trial.png           content_sum=2001.8
+  normal/station_21_synthesis_pending.png          content_sum=2281.6
+  normal/station_21_synthesis_executed.png         content_sum=2273.8
+
+STATE PAIR DIFFERENCES (must be clearly distinct)
+  S06 notes vs requested     DISTINCT  changed=244 mean=0.0036 max=2.1373
+  S07 pending vs executed    DISTINCT  changed=1115 mean=0.0055 max=1.2039
+
+NORMAL vs REDUCED (amplitude-only expectation; facts remain visible)
+  S06 notes N/R            changed=2915 mean=0.0052 max=2.1373
+  S06 requested N/R        changed=1555 mean=0.0046 max=2.1373
+  S06 institution N/R      changed=395 mean=0.0039 max=1.7255
+  S06 scope N/R            changed=4221 mean=0.0051 max=2.4000
+  S07 public N/R           changed=3162 mean=0.0051 max=0.3569
+  S07 voice N/R            changed=4223 mean=0.0056 max=0.3020
+  S07 relational N/R       changed=2305 mean=0.0041 max=0.3059
+  S07 pending N/R          changed=2246 mean=0.0038 max=0.3176
+  S07 executed N/R         changed=819 mean=0.0032 max=0.3020
+
+BOUNDARY
+Diff checks distinguish rendered state surfaces, not human readability of any single frame.

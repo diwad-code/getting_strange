@@ -1,0 +1,22 @@
+{
+	"animation_cycle_frames": 220,
+	"audit": "H-005",
+	"engine_max_fps": 0,
+	"godot": "4.7-stable (official)",
+	"notes": "Normal Windows/OpenGL runtime measurement; no game scene edits",
+	"os": "Windows",
+	"output_root": "res://reports/pkg_0110/run_02",
+	"package": "PKG-0110-RUN-02",
+	"physics_hz": 60,
+	"render_time_measurement": "RenderingServer.viewport_set_measure_render_time",
+	"rendering_driver": "opengl3",
+	"rendering_method": "gl_compatibility",
+	"sample_frames": 120,
+	"timestamp_utc": "2026-08-24T14:24:25",
+	"video_adapter_api": "3.3.0 - Build 32.0.101.7085",
+	"video_adapter_name": "Intel(R) Iris(R) Xe Graphics",
+	"video_adapter_vendor": "Intel",
+	"viewport": "640x360",
+	"vsync": "disabled by harness only",
+	"warmup_frames": 60
+}

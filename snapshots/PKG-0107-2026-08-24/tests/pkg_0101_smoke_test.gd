@@ -1,0 +1,280 @@
+extends SceneTree
+
+## PKG-0101 gate: Station 16..20 Vector-Stage visibility and diegetic obstacle contracts.
+##
+## This gate proves technical behavior only (D-012, ADR-003). It cannot prove
+## that a space is fun, emotionally effective, or comprehensible to a person.
+
+const ACT_IIB_PATHS := [
+	"res://scenes/levels/station_16.tscn",
+	"res://scenes/levels/station_17.tscn",
+	"res://scenes/levels/station_18.tscn",
+	"res://scenes/levels/station_19.tscn",
+	"res://scenes/levels/station_20.tscn",
+]
+
+const REQUIRED_FLOORS := {
+	"res://scenes/levels/station_16.tscn": ["FloorMain"],
+	"res://scenes/levels/station_17.tscn": ["FloorMain"],
+	"res://scenes/levels/station_18.tscn": ["FloorMain"],
+	"res://scenes/levels/station_19.tscn": ["FloorMain"],
+	"res://scenes/levels/station_20.tscn": ["FloorMain"],
+}
+
+const REQUIRED_SHELLS := {
+	"res://scenes/levels/station_16.tscn": ["WallLeft", "WallRight", "Ceiling"],
+	"res://scenes/levels/station_17.tscn": ["WallLeft", "WallRight", "Ceiling"],
+	"res://scenes/levels/station_18.tscn": ["WallLeft", "WallRight", "Ceiling"],
+	"res://scenes/levels/station_19.tscn": ["WallLeft", "WallRight", "Ceiling"],
+	"res://scenes/levels/station_20.tscn": ["WallLeft", "WallRight", "Ceiling"],
+}
+
+const OBSTACLE_PATHS := {
+	17: "Geometry/PneumaticDossierCapsule",
+	19: "Geometry/Line4ModelTable",
+	20: "Geometry/SzymonWellDrawing",
+}
+
+var _failures: Array[String] = []
+
+
+func _initialize() -> void:
+	call_deferred("_run")
+
+
+func _expect(condition: bool, message: String) -> void:
+	if not condition:
+		_failures.append(message)
+		push_error("PKG-0101: " + message)
+
+
+func _run() -> void:
+	var state := root.get_node_or_null("GameStateManager")
+	_expect(state != null, "GameStateManager autoload is missing")
+	if state:
+		var state_constants: Dictionary = state.get_script().get_script_constant_map()
+		_expect(
+			int(state_constants.get("CAMPAIGN_TRANSITION_LIMIT", -1)) == 25,
+			"this package must not change the delivered campaign transition limit"
+		)
+		state.campaign_auto_transition_enabled = false
+		state.reset_campaign(true)
+
+	await _check_stations(state)
+	_check_three_question_headers()
+	_check_campaign_chain(state)
+
+	if state:
+		state.campaign_auto_transition_enabled = true
+		state.reset_campaign(true)
+
+	if _failures.is_empty():
+		print("PKG-0101 SMOKE PASS: Act IIb Vector-Stage state pass, diegetic obstacles and chain 16..20")
+		quit(0)
+	else:
+		for failure in _failures:
+			print("PKG-0101 FAILURE: " + failure)
+		quit(1)
+
+
+func _check_stations(state: Node) -> void:
+	for expected_number in range(16, 21):
+		var path: String = ACT_IIB_PATHS[expected_number - 16]
+		var packed := load(path) as PackedScene
+		_expect(packed != null, "Act IIb station must load: %s" % path)
+		if packed == null:
+			continue
+
+		var station := packed.instantiate() as Node2D
+		root.add_child(station)
+		await process_frame
+
+		var stage := station.get_node_or_null("VectorStageEnvironment") as VectorStageEnvironment
+		_expect(stage != null, "Vector-Stage environment missing: %s" % path)
+		if stage:
+			_expect(stage.station_number == expected_number, "Vector-Stage profile mismatch: %s" % path)
+			_expect(stage.z_index < 0, "Vector-Stage layer must stay behind level content: %s" % path)
+
+		var geometry := station.get_node_or_null("Geometry")
+		_expect(geometry != null, "geometry root missing: %s" % path)
+		if geometry:
+			for floor_name in REQUIRED_FLOORS[path]:
+				var floor := geometry.get_node_or_null(floor_name) as StaticBody2D
+				_expect(floor != null, "authored floor %s is missing: %s" % [floor_name, path])
+				_check_rectangle_shape(floor, Vector2(640.0, 80.0), "floor", path)
+			for shell_name in REQUIRED_SHELLS[path]:
+				var shell := geometry.get_node_or_null(shell_name) as StaticBody2D
+				_expect(shell != null, "shell collider %s is missing: %s" % [shell_name, path])
+				if shell:
+					_expect(shell.get_node_or_null("CollisionShape2D") != null, "shell collider lost its shape: %s" % path)
+			for child in geometry.get_children():
+				if expected_number in [16, 18]:
+					_expect(not child is AnimatableBody2D, "Station %d must keep the space free of an artificial obstacle" % expected_number)
+
+		var props := station.get_node_or_null("Props")
+		_expect(props != null, "props root missing: %s" % path)
+		if props:
+			for prop in props.get_children():
+				if prop is MemoryResonancePoint:
+					_expect(prop.interaction_radius > 0.0, "prop interaction radius must stay positive: %s" % path)
+
+		_expect(station.get_node_or_null("AirlockZone") is Area2D, "airlock zone missing: %s" % path)
+		_expect(station.get_node_or_null("Player") is PrototypePlayer, "player instance missing: %s" % path)
+		_expect(station.has_signal(&"level_completed"), "level completion signal missing: %s" % path)
+		_check_state_pass_source(path)
+
+		if expected_number in OBSTACLE_PATHS:
+			await _check_obstacle(expected_number, station, state)
+
+		station.queue_free()
+		await process_frame
+
+
+func _check_rectangle_shape(body: StaticBody2D, expected_size: Vector2, label: String, path: String) -> void:
+	if body == null:
+		return
+	var shape_node := body.get_node_or_null("CollisionShape2D") as CollisionShape2D
+	_expect(shape_node != null, "%s must carry a collision shape: %s" % [label, path])
+	if shape_node:
+		var rectangle := shape_node.shape as RectangleShape2D
+		_expect(rectangle != null, "%s must use a rectangle shape: %s" % [label, path])
+		if rectangle:
+			_expect(rectangle.size == expected_size, "%s shape size changed: %s" % [label, path])
+
+
+func _check_state_pass_source(path: String) -> void:
+	var station_number := int(path.get_file().trim_suffix(".tscn").trim_prefix("station_"))
+	var script_path := "res://scripts/levels/station_%02d.gd" % station_number
+	var file := FileAccess.open(script_path, FileAccess.READ)
+	_expect(file != null, "station script must be readable: %s" % script_path)
+	if file == null:
+		return
+	var source := file.get_as_text()
+	file.close()
+	var draw_start := source.find("func _draw() -> void:")
+	var state_start := source.find("func _draw_state_layer() -> void:")
+	_expect(draw_start >= 0 and state_start > draw_start, "station script must expose a state pass: %s" % script_path)
+	if draw_start < 0 or state_start < 0:
+		return
+	var state_body := source.substr(state_start)
+	var play_call := state_body.find("VectorStageStyle.draw_play_plane")
+	var first_variable := state_body.find("\n\tvar ")
+	_expect(play_call >= 0, "state pass must derive the route from Geometry: %s" % script_path)
+	_expect(first_variable < 0 or play_call < first_variable, "play plane must be first in state pass: %s" % script_path)
+	var draw_body := source.substr(draw_start, state_start - draw_start)
+	for forbidden_call in [
+		"draw_stage_background",
+		"_draw_architecture()",
+		"_draw_apartment_environment()",
+		"_draw_bathroom_environment()",
+		"_draw_study_room()",
+		"draw_rect(Rect2(Vector2.ZERO, VIEW_SIZE), COLOR_BACKGROUND)",
+	]:
+		_expect(not draw_body.contains(forbidden_call), "opaque legacy draw remains in %s" % script_path)
+
+
+func _check_obstacle(expected_number: int, station: Node2D, state: Node) -> void:
+	var obstacle := station.get_node_or_null(OBSTACLE_PATHS[expected_number])
+	_expect(obstacle != null, "diegetic obstacle missing in Station %d" % expected_number)
+	if obstacle == null:
+		return
+
+	match expected_number:
+		17:
+			var capsule := obstacle as AnimatableBody2D
+			_expect(capsule != null, "Station 17 pneumatic capsule must be AnimatableBody2D")
+			var station_17 := station as Station17
+			if station_17 and capsule:
+				station_17.pneumatic_cycle_time = 0.0
+				station_17._update_pneumatic_cycle()
+				await physics_frame
+				var closed_position := capsule.global_position
+				_expect(not station_17.is_pneumatic_capsule_open, "Station 17 capsule must start its cycle closed")
+				station_17.pneumatic_cycle_time = 1.5
+				station_17._update_pneumatic_cycle()
+				await physics_frame
+				_expect(station_17.is_pneumatic_capsule_open, "Station 17 capsule must expose an open phase")
+				_expect(capsule.global_position != closed_position, "Station 17 capsule must move because its delivery system works")
+				station_17._apply_pneumatic_correction()
+				await process_frame
+				_expect(station_17.pneumatic_correction_count > 0, "Station 17 correction must count a lost attempt")
+				_expect(station_17.pneumatic_detail_faded, "Station 17 correction must preserve a lost detail")
+				_expect(state != null and state.decisions.has(&"station_17_pneumatic_capsule_corrected"), "Station 17 correction must be recorded")
+		19:
+			var model_table := obstacle as AnchorableObject
+			_expect(model_table != null, "Station 19 model table must use AnchorableObject")
+			var station_19 := station as Station19
+			if model_table and station_19:
+				_expect(model_table.state_a_position == model_table.state_b_position, "Station 19 models must not become a moving platform")
+				_expect(model_table.state_a_size != model_table.state_b_size, "Station 19 model versions must differ in extent")
+				_expect(not model_table.is_anchored, "Station 19 model table must start unheld")
+				_expect(model_table.toggle_anchor(), "Station 19 model table must be holdable")
+				station_19.run_model_correction_pass()
+				await process_frame
+				_expect(model_table.current_reality == AnchorableObject.RealityState.STATE_A, "held Station 19 model must resist correction")
+				_expect(station_19.model_correction_count == 0, "held Station 19 model must not pay a correction cost")
+				model_table.set_anchored(false)
+				station_19.run_model_correction_pass()
+				await process_frame
+				_expect(station_19.last_model_correction_target == AnchorableObject.RealityState.STATE_B, "Station 19 correction must target the alternate model")
+				_expect(station_19.model_correction_count > 0, "Station 19 correction must count a lost attempt")
+				_expect(station_19.model_detail_faded, "Station 19 correction must preserve a lost detail")
+				_expect(model_table.current_reality == AnchorableObject.RealityState.STATE_A, "Station 19 checkpoint must reseat the model")
+				_expect(state != null and state.decisions.has(&"station_19_model_table_corrected"), "Station 19 correction must be recorded")
+		20:
+			var drawing := obstacle as AnchorableObject
+			_expect(drawing != null, "Station 20 well drawing must use AnchorableObject")
+			var station_20 := station as Station20
+			if drawing and station_20:
+				_expect(drawing.state_a_position == drawing.state_b_position, "Station 20 drawing must stay on its paper")
+				_expect(drawing.state_a_size != drawing.state_b_size, "Station 20 drawing versions must differ in extent")
+				station_20.is_drawing_inspected = true
+				station_20.choose_drawing_disposition(Station20.DrawingChoice.ANCHOR_DRAWING)
+				_expect(drawing.is_anchored, "Station 20 anchor choice must hold the drawing")
+				station_20.run_drawing_correction_pass()
+				await process_frame
+				_expect(drawing.current_reality == AnchorableObject.RealityState.STATE_A, "held Station 20 drawing must resist correction")
+				_expect(station_20.drawing_correction_count == 0, "held Station 20 drawing must not pay a correction cost")
+				drawing.set_anchored(false)
+				station_20.run_drawing_correction_pass()
+				await process_frame
+				_expect(station_20.last_drawing_correction_target == AnchorableObject.RealityState.STATE_B, "Station 20 correction must target the alternate paper")
+				_expect(station_20.drawing_correction_count > 0, "Station 20 correction must count a lost attempt")
+				_expect(station_20.drawing_detail_faded, "Station 20 correction must preserve a lost detail")
+				_expect(drawing.current_reality == AnchorableObject.RealityState.STATE_A, "Station 20 checkpoint must reseat the drawing")
+				_expect(state != null and state.decisions.has(&"station_20_drawing_corrected"), "Station 20 correction must be recorded")
+
+
+func _check_three_question_headers() -> void:
+	for station_number in [17, 19, 20]:
+		var path := "res://scripts/levels/station_%02d.gd" % station_number
+		var file := FileAccess.open(path, FileAccess.READ)
+		_expect(file != null, "station script must be readable: %s" % path)
+		if file == null:
+			continue
+		var source := file.get_as_text()
+		file.close()
+		for question in ["dlaczego to tu jest", "czego wymaga od Leny", "koszt porażki"]:
+			_expect(
+				source.contains("## PRZESZKODA — " + question),
+				"%s is missing the three-question header '%s'" % [path, question]
+			)
+		var why_line := ""
+		for line in source.split("\n"):
+			if line.begins_with("## PRZESZKODA — dlaczego to tu jest"):
+				why_line = line
+				break
+		_expect(not why_line.to_lower().contains("gracz"), "%s world sentence contains forbidden player wording" % path)
+
+
+func _check_campaign_chain(state: Node) -> void:
+	if state == null:
+		return
+	state.reset_campaign(true)
+	for station_number in range(1, 20):
+		state.complete_station(StringName("station_%02d" % station_number), false)
+	_expect(state.has_reached_station(&"station_20"), "campaign chain must reach Station 20")
+	for station_number in range(20, 26):
+		state.complete_station(StringName("station_%02d" % station_number), false)
+	_expect(state.has_reached_station(&"station_25"), "campaign chain must still reach Station 25")
+	_expect(not state.has_reached_station(&"station_26"), "this package must not raise the delivered limit of 25")

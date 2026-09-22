@@ -1,0 +1,13 @@
+PKG-0165 VISUAL EVIDENCE REPORT
+Renderer: Intel(R) Iris(R) Xe Graphics
+Viewport: 640x360; normal Windows display driver; script was not headless.
+Three textless M2 frames of Station 17: neutral, cost ledger read, adaptation offer rejected.
+One M3 true-grayscale structure frame after the limited consent scope was recorded.
+Hash distinctness and grayscale checks are structural evidence only; no line claims
+human comprehension, emotion, comfort or PRODUCT GO (D-012, ADR-003).
+
+CAPTURED FRAMES
+neutral            mono=false hidden=6  hash=3026497176 res://reports/pkg_0165/station_17_neutral.png
+ledger_read        mono=false hidden=6  hash=226495147 res://reports/pkg_0165/station_17_ledger_read.png
+offer_rejected     mono=false hidden=6  hash=1629484203 res://reports/pkg_0165/station_17_offer_rejected.png
+structure_mono     mono=true  hidden=6  hash=1356967888 res://reports/pkg_0165/station_17_structure_mono.png

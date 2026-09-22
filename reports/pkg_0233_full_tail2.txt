@@ -1,0 +1,12 @@
+﻿=== PKG-0191 Smoke Test: Station 10-13 canonical-fact alignment ===
+PKG-0191 PASS: Station 10-13 write all 12 canonical facts through the real MRP bridge, Station 13 synthesis is fully gated, and save/reload persists them.
+== PKG-0192 P7 callable surface retirement gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0192 PASS: Station 10-13 no longer write p7.foreign_daily_life.*/p7.marta_threshold.*; HallwaySideboard/BalconyDoor/DeskDrawer are documented P9 diegetic obstacles; legacy-save migration stays idempotent.
+== PKG-0193 creative scene delivery gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0193 PASS: real MRP input, delivered conversations, advance isolation, missing sources, sample branches, reload, skip and text scales
+== PKG-0194 creative scene B delivery gate ==
+

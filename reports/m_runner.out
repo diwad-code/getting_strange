@@ -1,0 +1,7 @@
+GATE smoke exit=0
+GATE 0120 exit=0
+GATE 0147 exit=0
+GATE 0101 exit=0
+GATE 0138 exit=0
+GATE 0165 exit=0
+ALL GATES DONE

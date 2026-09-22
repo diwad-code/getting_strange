@@ -1,0 +1,184 @@
+extends SceneTree
+
+## PKG-0189 — static inventory for the two residual P3 boundaries.
+## Updated by PKG-0191, which implemented the F-0184-012 canonical-fact
+## alignment this inventory audited. Updated again by PKG-0192, which
+## retired the callable P7 surface this inventory previously required to
+## stay present (D-205 §4, second dependency step); the legacy namespace
+## check below now asserts absence instead of presence. The F-0184-010 MRP
+## static contract (below) is still untouched and still asserted unchanged.
+##
+## This gate protects audited facts only. It does not extract MemoryResonancePoint,
+## and it does not make a claim about player experience or PRODUCT GO.
+
+const MRP_PATH := "res://scripts/interactables/memory_resonance_point.gd"
+const REPORT_PATH := "res://docs/rebuild/PKG_0189_RESIDUAL_BOUNDARY_SPEC.md"
+const STATION_08_PATH := "res://scripts/levels/station_08.gd"
+const STATION_PATHS: Array[String] = [
+	"res://scripts/levels/station_10.gd",
+	"res://scripts/levels/station_11.gd",
+	"res://scripts/levels/station_12.gd",
+	"res://scripts/levels/station_13.gd",
+]
+
+const MRP_SENTINELS := [
+	"PHOTOGRAPH = 0",
+	"DOOR_CARD_READER = 5",
+	"STAIR_TIMER_SWITCH = 24",
+	"STATION_41_EXIT = 196",
+	"EPILOGUE_FINAL_BLACKOUT = 202",
+]
+const MRP_EXPORTS := [
+	"@export var resonance_id: String",
+	"@export var prop_type: PropType",
+	"@export var prop_title: String",
+	"@export var prop_subtitle: String",
+	"@export var interaction_radius: float",
+	"@export var is_activated: bool",
+	"@export var is_one_shot: bool",
+	"@export var shadow_progress: float",
+]
+const CURRENT_P9_FACTS := [
+	"p9.mystery.marta.home_task_complete",
+	"p9.mystery.institution.card_presented",
+	"p9.mystery.jakub.control_questions_asked",
+	"p9.mystery.synthesis.marta_source_seen",
+]
+## PKG-0192 (D-205 §4) retired this callable P7 surface: no active writer in
+## Station 10-13 may still record a decision under these namespaces. The
+## check below looks for the actual StringName write-literal prefix
+## (`&"p7.foreign_daily_life.` / `&"p7.marta_threshold.`), not a bare
+## substring, so it does not false-positive on the header comments that
+## document the retirement decision (those name the namespace inside a
+## Markdown code span, never as a live `&"..."` literal). Their bookkeeping
+## now lives under `RETIRED_P7_SUCCESSOR_NAMESPACE`.
+const LEGACY_P7_NAMESPACES := [
+	"&\"p7.foreign_daily_life.",
+	"&\"p7.marta_threshold.",
+]
+const RETIRED_P7_SUCCESSOR_NAMESPACE := "p9.threshold_obstacle."
+## PKG-0191 — the eleven canonical CAMPAIGN_MAP facts written directly inside
+## `station_10.gd`..`station_13.gd`. `world_recognized` is checked separately
+## below (it predates this package). `marta_relationship_disclosed` is the
+## thirteenth canonical fact but is deliberately excluded from this list: its
+## audited single writer is `speak_with_neighbour()` in `station_08.gd`
+## (verified against source, not assumed from documentation), and PKG-0191
+## does not duplicate it into Station 10 — see `MARTA_RELATIONSHIP_WRITER_STATION`.
+const CANONICAL_FACTS_WRITTEN_IN_10_13 := [
+	"marta_memories_conflict",
+	"marta_boundary_accepted",
+	"local_lena_ucp_profile_found",
+	"parallel_test_trace_found",
+	"jakub_public_history_verified",
+	"jakub_voice_heard",
+	"jakub_met_as_person",
+	"recognition_evidence_public",
+	"recognition_evidence_relational",
+	"recognition_evidence_carried",
+	"local_lena_search_committed",
+]
+const MARTA_RELATIONSHIP_FACT := "marta_relationship_disclosed"
+const MARTA_RELATIONSHIP_WRITER_STATION := STATION_08_PATH
+
+var _failures: Array[String] = []
+
+
+func _initialize() -> void:
+	call_deferred("_run")
+
+
+func _expect(condition: bool, message: String) -> void:
+	if not condition:
+		_failures.append(message)
+		push_error("PKG-0189: " + message)
+
+
+func _read(path: String) -> String:
+	var file := FileAccess.open(path, FileAccess.READ)
+	_expect(file != null, "inventory file must be readable: %s" % path)
+	if file == null:
+		return ""
+	var source := file.get_as_text()
+	file.close()
+	return source
+
+
+func _run() -> void:
+	_check_mrp_contract()
+	_check_station_hybrid_inventory()
+	_check_report_inventory()
+	if _failures.is_empty():
+		print("PKG-0189 INVENTORY PASS: MRP contract unchanged; Station 10-13 canonical facts recorded post-PKG-0191; callable P7 surface retired post-PKG-0192")
+		quit(0)
+	else:
+		for failure in _failures:
+			print("PKG-0189 FAILURE: " + failure)
+		quit(1)
+
+
+func _check_mrp_contract() -> void:
+	var source := _read(MRP_PATH)
+	_expect(source.contains("class_name MemoryResonancePoint"), "MRP class identity must remain inventory-visible")
+	_expect(source.contains("extends Area2D"), "MRP Area2D boundary must remain inventory-visible")
+	_expect(source.count("func _draw_") == 206, "MRP draw-function inventory must remain 206")
+	_expect(source.count("func ") == 221, "MRP function inventory must remain 221")
+	for sentinel in MRP_SENTINELS:
+		_expect(source.contains(sentinel), "MRP enum sentinel missing: %s" % sentinel)
+	for export_name in MRP_EXPORTS:
+		_expect(source.contains(export_name), "MRP exported contract missing: %s" % export_name)
+	for signal_name in ["signal resonance_triggered(id: String, prop_type: int)", "signal state_changed(is_active: bool)"]:
+		_expect(source.contains(signal_name), "MRP signal contract missing: %s" % signal_name)
+	for method_name in ["func get_contact_progress()", "func get_touch_flash()", "func trigger_interaction()"]:
+		_expect(source.contains(method_name), "MRP public method missing: %s" % method_name)
+	_expect(source.contains("game_state.collect_clue(StringName(resonance_id))"), "MRP clue-collection bridge missing")
+	_expect(source.contains("const SWITCH_LIKE_PROPS"), "MRP switch-like prop grouping missing")
+	_expect(not source.contains("add_to_group("), "MRP inventory must not silently replace its contract with Node groups")
+
+
+func _check_station_hybrid_inventory() -> void:
+	var combined := ""
+	for path in STATION_PATHS:
+		var source := _read(path)
+		combined += source
+		_expect(source.contains("func _on_prop_resonance_triggered"), "station prop bridge missing: %s" % path)
+		_expect(source.contains("resonance_triggered.connect"), "station MRP signal connection missing: %s" % path)
+		_expect(source.contains("clue_inspected.emit"), "station clue signal emission missing: %s" % path)
+	for fact in CURRENT_P9_FACTS:
+		_expect(combined.contains(fact), "current P9 writer fact missing: %s" % fact)
+	for namespace_name in LEGACY_P7_NAMESPACES:
+		_expect(not combined.contains(namespace_name), "PKG-0192 retired this callable P7 surface; no Station 10-13 writer may still use it: %s" % namespace_name)
+	_expect(combined.contains(RETIRED_P7_SUCCESSOR_NAMESPACE), "PKG-0192 successor namespace must carry the retired obstacle facts: %s" % RETIRED_P7_SUCCESSOR_NAMESPACE)
+	for fact in CANONICAL_FACTS_WRITTEN_IN_10_13:
+		_expect(combined.contains(fact), "PKG-0191 canonical writer must now be present in Station 10-13: %s" % fact)
+	_expect(combined.contains("world_recognized"), "Station 13 synthesis fact must remain inventory-visible")
+	_check_marta_relationship_single_writer(combined)
+
+
+func _check_marta_relationship_single_writer(combined_10_13: String) -> void:
+	# PKG-0191 verified against source (not documentation) that
+	# marta_relationship_disclosed is already written by station_08.gd's
+	# speak_with_neighbour(). Duplicating a writer into Station 10 would
+	# violate the one-writer-per-fact contract, so this checks the fact stays
+	# out of the 10-13 combined source and confirms its real owner instead.
+	# A raw substring check would false-positive on Station 10's own
+	# documentation comment naming this fact to explain the decision, so this
+	# looks for an actual write call, not any mention of the fact name.
+	_expect(not combined_10_13.contains("_record(&\"%s\"" % MARTA_RELATIONSHIP_FACT), "marta_relationship_disclosed must not gain a second writer in Station 10-13")
+	var station_08_source := _read(MARTA_RELATIONSHIP_WRITER_STATION)
+	_expect(station_08_source.contains("func speak_with_neighbour"), "audited marta_relationship_disclosed writer method must remain in station_08.gd")
+	_expect(station_08_source.contains(MARTA_RELATIONSHIP_FACT), "audited marta_relationship_disclosed write must remain in station_08.gd")
+
+
+func _check_report_inventory() -> void:
+	var report := _read(REPORT_PATH)
+	for marker in [
+		"F-0184-010",
+		"F-0184-012",
+		"10,193",
+		"203",
+		"206",
+		"PKG-0190",
+		"local_lena_search_committed",
+		"not PRODUCT GO",
+	]:
+		_expect(report.contains(marker), "boundary specification marker missing: %s" % marker)

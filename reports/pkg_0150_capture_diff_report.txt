@@ -1,0 +1,31 @@
+PKG-0150 visual capture diff report
+Generated at: 2026-08-30T22:53:15
+
+=== Visual State Comparison ===
+ - S14 configs vs reviewed matrix: changed_samples=4268 mean_delta=0.0486
+ - S14 witnesses vs negotiation confronted: changed_samples=4051 mean_delta=0.0154
+ - S14 topography vs Op A: changed_samples=2759 mean_delta=0.0322
+ - S14 Op A vs Op B: changed_samples=1053 mean_delta=0.0121
+ - S14 Op B vs Op C: changed_samples=1022 mean_delta=0.0097
+ - S15 cups vs chamber 42A witnessed: changed_samples=671 mean_delta=0.0031
+ - S15 doorstep vs chamber 42B witnessed: changed_samples=102 mean_delta=0.0022
+ - S15 tram vs chamber 42C witnessed: changed_samples=1414 mean_delta=0.0035
+ - S15 notice/credits vs epilogue blackout: changed_samples=36759 mean_delta=0.2953
+
+=== Normal vs Reduced Motion Comparison ===
+ - station_39_configs_inspected.png: changed_samples=27796 mean_delta=0.2112
+ - station_39_matrix_reviewed.png: changed_samples=27907 mean_delta=0.2114
+ - station_40_witnesses_inspected.png: changed_samples=31706 mean_delta=0.4824
+ - station_40_negotiation_confronted.png: changed_samples=31796 mean_delta=0.4849
+ - station_41_topography_inspected.png: changed_samples=26387 mean_delta=0.2689
+ - station_41_operation_committed_a.png: changed_samples=26493 mean_delta=0.2693
+ - station_41_operation_committed_b.png: changed_samples=26698 mean_delta=0.2687
+ - station_41_operation_committed_c.png: changed_samples=26613 mean_delta=0.2687
+ - station_42a_cups_inspected.png: changed_samples=30200 mean_delta=0.2750
+ - station_42a_chamber_a_witnessed.png: changed_samples=29934 mean_delta=0.2729
+ - station_42b_doorstep_inspected.png: changed_samples=31848 mean_delta=0.3258
+ - station_42b_chamber_b_witnessed.png: changed_samples=31979 mean_delta=0.3275
+ - station_42c_tram_inspected.png: changed_samples=29278 mean_delta=0.2670
+ - station_42c_chamber_c_witnessed.png: changed_samples=29871 mean_delta=0.2697
+ - station_43_notice_and_credits.png: changed_samples=28385 mean_delta=0.2327
+ - station_43_epilogue_completed.png: changed_samples=29 mean_delta=0.0013

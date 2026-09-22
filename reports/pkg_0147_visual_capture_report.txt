@@ -1,0 +1,34 @@
+PKG-0147 VISUAL CAPTURE REPORT
+Technical evidence only: rendered state, layer presence and normal/reduced output. No line claims comprehension, fun, emotional credibility or comfort.
+Logical size: 640x360. Normal Windows rendering device. Public P7 station APIs drove each state.
+
+CAPTURED STATES
+normal  station_15   notes_only               res://reports/pkg_0147/normal/station_15_notes_only.png
+normal  station_15   record_requested         res://reports/pkg_0147/normal/station_15_record_requested.png
+normal  station_16   institution_trial        res://reports/pkg_0147/normal/station_16_institution_trial.png
+normal  station_17   report_scope_committed   res://reports/pkg_0147/normal/station_17_report_scope_committed.png
+normal  station_18   public_trial             res://reports/pkg_0147/normal/station_18_public_trial.png
+normal  station_19   control_answers_compared res://reports/pkg_0147/normal/station_19_control_answers_compared.png
+normal  station_20   relational_trial         res://reports/pkg_0147/normal/station_20_relational_trial.png
+normal  station_21   synthesis_pending        res://reports/pkg_0147/normal/station_21_synthesis_pending.png
+normal  station_21   synthesis_executed       res://reports/pkg_0147/normal/station_21_synthesis_executed.png
+reduced station_15   notes_only               res://reports/pkg_0147/reduced/station_15_notes_only.png
+reduced station_15   record_requested         res://reports/pkg_0147/reduced/station_15_record_requested.png
+reduced station_16   institution_trial        res://reports/pkg_0147/reduced/station_16_institution_trial.png
+reduced station_17   report_scope_committed   res://reports/pkg_0147/reduced/station_17_report_scope_committed.png
+reduced station_18   public_trial             res://reports/pkg_0147/reduced/station_18_public_trial.png
+reduced station_19   control_answers_compared res://reports/pkg_0147/reduced/station_19_control_answers_compared.png
+reduced station_20   relational_trial         res://reports/pkg_0147/reduced/station_20_relational_trial.png
+reduced station_21   synthesis_pending        res://reports/pkg_0147/reduced/station_21_synthesis_pending.png
+reduced station_21   synthesis_executed       res://reports/pkg_0147/reduced/station_21_synthesis_executed.png
+
+INSPECTION SCOPE
+Station 15: field notes observed vs two details compared, phone observed and own work record requested.
+Station 16: biometrics, card number and activity history resolved by the institution trial at the turnstile.
+Station 17: report read, signature compared, intercom observed, service route released, header copied in minimum scope.
+Station 18: municipal and hospital registries, employment card and disaster case resolved on the microfiche reader.
+Station 19: microphone shielded, control questions asked and both answers compared in the notepad.
+Station 20: trolley moved, Marta present, Jakub met, refusal accepted, voluntary scan, local service base compared.
+Station 21 pending: three families placed, synthesis NOT executed; the table label and corridor stay neutral.
+Station 21 executed: explicit synthesis completed; the table label names the recognition and the corridor names the second goal.
+Reduced-motion frames retain the same state facts while peripheral amplitude is reduced by the existing accessibility system.

@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_staging"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"staging"
+source_fact = &"p7.marta_threshold.voice_observed"
+predicted_outcome = "Jeżeli wiadomość jest inscenizacją, głos, numer i szczegóły dnia nie utworzą niezależnej zgodności."
+required_evidence = [&"p7.marta_threshold.voice_observed", &"p7.marta_threshold.caller_verified"]
+trial_result = &"independent_detail_conflicts"
+closure_id = &"p7.marta_threshold.independent_day_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_different_dates"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"different_dates"
+source_fact = &"p7.marta_threshold.document_trial_result"
+predicted_outcome = "Jeżeli dokumenty dotyczą różnych dat, niezależny opis Marty nie będzie pasował do tej samej godziny, sprzętu i położenia klucza."
+required_evidence = [&"p7.marta_threshold.document_trial_result", &"p7.marta_threshold.independent_questions_ready"]
+trial_result = &"independent_detail_conflicts"
+closure_id = &"p7.marta_threshold.independent_day_result"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_memory_gap"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"memory_gap"
+source_fact = &"p7.marta_threshold.caller_verified"
+predicted_outcome = "Jeżeli pamięć Leny ma lukę, Marta poda szczegół dnia bez sugerowania odpowiedzi i ujawni różnicę relacji."
+required_evidence = [&"p7.marta_threshold.document_trial_result", &"p7.marta_threshold.arrival_time_disclosed", &"p7.marta_threshold.key_position_verified"]
+trial_result = &"independent_detail_conflicts"
+closure_id = &"p7.marta_threshold.independent_day_result"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_marta_threshold"]
+script = ExtResource("3_commitment")
+commitment_id = &"respect_marta_threshold"
+person_id = &"marta"
+scope = "Marta opisuje tylko własny dzień i zatrzymuje gest bliskości, którego przybyła Lena nie potwierdza."
+known_cost = "Lena nie dziedziczy relacji miejscowej Leny i wychodzi z jawną różnicą zamiast uspokajającego dopasowania."
+required_disclosure = [&"p7.marta_threshold.arrival_time_disclosed", &"p7.marta_threshold.field_equipment_compared", &"p7.marta_threshold.key_position_verified"]
+alternative_route = "Lena może przerwać rozmowę i zachować dokumenty, ale nie otrzyma niezależnego opisu dnia ani śladu relacji."
+outcome_key = &"p7.marta_threshold.marta_threshold"
+trace_key = &"p7.marta_threshold.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"marta_threshold"
+station_ids = [&"station_12", &"station_13", &"station_14"]
+entry_gate = &"p7.foreign_daily_life.trace"
+discrepancy = "Wiadomość Marty, dwie wersje dokumentów i jej obecność nie pasują do wygodnej wersji zwykłej pomyłki."
+required_source_facts = [&"p7.marta_threshold.voice_observed", &"p7.marta_threshold.caller_verified", &"p7.marta_threshold.document_trial_result", &"p7.marta_threshold.independent_day_result"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_staging"), SubResource("DiagnosticHypothesis_different_dates"), SubResource("DiagnosticHypothesis_memory_gap")])
+trial_id = &"independent_day_detail"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_marta_threshold")])
+trace_key = &"p7.marta_threshold.trace"
+guidance_beat_ids = [&"s12_verify_voice", &"s13_compare_documents", &"s14_independent_day"]
+state_keys = [&"p7.marta_threshold.voice_observed", &"p7.marta_threshold.caller_verified", &"p7.marta_threshold.document_trial_result", &"p7.marta_threshold.independent_day_result", &"p7.marta_threshold.marta_threshold", &"p7.marta_threshold.trace"]
+migration_revision = 1

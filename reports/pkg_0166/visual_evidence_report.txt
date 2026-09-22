@@ -1,0 +1,13 @@
+PKG-0166 VISUAL EVIDENCE REPORT
+Renderer: Intel(R) Iris(R) Xe Graphics
+Viewport: 640x360; normal Windows display driver; script was not headless.
+Three textless M2 frames of Station 18: neutral, forecasts compared, Marta partial truth.
+One M3 true-grayscale structure frame after method_committed on the limited-consent path.
+Hash distinctness and grayscale checks are structural evidence only; no line claims
+human comprehension, emotion, comfort or PRODUCT GO (D-012, ADR-003).
+
+CAPTURED FRAMES
+neutral            mono=false hidden=6  hash=1112490514 res://reports/pkg_0166/station_18_neutral.png
+forecasts_compared mono=false hidden=6  hash=2436799912 res://reports/pkg_0166/station_18_forecasts_compared.png
+marta_partial      mono=false hidden=6  hash=1702201427 res://reports/pkg_0166/station_18_marta_partial.png
+structure_mono     mono=true  hidden=6  hash=1379732943 res://reports/pkg_0166/station_18_structure_mono.png

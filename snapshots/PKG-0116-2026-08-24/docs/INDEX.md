@@ -1,0 +1,122 @@
+# Indeks dokumentacji
+
+Status: **ROUTING PO PKG-0116**  
+Data: 2026-08-24
+
+Projekt przechodzi kontrolowaną przebudowę kreatywną. Istniejące 43 sceny są
+technicznym substratem; aktywny kanon i kolejka wdrożeń mają wersję 2.0.
+
+## Kolejnosc wejscia w nowej sesji
+
+1. `AGENTS.md` — twarde granice Godot-only, no-Git i zasady przeszkód.
+2. `docs/CURRENT_STATE.md` — aktualna prawda runtime i ostatnia weryfikacja.
+3. `docs/NEXT_SESSION_PROMPT.md` — jedyny aktywny pakiet.
+4. Aktywna specyfikacja wskazana w `CURRENT_STATE.md`.
+5. Źródła i testy nazwane w prompcie.
+6. ADR-y i bible tylko w zakresie potrzebnym do decyzji pakietu.
+
+Przed pierwszą edycją uruchom:
+
+```powershell
+pwsh -NoProfile -File .\tools\verify.ps1
+```
+
+Projekt nie ma repozytorium ani historii Git. Pliki na dysku są jedynym stanem,
+`SESSION_LOG.md` kroniką, a `snapshots/` zamrożeniem zamkniętych pakietów.
+
+## Hierarchia prawdy
+
+W razie sprzeczności:
+
+1. aktualnie uruchomiony runtime i świeży wynik testów;
+2. aktualny kod, sceny, zasoby i konfiguracja na dysku;
+3. `CURRENT_STATE.md`, `NEXT_SESSION_PROMPT.md` i aktywna specyfikacja;
+4. najnowsze zaakceptowane ADR-y i decyzje;
+5. bible 2.0, plan przebudowy i roadmapa;
+6. historyczne audyty, wpisy sesji, snapshoty i stare prompty.
+
+Kod nie może służyć jako pretekst do pozostawienia niezgodnej dokumentacji.
+Rozjazd naprawia ten sam pakiet. Snapshot jest zamrożoną kopią, nie źródłem
+bieżącej prawdy.
+
+## Dokumenty zywe
+
+| Plik | Rola | Reguła |
+|---|---|---|
+| `CURRENT_STATE.md` | jeden aktualny stan projektu | zastąpić prawdą po każdym pakiecie |
+| `NEXT_SESSION_PROMPT.md` | jeden samowystarczalny handoff | zawsze zastąpić aktualnym promptem |
+| `SESSION_LOG.md` | chronologiczna historia pakietów | tylko dopisywać |
+| `CREATIVE_REBUILD_PLAN.md` | aktywna kolejka 0116–0123+ | aktualizować po zmianie kolejności |
+| `ROADMAP.md` | fazy i meta wydania | aktualizować przy otwarciu/zamknięciu etapu |
+| `RISKS_AND_HYPOTHESES.md` | dowody, braki i ryzyka | nie zamieniać hipotez w fakty |
+| `DECISION_LOG.md` | lekki rejestr decyzji | dopisywać zmianę, nie usuwać historii |
+
+## Aktywne kontrakty przebudowy 2.0
+
+| Plik | Odpowiada za |
+|---|---|
+| `decisions/ADR-006-controlled-creative-rebuild.md` | dlaczego nie pełny reset i dlaczego nie stary content lock |
+| `CREATIVE_REBUILD_PLAN.md` | zakres zachowany/przebudowany i kolejność pionowych wycinków |
+| `LENA_CHARACTER_AND_ANIMATION.md` | nowa postać, rig, stany i kryteria animacji |
+| `PLAYER_GUIDANCE_AND_INNER_VOICE.md` | pokaż → naprowadź → pomyśl, zastój i omylne interpretacje |
+| `PIXEL_PRESENTATION_ARCHITECTURE.md` | pikselizowany świat i ostre warstwy tekstu |
+| `../VISUAL_DESIGN.md` | Rówień Pixel-Stage i reżyseria obrazu |
+| `TRAVERSAL_AND_OBSTACLE_DESIGN.md` | dozwolone wyzwania i zakaz arcade'owych przeszkód |
+
+## Kanon narracyjny 2.0
+
+| Plik | Odpowiada za |
+|---|---|
+| `PRODUCT_BRIEF.md` | krótka obietnica produktu i filary |
+| `PROJECT_BIBLE.md` | nadrzędny kierunek produkcyjny |
+| `narrative/NARRATIVE_BIBLE.md` | prawda świata, postacie i bramy 21/22 |
+| `narrative/FULL_STORY.md` | 43 przestrzenie scena po scenie |
+| `narrative/CONTINUITY_TRACKER.md` | okna wiedzy, dowody, flagi i zakazane terminy |
+| `narrative/DIALOGUE_SCRIPT.md` | głosy, kluczowe dialogi i myśli |
+
+Najważniejszy kontrakt: 01–05 normalność, 06–20 eskalacja bez diagnozy,
+Station 21 rozpoznanie „To nie jest mój świat”, Station 22 pierwsze świadome
+Anchor/Yield.
+
+## Dokumenty techniczne i procesowe
+
+| Plik | Rola |
+|---|---|
+| `TECHNICAL_DIRECTION.md` | architektura Godot, InputMap, viewport i moduły |
+| `WORKFLOW.md` | start, Definition of Done, weryfikacja i snapshot |
+| `RESEARCH_FOUNDATIONS.md` | źródła i ograniczone wnioski researchu |
+| `INSPIRATION_BOUNDARIES.md` | granice inspiracji i ryzyka podobieństwa |
+| `PROTOTYPE_01_MOVEMENT_LAB.md` | historyczny kontrakt ruchu bazowego |
+| `PLAYTEST_01.md` | model dowodu bez zewnętrznych testerów |
+| `decisions/ADR-001-godot-pc-first.md` | wybór silnika i platformy |
+| `decisions/ADR-002-evidence-gated-prototypes.md` | bramki prototypów |
+| `decisions/ADR-003-evidence-model-without-external-testers.md` | granice wniosków |
+| `decisions/ADR-004-ai-autonomy.md` | autonomia roli |
+| `decisions/ADR-005-mechanics-threshold-pivot.md` | historyczny pivot Anchor |
+
+## Dokumenty historyczne / nieaktywne jako plan
+
+- `IMPLEMENTATION_PLAN_AUDIT_AND_RELEASE_READINESS.md` opisuje stan przed
+  D-113; jego droga R2 content lock → build jest zastąpiona przez plan 2.0.
+- `VECTOR_STAGE_ART_DIRECTION_AUDIT.md` i audyty `VECTOR_STAGE_*` są dowodem
+  dawnego runtime, nie aktywnym kanonem powierzchni obrazu.
+- `TRAVERSAL_ACT_*_AUDIT.md` zachowują fakty o istniejących colliderach; ponowne
+  autorstwo nadal podlega nadrzędnemu kanonowi przeszkód.
+- Snapshoty i stare `NEXT_SESSION_PROMPT.md` w zamrożeniach nie są czytane jako
+  stan bieżący.
+- `archive_retired_web/` jest martwym artefaktem poza projektem gry.
+
+## Protokol przekazania
+
+Pakiet kończy się dopiero po:
+
+1. testach proporcjonalnych do zmiany;
+2. synchronizacji kodu, kanonu i dokumentacji;
+3. wpisie append-only w `SESSION_LOG.md`;
+4. zastąpieniu `CURRENT_STATE.md` i `NEXT_SESSION_PROMPT.md`;
+5. pełnym `tools/verify.ps1` z kodem 0;
+6. dla obrazu — świeżych capture'ach normalnym driverem i inspekcji;
+7. snapshotcie `tools/snapshot.ps1 -Package PKG-NNNN`.
+
+Test lub render dowodzi wyłącznie mierzonego kontraktu, nie zabawy, emocji,
+zrozumienia ani odbioru przez zewnętrznego gracza.

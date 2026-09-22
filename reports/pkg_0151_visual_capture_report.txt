@@ -1,0 +1,40 @@
+PKG-0151 VISUAL CAPTURE REPORT
+Technical evidence only: representative P7 rendered states in normal and reduced-motion modes.
+Logical size: 640x360. Public station APIs only. No claim about comprehension, fun, emotion or comfort.
+
+[normal] station_01 / sample_committed -> res://reports/pkg_0151/normal/station_01_sample_committed.png
+[normal] station_04 / reader_trial_committed -> res://reports/pkg_0151/normal/station_04_reader_trial_committed.png
+[normal] station_08 / intercom_completed -> res://reports/pkg_0151/normal/station_08_intercom_completed.png
+[normal] station_14 / threshold_respected -> res://reports/pkg_0151/normal/station_14_threshold_respected.png
+[normal] station_21 / synthesis_executed -> res://reports/pkg_0151/normal/station_21_synthesis_executed.png
+[normal] station_25 / paired_with_notes -> res://reports/pkg_0151/normal/station_25_paired_with_notes.png
+[normal] station_28 / shared_drift_yielded -> res://reports/pkg_0151/normal/station_28_shared_drift_yielded.png
+[normal] station_30 / dependencies_compared -> res://reports/pkg_0151/normal/station_30_dependencies_compared.png
+[normal] station_33 / intent_reconstructed -> res://reports/pkg_0151/normal/station_33_intent_reconstructed.png
+[normal] station_36 / cost_ledger_revealed -> res://reports/pkg_0151/normal/station_36_cost_ledger_revealed.png
+[normal] station_38 / truth_disclosed_full -> res://reports/pkg_0151/normal/station_38_truth_disclosed_full.png
+[normal] station_41 / operation_committed_a -> res://reports/pkg_0151/normal/station_41_operation_committed_a.png
+[normal] station_41 / operation_committed_b -> res://reports/pkg_0151/normal/station_41_operation_committed_b.png
+[normal] station_41 / operation_committed_c -> res://reports/pkg_0151/normal/station_41_operation_committed_c.png
+[normal] station_42a / chamber_a_witnessed -> res://reports/pkg_0151/normal/station_42a_chamber_a_witnessed.png
+[normal] station_42b / chamber_b_witnessed -> res://reports/pkg_0151/normal/station_42b_chamber_b_witnessed.png
+[normal] station_42c / chamber_c_witnessed -> res://reports/pkg_0151/normal/station_42c_chamber_c_witnessed.png
+[normal] station_43 / epilogue_completed -> res://reports/pkg_0151/normal/station_43_epilogue_completed.png
+[reduced] station_01 / sample_committed -> res://reports/pkg_0151/reduced/station_01_sample_committed.png
+[reduced] station_04 / reader_trial_committed -> res://reports/pkg_0151/reduced/station_04_reader_trial_committed.png
+[reduced] station_08 / intercom_completed -> res://reports/pkg_0151/reduced/station_08_intercom_completed.png
+[reduced] station_14 / threshold_respected -> res://reports/pkg_0151/reduced/station_14_threshold_respected.png
+[reduced] station_21 / synthesis_executed -> res://reports/pkg_0151/reduced/station_21_synthesis_executed.png
+[reduced] station_25 / paired_with_notes -> res://reports/pkg_0151/reduced/station_25_paired_with_notes.png
+[reduced] station_28 / shared_drift_yielded -> res://reports/pkg_0151/reduced/station_28_shared_drift_yielded.png
+[reduced] station_30 / dependencies_compared -> res://reports/pkg_0151/reduced/station_30_dependencies_compared.png
+[reduced] station_33 / intent_reconstructed -> res://reports/pkg_0151/reduced/station_33_intent_reconstructed.png
+[reduced] station_36 / cost_ledger_revealed -> res://reports/pkg_0151/reduced/station_36_cost_ledger_revealed.png
+[reduced] station_38 / truth_disclosed_full -> res://reports/pkg_0151/reduced/station_38_truth_disclosed_full.png
+[reduced] station_41 / operation_committed_a -> res://reports/pkg_0151/reduced/station_41_operation_committed_a.png
+[reduced] station_41 / operation_committed_b -> res://reports/pkg_0151/reduced/station_41_operation_committed_b.png
+[reduced] station_41 / operation_committed_c -> res://reports/pkg_0151/reduced/station_41_operation_committed_c.png
+[reduced] station_42a / chamber_a_witnessed -> res://reports/pkg_0151/reduced/station_42a_chamber_a_witnessed.png
+[reduced] station_42b / chamber_b_witnessed -> res://reports/pkg_0151/reduced/station_42b_chamber_b_witnessed.png
+[reduced] station_42c / chamber_c_witnessed -> res://reports/pkg_0151/reduced/station_42c_chamber_c_witnessed.png
+[reduced] station_43 / epilogue_completed -> res://reports/pkg_0151/reduced/station_43_epilogue_completed.png

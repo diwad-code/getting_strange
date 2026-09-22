@@ -1,0 +1,19 @@
+[
+  {
+    "session_id": "6cbd9186-47f1-4082-9170-2106c9bce1dd",
+    "transcript_path": "C:\\Users\\admin\\.claude\\projects\\C--getting-strange\\6cbd9186-47f1-4082-9170-2106c9bce1dd.jsonl",
+    "cwd": "C:\\getting_strange\\tools",
+    "prompt_id": "9bafbda3-b6b9-4660-a776-8436bd209cfd",
+    "permission_mode": "bypassPermissions",
+    "effort": {
+      "level": "medium"
+    },
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cd /c/getting_strange && head -12 tools/pkg_0137_backtrack_probe.gd",
+      "description": "Check backtrack probe header"
+    },
+    "tool_use_id": "toolu_011WHyZWWKAXFpdUB36hcwcu"
+  }
+]

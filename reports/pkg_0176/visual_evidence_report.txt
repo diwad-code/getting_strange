@@ -1,0 +1,9 @@
+PKG-0176 visual evidence — GATE-INTRO cold open (DEF-1)
+Normal Windows display driver, not headless. 640x360 logical frame.
+- cold_open_shot1_tram.png :: DEF-1 ujecie 1: nocne torowisko Linii 4, tramwaj przejezdza bez udzialu gracza
+- cold_open_shot2_hands.png :: DEF-1 ujecie 2: sylwetka Leny od barkow w dol, dlon na obejmie czujnika, twarz poza pula swiatla
+- cold_open_shot3_live.png :: DEF-1 ujecie 3a: przebieg na zywo, skok przy przejezdzie i powrot do szumu
+- cold_open_shot3_archive.png :: DEF-1 ujecie 3b: archiwum z plaska linia 3 s w otoczeniu normalnego szumu
+- layer_b_before_measurement.png :: DEF-1 warstwa B: stanowisko przed pomiarem, jedyna dostepna czynnosc to rejestrator
+- layer_b_live_pass.png :: DEF-1 warstwa B: przyrzad robi jeden przebieg pomiaru w czasie rzeczywistym
+- layer_b_gap_and_marta.png :: DEF-1 warstwa B: luka 3 s i wiadomosc Marty z imieniem i godzina na tym samym ekranie

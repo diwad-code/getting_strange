@@ -1,0 +1,320 @@
+{
+  "blockers": [],
+  "rows": [
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_01",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 2,
+      "guidance_ok": true,
+      "id": "station_02",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 2,
+      "guidance_ok": true,
+      "id": "station_03",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 2,
+      "guidance_ok": true,
+      "id": "station_04",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_05",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_06",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_07",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_08",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_09",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_10",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_11",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_12",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_13",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_14",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_15",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_16",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 2,
+      "guidance_ok": true,
+      "id": "station_17",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_18",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_19",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 2,
+      "guidance_ok": true,
+      "id": "station_20",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 3,
+      "guidance_ok": true,
+      "id": "station_21",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 2,
+      "guidance_ok": true,
+      "id": "station_22",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 2,
+      "guidance_ok": true,
+      "id": "station_23",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_24",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_25",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_26",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_27",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_28",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_29",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_30",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_31",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_32",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_33",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_34",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_35",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_36",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_37",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_38",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_39",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_40",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_41",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_42a",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_42b",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_42c",
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "beats_registered": 1,
+      "guidance_ok": true,
+      "id": "station_43",
+      "return_ok": true
+    }
+  ]
+}

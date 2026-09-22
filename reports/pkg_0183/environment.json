@@ -1,0 +1,10 @@
+{
+  "utc": "2026-09-03T20:52:27.3572957Z",
+  "local": "2026-09-03T22:52:27.3596106+02:00",
+  "os": "Microsoft Windows NT 10.0.26200.0",
+  "powershell": "7.6.5",
+  "godot_command": "C:\\Users\\admin\\AppData\\Local\\Microsoft\\WinGet\\Links\\godot.exe",
+  "godot_target": "C:\\Users\\admin\\AppData\\Local\\Microsoft\\WinGet\\Packages\\GodotEngine.GodotEngine_Microsoft.Winget.Source_8wekyb3d8bbwe\\Godot_v4.7.2-stable_win64.exe",
+  "cwd": "C:\\getting_strange",
+  "display": null
+}

@@ -1,0 +1,35 @@
+=== PKG-0177 VISUAL CAPTURE EVIDENCE REPORT ===
+Date: 2026-09-03
+Renderer: Intel(R) Iris(R) Xe Graphics
+Logical resolution: 640x360
+Mode: Normal Windows display driver; script was not headless.
+
+--- 1. AFTER-FRAMES MATCHING PKG-0171 (14 captures) ---
+- File: family_domestic_interior_station_01.png | Scene: station_01 | Size: 640x360 | Hash: 4136819930 | Description: Family 1: Domestic Interior / Measurement Rig & Cold Open (station_01)
+- File: defect_def4_stairs_station_02.png | Scene: station_02 | Size: 640x360 | Hash: 4245510938 | Description: DEF-4/DEF-6: Stairwell & unified LadderZone (station_02)
+- File: family_street_urban_station_04.png | Scene: station_04 | Size: 640x360 | Hash: 773827040 | Description: Family 2: Street Urban / Memorial & Transit Door (station_04)
+- File: defect_def9_kiosk_station_06.png | Scene: station_06 | Size: 640x360 | Hash: 2976727215 | Description: DEF-9 Debt: Kiosk counter vendor & diegetic timetable (station_06)
+- File: family_bazaar_station_07.png | Scene: station_07 | Size: 640x360 | Hash: 3112669616 | Description: Family 3: Bazaar / Market street entrance & Threshold (station_07)
+- File: defect_def5_ladder_station_09.png | Scene: station_09 | Size: 640x360 | Hash: 731965562 | Description: DEF-5: Warehouse ladder & residential threshold (station_09)
+- File: family_technical_decay_station_10.png | Scene: station_10 | Size: 640x360 | Hash: 1931413554 | Description: Family 4: Technical Decay / Marta CharacterVisualRig (station_10)
+- File: defect_def9_wierzbicka_station_11.png | Scene: station_11 | Size: 640x360 | Hash: 754170058 | Description: DEF-9: Wierzbicka CharacterVisualRig & UCP console (station_11)
+- File: defect_def9_jakub_station_12.png | Scene: station_12 | Size: 640x360 | Hash: 432393828 | Description: DEF-9: Jakub CharacterVisualRig & reel recorder (station_12)
+- File: family_institutional_station_14.png | Scene: station_14 | Size: 640x360 | Hash: 147276715 | Description: Family 5: Institutional archive / dead-circuit lesson (station_14)
+- File: family_subterranean_transit_station_16.png | Scene: station_16 | Size: 640x360 | Hash: 1267255487 | Description: Family 6: Subterranean transit / safe analyzer (station_16)
+- File: family_choice_threshold_station_18.png | Scene: station_18 | Size: 640x360 | Hash: 2283709450 | Description: Family 7: Choice threshold / 3 forecasts & commit post (station_18)
+- File: family_threshold_anomalous_station_42a.png | Scene: station_42a | Size: 640x360 | Hash: 4233195020 | Description: Threshold Anomalous variant A / force_home return (station_42a)
+- File: family_epilogue_station_43.png | Scene: station_43 | Size: 640x360 | Hash: 3934259746 | Description: Epilogue / River Vistula dawn & administrative closure (station_43)
+
+--- 2. M3 MONOCHROME STRUCTURAL FRAMES (7 location families) ---
+Text and UI suppressed; true grayscale conversion; hash distinctness proves structural divergence.
+- File: mono/m3_family1_station_01_domestic.png | Scene: station_01 | Hidden Nodes: 0 | Hash: 3406058713 | Family: Family 1: Domestic Interior (station_01)
+- File: mono/m3_family2_station_02_urban.png | Scene: station_02 | Hidden Nodes: 0 | Hash: 1506546363 | Family: Family 2: Street Urban / Exterior (station_02)
+- File: mono/m3_family3_station_03_transit.png | Scene: station_03 | Hidden Nodes: 0 | Hash: 3147841362 | Family: Family 3: Transit / Tram stop (station_03)
+- File: mono/m3_family4_station_09_residential.png | Scene: station_09 | Hidden Nodes: 0 | Hash: 26546613 | Family: Family 4: Residential / Private Apartment (station_09)
+- File: mono/m3_family5_station_11_institutional.png | Scene: station_11 | Hidden Nodes: 0 | Hash: 2758190369 | Family: Family 5: Institutional / Archive (station_11)
+- File: mono/m3_family6_station_12_technical.png | Scene: station_12 | Hidden Nodes: 0 | Hash: 164080393 | Family: Family 6: Technical / Workshop (station_12)
+- File: mono/m3_family7_station_15_anomalous.png | Scene: station_15 | Hidden Nodes: 0 | Hash: 719576981 | Family: Family 7: Anomalous / Dead-circuit (station_15)
+Unique mono hashes count: 7 / 7
+
+This capture proves physical presence and structural distinction of frames on the Windows driver.
+It does NOT prove player comprehension, emotion, fun or PRODUCT GO (D-012, ADR-003).

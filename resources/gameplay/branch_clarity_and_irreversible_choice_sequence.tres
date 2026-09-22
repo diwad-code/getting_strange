@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_forced_return_isolation"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"forced_return_isolation"
+source_fact = &"p7.branch_clarity_and_irreversible_choice.config_a_inspected"
+predicted_outcome = "Wymuszenie powrotu do domowego świata odtworzy stan z 21:45, lecz odetnie miejscową Lenę i pozostawi pustkę w relacjach Równi."
+required_evidence = [&"p7.branch_clarity_and_irreversible_choice.config_a_inspected", &"p7.branch_clarity_and_irreversible_choice.negotiation_confronted"]
+trial_result = &"branch_a_verified"
+closure_id = &"p7.branch_clarity_and_irreversible_choice.operation_a_selected"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_plane_closure_local"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"plane_closure_local"
+source_fact = &"p7.branch_clarity_and_irreversible_choice.config_b_inspected"
+predicted_outcome = "Zamknięcie Równi i sprowadzenie miejscowej Leny przywróci spójność miasta, lecz Lena zaakceptuje brak własnego adresu."
+required_evidence = [&"p7.branch_clarity_and_irreversible_choice.config_b_inspected", &"p7.branch_clarity_and_irreversible_choice.negotiation_confronted"]
+trial_result = &"branch_b_verified"
+closure_id = &"p7.branch_clarity_and_irreversible_choice.operation_b_selected"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_mutual_transition_witness"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"mutual_transition_witness"
+source_fact = &"p7.branch_clarity_and_irreversible_choice.config_c_inspected"
+predicted_outcome = "Zsynchronizowany powrót i sieć świadectwa zachowają obie obecności, lecz stworzą trwały przeciek pamięci i współistnienie sprzeczności."
+required_evidence = [&"p7.branch_clarity_and_irreversible_choice.config_c_inspected", &"p7.branch_clarity_and_irreversible_choice.negotiation_confronted"]
+trial_result = &"branch_c_verified"
+closure_id = &"p7.branch_clarity_and_irreversible_choice.operation_c_selected"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_final_branch_commitment"]
+script = ExtResource("3_commitment")
+commitment_id = &"final_branch_commitment"
+person_id = &"all_witnesses"
+scope = "Nieodwracalne załączenie wybranej operacji rozstrzygnięcia na konsoli w Przestrzeni 41."
+known_cost = "Każda gałąź pociąga za sobą twardy, nieodwracalny koszt dla osób, ciągłości i struktur miejskich."
+required_disclosure = [&"p7.branch_clarity_and_irreversible_choice.negotiation_confronted", &"p7.branch_clarity_and_irreversible_choice.console_committed"]
+alternative_route = "Dostępne są trzy równorzędne operacje (A, B, C) bez fałszywych wyborów i bez moralnego rankingu."
+outcome_key = &"p7.branch_clarity_and_irreversible_choice.commitment"
+trace_key = &"p7.branch_clarity_and_irreversible_choice.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"branch_clarity_and_irreversible_choice"
+station_ids = [&"station_39", &"station_40", &"station_41"]
+entry_gate = &"p7.consent_and_rescue_boundary.trace"
+discrepancy = "Trzy obwody transmisyjne i stanowiska egzekucyjne UCP oferują trzy różne rozstrzygnięcia, lecz każde pociąga za sobą twardy, nieodwracalny koszt dla osób i światów."
+required_source_facts = [&"p7.branch_clarity_and_irreversible_choice.matrix_reviewed", &"p7.branch_clarity_and_irreversible_choice.negotiation_confronted", &"p7.branch_clarity_and_irreversible_choice.console_committed"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_forced_return_isolation"), SubResource("DiagnosticHypothesis_plane_closure_local"), SubResource("DiagnosticHypothesis_mutual_transition_witness")])
+trial_id = &"operational_branch_commitment"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_final_branch_commitment")])
+trace_key = &"p7.branch_clarity_and_irreversible_choice.trace"
+guidance_beat_ids = [&"s39_method_selection", &"s39_method_hypothesis", &"s39_pulpit_action", &"s39_system_hint", &"s40_negotiation_source", &"s40_negotiation_contact", &"s40_costs_hypothesis", &"s40_listen_witnesses", &"s40_system_hint", &"s41_operational_choice", &"s41_choice_hypothesis", &"s41_commit_action", &"s41_system_hint"]
+state_keys = [&"p7.branch_clarity_and_irreversible_choice.config_a_inspected", &"p7.branch_clarity_and_irreversible_choice.config_b_inspected", &"p7.branch_clarity_and_irreversible_choice.reference_core_inspected", &"p7.branch_clarity_and_irreversible_choice.config_c_inspected", &"p7.branch_clarity_and_irreversible_choice.matrix_reviewed", &"p7.branch_clarity_and_irreversible_choice.terminal_inspected", &"p7.branch_clarity_and_irreversible_choice.marta_inspected", &"p7.branch_clarity_and_irreversible_choice.szymon_inspected", &"p7.branch_clarity_and_irreversible_choice.cost_matrix_inspected", &"p7.branch_clarity_and_irreversible_choice.negotiation_confronted", &"p7.branch_clarity_and_irreversible_choice.topography_inspected", &"p7.branch_clarity_and_irreversible_choice.console_committed", &"p7.branch_clarity_and_irreversible_choice.chosen_operation", &"p7.branch_clarity_and_irreversible_choice.commitment", &"p7.branch_clarity_and_irreversible_choice.trace", &"p7.branch_clarity_and_irreversible_choice.safe_trial_feedback"]
+migration_revision = 1

@@ -1,0 +1,140 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_38.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor_main"]
+size = Vector2(640, 80)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_ceiling"]
+size = Vector2(640, 48)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(50, 70)
+
+[sub_resource type="CircleShape2D" id="Circle_prop_calc"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_field"]
+radius = 52.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_jakub"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_rescue"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_exit"]
+radius = 60.0
+
+[node name="Station38" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="FloorMain" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 316)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorMain"]
+shape = SubResource("Rectangle_floor_main")
+
+[node name="Ceiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ceiling"]
+shape = SubResource("Rectangle_ceiling")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="ReturnCoordinateCalculator" type="Area2D" parent="Props"]
+position = Vector2(140, 246)
+script = ExtResource("2_resonance")
+resonance_id = "prop_coordinate_calc"
+prop_type = 180
+prop_title = "Kalkulator współrzędnych powrotu UCP"
+prop_subtitle = "Terminal analityczny przeliczający profil Jakuba jako wektora wyjścia do świata Leny"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ReturnCoordinateCalculator"]
+shape = SubResource("Circle_prop_calc")
+
+[node name="AccidentSimulationField" type="Area2D" parent="Props"]
+position = Vector2(245, 242)
+script = ExtResource("2_resonance")
+resonance_id = "prop_accident_field"
+prop_type = 177
+prop_title = "Pole symulacji katastrofy Linii 4"
+prop_subtitle = "Niekorygowane pole pamięci wypadku z lewitującym kadłubem wykolejonego tramwaju"
+interaction_radius = 52.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/AccidentSimulationField"]
+shape = SubResource("Circle_prop_field")
+
+[node name="DestabilizingJakubShadow" type="Area2D" parent="Props"]
+position = Vector2(345, 246)
+script = ExtResource("2_resonance")
+resonance_id = "prop_jakub_shadow"
+prop_type = 178
+prop_title = "Dekompensujący się cień Jakuba"
+prop_subtitle = "Sylwetka Jakuba wciągana w pole symulacji i rozpadająca się na paski fali nośnej"
+interaction_radius = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/DestabilizingJakubShadow"]
+shape = SubResource("Circle_prop_jakub")
+
+[node name="RescueTetherAnchor" type="Area2D" parent="Props"]
+position = Vector2(445, 246)
+script = ExtResource("2_resonance")
+resonance_id = "prop_rescue_tether"
+prop_type = 179
+prop_title = "Węzeł ratunkowy / Podanie dłoni bratu"
+prop_subtitle = "Ustabilizowanie Jakuba jako żywego człowieka zamiast instrumentalnego dowodu"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/RescueTetherAnchor"]
+shape = SubResource("Circle_prop_rescue")
+
+[node name="Station38Exit" type="Area2D" parent="Props"]
+position = Vector2(560, 242)
+script = ExtResource("2_resonance")
+resonance_id = "prop_reference_exit"
+prop_type = 181
+prop_title = "Wrota Komory Referencyjnej (Przestrzeń 39)"
+prop_subtitle = "Rotacyjna śluza otwierająca drogę do serca Podstruktury i wyboru finałowego"
+interaction_radius = 60.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Station38Exit"]
+shape = SubResource("Circle_prop_exit")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(65, 248)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(610, 245)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")

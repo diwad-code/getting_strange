@@ -1,0 +1,53 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+================================================================================
+  PKG-0137 PLAYTHROUGH AUDIT 01 -> 43 (frame, labels, exits, locomotion)
+================================================================================
+station_01   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_02   frame=OK  (over   0) labels=1     loco(slip   0.0 step 18)=OK   airlock=OK   return=OK
+station_03   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_04   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_05   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_06   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_07   frame=OK  (over   0) labels=1     loco(slip   0.0 step  2)=OK   airlock=OK   return=OK
+station_08   frame=OK  (over   0) labels=3     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_09   frame=OK  (over   0) labels=2     loco(slip   0.0 step 18)=OK   airlock=OK   return=OK
+station_10   frame=OK  (over   0) labels=2     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_11   frame=OK  (over   0) labels=2     loco(slip   0.0 step 18)=OK   airlock=OK   return=OK
+station_12   frame=OK  (over   0) labels=2     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_13   frame=OK  (over   0) labels=3     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_14   frame=OK  (over   0) labels=2     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_15   frame=OK  (over   0) labels=2     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_16   frame=OK  (over   0) labels=2     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_17   frame=OK  (over   0) labels=2     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_18   frame=OK  (over   0) labels=2     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_19   frame=OK  (over   0) labels=2     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_20   frame=OK  (over   0) labels=2     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_21   frame=OK  (over   0) labels=4     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_22   frame=OK  (over   0) labels=2     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_23   frame=OK  (over   0) labels=2     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_24   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_25   frame=OK  (over   0) labels=1     loco(slip   0.0 step 18)=OK   airlock=OK   return=OK
+station_26   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_27   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_28   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_29   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_30   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_31   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_32   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_33   frame=OK  (over   0) labels=1     loco(slip   0.0 step 18)=OK   airlock=OK   return=OK
+station_34   frame=OK  (over   0) labels=1     loco(slip   0.0 step 18)=OK   airlock=OK   return=OK
+station_35   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_36   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_37   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_38   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_39   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_40   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_41   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_42a  frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_42b  frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_42c  frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+station_43   frame=OK  (over   0) labels=1     loco(slip   0.0 step  0)=OK   airlock=OK   return=OK
+================================================================================
+BLOCKERS: 0
+PKG-0137 PLAYTHROUGH: CLEAN.

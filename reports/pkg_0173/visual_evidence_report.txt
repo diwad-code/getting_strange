@@ -1,0 +1,5 @@
+PKG-0173 visual evidence
+GATE-ANIM technical frames. Not a product GO.
+- stairs_station_08.png — DEF-5: Station 08 stair geometry with Lena on the riser
+- ladder_station_02.png — DEF-6: Station 02 ServiceLadder as the only drawn ladder
+- traversal_pose_sheet.png — DEF-5/DEF-6 pose sheet

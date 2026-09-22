@@ -1,0 +1,38 @@
+PKG-0149 VISUAL CAPTURE REPORT
+Programmatic visual capture of S11–S13 diagnostic spaces (Station 31–38).
+Captured frames: 34
+
+  [normal] station_31 / chairs_inspected -> res://reports/pkg_0149/normal/station_31_chairs_inspected.png
+  [normal] station_31 / adaptation_rejected -> res://reports/pkg_0149/normal/station_31_adaptation_rejected.png
+  [normal] station_32 / steamed_and_cracked -> res://reports/pkg_0149/normal/station_32_steamed_and_cracked.png
+  [normal] station_32 / material_memory_anchored -> res://reports/pkg_0149/normal/station_32_material_memory_anchored.png
+  [normal] station_33 / ladder_and_gauge -> res://reports/pkg_0149/normal/station_33_ladder_and_gauge.png
+  [normal] station_33 / intent_reconstructed -> res://reports/pkg_0149/normal/station_33_intent_reconstructed.png
+  [normal] station_34 / reactor_and_desk -> res://reports/pkg_0149/normal/station_34_reactor_and_desk.png
+  [normal] station_34 / pair_registry_unlocked -> res://reports/pkg_0149/normal/station_34_pair_registry_unlocked.png
+  [normal] station_35 / cooling_pool -> res://reports/pkg_0149/normal/station_35_cooling_pool.png
+  [normal] station_35 / home_echo_verified -> res://reports/pkg_0149/normal/station_35_home_echo_verified.png
+  [normal] station_36 / drain_current -> res://reports/pkg_0149/normal/station_36_drain_current.png
+  [normal] station_36 / cost_ledger_revealed -> res://reports/pkg_0149/normal/station_36_cost_ledger_revealed.png
+  [normal] station_37 / oscilloscope_and_patchbay -> res://reports/pkg_0149/normal/station_37_oscilloscope_and_patchbay.png
+  [normal] station_37 / living_signal_bridged -> res://reports/pkg_0149/normal/station_37_living_signal_bridged.png
+  [normal] station_38 / calculator_and_accident -> res://reports/pkg_0149/normal/station_38_calculator_and_accident.png
+  [normal] station_38 / truth_disclosed_full -> res://reports/pkg_0149/normal/station_38_truth_disclosed_full.png
+  [normal] station_38 / truth_disclosed_withheld -> res://reports/pkg_0149/normal/station_38_truth_disclosed_withheld.png
+  [reduced] station_31 / chairs_inspected -> res://reports/pkg_0149/reduced/station_31_chairs_inspected.png
+  [reduced] station_31 / adaptation_rejected -> res://reports/pkg_0149/reduced/station_31_adaptation_rejected.png
+  [reduced] station_32 / steamed_and_cracked -> res://reports/pkg_0149/reduced/station_32_steamed_and_cracked.png
+  [reduced] station_32 / material_memory_anchored -> res://reports/pkg_0149/reduced/station_32_material_memory_anchored.png
+  [reduced] station_33 / ladder_and_gauge -> res://reports/pkg_0149/reduced/station_33_ladder_and_gauge.png
+  [reduced] station_33 / intent_reconstructed -> res://reports/pkg_0149/reduced/station_33_intent_reconstructed.png
+  [reduced] station_34 / reactor_and_desk -> res://reports/pkg_0149/reduced/station_34_reactor_and_desk.png
+  [reduced] station_34 / pair_registry_unlocked -> res://reports/pkg_0149/reduced/station_34_pair_registry_unlocked.png
+  [reduced] station_35 / cooling_pool -> res://reports/pkg_0149/reduced/station_35_cooling_pool.png
+  [reduced] station_35 / home_echo_verified -> res://reports/pkg_0149/reduced/station_35_home_echo_verified.png
+  [reduced] station_36 / drain_current -> res://reports/pkg_0149/reduced/station_36_drain_current.png
+  [reduced] station_36 / cost_ledger_revealed -> res://reports/pkg_0149/reduced/station_36_cost_ledger_revealed.png
+  [reduced] station_37 / oscilloscope_and_patchbay -> res://reports/pkg_0149/reduced/station_37_oscilloscope_and_patchbay.png
+  [reduced] station_37 / living_signal_bridged -> res://reports/pkg_0149/reduced/station_37_living_signal_bridged.png
+  [reduced] station_38 / calculator_and_accident -> res://reports/pkg_0149/reduced/station_38_calculator_and_accident.png
+  [reduced] station_38 / truth_disclosed_full -> res://reports/pkg_0149/reduced/station_38_truth_disclosed_full.png
+  [reduced] station_38 / truth_disclosed_withheld -> res://reports/pkg_0149/reduced/station_38_truth_disclosed_withheld.png

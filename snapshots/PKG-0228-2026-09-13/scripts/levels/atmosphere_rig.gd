@@ -1,0 +1,508 @@
+class_name AtmosphereRig
+extends Node2D
+
+## Reusable production-lighting and atmospheric soundscape rig for Getting Strange.
+## The rig uses native PointLight2D nodes, low-count CPU particles, and procedural
+## 16-bit PCM audio streams so it remains 100% Zero-Asset and safe on GL Compatibility renderer.
+
+@export var station_number := 1
+@export var world_width := 640.0
+
+## PKG-0130 frame-budget contract. The simulation cap itself lives in
+## `ParticleBudget` so every emitter in the project shares one contract.
+const PARTICLE_SIMULATION_FPS := ParticleBudget.SIMULATION_FPS
+const MAX_PARTICLE_NODES_PER_RIG := 2
+
+## Radial light gradients are identical for identical colours. Generating one
+## 256x256 GradientTexture2D per PointLight2D burned load time and VRAM on every
+## scene change; a process-wide cache keyed by colour collapses that to one texture
+## per distinct colour for the whole campaign.
+static var _light_texture_cache: Dictionary = {}
+
+var _flicker_time := 0.0
+var _fluorescent_lights: Array[PointLight2D] = []
+## Parallel arrays instead of Array[Dictionary]: the previous per-frame
+## `entry.get("pulse_speed", ...)` string hash lookups ran once per pulsing light
+## per frame. Packed float arrays remove all hashing from the hot path.
+var _pulsing_lights: Array[PointLight2D] = []
+var _pulse_base_energy := PackedFloat32Array()
+var _pulse_speed := PackedFloat32Array()
+var _pulse_amplitude := PackedFloat32Array()
+var _particle_nodes: Array[CPUParticles2D] = []
+var _fluorescent_hum: AudioStreamPlayer
+var _substructure_player: AudioStreamPlayer
+var _unease_player: AudioStreamPlayer
+var _unease_active := false
+var _unease_timer := 0.0
+## PKG-0180 (Ambient Soundscape Pass): wyciszanie otoczenia przy dialogach i dziennikach
+const BASE_HUM_VOLUME_DB: float = -24.0
+const BASE_SUB_VOLUME_DB: float = -28.0
+const BASE_UNEASE_VOLUME_DB: float = -22.0
+const DUCK_ATTENUATION_DB: float = 7.0
+const DUCK_LERP_SPEED: float = 6.0
+## PKG-0220 (A2/A3): busy Ambient (tlo) / Dialogue (rezerwa na sidechain).
+## Reczny duck jest sidechainem (obecnosc dialogu scisza Ambient); kompresor opcjonalny.
+const AMBIENT_BUS_NAME := &"Ambient"
+const DIALOGUE_BUS_NAME := &"Dialogue"
+## PKG-0220 (A1): drugi bufor petli primary (hot spare, wyciszony, bez retriggera).
+var _ambient_back: AudioStreamPlayer
+var _manual_ducked := false
+var _ambient_ducked := false
+## PKG-0141 (D-151). Ostatnio nalozony stan warstwy mikro-czastek. Trzymany,
+## zeby przelaczenie trybu w trakcie gry bylo natychmiastowe, a klatka bez
+## zmiany trybu nie dotykala emiterow w ogole.
+var _micro_particles_emitting := true
+
+
+func _ready() -> void:
+	_micro_particles_emitting = MotionAccessibility.allows_micro_particles()
+	_build_lights()
+	_build_air_particles()
+	_build_steam_particles()
+	_build_audio_soundscape()
+
+
+func _exit_tree() -> void:
+	# PKG-0220 (A4): drain przez ProceduralAudio.drain_playback (jeden helper, idempotentny).
+	ProceduralAudio.drain_playback(self)
+	# Deterministic particle teardown: stop emission and drop every live instance
+	# before the node leaves the tree, so a scene change never leaves expired
+	# particle state stepping in the background.
+	for particles in _particle_nodes:
+		ParticleBudget.release(particles)
+	_particle_nodes.clear()
+	_fluorescent_lights.clear()
+	_pulsing_lights.clear()
+	_pulse_base_energy.clear()
+	_pulse_speed.clear()
+	_pulse_amplitude.clear()
+
+
+## Number of live CPU particle emitters owned by this rig. Used by the
+## PKG-0130 frame budget gate.
+func get_particle_node_count() -> int:
+	return _particle_nodes.size()
+
+
+## Total simultaneous particle allocation of this rig (sum of `amount`).
+func get_particle_budget() -> int:
+	var total := 0
+	for particles in _particle_nodes:
+		if is_instance_valid(particles):
+			total += particles.amount
+	return total
+
+
+static func get_light_texture_cache_size() -> int:
+	return _light_texture_cache.size()
+
+
+static func clear_light_texture_cache() -> void:
+	_light_texture_cache.clear()
+
+
+func _process(delta: float) -> void:
+	_flicker_time += delta
+	
+	# Unease timer update
+	if _unease_active:
+		_unease_timer -= delta
+		if _unease_timer <= 0.0:
+			_unease_active = false
+	
+	# PKG-0141 (D-151). Tryb ograniczonego ruchu zeruje AMPLITUDE migotania i
+	# pulsowania, nigdy poziom spoczynkowy: swiatlo dalej swieci, przestaje tylko
+	# oddychac. Reakcja na niepokoj (`unease_factor`) zostaje, bo to zmiana
+	# poziomu sceny, a nie ruch peryferyjny.
+	var motion := MotionAccessibility.motion_scale()
+
+	# Fluorescent 100 Hz micro-flicker
+	var unease_factor := 0.72 if _unease_active else 1.0
+	var micro_flicker := (0.84 + sin(_flicker_time * TAU * 100.0) * 0.06 * motion) * unease_factor
+	for index in _fluorescent_lights.size():
+		var light := _fluorescent_lights[index]
+		if is_instance_valid(light):
+			light.energy = micro_flicker + sin(_flicker_time * 1.7 + float(index)) * 0.04 * motion
+			
+	# Smooth periodic pulse lights (emergency beacons, neon, sodium, choice indicators)
+	for index in _pulsing_lights.size():
+		var plight := _pulsing_lights[index]
+		if is_instance_valid(plight):
+			var pulse := sin(_flicker_time * TAU * _pulse_speed[index]) * motion
+			plight.energy = maxf(0.05, _pulse_base_energy[index] + pulse * _pulse_amplitude[index])
+
+	_sync_micro_particles()
+	_update_ambient_ducking(delta)
+
+
+## PKG-0180 (Ambient Soundscape Pass): Ręczne sterowanie wyciszeniem tła
+func set_ambient_ducked(ducked: bool) -> void:
+	_manual_ducked = ducked
+
+
+func is_ambient_ducked() -> bool:
+	return _is_ducking_active()
+
+
+func _is_ducking_active() -> bool:
+	if _manual_ducked:
+		return true
+	var parent_node := get_parent()
+	if parent_node != null:
+		var crt := parent_node.get_node_or_null("CRTDialogueBox")
+		if crt != null and crt.has_method("is_presenting") and bool(crt.call("is_presenting")):
+			return true
+		var thought := parent_node.get_node_or_null("InnerThoughtSurface")
+		if thought != null and thought.visible:
+			return true
+	return false
+
+
+func _update_ambient_ducking(delta: float) -> void:
+	_ambient_ducked = _is_ducking_active()
+	var blend_rate := clampf(delta * DUCK_LERP_SPEED, 0.0, 1.0)
+	
+	if is_instance_valid(_fluorescent_hum):
+		var target_hum := BASE_HUM_VOLUME_DB - (DUCK_ATTENUATION_DB if _ambient_ducked else 0.0)
+		_fluorescent_hum.volume_db = lerpf(_fluorescent_hum.volume_db, target_hum, blend_rate)
+		
+	if is_instance_valid(_substructure_player):
+		var target_sub := BASE_SUB_VOLUME_DB - (DUCK_ATTENUATION_DB if _ambient_ducked else 0.0)
+		_substructure_player.volume_db = lerpf(_substructure_player.volume_db, target_sub, blend_rate)
+
+	# PKG-0220 (A2): duck obejmuje takze _unease_player (wczesniej tylko hum+sub).
+	if is_instance_valid(_unease_player):
+		var target_unease := BASE_UNEASE_VOLUME_DB - (DUCK_ATTENUATION_DB if _ambient_ducked else 0.0)
+		_unease_player.volume_db = lerpf(_unease_player.volume_db, target_unease, blend_rate)
+
+
+## PKG-0141 (D-151). Pyl i para to jedyne stale emitery dekoracyjne stacji.
+## Tryb ograniczonego ruchu gasi je, a wyjscie z trybu zapala z powrotem — bez
+## odbudowy sceny i bez dotykania budzetu klatki (D-120).
+func _sync_micro_particles() -> void:
+	var wanted := MotionAccessibility.allows_micro_particles()
+	if wanted == _micro_particles_emitting:
+		return
+	_micro_particles_emitting = wanted
+	for particles in _particle_nodes:
+		ParticleBudget.set_micro_emission(particles, true)
+
+
+## Czy warstwa mikro-czastek rigu jest w tej chwili zapalona. Wystawione dla
+## bramki PKG-0141.
+func is_emitting_micro_particles() -> bool:
+	return _micro_particles_emitting
+
+
+func _build_lights() -> void:
+	# Primary overhead fluorescent lighting (preserves contract name "FluorescentLight")
+	var fluorescent_positions := [Vector2(world_width * 0.22, 72.0), Vector2(world_width * 0.68, 78.0)]
+	var base_fl_color := Color("b8ded5")
+	if station_number >= 31 and station_number <= 37:
+		base_fl_color = Color("88b5c4") # Cold subterranean vaulted light
+	elif station_number >= 38 and station_number <= 41:
+		base_fl_color = Color("70a4b8") # Deep machinery cold cast
+	elif station_number == 43:
+		base_fl_color = Color("f0e6d2") # Morning daylight
+		
+	for position in fluorescent_positions:
+		var light := _make_light("FluorescentLight", position, base_fl_color, 0.9)
+		_fluorescent_lights.append(light)
+		
+	# Station-specific narrative and dramatic lighting profiles
+	_build_station_specific_lighting()
+
+
+func _build_station_specific_lighting() -> void:
+	if station_number <= 7:
+		# Foundation / Street / Kiosk
+		var accent_color := Color("d6a46d") if station_number <= 3 else Color("a9d5e0")
+		_make_light("PracticalAccent", Vector2(world_width * 0.82, 195.0), accent_color, 0.62)
+		if station_number == 5:
+			_make_light("StreetLampGlow", Vector2(world_width * 0.52, 100.0), Color("e2d5a3"), 0.78)
+			
+	elif station_number >= 8 and station_number <= 13:
+		# Residential / Municipal / Apartment 14
+		var sodium := _make_light("SodiumNeonPulse", Vector2(world_width * 0.48, 85.0), Color("e2b060"), 0.75)
+		_add_pulsing_light(sodium, 0.75, 0.35, 0.20)
+		_make_light("ApartmentWindowGlow", Vector2(world_width * 0.85, 160.0), Color("89b8c2"), 0.55)
+		
+	elif station_number >= 14 and station_number <= 23:
+		# UCP Compliance / Consultation / Jakub
+		var terminal := _make_light("TerminalCyanGlow", Vector2(world_width * 0.75, 140.0), Color("75c7c3"), 0.70)
+		_add_pulsing_light(terminal, 0.70, 0.8, 0.15)
+		if station_number >= 18:
+			var stress_ind := _make_light("StressIndicatorPulse", Vector2(world_width * 0.25, 120.0), Color("c65d58"), 0.50)
+			_add_pulsing_light(stress_ind, 0.50, 0.5, 0.22)
+			
+	elif station_number >= 24 and station_number <= 30:
+		# Line 4 Junction / Intermediate tunnels
+		var beacon := _make_light("EmergencyBeacon", Vector2(world_width * 0.50, 60.0), Color("d69a62"), 0.85)
+		_add_pulsing_light(beacon, 0.85, 0.75, 0.35)
+		_make_light("TunnelDeepGlow", Vector2(world_width * 0.88, 210.0), Color("4a7280"), 0.60)
+		
+	elif station_number >= 31 and station_number <= 37:
+		# Substructure Vaults / Evidence / Filtration
+		var archive_lamp := _make_light("ArchiveLedgerSpot", Vector2(world_width * 0.35, 180.0), Color("d8a068"), 0.75)
+		_add_pulsing_light(archive_lamp, 0.75, 0.25, 0.12)
+		_make_light("SubstructureChasmLight", Vector2(world_width * 0.78, 90.0), Color("6ba8be"), 0.65)
+		
+	elif station_number == 40:
+		# Gabinet Wierzbickiej: Dramatic high-contrast desk spotlight
+		var desk_spot := _make_light("HighContrastSpotlight", Vector2(world_width * 0.50, 160.0), Color("d9b88a"), 1.25)
+		desk_spot.texture_scale = 1.85
+		_make_light("PerimeterDeepShadow", Vector2(world_width * 0.15, 220.0), Color("1a2b38"), 0.40)
+		
+	elif station_number == 41:
+		# Choice Chamber: Tri-color ethical axis pillars
+		var pillar_cyan := _make_light("ChoicePillarCyan", Vector2(world_width * 0.20, 150.0), Color("75c7c3"), 0.85)
+		var pillar_oxide := _make_light("ChoicePillarOxide", Vector2(world_width * 0.50, 150.0), Color("c65d58"), 0.85)
+		var pillar_amber := _make_light("ChoicePillarAmber", Vector2(world_width * 0.80, 150.0), Color("d69a62"), 0.85)
+		_add_pulsing_light(pillar_cyan, 0.85, 0.4, 0.18)
+		_add_pulsing_light(pillar_oxide, 0.85, 0.4, 0.18)
+		_add_pulsing_light(pillar_amber, 0.85, 0.4, 0.18)
+		
+	elif station_number == 42:
+		# Finales 42A / 42B / 42C
+		var finale_light := _make_light("FinaleFocalLight", Vector2(world_width * 0.50, 140.0), Color("9bd2cc"), 1.10)
+		finale_light.texture_scale = 2.0
+		_add_pulsing_light(finale_light, 1.10, 0.2, 0.15)
+		
+	elif station_number == 43:
+		# Epilogue 43: Morning daylight breakthrough
+		var dawn := _make_light("DawnWashLight", Vector2(world_width * 0.50, 120.0), Color("f0e6d2"), 1.15)
+		dawn.texture_scale = 2.2
+
+
+func _add_pulsing_light(light: PointLight2D, base_energy: float, pulse_speed: float, pulse_amp: float) -> void:
+	_pulsing_lights.append(light)
+	_pulse_base_energy.append(base_energy)
+	_pulse_speed.append(pulse_speed)
+	_pulse_amplitude.append(pulse_amp)
+
+
+func _make_light(node_name: String, light_position: Vector2, light_color: Color, light_energy: float) -> PointLight2D:
+	var light := PointLight2D.new()
+	light.name = node_name
+	light.position = light_position
+	light.color = light_color
+	light.energy = light_energy
+	light.texture = _create_radial_light_texture(light_color)
+	light.texture_scale = 1.45
+	light.blend_mode = Light2D.BLEND_MODE_ADD
+	add_child(light)
+	return light
+
+
+func _create_radial_light_texture(light_color: Color) -> GradientTexture2D:
+	var cache_key := light_color.to_html(false)
+	var cached: GradientTexture2D = _light_texture_cache.get(cache_key)
+	if cached != null:
+		return cached
+	
+	var gradient := Gradient.new()
+	gradient.offsets = PackedFloat32Array([0.0, 0.18, 0.62, 1.0])
+	gradient.colors = PackedColorArray([
+		Color(light_color, 0.92),
+		Color(light_color, 0.52),
+		Color(light_color, 0.13),
+		Color(light_color, 0.0),
+	])
+	var texture := GradientTexture2D.new()
+	texture.gradient = gradient
+	texture.width = 256
+	texture.height = 256
+	texture.fill_from = Vector2(0.5, 0.5)
+	texture.fill_to = Vector2(1.0, 0.5)
+	texture.fill = GradientTexture2D.FILL_RADIAL
+	_light_texture_cache[cache_key] = texture
+	return texture
+
+
+func _build_air_particles() -> void:
+	var particles := CPUParticles2D.new()
+	particles.name = "VolumetricDust"
+	particles.position = Vector2(world_width * 0.5, 170.0)
+	particles.amount = 28
+	particles.lifetime = 5.0
+	particles.preprocess = 2.0
+	particles.emission_shape = CPUParticles2D.EMISSION_SHAPE_RECTANGLE
+	particles.emission_rect_extents = Vector2(world_width * 0.5, 145.0)
+	particles.direction = Vector2(0.15, -1.0)
+	particles.spread = 35.0
+	particles.gravity = Vector2(2.0, -4.0)
+	particles.initial_velocity_min = 4.0
+	particles.initial_velocity_max = 12.0
+	particles.scale_amount_min = 0.6
+	particles.scale_amount_max = 1.4
+	particles.color = Color(0.76, 0.88, 0.82, 0.18)
+	ParticleBudget.apply_frame_budget(particles)
+	ParticleBudget.set_micro_emission(particles, true)
+	add_child(particles)
+	_particle_nodes.append(particles)
+
+
+func _build_steam_particles() -> void:
+	# Add delicate microdynamic steam plumes in industrial/junction/substructure sectors
+	if (station_number >= 14 and station_number <= 41):
+		var steam := CPUParticles2D.new()
+		steam.name = "VentSteam"
+		steam.position = Vector2(world_width * 0.35, 275.0)
+		steam.amount = 16
+		steam.lifetime = 2.8
+		steam.preprocess = 1.0
+		steam.emission_shape = CPUParticles2D.EMISSION_SHAPE_RECTANGLE
+		steam.emission_rect_extents = Vector2(14.0, 3.0)
+		steam.direction = Vector2(0.05, -1.0)
+		steam.spread = 16.0
+		steam.gravity = Vector2(1.0, -6.0)
+		steam.initial_velocity_min = 18.0
+		steam.initial_velocity_max = 32.0
+		steam.scale_amount_min = 1.2
+		steam.scale_amount_max = 2.8
+		steam.color = Color(0.82, 0.94, 0.92, 0.16)
+		ParticleBudget.apply_frame_budget(steam)
+		ParticleBudget.set_micro_emission(steam, true)
+		add_child(steam)
+		_particle_nodes.append(steam)
+
+
+## PKG-0220 (A3): busy Ambient/Dialogue zakladane idempotentnie (bez efektow;
+## reczny duck pelni role sidechainu Dialogue->Ambient; kompresor opcjonalny).
+func _ensure_audio_buses() -> void:
+	if AudioServer.get_bus_index(String(AMBIENT_BUS_NAME)) < 0:
+		AudioServer.add_bus()
+		AudioServer.set_bus_name(AudioServer.get_bus_count() - 1, String(AMBIENT_BUS_NAME))
+		AudioServer.set_bus_send(AudioServer.get_bus_index(String(AMBIENT_BUS_NAME)), "Master")
+	if AudioServer.get_bus_index(String(DIALOGUE_BUS_NAME)) < 0:
+		AudioServer.add_bus()
+		AudioServer.set_bus_name(AudioServer.get_bus_count() - 1, String(DIALOGUE_BUS_NAME))
+		AudioServer.set_bus_send(AudioServer.get_bus_index(String(DIALOGUE_BUS_NAME)), "Master")
+
+
+func _build_audio_soundscape() -> void:
+	# PKG-0220 (A3): ambient celowo niepozycjonowany — zwykly AudioStreamPlayer
+	# (mono 44100), nie AudioStreamPlayer2D; pozycje daje miks/routing na bus
+	# Ambient, nie panorama. Blipy dialogowe graja poza rigiem (Master/Dialogue).
+	_ensure_audio_buses()
+	# Primary ambient player (preserves "FluorescentHum" name for test suite backwards compatibility)
+	_fluorescent_hum = AudioStreamPlayer.new()
+	_fluorescent_hum.name = "FluorescentHum"
+	_fluorescent_hum.stream = _select_primary_soundscape()
+	_fluorescent_hum.volume_db = BASE_HUM_VOLUME_DB
+	_fluorescent_hum.bus = AMBIENT_BUS_NAME
+	add_child(_fluorescent_hum)
+	# PKG-0220 (A1): gapless LOOP_FORWARD w strumieniu, zero retriggera finished->play.
+	_fluorescent_hum.play()
+
+	# PKG-0220 (A1): double-buffer — drugi bufor tej samej petli jako hot spare
+	# (wyciszony, zapetlony, bez retriggera; NIE gra — budżet głosów 0130 liczy
+	# tylko playing; stream przypiety wiec przejecie to samo play() bez resyntezy).
+	_ambient_back = AudioStreamPlayer.new()
+	_ambient_back.name = "AmbientBackBuffer"
+	_ambient_back.stream = _fluorescent_hum.stream
+	_ambient_back.volume_db = -80.0
+	_ambient_back.bus = AMBIENT_BUS_NAME
+	add_child(_ambient_back)
+
+	# Secondary substructure / tension layer for deep sectors
+	if station_number >= 31 and station_number <= 41:
+		_substructure_player = AudioStreamPlayer.new()
+		_substructure_player.name = "SubstructureDronePlayer"
+		_substructure_player.stream = ProceduralAudio.get_cached_sound(&"cooling_chamber_drone", ProceduralAudio.create_cooling_chamber_drone_sound)
+		_substructure_player.volume_db = BASE_SUB_VOLUME_DB
+		_substructure_player.bus = AMBIENT_BUS_NAME
+		add_child(_substructure_player)
+		_substructure_player.play()
+
+	# Unease tinnitus player
+	_unease_player = AudioStreamPlayer.new()
+	_unease_player.name = "UneaseTinnitusPlayer"
+	_unease_player.stream = ProceduralAudio.get_cached_sound(&"unease_tinnitus", ProceduralAudio.create_unease_tinnitus_sound)
+	_unease_player.volume_db = BASE_UNEASE_VOLUME_DB
+	_unease_player.bus = AMBIENT_BUS_NAME
+	add_child(_unease_player)
+
+
+func get_act_number() -> int:
+	if station_number <= 10:
+		return 1
+	elif station_number <= 28:
+		return 2
+	elif station_number <= 37:
+		return 3
+	else:
+		return 4
+
+
+func _select_primary_soundscape() -> AudioStreamWAV:
+	if station_number == 1:
+		return ProceduralAudio.get_cached_sound(&"act1_fluorescent_hum", ProceduralAudio.create_act1_fluorescent_ballast_hum_sound)
+	elif station_number == 2:
+		# PKG-0180: Outdoor bypass / elevated viaduct wind
+		return ProceduralAudio.get_cached_sound(&"outdoor_viaduct_wind", ProceduralAudio.create_outdoor_viaduct_wind_sound)
+	elif station_number == 3:
+		return ProceduralAudio.get_cached_sound(&"act1_fluorescent_hum", ProceduralAudio.create_act1_fluorescent_ballast_hum_sound)
+	elif station_number == 4:
+		# PKG-0180: Open perimeter platform outdoor wind
+		return ProceduralAudio.get_cached_sound(&"outdoor_perimeter_wind", ProceduralAudio.create_outdoor_perimeter_wind_sound)
+	elif station_number == 5:
+		return ProceduralAudio.get_cached_sound(&"act1_rain_asphalt", ProceduralAudio.create_act1_rain_ambience_sound)
+	elif station_number == 6:
+		return ProceduralAudio.get_cached_sound(&"act1_bus_engine", func() -> AudioStreamWAV: return ProceduralAudio.create_bus_engine_sound(false))
+	elif station_number <= 10:
+		return ProceduralAudio.get_cached_sound(&"act1_residential_ambience", ProceduralAudio.create_residential_ambience_sound)
+	elif station_number <= 13:
+		return ProceduralAudio.get_cached_sound(&"act2_corridor_resonance", ProceduralAudio.create_linoleum_corridor_resonance_sound)
+	elif station_number == 14:
+		# PKG-0180: Subterranean Substation transformer resonance
+		return ProceduralAudio.get_cached_sound(&"subterranean_substation_resonance", ProceduralAudio.create_subterranean_substation_resonance_sound)
+	elif station_number == 15:
+		# PKG-0180: Signal testing vault subterranean resonance
+		return ProceduralAudio.get_cached_sound(&"signal_vault_resonance", ProceduralAudio.create_signal_vault_resonance_sound)
+	elif station_number == 16:
+		# PKG-0180: Safe analyzer cooling conduit drone
+		return ProceduralAudio.get_cached_sound(&"analyzer_cooling_conduit_drone", ProceduralAudio.create_analyzer_cooling_conduit_drone_sound)
+	elif station_number == 17:
+		# PKG-0180: Archive consent ledger acoustic resonance
+		return ProceduralAudio.get_cached_sound(&"archive_ledger_resonance", ProceduralAudio.create_archive_ledger_resonance_sound)
+	elif station_number <= 20:
+		return ProceduralAudio.get_cached_sound(&"act2_institutional_hvac", ProceduralAudio.create_institutional_hvac_ambient_sound)
+	elif station_number <= 23:
+		return ProceduralAudio.get_cached_sound(&"act2_teletype_relay", ProceduralAudio.create_teletype_relay_ambience_sound)
+	elif station_number <= 28:
+		return ProceduralAudio.get_cached_sound(&"act2_tunnel_rumble", ProceduralAudio.create_tunnel_rumble_sound)
+	elif station_number <= 30:
+		return ProceduralAudio.get_cached_sound(&"act3_transformer_infrasound", ProceduralAudio.create_transformer_infrasound_sound)
+	elif station_number <= 33:
+		return ProceduralAudio.get_cached_sound(&"act3_tempered_glass", ProceduralAudio.create_tempered_glass_resonance_sound)
+	elif station_number <= 36:
+		return ProceduralAudio.get_cached_sound(&"act3_shaft_water_drip", ProceduralAudio.create_shaft_water_drip_echo_sound)
+	elif station_number == 37:
+		return ProceduralAudio.get_cached_sound(&"act3_catwalk_creak", ProceduralAudio.create_riveted_catwalk_creak_sound)
+	elif station_number <= 39:
+		return ProceduralAudio.get_cached_sound(&"act4_high_voltage_hum", ProceduralAudio.create_high_voltage_hum_sound)
+	elif station_number <= 41:
+		return ProceduralAudio.get_cached_sound(&"act4_correction_tension", ProceduralAudio.create_correction_tension_swell_sound)
+	elif station_number == 42:
+		var parent_node := get_parent()
+		if parent_node != null:
+			var pname := parent_node.name.to_lower()
+			if "42a" in pname:
+				return ProceduralAudio.get_cached_sound(&"finale_42a_forced_return", ProceduralAudio.create_finale_42a_forced_return_sound)
+			elif "42b" in pname:
+				return ProceduralAudio.get_cached_sound(&"finale_42b_closure", ProceduralAudio.create_finale_42b_closure_sound)
+			elif "42c" in pname:
+				return ProceduralAudio.get_cached_sound(&"finale_42c_reciprocal_passage", ProceduralAudio.create_finale_42c_reciprocal_passage_sound)
+		return ProceduralAudio.get_cached_sound(&"finale_42a_forced_return", ProceduralAudio.create_finale_42a_forced_return_sound)
+	else:
+		# PKG-0180: Station 43 riverbank & morning air ambience
+		return ProceduralAudio.get_cached_sound(&"dawn_river_ambience", ProceduralAudio.create_dawn_river_ambience_sound)
+
+
+## Trigger unease reaction audio and lighting flicker
+func trigger_unease_atmosphere(duration: float = 1.5) -> void:
+	_unease_active = true
+	_unease_timer = duration
+	if _unease_player and not _unease_player.playing:
+		_unease_player.play()

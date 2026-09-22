@@ -1,0 +1,6 @@
+generator	mix_rate	frames	peak_abs	clipped_samples	dc_offset	status
+create_anchor_sound	44100	17640	0.472229	0	-0.000456	PASS
+create_unanchor_sound	44100	12348	0.542847	0	-0.000062	PASS
+create_correction_pulse_sound	44100	24255	0.592926	0	0.001714	PASS
+create_footstep_linoleum_sound	44100	3087	0.231415	0	0.000662	PASS
+create_tile_footstep_sound	44100	7938	0.745819	0	-0.002686	PASS

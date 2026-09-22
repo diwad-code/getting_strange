@@ -1,0 +1,4 @@
+cycle	loaded	object_count_before	object_count_after	delta	cache_after_clear	save_reload	pause_resume	status
+1	22	2118	1996	-122	0	true	true	PASS
+2	22	2136	1996	-140	0	true	true	PASS
+3	22	2136	1996	-140	0	true	true	PASS

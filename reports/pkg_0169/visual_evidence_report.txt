@@ -1,0 +1,13 @@
+PKG-0169 VISUAL EVIDENCE REPORT
+Renderer: Intel(R) Iris(R) Xe Graphics
+Viewport: 640x360; normal Windows display driver; script was not headless.
+Three textless M2 frames of Station 42C: neutral, passage opened, memory leak accepted.
+One M3 true-grayscale structure frame after household consequence on the limited/withheld path.
+Hash distinctness and grayscale checks are structural evidence only; no line claims
+human comprehension, emotion, comfort or PRODUCT GO (D-012, ADR-003).
+
+CAPTURED FRAMES
+neutral            mono=false hidden=4  hash=3484846049 res://reports/pkg_0169/station_42c_neutral.png
+passage_opened     mono=false hidden=4  hash=4219738 res://reports/pkg_0169/station_42c_passage_opened.png
+leak_accepted      mono=false hidden=4  hash=174892510 res://reports/pkg_0169/station_42c_leak_accepted.png
+structure_mono     mono=true  hidden=4  hash=2038103679 res://reports/pkg_0169/station_42c_structure_mono.png

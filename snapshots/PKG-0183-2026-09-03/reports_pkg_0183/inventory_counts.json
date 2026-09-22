@@ -1,0 +1,14 @@
+{
+  "inventory_files": 935,
+  "scenes_tscn": 50,
+  "scripts_gd": 94,
+  "tests_gd": 78,
+  "tools_files": 194,
+  "docs_files": 87,
+  "assets_files": 230,
+  "resources_files": 22,
+  "missing_from_0182": 36,
+  "only_in_0182": 0,
+  "tests_not_in_verify": 2,
+  "prior_coverage_exists": "true"
+}

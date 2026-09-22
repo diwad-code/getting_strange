@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_domestic_presence_with_gaps"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"domestic_presence_with_gaps"
+source_fact = &"p7.conscious_silence_and_presence.chamber_a_entered"
+predicted_outcome = "Powrót z 21:45 ujawnia obecność domowej Marty i dorosłego Jakuba na fotografii, lecz pozostawia przemilczany koszt nieobecności drugiej Leny."
+required_evidence = [&"p7.conscious_silence_and_presence.chamber_a_entered", &"p7.conscious_silence_and_presence.epilogue_noticed"]
+trial_result = &"outcome_42a_verified"
+closure_id = &"p7.conscious_silence_and_presence.epilogue_completed"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_local_anchoring_in_foreign_city"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"local_anchoring_in_foreign_city"
+source_fact = &"p7.conscious_silence_and_presence.chamber_b_entered"
+predicted_outcome = "Przyjęcie adresu w mieszkaniu 14 pozwala miejscowej Lenie powrócić, podczas gdy Lena przyjmuje obcy klucz i nieznany poranek bez domowej ochrony."
+required_evidence = [&"p7.conscious_silence_and_presence.chamber_b_entered", &"p7.conscious_silence_and_presence.epilogue_noticed"]
+trial_result = &"outcome_42b_verified"
+closure_id = &"p7.conscious_silence_and_presence.epilogue_completed"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_dual_continuity_coexistence"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"dual_continuity_coexistence"
+source_fact = &"p7.conscious_silence_and_presence.chamber_c_entered"
+predicted_outcome = "Wzajemny powrót utrzymuje dwie równoległe wersje w przestrzeni publicznej miasta, gdzie mieszkańcy i instytucje uczą się żyć z dwiema kolejnościami."
+required_evidence = [&"p7.conscious_silence_and_presence.chamber_c_entered", &"p7.conscious_silence_and_presence.epilogue_noticed"]
+trial_result = &"outcome_42c_verified"
+closure_id = &"p7.conscious_silence_and_presence.epilogue_completed"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_epilogue_presence_commitment"]
+script = ExtResource("3_commitment")
+commitment_id = &"epilogue_presence_commitment"
+person_id = &"all_witnesses"
+scope = "Świadome wejście w epilog i potwierdzenie stanu relacji oraz miasta bez moralizowania i bez rankingu punktowego."
+known_cost = "Brak idealnego, uniwersalnego rozwiązania; trwanie w konkretnym, nieodwracalnym stanie materii i pamięci."
+required_disclosure = [&"p7.conscious_silence_and_presence.final_chamber_witnessed", &"p7.conscious_silence_and_presence.epilogue_completed"]
+alternative_route = "Każda z trzech dróg (42A, 42B, 42C) prowadzi do uczciwego domknięcia w Przestrzeni 43."
+outcome_key = &"p7.conscious_silence_and_presence.commitment"
+trace_key = &"p7.conscious_silence_and_presence.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"conscious_silence_and_presence"
+station_ids = [&"station_42a", &"station_42b", &"station_42c", &"station_43"]
+entry_gate = &"p7.branch_clarity_and_irreversible_choice.trace"
+discrepancy = "Rozstrzygnięcie finałowe nie jest triumfem ani porażką, lecz materialnym i relacyjnym stanem sześciu podmiotów po wykonaniu wybranej metody."
+required_source_facts = [&"p7.conscious_silence_and_presence.final_chamber_witnessed", &"p7.conscious_silence_and_presence.epilogue_completed"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_domestic_presence_with_gaps"), SubResource("DiagnosticHypothesis_local_anchoring_in_foreign_city"), SubResource("DiagnosticHypothesis_dual_continuity_coexistence")])
+trial_id = &"conscious_silence_and_presence_witness"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_epilogue_presence_commitment")])
+trace_key = &"p7.conscious_silence_and_presence.trace"
+guidance_beat_ids = [&"s42a_return_echo", &"s42b_closure_echo", &"s42c_mutual_echo", &"s43_epilogue", &"s43_system_hint"]
+state_keys = [&"p7.conscious_silence_and_presence.chamber_a_entered", &"p7.conscious_silence_and_presence.chamber_b_entered", &"p7.conscious_silence_and_presence.chamber_c_entered", &"p7.conscious_silence_and_presence.final_chamber_witnessed", &"p7.conscious_silence_and_presence.epilogue_noticed", &"p7.conscious_silence_and_presence.epilogue_credits_read", &"p7.conscious_silence_and_presence.epilogue_completed", &"p7.conscious_silence_and_presence.commitment", &"p7.conscious_silence_and_presence.trace", &"p7.conscious_silence_and_presence.safe_trial_feedback"]
+migration_revision = 1

@@ -1,0 +1,6 @@
+﻿Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0233 PASS: story-sense bridges hold (B/C/D2/D5, pins intact)
+Verification passed.
+FINAL_EXIT:0
+

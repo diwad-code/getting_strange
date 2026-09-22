@@ -1,0 +1,87 @@
+== Documentation contract ==
+DOCS PASS: 26 required files and handoff contracts
+== Web Showcase validation ==
+== Web Showcase Static & Contract Validation ==
+WEB RUNTIME SMOKE: PASS (all bundles evaluate, 49 globals, 100 dossiers)
+WEB PASS: All HTML, CSS, JS, Locales, PWA Manifest, and Assets validated successfully.
+== Godot headless import ==
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Inicjalizacja projektu (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Skanowanie struktury plików...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Wczytywanie globalnych nazw klas...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Weryfikowanie GDExtension...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Tworzenie skryptów autoładowania...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Inicjalizacja wtyczek...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Uruchamianie skanu systemu plików...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Wczytywanie edytora (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Wczytywanie układu edytora...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Wczytywanie doków...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+== Getting Strange smoke test ==
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+MOVEMENT PROFILE: A
+TEST: movement_lab completed
+TEST: anchor_lab completed
+ERROR: Error calling deferred method: 'CanvasLayer(crt_dialogue_box.gd)::present': Cannot convert argument 1 from Array to Array.
+   at: _call_function (core/object/message_queue.cpp:220)
+TEST: station_01 completed
+ERROR: Error calling deferred method: 'CanvasLayer(crt_dialogue_box.gd)::present': Cannot convert argument 1 from Array to Array.
+   at: _call_function (core/object/message_queue.cpp:220)
+TEST: station_02 completed
+ERROR: Error calling deferred method: 'CanvasLayer(crt_dialogue_box.gd)::present': Cannot convert argument 1 from Array to Array.
+   at: _call_function (core/object/message_queue.cpp:220)
+TEST: station_03 completed
+ERROR: Error calling deferred method: 'CanvasLayer(crt_dialogue_box.gd)::present': Cannot convert argument 1 from Array to Array.
+   at: _call_function (core/object/message_queue.cpp:220)
+TEST: station_04 completed
+ERROR: Error calling deferred method: 'CanvasLayer(crt_dialogue_box.gd)::present': Cannot convert argument 1 from Array to Array.
+   at: _call_function (core/object/message_queue.cpp:220)
+TEST: station_05 completed
+TEST: station_06 completed
+TEST: station_07 completed
+TEST: station_08 completed
+TEST: station_09 completed
+TEST: station_10 completed
+TEST: station_11 completed
+TEST: station_12 completed
+TEST: station_13 completed
+TEST: station_14 completed
+TEST: station_15 completed
+TEST: station_16 completed
+TEST: station_17 completed
+TEST: station_18 completed
+TEST: station_19 completed
+TEST: station_20 completed
+TEST: station_21 completed
+TEST: station_22 completed
+TEST: station_23 completed
+TEST: station_24 completed
+TEST: station_25 completed
+TEST: station_26 completed
+TEST: station_27 completed
+TEST: station_28 completed
+TEST: station_29 completed
+TEST: station_30 completed
+TEST: station_31 completed
+TEST: station_32 completed
+TEST: station_33 completed
+TEST: station_34 completed
+TEST: station_35 completed
+TEST: station_36 completed
+TEST: station_37 completed
+TEST: station_38 completed
+TEST: station_39 completed
+TEST: station_40 completed
+TEST: station_41 completed
+TEST: station_42a completed
+TEST: station_42b completed
+TEST: station_42c completed
+TEST: station_43 completed
+SMOKE PASS: project, scene, input and player physics
+WARNING: 6 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2535)

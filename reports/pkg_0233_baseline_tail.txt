@@ -1,0 +1,25 @@
+﻿
+PKG-0224 CAST GEOMETRY PASS: rigs, exceptions, family profiles, aperture lint.
+== PKG-0225 vignettes and finales carriers gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0225 VIGNETTES FINALES PASS: placement, skip, 43 states and K1/K2/K3/K5/K6 carriers verified
+== PKG-0226 truth payoff and review table gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0226 TRUTH PAYOFF TABLE PASS: 9 distinct openings, payoff marks, 6-item table, no new facts, draw paths clean
+== PKG-0227 hygiene and tools pin gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0227 HYGIENE TOOLS PASS: setter lint + physics 4x4 + cameras + no draw_string + capture INDEX + dev isolation.
+== PKG-0230 story sense repair gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0230 PASS: story-sense repair contracts hold
+== PKG-0232 causal chain gate ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PKG-0232 PASS: causal chain holds (no default finale, ordered 42, atomic 43, repeat navigation, save coherence)
+Verification passed.
+BASELINE_EXIT:0
+

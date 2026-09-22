@@ -1,0 +1,58 @@
+ Poniżej znajdują się instrukcje uruchomienia, układ sterowania oraz checklista elementów do weryfikacji.
+  ──────
+  ### 1. Jak uruchomić grę w oknie
+
+  W oknie terminala PowerShell w katalogu C:\getting_strange uruchom:
+
+    godot --path C:\getting_strange
+
+  Alternatywnie (używając lokalnego pliku wykonywalnego):
+
+    .\Godot_v4.6.3-stable_win64.exe --path C:\getting_strange
+
+  (Jeśli wolisz, żebym uruchomił okno gry bezpośrednio stąd w tle, daj znać – uruchomię je natychmiast).
+  ──────
+  ### 2. Klawiszologia i sterowanie (InputMap)
+
+  • Ruch poziomy: A / D lub Strzałka w lewo / Strzałka w prawo
+  • Wspinaczka / Drabina: W lub Strzałka w górę (wymaga zatrzymania postaci pod drabiną)
+  • Interakcja / Przejście progu / Potwierdzenie: E, Spacja lub Enter
+  • Przewijanie kwestii dialogowych: E lub Spacja
+  • Pauza / Opcje: Escape
+  ──────
+  ### 3. Checklista weryfikacji 9 defektów (Na co zwrócić uwagę)
+
+  Podczas rozgrywki polecam zwrócić uwagę na konkretne poprawki z sesji z 2026-09-02:
+
+  1. Zimne otwarcie (DEF-1):
+      • Po kliknięciu Nowa gra startuje Warstwa A: 3 ujęcia kinowe (nocne torowisko Linii 4, dłonie i sylwetka Leny,
+      proceduralny wykres drgań z dokładnie 3-sekundową płaską luką archiwalną).
+      • Płynne przejście do Warstwy B na stacji 01 (wymuszony pomiar wstępny na stanowisku roboczym przed
+      wyruszeniem w drogę). Wszystkie 5 faktów tożsamości i celu podane w diegezie.
+  2. Drabina na Stacji 02 (DEF-6):
+      • Drabina ServiceLadder jest rysowana dokładnie w świetle kolizji (usunięto rozbieżny rysunek proceduralny).
+      • Postać nie zaczepia się przypadkowo w biegu. Wciśnięcie W lub E uruchamia stan wspinaczki climb_back
+      pokazujący plecy Leny.
+  3. Drzwi wagonu na Stacjach 03 i 04 (DEF-4, DEF-7):
+      • Przejście przez drzwi pociągu (ThresholdZone) – wymaga podejścia i wciśnięcia E. Odtwarzana jest animacja
+      wejścia do pojazdu (board_vehicle).
+  4. Schody do bloku na Stacji 08 (DEF-5):
+      • Lena pokonuje kolejne stopnie klatki schodowej płynnym ruchem krawężnikowym (try_curb_step) – brak efektu
+      potykania, przysiadu czy kurzu lądowania na każdym stopniu.
+  5. Obsada i portrety na Stacjach 10, 11 i 12 (DEF-2, DEF-3, DEF-9):
+      • Stacja 10: Marta stoi przy wejściu w proporcjonalnej skali (CharacterVisualRig, 64×104 px). Otwarcie
+      dialogu wyświetla unikalny, autorski portret Marty (długie różowe włosy, septum, inna twarz niż Lena).
+      • Stacja 11: dr Helena Wierzbicka siedząca w gabinecie.
+      • Stacja 12: Jakub Wolski pracujący przy stole warsztatowym.
+  6. Ciągła przechodniość (DEF-8):
+      • Wyjścia ze wszystkich stacji są otwarte od razu. Pominięcie badania opcjonalnych rekwizytów nie blokuje
+      przejścia (system GapLedger odnotowuje lukę w pamięci).
+
+  ──────
+  ### 4. Co po zakończeniu testu?
+
+  Gdy skończysz przechodzić grę lub wybrany fragment, wróć tutaj z jedną z dwóch dyspozycji:
+
+  • Zgoda na wydanie (Ścieżka A): Napisz np. Wszystko gra, zdejmij blokadę D-168 i zbuduj .exe – natychmiast
+  przestawię status GATE-REL na PASS i wygeneruję pakiet binarnego wydania GettingStrange.exe.
+  • Uwagi / poprawki: Wskaż dowolne elementy wymagające dopracowania, a natychmiast przystąpimy do ich korekty.

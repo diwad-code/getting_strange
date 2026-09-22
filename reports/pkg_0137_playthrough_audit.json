@@ -1,0 +1,1175 @@
+{
+  "blockers": [],
+  "rows": [
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": false,
+      "id": "station_01",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.051300048828125,
+        "slip_px": 0.000000000000258237875527811,
+        "stuck_at": -1.0,
+        "travelled": 480.000793457031
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_02",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 17.9278259277344,
+        "slip_px": 0.00000000000025157653738006,
+        "stuck_at": -1.0,
+        "travelled": 478.149841308594
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_03",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.051300048828125,
+        "slip_px": 0.000000000000258237875527811,
+        "stuck_at": -1.0,
+        "travelled": 480.000793457031
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_04",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 43,
+        "max_step": 0.072174072265625,
+        "slip_px": 0.000000000000229150032282632,
+        "stuck_at": 479.991882324219,
+        "travelled": 409.991882324219
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_05",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.051300048828125,
+        "slip_px": 0.000000000000258237875527811,
+        "stuck_at": -1.0,
+        "travelled": 480.000793457031
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_06",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 5,
+        "max_step": 0.072174072265625,
+        "slip_px": 0.000000000000247801779096335,
+        "stuck_at": -1.0,
+        "travelled": 471.999755859375
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_07",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 2.39999389648438,
+        "slip_px": 0.000000000000250910403565285,
+        "stuck_at": -1.0,
+        "travelled": 457.639465332031
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_08",
+      "label_hits": [],
+      "labels": 3,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 36,
+        "max_step": 0.072174072265625,
+        "slip_px": 0.000000000000236921593455008,
+        "stuck_at": 491.995056152344,
+        "travelled": 421.995056152344
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_09",
+      "label_hits": [],
+      "labels": 2,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 17.9278259277344,
+        "slip_px": 0.000000000000266675570514963,
+        "stuck_at": -1.0,
+        "travelled": 467.577331542969
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_10",
+      "label_hits": [],
+      "labels": 2,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 51,
+        "max_step": 0.072174072265625,
+        "slip_px": 0.000000000000220268248085631,
+        "stuck_at": 467.994964599609,
+        "travelled": 397.994964599609
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_11",
+      "label_hits": [],
+      "labels": 2,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 17.9278259277344,
+        "slip_px": 0.000000000000250910403565285,
+        "stuck_at": -1.0,
+        "travelled": 493.714233398438
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_12",
+      "label_hits": [],
+      "labels": 2,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 18,
+        "max_step": 0.072174072265625,
+        "slip_px": 0.000000000000248245868306185,
+        "stuck_at": -1.0,
+        "travelled": 449.991882324219
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_13",
+      "label_hits": [],
+      "labels": 3,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.051300048828125,
+        "slip_px": 0.000000000000258237875527811,
+        "stuck_at": -1.0,
+        "travelled": 480.000793457031
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_14",
+      "label_hits": [],
+      "labels": 2,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.051300048828125,
+        "slip_px": 0.000000000000255573340268711,
+        "stuck_at": -1.0,
+        "travelled": 480.0009765625
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_15",
+      "label_hits": [],
+      "labels": 2,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.051300048828125,
+        "slip_px": 0.000000000000255573340268711,
+        "stuck_at": -1.0,
+        "travelled": 480.0009765625
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_16",
+      "label_hits": [],
+      "labels": 2,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.066436767578125,
+        "slip_px": 0.000000000000263122856836162,
+        "stuck_at": -1.0,
+        "travelled": 480.000915527344
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_17",
+      "label_hits": [],
+      "labels": 2,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.066436767578125,
+        "slip_px": 0.000000000000263122856836162,
+        "stuck_at": -1.0,
+        "travelled": 480.000915527344
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_18",
+      "label_hits": [],
+      "labels": 2,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.066436767578125,
+        "slip_px": 0.000000000000263122856836162,
+        "stuck_at": -1.0,
+        "travelled": 480.000915527344
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_19",
+      "label_hits": [],
+      "labels": 2,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.066436767578125,
+        "slip_px": 0.000000000000263122856836162,
+        "stuck_at": -1.0,
+        "travelled": 480.000915527344
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_20",
+      "label_hits": [],
+      "labels": 2,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.066436767578125,
+        "slip_px": 0.000000000000263122856836162,
+        "stuck_at": -1.0,
+        "travelled": 480.000915527344
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_21",
+      "label_hits": [],
+      "labels": 4,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.0513153076171875,
+        "slip_px": 0.000000000000255573340268711,
+        "stuck_at": -1.0,
+        "travelled": 480.0009765625
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_22",
+      "label_hits": [],
+      "labels": 2,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.066436767578125,
+        "slip_px": 0.000000000000263122856836162,
+        "stuck_at": -1.0,
+        "travelled": 480.000915527344
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_23",
+      "label_hits": [],
+      "labels": 2,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.066436767578125,
+        "slip_px": 0.000000000000263122856836162,
+        "stuck_at": -1.0,
+        "travelled": 480.000915527344
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_24",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.0655975341796875,
+        "slip_px": 0.000000000000257571741713036,
+        "stuck_at": -1.0,
+        "travelled": 480.001037597656
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_25",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 17.9288330078125,
+        "slip_px": 0.000000000000246025422256935,
+        "stuck_at": -1.0,
+        "travelled": 479.671081542969
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_26",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 118,
+        "max_step": 0.0711669921875,
+        "slip_px": 0.000000000000156763491077072,
+        "stuck_at": 339.991302490234,
+        "travelled": 289.991302490234
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_27",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.0655975341796875,
+        "slip_px": 0.000000000000257571741713036,
+        "stuck_at": -1.0,
+        "travelled": 480.001037597656
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_28",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.0655975341796875,
+        "slip_px": 0.000000000000257571741713036,
+        "stuck_at": -1.0,
+        "travelled": 480.001037597656
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_29",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.0655975341796875,
+        "slip_px": 0.000000000000257571741713036,
+        "stuck_at": -1.0,
+        "travelled": 480.001037597656
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_30",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.0655975341796875,
+        "slip_px": 0.000000000000257571741713036,
+        "stuck_at": -1.0,
+        "travelled": 480.001037597656
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_31",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.0655975341796875,
+        "slip_px": 0.000000000000257571741713036,
+        "stuck_at": -1.0,
+        "travelled": 480.001037597656
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_32",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.0655975341796875,
+        "slip_px": 0.000000000000257571741713036,
+        "stuck_at": -1.0,
+        "travelled": 480.001037597656
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_33",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 17.9288330078125,
+        "slip_px": 0.000000000000243582931602759,
+        "stuck_at": -1.0,
+        "travelled": 479.334838867188
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_34",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 17.9288330078125,
+        "slip_px": 0.000000000000244027020812609,
+        "stuck_at": -1.0,
+        "travelled": 479.293640136719
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_35",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.0655975341796875,
+        "slip_px": 0.000000000000257571741713036,
+        "stuck_at": -1.0,
+        "travelled": 480.001037597656
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_36",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.0655975341796875,
+        "slip_px": 0.000000000000257571741713036,
+        "stuck_at": -1.0,
+        "travelled": 480.001037597656
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_37",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.0655975341796875,
+        "slip_px": 0.000000000000257571741713036,
+        "stuck_at": -1.0,
+        "travelled": 480.001037597656
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_38",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.0657196044921875,
+        "slip_px": 0.000000000000254019028034236,
+        "stuck_at": -1.0,
+        "travelled": 480.000854492188
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_39",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.065032958984375,
+        "slip_px": 0.000000000000254019028034236,
+        "stuck_at": -1.0,
+        "travelled": 480.000854492188
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_40",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.065032958984375,
+        "slip_px": 0.000000000000254019028034236,
+        "stuck_at": -1.0,
+        "travelled": 480.000854492188
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_41",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.065032958984375,
+        "slip_px": 0.000000000000254019028034236,
+        "stuck_at": -1.0,
+        "travelled": 480.000854492188
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_42a",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.065032958984375,
+        "slip_px": 0.000000000000254019028034236,
+        "stuck_at": -1.0,
+        "travelled": 480.000854492188
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_42b",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.065032958984375,
+        "slip_px": 0.000000000000254019028034236,
+        "stuck_at": -1.0,
+        "travelled": 480.000854492188
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_42c",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.065032958984375,
+        "slip_px": 0.000000000000254019028034236,
+        "stuck_at": -1.0,
+        "travelled": 480.000854492188
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    },
+    {
+      "airlock_ok": true,
+      "cam_y": 216.0,
+      "frame_ok": true,
+      "has_airlock": true,
+      "has_return": true,
+      "id": "station_43",
+      "label_hits": [],
+      "labels": 1,
+      "labels_ok": true,
+      "loco": {
+        "blocked_frames": 0,
+        "max_step": 0.065032958984375,
+        "slip_px": 0.000000000000254019028034236,
+        "stuck_at": -1.0,
+        "travelled": 480.000854492188
+      },
+      "loco_ok": true,
+      "overflow": {
+        "bottom": 0.0,
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0
+      },
+      "return_ok": true
+    }
+  ]
+}

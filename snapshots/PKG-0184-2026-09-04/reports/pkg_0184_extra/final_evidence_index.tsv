@@ -1,0 +1,19 @@
+artefact	kind	command	exit	after_last_change	notes
+reports/pkg_0184/environment.json	env	Get-CimInstance + godot --version	0	yes	Windows NT 10.0.26200.0; Intel i5-1235U; Iris Xe; Godot 4.7.2.ed1daf0bf
+reports/pkg_0184/baseline.log	verifier	pwsh -NoProfile -File .\tools\verify.ps1	0	no (pre-0184-gate; 0184 not yet in chain)	1038.2s; Verification passed; 5 allowlisted WARNING; 0 ObjectDB
+reports/pkg_0184/pkg_0184_smoke_red.log	tdd-red	godot --headless --script tests/pkg_0184_smoke_test.gd	1	yes vs then-current disk	10 failures: ReturnPromise, skip, openings 10/11/13, plus over-broad clampf(raw) scan
+reports/pkg_0184/pkg_0184_smoke_green.log	tdd-green	same after fixes	0	yes	14.8s; PKG-0184 SMOKE PASS
+reports/pkg_0184/pkg_0179_retest.log	negative-of-false-pass	godot --headless --script tests/pkg_0179_smoke_test.gd	0	yes	prints steps 1–6 then PASS
+reports/pkg_0184/pkg_0091_independent.log	orphaned-test	godot --headless --script tests/pkg_0091_smoke_test.gd	1	yes	NOT in verify.ps1; VectorStageEnvironment on station_05
+reports/pkg_0184/pkg_0094_independent.log	orphaned-test	godot --headless --script tests/pkg_0094_smoke_test.gd	1	yes	NOT in verify.ps1; stations 06–08
+reports/pkg_0184/log_policy_retest.log	negative-gate	pwsh tools/test_godot_log_policy.ps1	0	yes	forbidden SCRIPT ERROR/WARNING/ObjectDB/orphan fail closed
+reports/pkg_0184/runtime_routes/full-a.tsv	m1	pkg_0177 -- --pkg0184-route=full-a	0	yes	20/20; 187.93s; 42A
+reports/pkg_0184/runtime_routes/minimal-b.tsv	m1	pkg_0177 -- --pkg0184-route=minimal-b	0	yes	20/20; 171.45s; 42B
+reports/pkg_0184/runtime_routes/mixed-c.tsv	m1	pkg_0177 -- --pkg0184-route=mixed-c	0	yes	20/20; 181.27s; 42C
+reports/pkg_0184/runtime_routes/soak_3_cycles.tsv	soak	pkg_0184 smoke	0	yes	after=2000 three cycles
+reports/pkg_0184/capture.log	visual	godot --script tools/capture_pkg_0184.gd (no headless)	0	yes	98 Windows frames; Intel Iris Xe OpenGL 3.3.0 Build 32.0.101.7085
+reports/pkg_0184/visual_matrix.tsv	visual	same	0	yes	0 duplicate normal/key_object; min luma 0.1024
+reports/pkg_0184/performance.tsv	perf	godot --script tools/performance_pkg_0184.gd (no headless)	0	yes	22 addresses; MEASURED-BASELINE not a 16.667ms budget
+reports/pkg_0184/audio/audio_full_measurements.tsv	audio	godot --headless --script tools/audio_pkg_0184.gd	0	yes	254 generators; 0 clipped
+reports/pkg_0184/inventory.tsv	inventory	tools/audit_pkg_0184.ps1	0	yes	948 files
+reports/pkg_0184/final.log	verifier	pwsh tools/verify.ps1 AFTER last source change	0	yes	1013.7s; Verification passed; PKG-0184 gate in chain; 7 allowlisted WARNING; 0 ObjectDB

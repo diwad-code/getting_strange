@@ -1,0 +1,69 @@
+[gd_resource type="Resource" script_class="DiagnosticSequenceDefinition" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_sequence_definition.gd" id="1_sequence"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_hypothesis_definition.gd" id="2_hypothesis"]
+[ext_resource type="Script" path="res://scripts/gameplay/diagnostic_commitment_definition.gd" id="3_commitment"]
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_single_body_swap"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"single_body_swap"
+source_fact = &"p7.pair_cost_and_echo.pair_registry_inspected"
+predicted_outcome = "Jeżeli doszło do prostej zamiany ciał, monitor echa domu wykaże obecność miejscowej Leny w mieszkaniu przybyłej Leny."
+required_evidence = [&"p7.pair_cost_and_echo.pair_registry_inspected", &"p7.pair_cost_and_echo.home_echo_verified"]
+trial_result = &"home_echo_confirms_complex_superposition"
+closure_id = &"p7.pair_cost_and_echo.home_echo_verified"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_linked_continuities"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"linked_continuities"
+source_fact = &"p7.pair_cost_and_echo.thermal_exchangers_inspected"
+predicted_outcome = "Jeżeli ciągłości są sprzężone węzłem, podtrzymanie Równi wywołuje nagrzewanie wymienników i zrzut energii do drenażu."
+required_evidence = [&"p7.pair_cost_and_echo.thermal_exchangers_inspected", &"p7.pair_cost_and_echo.drain_current_measured"]
+trial_result = &"drain_weir_absorbs_bilateral_heat"
+closure_id = &"p7.pair_cost_and_echo.drain_current_measured"
+
+[sub_resource type="Resource" id="DiagnosticHypothesis_conscious_cost_export"]
+script = ExtResource("2_hypothesis")
+hypothesis_id = &"conscious_cost_export"
+source_fact = &"p7.pair_cost_and_echo.line4_ledger_inspected"
+predicted_outcome = "Jeżeli UCP świadomie eksportował koszt, stabilizacja Linii 4 w Równi skorelowana jest z katastrofą i śmiercią Jakuba w domu Leny."
+required_evidence = [&"p7.pair_cost_and_echo.line4_ledger_inspected", &"p7.pair_cost_and_echo.ucp_cost_ledger_found"]
+trial_result = &"cost_ledger_proves_deliberate_sacrifice"
+closure_id = &"p7.pair_cost_and_echo.ucp_cost_ledger_found"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_disclose_pair_cost_to_persons"]
+script = ExtResource("3_commitment")
+commitment_id = &"disclose_pair_cost_to_persons"
+person_id = &"lena"
+scope = "Ujawnienie pełnej ceny katastrofy Jakubowi i Marcie."
+known_cost = "Możliwość odmowy współpracy przez osoby dotknięte bilansem."
+required_disclosure = [&"p7.pair_cost_and_echo.home_echo_verified", &"p7.pair_cost_and_echo.ucp_cost_ledger_found"]
+alternative_route = "Ukrycie bilansu przed Martą i Jakubem pozwoliłoby na wymuszenie synchronizacji, lecz zniszczyłoby ich zaufanie."
+outcome_key = &"p7.pair_cost_and_echo.commitment"
+trace_key = &"p7.pair_cost_and_echo.trace"
+
+[sub_resource type="Resource" id="DiagnosticCommitment_preserve_independent_route"]
+script = ExtResource("3_commitment")
+commitment_id = &"preserve_independent_route"
+person_id = &"lena"
+scope = "Wyznaczenie trasy niezależnej bez obciążania relacji."
+known_cost = "Brak wsparcia technicznego Jakuba i wyższe ryzyko błędu procedury."
+required_disclosure = [&"p7.pair_cost_and_echo.drain_current_measured", &"p7.pair_cost_and_echo.ucp_cost_ledger_found"]
+alternative_route = "Poleganie wyłącznie na aparaturze UCP zatarłoby niezależne dane."
+outcome_key = &"p7.pair_cost_and_echo.commitment"
+trace_key = &"p7.pair_cost_and_echo.trace"
+
+[resource]
+script = ExtResource("1_sequence")
+sequence_id = &"pair_cost_and_echo"
+station_ids = [&"station_34", &"station_35", &"station_36"]
+entry_gate = &"p7.archive_countermodel.trace"
+discrepancy = "Rejestr par, echo domu i katastrofa Linii 4 przeczą prostemu swapowi."
+required_source_facts = [&"p7.pair_cost_and_echo.pair_registry_inspected", &"p7.pair_cost_and_echo.home_echo_verified", &"p7.pair_cost_and_echo.ucp_cost_ledger_found"]
+hypotheses = Array[ExtResource("2_hypothesis")]([SubResource("DiagnosticHypothesis_single_body_swap"), SubResource("DiagnosticHypothesis_linked_continuities"), SubResource("DiagnosticHypothesis_conscious_cost_export")])
+trial_id = &"pair_cost_and_echo_synthesis"
+commitments = Array[ExtResource("3_commitment")]([SubResource("DiagnosticCommitment_disclose_pair_cost_to_persons"), SubResource("DiagnosticCommitment_preserve_independent_route")])
+trace_key = &"p7.pair_cost_and_echo.trace"
+guidance_beat_ids = [&"s34_reactor_source", &"s34_reactor_contact", &"s34_pair_hypothesis", &"s34_unlock_registry", &"s34_system_hint", &"s35_pool_source", &"s35_pool_contact", &"s35_echo_hypothesis", &"s35_process_echo", &"s35_system_hint", &"s36_weir_source", &"s36_weir_contact", &"s36_cost_hypothesis", &"s36_reveal_ledger", &"s36_system_hint"]
+state_keys = [&"p7.pair_cost_and_echo.reactor_core_inspected", &"p7.pair_cost_and_echo.control_desk_inspected", &"p7.pair_cost_and_echo.thermal_exchangers_inspected", &"p7.pair_cost_and_echo.sensor_probe_inspected", &"p7.pair_cost_and_echo.pair_registry_inspected", &"p7.pair_cost_and_echo.cooling_pool_inspected", &"p7.pair_cost_and_echo.bypass_valve_inspected", &"p7.pair_cost_and_echo.chemical_sampler_inspected", &"p7.pair_cost_and_echo.home_echo_verified", &"p7.pair_cost_and_echo.drain_weir_inspected", &"p7.pair_cost_and_echo.drain_current_measured", &"p7.pair_cost_and_echo.service_ladder_inspected", &"p7.pair_cost_and_echo.sampling_tap_inspected", &"p7.pair_cost_and_echo.line4_ledger_inspected", &"p7.pair_cost_and_echo.ucp_cost_ledger_found", &"p7.pair_cost_and_echo.commitment", &"p7.pair_cost_and_echo.trace", &"p7.pair_cost_and_echo.safe_trial_feedback"]
+migration_revision = 1

@@ -1,0 +1,206 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_01.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/levels/atmosphere_rig.gd" id="5_atmosphere"]
+[ext_resource type="Script" path="res://scripts/ui/crt_dialogue_box.gd" id="6_dialogue"]
+[ext_resource type="Script" path="res://scripts/ui/station_dialogue_cue.gd" id="7_cue"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor"]
+size = Vector2(640, 64)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_ceiling"]
+size = Vector2(640, 36)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_desk"]
+size = Vector2(120, 32)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_bench"]
+size = Vector2(140, 26)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_door"]
+size = Vector2(16, 116)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(40, 116)
+
+[sub_resource type="CircleShape2D" id="Circle_photo"]
+radius = 42.0
+
+[sub_resource type="CircleShape2D" id="Circle_clipboard"]
+radius = 38.0
+
+[sub_resource type="CircleShape2D" id="Circle_switch"]
+radius = 36.0
+
+[sub_resource type="CircleShape2D" id="Circle_gauge"]
+radius = 40.0
+
+[node name="Station01" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="AtmosphereRig" type="Node2D" parent="."]
+script = ExtResource("5_atmosphere")
+station_number = 1
+
+[node name="CRTDialogueBox" type="CanvasLayer" parent="."]
+script = ExtResource("6_dialogue")
+
+[node name="OpeningDialogueCue" type="Node" parent="."]
+script = ExtResource("7_cue")
+station_id = &"station_01"
+opening_line = "Protokół 04. Sprawdzam jeszcze raz, zanim otworzę komorę."
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 328)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Floor"]
+shape = SubResource("Rectangle_floor")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="Ceiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ceiling"]
+shape = SubResource("Rectangle_ceiling")
+
+[node name="OperatorDesk" type="StaticBody2D" parent="Geometry"]
+position = Vector2(120, 280)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/OperatorDesk"]
+shape = SubResource("Rectangle_desk")
+
+[node name="ConsoleBench" type="StaticBody2D" parent="Geometry"]
+position = Vector2(275, 283)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/ConsoleBench"]
+shape = SubResource("Rectangle_bench")
+
+[node name="ChamberDoor" type="AnimatableBody2D" parent="."]
+position = Vector2(585, 238)
+sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChamberDoor"]
+shape = SubResource("Rectangle_door")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(615, 238)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="PhotoDesk" type="Area2D" parent="Props"]
+position = Vector2(140, 254)
+script = ExtResource("2_resonance")
+resonance_id = "photo_desk"
+prop_title = "Fotografia (Lena i Jakub)"
+prop_subtitle = "Sterownia IKP 21:43"
+interaction_radius = 42.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/PhotoDesk"]
+shape = SubResource("Circle_photo")
+
+[node name="Clipboard" type="Area2D" parent="Props"]
+position = Vector2(95, 255)
+script = ExtResource("2_resonance")
+resonance_id = "clipboard"
+prop_type = 4
+prop_title = "Lista kontrolna procedury"
+prop_subtitle = "Protokół 01"
+interaction_radius = 38.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Clipboard"]
+shape = SubResource("Circle_clipboard")
+
+[node name="CircuitAlpha" type="Area2D" parent="Props"]
+position = Vector2(230, 257)
+script = ExtResource("2_resonance")
+resonance_id = "circuit_alpha"
+prop_type = 1
+prop_title = "Obwód Alpha (Pompa Próżniowa)"
+prop_subtitle = "Zasilanie główne"
+interaction_radius = 36.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/CircuitAlpha"]
+shape = SubResource("Circle_switch")
+
+[node name="CircuitBeta" type="Area2D" parent="Props"]
+position = Vector2(270, 257)
+script = ExtResource("2_resonance")
+resonance_id = "circuit_beta"
+prop_type = 1
+prop_title = "Obwód Beta (Siatka Korelacyjna)"
+prop_subtitle = "Stabilizacja próżniowa"
+interaction_radius = 36.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/CircuitBeta"]
+shape = SubResource("Circle_switch")
+
+[node name="CircuitGamma" type="Area2D" parent="Props"]
+position = Vector2(310, 257)
+script = ExtResource("2_resonance")
+resonance_id = "circuit_gamma"
+prop_type = 1
+prop_title = "Obwód Gamma (Matryca Sensorów)"
+prop_subtitle = "Detektory korelacji"
+interaction_radius = 36.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/CircuitGamma"]
+shape = SubResource("Circle_switch")
+
+[node name="VacuumManometer" type="Area2D" parent="Props"]
+position = Vector2(380, 255)
+script = ExtResource("2_resonance")
+resonance_id = "vacuum_gauge"
+prop_type = 2
+prop_title = "Manometr próżniowy (10^-7 mbar)"
+prop_subtitle = "Pomiar podciśnienia"
+interaction_radius = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/VacuumManometer"]
+shape = SubResource("Circle_gauge")
+
+[node name="ChamberTerminal" type="Area2D" parent="Props"]
+position = Vector2(520, 255)
+script = ExtResource("2_resonance")
+resonance_id = "chamber_terminal"
+prop_type = 3
+prop_title = "Terminal śluzy komory"
+prop_subtitle = "Rygiel elektromagnetyczny"
+interaction_radius = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ChamberTerminal"]
+shape = SubResource("Circle_gauge")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(70, 296)
+
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")
+target = NodePath("../Player")

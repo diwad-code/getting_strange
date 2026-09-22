@@ -1,0 +1,370 @@
+class_name Station06
+extends Node2D
+
+## Station 06 — Kiosk contradiction (Rodzina 1: Zewnętrzna / Miejska / Publiczna).
+## Pierwsza publiczna rozbieżność przez człowieka: sprzedawca w kiosku i wydrukowany
+## rozkład podają inne fakty niż pamięć Leny, lecz sprzedawca ma własną pracę i nie zna żadnej tajemnicy.
+##
+## PRZESZKODA — dlaczego to tu jest: Kiosk i tablica rozkładu obsługują pasażerów i mieszkańców osiedla, a zakup i porównanie godzin wymagają kontaktu z publicznym źródłem.
+## PRZESZKODA — czego wymaga od Leny: sprawdzenia wydrukowanego rozkładu, zakupu wody i zadania pytania kontrolnego o Martę.
+## PRZESZKODA — koszt porażki: przejście obok kiosku bez rozmowy zostawia rozbieżność w sferze domysłów bez weryfikacji u osoby postronnej.
+
+const NarrativeGuidanceService := preload("res://scripts/core/narrative_guidance_service.gd")
+const GuidanceBeat := preload("res://scripts/core/guidance_beat.gd")
+
+const FACT_PAPER := &"p7.address_and_record.paper_route_observed"
+const FACT_OFFLINE := &"p7.address_and_record.offline_route_observed"
+const FACT_RESULT := &"p7.address_and_record.public_route_result"
+const FACT_QUESTION := &"p7.address_and_record.shopkeeper_question_asked"
+const FACT_ANSWER := &"p7.address_and_record.shopkeeper_answer"
+const FACT_FEEDBACK := &"p7.address_and_record.safe_trial_feedback"
+
+signal timetable_inspected()
+signal water_purchased()
+signal kiosk_vendor_asked()
+signal level_completed()
+signal previous_level_requested()
+
+@onready var player: PrototypePlayer = $Player
+@onready var camera: CinematicCamera = StationCameraRig.resolve(self)
+@onready var props: Node2D = $Props
+@onready var airlock_zone: Area2D = $AirlockZone
+@onready var return_zone: Area2D = $ReturnZone
+@onready var dialogue: CRTDialogueBox = $CRTDialogueBox
+@onready var guidance_service: NarrativeGuidanceService = $NarrativeGuidanceService
+
+var is_timetable_inspected := false
+var is_water_purchased := false
+var is_kiosk_vendor_asked := false
+var is_exit_unlocked := false
+var is_level_completed := false
+
+## PKG-0198 (ZERO wycinek 2, D-215): słyszalne źródło pracy kiosku w kadrze.
+## Świetlówka lady (okno 310..460,180..260) ma własny szum — warstwa czysto
+## wizualno-dźwiękowa: zero writerów, flag i sygnałów gry.
+var _kiosk_hum: AudioStreamPlayer2D = null
+
+
+func _ready() -> void:
+	camera = StationCameraRig.bind(self, player)
+	_setup_guidance()
+	_connect_action_points()
+	if airlock_zone != null and not airlock_zone.body_entered.is_connected(_on_airlock_body_entered):
+		airlock_zone.body_entered.connect(_on_airlock_body_entered)
+	# PKG-0221 (D-234): ReturnZone wylacznikiem interactu (trigger_return);
+	# overlap stacji nie progresuje — wlasnego podpiecia brak.
+	_set_action_available(&"buy_water_at_kiosk", false)
+	_set_action_available(&"ask_kiosk_vendor", false)
+	_connect_npc_rig()
+	_setup_kiosk_hum()
+	queue_redraw()
+
+
+## PKG-0198: słyszalne źródło pracy kiosku w kadrze (przy oknie lady).
+## Szum świetlówki gra od wejścia, niezależnie od czynności gracza.
+func _setup_kiosk_hum() -> void:
+	if has_node("KioskWorkHum"):
+		_kiosk_hum = get_node("KioskWorkHum") as AudioStreamPlayer2D
+		return
+	_kiosk_hum = AudioStreamPlayer2D.new()
+	_kiosk_hum.name = "KioskWorkHum"
+	_kiosk_hum.position = Vector2(385.0, 220.0)
+	_kiosk_hum.volume_db = -26.0
+	_kiosk_hum.stream = ProceduralAudio.get_cached_sound(&"s06_kiosk_hum", ProceduralAudio.create_act1_fluorescent_ballast_hum_sound)
+	add_child(_kiosk_hum)
+	_kiosk_hum.play()
+
+
+## PKG-0197 (ZERO REWIZJA, D-214): sprzedawca pracuje ciałem, nie stoi.
+## Wcześniej rig `vendor` tkwił w `idle` przez całą stację, choć ma klatki
+## talk_0/talk_1 — dubbingowała go wyłącznie kwestia w CRT. Sterownik
+## wizualny (zero writerów/flag/sygnałów gry): linia sprzedawcy → talk,
+## linia Leny → listen, koniec rozmowy → idle. Obraca się do gracza.
+func _connect_npc_rig() -> void:
+	if dialogue == null:
+		return
+	if not dialogue.line_started.is_connected(_on_npc_dialogue_line):
+		dialogue.line_started.connect(_on_npc_dialogue_line)
+	if not dialogue.dialogue_finished.is_connected(_on_npc_dialogue_finished):
+		dialogue.dialogue_finished.connect(_on_npc_dialogue_finished)
+
+
+func _npc_rig() -> CharacterVisualRig:
+	var rig := get_node_or_null("KioskBlockout/Vendor") as CharacterVisualRig
+	if rig != null:
+		return rig
+	return _find_rig_recursive(self)
+
+
+func _find_rig_recursive(node: Node) -> CharacterVisualRig:
+	for child in node.get_children():
+		if child is CharacterVisualRig:
+			return child as CharacterVisualRig
+		var found := _find_rig_recursive(child)
+		if found != null:
+			return found
+	return null
+
+
+func _on_npc_dialogue_line(speaker: StringName, _text: String) -> void:
+	var rig := _npc_rig()
+	if rig == null:
+		return
+	var s := String(speaker).to_lower()
+	if s.contains("sprzedaw") or s == "vendor":
+		rig.set_state(&"talk")
+	else:
+		rig.set_state(&"listen")
+	if player != null and is_instance_valid(player):
+		rig.set_facing(player.global_position.x - rig.global_position.x)
+
+
+func _on_npc_dialogue_finished() -> void:
+	var rig := _npc_rig()
+	if rig == null:
+		return
+	rig.set_state(&"idle")
+
+
+func _connect_action_points() -> void:
+	for child in props.get_children():
+		if child is OpeningActionPoint:
+			var action := child as OpeningActionPoint
+			if not action.action_requested.is_connected(_on_action_requested):
+				action.action_requested.connect(_on_action_requested)
+
+
+func _on_action_requested(action_id: StringName) -> void:
+	match action_id:
+		&"inspect_street_timetable":
+			inspect_street_timetable()
+		&"buy_water_at_kiosk":
+			buy_water_at_kiosk()
+		&"ask_kiosk_vendor":
+			ask_kiosk_vendor()
+
+
+func inspect_street_timetable() -> bool:
+	if is_timetable_inspected:
+		return false
+	is_timetable_inspected = true
+	_record(FACT_PAPER, true)
+	_record(&"p9.kiosk.timetable_contradiction_seen", true)
+	_resolve_action(&"inspect_street_timetable")
+	_set_action_available(&"buy_water_at_kiosk", true)
+	timetable_inspected.emit()
+	# CR-D (PKG-0196 §6): rozkład daje konkretny konflikt trasy i daty;
+	# adres i wspólne zamieszkanie zostają późniejszym źródłom (07/08).
+	_present([
+		{"speaker": "LENA", "text": "Rozkład z tego miesiąca. Linia 4 jedzie inaczej, niż pamiętam — a data druku się zgadza."},
+	])
+	queue_redraw()
+	return true
+
+
+func buy_water_at_kiosk() -> bool:
+	if not is_timetable_inspected or is_water_purchased:
+		_record_feedback(&"timetable_check_required")
+		return false
+	is_water_purchased = true
+	_record(FACT_OFFLINE, true)
+	_record(&"p9.kiosk.water_purchased", true)
+	_resolve_action(&"buy_water_at_kiosk")
+	_set_action_available(&"ask_kiosk_vendor", true)
+	water_purchased.emit()
+	_present([
+		{"speaker": "LENA", "text": "Proszę butelkę wody."},
+		{"speaker": "SPRZEDAWCA", "text": "Dobry wieczór, pani Leno. Niegazowana jak zawsze. Proszę, cztery złote."},
+	])
+	queue_redraw()
+	return true
+
+
+func ask_kiosk_vendor() -> bool:
+	if not is_water_purchased or is_kiosk_vendor_asked:
+		_record_feedback(&"purchase_required")
+		return false
+	is_kiosk_vendor_asked = true
+	_record(FACT_RESULT, "paper_matches_vehicle")
+	_record(FACT_QUESTION, true)
+	_record(FACT_ANSWER, "yesterday_purchase")
+	_record(&"unease_pattern_started", true)
+	_record(&"p9.kiosk.vendor_testimony_recorded", true)
+	_resolve_action(&"ask_kiosk_vendor")
+	kiosk_vendor_asked.emit()
+	# CR-D (PKG-0196 §6): sprzedawca ma własną pracę i nie zna tajemnicy —
+	# zakup Marty, imię i zamiar zamknięcia kiosku; bez adresu i wspólnoty.
+	_present([
+		{"speaker": "SPRZEDAWCA", "text": "Marta rano kupiła wodę. Pytała, o której pani wraca."},
+		{"speaker": "LENA", "text": "Dziękuję. Długo dziś jeszcze otwarte?"},
+		{"speaker": "SPRZEDAWCA", "text": "Zwijam kiosk po tej zmianie. Dobranoc, pani Leno."},
+	])
+	_unlock_exit()
+	queue_redraw()
+	return true
+
+
+## Backward compatibility for PKG-0146 early diagnostic tests
+func observe_paper_timetable() -> bool:
+	return inspect_street_timetable()
+
+
+func observe_offline_route() -> bool:
+	if not is_timetable_inspected:
+		inspect_street_timetable()
+	return buy_water_at_kiosk()
+
+
+func compare_public_route() -> bool:
+	if not is_water_purchased:
+		buy_water_at_kiosk()
+	return ask_kiosk_vendor()
+
+
+func unlock_exit_for_return() -> void:
+	_unlock_exit()
+
+
+func _unlock_exit() -> void:
+	if is_exit_unlocked:
+		return
+	is_exit_unlocked = true
+	pass  # PKG-0174: ThresholdZone requires interact
+
+
+func _complete_if_player_already_in_airlock() -> void:
+	if airlock_zone != null and player != null and airlock_zone.overlaps_body(player):
+		_trigger_level_completion()
+
+
+func _setup_guidance() -> void:
+	if guidance_service == null:
+		return
+	_register_beat(&"s06_composition", GuidanceBeat.Tier.L0_COMPOSITION, &"observation", &"factual", "", "", &"", "")
+	_register_beat(&"s06_reaction", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Sprzedawca wita mnie po imieniu. Zapytam o rozkład.", "The shopkeeper greets me by name. I will ask about the schedule.", &"", "")
+	_register_beat(&"s06_thought", GuidanceBeat.Tier.L2_CONTEXTUAL_THOUGHT, &"interpretation", &"fallible", "Rozkład podaje inny przystanek niż pamiętam. Zapytam sprzedawcę.", "The schedule lists a different stop than I remember. I will ask the vendor.", &"kiosk_schedule", "buy_water_at_kiosk")
+	_register_beat(&"s06_cache_hypothesis", GuidanceBeat.Tier.L2_CONTEXTUAL_THOUGHT, &"interpretation", &"fallible", "Błąd w druku albo stara tabliczka. Zawsze najpierw szuka się bałaganu w papierach.", "Misprint or an old plate. You always look for paper chaos first.", &"kiosk_schedule", "buy_water_at_kiosk")
+	_register_beat(&"s06_intent", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Sprawdzę rozkład, kupię wodę i zadam pytanie o Martę.", "I will check the schedule, buy water, and ask about Marta.", &"", "")
+	_register_beat(&"s06_hint", GuidanceBeat.Tier.L4_RESCUE_HINT, &"system_hint", &"system", "WSKAZÓWKA: Obejrzyj rozkład, zrób zakup w kiosku i porozmawiaj ze sprzedawcą.", "HINT: Read the schedule, purchase water at the kiosk, and talk with the vendor.", &"", "")
+
+
+func _register_beat(beat_id: StringName, tier: GuidanceBeat.Tier, thought_kind: StringName, truth_scope: StringName, text_pl: String, text_en: String, hypothesis_id: StringName, predicted_check: String) -> void:
+	var beat := GuidanceBeat.new()
+	beat.beat_id = beat_id
+	beat.scene_id = &"station_06"
+	beat.tier = tier
+	beat.thought_kind = thought_kind
+	beat.truth_scope = truth_scope
+	beat.text_pl = text_pl
+	beat.text_en = text_en
+	beat.cooldown_s = 8.0
+	beat.hypothesis_id = hypothesis_id
+	beat.predicted_check = predicted_check
+	guidance_service.register_beat(beat)
+
+
+func _on_airlock_body_entered(_body: Node2D) -> void:
+	# PKG-0174: AirlockZone is a closure zone, not a trigger.
+	pass
+
+
+func _on_return_zone_body_entered(_body: Node2D) -> void:
+	# PKG-0221 (D-234): ReturnZone is a closure zone, not a trigger.
+	pass
+
+
+func _trigger_level_completion() -> void:
+	if is_level_completed:
+		return
+	is_level_completed = true
+	level_completed.emit()
+
+
+func _record_feedback(value: StringName) -> void:
+	_record(FACT_FEEDBACK, String(value))
+	GapLedger.annotate_feedback(self, value) # PKG-0215 (D-228): blocked verb speaks its gap, if any.
+
+
+func _record(key: StringName, value: Variant) -> void:
+	var state := get_node_or_null("/root/GameStateManager")
+	if state != null:
+		state.record_decision(key, value)
+
+
+func _resolve_action(action_id: StringName) -> void:
+	var action := _find_action(action_id)
+	if action != null:
+		action.resolve()
+
+
+func _set_action_available(action_id: StringName, available: bool) -> void:
+	var action := _find_action(action_id)
+	if action != null:
+		action.set_available(available)
+
+
+func _find_action(action_id: StringName) -> OpeningActionPoint:
+	for child in props.get_children():
+		if child is OpeningActionPoint and (child as OpeningActionPoint).action_id == action_id:
+			return child as OpeningActionPoint
+	return null
+
+
+func _present(lines: Array) -> void:
+	if dialogue != null:
+		dialogue.present(lines)
+
+
+func _draw() -> void:
+	VectorStageStyle.draw_stage_apron(self, Vector2(640.0, 360.0))
+	# Open sky: ≥ 25% height (y: 0 to 110 px), no ceiling!
+	draw_rect(Rect2(0.0, 0.0, 640.0, 110.0), VectorStageStyle.INK)
+	# Distant rooftops and night horizon
+	draw_colored_polygon(PackedVector2Array([
+		Vector2(0.0, 110.0), Vector2(100.0, 90.0), Vector2(240.0, 80.0),
+		Vector2(420.0, 95.0), Vector2(560.0, 85.0), Vector2(640.0, 90.0),
+		Vector2(640.0, 110.0),
+	]), VectorStageStyle.shade(VectorStageStyle.DEEP_PLANE, 0.40))
+	# Mid plane: Street facade behind the kiosk
+	draw_rect(Rect2(0.0, 110.0, 640.0, 196.0), VectorStageStyle.DEEP_PLANE)
+	# Timetable stand at x=150
+	var timetable_color := VectorStageStyle.ANCHOR_CYAN if is_timetable_inspected else VectorStageStyle.HUMAN_AMBER
+	draw_line(Vector2(150.0, 306.0), Vector2(150.0, 180.0), VectorStageStyle.LIGHT_PLANE, 2.0)
+	draw_rect(Rect2(126.0, 170.0, 48.0, 36.0), VectorStageStyle.INK)
+	draw_rect(Rect2(126.0, 170.0, 48.0, 36.0), timetable_color, false, 1.5)
+	draw_line(Vector2(132.0, 182.0), Vector2(168.0, 182.0), timetable_color, 1.0)
+	draw_line(Vector2(132.0, 192.0), Vector2(168.0, 192.0), timetable_color, 1.0)
+	# Kiosk pavilion structure (x=280..490, y=140..306)
+	draw_colored_polygon(PackedVector2Array([
+		Vector2(270.0, 148.0), Vector2(500.0, 140.0), Vector2(490.0, 306.0), Vector2(280.0, 306.0),
+	]), VectorStageStyle.MID_PLANE)
+	# Kiosk canopy / roof
+	draw_colored_polygon(PackedVector2Array([
+		Vector2(255.0, 148.0), Vector2(515.0, 140.0), Vector2(510.0, 160.0), Vector2(260.0, 168.0),
+	]), VectorStageStyle.shade(VectorStageStyle.LIGHT_PLANE, 0.35))
+	# Kiosk serving window (x=310..460, y=180..260)
+	draw_rect(Rect2(310.0, 180.0, 150.0, 80.0), VectorStageStyle.INK)
+	var window_color := VectorStageStyle.ANCHOR_CYAN if is_water_purchased else VectorStageStyle.HUMAN_AMBER
+	draw_rect(Rect2(310.0, 180.0, 150.0, 80.0), window_color, false, 1.5)
+	# Newspaper rack & bottle display
+	# PKG-0198 (ZERO wycinek 2): rack ma pracę — po zakupie wody jeden
+	# egzemplarz ubywa ze stojaka (sprzedawca wydał towar), zamiast stać
+	# jako wieczna dekoracja. Stan czytelny bryłą, nie samym kolorem.
+	var rack_color := VectorStageStyle.ANCHOR_CYAN if is_water_purchased else VectorStageStyle.shade(VectorStageStyle.LIGHT_PLANE, 0.40)
+	for nx in [320.0, 340.0, 360.0, 380.0]:
+		if is_water_purchased and nx >= 380.0:
+			continue
+		draw_rect(Rect2(nx, 220.0, 14.0, 20.0), rack_color, false, 1.0)
+	# Vendor is CharacterVisualRig `vendor` (PKG-0186). Do not draw a circle-head.
+	# PKG-0197: cień kontaktowy kiosku — światło pada z lampy kiosku i latarni
+	# ulicy z lewej, więc cień kładzie się w prawo, jak w stacji 01.
+	draw_colored_polygon(PackedVector2Array([
+		Vector2(262.0, 304.0), Vector2(508.0, 302.0),
+		Vector2(516.0, 310.0), Vector2(270.0, 312.0),
+	]), Color(VectorStageStyle.INK, 0.48))
+	# Sidewalk (near plane)
+	draw_rect(Rect2(0.0, 306.0, 640.0, 54.0), VectorStageStyle.shade(VectorStageStyle.MID_PLANE, 0.30))
+	draw_line(Vector2(0.0, 306.0), Vector2(640.0, 306.0), VectorStageStyle.LIGHT_PLANE, 2.0)
+	# Exit gate indicator on x=610
+	var exit_color := VectorStageStyle.ANCHOR_CYAN if is_exit_unlocked else VectorStageStyle.HUMAN_AMBER
+	draw_line(Vector2(610.0, 180.0), Vector2(610.0, 306.0), exit_color, 2.0)

@@ -1,0 +1,209 @@
+[gd_scene load_steps=24 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_08.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/levels/atmosphere_rig.gd" id="5_atmosphere"]
+[ext_resource type="Script" path="res://scripts/ui/crt_dialogue_box.gd" id="6_dialogue"]
+[ext_resource type="Script" path="res://scripts/ui/station_dialogue_cue.gd" id="7_cue"]
+[ext_resource type="Script" path="res://scripts/visual/vector_stage_environment.gd" id="8_vector_stage"]
+[ext_resource type="Script" path="res://scripts/interactables/movable_anchorable_prop.gd" id="9_movable"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor"]
+size = Vector2(640, 64)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_ceiling"]
+size = Vector2(640, 30)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(60, 120)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_sideboard"]
+size = Vector2(74, 210)
+
+[sub_resource type="CircleShape2D" id="Circle_prop_coat_rack"]
+radius = 44.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_photo"]
+radius = 44.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_kettle"]
+radius = 42.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_beaker"]
+radius = 42.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_memento"]
+radius = 42.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_marta"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_cipher_desk"]
+radius = 48.0
+
+[node name="Station08" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="VectorStageEnvironment" type="Node2D" parent="."]
+script = ExtResource("8_vector_stage")
+stage_seed = 8
+station_number = 8
+
+[node name="AtmosphereRig" type="Node2D" parent="."]
+script = ExtResource("5_atmosphere")
+station_number = 8
+
+[node name="CRTDialogueBox" type="CanvasLayer" parent="."]
+script = ExtResource("6_dialogue")
+
+[node name="OpeningDialogueCue" type="Node" parent="."]
+script = ExtResource("7_cue")
+station_id = &"station_08"
+opening_line = "W tym mieszkaniu ktoś zostawił wodę na herbatę dokładnie dla dwóch osób."
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 342)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Floor"]
+shape = SubResource("Rectangle_floor")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="Ceiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ceiling"]
+shape = SubResource("Rectangle_ceiling")
+
+[node name="HallwaySideboard" type="CharacterBody2D" parent="Geometry"]
+position = Vector2(470, 205)
+script = ExtResource("9_movable")
+crate_size = Vector2(74, 210)
+push_speed_max = 48.0
+push_acceleration = 360.0
+interaction_radius = 58.0
+object_name = "Szafka kartotekowa w przedpokoju"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/HallwaySideboard"]
+shape = SubResource("Rectangle_sideboard")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(610, 255)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="CoatRack" type="Area2D" parent="Props"]
+position = Vector2(105, 275)
+script = ExtResource("2_resonance")
+resonance_id = "CoatRack"
+prop_type = 25
+prop_title = "Wieszak w przedpokoju"
+prop_subtitle = "Dwa płaszcze // Buty na deszcz sprzed 17 dni"
+interaction_radius = 44.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/CoatRack"]
+shape = SubResource("Circle_prop_coat_rack")
+
+[node name="ReflectedPhoto" type="Area2D" parent="Props"]
+position = Vector2(150, 255)
+script = ExtResource("2_resonance")
+resonance_id = "ReflectedPhoto"
+prop_type = 26
+prop_title = "Wspólna fotografia"
+prop_subtitle = "Marta i Lena od tyłu // Kadr w oknie"
+interaction_radius = 44.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ReflectedPhoto"]
+shape = SubResource("Circle_prop_photo")
+
+[node name="TeaKettle" type="Area2D" parent="Props"]
+position = Vector2(215, 270)
+script = ExtResource("2_resonance")
+resonance_id = "TeaKettle"
+prop_type = 30
+prop_title = "Czajnik na kuchni"
+prop_subtitle = "Gorąca woda // Dwa ceramiczne kubki"
+interaction_radius = 42.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/TeaKettle"]
+shape = SubResource("Circle_prop_kettle")
+
+[node name="BeakerPlanter" type="Area2D" parent="Props"]
+position = Vector2(295, 275)
+script = ExtResource("2_resonance")
+resonance_id = "BeakerPlanter"
+prop_type = 27
+prop_title = "Zlewka laboratoryjna 200 ml"
+prop_subtitle = "Doniczka na sukulent // Podwójne zastosowanie"
+interaction_radius = 42.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/BeakerPlanter"]
+shape = SubResource("Circle_prop_beaker")
+
+[node name="JakubMemento" type="Area2D" parent="Props"]
+position = Vector2(335, 275)
+script = ExtResource("2_resonance")
+resonance_id = "JakubMemento"
+prop_type = 28
+prop_title = "Pamiątka Jakuba"
+prop_subtitle = "Mosiężna poziomica // Przycisk do kalkulacji"
+interaction_radius = 42.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/JakubMemento"]
+shape = SubResource("Circle_prop_memento")
+
+[node name="MartaInteraction" type="Area2D" parent="Props"]
+position = Vector2(375, 275)
+script = ExtResource("2_resonance")
+resonance_id = "MartaInteraction"
+prop_type = 23
+prop_title = "Marta Kurek"
+prop_subtitle = "Wnętrze mieszkania // Świadek"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/MartaInteraction"]
+shape = SubResource("Circle_prop_marta")
+
+[node name="CipherDesk" type="Area2D" parent="Props"]
+position = Vector2(465, 270)
+script = ExtResource("2_resonance")
+resonance_id = "CipherDesk"
+prop_type = 29
+prop_title = "Biurko robocze z szufladą"
+prop_subtitle = "Zamek szyfrowy 0311 // Szkice Podstruktury UCP"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/CipherDesk"]
+shape = SubResource("Circle_prop_cipher_desk")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(65, 296)
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")

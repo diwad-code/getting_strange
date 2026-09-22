@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/prototype/movement_lab.gd" id="1_lab"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="2_player"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor_start"]
+size = Vector2(240, 40)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_step"]
+size = Vector2(56, 22)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_upper"]
+size = Vector2(100, 20)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_lower"]
+size = Vector2(84, 20)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor_end"]
+size = Vector2(84, 40)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_kill"]
+size = Vector2(800, 80)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_goal"]
+size = Vector2(32, 56)
+
+[node name="MovementLab" type="Node2D"]
+script = ExtResource("1_lab")
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="FloorStart" type="StaticBody2D" parent="Geometry"]
+position = Vector2(100, 340)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorStart"]
+shape = SubResource("Rectangle_floor_start")
+
+[node name="Step" type="StaticBody2D" parent="Geometry"]
+position = Vector2(248, 309)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Step"]
+shape = SubResource("Rectangle_step")
+
+[node name="UpperPlatform" type="StaticBody2D" parent="Geometry"]
+position = Vector2(326, 278)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/UpperPlatform"]
+shape = SubResource("Rectangle_upper")
+
+[node name="LowerPlatform" type="StaticBody2D" parent="Geometry"]
+position = Vector2(462, 302)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/LowerPlatform"]
+shape = SubResource("Rectangle_lower")
+
+[node name="FloorEnd" type="StaticBody2D" parent="Geometry"]
+position = Vector2(598, 340)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorEnd"]
+shape = SubResource("Rectangle_floor_end")
+
+[node name="KillZone" type="Area2D" parent="."]
+position = Vector2(320, 400)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("Rectangle_kill")
+
+[node name="Goal" type="Area2D" parent="."]
+position = Vector2(606, 292)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
+shape = SubResource("Rectangle_goal")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(48, 296)
+
+[connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]
+[connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]

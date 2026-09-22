@@ -1,0 +1,30 @@
+PKG-0157 VISUAL CAPTURE REPORT
+Technical evidence for PHASE-02 First Five Minutes (BUNDLE-06..10).
+Rendered in 640x360 with normal Windows display driver. Normal and reduced-motion states.
+
+CAPTURED FRAMES
+normal  title_screen   default                          res://reports/pkg_0157/normal/title_screen_default.png
+normal  station_01     initial_worksite                 res://reports/pkg_0157/normal/station_01_initial_worksite.png
+normal  station_01     sample_and_message_completed     res://reports/pkg_0157/normal/station_01_sample_and_message_completed.png
+normal  station_02     initial_detour                   res://reports/pkg_0157/normal/station_02_initial_detour.png
+normal  station_02     ladder_taken                     res://reports/pkg_0157/normal/station_02_ladder_taken.png
+normal  station_03     initial_platform                 res://reports/pkg_0157/normal/station_03_initial_platform.png
+normal  station_03     marta_replied                    res://reports/pkg_0157/normal/station_03_marta_replied.png
+normal  station_04     initial_carriage                 res://reports/pkg_0157/normal/station_04_initial_carriage.png
+normal  station_04     reader_stowed                    res://reports/pkg_0157/normal/station_04_reader_stowed.png
+reduced title_screen   default                          res://reports/pkg_0157/reduced/title_screen_default.png
+reduced station_01     initial_worksite                 res://reports/pkg_0157/reduced/station_01_initial_worksite.png
+reduced station_01     sample_and_message_completed     res://reports/pkg_0157/reduced/station_01_sample_and_message_completed.png
+reduced station_02     initial_detour                   res://reports/pkg_0157/reduced/station_02_initial_detour.png
+reduced station_02     ladder_taken                     res://reports/pkg_0157/reduced/station_02_ladder_taken.png
+reduced station_03     initial_platform                 res://reports/pkg_0157/reduced/station_03_initial_platform.png
+reduced station_03     marta_replied                    res://reports/pkg_0157/reduced/station_03_marta_replied.png
+reduced station_04     initial_carriage                 res://reports/pkg_0157/reduced/station_04_initial_carriage.png
+reduced station_04     reader_stowed                    res://reports/pkg_0157/reduced/station_04_reader_stowed.png
+
+VERIFICATION NOTES
+- Shell (TitleScreen): Personal thriller promise, Polish/English localization, focus traversal preserved.
+- Station 01: Workstation, vibration reader drum, sample case, Marta phone, single workstation, door unblocked.
+- Station 02: Open sky >25%, 3 depth planes, no ceiling, working gantry, embankment landing, ladder.
+- Station 03: Partial shelter, track edge, scheduled vehicle, Line 4 timetable, phone reply to Marta.
+- Station 04: Carriage interior, moving window parallax, Line 4 memorial silhouette, seats, reader stow case.

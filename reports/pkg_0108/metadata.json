@@ -1,0 +1,85 @@
+{
+	"cases": [
+		{
+			"group": "opening",
+			"id": "station_01",
+			"path": "res://scenes/levels/station_01.tscn",
+			"ui": true
+		},
+		{
+			"group": "middle_anchor",
+			"id": "station_14",
+			"path": "res://scenes/levels/station_14.tscn",
+			"ui": false
+		},
+		{
+			"group": "middle_yield",
+			"id": "station_22",
+			"path": "res://scenes/levels/station_22.tscn",
+			"ui": true
+		},
+		{
+			"group": "mechanical_slice",
+			"id": "station_38",
+			"path": "res://scenes/levels/station_38.tscn",
+			"ui": false
+		},
+		{
+			"group": "choice_chamber",
+			"id": "station_41",
+			"path": "res://scenes/levels/station_41.tscn",
+			"ui": false
+		},
+		{
+			"group": "final_return",
+			"id": "station_42a",
+			"path": "res://scenes/levels/station_42a.tscn",
+			"ui": false
+		},
+		{
+			"group": "final_reconciliation",
+			"id": "station_42b",
+			"path": "res://scenes/levels/station_42b.tscn",
+			"ui": false
+		},
+		{
+			"group": "final_testimony",
+			"id": "station_42c",
+			"path": "res://scenes/levels/station_42c.tscn",
+			"ui": false
+		},
+		{
+			"group": "epilogue",
+			"id": "station_43",
+			"path": "res://scenes/levels/station_43.tscn",
+			"ui": true
+		}
+	],
+	"color_tolerance": 0.1,
+	"contrast": "(Lmax + 0.05) / (Lmin + 0.05)",
+	"driver_requirement": "normal Windows display driver / OpenGL; not headless",
+	"engine": {
+		"build": "official",
+		"hash": "5b4e0cb0fd279832bbdd69fed5354d4e5ad26f88",
+		"hex": 263936,
+		"major": 4,
+		"minor": 7,
+		"patch": 0,
+		"status": "stable",
+		"string": "4.7-stable (official)",
+		"timestamp": 0
+	},
+	"luminance": "sRGB to linear, 0.2126R + 0.7152G + 0.0722B",
+	"package": "PKG-0108",
+	"scale_interpolation": "Image.INTERPOLATE_NEAREST",
+	"tool": "res://tools/audit_h012.gd",
+	"transformations": [
+		"grayscale",
+		"deuteranopia",
+		"protanopia"
+	],
+	"viewport": {
+		"height": 360,
+		"width": 640
+	}
+}

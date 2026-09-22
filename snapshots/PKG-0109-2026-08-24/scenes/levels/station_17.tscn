@@ -1,0 +1,171 @@
+[gd_scene load_steps=21 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_17.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/levels/atmosphere_rig.gd" id="5_atmosphere"]
+[ext_resource type="Script" path="res://scripts/ui/crt_dialogue_box.gd" id="6_dialogue"]
+[ext_resource type="Script" path="res://scripts/ui/station_dialogue_cue.gd" id="7_cue"]
+[ext_resource type="Script" path="res://scripts/visual/vector_stage_environment.gd" id="8_vector_stage"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor_main"]
+size = Vector2(640, 80)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_ceiling"]
+size = Vector2(640, 40)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(50, 70)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_pneumatic_capsule"]
+size = Vector2(46, 82)
+
+[sub_resource type="CircleShape2D" id="Circle_prop_ticket_dispenser"]
+radius = 45.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_waiting_bench"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_pneumatic_station"]
+radius = 55.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_diagnostic_printer"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_office_door"]
+radius = 60.0
+
+[node name="Station17" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="VectorStageEnvironment" type="Node2D" parent="."]
+script = ExtResource("8_vector_stage")
+stage_seed = 17
+station_number = 17
+
+[node name="AtmosphereRig" type="Node2D" parent="."]
+script = ExtResource("5_atmosphere")
+station_number = 17
+
+[node name="CRTDialogueBox" type="CanvasLayer" parent="."]
+script = ExtResource("6_dialogue")
+
+[node name="OpeningDialogueCue" type="Node" parent="."]
+script = ExtResource("7_cue")
+station_id = &"station_17"
+opening_line = "Bilet z automatu ma datę sprzed siedemnastu dni. Urząd wiedział o moim przybyciu, zanim weszłam do komory."
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="FloorMain" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 320)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorMain"]
+shape = SubResource("Rectangle_floor_main")
+
+[node name="PneumaticDossierCapsule" type="AnimatableBody2D" parent="Geometry"]
+position = Vector2(490, 240)
+sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/PneumaticDossierCapsule"]
+shape = SubResource("Rectangle_pneumatic_capsule")
+
+[node name="Ceiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ceiling"]
+shape = SubResource("Rectangle_ceiling")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="QueuingTicketDispenser" type="Area2D" parent="Props"]
+position = Vector2(130, 245)
+script = ExtResource("2_resonance")
+resonance_id = "prop_ticket_dispenser"
+prop_type = 72
+prop_title = "Automat biletowy"
+prop_subtitle = "Sprawa 084/17 (Stan z dnia: -17 dni)"
+interaction_radius = 45.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/QueuingTicketDispenser"]
+shape = SubResource("Circle_prop_ticket_dispenser")
+
+[node name="ComplianceWaitingBench" type="Area2D" parent="Props"]
+position = Vector2(230, 250)
+script = ExtResource("2_resonance")
+resonance_id = "prop_waiting_bench"
+prop_type = 73
+prop_title = "Ławka poczekalni"
+prop_subtitle = "Afisz procedur zgodności UCP"
+interaction_radius = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ComplianceWaitingBench"]
+shape = SubResource("Circle_prop_waiting_bench")
+
+[node name="PneumaticDossierStation" type="Area2D" parent="Props"]
+position = Vector2(340, 235)
+script = ExtResource("2_resonance")
+resonance_id = "prop_pneumatic_station"
+prop_type = 74
+prop_title = "Stacja tuby pneumatycznej"
+prop_subtitle = "Kapsuła akt osobowych R-01..R-06"
+interaction_radius = 55.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/PneumaticDossierStation"]
+shape = SubResource("Circle_prop_pneumatic_station")
+
+[node name="DiagnosticMemoryPrinter" type="Area2D" parent="Props"]
+position = Vector2(450, 250)
+script = ExtResource("2_resonance")
+resonance_id = "prop_diagnostic_printer"
+prop_type = 75
+prop_title = "Aparat diagnostyczny"
+prop_subtitle = "Rejestracja odpowiedzi sensorycznych"
+interaction_radius = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/DiagnosticMemoryPrinter"]
+shape = SubResource("Circle_prop_diagnostic_printer")
+
+[node name="ConsultationOfficeDoor" type="Area2D" parent="Props"]
+position = Vector2(580, 230)
+script = ExtResource("2_resonance")
+resonance_id = "prop_office_door"
+prop_type = 76
+prop_title = "Gabinet konsultacyjny 06"
+prop_subtitle = "Dr Helena Wierzbicka"
+interaction_radius = 60.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ConsultationOfficeDoor"]
+shape = SubResource("Circle_prop_office_door")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(590, 245)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(45, 240)
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")

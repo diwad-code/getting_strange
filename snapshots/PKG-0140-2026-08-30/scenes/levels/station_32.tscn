@@ -1,0 +1,219 @@
+[gd_scene load_steps=28 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/station_32.gd" id="1_station"]
+[ext_resource type="Script" path="res://scripts/interactables/memory_resonance_point.gd" id="2_resonance"]
+[ext_resource type="PackedScene" path="res://scenes/player/prototype_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/camera/cinematic_camera.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/levels/atmosphere_rig.gd" id="5_atmosphere"]
+[ext_resource type="Script" path="res://scripts/ui/crt_dialogue_box.gd" id="6_dialogue"]
+[ext_resource type="Script" path="res://scripts/ui/station_dialogue_cue.gd" id="7_cue"]
+[ext_resource type="Script" path="res://scripts/visual/vector_stage_environment.gd" id="8_vector_stage"]
+[ext_resource type="Script" path="res://scripts/interactables/anchorable_object.gd" id="9_anchorable"]
+[ext_resource type="Script" path="res://scripts/visual/world_pixel_compositor.gd" id="10_compositor"]
+[ext_resource type="Script" path="res://scripts/core/narrative_guidance_service.gd" id="11_guidance"]
+[ext_resource type="Script" path="res://scripts/ui/inner_thought_surface.gd" id="12_thought"]
+[ext_resource type="Script" path="res://scripts/visual/crisp_diegetic_text.gd" id="13_crisp_text"]
+[ext_resource type="Script" path="res://scripts/environment/ladder_zone.gd" id="14_ladder"]
+[ext_resource type="Script" path="res://scripts/environment/return_zone.gd" id="15_returnzone"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_floor_main"]
+size = Vector2(640, 80)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_ceiling"]
+size = Vector2(640, 48)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_left"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wall_right"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_observed_glass"]
+size = Vector2(30, 32)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
+size = Vector2(50, 70)
+
+[sub_resource type="CircleShape2D" id="Circle_prop_steamed"]
+radius = 46.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_cracked"]
+radius = 46.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_trace"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_polished"]
+radius = 46.0
+
+[sub_resource type="CircleShape2D" id="Circle_prop_exit"]
+radius = 60.0
+
+[node name="Station32" type="Node2D"]
+script = ExtResource("1_station")
+
+[node name="VectorStageEnvironment" type="Node2D" parent="."]
+script = ExtResource("8_vector_stage")
+stage_seed = 32
+station_number = 32
+
+[node name="AtmosphereRig" type="Node2D" parent="."]
+script = ExtResource("5_atmosphere")
+station_number = 32
+
+[node name="WorldPixelCompositor" type="CanvasLayer" parent="."]
+script = ExtResource("10_compositor")
+
+[node name="NarrativeGuidanceService" type="Node" parent="."]
+script = ExtResource("11_guidance")
+
+[node name="InnerThoughtSurface" type="CanvasLayer" parent="." node_paths=PackedStringArray("guidance_service")]
+script = ExtResource("12_thought")
+guidance_service = NodePath("../NarrativeGuidanceService")
+
+[node name="CRTDialogueBox" type="CanvasLayer" parent="."]
+script = ExtResource("6_dialogue")
+
+[node name="OpeningDialogueCue" type="Node" parent="."]
+script = ExtResource("7_cue")
+station_id = &"station_32"
+opening_line = "Szkło laboratoryjne. Ślad kondensacji i pamięć materiału."
+
+[node name="CrispDiegeticText" type="Node2D" parent="."]
+position = Vector2(60, 95)
+script = ExtResource("13_crisp_text")
+text = "STANOWISKO ANALITYCZNE // PAMIĘĆ MATERIAŁU // ŚLAD REZONANSU"
+font_size = 9
+text_color = Color(0.46, 0.78, 0.76, 1)
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="FloorMain" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 320)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorMain"]
+shape = SubResource("Rectangle_floor_main")
+
+[node name="Ceiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(320, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ceiling"]
+shape = SubResource("Rectangle_ceiling")
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallLeft"]
+shape = SubResource("Rectangle_wall_left")
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/WallRight"]
+shape = SubResource("Rectangle_wall_right")
+
+[node name="ObservedGlassTrace" type="AnimatableBody2D" parent="Geometry"]
+position = Vector2(362, 190)
+script = ExtResource("9_anchorable")
+state_a_position = Vector2(362, 190)
+state_b_position = Vector2(362, 190)
+state_a_size = Vector2(30, 32)
+state_b_size = Vector2(34, 184)
+state_a_solid = false
+state_b_solid = true
+object_name = "Obserwowany ślad w szkle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/ObservedGlassTrace"]
+shape = SubResource("Rectangle_observed_glass")
+one_way_collision = true
+
+[node name="GlassLabLadder" type="Area2D" parent="."]
+position = Vector2(325, 280)
+script = ExtResource("14_ladder")
+ladder_height = 100.0
+ladder_width = 22.0
+ladder_title = "Drabina laboratoryjna stanowiska analitycznego"
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="SteamedGlassPaneA" type="Area2D" parent="Props"]
+position = Vector2(125, 245)
+script = ExtResource("2_resonance")
+resonance_id = "prop_steamed_glass_pane_a"
+prop_type = 147
+prop_title = "Zaparowana tafla szkła (Wariant Spokojny)"
+prop_subtitle = "Obraz pustej ulicy o świcie bez wypadku i bez ofiar"
+interaction_radius = 46.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/SteamedGlassPaneA"]
+shape = SubResource("Circle_prop_steamed")
+
+[node name="CrackedGlassPaneB" type="Area2D" parent="Props"]
+position = Vector2(235, 245)
+script = ExtResource("2_resonance")
+resonance_id = "prop_cracked_glass_pane_b"
+prop_type = 148
+prop_title = "Popękana tafla szkła (Wariant Uderzenia)"
+prop_subtitle = "Widmo pożaru, fala uderzeniowa i zapach spalenizny w szkle"
+interaction_radius = 46.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/CrackedGlassPaneB"]
+shape = SubResource("Circle_prop_cracked")
+
+[node name="CondensationTraceEtcher" type="Area2D" parent="Props"]
+position = Vector2(345, 248)
+script = ExtResource("2_resonance")
+resonance_id = "prop_trace_etcher"
+prop_type = 150
+prop_title = "Ślad wyrysowany na zaparowanym szkle"
+prop_subtitle = "Przeciągnięcie palcem po szkle wywołuje rezonans z wymazaną prawdą"
+interaction_radius = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/CondensationTraceEtcher"]
+shape = SubResource("Circle_prop_trace")
+
+[node name="PolishedGlassPaneC" type="Area2D" parent="Props"]
+position = Vector2(455, 245)
+script = ExtResource("2_resonance")
+resonance_id = "prop_polished_glass_pane_c"
+prop_type = 149
+prop_title = "Wygładzona tafla szkła (Wariant Oficjalny)"
+prop_subtitle = "Wykresy i raporty UCP bez śladu kolizji tramwaju Linii 4"
+interaction_radius = 46.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/PolishedGlassPaneC"]
+shape = SubResource("Circle_prop_polished")
+
+[node name="Station32Exit" type="Area2D" parent="Props"]
+position = Vector2(590, 245)
+script = ExtResource("2_resonance")
+resonance_id = "prop_station_32_exit"
+prop_type = 151
+prop_title = "Właz techniczny do Szybu Wentylacyjnego"
+prop_subtitle = "Zejście poziom niżej do maszynowni i rejestru par"
+interaction_radius = 60.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Station32Exit"]
+shape = SubResource("Circle_prop_exit")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(50, 240)
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+script = ExtResource("4_camera")
+
+[node name="AirlockZone" type="Area2D" parent="."]
+position = Vector2(610, 245)
+
+[node name="ReturnZone" type="Area2D" parent="."]
+position = Vector2(15, 238)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("15_returnzone")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnZone"]
+shape = SubResource("Rectangle_airlock")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirlockZone"]
+shape = SubResource("Rectangle_airlock")

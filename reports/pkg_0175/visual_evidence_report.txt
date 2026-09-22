@@ -1,0 +1,5 @@
+PKG-0175 visual evidence
+Intel display capture, not headless.
+- open_exit_station_01.png :: DEF-8: Station 01 exit open from ready
+- open_exit_station_03.png :: DEF-8: Station 03 vehicle threshold reachable without readings
+- open_exit_station_18.png :: DEF-8: Station 18 commitment is the only fork, door stays open
