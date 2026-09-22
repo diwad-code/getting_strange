@@ -1,0 +1,74 @@
+name: Windows verification 0240
+on:
+  push:
+    branches: [fix/visual-animation-ux-2026-09-22]
+    paths: [.github/workflows/verify-visual-0240.yml, scripts/**, scenes/**, tools/audit_0240_*, docs/rebuild/PKG_0240_*]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /AGENTS.md
+            /README.md
+            /VISUAL_DESIGN.md
+            /project.godot
+            /icon.svg
+            /export_presets.cfg
+            /scripts/
+            /scenes/
+            /resources/
+            /assets/
+            /docs/
+            /tools/
+            /tests/
+            !**/logs/**
+            !**/reports/**
+            !**/snapshots/**
+          persist-credentials: false
+      - name: Install verified Godot 4.7.2
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $bin = Join-Path $env:RUNNER_TEMP 'godot-0240'
+          New-Item -ItemType Directory -Force $bin | Out-Null
+          Invoke-WebRequest 'https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_win64.exe.zip' -OutFile "$bin/godot.zip"
+          Invoke-WebRequest 'https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/SHA512-SUMS.txt' -OutFile "$bin/SHA512-SUMS.txt"
+          $line = Get-Content "$bin/SHA512-SUMS.txt" | Where-Object { $_ -match 'Godot_v4.7.2-stable_win64.exe.zip$' }
+          $expected = ($line -split '\s+')[0]
+          if ((Get-FileHash "$bin/godot.zip" -Algorithm SHA512).Hash.ToLowerInvariant() -ne $expected.ToLowerInvariant()) { throw 'Checksum mismatch' }
+          Expand-Archive "$bin/godot.zip" "$bin/unpacked"
+          Copy-Item "$bin/unpacked/Godot_v4.7.2-stable_win64.exe" "$bin/godot.exe"
+          Copy-Item "$bin/unpacked/Godot_v4.7.2-stable_win64_console.exe" "$bin/godot_console.exe"
+          $bin >> $env:GITHUB_PATH
+      - name: Baseline prerequisite and full verifier
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force 'reports/audit_0240/windows' | Out-Null
+          git rev-parse HEAD | Out-File 'reports/audit_0240/windows/commit.txt'
+          $path = 'scripts/levels/narrative_repair_rules.gd'
+          $text = [IO.File]::ReadAllText($path)
+          $old = 'var sample := decisions.get(&"home_sample_preserved", false) == true'
+          if ($text.Contains($old)) {
+            [IO.File]::WriteAllText($path, $text.Replace($old, 'var sample: bool = decisions.get(&"home_sample_preserved", false) == true'))
+            'DECLARED BASELINE PREREQUISITE: explicit bool at narrative_repair_rules.gd:90, no other changes' | Out-File 'reports/audit_0240/windows/prerequisite.txt'
+          }
+          & pwsh -NoProfile -File tools/verify.ps1 *> 'reports/audit_0240/windows/verify.log'
+          $code = $LASTEXITCODE
+          "VERIFY_EXIT=$code" | Out-File 'reports/audit_0240/windows/result.txt'
+          Get-Content 'reports/audit_0240/windows/verify.log' -Tail 90
+          exit $code
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: windows-verification-0240
+          path: reports/audit_0240/windows/
+          retention-days: 7
+          if-no-files-found: warn
