@@ -1,0 +1,62 @@
+name: Prepare visual UX audit 0240
+on:
+  push:
+    branches: [fix/visual-animation-ux-2026-09-22]
+    paths: [.github/workflows/visual-ux-audit-0240.yml]
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 71d937329385368e718b947b43f84fed00324d57
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /AGENTS.md
+            /VISUAL_DESIGN.md
+            /project.godot
+            /icon.svg
+            /.gitattributes
+            /scripts/
+            /scenes/
+            /resources/
+            /assets/
+            /docs/
+            /tools/
+            /tests/
+            /.github/skills/README.md
+            !**/logs/**
+            !**/reports/**
+            !**/snapshots/**
+          persist-credentials: false
+      - name: Package exact sources and toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit_bundle
+          git rev-parse HEAD > audit_bundle/base_commit.txt
+          git ls-files -s > audit_bundle/git_manifest.txt
+          tar --exclude='*/logs' --exclude='*/reports' --exclude='*/snapshots' -czf audit_bundle/source.tar.gz AGENTS.md VISUAL_DESIGN.md project.godot icon.svg scripts scenes resources assets docs tools tests .github/skills/README.md
+          curl -fLsS --retry 3 https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip -o audit_bundle/godot.zip
+          curl -fLsS --retry 3 https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/SHA512-SUMS.txt -o audit_bundle/SHA512-SUMS.txt
+          python3 - <<'PY'
+          import hashlib, pathlib
+          root = pathlib.Path('audit_bundle')
+          rows = (root/'SHA512-SUMS.txt').read_text().splitlines()
+          row = next(line for line in rows if line.split()[-1].lstrip('*') == 'Godot_v4.7.2-stable_linux.x86_64.zip')
+          assert hashlib.sha512((root/'godot.zip').read_bytes()).hexdigest() == row.split()[0]
+          print('GODOT_ARCHIVE_CHECKSUM_OK')
+          PY
+          du -sh audit_bundle/*
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: audit-environment-0240
+          path: audit_bundle/
+          retention-days: 3
+          if-no-files-found: error
