@@ -4,7 +4,7 @@ extends Node2D
 ## Station 42B — P9 PHASE-06, oddanie miejscowej Lenie jej ciała i zamknięcie przepływu.
 ## Znane mieszkanie z 09/10/13 o świcie: ta sama bryła, jeden zmieniony fakt
 ## o osobach (miejscowa Lena w odzyskanym ciele, przybyła Lena poza indeksem).
-## Lena zamyka przepływ Równi, odczytuje stan miejscowej Leny i skutek dla
+## Lena odzyskuje miejscową, potwierdza jej stan, zamyka przepływ i odczytuje skutek dla
 ## osób w tej przestrzeni. Pytanie, z którym gracz wychodzi: „gdzie jestem teraz ja?".
 
 ## PRZESZKODA — dlaczego to tu jest: Przepływ Równi zostaje zamknięty przy
@@ -14,6 +14,8 @@ extends Node2D
 ## odzyskanej miejscowej Leny i odczytu skutku dla Marty i Jakuba w tej przestrzeni.
 ## PRZESZKODA — koszt porażki: niepełna próba zostawia fakt informacyjny i nie
 ## zamyka drogi do 43, jeśli 42B jest wybranym wariantem.
+
+const NarrativeRules := preload("res://scripts/levels/narrative_repair_rules.gd")
 
 const NarrativeGuidanceService := preload("res://scripts/core/narrative_guidance_service.gd")
 const GuidanceBeat := preload("res://scripts/core/guidance_beat.gd")
@@ -77,8 +79,8 @@ signal chamber_b_witnessed()
 ## prezenter) i służy wyłącznie jako fallback edytora i testów (bramka PKG-0107, dokładnie 4 linie).
 const DIALOGUE_LINES: Array[Dictionary] = [
 	{"speaker": "MARTA", "text": "Co wiedziałaś przed testem?"},
-	{"speaker": "MIEJSCOWA LENA", "text": "Próbę zrobiłam sama. UCP dopisało resztę."},
-	{"speaker": "MARTA", "text": "Poznaję twój oddech. Klucz dostaniesz, kiedy odpowiesz."},
+	{"speaker": "MIEJSCOWA LENA", "text": "Zaczęłam próbę, zanim ta obca osoba mogła odpowiedzieć."},
+	{"speaker": "MARTA", "text": "Mnie też nie zapytałaś. Nie skończyłyśmy rozmowy."},
 	{"speaker": "LENA", "text": "Stoję w progu. Czytnik nie ma tu adresu."},
 ]
 
@@ -87,6 +89,7 @@ var dialogue_active := false
 var dialogue_index := 0
 var is_dialogue_completed := false
 
+var is_recovery_started := false
 var is_flow_closed := false
 var is_local_lena_recovered := false
 var is_household_read := false
@@ -132,16 +135,16 @@ func _setup_guidance() -> void:
 	if guidance_service == null:
 		return
 	_register_beat(&"s42b_dawn_source", GuidanceBeat.Tier.L0_COMPOSITION, &"observation", &"factual", "", "", &"", "")
-	_register_beat(&"s42b_closure_echo", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Miejscowa Lena wraca do swojego życia. Przepływ Równi jest zamknięty.", "Local Lena returns to her life. The flow of the Plane is closed.", &"", "")
+	_register_beat(&"s42b_closure_echo", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Miejscowa odpowiedziała u siebie. Teraz przepływ jest zamknięty.", "Local Lena answered at home. Now the flow is closed.", &"", "")
 	# PKG-0225 (K1/K5): nośniki finałowe — puste miejsce po kurtce (hak) oraz
 	# koszula ściągnięta w dół (blizna ciałem, granica z 12 trzyma). Konkrety
 	# bez tezy (D-214); wzór K4: rejestracja + ślad w _draw, bez triggera.
 	_register_beat(&"s42b_hook", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Hak po kurtce jest pusty.", "The jacket hook is empty.", &"", "")
 	_register_beat(&"s42b_shirt", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Na oparciu koszula ściągnięta w dół. Boku nie pokazuje.", "A shirt pulled down over the chair back. He does not show his side.", &"", "")
 	_register_beat(&"s42b_unindexed_hypothesis", GuidanceBeat.Tier.L2_CONTEXTUAL_THOUGHT, &"interpretation", &"fallible", "Gdzie jestem teraz ja? Zostałam poza rejestrem instytucji, ale stoję tu naprawdę.", "Where am I now? I remained outside the institution index, but I am standing here.", &"arrived_lena_unindexed_presence", "read_local_lena_recovered")
-	_register_beat(&"s42b_read_plan", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Zamknąć przepływ, sprawdzić stan miejscowej Leny i przyjąć nieindeksowaną obecność.", "Close the flow, check local Lena's state, and accept unindexed presence.", &"", "execute_close_flow")
+	_register_beat(&"s42b_read_plan", GuidanceBeat.Tier.L3_DIRECTIONAL_THOUGHT, &"intention", &"procedural", "Najpierw rozpocznę odzyskanie. Sprawdzę ją przy progu. Potem wrócę zamknąć przepływ.", "Start the recovery, check her at the threshold, then return to close the flow.", &"", "execute_close_flow")
 	_register_beat(&"s42b_recovered_seen", GuidanceBeat.Tier.L1_REACTION, &"observation", &"factual", "Ona jest u siebie. Oddycha i odpowiada sama.", "She is home. She breathes and answers on her own.", &"", "")
-	_register_beat(&"s42b_system_hint", GuidanceBeat.Tier.L4_RESCUE_HINT, &"system_hint", &"system", "WSKAZÓWKA: Zamknięcie przepływu, próg miejscowej Leny, stół nieindeksowanej obecności.", "HINT: Flow closure, local Lena threshold, unindexed presence table.", &"", "")
+	_register_beat(&"s42b_system_hint", GuidanceBeat.Tier.L4_RESCUE_HINT, &"system_hint", &"system", "WSKAZÓWKA: Zasuwa → próg → zasuwa po odpowiedzi miejscowej → stół.", "HINT: Latch → threshold → latch after local Lena answers → table.", &"", "")
 
 
 func _register_beat(beat_id: StringName, tier: GuidanceBeat.Tier, thought_kind: StringName, truth_scope: StringName, text_pl: String, text_en: String, hypothesis_id: StringName, predicted_check: String) -> void:
@@ -216,11 +219,22 @@ func execute_close_flow() -> bool:
 	if not _has_close_equal():
 		_record_feedback(&"method_close_equal_required")
 		return false
-	is_flow_closed = true
-	if not _decided(FACT_FLOW_CLOSED):
-		_record(FACT_FLOW_CLOSED, true)
+	if not is_recovery_started:
+		# Pierwsze użycie przygotowuje odzyskanie, nie zamyka kanału.
+		is_recovery_started = true
+		_record(&"p9.finale.close_equal.recovery_started", true)
 		_record(FACT_EXECUTED, true)
 		_record(FACT_ENDING_FAMILY, ENDING_FAMILY_VALUE)
+		_report_progress(&"s42b_recovery_started")
+		queue_redraw()
+		return true
+	if not is_local_lena_recovered or not _decided(FACT_LOCAL_RECOVERED):
+		_record_feedback(&"recovered_state_required")
+		if guidance_service:
+			guidance_service.trigger_beat(&"s42b_read_plan")
+		return false
+	is_flow_closed = true
+	_record(FACT_FLOW_CLOSED, true)
 	if guidance_service:
 		guidance_service.trigger_beat(&"s42b_closure_echo")
 	_report_progress(&"s42b_flow_closed")
@@ -228,6 +242,10 @@ func execute_close_flow() -> bool:
 	_unlock_exit()
 	queue_redraw()
 	return true
+
+func _has_pending_narrative_dialogue(id: String) -> bool:
+	return id in ["flow_closure", "prop_flow_closure", "FlowClosureLatch"] \
+		and is_recovery_started and not is_flow_closed
 
 
 func close_flow() -> bool:
@@ -240,9 +258,9 @@ func read_local_lena_recovered() -> bool:
 	if not _has_close_equal():
 		_record_feedback(&"method_close_equal_required")
 		return false
-	# PKG-0232 (D-244, D3): stan dopiero po wykonaniu.
-	if not is_flow_closed and not _decided(FACT_FLOW_CLOSED):
-		_record_feedback(&"flow_closure_required")
+	# PKG-0239: potwierdzenie powrotu po rozpoczęciu odzyskiwania, przed zamknięciem.
+	if not is_recovery_started or not _decided(&"p9.finale.close_equal.recovery_started"):
+		_record_feedback(&"recovery_preparation_required")
 		if guidance_service:
 			guidance_service.trigger_beat(&"s42b_read_plan")
 		return false
@@ -280,8 +298,8 @@ func read_household_consequence() -> bool:
 		_record_feedback(&"method_close_equal_required")
 		return false
 	# PKG-0232 (D-244, D3): skutek dopiero po odczycie stanu.
-	if not is_local_lena_recovered and not _decided(FACT_LOCAL_RECOVERED):
-		_record_feedback(&"recovered_state_required")
+	if not is_flow_closed or not is_local_lena_recovered:
+		_record_feedback(&"flow_closure_required")
 		if guidance_service:
 			guidance_service.trigger_beat(&"s42b_read_plan")
 		return false
@@ -294,7 +312,7 @@ func read_household_consequence() -> bool:
 		_record_feedback(&"consent_scope_required")
 		return false
 	household_consequence = {
-		"marta": marta_truth_state if not marta_truth_state.is_empty() else MARTA_PARTIAL,
+		"marta": marta_truth_state,
 		"jakub": jakub_consent_state,
 		"local_lena": "recovered_in_body",
 		"arrived_lena": "unindexed_presence",
@@ -396,35 +414,31 @@ func _trigger_level_completion() -> void:
 ## instancja po ReturnZone odtwarza stan ekspozycji z decyzji (rysunek).
 ## Flagi kroków odtwarzają się pierwszym aktem (prezentacja bez zapisu).
 func _restore_chain_from_decisions() -> void:
+	is_recovery_started = _decided(&"p9.finale.close_equal.recovery_started")
+	is_flow_closed = _decided(FACT_FLOW_CLOSED)
+	is_local_lena_recovered = _decided(FACT_LOCAL_RECOVERED)
+	is_doorstep_inspected = is_local_lena_recovered
+	is_chamber_b_witnessed = is_local_lena_recovered
+	is_household_read = _decided(FACT_HOUSEHOLD)
 	var household: Variant = _read_decision(FACT_HOUSEHOLD)
 	if household is Dictionary and not (household as Dictionary).is_empty():
 		household_consequence = (household as Dictionary).duplicate(true)
 
 
 func _has_close_equal() -> bool:
-	var namespaced := str(_read_decision(FACT_DONOR_METHOD))
-	var canonical := str(_read_decision(FACT_CANONICAL_METHOD))
-	return namespaced == METHOD_CLOSE_EQUAL or canonical == METHOD_CLOSE_EQUAL
+	return NarrativeRules.committed(_narrative_decisions(), "close_equal_recover_local")
+
+func _narrative_decisions() -> Dictionary:
+	var state := get_node_or_null("/root/GameStateManager")
+	return state.decisions if state != null else {}
 
 
 func _read_marta_truth() -> String:
-	var namespaced := str(_read_decision(FACT_DONOR_MARTA))
-	if namespaced in [MARTA_FULL, MARTA_PARTIAL, MARTA_WITHHELD]:
-		return namespaced
-	var canonical := str(_read_decision(FACT_CANONICAL_MARTA))
-	if canonical in [MARTA_FULL, MARTA_PARTIAL, MARTA_WITHHELD]:
-		return canonical
-	return ""
+	return NarrativeRules.truth(_narrative_decisions())
 
 
 func _read_jakub_consent() -> String:
-	var scoped := str(_read_decision(FACT_DONOR_SCOPE))
-	if scoped in [SCOPE_GRANTED, SCOPE_LIMITED, SCOPE_REFUSED]:
-		return scoped
-	var canonical := str(_read_decision(FACT_CANONICAL_SCOPE))
-	if canonical in [SCOPE_GRANTED, SCOPE_LIMITED, SCOPE_REFUSED]:
-		return canonical
-	return ""
+	return NarrativeRules.scope(_narrative_decisions())
 
 
 func _read_decision(id: StringName) -> Variant:

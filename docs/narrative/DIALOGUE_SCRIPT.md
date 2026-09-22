@@ -1,5 +1,35 @@
 # Biblia dialogowa i kluczowe rozmowy
 
+## Aktywny dialog po audycie / PKG-0239 / 2026-09-22
+
+Źródłem wykonania są `scripts/levels/creative_scene_lines.gd`, otwarcia
+`.tscn` i guidance stacji. Lokatory oraz granice potwierdzenia:
+`docs/narrative/NARRATIVE_FIX_IMPLEMENTATION.md`. Poniższy dawca nie
+przywraca starej numeracji ani sprzecznego aktywnego brzmienia.
+
+Lena nie mówi o sterowaniu nią, konstrukcji sekcji i przeglądaniu creditsów.
+Zamiast deklarować świadomość decyzji, nazywa ryzyko impulsu. Marta odpowiada
+na schowaną kartkę, nie zatwierdza jej etyczności. Wierzbicka broni lokalnego
+poranka i własnego zakresu pomiaru; Lena pyta o pominiętych ludzi. Miejscowa
+przyznaje własne ryzyko przed późniejszą ingerencją UCP.
+
+Zgoda obejmuje prośbę, zakres, koszt i odpowiedź na jedną metodę. Zapis
+następuje w `_on_narrative_dialogue_finished()` stacji 17/18. Odczyt ryzyka
+nie daje zgody. Wskazówka obsługi ma własny podpis `WSKAZÓWKA`. Odmowa
+nie znika przy powrocie. Po odmowie podłączenia dopuszczona jest wyłącznie
+nowa propozycja samego odczytu do B; Jakub może odmówić także jej.
+
+Miejscowa Marta oddziela ratunek, synchronizację i przebaczenie. Pełny zapis
+nie daje automatycznie klucza. Domowa Marta słyszy własną rozmowę w A/C;
+nie dziedziczy `marta_truth_state` miejscowej. Po koszcie 16 miejscowa Marta
+nadal kończy zdanie o kaloryferze; przybyła może poznać treść z powtórzenia,
+lecz nie odzyskuje wspomnienia pierwszej dzisiejszej wypowiedzi.
+
+W finale podpisy `RÓWNIA — ...` oznaczają odrębną perspektywę osoby lub
+dokumentu, nie nowy kanał odbioru po zamknięciu A/B. B używa starego echa
+i niewysłanego „Jadę”. Czytelność przejść perspektywy w wykonaniu
+nie została potwierdzona przez samo dopisanie tekstu.
+
 ## Dostarczone rozmowy CR-A / PKG-0193
 
 Aktywne 09–13 korzystają z `scripts/levels/creative_scene_lines.gd` i
@@ -34,8 +64,8 @@ wiedzy postaci ani relacji bez aktualizacji kanonu.
    do skrótu, granicy, wspólnym konkrecie i tym, czego nie trzeba tłumaczyć.
 7. Po silnej kwestii kamera i tekst zostawiają miejsce na reakcję. Druga postać
    nie dopowiada natychmiast jej znaczenia.
-8. Przed Station 21 nikt nie używa słownika obcego świata. Przed 22 nikt nie
-   zna nazwy i kosztu metody.
+8. W aktywnej trasie przed syntezą 13 nikt nie używa słownika obcego świata.
+   W 14 nazwy następują po obu zachowaniach; mały koszt zostaje rozegrany w 16.
 9. Centralna rozmowa ma najwyżej 8–14 krótkich wymian pomiędzy działaniami.
    Informacja, którą można pokazać urządzeniem, nie zostaje monologiem.
 10. Po usunięciu etykiet mówiących głosy nadal powinny być rozróżnialne.

@@ -60,12 +60,12 @@ script = ExtResource("6_dialogue")
 [node name="OpeningDialogueCue" type="Node" parent="."]
 script = ExtResource("7_cue")
 station_id = &"station_17"
-opening_line = "Echo domu potwierdziło: nikt się nie zamienił. Idę do rejestru par w hali UCP."
+opening_line = "Marta w domu zgłosiła moje zaginięcie. Z odpowiedzią i ceną idę do rejestru par w hali UCP."
 
 [node name="CrispDiegeticText_Ledger" type="Node2D" parent="."]
 position = Vector2(84, 130)
 script = ExtResource("12_crisp_text")
-text = "REJESTR PAR LINII 4 // KTO UTZYMUJE ZAPIS // KTO ZAPLACIL"
+text = "REJESTR PAR LINII 4 // KTO UTRZYMUJE ZAPIS // KTO ZAPŁACIŁ"
 font_size = 9
 text_color = Color(0.82, 0.6, 0.36, 1)
 

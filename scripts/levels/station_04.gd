@@ -87,7 +87,7 @@ func observe_reader_buffer() -> bool:
 		return false
 	is_reader_buffer_observed = true
 	_record(FACT_READER, true)
-	var repeated_sample := _decision_string(OPENING_CHOICE) != "leave_on_time"
+	var repeated_sample := _decision_string(OPENING_CHOICE) == "repeat_sample"
 	_record(&"p9.opening.reader_gap_returns_in_transit", repeated_sample)
 	_record(&"p9.opening.packed_reader_checked_in_transit", not repeated_sample)
 	_resolve_action(&"observe_reader_buffer")
@@ -111,7 +111,7 @@ func watch_line_four_memorial() -> bool:
 	_set_action_available(&"stow_reader_for_marta", true)
 	line_four_memorial_seen.emit()
 	_present([
-		{"speaker": "LENA", "text": "Pomnik Linii 4. Nie patrzę na niego od dziewięciu lat."},
+		{"speaker": "LENA", "text": "Pomnik Linii 4. Nazwisko Jakuba. Dziewięć lat, a wciąż odwracam głowę."},
 	])
 	queue_redraw()
 	return true
@@ -129,7 +129,7 @@ func stow_reader_for_marta() -> bool:
 	reader_stowed.emit()
 	# CR-D (PKG-0196 §6): odłożenie czytnika (bufor) oddzielone od fizycznej
 	# próbki; gałąź wyjścia na czas nie wymyśla drugiego pomiaru.
-	var carried_sample := _decision_string(OPENING_CHOICE) != "leave_on_time"
+	var carried_sample := _decision_string(OPENING_CHOICE) == "repeat_sample"
 	_present([
 		{"speaker": "LENA", "text": "Odwracam czytnik ekranem do dołu. Próbka jedzie w torbie." if carried_sample else "Odwracam czytnik ekranem do dołu. Tyle z pracy na dziś."},
 	])

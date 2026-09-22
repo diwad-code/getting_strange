@@ -21,6 +21,15 @@ func _ready() -> void:
 		var player := get_parent().get_node_or_null("Player") as Node2D
 		if player and game_state:
 			game_state.set_checkpoint(station_id, player.global_position)
+	# PKG-0239: powrót do finału nie przedstawia wykonanego kroku jako przyszłego.
+	var executed_keys := {
+		&"station_42a": &"p9.finale.forced_return.executed",
+		&"station_42b": &"p9.finale.close_equal.executed",
+		&"station_42c": &"p9.finale.mutual_passage.executed",
+	}
+	if game_state and executed_keys.has(station_id):
+		if game_state.decisions.get(executed_keys[station_id], false) == true:
+			return
 	if opening_line.is_empty():
 		return
 	var dialogue := get_parent().get_node_or_null("CRTDialogueBox") as CRTDialogueBox

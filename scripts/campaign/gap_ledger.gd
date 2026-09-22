@@ -56,11 +56,12 @@ const CATALOG := {
 	"s05.street_unread": {
 		"opened_from": "station_05",
 		"origin_station": "station_05",
-		"blocks": ["s05.verify_sample_case"],
+		"blocks": [],
+		"optional": true,
 		"station_flag": "is_street_route_checked",
 		"close_fact": "p7.return_under_control.street_route_checked",
-		"thought_pl": "Nie sprawdziłam ulicy do domu.",
-		"thought_en": "I didn't check the street home.",
+		"thought_pl": "Mogę przejść dalej. Zaglądanie do torby nie jest konieczne.",
+		"thought_en": "I can cross. Checking the bag is optional.",
 	},
 	"s06.timetable_unread": {
 		"opened_from": "station_06",
@@ -167,8 +168,8 @@ const CATALOG := {
 		"blocks": ["s18.commit_method"],
 		"station_flag": "is_consent_scope_recorded",
 		"close_fact": "jakub_consent_state",
-		"thought_pl": "Nie zapisałam zakresu zgody Jakuba.",
-		"thought_en": "I didn't record Jakub's consent scope.",
+		"thought_pl": "Sprawdzę, na jaki udział odpowiedział Jakub. Sam opis metody nie jest zgodą.",
+		"thought_en": "I will check which participation Jakub answered. A method description is not consent.",
 	},
 	"s18.method_uncommitted": {
 		"opened_from": "station_18",
@@ -242,6 +243,10 @@ const FEEDBACK_TO_GAP := {
 	"jakub_consent_missing": "s17.consent_unscoped",
 	"commit_post_missing": "s18.method_uncommitted",
 	"marta_table_missing": "s18.method_uncommitted",
+	"method_proposal_required": "s18.method_uncommitted",
+	"method_forecast_required": "s18.method_uncommitted",
+	"method_specific_response_required": "s17.consent_unscoped",
+	"marta_full_record_and_sync_required": "s18.method_uncommitted",
 }
 
 
@@ -260,6 +265,8 @@ const STATION_FEEDBACK_OVERRIDES := {}
 # Fail-closed gate: every route literal must be mapped above, overridden
 # above, or listed here.
 const NON_GAP_FEEDBACKS := [
+	"consent_scope_locked",
+	"recovery_preparation_required",
 	"choice_already_committed",
 	"planter_returned_to_step",
 	"sideboard_returned",
@@ -309,6 +316,9 @@ static func record_on_depart(station: Node) -> void:
 	for gap_id in CATALOG.keys():
 		var spec: Dictionary = CATALOG[gap_id]
 		if String(spec.get("opened_from", "")) != sid:
+			continue
+		if spec.get("optional", false) == true:
+			_close(gsm, StringName(gap_id))  # Wycofanie obowiązku, nie fikcyjna inspekcja.
 			continue
 		if _is_satisfied(station, spec, gsm):
 			_close(gsm, StringName(gap_id))
@@ -378,7 +388,7 @@ static func sync_closed_from_station(station: Node) -> void:
 		var spec: Dictionary = CATALOG[gap_id]
 		if String(spec.get("origin_station", "")) != sid and String(spec.get("opened_from", "")) != sid:
 			continue
-		if _is_satisfied(station, spec, gsm):
+		if spec.get("optional", false) == true or _is_satisfied(station, spec, gsm):
 			_close(gsm, StringName(gap_id))
 
 

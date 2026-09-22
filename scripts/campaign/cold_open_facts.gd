@@ -95,7 +95,7 @@ const TEXT_TIME_MID := "-10 s"
 const TEXT_TIME_RIGHT := "0 s"
 const TEXT_GAP_MARKER := "-03,0 s"
 const TEXT_ARCHIVE_LABEL := "ARCHIWUM  20:14"
-const TEXT_MARTA_MESSAGE := "MARTA  20:31\nHerbata stoi. Wpół do dziewiątej?"
+const TEXT_MARTA_MESSAGE := "MARTA  20:31\nJeden odczyt i wychodzisz? Herbata czeka."
 const TEXT_SKIP_HINT := "POMIŃ ▸"
 const LINE_LENA_GAP := "Przejazd był. Drgania są. Trzech sekund zapisu nie ma."
 

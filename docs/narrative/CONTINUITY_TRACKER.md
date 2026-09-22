@@ -1,10 +1,57 @@
 # Tracker ciągłości, wiedzy i wypłat
 
+## Aktywna ciągłość po audycie / PKG-0239 / 2026-09-22
+
+Trasa 01–18 → 42A/B/C → 43. Tabele dawcy 0.3 niżej nie wyznaczają adresów
+aktualnej kampanii. Raport: `docs/narrative/NARRATIVE_FIX_IMPLEMENTATION.md`.
+Czas scen i rzeczywiste przejście: **brak danych**.
+
+| Zdarzenie | Kto i od kiedy wie | Granica |
+|---|---|---|
+| Odczyt 01, log 15 | Lena w 15 wiąże kontakt z pierwszym pomiarem | Powtórka nie jest przyczyną przejścia |
+| Kaloryfer 10 | Miejscowa Marta pamięta; przybyła słyszy opis | Przybyła nie przeżyła tego wspólnego domu |
+| Synteza 13 | Lena i miejscowa Marta po istniejących źródłach | Rozpoznanie nie daje wiedzy o metodach |
+| Odpowiedź 15 | Lena po kontrolach i błędzie | Responsywność nie ustala całej tożsamości |
+| Ubytek 16 | Własna pamięć zdania albo sekunda nośnika | Marta nadal pamięta |
+| Echo domu 16 | Wiadomość domowej Marty z określonej chwili | Nie jest przeszukaniem domu ani świata |
+| Rejestr 17 | Lena poznaje związek kosztu i wiedzę UCP | Nie dowodzi zamiaru zabójstwa |
+| Prawda 18 | Miejscowa Marta po własnej wymianie | Nie przenosi się do domowej Marty |
+| Domowa Marta 42A/C | Dowiaduje się w swojej rozmowie | Osobne zdarzenie i fakt |
+| A/B po zamknięciu | Odrębnie podpisane osoby i dokumenty | Nie nowa odpowiedź w zamkniętym kanale |
+
+`station_17._on_narrative_dialogue_finished()` zapisuje pierwotny zakres,
+odpowiedzi `method_responses` i ewentualną `revised_reading_response`.
+Odmowa jest trwała. Środek biurka odczytuje ryzyko, nie odpowiada za Jakuba.
+Nowa propozycja po odmowie podłączenia obejmuje tylko sam odczyt do B.
+
+`station_18._on_narrative_dialogue_finished()` zapisuje pełniejszą prawdę
+oraz osobno `marta_sync_response`. `marta_initial_truth` i
+`marta_was_incomplete` zachowują wcześniejszą relację. Zatwierdzenie zamraża
+snapshot z metodą i odpowiedziami. Brak lub konflikt starych zapisów nie
+daje dorozumianej zgody. Negocjacje kończą się przed zamrożeniem.
+
+| Nośnik 01 | Koszt 16 | Stan w 18, 42 i 43 |
+|---|---|---|
+| Surowa próbka | `marta_memory` | Próbka pozostaje; brak własnej pamięci jednego zdania Marty |
+| Surowa próbka | `sample_second` | Próbka bez 20:40:07 |
+| Sam bufor | `marta_memory` | Bufor pozostaje; brak własnej pamięci zdania, nie pamięci Marty |
+| Sam bufor | `sample_second` | Bufor bez 20:40:07; próbka nie powstaje |
+
+Każdy przekrój prowadzi tylko do metod dopuszczonych rzeczywistymi
+odpowiedziami. A/C wymagają szerszego zakresu i własnej odpowiedzi Jakuba;
+B dopuszcza sam odczyt; C wymaga też full i osobnej zgody Marty. Odmowa
+nie otwiera żadnej metody. Jej zmiana na ograniczony udział w B wymaga
+nowej propozycji; pierwsza odmowa pozostaje w zapisie.
+
+B: `recovery_started` → `local_lena_recovered` → `flow_closed` → skutek.
+Powrót nie ponawia otwarcia po wykonaniu, nie zmienia kosztu i nie tworzy
+nowej próbki. Epilog B wymaga zamknięcia, nie samego rozpoczęcia odzyskania.
+
 ## Bieżący wycinek P9 / PKG-0193
 
 Obowiązują adresy i writerzy z `docs/rebuild/PKG_0193_CREATIVE_SCENES.md`.
 W 09 fotografia stawia problem bliskości. W 10 Marta i przybyła pamiętają
-różne następstwa deszczu: kaloryfer i wspólny dom / parking i zerwanie pracy.
+różne następstwa deszczu: kaloryfer i wspólny dom / parking i rozstanie.
 W 11 rejestr szpitalny oraz serwisowy potwierdzają życie Jakuba; dopiero w 12
 Lena słyszy odpowiedzi, spotyka człowieka i przyjmuje odmowę. Brak odczytu
 nie jest uzupełniany wejściem do następnej sceny. Rozpoznanie i poszukiwanie
@@ -12,7 +59,8 @@ drugiej Leny powstają w 13 po pełnej syntezie. Skip nie usuwa późniejszej
 wymiany z Martą. Stan „fakt zapisany” nie oznacza przeczytania rozmowy.
 `home_sample_preserved=false` wyklucza surowy nośnik na stole i w kwestii,
 ale nie usuwa własnego czytnika ani zaświadczenia. Kaloryfer pozostaje
-ustanowionym szczegółem do wypłaty kosztu CR-B. Zegar tabel legacy niżej nie
+ustanowionym szczegółem wypowiedzianym przybyłej. Koszt dotyczy jej pamięci
+dzisiejszego zdania, nie cudzej biografii. Zegar tabel legacy niżej nie
 jest pomiarem długości nowych rozmów ani bieżącą numeracją P9.
 
 Status: **MATERIAŁ ŹRÓDŁOWY P9 — FAKTY I RELACJE ZACHOWANE; NUMERACJA PODLEGA BUNDLE-03**  
@@ -22,7 +70,7 @@ Tracker jest wykonawczą mapą `FULL_STORY.md` 0.3. Oddziela prawdę kanoniczną
 wiedzę postaci, hipotezy Leny, widoczne poszlaki i stan runtime. Legacy sceny
 mogą łamać te zasady do czasu migracji, ale nie ustanawiają kanonu.
 
-## 1. Zegar jednej nocy
+## 1. Historyczny zegar dawcy 0.3 — nie pomiar aktywnej trasy
 
 | Station | Czas orientacyjny | Zdarzenie | Stan wiedzy Leny |
 |---|---:|---|---|
@@ -40,7 +88,7 @@ mogą łamać te zasady do czasu migracji, ale nie ustanawiają kanonu.
 Zegary nie cofają się. Echo domu pokazuje równoległy czas, nie podróż w
 przeszłość. Podstruktura może zaburzać rytm obrazu, ale nie kolejność przyczyn.
 
-## 2. Okna języka i wiedzy
+## 2. Historyczne okna dawcy 0.3 — aktywna mapa powyżej
 
 | Okno | Lena może powiedzieć | Lena nie może jeszcze powiedzieć |
 |---|---|---|

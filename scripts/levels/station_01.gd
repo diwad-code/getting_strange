@@ -103,6 +103,7 @@ func _ready() -> void:
 		airlock_zone.body_entered.connect(_on_airlock_body_entered)
 	_set_action_available(&"read_marta_message", false)
 	_setup_cold_open()
+	_restore_opening_choice()
 	_setup_machine_hum()
 	queue_redraw()
 
@@ -147,6 +148,26 @@ func _setup_cold_open() -> void:
 	var cue := get_node_or_null("OpeningDialogueCue")
 	if cue != null and String(cue.get("opening_line")).to_lower().contains("drga"):
 		ColdOpenFactsScript.record_step.call_deferred(ColdOpenFactsScript.STEP_WORD_SPOKEN)
+
+
+## PKG-0239: powrót nie wytwarza nowej próbki i nie zmienia wyboru otwarcia.
+func _restore_opening_choice() -> void:
+	var state := get_node_or_null("/root/GameStateManager")
+	if state == null:
+		return
+	var stored := str(state.decisions.get(OPENING_CHOICE, ""))
+	if stored.is_empty():
+		return
+	opening_choice = stored
+	cold_open_stage = ColdOpenStage.DONE
+	is_measurement_repeated = stored == CHOICE_REPEAT
+	is_sample_secured = stored == CHOICE_REPEAT
+	is_marta_message_read = state.decisions.get(&"p9.opening.marta_waiting", false) == true
+	_set_action_available(&"repeat_line_four_measurement", false)
+	_set_action_available(&"secure_raw_sample", false)
+	_set_action_available(&"read_marta_message", not is_marta_message_read)
+	if is_marta_message_read:
+		_unlock_exit()
 
 
 func is_cold_open_active() -> bool:
@@ -384,13 +405,13 @@ func read_marta_message() -> bool:
 	marta_message_read.emit()
 	if opening_choice == CHOICE_REPEAT:
 		_present([
-			{"speaker": "MARTA", "text": "Miałyśmy zacząć o wpół do dziewiątej. Napisz tylko, czy jedziesz."},
-			{"speaker": "LENA", "text": "Jadę. Powtórzyłam pomiar i zabrałam próbkę. Będę później."},
+			{"speaker": "MARTA", "text": "Obiecałaś wyjść po jednym odczycie. Jedziesz?"},
+			{"speaker": "LENA", "text": "Powtórzyłam pomiar. Zostałam dłużej, choć obiecałam. Już jadę."},
 		])
 	else:
 		_present([
-			{"speaker": "MARTA", "text": "Miałyśmy zacząć o wpół do dziewiątej. Herbata jeszcze jest gorąca."},
-			{"speaker": "LENA", "text": "Spakowałam sprzęt. Jadę zgodnie z obietnicą."},
+			{"speaker": "MARTA", "text": "Jeden odczyt miał wystarczyć. Herbata czeka."},
+			{"speaker": "LENA", "text": "Jeden odczyt. Spakowałam sprzęt i wychodzę."},
 		])
 	_unlock_exit()
 	_show_step_status("WYJŚCIE // ODBLOKOWANE")

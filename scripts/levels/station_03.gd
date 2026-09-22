@@ -102,7 +102,7 @@ func reply_to_marta() -> bool:
 		return false
 	is_marta_reply_sent = true
 	_record(FACT_NOTICE, true)
-	var repeated_sample := _decision_string(OPENING_CHOICE) != "leave_on_time"
+	var repeated_sample := _decision_string(OPENING_CHOICE) == "repeat_sample"
 	_record(FACT_TRACE, "sample_preserved_and_time_sent" if repeated_sample else "equipment_packed_and_departure_confirmed")
 	_record(&"marta_promise_broken", repeated_sample)
 	_record(&"p9.opening.marta_knows_delay", true)
@@ -113,12 +113,12 @@ func reply_to_marta() -> bool:
 	if repeated_sample:
 		_present([
 			{"speaker": "MARTA", "text": "Herbata stygnie. Napisz, kiedy wsiądziesz."},
-			{"speaker": "LENA", "text": "Jadę. Przez objazd będę później."},
+			{"speaker": "LENA", "text": "Do mojego opóźnienia doszedł objazd. Wsiadam."},
 		])
 	else:
 		_present([
 			{"speaker": "MARTA", "text": "Widzę zamknięcie na trasie. Jedź spokojnie, herbata czeka."},
-			{"speaker": "LENA", "text": "Jadę. Tym razem wyszłam z pracy wtedy, kiedy obiecałam."},
+			{"speaker": "LENA", "text": "Wyszłam po jednym odczycie. Teraz czekam przez objazd."},
 		])
 	_unlock_exit()
 	queue_redraw()

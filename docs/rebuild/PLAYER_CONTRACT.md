@@ -1,13 +1,38 @@
 # Kontrakt gracza — tożsamość, stawka i pierwsze 30 minut
 
+## Uzupełnienie po audycie / PKG-0239 / 2026-09-22
+
+Raport: `docs/narrative/NARRATIVE_FIX_IMPLEMENTATION.md`. Czasy poniżej
+pozostają celami, nie wynikiem badania tej wersji. Przejście i odbiór:
+**brak danych**. Nie ogłoszono PRODUCT GO.
+
+Obietnica dotyczy wyjścia po jednym odczycie, nie przybycia na spotkanie,
+które zaczęło się przed obowiązkowym pomiarem. Kontakt pozostaje o 20:40.
+Powtórka łamie obietnicę; objazd opóźnia obie drogi. Bez powtórki Lena ma
+czytnik, dokument i bufor. Torba w 05 jest opcjonalna; samo przejście nie
+stempluje inspekcji. Kiosk odpowiada o trasie, nie o godzinie zamknięcia.
+
+Po 13 rozpoznanie świata nie daje pełnej wiedzy o nadawcy ani powrocie.
+15–18 oddziela obserwację, wniosek, znany koszt, niewiadomą i cudzą odpowiedź.
+Dobra obserwacja nie jest automatycznym przyzwoleniem na procedurę.
+
+Prognozy są czytelne także przy odmowie. Wykonanie wymaga odpowiedzi Jakuba
+na wskazaną metodę; C także pełnej wiedzy miejscowej Marty i odrębnej zgody
+na synchronizację. Pełna prawda nie daje przebaczenia. Przerwanie rozmowy
+nie zapisuje niewypowiedzianej odpowiedzi. Ponowienie tej samej prośby nie
+usuwa odmowy. Zmiana zakresu wymaga nowej propozycji i nowej odpowiedzi.
+
+Finał nie odtwarza małego kosztu, nie tworzy niezdobytej próbki i nie przenosi
+wiedzy między Martami. A/B/C zachowują odrębne ceny. Wskazówki obsługi są
+oddzielone od głosu Leny, która nie mówi o sterowaniu sobą lub creditsach.
+
 Status: **AKTYWNY KONTRAKT PRODUKTU P9 — BUNDLE-02 / PKG-0156**
 Data: 2026-08-31
 Decyzje nadrzędne: D-168, ADR-008
 Plan: `docs/PROJECT_REBUILD_EXECUTION_PLAN.md` §3
 Bramki: `docs/rebuild/ACCEPTANCE_MATRIX.md`
 
-Ten dokument odpowiada na cztery pytania, na które bieżący runtime nie
-odpowiada: kim jest gracz, co ma robić, po co i według jakich zasad. Każdy
+Ten dokument ustanawia cztery pytania kontraktu: kim jest gracz, co ma robić, po co i według jakich zasad. Każdy
 kolejny bundle P9 jest mierzony tym kontraktem, nie zielonym testem.
 
 Zasada nadrzędna dokumentu:
@@ -33,7 +58,7 @@ uwierzyła i wybrała zawód, w którym można sprawdzić takie luki.
 | Warstwa | Treść | Nośnik |
 |---|---|---|
 | Kim jest | diagnostyczka drgań, nie bohaterka | strój roboczy, czytnik w ręku, stanowisko pomiarowe |
-| Co robi teraz | powtarza pomiar trzysekundowej luki przy Linii 4 | fizyczna czynność gracza na stanowisku |
+| Co robi teraz | wykonuje jeden odczyt, potem wybiera powtórkę albo wyjście | fizyczna czynność gracza na stanowisku |
 | Czego chce | zamknąć pomiar czysto i wrócić do Marty | wiadomość Marty + realny upływ czasu w scenie |
 | Czego się boi | że znów nazwą lukę błędem, a przypadek zostanie bezkarny | reakcja ciała przy odczycie, cisza po nim |
 | Czego potrzebuje (nie wie o tym) | działać uczciwie przy niepełnej wiedzy i pytać ludzi o zgodę | dopiero po Station 13 |
@@ -41,7 +66,7 @@ uwierzyła i wybrała zawód, w którym można sprawdzić takie luki.
 ### Jedno zdanie, które gracz ma umieć powiedzieć po 60 sekundach
 
 > „Jestem Leną, sprawdzam dziwną lukę w pomiarze przy Linii 4, a Marta czeka
-> na mnie i właśnie się spóźniam.”
+> na mnie. Obiecałam wyjść po jednym odczycie.”
 
 Jeśli gracz musi przeczytać opis postaci, żeby to powiedzieć — kontrakt jest
 złamany.
@@ -115,7 +140,7 @@ mówią to samo przeciwko pamięci Leny: rozkład, kiosk, budynek i sąsiadka.
 | Źródło | Co mówi | Dlaczego jest uczciwe |
 |---|---|---|
 | rozkład na przystanku | trasa ma inny przebieg, niż Lena pamięta | druk, data, publiczna informacja |
-| sprzedawca w kiosku | zna Martę i zna „Lenę”, ale kojarzy inne szczegóły | ma własną pracę, nie zna tajemnicy |
+| sprzedawca w kiosku | potwierdza obecną trasę Linii 4, odróżniając ją od objazdu; zna Martę i „Lenę” | ma własną pracę, nie zna tajemnicy |
 | fasada budynku | dokument mówi 12, domofon mówi 14 | dwa fizyczne źródła w kadrze |
 | sąsiadka na klatce | wita ją jak kogoś, kto tu mieszka od lat | codzienny ton, brak sugestii |
 
