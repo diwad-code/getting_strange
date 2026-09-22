@@ -81,7 +81,7 @@ func _build_interface() -> void:
 
 	_settings_panel = SettingsOverlay.new()
 	_settings_panel.name = "SettingsPanel"
-	_settings_panel.position = Vector2(294.0, 24.0)
+	_settings_panel.position = Vector2(174.0, 24.0)
 	_settings_panel.visible = false
 	_settings_panel.closed.connect(_on_settings_closed)
 	add_child(_settings_panel)
@@ -241,6 +241,8 @@ func _update_focus_chain() -> void:
 		var next := _menu_buttons[(index + 1) % _menu_buttons.size()]
 		current.focus_neighbor_top = previous.get_path()
 		current.focus_neighbor_bottom = next.get_path()
+		current.focus_next = next.get_path()
+		current.focus_previous = previous.get_path()
 	if not _menu_buttons.is_empty():
 		_menu_buttons[0].grab_focus.call_deferred()
 
@@ -270,8 +272,15 @@ func _build_runtime_label() -> String:
 
 
 func _on_new_game_pressed() -> void:
-	if _game_state:
+	if not _game_state or get_node_or_null("SafeActionDialog") != null:
+		return
+	if not _game_state.has_valid_campaign_save():
 		_game_state.start_new_game()
+		return
+	var dialog := SafeActionDialog.new()
+	add_child(dialog)
+	dialog.confirmed.connect(_game_state.start_new_game, CONNECT_ONE_SHOT)
+	dialog.present(_tr("CONFIRM_NEW_TITLE"), _tr("CONFIRM_NEW_BODY"), _tr("MENU_NEW_GAME"), _new_game_button)
 
 
 func _on_continue_pressed() -> void:
@@ -281,8 +290,7 @@ func _on_continue_pressed() -> void:
 
 func _on_settings_pressed() -> void:
 	_settings_panel.open_panel()
-	for button in _menu_buttons:
-		button.visible = false
+	_title_panel.visible = false
 
 
 func _on_settings_back_pressed() -> void:
@@ -290,8 +298,7 @@ func _on_settings_back_pressed() -> void:
 
 
 func _on_settings_closed() -> void:
-	for button in _menu_buttons:
-		button.visible = true
+	_title_panel.visible = true
 	_settings_button.grab_focus.call_deferred()
 
 

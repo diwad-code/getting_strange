@@ -87,7 +87,7 @@ static func risk_pairs(method: String) -> Array:
 static func carrier_pairs(decisions: Dictionary) -> Array:
 	if not decisions.has(&"home_sample_preserved") or not (decisions[&"home_sample_preserved"] is bool):
 		return [["Lena", "Brak potwierdzenia, jaki nośnik zachowałam. Nie nazwę go pełną próbką."]]
-	var sample := decisions.get(&"home_sample_preserved", false) == true
+	var sample: bool = decisions.get(&"home_sample_preserved", false) == true
 	var lost := str(decisions.get(&"p9.mechanics.small_cost.choice", ""))
 	var noun := "surowa próbka" if sample else "bufor czytnika"
 	var remained := "Została" if sample else "Został"

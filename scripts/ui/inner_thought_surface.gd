@@ -22,7 +22,7 @@ var _is_showing: bool = false
 
 func _ready() -> void:
 	layer = 16 # CrispGameplayUILayer
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	_build_ui()
 	visible = false
 	
@@ -73,19 +73,27 @@ func _build_ui() -> void:
 	
 	_thought_label = RichTextLabel.new()
 	_thought_label.name = "ThoughtText"
-	_thought_label.position = Vector2(12.0, 22.0)
+	_thought_label.position = Vector2(12.0, 26.0)
 	_thought_label.size = Vector2(416.0, 30.0)
+	_thought_label.custom_minimum_size = Vector2(416.0, 30.0)
 	_thought_label.bbcode_enabled = true
-	_thought_label.fit_content = false
+	_thought_label.fit_content = true
 	_thought_label.scroll_active = false
 	_thought_label.add_theme_font_size_override(&"normal_font_size", 12)
 	_mark_scalable(_thought_label, 12, "normal_font_size")
 	_thought_label.add_theme_color_override(&"default_color", Color("d7e0e3"))
 	_panel.add_child(_thought_label)
+	_thought_label.resized.connect(_fit_panel_height)
+	_fit_panel_height()
+
+
+func _fit_panel_height() -> void:
+	# At 115%, two lines require 40px instead of the old fixed 30px.
+	_panel.size.y = maxf(60.0, _thought_label.position.y + _thought_label.size.y + 4.0)
 
 
 func _process(delta: float) -> void:
-	if not _is_showing:
+	if get_tree().paused or not _is_showing:
 		return
 	
 	if _dismiss_timer > 0.0:
@@ -108,6 +116,8 @@ func present_thought(beat: GuidanceBeat, text: String) -> void:
 		_accent_line.color = VectorStageStyle.HUMAN_AMBER
 	
 	_thought_label.text = "[color=#d7e0e3]%s[/color]" % text
+	_thought_label.reset_size()
+	_fit_panel_height()
 	_dismiss_timer = clampf(float(text.length()) * 0.08 + 2.8, 3.5, 7.0)
 	_is_showing = true
 	visible = true

@@ -85,7 +85,7 @@ text_color = Color(0.82, 0.6, 0.36, 1)
 [node name="Geometry" type="Node2D" parent="."]
 
 [node name="FloorMain" type="StaticBody2D" parent="Geometry"]
-position = Vector2(320, 328)
+position = Vector2(320, 346)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorMain"]
 shape = SubResource("Rectangle_floor")

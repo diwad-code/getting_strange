@@ -9,6 +9,11 @@ static var current_locale: String = "pl"
 
 static var _translations: Dictionary = {
 	"pl": {
+		"CONFIRM_CANCEL": "ANULUJ",
+		"CONFIRM_NEW_TITLE": "ZACZĄĆ OD NOWA?",
+		"CONFIRM_NEW_BODY": "Nowa gra usunie obecny zapis kampanii. Tej zmiany nie da się cofnąć.",
+		"CONFIRM_RESET_TITLE": "USUNĄĆ ZAPIS?",
+		"CONFIRM_RESET_BODY": "Postęp kampanii zostanie usunięty. Gra wróci do ekranu tytułowego.",
 		"UI_START_EXPERIMENT": "ROZPOCZNIJ POMIAR (21:45)",
 		"UI_MOVEMENT_PROFILE": "PROFIL RUCHU:",
 		"UI_PROFILE_A": "PROFIL A: BAZOWY (IKP STANDARD)",
@@ -48,7 +53,7 @@ static var _translations: Dictionary = {
 		"SETTINGS_REDUCED_MOTION": "OGRANICZONY RUCH",
 		"SETTINGS_REDUCED_MOTION_HINT": "Tłumi migotanie świetlówek, pulsowanie pola kotwiczenia, wstrząs kamery i mikro-cząstki. Nic nie znika ze świata.",
 		"SETTINGS_REMAP": "STEROWANIE  //  REMAP",
-		"SETTINGS_HINT": "Zmiany zapisują się natychmiast. Dialogi pozostają w języku źródłowym.",
+		"SETTINGS_HINT": "Autozapis ustawień. Dialogi: oryginał.",
 		"SETTINGS_REMAP_TITLE": "STEROWANIE  //  REMAP AKCJI",
 		"SETTINGS_REMAP_HINT": "Wybierz akcję, potem naciśnij klawisz lub przycisk pada.",
 		"SETTINGS_REMAP_PENDING": "NACIŚNIJ KLAWISZ LUB PRZYCISK PADA DLA: %s\nESC / B = ANULUJ",
@@ -75,6 +80,11 @@ static var _translations: Dictionary = {
 		"SAVE_RESET": "ZAPIS ZRESETOWANY",
 	},
 	"en": {
+		"CONFIRM_CANCEL": "CANCEL",
+		"CONFIRM_NEW_TITLE": "START OVER?",
+		"CONFIRM_NEW_BODY": "A new game will delete the current campaign save. This cannot be undone.",
+		"CONFIRM_RESET_TITLE": "DELETE THE SAVE?",
+		"CONFIRM_RESET_BODY": "Campaign progress will be deleted and the game will return to the title screen.",
 		"UI_START_EXPERIMENT": "START EXPERIMENT (21:45)",
 		"UI_MOVEMENT_PROFILE": "MOVEMENT PROFILE:",
 		"UI_PROFILE_A": "PROFILE A: BASELINE (IKP STANDARD)",
@@ -114,7 +124,7 @@ static var _translations: Dictionary = {
 		"SETTINGS_REDUCED_MOTION": "REDUCED MOTION",
 		"SETTINGS_REDUCED_MOTION_HINT": "Damps fluorescent flicker, anchor field breathing, camera shake and micro-particles. Nothing leaves the world.",
 		"SETTINGS_REMAP": "CONTROLS  //  REMAP",
-		"SETTINGS_HINT": "Changes save immediately. Dialogue remains in its source language.",
+		"SETTINGS_HINT": "Settings auto-save. Dialogue: original.",
 		"SETTINGS_REMAP_TITLE": "CONTROLS  //  ACTION REMAP",
 		"SETTINGS_REMAP_HINT": "Choose an action, then press a key or controller button.",
 		"SETTINGS_REMAP_PENDING": "PRESS A KEY OR CONTROLLER BUTTON FOR: %s\nESC / B = CANCEL",

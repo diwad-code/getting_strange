@@ -483,6 +483,8 @@ func _frame_index(state_name: StringName, count: int) -> int:
 
 
 func _breath_offset(state_name: StringName) -> float:
+	if MotionAccessibility.is_reduced_motion():
+		return 0.0
 	if not BREATHING_STATES.has(state_name):
 		return 0.0
 	return -1.0 if sin(_breath_cycle / BREATH_PERIOD * TAU) > 0.35 else 0.0

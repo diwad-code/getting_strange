@@ -76,7 +76,7 @@ text_color = Color(0.82, 0.6, 0.36, 1)
 [node name="Geometry" type="Node2D" parent="."]
 
 [node name="FloorMain" type="StaticBody2D" parent="Geometry"]
-position = Vector2(320, 328)
+position = Vector2(320, 346)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/FloorMain"]
 shape = SubResource("Rectangle_floor")
@@ -120,7 +120,7 @@ shape = SubResource("Rectangle_airlock")
 
 [node name="Marta" type="Node2D" parent="MartaDoorstep"]
 z_index = 6
-position = Vector2(352, 296)
+position = Vector2(352, 277)
 script = ExtResource("14_cast")
 character_id = &"marta"
 initial_state = &"idle"
