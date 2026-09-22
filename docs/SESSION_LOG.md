@@ -10753,3 +10753,17 @@ Handoff: `docs/NEXT_SESSION_PROMPT.md`, oczekiwanie na decyzję właściciela (P
 Zamrożenie: `tools/snapshot.ps1 -Package PKG-0238` -> `snapshots/PKG-0238-2026-09-16`.
 
 
+
+
+## 2026-09-22 — PKG-0241 / grafika, animacja, UX
+
+Na jawne zlecenie wlasciciela wykonano audyt i wdrozenie w repozytorium GitHub (D-251).
+Baza 71d937329385368e718b947b43f84fed00324d57; galaz fix/art-ux-audit-0241, kod po publikacji
+d9f5fb91a3ed6ff2669043d29f1c1115683aac62. Poprzednia galaz 0240 nietknieta.
+22 sceny, 176 kadrów przed/po, 741 pomiarów tekstu. Naprawiono import, vendor i jego gitignore,
+podlogi/stopy finalow, trzy klatki Leny, pauze/tekst/line_finished, remap/fokus, warstwy menu,
+bezpieczne potwierdzenia nowej gry/resetu, faze NPC i reduced motion. Nowa bramka 51/51 PASS;
+Linux 83/128 wobec 61/127, zero nowego FAIL w porownywalnych testach. Kontrola 0173 wykryla
+przyciecie podeszwy; przywrocono oryginalne piksele i ponownie zaliczono test bez zmiany asercji.
+Windows i pozostale ograniczenia: docs/audits/PKG_0241_REPORT.md. Bez merge, auto-merge i EXE.
+Nastepnie R1/R2 z planu wdrozenia; pozostaja tez artystyczna ciaglosc i docelowy odbior sprzetu.

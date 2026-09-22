@@ -340,6 +340,8 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if get_tree().current_scene is TitleScreen:
+		return
 	if not event.is_action_pressed(&"pause") or event.is_echo() or _transitioning:
 		return
 	set_pause_menu_visible(not get_tree().paused)
@@ -1479,7 +1481,9 @@ func set_pause_menu_visible(is_visible: bool) -> void:
 	get_tree().paused = is_visible
 	_pause_layer.visible = is_visible
 	if not is_visible and is_instance_valid(_pause_settings_panel):
-		_pause_settings_panel.visible = false
+		if _pause_settings_panel.visible:
+			_pause_settings_panel.close_panel()
+		_pause_layer.get_node("PanelContainer").show()
 	if is_visible:
 		_refresh_station_buttons()
 		var resume := _pause_layer.get_node_or_null("PanelContainer/VBoxContainer/HBoxContainer/ResumeButton") as Button
@@ -1657,7 +1661,7 @@ func _ensure_pause_menu() -> void:
 	_add_menu_button(actions, "CHECKPOINT", restart_from_checkpoint, "CheckpointButton")
 	_add_menu_button(actions, "USTAWIENIA", _open_pause_settings, "SettingsButton")
 	_add_menu_button(actions, "TRYB TESTOWY: OFF", _toggle_test_mode, "TestModeButton")
-	_add_menu_button(actions, "RESET ZAPISU", func() -> void: reset_campaign(true), "ResetButton")
+	_add_menu_button(actions, "RESET ZAPISU", _request_reset_campaign, "ResetButton")
 	content.add_child(HSeparator.new())
 	_station_grid = GridContainer.new()
 	_station_grid.name = "StationGrid"
@@ -1725,6 +1729,18 @@ func _style_pause_button(button: Button, compact: bool) -> void:
 	button.focus_mode = Control.FOCUS_ALL
 
 
+func _request_reset_campaign() -> void:
+	if get_node_or_null("SafeActionDialog") != null:
+		return
+	var dialog := SafeActionDialog.new()
+	add_child(dialog)
+	var return_button := _pause_layer.get_node("PanelContainer/VBoxContainer/HBoxContainer/ResetButton") as Button
+	dialog.confirmed.connect(func() -> void:
+		reset_campaign(true)
+		return_to_title(), CONNECT_ONE_SHOT)
+	dialog.present(LocalizationManager.tr_key("CONFIRM_RESET_TITLE"), LocalizationManager.tr_key("CONFIRM_RESET_BODY"), LocalizationManager.tr_key("PAUSE_RESET_SAVE"), return_button)
+
+
 func _toggle_test_mode() -> void:
 	set_test_mode(not test_mode_enabled)
 
@@ -1768,15 +1784,17 @@ func _on_station_requested(station_id: StringName) -> void:
 func _open_pause_settings() -> void:
 	if not is_instance_valid(_pause_settings_panel):
 		return
+	_pause_layer.get_node("PanelContainer").hide()
 	_pause_settings_panel.open_panel()
 
 
 func _on_pause_settings_closed() -> void:
 	if is_instance_valid(_pause_settings_panel):
 		_pause_settings_panel.visible = false
-	var resume := _pause_layer.get_node_or_null("PanelContainer/VBoxContainer/HBoxContainer/ResumeButton") as Button
-	if resume:
-		resume.grab_focus.call_deferred()
+	_pause_layer.get_node("PanelContainer").show()
+	var launch_button := _pause_layer.get_node_or_null("PanelContainer/VBoxContainer/HBoxContainer/SettingsButton") as Button
+	if launch_button and _pause_layer.visible:
+		launch_button.grab_focus.call_deferred()
 
 
 func _mark_scalable_text(control: Control, base_font_size: int) -> void:
@@ -1808,6 +1826,8 @@ func _configure_pause_focus() -> void:
 		var next := linear_buttons[(index + 1) % linear_buttons.size()]
 		current.focus_neighbor_top = previous.get_path()
 		current.focus_neighbor_bottom = next.get_path()
+		current.focus_next = next.get_path()
+		current.focus_previous = previous.get_path()
 	for index in range(grid_buttons.size()):
 		var button := grid_buttons[index]
 		var column := index % _station_grid.columns

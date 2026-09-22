@@ -1,5 +1,8 @@
 [CmdletBinding()]
-param()
+param(
+    [ValidateSet('WASAPI', 'Dummy', 'PulseAudio', 'ALSA')]
+    [string] $AudioDriver = 'WASAPI'
+)
 
 $ErrorActionPreference = 'Stop'
 # NOTE (PKG-0227 / T3): the function definition below only names the gate
@@ -39,7 +42,7 @@ function Invoke-GodotGate {
     # headless shutdown (upstream #76745). WASAPI keeps real audio behaviour in
     # the gates and retires the playback before ObjectDB cleanup on Windows.
     $effectiveArguments = if ($Arguments -contains '--headless') {
-        $Arguments + @('--audio-driver', 'WASAPI')
+        $Arguments + @('--audio-driver', $AudioDriver)
     } else {
         $Arguments
     }
@@ -54,6 +57,7 @@ function Invoke-GodotGate {
     Test-GodotLogLines -Lines $output -GateName $Name
 }
 
+Write-Host "Audio profile: $AudioDriver (Dummy does NOT certify physical audio output)"
 Write-Host '== Godot log policy self-test =='
 & (Join-Path $PSScriptRoot 'test_godot_log_policy.ps1')
 
@@ -577,3 +581,7 @@ Invoke-GodotGate `
     -Arguments @('--headless', '--path', $projectRoot, '--script', 'res://tests/pkg_0238_dialogue_bridges_test.gd')
 
 Write-Host 'Verification passed.'
+
+Invoke-GodotGate `
+    -Name 'PKG-0241 visual, animation and modal UX regression gate' `
+    -Arguments @('--headless', '--path', $projectRoot, '--script', 'res://tests/pkg_0241_visual_ux_test.gd')

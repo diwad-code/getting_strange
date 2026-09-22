@@ -52,7 +52,7 @@ var _dwell_accumulator := 0.0
 
 func _ready() -> void:
 	layer = 20
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	var game_state := get_node_or_null("/root/GameStateManager")
 	if game_state:
 		characters_per_second = float(game_state.text_speed_cps)
@@ -110,10 +110,13 @@ func show_line(speaker: String, text: String) -> void:
 
 
 func hide_box() -> void:
+	var was_presenting := is_presenting()
+	_audio.stop()
 	visible = false
 	_line_index = -1
 	_typing = false
-	dialogue_finished.emit()
+	if was_presenting:
+		dialogue_finished.emit()
 
 
 func is_presenting() -> bool:
@@ -134,25 +137,23 @@ func get_step_status_text() -> String:
 
 
 func advance_dialogue() -> void:
-	if not is_presenting():
+	if get_tree().paused or not is_presenting():
 		return
 	if _typing:
-		_visible_characters = _current_text.length()
-		_typing = false
-		_render_current_text()
+		_finish_typing()
 	else:
 		_advance_line()
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not is_presenting() or (not event.is_action_pressed(&"interact") and not event.is_action_pressed(&"ui_accept")):
+	if get_tree().paused or event.is_echo() or not is_presenting() or (not event.is_action_pressed(&"interact") and not event.is_action_pressed(&"ui_accept")):
 		return
 	get_viewport().set_input_as_handled()
 	advance_dialogue()
 
 
 func _process(delta: float) -> void:
-	if not visible or _line_index < 0:
+	if get_tree().paused or not visible or _line_index < 0:
 		return
 	if _typing:
 		_type_accumulator += delta * characters_per_second
@@ -163,10 +164,7 @@ func _process(delta: float) -> void:
 			if _visible_characters % 2 == 0:
 				_play_speech_blip()
 		if _visible_characters >= _current_text.length():
-			_typing = false
-			_dwell_accumulator = 0.0
-			_continue_label.visible = true
-			line_finished.emit(StringName(_speaker_label.text), _current_text)
+			_finish_typing()
 	elif auto_advance:
 		_dwell_accumulator += delta
 		if _dwell_accumulator >= auto_advance_dwell_time:
@@ -193,13 +191,30 @@ func _advance_line() -> void:
 	_dwell_accumulator = 0.0
 	_typing = not _current_text.is_empty()
 	_continue_label.visible = false
+	_text_label.text = _current_text
 	_render_current_text()
 	line_started.emit(speaker, _current_text)
+	if not _typing:
+		_continue_label.visible = true
+		line_finished.emit(speaker, _current_text)
+
+
+func _finish_typing() -> void:
+	if not _typing:
+		return
+	_visible_characters = _current_text.length()
+	_typing = false
+	_dwell_accumulator = 0.0
+	_render_current_text()
+	_continue_label.visible = true
+	_audio.stop()
+	# Preserve the canonical speaker rather than the uppercased display label.
+	line_finished.emit(StringName(_lines[_line_index].get("speaker", "Lena")), _current_text)
 
 
 func _render_current_text() -> void:
-	var visible_text := _current_text.left(_visible_characters)
-	_text_label.text = "[color=#d7e0e3]%s[/color]" % visible_text
+	# Lay out the WHOLE line once. Substrings made words jump between rows.
+	_text_label.visible_characters = _visible_characters
 
 
 func _play_speech_blip() -> void:
@@ -260,7 +275,8 @@ func _build_interface() -> void:
 	_text_label.name = "DialogueText"
 	_text_label.position = Vector2(82.0, 30.0)
 	_text_label.size = Vector2(488.0, 52.0)
-	_text_label.bbcode_enabled = true
+	_text_label.bbcode_enabled = false
+	_text_label.visible_characters_behavior = TextServer.VC_CHARS_AFTER_SHAPING
 	_text_label.fit_content = false
 	_text_label.scroll_active = false
 	_text_label.add_theme_font_size_override(&"normal_font_size", 15)

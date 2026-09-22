@@ -104,10 +104,11 @@ const PROMPT_PATH := "res://docs/NEXT_SESSION_PROMPT.md"
 
 const SELF_REF := "res://tests/pkg_0207_gate_census_test.gd"
 
-const EXPECTED_INVOKE_LINES := 129
-const EXPECTED_SCRIPT_ARGS := 128
-const EXPECTED_TEST_REFS := 127
-const EXPECTED_DISK_TESTS := 127
+## PKG-0241: one real regression gate added, all four census counts +1.
+const EXPECTED_INVOKE_LINES := 130
+const EXPECTED_SCRIPT_ARGS := 129
+const EXPECTED_TEST_REFS := 128
+const EXPECTED_DISK_TESTS := 128
 
 const INPUT_ACTIONS: Array[String] = [
 	"move_left",

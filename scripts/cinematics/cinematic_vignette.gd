@@ -72,7 +72,7 @@ func _to_float_array(source: Array) -> Array[float]:
 
 
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	layer = 19
 	_game_state = get_node_or_null("/root/GameStateManager")
 	_reduced = MotionAccessibility.is_reduced_motion()
@@ -153,7 +153,7 @@ func _enter_frame(index: int) -> void:
 
 
 func _process(delta: float) -> void:
-	if _finished or _index < 0:
+	if get_tree().paused or _finished or _index < 0:
 		return
 	_elapsed += delta
 	if _elapsed >= _current_frame_duration():
@@ -168,7 +168,7 @@ func _current_frame_duration() -> float:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _finished or not _can_skip:
+	if get_tree().paused or event.is_echo() or _finished or not _can_skip:
 		return
 	if not (event.is_action_pressed(&"interact") or event.is_action_pressed(&"ui_accept")):
 		return

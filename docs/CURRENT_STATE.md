@@ -1,5 +1,24 @@
 # Aktualny stan projektu
 
+## Aktualizacja nadrzedna — 2026-09-22 / PKG-0241
+
+Stan po audycie grafiki, animacji i UX na bazie main `71d937329385368e718b947b43f84fed00324d57`.
+Kod/PNG opublikowano na `fix/art-ux-audit-0241`; stan po usunieciu jednorazowych narzedzi publikacji:
+`d9f5fb91a3ed6ff2669043d29f1c1115683aac62`. Raport i dalsze commity dokumentacji nie zmieniaja wyniku kodu.
+Nowa bramka: **51/51 PASS**. Diagnostyczny zestaw Linux/Dummy: **83/128 PASS**,
+wobec **61/127 PASS** bazy + jawny bool. W 127 wspolnych testach: 21 FAIL→PASS,
+zero PASS→FAIL. To nie jest pelny wynik PowerShell verify.ps1 ani PRODUCT GO.
+
+Dowody: 22 aktywne sceny, 88 kadrów przed i 88 po, 741 pomiarów literalnego tekstu;
+[raport](audits/PKG_0241_REPORT.md) zawiera wynik Windows, ograniczenia i otwarte bledy.
+[Plan](audits/PKG_0241_IMPLEMENTATION_PLAN.md): W1–W4 wdrozone, W5 z otwarta bramka calosciowa.
+Nastepny pakiet: R1/R2 — rozliczyc stare smoke/narracje 17/18/A/B/C/43 i historyczne dowody,
+bez wycinania asercji. Pozniej R3 ciaglosc grafiki i R4 fizyczny pad/DPI/audio/benchmark Windows.
+Nie wykonano merge do main, auto-merge, wydania ani eksportu EXE. D-168 nadal blokuje release.
+
+**Ponizszy zapis PKG-0238 to historia. Nie zastepuje swiezych wynikow PKG-0241.**
+
+
 Stan na: 2026-09-16, PKG-0238 / mosty dialogowe (Pakiet E planu 2026-09-15, DOMKNIĘCIE PLANU).
 WDROZONY KODOWO: Pakiet E ze świeżego planu
 `docs/narrative/SENS_FABULARNY_PLAN_NAPRAWY_2026-09-15.md` (decyzja D-250).

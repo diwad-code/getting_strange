@@ -1,5 +1,16 @@
 # Getting Strange: agent instructions
 
+## Current authority: 2026-09-22 / PKG-0241
+
+The owner explicitly authorized the art/animation/UX audit and implementation in
+`diwad-code/getting_strange`. GitHub commits on `fix/art-ux-audit-0241` are now part
+of the record: historical D-016 claims that no repository exists no longer apply
+to this task (D-251). Start with `docs/audits/PKG_0241_REPORT.md` and the current
+handoff. This does not authorize a release, a website, deletion of historical
+evidence, or weakening tests to obtain PASS. Main and the older audit branch were
+not overwritten. The historical instructions below retain all other scope rules.
+
+
 ## Scope boundary (hard rule, D-098)
 
 **Getting Strange is a game built in Godot 4.7. Nothing else.**

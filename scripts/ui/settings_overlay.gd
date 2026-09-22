@@ -66,6 +66,7 @@ func _ready() -> void:
 func open_panel() -> void:
 	_pending_rebind_action = &""
 	_remap_panel.visible = false
+	_set_base_controls_visible(true)
 	visible = true
 	_sync_controls()
 	_refresh_localized_text()
@@ -396,6 +397,10 @@ func _update_focus_chain() -> void:
 		var next := controls[(index + 1) % controls.size()]
 		current.focus_neighbor_top = previous.get_path()
 		current.focus_neighbor_bottom = next.get_path()
+		current.focus_next = next.get_path()
+		current.focus_previous = previous.get_path()
+		current.focus_neighbor_left = current.get_path()
+		current.focus_neighbor_right = current.get_path()
 
 
 func _update_remap_focus_chain() -> void:
@@ -414,9 +419,14 @@ func _update_remap_focus_chain() -> void:
 		var next := buttons[(index + 1) % buttons.size()]
 		current.focus_neighbor_top = previous.get_path()
 		current.focus_neighbor_bottom = next.get_path()
+		current.focus_next = next.get_path()
+		current.focus_previous = previous.get_path()
+		current.focus_neighbor_left = current.get_path()
+		current.focus_neighbor_right = current.get_path()
 
 
 func _open_remap() -> void:
+	_set_base_controls_visible(false)
 	_remap_panel.visible = true
 	_pending_rebind_action = &""
 	_refresh_localized_text()
@@ -429,6 +439,7 @@ func _open_remap() -> void:
 func _close_remap() -> void:
 	_pending_rebind_action = &""
 	_remap_panel.visible = false
+	_set_base_controls_visible(true)
 	_refresh_localized_text()
 	_remap_button.grab_focus.call_deferred()
 
@@ -468,8 +479,9 @@ func _submit_rebind_event(event: InputEvent) -> Dictionary:
 func _restore_defaults() -> void:
 	if _game_state and _game_state.has_method("restore_default_input_map"):
 		_game_state.restore_default_input_map(true)
-	_remap_hint.text = _tr("SETTINGS_REMAP_DEFAULTS_RESTORED")
+	_pending_rebind_action = &""
 	_refresh_remap_rows()
+	_remap_hint.text = _tr("SETTINGS_REMAP_DEFAULTS_RESTORED")
 
 
 func _on_locale_selected(index: int) -> void:
@@ -517,6 +529,26 @@ func _on_accessibility_changed(_scale: float, _locale: String) -> void:
 
 func _on_input_map_changed() -> void:
 	_refresh_remap_rows()
+
+
+func _set_base_controls_visible(value: bool) -> void:
+	for child in get_children():
+		if child is CanvasItem and child != _remap_panel:
+			child.visible = value
+
+
+func _input(event: InputEvent) -> void:
+	if not visible:
+		return
+	# Input precedes GUI. A focused Button otherwise eats Enter/Space/PAD A.
+	if _remap_panel.visible and not _pending_rebind_action.is_empty():
+		_unhandled_input(event)
+	elif not event.is_echo() and (event.is_action_pressed(&"ui_cancel") or event.is_action_pressed(&"pause")):
+		if _remap_panel.visible:
+			_close_remap()
+		else:
+			close_panel()
+		get_viewport().set_input_as_handled()
 
 
 func _unhandled_input(event: InputEvent) -> void:

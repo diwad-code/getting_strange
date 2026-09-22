@@ -108,6 +108,9 @@ func set_state(new_state_name: StringName) -> void:
 		resolved = &"idle"
 	if _frames.get(resolved, []).is_empty():
 		resolved = &"idle"
+	if _state == resolved:
+		_apply_current_frame()
+		return
 	var old_name := _state
 	_state = resolved
 	_state_time = 0.0
@@ -158,6 +161,8 @@ func _frame_index(count: int) -> int:
 
 
 func _breath_offset() -> float:
+	if MotionAccessibility.is_reduced_motion():
+		return 0.0
 	if _state != &"idle" and _state != &"listen":
 		return 0.0
 	return -1.0 if sin(_breath_cycle / BREATH_PERIOD * TAU) > 0.35 else 0.0

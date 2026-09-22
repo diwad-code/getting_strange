@@ -76,7 +76,7 @@ var _skip_label: Label
 
 
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	_game_state = get_node_or_null("/root/GameStateManager")
 	_reduced = MotionAccessibility.is_reduced_motion()
@@ -169,7 +169,7 @@ func _enter_shot(index: int) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if _finished:
+	if get_tree().paused or _finished:
 		return
 	_shot_time += delta
 	_elapsed += delta
@@ -236,7 +236,7 @@ func _update_shot_gap() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _finished or not _can_skip:
+	if get_tree().paused or event.is_action_pressed(&"pause") or _finished or not _can_skip:
 		return
 	var pressed := (
 		(event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo)
