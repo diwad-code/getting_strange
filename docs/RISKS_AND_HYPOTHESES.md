@@ -255,3 +255,14 @@ PKG-0217 / limit dlugosci linii dialogowych (2026-09-12, MEASURED): pudlo CRT 48
 PKG-0219 / sufit + swiatlo + roza (2026-09-12, TECHNICAL): podbitka 09 domyka przeswit do 37 px (kontrakt 20-45, bramka 0219); swiatlo 01: work light + cold fill + cien bebna 0.48 w prawo (audyt 12/14 stoi); regula D-232 (Marta w kadrze -> 1 akcent -> reszta w shade(MID_PLANE); mono 09 vs 01/11/12/15 na 3 osiach strukturalnie). Otwarte: sufity 08 (masa do 36) i 13 (brak masy) oraz near-miss 10 (51 px); egzekucja reguly w 10/13 czeka na przepisanie ich palet (osobny pakiet). Licznik D-217 WYCZERPANY: 4 zakresowe po pelnej PKG-0215 � PKG-0220 MUSI byc pelna verify (faza R4, shared-touch audio). Nie jest to dowod odbioru (D-012, ADR-003).
 
 PKG-0220 / petle ambientu + duck (2026-09-12, TECHNICAL): 7 ambientow PKG-0180 na generate_looping_wav (f0/AM/dlugosci nietkniete, krawedzie RMS>500, szew bez pelnoskalowego trzasku, bramka 0220); duck x3 (hum/sub/unease -7 dB); busy Ambient/Dialogue; back-buffer stopped-spare (budzet 0130 stoi � pierwszy wariant z grajacym spare wylozyl 0130 realnym FAIL-em 5>4 na 8 stacjach 31-41, naprawiony w tym samym pakiecie); drain przez helper. PELNA verify.ps1 PASS (licznik D-217 zresetowany: ostatnia pelna PKG-0220). Otwarte: ambience spoza 7 na one-shot+retrigger; start stacji od pelnego poziomu bez fade-in (transjent wejsciowy mozliwy, maskowany -24 dB, niemierzony). Nie jest to dowod odbioru (D-012, ADR-003).
+
+
+## PKG-0241 — otwarte ryzyka / 2026-09-22
+
+Nowe 51/51 sprawdzen i 176 kadrów nie dowodza calej kampanii ani odbioru emocjonalnego.
+Diagnostyka Linux 83/128 ma 45 niepowodzen: niezgodnosci narracyjne/testowe, braki historycznych
+dowodow i timeouty trzeba rozliczyc osobno. Szczegoly i profil Windows sa w raporcie audytu.
+Brak dowodu fizycznego pada, dzwieku, DPI i wydajnosci na komputerze gracza; 60 Hz to symulacja.
+Talk_0/talk_1 vendor pozostaja identyczne. Ciaglosc kostiumu Leny i detali winiet wymaga R3,
+nie losowej regeneracji. Ryzyko ponownego wykluczenia vendor ograniczono wyjatkiem gitignore.
+Nie ma PRODUCT GO ani nowego wydania. Plan R1–R4: docs/audits/PKG_0241_IMPLEMENTATION_PLAN.md.

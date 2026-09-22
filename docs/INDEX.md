@@ -1,5 +1,15 @@
 # Indeks dokumentacji
 
+## Biezacy pakiet — 2026-09-22 / PKG-0241
+
+Najpierw [raport audytu grafiki, animacji i UX](audits/PKG_0241_REPORT.md),
+[plan audytu](audits/PKG_0241_AUDIT_PLAN.md),
+[wdrozenie i dalsze bramki](audits/PKG_0241_IMPLEMENTATION_PLAN.md),
+[pochodzenie grafik](audits/PKG_0241_ASSET_PROVENANCE.json), potem CURRENT_STATE i NEXT_SESSION_PROMPT.
+Nowa bramka 51/51 PASS takze na Windows/Dummy; diagnostyka Linux 83/128. Pelny Windows verify: FAIL (25 sprawdzen smoke). Nie PRODUCT GO.
+Starsza kolejka i deklaracje PASS ponizej pozostaja historia, nie aktualna weryfikacja.
+
+
 > KOLEJKA (2026-09-15, dyspozycja wlasciciela): swiezy audyt sensu
 > `docs/narrative/SENS_FABULARNY_RAPORT_2026-09-15.md` + plan
 > `docs/narrative/SENS_FABULARNY_PLAN_NAPRAWY_2026-09-15.md`.

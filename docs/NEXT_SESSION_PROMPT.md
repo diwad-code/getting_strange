@@ -1,3 +1,26 @@
+# AKTUALNY HANDOFF — PKG-0241 / 2026-09-22
+
+Pracuj na `fix/art-ux-audit-0241`, najpierw odczytaj jej aktualny HEAD i diff wobec main.
+Przeczytaj `docs/audits/PKG_0241_REPORT.md` i `PKG_0241_IMPLEMENTATION_PLAN.md`.
+Nie powtarzaj odzyskiwania vendor ani poprzedniej galezi przygotowawczej 0240.
+W1–W4 sa wdrozone; nowa bramka 51/51, Linux 83/128 (baza 61/127), brak nowego FAIL
+wsrod wspolnych testow. To nie jest zielona bramka calej gry. Szczegolowy wynik Windows jest w raporcie.
+
+CEL SESJI: wykonaj R1/R2 z planu. Na izolowanym zapisie odtworz pierwszy blad smoke:
+zakres zgody w 17, prognozy i metoda w 18, wykonanie A/B/C oraz 43. Zapisz decyzje i interakcje
+przed/po. Rozstrzygnij blad wykonania kontra test sprzed PKG-0239. Nie dawaj zgody automatycznie,
+nie usuwaj odmowy ani nie oslabiaj testow. Osobno rozlicz brak archiwalnych reports/export_presets
+w lokalnym pakiecie oraz historyczny test wymagajacy braku Git — wlasciciel zlecil prace na GitHubie.
+
+KRYTERIA AKCEPTACJI: nowy test 0241 pozostaje zielony; stare bledy maja reprodukcje i uzasadnione
+naprawy; pelna weryfikacja Windows jest jawna, nie zastapiona kodem 0 bez kontroli logu.
+Przed wydaniem wymagany rzeczywisty pad/audio/DPI i pomiar klatki. Zachowaj 640x360, 60 Hz,
+kanon fabuly, Zakotwiczenie i brak nowych przeszkod zrecznosciowych.
+KONIEC PAKIETU: testy, dowody, aktualny handoff i osobny PR. Bez automatycznego PRODUCT GO/release.
+
+---
+Nizej zachowana historia poprzedniego promptu. Biezaca kolejka powyzej ma pierwszenstwo.
+
 # CEL SESJI
 # SRODOWISKO I BASELINE
 # KRYTERIA AKCEPTACJI
