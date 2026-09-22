@@ -1,0 +1,44 @@
+[
+  {
+    "path": "AGENTS.md",
+    "sha256": "b6d9a123a30507dfa73eb6e26e67d41335246471eeae8c75de591c4fe74a1546",
+    "mode": "after_title",
+    "text": "\n## Current authority: 2026-09-22 / PKG-0241\n\nThe owner explicitly authorized the art/animation/UX audit and implementation in\n`diwad-code/getting_strange`. GitHub commits on `fix/art-ux-audit-0241` are now part\nof the record: historical D-016 claims that no repository exists no longer apply\nto this task (D-251). Start with `docs/audits/PKG_0241_REPORT.md` and the current\nhandoff. This does not authorize a release, a website, deletion of historical\nevidence, or weakening tests to obtain PASS. Main and the older audit branch were\nnot overwritten. The historical instructions below retain all other scope rules.\n"
+  },
+  {
+    "path": "docs/CURRENT_STATE.md",
+    "sha256": "94f00e5c4ce96dd49cd180bd7b1352272883912075b18e464889b46f36e53854",
+    "mode": "after_title",
+    "text": "\n## Aktualizacja nadrzedna — 2026-09-22 / PKG-0241\n\nStan po audycie grafiki, animacji i UX na bazie main `71d937329385368e718b947b43f84fed00324d57`.\nKod/PNG opublikowano na `fix/art-ux-audit-0241`; stan po usunieciu jednorazowych narzedzi publikacji:\n`d9f5fb91a3ed6ff2669043d29f1c1115683aac62`. Raport i dalsze commity dokumentacji nie zmieniaja wyniku kodu.\nNowa bramka: **51/51 PASS**. Diagnostyczny zestaw Linux/Dummy: **83/128 PASS**,\nwobec **61/127 PASS** bazy + jawny bool. W 127 wspolnych testach: 21 FAIL→PASS,\nzero PASS→FAIL. To nie jest pelny wynik PowerShell verify.ps1 ani PRODUCT GO.\n\nDowody: 22 aktywne sceny, 88 kadrów przed i 88 po, 741 pomiarów literalnego tekstu;\n[raport](audits/PKG_0241_REPORT.md) zawiera wynik Windows, ograniczenia i otwarte bledy.\n[Plan](audits/PKG_0241_IMPLEMENTATION_PLAN.md): W1–W4 wdrozone, W5 z otwarta bramka calosciowa.\nNastepny pakiet: R1/R2 — rozliczyc stare smoke/narracje 17/18/A/B/C/43 i historyczne dowody,\nbez wycinania asercji. Pozniej R3 ciaglosc grafiki i R4 fizyczny pad/DPI/audio/benchmark Windows.\nNie wykonano merge do main, auto-merge, wydania ani eksportu EXE. D-168 nadal blokuje release.\n\n**Ponizszy zapis PKG-0238 to historia. Nie zastepuje swiezych wynikow PKG-0241.**\n"
+  },
+  {
+    "path": "docs/NEXT_SESSION_PROMPT.md",
+    "sha256": "de733f8a9b93107ec6e8edf8a3ed98d27e4133f8ccd3ef3536e929bf2fb46f0d",
+    "mode": "prefix",
+    "text": "# AKTUALNY HANDOFF — PKG-0241 / 2026-09-22\n\nPracuj na `fix/art-ux-audit-0241`, najpierw odczytaj jej aktualny HEAD i diff wobec main.\nPrzeczytaj `docs/audits/PKG_0241_REPORT.md` i `PKG_0241_IMPLEMENTATION_PLAN.md`.\nNie powtarzaj odzyskiwania vendor ani poprzedniej galezi przygotowawczej 0240.\nW1–W4 sa wdrozone; nowa bramka 51/51, Linux 83/128 (baza 61/127), brak nowego FAIL\nwsrod wspolnych testow. To nie jest zielona bramka calej gry. Szczegolowy wynik Windows jest w raporcie.\n\nCEL SESJI: wykonaj R1/R2 z planu. Na izolowanym zapisie odtworz pierwszy blad smoke:\nzakres zgody w 17, prognozy i metoda w 18, wykonanie A/B/C oraz 43. Zapisz decyzje i interakcje\nprzed/po. Rozstrzygnij blad wykonania kontra test sprzed PKG-0239. Nie dawaj zgody automatycznie,\nnie usuwaj odmowy ani nie oslabiaj testow. Osobno rozlicz brak archiwalnych reports/export_presets\nw lokalnym pakiecie oraz historyczny test wymagajacy braku Git — wlasciciel zlecil prace na GitHubie.\n\nKRYTERIA AKCEPTACJI: nowy test 0241 pozostaje zielony; stare bledy maja reprodukcje i uzasadnione\nnaprawy; pelna weryfikacja Windows jest jawna, nie zastapiona kodem 0 bez kontroli logu.\nPrzed wydaniem wymagany rzeczywisty pad/audio/DPI i pomiar klatki. Zachowaj 640x360, 60 Hz,\nkanon fabuly, Zakotwiczenie i brak nowych przeszkod zrecznosciowych.\nKONIEC PAKIETU: testy, dowody, aktualny handoff i osobny PR. Bez automatycznego PRODUCT GO/release.\n\n---\nNizej zachowana historia poprzedniego promptu. Biezaca kolejka powyzej ma pierwszenstwo.\n\n"
+  },
+  {
+    "path": "docs/INDEX.md",
+    "sha256": "e2e69af6a4b04c56153ede3b215b37bae9b5bbfaacdd1bc93c24dc87b36aaa8a",
+    "mode": "after_title",
+    "text": "\n## Biezacy pakiet — 2026-09-22 / PKG-0241\n\nNajpierw [raport audytu grafiki, animacji i UX](audits/PKG_0241_REPORT.md),\n[plan audytu](audits/PKG_0241_AUDIT_PLAN.md),\n[wdrozenie i dalsze bramki](audits/PKG_0241_IMPLEMENTATION_PLAN.md),\n[pochodzenie grafik](audits/PKG_0241_ASSET_PROVENANCE.json), potem CURRENT_STATE i NEXT_SESSION_PROMPT.\nNowa bramka 51/51 PASS takze na Windows/Dummy; diagnostyka Linux 83/128. Pelny Windows verify: FAIL (25 sprawdzen smoke). Nie PRODUCT GO.\nStarsza kolejka i deklaracje PASS ponizej pozostaja historia, nie aktualna weryfikacja.\n"
+  },
+  {
+    "path": "docs/SESSION_LOG.md",
+    "sha256": "75d6b7dee0aa9697c12fbbf6d8ecc07c84eb2b90533945cf0a4259f6b607feb0",
+    "mode": "append",
+    "text": "\n## 2026-09-22 — PKG-0241 / grafika, animacja, UX\n\nNa jawne zlecenie wlasciciela wykonano audyt i wdrozenie w repozytorium GitHub (D-251).\nBaza 71d937329385368e718b947b43f84fed00324d57; galaz fix/art-ux-audit-0241, kod po publikacji\nd9f5fb91a3ed6ff2669043d29f1c1115683aac62. Poprzednia galaz 0240 nietknieta.\n22 sceny, 176 kadrów przed/po, 741 pomiarów tekstu. Naprawiono import, vendor i jego gitignore,\npodlogi/stopy finalow, trzy klatki Leny, pauze/tekst/line_finished, remap/fokus, warstwy menu,\nbezpieczne potwierdzenia nowej gry/resetu, faze NPC i reduced motion. Nowa bramka 51/51 PASS;\nLinux 83/128 wobec 61/127, zero nowego FAIL w porownywalnych testach. Kontrola 0173 wykryla\nprzyciecie podeszwy; przywrocono oryginalne piksele i ponownie zaliczono test bez zmiany asercji.\nWindows i pozostale ograniczenia: docs/audits/PKG_0241_REPORT.md. Bez merge, auto-merge i EXE.\nNastepnie R1/R2 z planu wdrozenia; pozostaja tez artystyczna ciaglosc i docelowy odbior sprzetu.\n"
+  },
+  {
+    "path": "docs/DECISION_LOG.md",
+    "sha256": "8c2ad6ee53690cc9c49a6375fad32a2734eee1e16d536053d59f4b8d4e4c58a3",
+    "mode": "append",
+    "text": "\n## D-251 — 2026-09-22 / zakres PKG-0241 i rzeczywisty stan repozytorium\n\nACCEPTED na jawne zlecenie wlasciciela: audyt grafiki, animacji i UX oraz implementacja\nna GitHubie diwad-code/getting_strange. D-016 o braku repozytorium jest dla tego zadania\nhistoryczne; nie usuwa sie jego zapisu, lecz nie wolno przedstawiać go jako obecnego faktu.\nDozwolona osobna galaz i PR, bez force-push/main merge/release. Zachowano Godot-only,\n640x360 i fizyke 60 Hz. Naprawy W1–W4 wedlug raportu PKG-0241; zadne nowe testy nie nadaja\nPRODUCT GO. W5 pozostaje z otwarta bramka calosciowa. D-168 nie zostaje uchylone.\n"
+  },
+  {
+    "path": "docs/RISKS_AND_HYPOTHESES.md",
+    "sha256": "1985dcbb838f04b6e5f25e2a7b4a39fb0f9de5bb1cd30a1487107664d5ebb3f0",
+    "mode": "append",
+    "text": "\n## PKG-0241 — otwarte ryzyka / 2026-09-22\n\nNowe 51/51 sprawdzen i 176 kadrów nie dowodza calej kampanii ani odbioru emocjonalnego.\nDiagnostyka Linux 83/128 ma 45 niepowodzen: niezgodnosci narracyjne/testowe, braki historycznych\ndowodow i timeouty trzeba rozliczyc osobno. Szczegoly i profil Windows sa w raporcie audytu.\nBrak dowodu fizycznego pada, dzwieku, DPI i wydajnosci na komputerze gracza; 60 Hz to symulacja.\nTalk_0/talk_1 vendor pozostaja identyczne. Ciaglosc kostiumu Leny i detali winiet wymaga R3,\nnie losowej regeneracji. Ryzyko ponownego wykluczenia vendor ograniczono wyjatkiem gitignore.\nNie ma PRODUCT GO ani nowego wydania. Plan R1–R4: docs/audits/PKG_0241_IMPLEMENTATION_PLAN.md.\n"
+  }
+]
