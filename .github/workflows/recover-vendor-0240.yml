@@ -1,0 +1,34 @@
+name: Recover existing vendor textures 0240
+on:
+  push:
+    branches: [fix/visual-animation-ux-2026-09-22]
+    paths: [.github/workflows/recover-vendor-0240.yml]
+permissions:
+  contents: read
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Read exact published texture blobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import base64, hashlib, json, os, pathlib, urllib.request
+          root = pathlib.Path('recovered_vendor_cache'); root.mkdir()
+          blobs = {'idle.ctex':'783f902fd840f7ea99a33ff928c2f8206e0d142a','talk_0.ctex':'04e46a422885cdee1bc16a43d9f3eecb1dab6fb7','talk_1.ctex':'04e46a422885cdee1bc16a43d9f3eecb1dab6fb7','listen.ctex':'8454a02597cff1f80135adda90598736efa0fc7d'}
+          for name, sha in blobs.items():
+              req = urllib.request.Request('https://api.github.com/repos/diwad-code/getting_strange/git/blobs/'+sha, headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'], 'Accept':'application/vnd.github+json'})
+              with urllib.request.urlopen(req, timeout=30) as response: data=json.load(response)
+              raw=base64.b64decode(data['content'])
+              assert hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()==sha
+              (root/name).write_bytes(raw)
+          (root/'provenance.json').write_text(json.dumps({'base':'71d937329385368e718b947b43f84fed00324d57','blobs':blobs}, indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vendor-textures-0240
+          path: recovered_vendor_cache/
+          retention-days: 3
+          if-no-files-found: error
