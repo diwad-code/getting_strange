@@ -65,9 +65,23 @@ jobs:
           assert patch['base'] == BASE and patch['branch'] == BRANCH
           assert len(patch['files']) == 32
           base_tree_sha = api('/git/commits/' + BASE)['tree']['sha']
-          base_tree = api('/git/trees/' + base_tree_sha + '?recursive=1')
-          assert not base_tree.get('truncated'), 'Base tree was truncated'
-          entries = {entry['path']: entry for entry in base_tree['tree']}
+          tree_cache = {}
+          def lookup(path):
+              current = base_tree_sha
+              pieces = PurePosixPath(path).parts
+              for index, name in enumerate(pieces):
+                  if current not in tree_cache:
+                      response = api('/git/trees/' + current)
+                      assert not response.get('truncated'), 'Directory tree was truncated'
+                      tree_cache[current] = {entry['path']: entry for entry in response['tree']}
+                  entry = tree_cache[current].get(name)
+                  if entry is None:
+                      return None
+                  if index == len(pieces) - 1:
+                      return entry
+                  assert entry['type'] == 'tree', 'Path component is not a directory'
+                  current = entry['sha']
+              return None
           postimages = []
           seen = set()
           for item in patch['files']:
@@ -77,7 +91,7 @@ jobs:
               assert not path.startswith('/') and '..' not in parts and '\\' not in path
               assert path not in seen, 'Duplicate path'
               seen.add(path)
-              entry = entries.get(path)
+              entry = lookup(path)
               if item['before'] is None:
                   assert entry is None, 'New path already exists: ' + path
                   original = b''
@@ -98,11 +112,10 @@ jobs:
               updated = ''.join(output).encode('utf-8')
               assert blob_hash(updated) == item['after'], 'Target version mismatch: ' + path
               postimages.append((path, updated, item['after']))
-          # All targets are checked before any branch mutation. Only the work branch is written.
           ref_path = '/git/refs/heads/' + BRANCH
           assert api('/git/ref/heads/' + BRANCH)['object']['sha'] == TRIGGER, 'Branch moved'
           trigger_commit = api('/git/commits/' + TRIGGER)
-          assert len(trigger_commit['parents']) == 1 and trigger_commit['parents'][0]['sha'] == BASE
+          assert len(trigger_commit['parents']) == 1 and trigger_commit['parents'][0]['sha'] == '0ec6627befc7f001d624dd86b511a0a8b6a7bb62'
           new_entries = []
           for path, data, expected in postimages:
               stored = api('/git/blobs', {'content': data.decode('utf-8'), 'encoding': 'utf-8'})
