@@ -226,37 +226,6 @@ func _payoff_line_into_branch() -> void:
 		dialogue_lines[2] = {"speaker": carrier[0][0], "text": carrier[0][1]}
 
 
-func _truth_clause() -> String:
-	match marta_truth_state:
-		"full":
-			return "Marcie: pełny zapis."
-		"partial":
-			return "Marcie: część zapisu."
-		"withheld":
-			return "Marcie: zapis wstrzymany."
-	return "Marcie: zapis nieustalony."
-
-
-func _consent_clause() -> String:
-	match jakub_consent_state:
-		"granted":
-			return "Jakub: ręka na wyłączniku."
-		"limited":
-			return "Jakub: tylko wskazania."
-		"refused":
-			return "Jakub: odmowa protokołu."
-	return "Jakub: zakres nieustalony."
-
-
-func _cost_clause() -> String:
-	match small_cost_state:
-		"marta_memory":
-			return "Nie pamiętam dzisiejszego zdania Marty o kurtce."
-		"sample_second":
-			return "Koszt: sekunda zbladła z wykresu."
-	return "Koszt: nieustalony."
-
-
 func _setup_guidance() -> void:
 	if not guidance_service:
 		return

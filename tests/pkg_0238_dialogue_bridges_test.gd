@@ -69,9 +69,11 @@ func _test_e1_dialogue_links() -> void:
 
 	# 11: kontakt do warsztatu + rejestr 186 dni
 	var rep_pairs: Array = CreativeLines.LINES.get("minimal_report", [])
-	_expect(rep_pairs.size() == 4, "11: minimal_report trzyma 4 pary")
-	if rep_pairs.size() >= 4:
-		var last_rep := rep_pairs[3] as Array
+	# PKG-0242 (R1): pins below follow the owner's PKG-0239 text (the
+	# bridge contract is kept; only the wording and pair counts moved).
+	_expect(rep_pairs.size() == 5, "11: minimal_report trzyma 5 par (wlasciciel, PKG-0239)")
+	if rep_pairs.size() >= 1:
+		var last_rep := rep_pairs[rep_pairs.size() - 1] as Array
 		_expect(String(last_rep[1]).contains("kontakt do warsztatu"), "11: minimal_report zawiera kontakt do warsztatu")
 	var rec_pairs: Array = CreativeLines.LINES.get("record_186_days", [])
 	_expect(rec_pairs.size() == 5, "11: record_186_days trzyma 5 par")
@@ -84,31 +86,26 @@ func _test_e1_dialogue_links() -> void:
 
 	# 13: to nie jest moj swiat / gdzie jest ona
 	var syn_pairs: Array = CreativeLines.LINES.get("synthesize", [])
-	_expect(syn_pairs.size() == 6, "13: synthesize trzyma 6 par")
-	if syn_pairs.size() >= 6:
-		var p1 := syn_pairs[1] as Array
-		var p2 := syn_pairs[2] as Array
-		_expect(String(p1[1]).contains("To nie jest mój świat"), "13: synthesize wypowiada wniosek: to nie jest moj swiat")
-		_expect(String(p2[1]).contains("gdzie jest ona"), "13: synthesize pyta: gdzie jest ona")
+	_expect(syn_pairs.size() == 8, "13: synthesize trzyma 8 par (wlasciciel, PKG-0239)")
+	var syn_text := JSON.stringify(syn_pairs)
+	_expect(syn_text.contains("To nie jest mój świat"), "13: synthesize wypowiada wniosek: to nie jest moj swiat")
+	_expect(syn_text.contains("gdzie jest ona"), "13: synthesize pyta: gdzie jest ona")
+	_expect(syn_text.find("To nie jest mój świat") < syn_text.find("gdzie jest ona"), "13: wniosek poprzedza pytanie")
 
 	# 17: Rownia zarobiona + para pogrzeb/stabilnosc
 	var led_pairs: Array = CreativeLines.LINES.get("cost_ledger_console", [])
-	_expect(led_pairs.size() == 3, "17: cost_ledger_console trzyma 3 pary")
-	if led_pairs.size() >= 3:
-		var p0 := led_pairs[0] as Array
-		var p1 := led_pairs[1] as Array
-		_expect(String(p0[1]).contains("stabilna Równia i pogrzeb Jakuba"), "17: rejestr zestawia stabilna Rownie i pogrzeb")
-		_expect(String(p1[1]).contains("Równia. Tym słowem podpisali to miejsce"), "17: Lena zarabia imie Rownia")
+	_expect(led_pairs.size() == 5, "17: cost_ledger_console trzyma 5 par (wlasciciel, PKG-0239)")
+	var led_text := JSON.stringify(led_pairs)
+	_expect(led_text.contains("katastrofę, po której pochowałam brata") and led_text.contains("Obszar utrzymywanego wyniku: Równia"), "17: rejestr zestawia utrzymana Rownie i pogrzeb")
+	_expect(led_text.contains("Równia. Tak nazywają ten utrzymany obszar"), "17: Lena zarabia imie Rownia")
 
 	# 42B: oddech, klucz, brak wiaty
 	var loc_pairs: Array = CreativeLines.LINES.get("local_lena_recovered", [])
-	_expect(loc_pairs.size() == 3, "42B: local_lena_recovered trzyma 3 pary")
-	if loc_pairs.size() >= 3:
-		var p0 := loc_pairs[0] as Array
-		var p2 := loc_pairs[2] as Array
-		_expect(String(p0[1]).contains("Co wiedziałaś przed testem"), "42B: pytanie Marty przed testem")
-		_expect(String(p2[1]).contains("Poznaję twój oddech"), "42B: Marta poznaje oddech miejscowej")
-		_expect(String(p2[1]).contains("Klucz dostaniesz"), "42B: klucz powiazany z odpowiedzia")
+	_expect(loc_pairs.size() == 5, "42B: local_lena_recovered trzyma 5 par (wlasciciel, PKG-0239)")
+	var loc_text := JSON.stringify(loc_pairs)
+	_expect(String((loc_pairs[0] as Array)[1]).contains("Co wiedziałaś przed testem"), "42B: pytanie Marty przed testem")
+	_expect(loc_text.contains("Zaczęłam, zanim mogła odpowiedzieć"), "42B: miejscowa przyznaje wlasna decyzje")
+	_expect(loc_text.contains("Zaczniemy od tego, co zrobiłaś ty"), "42B: Marta trzyma odpowiedzialnosc miejscowej przy sobie")
 	for key: String in ["household_b_full", "household_b_partial", "household_b_withheld"]:
 		var pairs: Array = CreativeLines.LINES.get(key, [])
 		if not pairs.is_empty():
@@ -129,8 +126,10 @@ func _test_e1_dialogue_links() -> void:
 		var p2 := c_full[2] as Array
 		var p4 := c_full[4] as Array
 		_expect(String(p0[1]).contains("Znam ten kubek"), "42C: Marta rozpoznaje kubek")
-		_expect(String(p2[1]).contains("pustą półkę"), "42C: spojrzenie na pusta polke")
-		_expect(String(p4[1]).contains("Obie. Przed własnymi domami"), "42C: odpowiedzialnosc obu Len")
+		_expect(String(p2[1]).contains("skąd go pamiętam"), "42C: przeciek jako obca pamiec kubka")
+		_expect(String(p4[1]).contains("Pamiętam kubek, nie twoją opowieść"), "42C: Marta oddziela przeciek od opowiesci")
+	var passage_text := JSON.stringify(CreativeLines.LINES.get("mutual_passage", []))
+	_expect(passage_text.contains("To nie usuwa mojej decyzji"), "42C: odpowiedzialnosc miejscowej obok nacisku UCP")
 
 
 func _test_e1_route_continuity_09_18() -> void:
@@ -149,7 +148,7 @@ func _test_e1_route_continuity_09_18() -> void:
 
 	# 11 wyjscie -> 12 wejscie
 	var s11_rep: Array = CreativeLines.LINES.get("minimal_report", [])
-	_expect(String((s11_rep[3] as Array)[1]).contains("kontakt do warsztatu"), "11: wyjscie bierze kontakt do warsztatu")
+	_expect(String((s11_rep[s11_rep.size() - 1] as Array)[1]).contains("kontakt do warsztatu"), "11: wyjscie bierze kontakt do warsztatu")
 	var s12_tscn := _read("res://scenes/levels/station_12.tscn")
 	_expect(s12_tscn.contains("ŁĄCZE WARSZTATOWE") or s12_tscn.contains("łącze"), "12: wejscie wita laczem warsztatowym")
 
@@ -173,21 +172,21 @@ func _test_e1_route_continuity_09_18() -> void:
 
 	# 15 wyjscie -> 16 wejscie
 	var s15_gd := _read("res://scripts/levels/station_15.gd")
-	_expect(s15_gd.contains("Niosę odpowiedź do analizatora poza obwodem"), "15: wyjscie zapowiada analizator poza obwodem")
+	_expect(s15_gd.contains("Niosę je do analizatora poza obwodem"), "15: wyjscie zapowiada analizator poza obwodem")
 	var s16_tscn := _read("res://scenes/levels/station_16.tscn")
 	_expect(s16_tscn.contains("Niosę odpowiedź do analizatora poza obwodem"), "16: wejscie potwierdza analizator poza obwodem")
 
 	# 16 wyjscie -> 17 wejscie
 	var s16_gd := _read("res://scripts/levels/station_16.gd")
-	_expect(s16_gd.contains("sprawdzę rejestr par w hali UCP"), "16: wyjscie zapowiada rejestr par w hali UCP")
+	_expect(s16_gd.contains("pójdę do rejestru par w hali UCP"), "16: wyjscie zapowiada rejestr par w hali UCP")
 	var s17_tscn := _read("res://scenes/levels/station_17.tscn")
-	_expect(s17_tscn.contains("Idę do rejestru par w hali UCP"), "17: wejscie potwierdza rejestr par w hali UCP")
+	_expect(s17_tscn.contains("idę do rejestru par w hali UCP"), "17: wejscie potwierdza rejestr par w hali UCP")
 
 	# 17 wyjscie -> 18 wejscie
 	var s17_gd := _read("res://scripts/levels/station_17.gd")
-	_expect(s17_gd.contains("Wracam na ulicę — trzy drogi, Marta"), "17: wyjscie zapowiada powrot na ulice")
+	_expect(s17_gd.contains("Zabiorę odpisy do Marty na ulicę"), "17: wyjscie zapowiada powrot na ulice")
 	var s18_tscn := _read("res://scenes/levels/station_18.tscn")
-	_expect(s18_tscn.contains("Wracam na znaną ulicę. Trzy drogi na tablicy, Marta przy oknie"), "18: wejscie potwierdza znana ulice i Marte")
+	_expect(s18_tscn.contains("Przyniosłam odpisy z hali. Marta czeka na znanej ulicy"), "18: wejscie potwierdza znana ulice i Marte")
 
 
 func _test_e2_three_seconds_implicit() -> void:

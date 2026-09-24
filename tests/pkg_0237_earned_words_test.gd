@@ -58,28 +58,39 @@ func _run() -> void:
 	_finish()
 
 
+## PKG-0242 (R1): PKG-0239 (owner narrative repair, authoritative for
+## content) rewrote the 17 ledger and offer. D1/D2 keep their intent on the
+## owner's text: the register says "Równia" before Lena does, Lena repeats it
+## as their name for the maintained area, Wierzbicka is recognised from the
+## counter at 11 and defends the result instead of reciting "Stan:" (owner
+## KROK 12), and Lena weighs the price before refusing.
 func _test_d1_rownea_earned() -> void:
 	print("1. D1: Rownia zarobiona w cost_ledger_console...")
 	var pairs: Array = CreativeLines.LINES.get("cost_ledger_console", [])
-	_expect(pairs.size() == 3, "cost_ledger_console trzyma 3 pary")
-	if pairs.size() >= 3:
-		var p0: Array = pairs[0] as Array
-		var p1: Array = pairs[1] as Array
-		var p2: Array = pairs[2] as Array
-		_expect(String(p0[0]) == "REJESTR UCP", "p0: rejestr wypowiada pare")
-		_expect(String(p0[1]).contains("Równia"), "p0: rejestr wymienia Rownie")
-		_expect(String(p0[1]).contains("04/17"), "p0: rejestr trzyma kod 04/17")
-		_expect(String(p0[1]).contains("jedną ręką"), "p0: rejestr trzyma obraz jednej reki")
-		_expect(String(p1[0]) == "Lena", "p1: Lena odpowiada na nazwe")
-		_expect(String(p1[1]).contains("Równia"), "p1: Lena powtarza i zarabia Rownie")
-		_expect(String(p1[1]).contains("Tym słowem podpisali to miejsce"), "p1: Lena rozumie, ze to tutejsza nazwa")
-		_expect(String(p1[1]).contains("Moje nie miało nazwy na papierze"), "p1: Lena zestawia to ze swoim swiatem")
-		_expect(String(p2[0]) == "Lena", "p2: Lena zamyka wniosek")
-		_expect(String(p2[1]).contains("Ktoś utrzymuje zapis"), "p2: Lena trzyma linie 0194")
-		_expect(String(p2[1]).contains("powiązanego kosztu"), "p2: Lena trzyma powiazany koszt")
-		for pair: Variant in pairs:
-			var text := String((pair as Array)[1])
-			_expect(text.length() <= 115, "kwestia miesci sie w pudle CRT (<=115): %s" % text)
+	_expect(pairs.size() == 5, "cost_ledger_console trzyma 5 par (wlasciciel, PKG-0239)")
+	var register_at := -1
+	var lena_at := -1
+	for i in range(pairs.size()):
+		var pair: Array = pairs[i] as Array
+		if register_at < 0 and String(pair[0]) == "REJESTR KOSZTÓW" and String(pair[1]).contains("Równia"):
+			register_at = i
+		if lena_at < 0 and String(pair[0]) == "Lena" and String(pair[1]).contains("Równia"):
+			lena_at = i
+	_expect(register_at >= 0, "rejestr wymienia Rownie")
+	_expect(lena_at > register_at, "Lena powtarza Rownie dopiero po rejestrze")
+	if lena_at >= 0:
+		_expect(String((pairs[lena_at] as Array)[1]).contains("Tak nazywają ten utrzymany obszar"), "Lena rozumie, ze to tutejsza nazwa")
+	var joined := ""
+	for pair: Variant in pairs:
+		joined += String((pair as Array)[1]) + "\n"
+		_expect(String((pair as Array)[1]).length() <= 115, "kwestia miesci sie w pudle CRT (<=115): %s" % String((pair as Array)[1]))
+	_expect(joined.contains("pochowałam brata"), "Lena zestawia to ze swoim swiatem (pogrzeb brata)")
+	_expect(joined.contains("powiązany koszt"), "rejestr trzyma powiazany koszt")
+	# Earned: no line served before 17 says the word.
+	for key: String in CreativeLines.LINES.keys():
+		if key in ["cost_ledger_console"] or key.begins_with("forecast_") or key.begins_with("marta_truth") or key.begins_with("method_commit") or key.begins_with("household") or key in ["flow_closure", "local_lena_recovered", "mutual_passage", "memory_leak", "forced_return_latch", "sealed_other_lena", "adaptation_offer_terminal"] or key.begins_with("consent_scope"):
+			continue
+		_expect(not JSON.stringify(CreativeLines.LINES[key]).contains("Równi"), "%s nie wypowiada Rowni przed 17" % key)
 
 
 func _test_d2_wierzbicka_two_modes() -> void:
@@ -87,23 +98,20 @@ func _test_d2_wierzbicka_two_modes() -> void:
 	var s17_tscn := _read("res://scenes/levels/station_17.tscn")
 	_expect(s17_tscn.contains("WIERZBICKA / ZAKRES"), "station_17.tscn etykieta terminala nazywa Wierzbicka / Zakres")
 	var offer_pairs: Array = CreativeLines.LINES.get("adaptation_offer_terminal", [])
-	_expect(offer_pairs.size() == 4, "adaptation_offer_terminal trzyma 4 pary (pin 0217)")
-	if offer_pairs.size() >= 4:
-		var p0: Array = offer_pairs[0] as Array
-		var p1: Array = offer_pairs[1] as Array
-		var p2: Array = offer_pairs[2] as Array
-		var p3: Array = offer_pairs[3] as Array
-		_expect(String(p0[0]) == "WIERZBICKA", "p0: Wierzbicka mowi w 17")
-		_expect(String(p0[1]).contains("Stan:"), "p0: styl bezosobowy Wierzbickiej")
-		_expect(String(p1[0]) == "Lena", "p1: Lena reaguje na glos")
-		_expect(String(p1[1]).contains("Głos z lady"), "p1: Lena rozpoznaje Wierzbicka z lady w 11")
-		_expect(String(p1[1]).contains("Bez kosztu?"), "p1: Lena pyta o koszt")
-		_expect(String(p2[0]) == "WIERZBICKA", "p2: Wierzbicka wyjasnia procedure")
-		_expect(String(p3[0]) == "Lena", "p3: Lena odmawia")
-		_expect(String(p3[1]).contains("Nie będę wygodnym zastępstwem"), "p3: odmowa Leny (pin 0194)")
-		for pair: Variant in offer_pairs:
-			var text := String((pair as Array)[1])
-			_expect(text.length() <= 115, "kwestia miesci sie w pudle CRT (<=115): %s" % text)
+	_expect(offer_pairs.size() == 6, "adaptation_offer_terminal trzyma 6 par (wlasciciel, PKG-0239)")
+	if offer_pairs.size() >= 6:
+		_expect(String((offer_pairs[0] as Array)[0]) == "Wierzbicka (terminal)", "p0: Wierzbicka mowi w 17 przez terminal")
+		_expect(String((offer_pairs[0] as Array)[1]).contains("Wynik zostanie utrzymany"), "p0: Wierzbicka broni utrzymanego wyniku")
+		_expect(String((offer_pairs[1] as Array)[0]) == "Lena", "p1: Lena reaguje na glos")
+		_expect(String((offer_pairs[1] as Array)[1]).contains("Poznaję głos z lady"), "p1: Lena rozpoznaje Wierzbicka z lady w 11")
+		_expect(String((offer_pairs[1] as Array)[1]).contains("A ona?"), "p1: Lena pyta o cene zastepstwa")
+		_expect(String((offer_pairs[4] as Array)[1]).contains("bezpieczeństwa tej strony"), "p4: Wierzbicka naciska argumentem")
+		_expect(String((offer_pairs[5] as Array)[0]) == "Lena", "p5: Lena odmawia")
+		_expect(String((offer_pairs[5] as Array)[1]).contains("Nie podpiszę"), "p5: odmowa Leny")
+	for pair: Variant in offer_pairs:
+		var text := String((pair as Array)[1])
+		_expect(text.length() <= 115, "kwestia miesci sie w pudle CRT (<=115): %s" % text)
+		_expect(not text.contains("Stan:"), "Wierzbicka nie recytuje stanu (wlasciciel KROK 12)")
 
 
 func _test_d3_analyzer_address() -> void:
@@ -126,7 +134,7 @@ func _test_d4_finale_b_single_location() -> void:
 	_expect(not s42b_gd.contains("wiacie z linii 03"), "station_42b.gd nie zawiera wiaty z linii 03")
 	for key: String in ["household_b_full", "household_b_partial", "household_b_withheld"]:
 		var pairs: Array = CreativeLines.LINES.get(key, [])
-		_expect(pairs.size() == 6, "%s trzyma 6 par" % key)
+		_expect(pairs.size() == 4, "%s trzyma 4 pary (wlasciciel, PKG-0239)" % key)
 		if not pairs.is_empty():
 			var p0: Array = pairs[0] as Array
 			_expect(String(p0[1]).contains("Stoję w progu"), "%s otwiera sie w progu" % key)
@@ -161,7 +169,9 @@ func _test_d6_controlled_body_named() -> void:
 	for scene_name: String in ["station_42a", "station_42b", "station_42c"]:
 		var tscn := _read("res://scenes/levels/%s.tscn" % scene_name)
 		_expect(tscn.contains("opening_line_2 = \""), "%s ma opening_line_2" % scene_name)
-		_expect(tscn.contains("przybyłą Leną"), "%s nazywa sterowane cialo: przybyla Lena" % scene_name)
+		# PKG-0242 (R1): the owner's cue is spoken by the Lena who chose at
+		# the post — the arrived one the player steers.
+		_expect(tscn.contains("opening_line_2 = \"W nocy przy słupku wybrałam"), "%s nazywa sterowane cialo: przybyla Lena" % scene_name)
 
 
 func _test_d7_epilogue_unseeded_branch() -> void:
@@ -175,8 +185,8 @@ func _test_d7_epilogue_unseeded_branch() -> void:
 		all_default += t + " "
 		_expect(t.length() <= 115, "linia domyslna <=115 znakow: %s" % t)
 	_expect(not all_default.contains("dwie kolejności"), "DEFAULT_DIALOGUE_LINES nie kradnie tonu C (dwie kolejnosci)")
-	_expect(all_default.contains("Brak metody"), "DEFAULT_DIALOGUE_LINES nazywa brak metody")
-	_expect(all_default.contains("niepodpisana") or all_default.contains("luka"), "DEFAULT_DIALOGUE_LINES brzmi jak luka w rejestrze")
+	_expect(all_default.contains("Brak potwierdzonej metody"), "DEFAULT_DIALOGUE_LINES nazywa brak metody")
+	_expect(all_default.contains("Brak podpisanego rozstrzygnięcia"), "DEFAULT_DIALOGUE_LINES brzmi jak luka w rejestrze")
 
 
 func _finish() -> void:

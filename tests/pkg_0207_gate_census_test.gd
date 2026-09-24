@@ -105,10 +105,12 @@ const PROMPT_PATH := "res://docs/NEXT_SESSION_PROMPT.md"
 const SELF_REF := "res://tests/pkg_0207_gate_census_test.gd"
 
 ## PKG-0241: one real regression gate added, all four census counts +1.
-const EXPECTED_INVOKE_LINES := 130
-const EXPECTED_SCRIPT_ARGS := 129
-const EXPECTED_TEST_REFS := 128
-const EXPECTED_DISK_TESTS := 128
+## PKG-0242: route traversal and interact priority gate added, all four
+## census counts +1 (same evolution rule, D-222).
+const EXPECTED_INVOKE_LINES := 131
+const EXPECTED_SCRIPT_ARGS := 130
+const EXPECTED_TEST_REFS := 129
+const EXPECTED_DISK_TESTS := 129
 
 const INPUT_ACTIONS: Array[String] = [
 	"move_left",

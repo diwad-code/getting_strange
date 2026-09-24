@@ -14,8 +14,10 @@ extends SceneTree
 ##     station_01..station_41 + station_42a/b/c + station_43;
 ## (2) 45 scen scenes/levels/station_*.tscn o tych samych ID — zbiory rowne
 ##     w obie strony (zero sierot, zero wiszacych);
-## (3) 3 helpery nie-stacyjne w scripts/levels: atmosphere_rig.gd,
-##     creative_scene_lines.gd, creative_scene_presentation.gd;
+## (3) 4 helpery nie-stacyjne w scripts/levels: atmosphere_rig.gd,
+##     creative_scene_lines.gd, creative_scene_presentation.gd oraz
+##     narrative_repair_rules.gd (PKG-0239, wlasciciel: jedna regula zgody,
+##     prawdy i metody dla 17/18/42; PKG-0242 kontrolowana aktualizacja 3 -> 4);
 ## (4) kazdy skrypt stacji definiuje class_name (Station01..Station43,
 ##     Station42A/B/C) i extends Node2D;
 ## (5) kazda scena referencjonuje wlasny skrypt stacji przez ext_resource
@@ -27,12 +29,13 @@ const SCRIPTS_DIR := "res://scripts/levels"
 const SCENES_DIR := "res://scenes/levels"
 
 const EXPECTED_STATION_N := 45
-const EXPECTED_HELPER_N := 3
+const EXPECTED_HELPER_N := 4
 
 const HELPER_NAMES: Array[String] = [
 	"atmosphere_rig.gd",
 	"creative_scene_lines.gd",
 	"creative_scene_presentation.gd",
+	"narrative_repair_rules.gd",
 ]
 
 const FINALE_IDS: Array[String] = [

@@ -580,8 +580,13 @@ Invoke-GodotGate `
     -Name 'PKG-0238 dialogue bridges gate' `
     -Arguments @('--headless', '--path', $projectRoot, '--script', 'res://tests/pkg_0238_dialogue_bridges_test.gd')
 
-Write-Host 'Verification passed.'
-
 Invoke-GodotGate `
     -Name 'PKG-0241 visual, animation and modal UX regression gate' `
     -Arguments @('--headless', '--path', $projectRoot, '--script', 'res://tests/pkg_0241_visual_ux_test.gd')
+
+Invoke-GodotGate `
+    -Name 'PKG-0242 route traversal and interact priority gate' `
+    -Arguments @('--headless', '--path', $projectRoot, '--script', 'res://tests/pkg_0242_route_traversal_test.gd')
+
+Write-Host 'Verification passed.'
+

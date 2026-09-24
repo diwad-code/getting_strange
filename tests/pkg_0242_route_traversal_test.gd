@@ -15,7 +15,17 @@ extends SceneTree
 ## player could not cross the room. The exit apertures of 16–18, 42A–C and 43
 ## were also placed on a floor height the scenes no longer had.
 ##
-## Proves physics and placement only; it does not prove comprehension or fun.
+## Second half — who owns the `interact` press (D-228 MRP > Threshold):
+## * on every address the exit keeps a stretch where no reading point is in
+##   reach, so a press there always leaves;
+## * where a reading point and the open exit overlap (18: the mutual-passage
+##   side of the method post) the reading point owns the press;
+## * each side of the 16/17/18 side-choices is a band at least MIN_SIDE_BAND
+##   wide (the 18 post used to leave 12 px per side);
+## * reading points no longer share one resized CircleShape2D.
+##
+## Proves physics, placement and input routing only; it does not prove
+## comprehension or fun.
 
 const ROUTE: Array[String] = [
 	"station_01", "station_02", "station_03", "station_04", "station_05",
@@ -26,6 +36,15 @@ const ROUTE: Array[String] = [
 ]
 const FRAME_BUDGET := 1500
 const APERTURE_FLOOR_TOLERANCE := 1.5
+const Focus := preload("res://scripts/interactables/interaction_focus.gd")
+const MIN_SIDE_BAND := 30.0
+## [station, point, dead zone of its side choice]
+const SIDE_CHOICES := [
+	["station_16", "Props/CostSelector", 10.0],
+	["station_17", "Props/ConsentScopeDesk", 24.0],
+	["station_18", "Props/MartaTruthTable", 24.0],
+	["station_18", "Props/MethodCommitPost", 40.0],
+]
 
 var _failures: Array[String] = []
 
@@ -50,7 +69,119 @@ func _run() -> void:
 	state.set("campaign_auto_transition_enabled", false)
 	for id in ROUTE:
 		await _traverse(state, id)
+	for id in ROUTE:
+		await _check_free_exit(state, id)
+	for choice in SIDE_CHOICES:
+		await _check_side_bands(state, choice)
+	await _check_post_beats_door(state)
+	await _check_unique_shapes(state)
 	_finish()
+
+
+## Physics positions only: Lena stands, the areas report overlap themselves.
+func _stand(player: CharacterBody2D, x: float) -> void:
+	player.global_position = Vector2(x, 296.0)
+	player.velocity = Vector2.ZERO
+	for _f in range(3):
+		await physics_frame
+
+
+func _open(state: Node, id: String) -> Node2D:
+	state.reset_campaign(true)
+	var station := (load("res://scenes/levels/%s.tscn" % id) as PackedScene).instantiate() as Node2D
+	root.add_child(station)
+	for _f in range(4):
+		await physics_frame
+	ThresholdBinder.install(station)
+	return station
+
+
+func _check_free_exit(state: Node, id: String) -> void:
+	var station := await _open(state, id)
+	var threshold := station.get_node_or_null("Threshold") as ThresholdZone
+	var player := station.get_node_or_null("Player") as CharacterBody2D
+	if threshold == null or player == null:
+		_expect(false, "%s needs a Threshold and a Player" % id)
+		await _close(station)
+		return
+	var free_stretch := 0
+	for x in range(int(threshold.global_position.x) - 70, int(threshold.global_position.x) + 40, 4):
+		player.global_position = Vector2(x, threshold.global_position.y + 20.0)
+		player.velocity = Vector2.ZERO
+		for _f in range(3):
+			await physics_frame
+		if threshold.is_player_in_range and Focus.focused_point(station) == null:
+			free_stretch += 4
+	_expect(free_stretch >= 24, "%s: the exit needs a stretch free of reading points (got %d px)" % [id, free_stretch])
+	await _close(station)
+
+
+func _check_side_bands(state: Node, choice: Array) -> void:
+	var station := await _open(state, String(choice[0]))
+	var point := station.get_node_or_null(String(choice[1])) as Node2D
+	var player := station.get_node_or_null("Player") as CharacterBody2D
+	if point == null or player == null:
+		_expect(false, "%s needs %s" % [choice[0], choice[1]])
+		await _close(station)
+		return
+	var dead: float = choice[2]
+	var left := 0
+	var right := 0
+	for x in range(int(point.global_position.x) - 110, int(point.global_position.x) + 110, 2):
+		await _stand(player, float(x))
+		if Focus.focused_point(station) != point:
+			continue
+		var offset := float(x) - point.global_position.x
+		if offset < -dead:
+			left += 2
+		elif offset > dead:
+			right += 2
+	_expect(left >= MIN_SIDE_BAND and right >= MIN_SIDE_BAND,
+		"%s %s: each side must be a band of >= %d px (left %d, right %d)" % [choice[0], choice[1], int(MIN_SIDE_BAND), left, right])
+	await _close(station)
+
+
+func _check_post_beats_door(state: Node) -> void:
+	var station := await _open(state, "station_18")
+	var post := station.get_node("Props/MethodCommitPost") as Node2D
+	var threshold := station.get_node("Threshold") as ThresholdZone
+	var player := station.get_node("Player") as CharacterBody2D
+	var pressed: Array[String] = []
+	station.connect("clue_inspected", func(id: String, _type: int) -> void: pressed.append(id))
+	var overlap_x := -1.0
+	for x in range(int(post.global_position.x) + 42, int(post.global_position.x) + 90, 2):
+		await _stand(player, float(x))
+		if threshold.is_player_in_range and Focus.focused_point(station) == post:
+			overlap_x = float(x)
+			break
+	_expect(overlap_x > 0.0, "18: the mutual side of the post must reach into the open doorway")
+	# The opening line is still on screen; a press there only advances it.
+	var box := station.get_node("CRTDialogueBox") as CRTDialogueBox
+	for _i in range(40):
+		if not box.is_presenting():
+			break
+		box.advance_dialogue()
+		await process_frame
+	if overlap_x > 0.0:
+		var event := InputEventAction.new()
+		event.action = &"interact"
+		event.pressed = true
+		root.push_input(event, true)
+		await process_frame
+		_expect(pressed.has("method_commit_post"), "18: at x=%d the post, not the door, must own the press" % int(overlap_x))
+		_expect(not bool(threshold.get("_busy")), "18: the door must not start a crossing while the post owns the press")
+	await _close(station)
+
+
+func _check_unique_shapes(state: Node) -> void:
+	var station := await _open(state, "station_18")
+	var radii := {}
+	for name in ["ForecastComparator", "MartaTruthTable", "MethodCommitPost"]:
+		var shape := (station.get_node("Props/%s/CollisionShape2D" % name) as CollisionShape2D).shape as CircleShape2D
+		radii[name] = shape.radius
+	_expect(is_equal_approx(radii["ForecastComparator"], 44.0) and is_equal_approx(radii["MartaTruthTable"], 56.0) and is_equal_approx(radii["MethodCommitPost"], 72.0),
+		"18: each reading point keeps its own reach (got %s)" % str(radii))
+	await _close(station)
 
 
 func _traverse(state: Node, id: String) -> void:
@@ -157,7 +288,7 @@ func _close(station: Node) -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("PKG-0242 ROUTE TRAVERSAL PASS: 22 addresses walkable spawn → exit → return by input only.")
+		print("PKG-0242 ROUTE TRAVERSAL PASS: 22 addresses walkable spawn → exit → return by input only; exits keep a free stretch; reading points own the press; side bands >= %d px." % int(MIN_SIDE_BAND))
 		quit(0)
 	else:
 		print("PKG-0242 ROUTE TRAVERSAL FAIL (%d)" % _failures.size())

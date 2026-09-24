@@ -18,6 +18,7 @@ extends SceneTree
 ## Zero zmian w creative_scene_lines.gd (piny 0194/0195/0217/0226 nietkniete).
 
 const ThresholdBinderScript := preload("res://scripts/environment/threshold_binder.gd")
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 
 var _failures: Array[String] = []
 
@@ -72,23 +73,20 @@ func _close(station: Node) -> void:
 	await process_frame
 
 
-func _seed_18_entry(state: Node, scope: String) -> void:
-	state.record_decision(&"p7.work_history_and_record.trace", "cost_ledger_and_consent_scope_recorded")
-	state.record_decision(&"p9.consent_and_cost.cost_ledger_read", true)
-	state.record_decision(&"p9.consent_and_cost.adaptation_offer", "rejected")
-	state.record_decision(&"p9.consent_and_cost.jakub_consent_scope", scope)
-	state.record_decision(&"jakub_consent_state", scope)
-	state.record_decision(&"p9.mechanics.small_cost.choice", "marta_memory")
+## PKG-0242 (R1): since PKG-0239 the method is a conversation over two
+## visits and the finales accept only a chain NarrativeRules.committed
+## recognises. Seeds are the recorded pre-17 input run plus the real 17/18
+## scenes (CampaignChain); `cost` is the Station 16 choice of that run.
+func _seed_18_answered(state: Node, method: String, marta: String, cost := "marta_memory") -> void:
+	CampaignChain.seed_before_17(state, "leave_on_time", cost)
+	_expect(await CampaignChain.record_scope(self, "granted"), "17 zapisuje zakres")
+	_expect(await CampaignChain.propose_method(self, method, marta), "18 nazywa %s" % method)
+	_expect(await CampaignChain.answer_method(self, "accepted"), "17 odpowiada na %s" % method)
 
 
 func _seed_42_entry(state: Node, method: String, marta: String, scope: String, cost: String) -> void:
-	state.record_decision(&"p9.method_commitment.method_committed", method)
-	state.record_decision(&"method_committed", method)
-	state.record_decision(&"p9.method_commitment.marta_truth_state", marta)
-	state.record_decision(&"marta_truth_state", marta)
-	state.record_decision(&"p9.consent_and_cost.jakub_consent_scope", scope)
-	state.record_decision(&"jakub_consent_state", scope)
-	state.record_decision(&"p9.mechanics.small_cost.choice", cost)
+	CampaignChain.seed_before_17(state, "leave_on_time", cost)
+	_expect(await CampaignChain.commit_chain(self, method, marta, scope), "lancuch %s/%s/%s zatwierdzony" % [method, marta, scope])
 
 
 func _seed_recognition(state: Node, sample: bool) -> void:
@@ -234,21 +232,22 @@ func _test_c1_bridge_13_to_14(state: Node) -> void:
 # ─── 6. C2: most 18->42 ──────────────────────────────────────────────────
 
 func _test_c2_bridge_18_to_42(state: Node) -> void:
-	state.reset_campaign(true)
-	_seed_18_entry(state, "granted")
+	await _seed_18_answered(state, "force_home", "partial")
 	var live18 := await _open(state, 18)
 	if live18 == null:
 		return
-	_expect(bool(live18.call("compare_forecast_consent_dependencies")), "18: zestawienie wychodzi")
-	_expect(bool(live18.call("disclose_marta_truth_partial")), "18: prawda wychodzi")
+	_expect(bool(live18.get("are_forecasts_compared")), "18: zestawienie wychodzi")
+	_expect(bool(live18.get("is_marta_truth_disclosed")), "18: prawda wychodzi")
 	_expect(bool(live18.call("commit_force_home")), "18: commit wychodzi")
 	_expect(state.decisions.has(&"p9.method_commitment.snapshot"), "commit zapisuje migawke (most zaczyna sie przy slupku)")
 	await _close(live18)
-	for entry: Array in [["station_42a", "zatwierdziłam powrót"], ["station_42b", "zamknęłam przepływ"], ["station_42c", "otworzyłam przejście"]]:
+	# PKG-0242 (R1): the owner's PKG-0239 cues say what Lena chose at night
+	# and what she will do now ("wybrałam ..."), cut to dawn ("Świt.").
+	for entry: Array in [["station_42a", "wybrałam powrót"], ["station_42b", "wybrałam jej odzyskanie"], ["station_42c", "wybrałam przejście dla nas obu"]]:
 		var cue := _read("res://scenes/levels/%s.tscn" % String(entry[0]))
 		_expect(cue.contains("W nocy przy słupku"), "%s nazywa nocna czynnosc zatwierdzenia" % String(entry[0]))
-		_expect(cue.contains("O świcie") or cue.contains("Swit") or cue.contains("świcie"), "%s trzyma ciecie w swit" % String(entry[0]))
-		_expect(cue.contains(String(entry[1])), "%s nazywa wykonana metode" % String(entry[0]))
+		_expect(cue.contains("Świt."), "%s trzyma ciecie w swit" % String(entry[0]))
+		_expect(cue.contains(String(entry[1])), "%s nazywa wybrana metode" % String(entry[0]))
 	_expect(String(state.call("arrival_side_for", &"station_18", &"station_42a")) == "left", "18 -> 42 wchodzi z lewej (pin 0230)")
 
 
@@ -256,8 +255,10 @@ func _test_c2_bridge_18_to_42(state: Node) -> void:
 
 func _test_c3_focalization_42b(_state: Node) -> void:
 	var cue := _read("res://scenes/levels/station_42b.tscn")
-	_expect(cue.contains("przybyłą Leną"), "42B nazywa kontrolowana postac: przybyla Lena")
-	_expect(cue.contains("progu"), "42B stawia ja w progu, nie we wnetrzu")
+	# PKG-0242 (R1): the owner's cue is spoken by the Lena who chose at the
+	# post (the arrived one) and names the other as "Miejscowa".
+	_expect(cue.contains("Miejscowa jeszcze tu nie odpowiada") and cue.contains("W nocy przy słupku wybrałam"), "42B nazywa kontrolowana postac: przybyla Lena")
+	_expect(cue.contains("Próg mieszkania 14"), "42B stawia ja w progu, nie we wnetrzu")
 	var script := load("res://scripts/levels/station_42b.gd") as GDScript
 	var consts: Dictionary = script.get_script_constant_map()
 	_expect((consts.get("DIALOGUE_LINES", []) as Array).size() == 4, "42B trzyma 4 kwestie (pin 0107)")
@@ -272,13 +273,10 @@ func _snapshot(state: Node) -> Dictionary:
 
 func _test_d2_snapshot(state: Node) -> void:
 	# (a) commit zapisuje jedna spojna migawke.
-	state.reset_campaign(true)
-	_seed_18_entry(state, "granted")
+	await _seed_18_answered(state, "force_home", "partial")
 	var live18 := await _open(state, 18)
 	if live18 == null:
 		return
-	_expect(bool(live18.call("compare_forecast_consent_dependencies")), "D2: zestawienie wychodzi")
-	_expect(bool(live18.call("disclose_marta_truth_partial")), "D2: prawda wychodzi")
 	_expect(bool(live18.call("commit_force_home")), "D2: commit wychodzi")
 	var snap := _snapshot(state)
 	for key: String in ["method", "marta_truth", "jakub_consent", "small_cost", "evidence", "finale"]:
@@ -301,37 +299,28 @@ func _test_d2_snapshot(state: Node) -> void:
 	_expect(String(_snapshot(state).get("method", "")) == "force_home", "migawka nietknieta po probie zmiany")
 	await _close(back18)
 	# (c) lock migawki na swiezej instancji z obcym snapshotem.
-	state.reset_campaign(true)
-	_seed_18_entry(state, "granted")
+	await _seed_18_answered(state, "close_equal_recover_local", "partial")
 	state.record_decision(&"p9.method_commitment.snapshot", {"method": "force_home", "finale": "station_42a"})
 	var locked := await _open(state, 18)
 	if locked == null:
 		return
-	locked.call("compare_forecast_consent_dependencies")
-	locked.call("disclose_marta_truth_partial")
 	_expect(not bool(locked.call("commit_close_equal")), "obca migawka blokuje inny commit")
 	_expect(String(locked.get("last_feedback")) == "method_snapshot_locked", "blokada migawki nazywa luke")
 	await _close(locked)
 	# (d) rozpoczecie wykonania w 42 blokuje kazdy commit.
-	state.reset_campaign(true)
-	_seed_18_entry(state, "granted")
+	await _seed_18_answered(state, "force_home", "partial")
 	state.record_decision(&"p9.finale.forced_return.executed", true)
 	var exe := await _open(state, 18)
 	if exe == null:
 		return
-	exe.call("compare_forecast_consent_dependencies")
-	exe.call("disclose_marta_truth_partial")
 	_expect(not bool(exe.call("commit_force_home")), "wykonanie w 42 blokuje commit")
 	_expect(String(exe.get("last_feedback")) == "finale_execution_started", "blokada wykonania nazywa luke")
 	await _close(exe)
 	# (e) save/reload trzyma migawke spojnie z metoda i finalem.
-	state.reset_campaign(true)
-	_seed_18_entry(state, "granted")
+	await _seed_18_answered(state, "force_home", "partial")
 	var sav := await _open(state, 18)
 	if sav == null:
 		return
-	sav.call("compare_forecast_consent_dependencies")
-	sav.call("disclose_marta_truth_partial")
 	sav.call("commit_force_home")
 	await _close(sav)
 	_expect(bool(state.call("save_campaign")), "zapis z migawka wychodzi")
@@ -346,61 +335,67 @@ func _test_d5_payoff(state: Node) -> void:
 	var methods := {"station_42a": "force_home", "station_42b": "close_equal_recover_local", "station_42c": "mutual_passage"}
 	var exec_verbs := {"station_42a": "execute_forced_return", "station_42b": "execute_close_flow", "station_42c": "execute_mutual_passage"}
 	var state_verbs := {"station_42a": "read_sealed_other_lena", "station_42b": "read_local_lena_recovered", "station_42c": "read_memory_leak"}
+	# PKG-0242 (R1): only chains a player can reach (PKG-0239): A needs
+	# Jakub's granted scope, B granted or limited, C the full record too.
+	var reachable := {"station_42a": [["full", "granted"], ["partial", "granted"], ["withheld", "granted"]],
+		"station_42b": [["full", "granted"], ["partial", "limited"], ["withheld", "limited"]],
+		"station_42c": [["full", "granted"]]}
 	for finale_id: String in methods.keys():
-		for truth: String in ["full", "partial", "withheld"]:
-			for scope: String in ["granted", "limited", "refused"]:
-				for cost: String in ["marta_memory", "sample_second"]:
-					state.reset_campaign(true)
-					_seed_42_entry(state, String(methods[finale_id]), truth, scope, cost)
-					var station := await _open_named(state, finale_id)
-					if station == null:
-						return
-					_expect(bool(station.call(String(exec_verbs[finale_id]))), "%s: wykonanie (%s/%s/%s)" % [finale_id, truth, scope, cost])
-					_expect(bool(station.call(String(state_verbs[finale_id]))), "%s: stan (%s/%s/%s)" % [finale_id, truth, scope, cost])
-					_expect(bool(station.call("read_household_consequence")), "%s: skutek (%s/%s/%s)" % [finale_id, truth, scope, cost])
-					var household: Variant = station.get("household_consequence")
-					_expect(household is Dictionary, "%s: skutek to slownik" % finale_id)
-					if household is Dictionary:
-						_expect(String((household as Dictionary).get("marta", "")) == truth, "%s: prawda w slowniku" % finale_id)
-						_expect(String((household as Dictionary).get("jakub", "")) == scope, "%s: zgoda w slowniku" % finale_id)
-						_expect(String((household as Dictionary).get("cost", "")) == cost, "%s: koszt w slowniku" % finale_id)
-					_expect(String(station.get("payoff_cost")) == cost, "%s: koszt w zmiennej wyplaty" % finale_id)
-					station.set("is_household_read", true)
-					station.queue_redraw()
-					await process_frame
-					await _close(station)
-	# Epilog: kazda rodzina x prawda x zgoda x koszt daje linie z trzema klauzulami.
-	var families := {"force_home": "Teczka.", "close_equal_recover_local": "drugie zgłoszenie", "mutual_passage": "Dwa rozkłady."}
-	var truth_marks := {"full": "pełny zapis", "partial": "część zapisu", "withheld": "zapis wstrzymany", "": "nieustalony"}
-	var scope_marks := {"granted": "wyłączniku", "limited": "wskazania", "refused": "odmowa", "": "nieustalony"}
-	var cost_marks := {"marta_memory": "kurtki", "sample_second": "wykresu", "": "nieustalony"}
-	for family: String in families.keys():
-		for truth: String in ["full", "partial", "withheld", ""]:
-			for scope: String in ["granted", "limited", "refused", ""]:
-				for cost: String in ["marta_memory", "sample_second", ""]:
-					state.reset_campaign(true)
-					state.record_decision(&"ending_family", family)
-					state.record_decision(&"ending_stability", "named_gaps")
-					if not truth.is_empty():
-						state.record_decision(&"marta_truth_state", truth)
-					if not scope.is_empty():
-						state.record_decision(&"jakub_consent_state", scope)
-					if not cost.is_empty():
-						state.record_decision(&"p9.mechanics.small_cost.choice", cost)
-					var epilogue := await _open_named(state, "station_43")
-					if epilogue == null:
-						return
-					var lines: Array = epilogue.get("dialogue_lines") as Array
-					_expect(lines.size() == 5, "43 %s trzyma 5 linii (pin 0232/0170)" % family)
-					var payoff := String((lines[2] as Dictionary).get("text", ""))
-					_expect(payoff.contains(String(families[family])), "43 %s: linia niesie znacznik rodziny" % family)
-					_expect(payoff.contains(String(truth_marks[truth])), "43 %s/%s: linia niesie prawde" % [family, truth])
-					_expect(payoff.contains(String(scope_marks[scope])), "43 %s/%s: linia niesie zgode" % [family, scope])
-					_expect(payoff.contains(String(cost_marks[cost])), "43 %s/%s: linia niesie koszt" % [family, cost])
-					_expect(payoff.length() <= 115, "43 linia wyplaty miesci sie w pudle CRT: %s" % payoff)
-					epilogue.queue_redraw()
-					await process_frame
-					await _close(epilogue)
+		for combo: Array in reachable[finale_id]:
+			var truth: String = combo[0]
+			var scope: String = combo[1]
+			for cost: String in ["marta_memory", "sample_second"]:
+				await _seed_42_entry(state, String(methods[finale_id]), truth, scope, cost)
+				var station := await _open_named(state, finale_id)
+				if station == null:
+					return
+				_expect(bool(station.call(String(exec_verbs[finale_id]))), "%s: wykonanie (%s/%s/%s)" % [finale_id, truth, scope, cost])
+				_expect(bool(station.call(String(state_verbs[finale_id]))), "%s: stan (%s/%s/%s)" % [finale_id, truth, scope, cost])
+				if finale_id == "station_42b":
+					_expect(bool(station.call("execute_close_flow")), "42B: zamkniecie po odpowiedzi miejscowej")
+				_expect(bool(station.call("read_household_consequence")), "%s: skutek (%s/%s/%s)" % [finale_id, truth, scope, cost])
+				var household: Variant = station.get("household_consequence")
+				_expect(household is Dictionary, "%s: skutek to slownik" % finale_id)
+				if household is Dictionary:
+					_expect(String((household as Dictionary).get("marta", "")) == truth, "%s: prawda w slowniku" % finale_id)
+					_expect(String((household as Dictionary).get("jakub", "")) == scope, "%s: zgoda w slowniku" % finale_id)
+					_expect(String((household as Dictionary).get("cost", "")) == cost, "%s: koszt w slowniku" % finale_id)
+				_expect(String(station.get("payoff_cost")) == cost, "%s: koszt w zmiennej wyplaty" % finale_id)
+				station.set("is_household_read", true)
+				station.queue_redraw()
+				await process_frame
+				await _close(station)
+	# Epilog. PKG-0242 (R1): the owner's PKG-0239 epilogue no longer re-reads
+	# truth and consent (the finale household already shows them, KROK 16);
+	# line 3 of every family carries the small cost in Lena's voice, true to
+	# the carrier she kept.
+	var executed := {"force_home": &"p9.finale.forced_return.executed", "close_equal_recover_local": &"p9.finale.close_equal.flow_closed", "mutual_passage": &"p9.finale.mutual_passage.executed"}
+	var family_opening := {"force_home": "Zgłoszenia nie wyrzucę", "close_equal_recover_local": "Zostań.", "mutual_passage": "Sięgnęłam po tamten kubek"}
+	var cost_marks := {"marta_memory": "Nie odda mi pamięci dzisiejszego zdania Marty", "sample_second": "bez sekundy 20:40:07", "": "Nie mam potwierdzenia, który koszt poniosłam"}
+	for family: String in executed.keys():
+		for sample: bool in [true, false]:
+			for cost: String in ["marta_memory", "sample_second", ""]:
+				state.reset_campaign(true)
+				state.record_decision(&"ending_family", family)
+				state.record_decision(&"ending_stability", "named_gaps")
+				state.record_decision(executed[family], true)
+				state.record_decision(&"home_sample_preserved", sample)
+				if not cost.is_empty():
+					state.record_decision(&"p9.mechanics.small_cost.choice", cost)
+				var epilogue := await _open_named(state, "station_43")
+				if epilogue == null:
+					return
+				var lines: Array = epilogue.get("dialogue_lines") as Array
+				_expect(lines.size() == 5, "43 %s trzyma 5 linii (pin 0232/0170)" % family)
+				_expect(String((lines[0] as Dictionary).get("text", "")).contains(String(family_opening[family])), "43 %s: linia niesie znacznik rodziny" % family)
+				var payoff := String((lines[2] as Dictionary).get("text", ""))
+				_expect(payoff.contains(String(cost_marks[cost])), "43 %s/%s: linia niesie koszt" % [family, cost])
+				if not cost.is_empty():
+					_expect(payoff.contains("surowa próbka" if sample else "bufor czytnika"), "43 %s: nośnik zgodny z 01" % family)
+				_expect(payoff.length() <= 115, "43 linia wyplaty miesci sie w pudle CRT: %s" % payoff)
+				epilogue.queue_redraw()
+				await process_frame
+				await _close(epilogue)
 
 
 # ─── 10. Zgodnosc pinow ──────────────────────────────────────────────────
