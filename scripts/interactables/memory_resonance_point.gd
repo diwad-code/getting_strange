@@ -1,6 +1,8 @@
 class_name MemoryResonancePoint
 extends Area2D
 
+const Focus := preload("res://scripts/interactables/interaction_focus.gd")
+
 ## Memory Resonance Point for Getting Strange.
 ## Represents narrative and procedural props in the game world that respond
 ## to Lena's presence and action without intrusive floating HUD text.
@@ -462,6 +464,7 @@ const SWITCH_LIKE_PROPS: Array[int] = [
 
 
 func _ready() -> void:
+	Focus.register(self)
 	_setup_collision()
 	_setup_audio()
 	_setup_particles()
@@ -914,8 +917,10 @@ func _process(delta: float) -> void:
 	# gasnie w jednej klatce, wiec zblizenie sie do niego czyta sie jak dotyk.
 	if _spawn_grace > 0.0:
 		_spawn_grace = maxf(0.0, _spawn_grace - delta)
-	var contact_target := 1.0 if is_player_in_range else 0.0
-	var contact_rate := 5.5 if is_player_in_range else 3.2
+	# PKG-0242: only the point that owns the next press shows the contact cue.
+	var has_focus: bool = is_player_in_range and Focus.is_focused(self)
+	var contact_target := 1.0 if has_focus else 0.0
+	var contact_rate := 5.5 if has_focus else 3.2
 	var previous_contact := _contact_progress
 	_contact_progress = move_toward(_contact_progress, contact_target, contact_rate * delta)
 	if _touch_flash > 0.0:
@@ -925,7 +930,7 @@ func _process(delta: float) -> void:
 		queue_redraw()
 	elif not is_equal_approx(previous_contact, _contact_progress):
 		queue_redraw()
-	elif is_player_in_range and not is_activated:
+	elif has_focus and not is_activated:
 		queue_redraw()
 
 
@@ -943,9 +948,10 @@ func _on_body_exited(body: Node2D) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not is_player_in_range:
+	if not is_player_in_range or event.is_echo():
 		return
-	if event.is_action_pressed(&"interact"):
+	# PKG-0242: overlapping reach zones no longer resolve by tree order.
+	if event.is_action_pressed(&"interact") and Focus.is_focused(self):
 		trigger_interaction()
 		get_viewport().set_input_as_handled()
 

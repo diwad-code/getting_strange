@@ -82,6 +82,13 @@ text = "ŚLAD DOMU // JEDEN SZCZEGÓŁ MOŻE ZMIENIĆ OSTROŚĆ"
 font_size = 8
 text_color = Color(0.84, 0.88, 0.89, 1)
 
+[node name="CrispDiegeticText_Cost" type="Node2D" parent="."]
+position = Vector2(250, 222)
+script = ExtResource("12_crisp_text")
+text = "SELEKTOR UBYTKU"
+font_size = 9
+text_color = Color(0.82, 0.6, 0.36, 1)
+
 [node name="Geometry" type="Node2D" parent="."]
 
 [node name="FloorMain" type="StaticBody2D" parent="Geometry"]

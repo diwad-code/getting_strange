@@ -82,6 +82,7 @@ func _ready() -> void:
 	_setup_guidance()
 	_connect_props()
 	_restore_consent_state()
+	_refresh_choice_legend()
 	if airlock_zone != null and not airlock_zone.body_entered.is_connected(_on_airlock_body_entered):
 		airlock_zone.body_entered.connect(_on_airlock_body_entered)
 	queue_redraw()
@@ -153,6 +154,7 @@ func read_cost_ledger() -> bool:
 		guidance_service.trigger_beat(&"s17_ledger_contact")
 	_report_progress(&"s17_cost_ledger_read")
 	cost_ledger_read.emit()
+	_refresh_choice_legend()
 	queue_redraw()
 	return true
 
@@ -169,6 +171,7 @@ func reject_adaptation_offer() -> bool:
 		guidance_service.close_hypothesis(&"cheap_adaptation")
 	_report_progress(&"s17_adaptation_offer_rejected")
 	adaptation_offer_rejected.emit()
+	_refresh_choice_legend()
 	queue_redraw()
 	return true
 
@@ -301,7 +304,32 @@ func _on_narrative_dialogue_finished(id: String) -> void:
 	_pending_reply = ""
 	_pending_revised = false
 	_restore_consent_state()
+	_refresh_choice_legend()
 	queue_redraw()
+
+
+## PKG-0242 (UX): the desk decides by where Lena stands, like the commit post
+## in 18. The legend names the three sides for the phase the desk is in:
+## the first request to Jakub, then his answer to one proposed method.
+func _refresh_choice_legend() -> void:
+	var sign := get_node_or_null("CrispDiegeticText_Desk")
+	if sign == null:
+		return
+	var text := "ŁĄCZE Z WARSZTATEM // JAKUB"
+	var decisions := _decisions()
+	var ready: bool = is_cost_ledger_read and is_adaptation_offer_rejected \
+		and decisions.get(&"world_recognized", false) == true and not NarrativeRules.locked(decisions)
+	if ready and not is_consent_scope_recorded:
+		text = "PROŚBA DO JAKUBA: ← PODŁĄCZENIE • ODCZYT • UDZIAŁ →"
+	elif ready:
+		var method := str(decisions.get(NarrativeRules.PROPOSED_KEY, ""))
+		var revised_possible: bool = jakub_consent_scope == SCOPE_REFUSED and method == "close_equal_recover_local" \
+			and not decisions.has(&"p9.consent_and_cost.revised_reading_response")
+		if NarrativeRules.METHODS.has(method) and decisions.get(&"p9.method_commitment.forecasts_compared", false) == true \
+				and NarrativeRules.response(decisions, method).is_empty() \
+				and (NarrativeRules.scope_allows(decisions, method) or revised_possible):
+			text = "ODPOWIEDŹ JAKUBA: ← ODMOWA • RYZYKO • ZGODA →"
+	sign.set("text", text)
 
 func _write_scope(scope: StringName) -> void:
 	_record(FACT_SCOPE, String(scope))

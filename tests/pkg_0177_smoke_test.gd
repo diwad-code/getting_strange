@@ -20,6 +20,7 @@ const _ThresholdBinder := preload("res://scripts/environment/threshold_binder.gd
 const PrototypePlayer := preload("res://scripts/player/prototype_player.gd")
 const CRTDialogueBox := preload("res://scripts/ui/crt_dialogue_box.gd")
 const ThresholdZone := preload("res://scripts/environment/threshold_zone.gd")
+const NarrativeRulesRef := preload("res://scripts/levels/narrative_repair_rules.gd")
 
 const REPORT_DIR := "res://reports/pkg_0177"
 const M1_TRACE_PATH := "res://reports/pkg_0177/m1_full_playthrough_trace.tsv"
@@ -38,7 +39,7 @@ const STATION_INTENTIONS := {
 	"station_02": "Przejść obejściem serwisowym i sprawdzić czas trasy",
 	"station_03": "Odczytać rozkład jazdy i odpisać Marcie",
 	"station_04": "Przejechać wagonem Linii 4 i zabezpieczyć czytnik",
-	"station_05": "Dotrzeć ulicą w stronę domu i sprawdzić próbkę",
+	"station_05": "Przejść ulicą w stronę domu",
 	"station_06": "Sprawdzić rozkład na kiosku i zapytać sprzedawcę",
 	"station_07": "Porównać adres na papierze z domofonem na bazarze",
 	"station_08": "Wejść po schodach do mieszkania czternaście",
@@ -54,6 +55,57 @@ const STATION_INTENTIONS := {
 	"station_18": "Zestawić trzy prognozy, powiedzieć Marcie prawdę i zatwierdzić metodę",
 	"station_42a": "Wykonać wymuszenie powrotu do własnego świata",
 	"station_43": "Przeczytać tablicę miejską i zamknąć ewidencję nad Wisłą",
+}
+
+## PKG-0242 (R1): plan wejścia gracza dla każdej stacji, sprawdzony sondą
+## przejścia. "i" = podejdź do x i naciśnij interact (z przewinięciem dialogu),
+## "climb" = drabina: podejdź do x i trzymaj move_up do wysokości y,
+## "wait" = odczekaj klatki (cykl maszyny 14, echo pętli 15),
+## "accept" = ui_accept (gasi winietę). 17 i 18 mają własny sterownik łańcucha.
+const STEP_PLANS := {
+	"station_02": [["i", 184.0], ["i", 362.0], ["i", 520.0], ["climb", 570.0, 185.0]],
+	"station_03": [["i", 190.0], ["i", 304.0]],
+	"station_04": [["i", 188.0], ["i", 406.0], ["i", 472.0]],
+	"station_05": [["i", 160.0], ["i", 320.0], ["i", 480.0]],
+	"station_06": [["i", 150.0], ["i", 330.0], ["i", 450.0]],
+	"station_07": [["i", 160.0], ["i", 330.0], ["i", 460.0]],
+	"station_08": [["i", 160.0], ["i", 338.0], ["i", 490.0]],
+	"station_09": [["i", 156.0], ["i", 210.0], ["i", 330.0]],
+	"station_10": [["i", 364.0], ["i", 430.0], ["i", 448.0]],
+	"station_11": [["i", 134.0], ["i", 230.0], ["i", 332.0]],
+	"station_12": [["i", 246.0], ["i", 300.0], ["i", 404.0]],
+	"station_13": [["i", 168.0], ["i", 430.0], ["i", 496.0]],
+	"station_14": [["i", 140.0], ["i", 395.0], ["wait", 500], ["i", 395.0], ["wait", 480]],
+	"station_15": [["i", 125.0], ["i", 338.0], ["wait", 200], ["i", 338.0], ["wait", 200], ["i", 338.0], ["i", 338.0], ["wait", 200], ["i", 516.0]],
+	"station_16": [["i", 160.0], ["cost"], ["i", 510.0]],
+	"station_42a": [["accept"], ["i", 176.0], ["i", 332.0], ["i", 484.0]],
+	"station_42b": [["accept"], ["i", 176.0], ["i", 332.0], ["i", 176.0], ["i", 484.0]],
+	"station_42c": [["accept"], ["i", 176.0], ["i", 332.0], ["i", 484.0]],
+	"station_43": [["accept"], ["i", 160.0], ["i", 340.0], ["i", 520.0]],
+}
+
+## Fakt, który plan danej stacji musi zostawić (dowód, że czynności zadziałały,
+## a nie tylko że gracz przeszedł przez otwarty próg).
+const STEP_FACTS := {
+	"station_02": &"p7.sample_and_promise.safe_bypass_taken",
+	"station_03": &"p7.sample_and_promise.trace",
+	"station_04": &"p7.return_under_control.trace",
+	"station_05": &"p9.street.crossing_completed",
+	"station_06": &"p9.kiosk.vendor_testimony_recorded",
+	"station_07": &"p9.exterior.intercom_code_unlocked",
+	"station_08": &"p9.stairwell.key_unlocked_fourteen",
+	"station_09": &"p9.mystery.home.trace",
+	"station_10": &"p9.mystery.marta.trace",
+	"station_11": &"p9.mystery.institution.trace",
+	"station_12": &"p9.mystery.jakub.trace",
+	"station_13": &"world_recognized",
+	"station_14": &"p9.mechanics.dead_circuit.trace",
+	"station_15": &"local_lena_intent_found",
+	"station_16": &"p9.mechanics.small_cost.home_echo_verified",
+	"station_42a": &"p9.finale.forced_return.household_consequence",
+	"station_42b": &"p9.finale.close_equal.household_consequence",
+	"station_42c": &"p9.finale.mutual_passage.household_consequence",
+	"station_43": &"p9.epilogue.executed",
 }
 
 const KNOWN_EXE_PATHS: Array[String] = [
@@ -297,7 +349,7 @@ func _drive_station_step(st: Node2D, station_id: StringName, state: Node) -> voi
 
 	var early_index := CAMPAIGN_20_ROUTE.find(station_id)
 	var skip_optional := (
-		early_index >= 1 and early_index <= 12 and (
+		early_index >= 1 and early_index <= 7 and (
 			_route_mode == "minimal" or (_route_mode == "mixed" and early_index % 2 == 0)
 		)
 	)
@@ -310,298 +362,207 @@ func _drive_station_step(st: Node2D, station_id: StringName, state: Node) -> voi
 		])
 		return
 
+	# PKG-0242 (R1): plan danych sprawdzony sondą przejścia — wyłącznie ruch,
+	# interact, ui_accept i postęp dialogu. Żadnych wywołań czasowników stacji,
+	# teleportu gracza ani wymuszonego ukończenia progu (to ukrywało blokadę
+	# 14 i nieosiągalny dzień Marty w 10).
+	if STEP_PLANS.has(sid):
+		await _run_step_plan(st, player, STEP_PLANS[sid])
+		_expect_station_facts(sid, state)
+		if is_instance_valid(st):
+			await _walk_right_to(player, 585.0, 300)
+			await _trigger_threshold_entry(st, player)
+
 	match sid:
-		"station_02":
-			await _walk_right_to(player, 184.0, 220)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 362.0, 260)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 520.0, 260)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 570.0, 140)
-			Input.action_press(&"move_up")
-			for _f in range(160):
-				await physics_frame
-				_total_sim_frames += 1
-				if not is_instance_valid(player) or player.global_position.y <= 185.0:
-					break
-			Input.action_release(&"move_up")
-			if is_instance_valid(player):
-				_sample_gate_obj(sid, player.global_position, "up")
-			await _walk_right_to(player, 585.0, 180)
-			await _trigger_threshold_entry(st, player)
-
-		"station_03":
-			await _walk_right_to(player, 190.0, 220)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 304.0, 220)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 585.0, 240)
-			await _trigger_threshold_entry(st, player)
-
-		"station_04":
-			await _walk_right_to(player, 188.0, 220)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 406.0, 300)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 472.0, 160)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 585.0, 240)
-			await _trigger_threshold_entry(st, player)
-
-		"station_05":
-			await _walk_right_to(player, 160.0, 200)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 320.0, 240)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 480.0, 240)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 585.0, 240)
-			await _trigger_threshold_entry(st, player)
-
-		"station_06":
-			await _walk_right_to(player, 150.0, 200)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 330.0, 260)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 450.0, 220)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 585.0, 240)
-			await _trigger_threshold_entry(st, player)
-
-		"station_07":
-			await _walk_right_to(player, 160.0, 200)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 330.0, 260)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 460.0, 220)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 585.0, 240)
-			await _trigger_threshold_entry(st, player)
-
-		"station_08":
-			await _walk_right_to(player, 160.0, 200)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 338.0, 280)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 490.0, 260)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 585.0, 240)
-			await _trigger_threshold_entry(st, player)
-
-		"station_09":
-			await _walk_right_to(player, 180.0, 200)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 340.0, 240)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 500.0, 240)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 585.0, 240)
-			await _trigger_threshold_entry(st, player)
-
-		"station_10":
-			await _walk_right_to(player, 364.0, 240)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 420.0, 200)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 448.0, 200)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 585.0, 240)
-			await _trigger_threshold_entry(st, player)
-
-		"station_11":
-			await _interact_with_scene_props(st, player)
-			if is_instance_valid(st):
-				await _walk_right_to(player, 585.0, 240)
-				await _trigger_threshold_entry(st, player)
-
-		"station_12":
-			await _interact_with_scene_props(st, player)
-			if is_instance_valid(st):
-				await _walk_right_to(player, 585.0, 240)
-				await _trigger_threshold_entry(st, player)
-
-		"station_13":
-			await _interact_with_scene_props(st, player)
-			if is_instance_valid(st):
-				await _walk_right_to(player, 585.0, 240)
-				await _trigger_threshold_entry(st, player)
-
-		"station_14":
-			# PKG-0232: lekcja martwego obwodu czasownikami (te same funkcje,
-			# które wołają rekwizyty; timing fali 7 s poza zasięgiem pojedynczego
-			# podejścia fizycznego). Sekwencja jak w bramce 0162.
-			(st as Node).call(&"hold_observed_element")
-			(st as Node).call(&"run_correction_pulse")
-			(st as Node).call(&"release_observed_element")
-			(st as Node).call(&"run_correction_pulse")
-			(st as Node).call(&"run_correction_pulse")
-			_expect(String(state.decisions.get(&"p9.mechanics.dead_circuit.anchor_held_through_pulse", "")) == "version_maintained_under_wave", "M1: kotwica 14")
-			_expect(String(state.decisions.get(&"p9.mechanics.dead_circuit.yield_cost_observed", "")) == "dead_section_downstream", "M1: koszt 14")
-			await _advance_all_dialogue(st)
-			if is_instance_valid(st):
-				await _walk_right_to(player, 585.0, 240)
-				await _trigger_threshold_entry(st, player)
-
-		"station_15":
-			# PKG-0232: próba sygnału czasownikami (sekwencja jak w 0163).
-			_expect(bool((st as Node).call(&"observe_signal_log")), "M1: log 20:40")
-			(st as Node).call(&"send_control_impulse")
-			(st as Node).call(&"run_response_cycle")
-			(st as Node).call(&"send_control_impulse")
-			(st as Node).call(&"run_response_cycle")
-			_expect(bool((st as Node).call(&"send_corrective_impulse")), "M1: impuls z bledem")
-			(st as Node).call(&"run_response_cycle")
-			_expect(bool((st as Node).call(&"read_abort_note")), "M1: notatka z warunkiem")
-			await _advance_all_dialogue(st)
-			if is_instance_valid(st):
-				await _walk_right_to(player, 585.0, 240)
-				await _trigger_threshold_entry(st, player)
-
-		"station_16":
-			# PKG-0232: analizator + koszt Marty + echo (sekwencja jak w 0164).
-			_expect(bool((st as Node).call(&"transfer_response_to_safe_analyzer")), "M1: analizator")
-			_expect(bool((st as Node).call(&"choose_marta_memory_cost")), "M1: koszt Marty")
-			_expect(bool((st as Node).call(&"confirm_home_echo")), "M1: echo domu")
-			await _advance_all_dialogue(st)
-			if is_instance_valid(st):
-				await _walk_right_to(player, 585.0, 240)
-				await _trigger_threshold_entry(st, player)
-
 		"station_17":
-			# PKG-0232: rejestr + odrzucenie oferty + pełna zgoda (sekwencja
-			# jak w 0165; granted honoruje domyślny wariant A i argv B/C).
-			_expect(bool((st as Node).call(&"read_cost_ledger")), "M1: rejestr par")
-			_expect(bool((st as Node).call(&"reject_adaptation_offer")), "M1: odrzucenie oferty")
-			_expect(bool((st as Node).call(&"record_jakub_consent_granted")), "M1: pelna zgoda")
-			await _advance_all_dialogue(st)
+			# PKG-0242 (R1): łańcuch zgody PKG-0239 wyłącznie czasownikami
+			# gracza. Rejestr i oferta przy konsolach; zakres przy biurku
+			# (strona = zakres), zapis dopiero po zakończonej rozmowie.
+			var plan := _chain_plan()
+			await _walk_to(player, 172.0)
+			await _interact_and_flush(st)
+			await _walk_to(player, 333.0)
+			await _interact_and_flush(st)
+			await _walk_to(player, _consent_x(String(plan["scope"])))
+			await _interact_and_flush(st)
+			_expect(String(state.decisions.get(&"jakub_consent_state", "")) == String(plan["scope"]),
+				"M1: zakres zgody zapisany po rozmowie przy biurku (%s)" % plan["scope"])
+			_expect(bool((st as Node).get("is_exit_unlocked")), "M1: 17 otwiera wyjście po zakresie")
 			if is_instance_valid(st):
 				await _walk_right_to(player, 585.0, 240)
 				await _trigger_threshold_entry(st, player)
 
 		"station_18":
-			# Zestawienie prognoz, prawda Marty i ZATWIERDZENIE metody.
-			# PKG-0232 (D-244, kontrolowana aktualizacja): wskazanie i commit
-			# to dwa podejścia do słupka; commit tylko metody dostępnej przy
-			# zapisanym zakresie zgody (finał wynika z metody, nie z argv).
-			# ui_accept gasi winietę VIG (zjadałaby pierwszy press tablicy);
-			# nic innego ui_accept nie woła (progi/MRP słuchają interact).
+			# PKG-0242 (R1): 18 → 17 → 18 czasownikami gracza (PKG-0239 krok 09):
+			# prognozy, prawda Marty, wskazanie metody; powrót progiem powrotu
+			# do Jakuba po odpowiedź na TĘ metodę; powrót na ulicę i
+			# zatwierdzenie. Zero wywołań metod stacji i zero flag.
+			var plan := _chain_plan()
+			var method := String(plan["method"])
 			await _press_semantic_action(&"ui_accept")
 			await _advance_all_dialogue(st)
-			await _walk_left_to(player, 176.0, 600)
-			if is_instance_valid(player):
-				player.reset_to(Vector2(176.0, player.global_position.y))
-				for _f in range(4):
-					await physics_frame
-			await _advance_all_dialogue(st)
+			await _walk_to(player, 176.0)
+			await _interact_and_flush(st)
+			_expect(bool((st as Node).get("are_forecasts_compared")), "M1: zestawienie prognoz")
+			await _walk_to(player, _truth_x(String(plan["truth"])))
+			await _interact_and_flush(st)
+			_expect(String(state.decisions.get(&"marta_truth_state", "")) == String(plan["truth"]), "M1: prawda Marty zapisana po rozmowie")
+			await _walk_to(player, _method_x(method))
+			await _interact_and_flush(st)
+			_expect(String((st as Node).get("named_method")) == method, "M1: wskazanie metody %s" % method)
+			_expect(not bool((st as Node).get("is_method_committed")), "M1: samo wskazanie nie zatwierdza metody")
+			if method == "mutual_passage":
+				await _walk_to(player, _truth_x("full"))
+				await _interact_and_flush(st)
+				_expect(String(state.decisions.get(&"p9.method_commitment.marta_sync_response", "")) == "accepted", "M1: Marta odpowiada na klucz przed migawką")
+			# Powrót do łącza w hali (lewy próg powrotu, czasownik interact).
+			await _walk_left_to(player, 24.0, 900)
 			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 332.0, 400)
-			if is_instance_valid(player):
-				player.reset_to(Vector2(332.0, player.global_position.y))
-				for _f in range(4):
-					await physics_frame
-			await _advance_all_dialogue(st)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			# Słupek x=484: strefy ±40 (0230); promień MRP 44. Dojście
-			# dokładne (bez luzu 4 px), bo okno boczne ma 4 px szerokości.
-			var commit_target := _choose_available_method(st)
-			var commit_x := 484.0
-			if commit_target == &"force_home":
-				commit_x = 442.0
-			elif commit_target == &"mutual_passage":
-				commit_x = 526.0
-			await _walk_right_to(player, commit_x, 240)
-			# Snap do środka strefy: krok fizyki (~4 px) jest równy szerokości
-			# okna bocznego. Wskazanie i commit wołane wprost (te same funkcje,
-			# które woła rekwizyt; fizyczny dispatch słupka gubi drugi press
-			# w kontencji z prezentacją wejścia — maszyna stanów jest ta sama,
-			# pinuje ją 0230 i 0232).
-			if is_instance_valid(player):
-				player.reset_to(Vector2(commit_x, player.global_position.y))
-				for _f in range(4):
-					await physics_frame
-			if is_instance_valid(st):
-				_expect(bool((st as Node).call("choose_method_from_player_side")), "M1: wskazanie metody")
-				_expect(String((st as Node).get("named_method")) == String(commit_target), "M1: wskazana dostepna metoda")
-				_expect(bool((st as Node).call("choose_method_from_player_side")), "M1: commit po wskazaniu")
-				_expect(bool((st as Node).get("is_method_committed")), "M1: metoda musi być zatwierdzona przed progiem")
-				_finale_id = _finale_for_method(String((st as Node).get("committed_method")))
-			if is_instance_valid(st):
-				await _walk_right_to(player, 585.0, 240)
-				await _trigger_threshold_entry(st, player)
+			var hall := await _await_station_scene(&"station_17", 600) as Node2D
+			_expect(hall != null, "M1: próg powrotu 18 prowadzi do hali 17")
+			if hall == null:
+				return
+			var hall_player := hall.get_node("Player") as PrototypePlayer
+			await _advance_all_dialogue(hall)
+			await _walk_to(hall_player, _consent_x("granted"))
+			await _interact_and_flush(hall)
+			_expect(String(NarrativeRulesRef.response(state.decisions, method)) == "accepted", "M1: Jakub odpowiada na %s" % method)
+			await _walk_right_to(hall_player, 585.0, 240)
+			await _trigger_threshold_entry(hall, hall_player)
+			var street := await _await_station_scene(&"station_18", 600) as Node2D
+			_expect(street != null, "M1: 17 wraca na ulicę 18")
+			if street == null:
+				return
+			var street_player := street.get_node("Player") as PrototypePlayer
+			await _advance_all_dialogue(street)
+			await _walk_to(street_player, _method_x(method))
+			await _interact_and_flush(street)
+			_expect(bool(street.get("is_method_committed")), "M1: metoda musi być zatwierdzona przed progiem")
+			_expect(String(street.get("committed_method")) == method, "M1: zatwierdzona metoda %s" % method)
+			_finale_id = _finale_for_method(String(street.get("committed_method")))
+			if is_instance_valid(street):
+				await _walk_right_to(street_player, 585.0, 240)
+				await _trigger_threshold_entry(street, street_player)
 
-		"station_42a", "station_42b", "station_42c":
-			# PKG-0232 (D-244, kontrolowana aktualizacja): łańcuch finału
-			# czasownikami (wykonanie → stan → skutek); sam próg nie domyka.
-			# ui_accept gasi winietę FINALE (zjadałaby press rygla).
-			await _press_semantic_action(&"ui_accept")
-			await _advance_all_dialogue(st)
-			await _interact_with_scene_props(st, player)
-			await _advance_all_dialogue(st)
-			if is_instance_valid(st):
-				await _walk_right_to(player, 585.0, 240)
-				await _trigger_threshold_entry(st, player)
-
-		"station_43":
-			# Epilog: tablica → napisy → blackout, każdy press poprzedzony
-			# flushem CRT (inspect pokazuje kolejną linię w pudle; goły press
-			# poszedłby w advance pudła zamiast w rekwizyt).
-			await _press_semantic_action(&"ui_accept")
-			await _advance_all_dialogue(st)
-			await _walk_right_to(player, 160.0, 240)
-			await _advance_all_dialogue(st)
-			await _press_semantic_action(&"interact")
-			await _advance_all_dialogue(st)
-			if is_instance_valid(st) and is_instance_valid(player):
-				await _walk_right_to(player, 340.0, 240)
-				await _advance_all_dialogue(st)
-				await _press_semantic_action(&"interact")
-				await _advance_all_dialogue(st)
-			if is_instance_valid(st) and is_instance_valid(player):
-				await _walk_right_to(player, 520.0, 240)
-				await _advance_all_dialogue(st)
-				await _press_semantic_action(&"interact")
-				await _advance_all_dialogue(st)
-			if is_instance_valid(st) and is_instance_valid(player):
-				await _walk_right_to(player, 585.0, 240)
-			if is_instance_valid(st) and is_instance_valid(player):
-				await _trigger_threshold_entry(st, player)
-			for _f in range(60):
-				await physics_frame
-				_total_sim_frames += 1
 
 	var step_elapsed := Time.get_ticks_msec() - step_start
 	_m1_trace_rows.append("%s\t%.2f\t%d\tPASS\tPlayer-verb traversal completed" % [
 		sid, float(_total_sim_frames) / 60.0, step_elapsed,
 	])
+
+
+func _run_step_plan(st: Variant, player: Variant, plan: Array) -> void:
+	for step in plan:
+		if not is_instance_valid(st) or not is_instance_valid(player):
+			return
+		match String(step[0]):
+			"i":
+				await _walk_to(player as Node2D, float(step[1]))
+				await _interact_and_flush(st)
+			"climb":
+				await _walk_to(player as Node2D, float(step[1]))
+				Input.action_press(&"move_up")
+				for _f in range(240):
+					await physics_frame
+					_total_sim_frames += 1
+					if not is_instance_valid(player) or (player as Node2D).global_position.y <= float(step[2]):
+						break
+				Input.action_release(&"move_up")
+				if is_instance_valid(player):
+					_sample_gate_obj(String((st as Node).name).to_lower(), (player as Node2D).global_position, "up")
+			"wait":
+				for _f in range(int(step[1])):
+					await physics_frame
+					_total_sim_frames += 1
+				await _advance_all_dialogue(st)
+			"accept":
+				await _press_semantic_action(&"ui_accept")
+				await _advance_all_dialogue(st)
+			"cost":
+				# Mały koszt z 16 zależy od wariantu (lewa strona selektora =
+				# pamięć zdania, prawa = sekunda zapisu; środek nie wybiera).
+				var cost_x := 390.0 if _finale_id == &"station_42b" else 350.0
+				await _walk_to(player as Node2D, cost_x)
+				await _interact_and_flush(st)
+
+
+func _expect_station_facts(sid: String, state: Node) -> void:
+	if not STEP_FACTS.has(sid):
+		return
+	var value: Variant = state.decisions.get(STEP_FACTS[sid], null)
+	var present: bool = value != null and not (value is String and String(value).is_empty()) \
+		and not (value is bool and value == false) and not (value is Dictionary and (value as Dictionary).is_empty())
+	_expect(present, "M1: %s musi zapisać %s czasownikami gracza" % [sid, STEP_FACTS[sid]])
+
+
+## PKG-0242 (R1): plan zgód dla wybranego wariantu. Każdy wariant przechodzi
+## inną kombinację zakresu i prawdy, żeby bieg nie testował jednej ścieżki.
+func _chain_plan() -> Dictionary:
+	match _finale_id:
+		&"station_42b":
+			return {"scope": "limited", "truth": "withheld", "method": "close_equal_recover_local"}
+		&"station_42c":
+			return {"scope": "granted", "truth": "full", "method": "mutual_passage"}
+	return {"scope": "granted", "truth": "partial", "method": "force_home"}
+
+
+## Biurko 17 (x=484): lewa strona odmowa, środek zakres ograniczony, prawa
+## pełny (±24 px). Stół 18 (x=332) tak samo dla prawdy; słupek 18 (x=484)
+## ±40 px dla metod.
+func _consent_x(scope: String) -> float:
+	match scope:
+		"refused": return 450.0
+		"limited": return 484.0
+	return 518.0
+
+
+func _truth_x(truth: String) -> float:
+	match truth:
+		"withheld": return 298.0
+		"partial": return 332.0
+	return 366.0
+
+
+func _method_x(method: String) -> float:
+	match method:
+		"force_home": return 434.0
+		"mutual_passage": return 534.0
+	return 484.0
+
+
+## Chód w obie strony z korektą krótkimi dotknięciami — bez teleportu gracza.
+func _walk_to(player: Node2D, target_x: float, tolerance: float = 6.0) -> void:
+	if not is_instance_valid(player):
+		return
+	for _attempt in range(12):
+		if not is_instance_valid(player):
+			return
+		var dx := target_x - player.global_position.x
+		if absf(dx) <= tolerance:
+			return
+		var action := &"move_right" if dx > 0.0 else &"move_left"
+		Input.action_press(action)
+		for _frame in range(900):
+			await physics_frame
+			_total_sim_frames += 1
+			if not is_instance_valid(player):
+				break
+			var left := target_x - player.global_position.x
+			if absf(left) <= 3.0 or signf(left) != signf(dx) or (absf(dx) < 24.0 and _frame >= 1):
+				break
+		Input.action_release(action)
+		for _f in range(10):
+			await physics_frame
+			_total_sim_frames += 1
+
+
+func _interact_and_flush(st: Variant) -> void:
+	await _advance_all_dialogue(st)
+	await _press_semantic_action(&"interact")
+	for _f in range(3):
+		await process_frame
+		_total_sim_frames += 1
+	await _advance_all_dialogue(st)
 
 
 func _interact_with_scene_props(st: Variant, player: Variant) -> void:
@@ -672,26 +633,38 @@ func _finale_for_method(method: String) -> StringName:
 
 
 func _trigger_threshold_entry(st: Variant, player: Variant) -> void:
+	# PKG-0242 (R1): próg przekracza się jak gracz — Lena musi w nim stać,
+	# a próg musi być otwarty przez stację. Wcześniej test ustawiał
+	# is_open/is_player_in_range i w razie porażki kończył stację przez
+	# complete_from_test, co ukryło nieprzechodzalną stację 14.
 	if not is_instance_valid(st):
 		return
 	var node := st as Node
-	_ThresholdBinder.install(node)
-	_GapLedger.ensure_exit_open(node)
 	var zone := node.get_node_or_null("Threshold") as ThresholdZone
-	if zone != null and is_instance_valid(zone):
-		zone.is_open = true
-		zone.is_player_in_range = true
-		await _press_semantic_action(&"interact")
-		var guard := 0
-		while is_instance_valid(st) and not bool((st as Node).get("is_level_completed")) and guard < 120:
+	_expect(zone != null, "M1: %s musi mieć próg wyjścia" % node.name)
+	if zone == null:
+		return
+	if is_instance_valid(player) and not zone.is_player_in_range:
+		Input.action_press(&"move_right")
+		for _f in range(240):
 			await physics_frame
 			_total_sim_frames += 1
-			guard += 1
-	if is_instance_valid(st) and not bool((st as Node).get("is_level_completed")):
-		_ThresholdBinder.complete_from_test(node, (player as Node2D) if is_instance_valid(player) else null)
-		for _f in range(6):
-			await physics_frame
-			_total_sim_frames += 1
+			if not is_instance_valid(zone) or zone.is_player_in_range:
+				break
+		Input.action_release(&"move_right")
+	await _advance_all_dialogue(st)
+	if not is_instance_valid(zone):
+		return
+	_expect(zone.is_player_in_range, "M1: Lena musi stać w progu %s" % node.name)
+	_expect(zone.is_open, "M1: próg %s musi być otwarty po czynnościach" % node.name)
+	await _press_semantic_action(&"interact")
+	var guard := 0
+	while is_instance_valid(st) and not bool((st as Node).get("is_level_completed")) and guard < 180:
+		await physics_frame
+		_total_sim_frames += 1
+		guard += 1
+	if is_instance_valid(st):
+		_expect(bool((st as Node).get("is_level_completed")), "M1: %s musi się zakończyć na progu" % node.name)
 
 
 func _sample_gate_obj(station_id: String, player_pos: Vector2, movement_dir: String) -> void:
@@ -788,10 +761,30 @@ func _advance_all_dialogue(st: Variant) -> void:
 	var dialogue := (st as Node).get_node_or_null("CRTDialogueBox") as CRTDialogueBox
 	if dialogue == null:
 		return
-	for _step in range(16):
-		if not is_instance_valid(dialogue) or not dialogue.is_presenting():
+	# PKG-0242: prezenter kolejkuje rozmowy (FIFO); pusta klatka między
+	# wpisami nie jest końcem kolejki. Flush trwa, dopóki pudło mówi albo
+	# prezenter ma wpis w kolejce.
+	var presenter := (st as Node).get_node_or_null("CreativeScenePresentation")
+	var idle := 0
+	for _step in range(160):
+		if not is_instance_valid(dialogue):
 			break
-		await _press_semantic_action(&"interact")
+		var busy := dialogue.is_presenting()
+		if not busy and presenter != null and is_instance_valid(presenter) and presenter.has_method("is_busy"):
+			busy = bool(presenter.call("is_busy"))
+		if not busy:
+			idle += 1
+			if idle >= 3:
+				break
+			await process_frame
+			_total_sim_frames += 1
+			continue
+		idle = 0
+		if dialogue.is_presenting():
+			await _press_semantic_action(&"interact")
+		else:
+			await process_frame
+			_total_sim_frames += 1
 
 
 func _as_strings(names: Array[StringName]) -> Array[String]:

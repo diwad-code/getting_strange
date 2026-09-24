@@ -48,6 +48,8 @@ const LINES := {
 	# ubytek. Bez surowej próbki nośnik nie jest opisywany jako pełna próbka. ---
 	"safe_analyzer": [["Lena", "Odpowiedź wchodzi do analizatora. Tryb ochronny trzyma obie wersje."], ["ANALIZATOR", "Dwa odczyty jednego śladu. Oś wspólna. Wybierz, co może stracić ostrość."]],
 	"cost_selector_preview": [["ANALIZATOR", "Wybierz nośnik ubytku: pamięć zdania usłyszanego dziś albo sekundę zachowanego odczytu."], ["Lena", "Pamięć Marty zostaje u niej. Mogę stracić tylko własną pamięć rozmowy o kurtce."]],
+	# PKG-0242 (UX): martwa strefa selektora 16 przypomina obie strony wyboru.
+	"cost_selector": [["ANALIZATOR", "Stań po lewej: pamięć zdania usłyszanego dziś. Po prawej: sekunda zapisu."]],
 	"cost_selector_marta": [["Lena", "Wybieram własną pamięć dzisiejszego zdania o kurtce. Nie wspomnienie, którego nie przeżyłam."], ["Marta (łącze)", "Powiedziałam: na kaloryferze."], ["Lena", "Wiem, że mi mówiłaś. Nie umiem sobie przypomnieć tego zdania."]],
 	"cost_selector_sample_full": [["Lena", "Wybieram sekundę surowej próbki."], ["ANALIZATOR", "20:40:07 — fragment utracony. Pozostały zapis zachowany."], ["Lena", "Dzisiejszą rozmowę z Martą pamiętam. Tej sekundy już nie odzyskam."]],
 	"cost_selector_sample_buffer": [["Lena", "Nie mam pełnej próbki. Wybieram sekundę bufora, który pozostał w czytniku."], ["ANALIZATOR", "20:40:07 — fragment bufora utracony."], ["Lena", "Dzisiejszą rozmowę z Martą pamiętam. Tej sekundy już nie odzyskam."]],

@@ -60,6 +60,8 @@ func _ready() -> void:
 			game_state.settings_changed.connect(_on_settings_changed)
 		if game_state.has_signal(&"accessibility_changed"):
 			game_state.accessibility_changed.connect(_on_accessibility_changed)
+		if game_state.has_signal(&"input_map_changed"):
+			game_state.input_map_changed.connect(_on_input_map_changed)
 	_build_interface()
 	if game_state and game_state.has_method("apply_text_scale_to_tree"):
 		game_state.apply_text_scale_to_tree()
@@ -76,6 +78,13 @@ func _exit_tree() -> void:
 			game_state.settings_changed.disconnect(_on_settings_changed)
 		if game_state.has_signal(&"accessibility_changed") and game_state.accessibility_changed.is_connected(_on_accessibility_changed):
 			game_state.accessibility_changed.disconnect(_on_accessibility_changed)
+		if game_state.has_signal(&"input_map_changed") and game_state.input_map_changed.is_connected(_on_input_map_changed):
+			game_state.input_map_changed.disconnect(_on_input_map_changed)
+
+
+func _on_input_map_changed() -> void:
+	if is_instance_valid(_continue_label):
+		_continue_label.text = _continue_prompt()
 
 
 func _on_settings_changed(_master_volume: float, new_text_speed_cps: float, _fullscreen: bool) -> void:
@@ -83,8 +92,18 @@ func _on_settings_changed(_master_volume: float, new_text_speed_cps: float, _ful
 
 
 func _on_accessibility_changed(_new_text_scale: float, _locale: String) -> void:
-	_continue_label.text = LocalizationManager.tr_key("CRT_CONTINUE")
+	_continue_label.text = _continue_prompt()
 	_channel_label.text = LocalizationManager.tr_key("CRT_CHANNEL")
+
+
+## PKG-0242 (UX): the continue cue names the key that actually advances the
+## line (it follows remapping), instead of the abstract action name.
+func _continue_prompt() -> String:
+	var key := "E"
+	var game_state := get_node_or_null("/root/GameStateManager")
+	if game_state and game_state.has_method("get_action_primary_prompt"):
+		key = String(game_state.call("get_action_primary_prompt", &"interact"))
+	return LocalizationManager.tr_key("CRT_CONTINUE") % key
 
 
 func present(lines: Array) -> void:
@@ -145,7 +164,12 @@ func advance_dialogue() -> void:
 		_advance_line()
 
 
-func _unhandled_input(event: InputEvent) -> void:
+## PKG-0242: consumed in `_input`, before any reading point, threshold or
+## ladder sees `_unhandled_input`. Advancing a line must never also act on the
+## world — in Station 01 the press that skipped Lena's line after the forced
+## measurement used to start the optional repeat (the broken promise) on the
+## rig she was still standing at.
+func _input(event: InputEvent) -> void:
 	if get_tree().paused or event.is_echo() or not is_presenting() or (not event.is_action_pressed(&"interact") and not event.is_action_pressed(&"ui_accept")):
 		return
 	get_viewport().set_input_as_handled()
@@ -286,7 +310,7 @@ func _build_interface() -> void:
 
 	_continue_label = Label.new()
 	_continue_label.name = "ContinueAction"
-	_continue_label.text = LocalizationManager.tr_key("CRT_CONTINUE")
+	_continue_label.text = _continue_prompt()
 	_continue_label.position = Vector2(478.0, 8.0)
 	_continue_label.modulate = VectorStageStyle.ANCHOR_CYAN
 	_continue_label.add_theme_font_size_override(&"font_size", 11)

@@ -17,6 +17,8 @@ var _new_game_button: Button
 var _continue_button: Button
 var _settings_button: Button
 var _quit_button: Button
+var _credits_button: Button
+var _credits_panel: CreditsPanel
 var _status_label: Label
 var _boot_capture_path := ""
 var _boot_automation_action := ""
@@ -67,11 +69,13 @@ func _build_interface() -> void:
 	var promise := _add_label(_title_panel, "PersonalPromise", "", Vector2(24.0, 68.0), Vector2(500.0, 46.0), 12, VectorStageStyle.LIGHT_PLANE)
 	promise.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
-	_new_game_button = _add_menu_button(_title_panel, "NewGameButton", "", Vector2(24.0, 126.0), _on_new_game_pressed, Vector2(248.0, 32.0))
-	_continue_button = _add_menu_button(_title_panel, "ContinueButton", "", Vector2(24.0, 161.0), _on_continue_pressed, Vector2(248.0, 30.0))
-	_settings_button = _add_menu_button(_title_panel, "SettingsButton", "", Vector2(24.0, 194.0), _on_settings_pressed, Vector2(248.0, 30.0))
-	_quit_button = _add_menu_button(_title_panel, "QuitButton", "", Vector2(24.0, 227.0), _on_quit_pressed, Vector2(248.0, 30.0))
-	_menu_buttons = [_new_game_button, _continue_button, _settings_button, _quit_button]
+	_new_game_button = _add_menu_button(_title_panel, "NewGameButton", "", Vector2(24.0, 118.0), _on_new_game_pressed, Vector2(248.0, 30.0))
+	_continue_button = _add_menu_button(_title_panel, "ContinueButton", "", Vector2(24.0, 150.0), _on_continue_pressed, Vector2(248.0, 28.0))
+	_settings_button = _add_menu_button(_title_panel, "SettingsButton", "", Vector2(24.0, 180.0), _on_settings_pressed, Vector2(248.0, 28.0))
+	# PKG-0242 (release): credits and the licence notices a public build carries.
+	_credits_button = _add_menu_button(_title_panel, "CreditsButton", "", Vector2(24.0, 210.0), _on_credits_pressed, Vector2(248.0, 28.0))
+	_quit_button = _add_menu_button(_title_panel, "QuitButton", "", Vector2(24.0, 240.0), _on_quit_pressed, Vector2(248.0, 28.0))
+	_menu_buttons = [_new_game_button, _continue_button, _settings_button, _credits_button, _quit_button]
 
 	_status_label = _add_label(_title_panel, "CampaignStatus", "", Vector2(306.0, 130.0), Vector2(230.0, 36.0), 10, VectorStageStyle.LIGHT_PLANE)
 	_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -85,6 +89,12 @@ func _build_interface() -> void:
 	_settings_panel.visible = false
 	_settings_panel.closed.connect(_on_settings_closed)
 	add_child(_settings_panel)
+	_credits_panel = CreditsPanel.new()
+	_credits_panel.name = "CreditsPanel"
+	_credits_panel.position = Vector2(36.0, 30.0)
+	_credits_panel.visible = false
+	_credits_panel.closed.connect(_on_credits_closed)
+	add_child(_credits_panel)
 	_update_focus_chain()
 
 
@@ -226,10 +236,12 @@ func _refresh_state() -> void:
 	_continue_button.disabled = not has_save
 	_continue_button.text = _tr("MENU_REPLAY_EPILOGUE") if _game_state.is_campaign_completed() else _tr("MENU_CONTINUE")
 	if has_save:
-		var checkpoint := String(_game_state.last_checkpoint_station).to_upper()
-		var finale_id := String(_game_state.get_selected_finale_id()).to_upper()
-		var ending_text := _tr("STATUS_COMPLETED_SUFFIX") % finale_id if _game_state.is_campaign_completed() else ""
-		_status_label.text = _tr("STATUS_SAVE_ACTIVE") % [checkpoint, ending_text]
+		# PKG-0242 (UX): the save names a place, not a scene identifier.
+		var checkpoint := LocalizationManager.station_display_name(String(_game_state.last_checkpoint_station)).to_upper()
+		if _game_state.is_campaign_completed():
+			_status_label.text = _tr("STATUS_COMPLETED") % checkpoint
+		else:
+			_status_label.text = _tr("STATUS_SAVE_ACTIVE") % [checkpoint, ""]
 	else:
 		_status_label.text = _tr("STATUS_SAVE_NONE")
 
@@ -256,19 +268,20 @@ func _refresh_localized_ui() -> void:
 	(_title_panel.get_node("ReturnPromise") as Label).text = _tr("TITLE_RETURN_PROMISE")
 	_new_game_button.text = _tr("MENU_NEW_GAME")
 	_settings_button.text = _tr("MENU_SETTINGS")
+	_credits_button.text = _tr("MENU_CREDITS")
 	_quit_button.text = _tr("MENU_QUIT")
 	(_title_panel.get_node("BuildLabel") as Label).text = _build_runtime_label()
 	_refresh_state()
 	if is_instance_valid(_settings_panel):
 		_settings_panel.refresh_for_test()
-	
+	if is_instance_valid(_credits_panel):
+		_credits_panel.refresh()
 	
 func _build_runtime_label() -> String:
+	# PKG-0242 (UX): players see the version only; resolution and physics rate
+	# were developer telemetry on a public title screen.
 	var version := String(ProjectSettings.get_setting("application/config/version", "DEV"))
-	var viewport_width := int(ProjectSettings.get_setting("display/window/size/viewport_width", int(LOGICAL_SIZE.x)))
-	var viewport_height := int(ProjectSettings.get_setting("display/window/size/viewport_height", int(LOGICAL_SIZE.y)))
-	var physics_hz := int(Engine.physics_ticks_per_second)
-	return _tr("BUILD_LABEL") % [version, viewport_width, viewport_height, physics_hz]
+	return _tr("BUILD_LABEL") % version
 
 
 func _on_new_game_pressed() -> void:
@@ -300,6 +313,18 @@ func _on_settings_back_pressed() -> void:
 func _on_settings_closed() -> void:
 	_title_panel.visible = true
 	_settings_button.grab_focus.call_deferred()
+
+
+func _on_credits_pressed() -> void:
+	if get_node_or_null("SafeActionDialog") != null:
+		return
+	_title_panel.visible = false
+	_credits_panel.open_panel(_credits_button)
+
+
+func _on_credits_closed() -> void:
+	_title_panel.visible = true
+	_credits_button.grab_focus.call_deferred()
 
 
 func _on_quit_pressed() -> void:

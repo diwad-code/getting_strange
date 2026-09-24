@@ -80,30 +80,28 @@ font_size = 9
 text_color = Color(0.82, 0.6, 0.36, 1)
 
 [node name="CrispDiegeticText_Window" type="Node2D" parent="."]
-position = Vector2(286, 150)
+position = Vector2(250, 148)
 script = ExtResource("12_crisp_text")
 text = "ODPISY DLA MARTY // ZAPIS I KLUCZ"
 font_size = 9
 text_color = Color(0.82, 0.6, 0.36, 1)
 
-# PKG-0230 (P0-2, S-03): legenda stref slupka — nad panelem dialogowym
-# (bramka 0137: render < 238) i poza aktorem (prawa strona kadru).
 [node name="CrispDiegeticText_CommitLeft" type="Node2D" parent="."]
-position = Vector2(424, 200)
+position = Vector2(428, 174)
 script = ExtResource("12_crisp_text")
 text = "LEWO: WYMUSZENIE DOMU"
 font_size = 9
 text_color = Color(0.82, 0.6, 0.36, 1)
 
 [node name="CrispDiegeticText_CommitMid" type="Node2D" parent="."]
-position = Vector2(424, 224)
+position = Vector2(428, 194)
 script = ExtResource("12_crisp_text")
 text = "ŚRODEK: ODZYSKANIE"
 font_size = 9
 text_color = Color(0.82, 0.6, 0.36, 1)
 
 [node name="CrispDiegeticText_CommitRight" type="Node2D" parent="."]
-position = Vector2(424, 248)
+position = Vector2(428, 214)
 script = ExtResource("12_crisp_text")
 text = "PRAWO: PRZEJŚCIE WZAJEMNE"
 font_size = 9

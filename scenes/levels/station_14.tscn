@@ -29,7 +29,7 @@ size = Vector2(20, 360)
 size = Vector2(640, 30)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_machine_housing"]
-size = Vector2(220, 60)
+size = Vector2(260, 18)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_airlock"]
 size = Vector2(60, 120)
@@ -119,7 +119,7 @@ position = Vector2(320, 15)
 shape = SubResource("Rectangle_ceiling")
 
 [node name="MachineHousing" type="StaticBody2D" parent="Geometry"]
-position = Vector2(320, 266)
+position = Vector2(340, 287)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/MachineHousing"]
 shape = SubResource("Rectangle_machine_housing")
@@ -135,7 +135,7 @@ state_a_size = Vector2(112, 18)
 state_b_size = Vector2(112, 8)
 state_a_solid = false
 state_b_solid = false
-interaction_radius = 60.0
+interaction_radius = 72.0
 object_name = "Most sekcji"
 
 [node name="AirlockZone" type="Area2D" parent="."]

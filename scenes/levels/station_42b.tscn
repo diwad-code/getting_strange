@@ -62,8 +62,8 @@ script = ExtResource("6_dialogue")
 [node name="OpeningDialogueCue" type="Node" parent="."]
 script = ExtResource("7_cue")
 station_id = &"station_42b"
-opening_line = "Próg mieszkania 14. Miejscowa jeszcze nie odpowiedziała tutaj."
-opening_line_2 = "Najpierw spróbuję ją odzyskać. Kanał zamknę dopiero po potwierdzeniu jej powrotu."
+opening_line = "Próg mieszkania 14. Świt. Miejscowa jeszcze tu nie odpowiada."
+opening_line_2 = "W nocy przy słupku wybrałam jej odzyskanie. Kanał zamknę dopiero, kiedy odpowie u siebie."
 speaker_2 = &"Lena"
 
 [node name="CrispDiegeticText" type="Node2D" parent="."]

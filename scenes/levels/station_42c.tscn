@@ -62,8 +62,8 @@ script = ExtResource("6_dialogue")
 [node name="OpeningDialogueCue" type="Node" parent="."]
 script = ExtResource("7_cue")
 station_id = &"station_42c"
-opening_line = "Dwa strojenia czekają na wykonanie. Przejście jeszcze nie jest otwarte."
-opening_line_2 = "Mamy odpowiedzi na tę metodę. Teraz otworzę okno dla obu sygnatur."
+opening_line = "Dwa czytniki. Świt. Ta sama sekunda po obu stronach."
+opening_line_2 = "W nocy przy słupku wybrałam przejście dla nas obu. Jakub i Marta odpowiedzieli; otworzę okno."
 speaker_2 = &"Lena"
 
 [node name="CrispDiegeticText" type="Node2D" parent="."]

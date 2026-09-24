@@ -76,6 +76,13 @@ text = "WIERZBICKA / ZAKRES // OFERTA ADAPTACJI"
 font_size = 9
 text_color = Color(0.52, 0.58, 0.6, 1)
 
+[node name="CrispDiegeticText_Desk" type="Node2D" parent="."]
+position = Vector2(300, 180)
+script = ExtResource("12_crisp_text")
+text = "ŁĄCZE Z WARSZTATEM // JAKUB"
+font_size = 9
+text_color = Color(0.82, 0.6, 0.36, 1)
+
 [node name="Geometry" type="Node2D" parent="."]
 
 [node name="FloorMain" type="StaticBody2D" parent="Geometry"]

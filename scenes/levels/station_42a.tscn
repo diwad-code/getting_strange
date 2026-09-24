@@ -71,8 +71,8 @@ script = ExtResource("6_dialogue")
 [node name="OpeningDialogueCue" type="Node" parent="."]
 script = ExtResource("7_cue")
 station_id = &"station_42a"
-opening_line = "Domowa sygnatura jest ustawiona. Powrót nie został jeszcze wykonany."
-opening_line_2 = "Wybrałam go przy słupku. Teraz muszę zamknąć kanał, przez który ona już nie wróci."
+opening_line = "Ten sam stół. Świt. Czytnik trzyma domową sygnaturę."
+opening_line_2 = "W nocy przy słupku wybrałam powrót. Teraz zamknę kanał, przez który ona już nie wróci."
 speaker_2 = &"Lena"
 
 [node name="CrispDiegeticText" type="Node2D" parent="."]

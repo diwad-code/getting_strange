@@ -147,17 +147,40 @@ static func _complete(station: Node) -> void:
 
 
 static func _place_on_floor(station: Node, zone: ThresholdZone, width: float, height: float) -> void:
-	var floor_top := 296.0
-	var floor_node := station.get_node_or_null("Geometry/Floor") as Node2D
-	if floor_node != null:
-		var shape := floor_node.get_node_or_null("CollisionShape2D") as CollisionShape2D
-		if shape != null and shape.shape is RectangleShape2D:
-			var rect := shape.shape as RectangleShape2D
-			floor_top = floor_node.global_position.y - rect.size.y * 0.5
 	var right_margin := 24.0
 	var center_x := 640.0 - right_margin - width * 0.5
+	var floor_top := floor_top_at(station, center_x)
 	var center_y := floor_top - height * 0.5
 	zone.position = Vector2(center_x, center_y)
+
+
+## PKG-0242 (R1): the walkable surface under `x`, read from the station's own
+## rectangle colliders. The binder used to read only `Geometry/Floor`; stations
+## 11–18 and 42A–43 name it `FloorMain` with tops at 288/296/306/280, so the
+## exit aperture sank into the floor (16–18, 43) or hovered above it (42A–C,
+## after PKG-0241 lowered their floor to the painted line).
+static func floor_top_at(station: Node, x: float) -> float:
+	var best := INF
+	var geometry := station.get_node_or_null("Geometry")
+	if geometry == null:
+		return 296.0
+	for body in geometry.get_children():
+		if not (body is StaticBody2D):
+			continue
+		for child in (body as Node).get_children():
+			var shape_node := child as CollisionShape2D
+			if shape_node == null or shape_node.disabled or not (shape_node.shape is RectangleShape2D):
+				continue
+			var size := (shape_node.shape as RectangleShape2D).size
+			var center: Vector2 = (body as Node2D).position + shape_node.position
+			if station is Node2D and shape_node.is_inside_tree():
+				center = (station as Node2D).to_local(shape_node.global_position)
+			var top := center.y - size.y * 0.5
+			# Ceilings and wall caps sit high in the frame; a floor is below 160.
+			if top < 160.0 or absf(x - center.x) > size.x * 0.5:
+				continue
+			best = minf(best, top)
+	return best if best < INF else 296.0
 
 
 static func _station_id(station: Node) -> StringName:

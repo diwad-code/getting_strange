@@ -82,6 +82,7 @@ func _ready() -> void:
 		is_home_echo_confirmed = state.decisions.get(FACT_HOME_ECHO, false) == true
 		if is_home_echo_confirmed:
 			_unlock_exit()
+	_refresh_choice_legend()
 	if airlock_zone != null and not airlock_zone.body_entered.is_connected(_on_airlock_body_entered):
 		airlock_zone.body_entered.connect(_on_airlock_body_entered)
 	queue_redraw()
@@ -170,6 +171,7 @@ func transfer_response_to_safe_analyzer() -> bool:
 		guidance_service.trigger_beat(&"s16_analyzer_contact")
 	_report_progress(&"s16_response_transferred")
 	response_transferred.emit()
+	_refresh_choice_legend()
 	queue_redraw()
 	return true
 
@@ -198,13 +200,45 @@ func select_sample_second_cost() -> bool:
 	return choose_sample_second_cost()
 
 
+## PKG-0242 (UX): the irreversible cost choice used to flip on the exact
+## selector centre (x ≤ 370 memory, x > 370 second), so standing "at" the
+## selector picked a side at random. The centre is now a dead zone that
+## repeats the two options; the sides are named by the legend above it.
+const COST_SIDE_DEAD_ZONE := 10.0
+
+var _cost_side_prompt := false
+
+
 func choose_cost_from_player_side() -> bool:
 	if player == null or cost_selector == null:
 		_record_feedback(&"cost_selector_missing")
 		return false
-	if player.global_position.x <= cost_selector.global_position.x:
+	var offset := player.global_position.x - cost_selector.global_position.x
+	if absf(offset) < COST_SIDE_DEAD_ZONE and is_response_transferred and not is_cost_selected:
+		_cost_side_prompt = true
+		return false
+	if offset < 0.0:
 		return choose_marta_memory_cost()
 	return choose_sample_second_cost()
+
+
+func _has_pending_narrative_dialogue(id: String) -> bool:
+	return id == "cost_selector" and _cost_side_prompt and not is_cost_selected
+
+
+func _on_narrative_dialogue_finished(id: String) -> void:
+	if id == "cost_selector":
+		_cost_side_prompt = false
+
+
+func _refresh_choice_legend() -> void:
+	var sign := get_node_or_null("CrispDiegeticText_Cost")
+	if sign == null:
+		return
+	var text := "SELEKTOR UBYTKU"
+	if is_response_transferred and not is_cost_selected:
+		text = "UBYTEK: ← MOJA PAMIĘĆ ZDANIA • SEKUNDA ZAPISU →"
+	sign.set("text", text)
 
 
 func _commit_cost(cost_id: StringName, choice_id: StringName) -> bool:
@@ -227,6 +261,7 @@ func _commit_cost(cost_id: StringName, choice_id: StringName) -> bool:
 	_record(FACT_TRACE, String(choice_id))
 	small_cost_manifested.emit(cost_id)
 	_report_progress(&"s16_small_cost_selected")
+	_refresh_choice_legend()
 	queue_redraw()
 	return true
 

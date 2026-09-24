@@ -392,7 +392,12 @@ func _draw() -> void:
 	if _pulse_travel > 0.0:
 		var pulse_pos := PULSE_ORIGIN.lerp(PULSE_TARGET, _pulse_progress)
 		draw_circle(pulse_pos, 3.0, Color("c65d58"))
-	draw_rect(Rect2(210.0, 274.0, 260.0, 22.0), Color("070b0e"))
+	# PKG-0242 (R1): cokół rozdzielni = kolizja MachineHousing (260×18, D-123).
+	# Wcześniej korpus kolidował na 60 px, więc Lena nie mogła ani dojść do
+	# wyjścia, ani sięgnąć obejmy mostu. Stopień czyta się jasną krawędzią.
+	draw_rect(Rect2(210.0, 274.0, 260.0, 4.0), Color("070b0e"))
+	draw_rect(Rect2(210.0, 278.0, 260.0, 18.0), Color("16222a"))
+	draw_line(Vector2(210.0, 278.5), Vector2(470.0, 278.5), Color("46565c"), 1.0)
 	var exit_color := Color("75c7c3") if is_exit_unlocked else Color("d39a62")
 	draw_line(Vector2(584.0, 180.0), Vector2(584.0, 298.0), exit_color, 2.0)
 	# PKG-0198 (ZERO wycinek 2): cień kontaktowy korpusu rozdzielni w prawo,

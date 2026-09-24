@@ -1,6 +1,8 @@
 class_name OpeningActionPoint
 extends Area2D
 
+const Focus := preload("res://scripts/interactables/interaction_focus.gd")
+
 ## Small local-scene action primitive for the rebuilt opening.
 ## It owns only reach, semantic InputMap input and visible action state. The
 ## station owns prerequisites, consequences, persistence and route changes.
@@ -32,6 +34,7 @@ var is_available: bool:
 		_is_available = value
 		queue_redraw()
 
+var _drawn_focus := false
 var _is_resolved := false
 var is_resolved: bool:
 	get:
@@ -45,6 +48,7 @@ var is_resolved: bool:
 
 
 func _ready() -> void:
+	Focus.register(self)
 	collision_layer = PhysicsLayers.OPENING.x
 	collision_mask = PhysicsLayers.OPENING.y
 	is_available = true
@@ -78,10 +82,17 @@ func _on_body_exited(body: Node2D) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not is_player_in_range or not event.is_action_pressed(&"interact"):
+	if not is_player_in_range or event.is_echo() or not event.is_action_pressed(&"interact"):
 		return
-	if trigger_interaction():
+	# PKG-0242: the nearest live point owns the press (see InteractionFocus).
+	if Focus.is_focused(self) and trigger_interaction():
 		get_viewport().set_input_as_handled()
+
+
+## A resolved or unavailable action cannot act, so it never takes focus away
+## from a neighbouring point that still can.
+func can_take_focus() -> bool:
+	return is_available and not is_resolved
 
 
 func trigger_interaction() -> bool:
@@ -89,6 +100,18 @@ func trigger_interaction() -> bool:
 		return false
 	action_requested.emit(action_id)
 	return true
+
+
+func _has_focus() -> bool:
+	return is_player_in_range and Focus.is_focused(self)
+
+
+func _process(_delta: float) -> void:
+	# Focus moves when Lena walks between two points that are both in reach.
+	var focused := _has_focus()
+	if focused != _drawn_focus:
+		_drawn_focus = focused
+		queue_redraw()
 
 
 func set_available(_value: bool) -> void:
@@ -105,9 +128,9 @@ func _draw() -> void:
 	var color := VectorStageStyle.ANCHOR_CYAN if is_resolved else VectorStageStyle.HUMAN_AMBER
 	if not is_available:
 		color = VectorStageStyle.shade(VectorStageStyle.MID_PLANE, 0.22)
-	elif not is_player_in_range and not is_resolved:
+	elif not _has_focus() and not is_resolved:
 		color = VectorStageStyle.shade(color, 0.36)
-	var radius := 8.0 if is_player_in_range and not is_resolved else 6.0
+	var radius := 8.0 if _has_focus() and not is_resolved else 6.0
 	draw_circle(Vector2.ZERO, radius, Color(color, 0.10))
 	draw_circle(Vector2.ZERO, radius, color, false, 1.5)
 	if is_resolved:

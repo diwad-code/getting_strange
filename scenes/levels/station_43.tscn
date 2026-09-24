@@ -67,19 +67,19 @@ script = ExtResource("6_dialogue")
 [node name="OpeningDialogueCue" type="Node" parent="."]
 script = ExtResource("7_cue")
 station_id = &"station_43"
-opening_line = "Epilog. Miasto żyje dalej z dokonanym wyborem i utrwaloną ciągłością."
+opening_line = "Rano. Pierwszy kurs jeszcze nie przyjechał."
 
 [node name="CrispDiegeticText" type="Node2D" parent="."]
 position = Vector2(92, 84)
 script = ExtResource("12_crisp_text")
-text = "EPILOG // ZAPIS NOWEJ CIĄGŁOŚCI // CREDITS / LICENCJE"
+text = "PRZYSTANEK // PIERWSZY KURS 5:12"
 font_size = 9
 text_color = Color(0.83, 0.6, 0.38, 1)
 
 [node name="CrispDiegeticText_LicenseManifest" type="Node2D" parent="."]
 position = Vector2(92, 108)
 script = ExtResource("12_crisp_text")
-text = "LICENCJE // MANIFEST RUNTIME\nAUDIO: ZERO-ASSET SYNTH\nŚWIAT: PROCEDURAL PIXEL-STAGE\nLENA 4.1: 22 PNG 64x104\nPORTRETY CRT: 5 PNG\nGODOT 4.7.2 (MIT)\nFREETYPE // HARFBUZZ // ICU\nACCESSKIT // ZLIB/LIBPNG // ENET/MBEDTLS"
+text = "OGŁOSZENIA // LINIA 4\nZMIANA ROZKŁADU OD 1.12\nKURSY CO 12 MIN\nBIURO RZECZY ZNALEZIONYCH\nNIE ZOSTAWIAJ BAGAŻU"
 font_size = 7
 text_color = Color(0.83, 0.6, 0.38, 1)
 backdrop_color = Color(0.04, 0.07, 0.09, 0.9)
@@ -87,7 +87,7 @@ backdrop_color = Color(0.04, 0.07, 0.09, 0.9)
 [node name="CrispDiegeticText_CreditsManifest" type="Node2D" parent="."]
 position = Vector2(320, 108)
 script = ExtResource("12_crisp_text")
-text = "CREDITS // PRODUCTION\nGETTING STRANGE\nLEAD PROGRAMMER & ART DIRECTOR\nKANON FABUŁY 0.3\nRENDER: PIXEL-STAGE 640x360\nSTEROWANIE: INPUTMAP // 60 HZ\nAUDIO: PROCEDURAL WAVEFORM SYNTH\nPL / EN SHELL // SUBTITLES"
+text = "GETTING STRANGE\nGETTING STRANGE TEAM\nSCENARIUSZ • OBRAZ • DŹWIĘK\nSILNIK: GODOT ENGINE\nLICENCJE: MENU GŁÓWNE\nDZIĘKUJEMY ZA GRĘ"
 font_size = 7
 text_color = Color(0.46, 0.78, 0.76, 1)
 backdrop_color = Color(0.04, 0.07, 0.09, 0.9)

@@ -112,8 +112,8 @@ func _ready() -> void:
 		airlock_zone.body_entered.connect(_on_airlock_zone_entered)
 	# PKG-0221 (D-234): ReturnZone wylacznikiem interactu (trigger_return);
 	# overlap stacji nie progresuje — wlasnego podpiecia brak.
-	if dialogue_active:
-		_show_dialogue_line(dialogue_index)
+	# PKG-0242 (R1): epilog zaczyna się przy tablicy, nie w _ready — kwestia
+	# 0 pokazana tutaj była natychmiast zastępowana kwestią otwierającą sceny.
 	queue_redraw()
 
 
@@ -299,13 +299,11 @@ func _connect_prop_signals() -> void:
 
 func inspect_notice() -> bool:
 	if is_notice_inspected:
-		# PKG-0232: ponowna lektura po powrocie przesuwa dialog (bez
+		# PKG-0232/0242: ponowna lektura odtwarza te same kwestie (bez
 		# duplikowania zapisów), żeby 5 linii zawsze było osiągalne.
-		if dialogue_index < dialogue_lines.size() - 1:
-			advance_dialogue()
-			queue_redraw()
-			return true
-		return false
+		_present_epilogue_beats(0, NOTICE_LAST_LINE)
+		queue_redraw()
+		return true
 	is_notice_inspected = true
 	_record(FACT_NOTICE, true)
 	_record(FACT_P9_ADMIN_NOTICE, true)
@@ -314,24 +312,20 @@ func inspect_notice() -> bool:
 	interaction_triggered.emit("prop_admin_notice_board")
 	_activate_prop_by_id("prop_admin_notice_board")
 	_activate_prop_by_id("admin_notice_board")
-	# PKG-0232 (D-244, D4): tablica opowiada dwa beaty (ogloszenie + skutek
-	# w mieszkaniu), zeby cale piec linii bylo osiagalne przed blackoutem.
-	if dialogue_index < dialogue_lines.size() - 1:
-		advance_dialogue()
-	if dialogue_index < dialogue_lines.size() - 1:
-		advance_dialogue()
+	# PKG-0242 (R1): tablica odtwarza kwestie 0–2 jako jedną sekwencję.
+	# Wcześniej dwa kolejne show_line w tej samej klatce zastępowały się,
+	# więc gracz widział tylko kwestię 2 (np. „Wróciłam sama.” nie padało).
+	_present_epilogue_beats(0, NOTICE_LAST_LINE)
 	queue_redraw()
 	return true
 
 
 func inspect_credits() -> bool:
 	if is_credits_inspected:
-		# PKG-0232: jak wyżej — ponowna lektura przesuwa dialog.
-		if dialogue_index < dialogue_lines.size() - 1:
-			advance_dialogue()
-			queue_redraw()
-			return true
-		return false
+		# PKG-0242: jak wyżej — ponowna lektura odtwarza te same kwestie.
+		_present_epilogue_beats(_credits_first_line(), dialogue_lines.size() - 1)
+		queue_redraw()
+		return true
 	is_credits_inspected = true
 	_record(FACT_CREDITS, true)
 	_record(FACT_P9_CREDITS, true)
@@ -340,14 +334,39 @@ func inspect_credits() -> bool:
 	interaction_triggered.emit("prop_credits_roll")
 	_activate_prop_by_id("prop_credits_roll")
 	_activate_prop_by_id("credits_roll")
-	# PKG-0232 (D-244, D4): napisy opowiadają dwa beaty (ewidencja +
-	# ostatnia czynność Leny). Po obu inspekcjach index >= 4.
-	if dialogue_index < dialogue_lines.size() - 1:
-		advance_dialogue()
-	if dialogue_index < dialogue_lines.size() - 1:
-		advance_dialogue()
+	# PKG-0242 (R1): napisy odtwarzają dwa ostatnie beaty (ewidencja +
+	# ostatnia czynność Leny). Jeżeli gracz zaczął od napisów, słyszy całą
+	# sekwencję w kolejności, zamiast końca przed początkiem.
+	_present_epilogue_beats(_credits_first_line(), dialogue_lines.size() - 1)
 	queue_redraw()
 	return true
+
+
+## Beaty tablicy: kwestie 0..NOTICE_LAST_LINE. Beaty napisów: reszta.
+const NOTICE_LAST_LINE := 2
+
+
+func _credits_first_line() -> int:
+	return NOTICE_LAST_LINE + 1 if is_notice_inspected else 0
+
+
+## PKG-0242 (R1): jedna sekwencja w oknie dialogu (kolejka CRT), a indeks
+## epilogu przesuwa się do ostatniej odtworzonej kwestii.
+func _present_epilogue_beats(first: int, last: int) -> void:
+	if dialogue_lines.is_empty():
+		return
+	first = clampi(first, 0, dialogue_lines.size() - 1)
+	last = clampi(last, first, dialogue_lines.size() - 1)
+	var sequence: Array = []
+	for idx in range(first, last + 1):
+		var line: Dictionary = dialogue_lines[idx]
+		sequence.append({"speaker": line.get("speaker", "ŹRÓDŁO NIEUSTALONE"), "text": line.get("text", "")})
+	if dialogue_box and dialogue_box.has_method("present"):
+		dialogue_box.present(sequence)
+	if last > dialogue_index:
+		for idx in range(dialogue_index + 1, last + 1):
+			dialogue_advanced.emit(idx)
+		dialogue_index = last
 
 
 ## PKG-0232 (D-244, D4): epilog jest atomowy —

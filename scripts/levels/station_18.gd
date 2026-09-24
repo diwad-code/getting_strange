@@ -108,6 +108,7 @@ func _ready() -> void:
 	jakub_consent_state = _read_jakub_consent()
 	_restore_commitment_from_decisions()
 	_refresh_commit_table()
+	_refresh_choice_legend()
 	if airlock_zone != null and not airlock_zone.body_entered.is_connected(_on_airlock_body_entered):
 		airlock_zone.body_entered.connect(_on_airlock_body_entered)
 	queue_redraw()
@@ -191,6 +192,7 @@ func compare_forecast_consent_dependencies() -> bool:
 		guidance_service.trigger_beat(&"s18_forecast_contact")
 	_report_progress(&"s18_forecasts_compared")
 	forecasts_compared.emit()
+	_refresh_choice_legend()
 	queue_redraw()
 	return true
 
@@ -286,6 +288,7 @@ func choose_method_from_player_side() -> bool:
 		_refresh_commit_table()
 		if guidance_service:
 			guidance_service.trigger_beat(_name_beat_for_method(pointed))
+		_refresh_choice_legend()
 		queue_redraw()
 		return true
 	return _commit_method(pointed)
@@ -374,7 +377,25 @@ func _on_narrative_dialogue_finished(id: String) -> void:
 	_pending_sync = ""
 	forecasts = _build_forecasts(_read_jakub_consent())
 	_refresh_commit_table()
+	_refresh_choice_legend()
 	queue_redraw()
+
+
+## PKG-0242 (UX): Marta's table decides by side like the commit post. The
+## legend names the sides: how much of the record Lena shows, then — for
+## mutual passage after the full record — Marta's answer about the key.
+func _refresh_choice_legend() -> void:
+	var sign := get_node_or_null("CrispDiegeticText_Window")
+	if sign == null:
+		return
+	var text := "ODPISY DLA MARTY // ZAPIS I KLUCZ"
+	var decisions := _decisions()
+	if are_forecasts_compared and not _snapshot_taken() and not _any_finale_executed():
+		if marta_truth_state == MARTA_FULL and named_method == METHOD_MUTUAL and not decisions.has(NarrativeRules.SYNC_KEY):
+			text = "KLUCZ MARTY: ← ODMOWA • RYZYKO • ZGODA →"
+		elif marta_truth_state != MARTA_FULL:
+			text = "DLA MARTY: ← NIC • CZĘŚĆ • CAŁY ZAPIS →"
+	sign.set("text", text)
 
 
 func _commit_method(method_id: StringName) -> bool:
@@ -442,6 +463,7 @@ func _commit_method(method_id: StringName) -> bool:
 	_report_progress(&"s18_method_committed")
 	method_committed.emit(method_id)
 	_unlock_exit()
+	_refresh_choice_legend()
 	queue_redraw()
 	return true
 

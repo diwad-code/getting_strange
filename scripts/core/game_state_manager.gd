@@ -1185,6 +1185,30 @@ func get_action_binding_text(action: StringName) -> String:
 	return " / ".join(prompts) if not prompts.is_empty() else "—"
 
 
+## PKG-0242 (UX): the first binding of an action, for short on-screen cues
+## ("DALEJ [E]"). Keyboard bindings win; a pad-only action shows its button.
+func get_action_primary_prompt(action: StringName) -> String:
+	if not InputMap.has_action(action):
+		return "—"
+	var fallback := ""
+	for event in InputMap.action_get_events(action):
+		var prompt := get_input_event_prompt(event)
+		if prompt.is_empty():
+			continue
+		if event is InputEventKey:
+			return prompt
+		if fallback.is_empty():
+			fallback = prompt
+	return fallback if not fallback.is_empty() else "—"
+
+
+## Developer-only pause controls (test mode, save wipe) exist in debug runs of
+## the project and are hidden in exported release builds. GS_RELEASE_SHELL=1
+## forces the release layout in a debug run for captures and gates.
+static func is_developer_shell() -> bool:
+	return OS.is_debug_build() and OS.get_environment("GS_RELEASE_SHELL") != "1"
+
+
 func get_input_event_prompt(event: InputEvent) -> String:
 	if event is InputEventKey:
 		var key_text := event.as_text()
@@ -1333,9 +1357,12 @@ func _refresh_pause_localization() -> void:
 	var settings_button := _pause_layer.get_node_or_null("PanelContainer/VBoxContainer/HBoxContainer/SettingsButton") as Button
 	if settings_button:
 		settings_button.text = LocalizationManager.tr_key("PAUSE_SETTINGS")
+	var main_menu := _pause_layer.get_node_or_null("PanelContainer/VBoxContainer/HBoxContainer/MainMenuButton") as Button
+	if main_menu:
+		main_menu.text = LocalizationManager.tr_key("PAUSE_MAIN_MENU")
 	var footer := _pause_layer.get_node_or_null("PanelContainer/VBoxContainer/PauseFooter") as Label
 	if footer:
-		footer.text = LocalizationManager.tr_key("PAUSE_FOOTER")
+		footer.text = LocalizationManager.tr_key("PAUSE_FOOTER") % [get_action_primary_prompt(&"pause"), get_action_primary_prompt(&"interact")]
 	_refresh_station_button_labels()
 
 
@@ -1346,7 +1373,7 @@ func _refresh_station_button_labels() -> void:
 		var button := child as Button
 		if button:
 			var station_id := StringName(String(button.get_meta("station_id", "")))
-			button.tooltip_text = LocalizationManager.tr_key("PAUSE_STATION_TOOLTIP") % String(station_id).trim_prefix("station_")
+			button.tooltip_text = LocalizationManager.tr_key("PAUSE_STATION_TOOLTIP") % [String(station_id).trim_prefix("station_").to_upper(), LocalizationManager.station_display_name(String(station_id))]
 
 
 func _apply_audio_setting() -> void:
@@ -1658,10 +1685,16 @@ func _ensure_pause_menu() -> void:
 	actions.add_theme_constant_override(&"separation", 5)
 	content.add_child(actions)
 	_add_menu_button(actions, "WZNÓW", func() -> void: set_pause_menu_visible(false), "ResumeButton")
-	_add_menu_button(actions, "CHECKPOINT", restart_from_checkpoint, "CheckpointButton")
+	_add_menu_button(actions, "RESTART SCENY", restart_from_checkpoint, "CheckpointButton")
 	_add_menu_button(actions, "USTAWIENIA", _open_pause_settings, "SettingsButton")
-	_add_menu_button(actions, "TRYB TESTOWY: OFF", _toggle_test_mode, "TestModeButton")
+	# PKG-0242 (UX): a paused player can always leave to the title screen;
+	# every decision is already autosaved (record_decision → save_campaign).
+	_add_menu_button(actions, "MENU GŁÓWNE", return_to_title, "MainMenuButton")
 	_add_menu_button(actions, "RESET ZAPISU", _request_reset_campaign, "ResetButton")
+	if is_developer_shell():
+		_add_menu_button(actions, "TRYB TESTOWY: OFF", _toggle_test_mode, "TestModeButton")
+	for child in actions.get_children():
+		(child as Button).custom_minimum_size.x = 86.0 if is_developer_shell() else 100.0
 	content.add_child(HSeparator.new())
 	_station_grid = GridContainer.new()
 	_station_grid.name = "StationGrid"
@@ -1741,6 +1774,30 @@ func _request_reset_campaign() -> void:
 	dialog.present(LocalizationManager.tr_key("CONFIRM_RESET_TITLE"), LocalizationManager.tr_key("CONFIRM_RESET_BODY"), LocalizationManager.tr_key("PAUSE_RESET_SAVE"), return_button)
 
 
+func _show_station_focus(station_id: StringName) -> void:
+	if not is_instance_valid(_status_label):
+		return
+	var unlocked := test_mode_enabled or station_id == &"station_01" or has_reached_station(station_id)
+	var name_text := LocalizationManager.station_display_name(String(station_id)) if unlocked else "—"
+	_status_label.text = LocalizationManager.tr_key("PAUSE_STATION_TOOLTIP") % [String(station_id).trim_prefix("station_").to_upper(), name_text]
+
+
+func _refresh_pause_status() -> void:
+	if not is_instance_valid(_status_label):
+		return
+	if is_developer_shell():
+		_status_label.text = LocalizationManager.tr_key("PAUSE_STATUS_DEBUG") % [
+			get_selectable_stations().size(),
+			CAMPAIGN_SELECTOR_STATIONS.size(),
+			"ON" if test_mode_enabled else "OFF",
+		]
+	else:
+		_status_label.text = LocalizationManager.tr_key("PAUSE_STATUS") % [
+			get_selectable_stations().size(),
+			CAMPAIGN_SELECTOR_STATIONS.size(),
+		]
+
+
 func _toggle_test_mode() -> void:
 	set_test_mode(not test_mode_enabled)
 
@@ -1754,7 +1811,11 @@ func _refresh_station_buttons() -> void:
 		var button := Button.new()
 		var unlocked := test_mode_enabled or station_id == &"station_01" or has_reached_station(station_id)
 		button.text = String(station_id).trim_prefix("station_").to_upper()
-		button.tooltip_text = LocalizationManager.tr_key("PAUSE_STATION_TOOLTIP") % button.text
+		button.tooltip_text = LocalizationManager.tr_key("PAUSE_STATION_TOOLTIP") % [button.text, LocalizationManager.station_display_name(String(station_id))]
+		# PKG-0242 (UX): keyboard/pad focus shows the place name in the status
+		# line, because a tooltip never appears without a mouse.
+		button.focus_entered.connect(_show_station_focus.bind(station_id))
+		button.focus_exited.connect(_refresh_pause_status)
 		button.disabled = not unlocked
 		button.custom_minimum_size = Vector2(52.0, 24.0)
 		button.focus_mode = Control.FOCUS_ALL
@@ -1763,12 +1824,7 @@ func _refresh_station_buttons() -> void:
 		_style_pause_button(button, true)
 		button.pressed.connect(_on_station_requested.bind(station_id))
 		_station_grid.add_child(button)
-	if is_instance_valid(_status_label):
-		_status_label.text = LocalizationManager.tr_key("PAUSE_STATUS") % [
-			get_selectable_stations().size(),
-			CAMPAIGN_SELECTOR_STATIONS.size(),
-			"ON" if test_mode_enabled else "OFF",
-		]
+	_refresh_pause_status()
 	var test_button := _pause_layer.get_node_or_null("PanelContainer/VBoxContainer/HBoxContainer/TestModeButton") as Button
 	if test_button:
 		test_button.text = LocalizationManager.tr_key("PAUSE_TEST_MODE") % ("ON" if test_mode_enabled else "OFF")
