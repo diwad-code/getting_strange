@@ -52,7 +52,7 @@ zabawy ani zrozumienia (D-012, ADR-003). PRODUCT GO pozostaje decyzją właścic
 - Zasięgi: biurko 17 i stół 18 — 56 px, słupek 18 — 72 px. Każda strona wyboru
   to pas 40 px (było 12–28 px); każde wyjście zachowuje odcinek wolny od punktów.
 - Drzwi, których stacja jeszcze nie może użyć (18 bez zatwierdzonej metody,
-  niedokończony finał), odmawiają **przed** animacją wejścia i Lena mówi, czego
+  niedokończony finał, 43 przed ostatnim zapisem czytnika), odmawiają **przed** animacją wejścia i Lena mówi, czego
   brakuje (`forward_block_line`, `GapLedger.say`). Wcześniej Lena wchodziła
   w drzwi i zostawała w progu bez słowa.
 - Punkt naciśnięty przed swoim poprzednikiem w tym samym pokoju nazywa ten
@@ -71,7 +71,9 @@ zabawy ani zrozumienia (D-012, ADR-003). PRODUCT GO pozostaje decyzją właścic
   z trzech ukończonych łańcuchów (błąd łapie polityka logu verify).
 - **05**: ślad `p7.return_under_control.trace` mówi teraz, co Lena zrobiła:
   sprawdziła torbę przed przejściem albo po prostu przeszła (torba opcjonalna od PKG-0239).
-- **43**: usunięto trzy nieużywane po PKG-0239 funkcje klauzul wypłaty.
+- **43**: usunięto trzy nieużywane po PKG-0239 funkcje klauzul wypłaty; taśma
+  zamknięcia linii (gałąź A) przeniesiona z lewego słupa, przy którym Lena
+  zaczyna scenę i który przecinał jej głowę, na prawy słup wiaty.
 
 ### 2.4 Powłoka wydania
 
@@ -128,7 +130,7 @@ prezenter rozmów.
 2. Każde wyjście ma odcinek wolny od punktów odczytu.
 3. Strony wyborów 16/17/18 to pasy ≥ 30 px.
 4. W drzwiach 18 słupek bierze naciśnięcie przed zatwierdzeniem, drzwi po nim.
-5. Drzwi 18 bez metody odmawiają bez animacji i mówią, czego brakuje.
+5. Drzwi 18 bez metody i drzwi 43 przed epilogiem odmawiają bez animacji i mówią, czego brakuje.
 6. 17: oferta przed rejestrem nazywa rejestr.
 7. Punkty zachowują własne promienie.
 8. Ponowne otwarcie wszystkich adresów po każdym z trzech zakończeń.

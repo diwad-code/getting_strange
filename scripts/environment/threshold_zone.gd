@@ -277,10 +277,11 @@ func _yields_to_reading_point() -> bool:
 	var id: Variant = point.get("resonance_id")
 	if host == null or id == null:
 		return true
+	# Explicit comparisons with true, no Variant-to-bool casts (pin 0184).
 	if host.has_method("is_point_actionable"):
-		return bool(host.call("is_point_actionable", String(id)))
+		return host.call("is_point_actionable", String(id)) == true
 	if host.has_method("_is_resolved"):
-		return not bool(host.call("_is_resolved", String(id)))
+		return host.call("_is_resolved", String(id)) != true
 	return true
 
 
