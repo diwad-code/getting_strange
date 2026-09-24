@@ -18,7 +18,8 @@ Stan po pakiecie gotowosci do premiery na galezi `claude/vigilant-brahmagupta-eq
 - 39 bramek przepietych na lancuch zgody PKG-0239 i tekst wlasciciela z zachowaniem intencji
   (D-252); licznik 0207: 131/130/129/129; helper 0212: 4.
 - Weryfikacja: izolowane uruchomienia 129/129 bramek PASS; pelna `verify.ps1 -AudioDriver Dummy`
-  (Linux) — wynik w `SESSION_LOG.md`, wpis PKG-0242. Nie jest to profil Windows/WASAPI.
+  (Linux, sekwencyjnie): **PASS, exit 0, 140 sekcji** (`reports/pkg_0242/verify_full_linux_dummy.log`).
+  Nie jest to profil Windows/WASAPI.
 - Nadal: brak PRODUCT GO, D-168 blokuje eksport i `.exe`; dialogi tylko PL (R-058);
   brak testow z ludzmi, fizycznego pada, audio i DPI (R-060).
 

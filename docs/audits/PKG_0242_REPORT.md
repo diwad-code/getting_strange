@@ -22,7 +22,8 @@ zabawy ani zrozumienia (D-012, ADR-003). PRODUCT GO pozostaje decyzją właścic
 - 39 historycznych bramek przepięto na łańcuch zgody PKG-0239 i tekst właściciela
   z zachowaniem intencji każdej asercji (sekcja 4); żadnej asercji nie usunięto
   bez zastąpienia kontraktem o tym samym celu.
-- Pełna `tools/verify.ps1 -AudioDriver Dummy` (Linux, Godot 4.7.2): wynik w sekcji 6.
+- Pełna `tools/verify.ps1 -AudioDriver Dummy` (Linux, Godot 4.7.2): **PASS, exit 0, 140 sekcji**
+  (sekcja 6). Profil Windows/WASAPI właściciela nie był uruchomiony.
 
 ## 2. Naprawy gry
 
@@ -145,7 +146,10 @@ Asercje 4 i 5 sprawdzono też w trybie odwrotnym (wyłączone ustępowanie drzwi
 - Izolowane uruchomienia wszystkich 129 bramek z `verify.ps1` (osobne katalogi
   użytkownika, 4 równolegle): wszystkie PASS po poprawkach tego pakietu.
 - Pełna `pwsh -NoProfile -File tools/verify.ps1 -AudioDriver Dummy`
-  (sekwencyjnie, jeden katalog użytkownika, polityka logu): patrz `SESSION_LOG.md`, wpis PKG-0242.
+  (sekwencyjnie, jeden katalog użytkownika, polityka logu): pierwszy przebieg zatrzymał się
+  na PKG-0184 (lint zabrania `bool(` w `threshold_zone.gd`; nowy kod go użył — poprawione
+  porównaniami z `true`, bez zmiany asercji); drugi przebieg **PASS, exit 0, 140 sekcji**,
+  „Verification passed.” po ostatniej bramce (`reports/pkg_0242/verify_full_linux_dummy.log`).
 - Kadry: `tools/capture_pkg_0241.gd` (88 kadrów, 81 pomiarów linii, **0 przepełnień**
   pudła CRT przy 85/100/115%) i nowy `tools/capture_pkg_0242.gd` (16 kadrów:
   tytuł PL/EN, twórcy i licencje, pauza, pokoje wyborów 16/17/18, odmowa drzwi 18,

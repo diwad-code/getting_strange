@@ -10767,3 +10767,43 @@ Linux 83/128 wobec 61/127, zero nowego FAIL w porownywalnych testach. Kontrola 0
 przyciecie podeszwy; przywrocono oryginalne piksele i ponownie zaliczono test bez zmiany asercji.
 Windows i pozostale ograniczenia: docs/audits/PKG_0241_REPORT.md. Bez merge, auto-merge i EXE.
 Nastepnie R1/R2 z planu wdrozenia; pozostaja tez artystyczna ciaglosc i docelowy odbior sprzetu.
+
+
+## PKG-0242: Gotowosc do premiery — ukonczalnosc, interakcja, powloka wydania, rozliczenie bramek
+
+Data: 2026-09-24. Galaz `claude/vigilant-brahmagupta-eq594t` (baza `ea61916`, merge PKG-0241).
+Zlecenie wlasciciela: doprowadzic gre do gotowosci do publicznej premiery. Zakres: Godot-only,
+bez WWW (D-098), bez wydania i `.exe` (D-168), tresc PKG-0239 nadrzedna.
+
+Wynik:
+- kampania ukonczalna wylacznie wejsciem na zakonczeniach A, B i C (M1 `pkg_0177`); 22 adresy
+  fizycznie przechodnie (nowa bramka `pkg_0242`);
+- naprawy: cokol 14, `InteractionFocus`, przewijanie CRT w `_input`, otwory wyjsc na podlodze,
+  legendy i martwa strefa wyborow 16/17/18, pasy wyboru 40 px, wlasne ksztalty kolizji punktow,
+  drzwi ustepuja punktom z niedokonczonym dzialaniem (D-228/D-253), zamkniete drzwi 18/42/43
+  mowia czego brakuje, kroki w pokoju nazywaja poprzednika, blad skryptu 16 przy powrocie,
+  slad 05, otwarcia 42A/B/C zgodne z kolejnoscia wybor → wykonanie;
+- powloka wydania (D-254): pauza bez trybu testowego poza buildem deweloperskim, TWÓRCY
+  I LICENCJE z tekstami z silnika, wersja 1.0.0, podpowiedz CRT z klawiszem, 43 bez manifestu;
+- 39 bramek przepietych na lancuch PKG-0239 i tekst wlasciciela z zachowaniem intencji (D-252,
+  tabela w raporcie); `tests/support/campaign_chain.gd`; licznik 0207: 131/130/129/129; 0212: 4.
+
+Weryfikacja (Linux, Godot 4.7.2, Dummy audio):
+- izolowane uruchomienia wszystkich 129 bramek z `verify.ps1`: 129/129 PASS (dozwolone ostrzezenia
+  testow uszkodzonego zapisu i schematu ustawien);
+- pierwsza pelna sekwencyjna `verify.ps1 -AudioDriver Dummy`: 90 bramek PASS, zatrzymanie na
+  PKG-0184 — lint zabrania `bool(` w `threshold_zone.gd`, a nowy kod go uzyl; poprawione
+  porownaniami z `true`, bez zmiany asercji;
+- druga pelna sekwencyjna `pwsh -NoProfile -File tools/verify.ps1 -AudioDriver Dummy`:
+  **PASS, exit 0**, 140 sekcji (131 wywolan bramek, polityka logu, kontrakt dokumentacji,
+  import), ostatnia linia „Verification passed.” po ostatniej bramce; dowod
+  `reports/pkg_0242/verify_full_linux_dummy.log`. To profil Linux/Dummy, nie Windows/WASAPI;
+- kadry: `tools/capture_pkg_0241.gd` 88 kadrow, 0 przepelnien pudla CRT przy 85/100/115%;
+  `tools/capture_pkg_0242.gd` 16 kadrow; oba poza repozytorium.
+
+Ograniczenia: brak testow z ludzmi (H-058); brak profilu Windows/WASAPI, pada, DPI (R-060);
+dialogi tylko PL (R-058); repo sledzi `.godot/`, `reports/`, binaria 4.6.3 (R-059); Lena bywa
+zaslonieta skrzydlem drzwi (R-061). Brak PRODUCT GO; D-168 obowiazuje.
+Raport: `docs/audits/PKG_0242_REPORT.md`. Decyzje: D-252..D-254.
+Handoff: `docs/NEXT_SESSION_PROMPT.md`.
+Zamrozenie: `tools/snapshot.ps1 -Package PKG-0242` -> `snapshots/PKG-0242-2026-09-24`.
