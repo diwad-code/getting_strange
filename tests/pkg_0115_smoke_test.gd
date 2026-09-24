@@ -196,12 +196,12 @@ func _check_pause_and_crt_surfaces() -> void:
 	var channel_label := crt.get_node_or_null("CRTDialoguePanel/ChannelLabel") as Label
 	_expect(continue_label != null and channel_label != null, "CRT must expose localized UI labels")
 	if continue_label and channel_label:
-		_expect(continue_label.text == "INTERACT  >", "CRT continue prompt must switch to English")
+		_expect(continue_label.text == "NEXT  [%s]" % _state.get_action_primary_prompt(&"interact"), "CRT continue prompt must switch to English")
 		_expect(channel_label.text == "WITNESS CHANNEL  //  SAVE ACTIVE", "CRT channel label must switch to English")
 	_state.set_locale("pl")
 	await process_frame
 	if continue_label and channel_label:
-		_expect(continue_label.text == "INTERAKCJA  >", "CRT continue prompt must switch back to Polish")
+		_expect(continue_label.text == "DALEJ  [%s]" % _state.get_action_primary_prompt(&"interact"), "CRT continue prompt must switch back to Polish")
 		_expect(channel_label.text == "KANAŁ ŚWIADKA  //  ZAPIS AKTYWNY", "CRT channel label must switch back to Polish")
 	crt.queue_free()
 	_state.set_pause_menu_visible(false)

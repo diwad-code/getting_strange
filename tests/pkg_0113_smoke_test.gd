@@ -99,7 +99,7 @@ func _check_dialogue_surface() -> void:
 		if portrait:
 			_expect(portrait.speaker == &"Lena", "CRT portrait did not receive the current speaker")
 		if continue_action:
-			_expect(continue_action.text == "INTERAKCJA  >", "CRT continue prompt must name the semantic action")
+			_expect(continue_action.text == "DALEJ  [%s]" % root.get_node("GameStateManager").get_action_primary_prompt(&"interact"), "CRT continue prompt must name the continue verb and the key bound to interact (PKG-0242)")
 	station.queue_free()
 	await process_frame
 

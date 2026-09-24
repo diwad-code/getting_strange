@@ -22,6 +22,9 @@ const SHARED_FIELDS: Array[StringName] = [
 	&"max_fall_speed",
 ]
 const _ThresholdBinder := preload("res://scripts/environment/threshold_binder.gd")
+## PKG-0242 (R1): authentic post-16 state and the real 17/18 conversations.
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
+const NarrativeRules := preload("res://scripts/levels/narrative_repair_rules.gd")
 const BASELINE_A_VALUES := {
 	&"move_speed": 96.0,
 	&"ground_acceleration": 900.0,
@@ -1537,21 +1540,27 @@ func _test_station_17() -> void:
 	_expect(packed_station != null, "station 17 scene does not load")
 	if packed_station == null:
 		return
-	var state := _seed_s06_entry()
+	# PKG-0242 (R1): state of a real 01–16 run; PKG-0239 records Jakub's scope
+	# only when the conversation at the desk finishes.
+	var state := root.get_node_or_null("GameStateManager")
 	if state:
-		state.record_decision(&"p7.work_history_and_record.institution_trial_result", "small_cost_and_home_echo_confirmed")
-		state.record_decision(&"p9.mechanics.small_cost.home_echo_verified", true)
-		state.record_decision(&"mechanic_cost_observed", true)
+		CampaignChain.seed_before_17(state)
 	var station := packed_station.instantiate() as Station17
 	root.add_child(station)
 	await physics_frame
 	_expect(not station.record_jakub_consent_granted(), "station 17: consent before ledger must stay safe")
 	_expect(station.read_cost_ledger(), "station 17: cost ledger must be read")
 	_expect(station.reject_adaptation_offer(), "station 17: adaptation offer must be rejected")
-	_expect(station.record_jakub_consent_limited(), "station 17: consent scope must be recorded")
+	_expect(station.record_jakub_consent_limited(), "station 17: consent request must open the conversation")
+	if state:
+		_expect(not state.decisions.has(&"jakub_consent_state"), "station 17: the request alone must not record Jakub's scope")
+	_expect(not station.pending_consent_pairs.is_empty(), "station 17: the scope conversation must be queued")
+	station._on_narrative_dialogue_finished("consent_scope_desk")
+	_expect(station.is_consent_scope_recorded, "station 17: consent scope must be recorded")
 	if state:
 		_expect(state.decisions.get(&"ucp_cost_ledger_found", false) == true, "station 17: canonical cost ledger must be set")
 		_expect(state.decisions.get(&"jakub_consent_state", "") == "limited", "station 17: consent state must be explicit")
+		_expect(NarrativeRules.scope(state.decisions) == "limited", "station 17: both scope records must agree")
 	_expect(station.get("is_exit_unlocked") == true, "station 17: exit must unlock after the consent scope")
 	await _cross_exit(station)
 	_expect(station.is_level_completed, "station 17 must complete upon entering airlock zone")
@@ -1560,6 +1569,51 @@ func _test_station_17() -> void:
 		await process_frame
 
 
+func _test_station_18() -> void:
+	var packed_station := load("res://scenes/levels/station_18.tscn") as PackedScene
+	_expect(packed_station != null, "station 18 scene does not load")
+	if packed_station == null:
+		return
+	var state := root.get_node_or_null("GameStateManager")
+	if state:
+		CampaignChain.seed_before_17(state)
+	_expect(await CampaignChain.record_scope(self, "limited"), "station 18: 17 must record a limited scope first")
+	var station := packed_station.instantiate() as Station18
+	root.add_child(station)
+	await physics_frame
+	# PKG-0230 (P0-1, S-02): commit bez zestawienia/prawdy i bez zakresu
+	# nie przechodzi (limited seed nie domyka force_home).
+	_expect(not station.commit_force_home(), "station 18: commit without inventory must stay blocked")
+	_expect(station.compare_forecast_consent_dependencies(), "station 18: three forecasts must be compared")
+	_expect(station.disclose_marta_truth_partial(), "station 18: Marta truth conversation must open")
+	station._on_narrative_dialogue_finished("marta_truth_table")
+	_expect(station.is_marta_truth_disclosed, "station 18: Marta truth state must be recorded")
+	# PKG-0239: naming a method is not consent; Jakub answers it at 17.
+	var player := station.get_node("Player") as Node2D
+	player.global_position.x = (station.get_node("Props/MethodCommitPost") as Node2D).global_position.x
+	await physics_frame
+	_expect(station.choose_method_from_player_side(), "station 18: the post must name close_equal")
+	_expect(not station.is_method_committed, "station 18: naming alone must not commit")
+	_expect(not station.commit_close_equal(), "station 18: commit without Jakub's answer must stay blocked")
+	station.queue_free()
+	for f in range(4):
+		await process_frame
+	_expect(await CampaignChain.answer_method(self, "accepted"), "station 18: Jakub must answer the proposed method at 17")
+	station = packed_station.instantiate() as Station18
+	root.add_child(station)
+	await physics_frame
+	_expect(station.commit_close_equal(), "station 18: allowed method must commit")
+	_expect(station.is_method_committed, "station 18: one method must be committed")
+	_expect(station.get("is_exit_unlocked") == true, "station 18: exit must unlock after method_committed")
+	await _cross_exit(station)
+	_expect(station.is_level_completed, "station 18 must complete upon entering airlock zone")
+	station.queue_free()
+	for f in range(4):
+		await process_frame
+
+
+## Frozen legacy donors 19–41 keep their historical entry seed (not part of
+## the active route; PKG-0242 did not touch them).
 func _seed_s07_entry() -> Node:
 	var state := root.get_node_or_null("GameStateManager")
 	if state:
@@ -1570,30 +1624,6 @@ func _seed_s07_entry() -> Node:
 		state.record_decision(&"p9.consent_and_cost.jakub_consent_scope", "limited")
 		state.record_decision(&"jakub_consent_state", "limited")
 	return state
-
-
-func _test_station_18() -> void:
-	var packed_station := load("res://scenes/levels/station_18.tscn") as PackedScene
-	_expect(packed_station != null, "station 18 scene does not load")
-	if packed_station == null:
-		return
-	_seed_s07_entry()
-	var station := packed_station.instantiate() as Station18
-	root.add_child(station)
-	await physics_frame
-	# PKG-0230 (P0-1, S-02): commit bez zestawienia/prawdy i bez zakresu
-	# nie przechodzi (limited seed nie domyka force_home).
-	_expect(not station.commit_force_home(), "station 18: commit without inventory must stay blocked")
-	_expect(station.compare_forecast_consent_dependencies(), "station 18: three forecasts must be compared")
-	_expect(station.disclose_marta_truth_partial(), "station 18: Marta truth state must be recorded")
-	_expect(station.commit_close_equal(), "station 18: allowed method must commit")
-	_expect(station.is_method_committed, "station 18: one method must be committed")
-	_expect(station.get("is_exit_unlocked") == true, "station 18: exit must unlock after method_committed")
-	await _cross_exit(station)
-	_expect(station.is_level_completed, "station 18 must complete upon entering airlock zone")
-	station.queue_free()
-	for f in range(4):
-		await process_frame
 
 
 func _test_station_19() -> void:
@@ -2957,11 +2987,10 @@ func _test_station_42a() -> void:
 
 	var state := root.get_node_or_null("GameStateManager")
 	if state:
-		state.reset_campaign(true)
-		state.record_decision(&"p9.method_commitment.method_committed", "force_home")
-		state.record_decision(&"method_committed", "force_home")
-		state.record_decision(&"marta_truth_state", "partial")
-		state.record_decision(&"jakub_consent_state", "limited")
+		# PKG-0242 (R1): the finale accepts only a chain a player can reach
+		# (scope → truth → proposal → Jakub's answer → commit, PKG-0239).
+		CampaignChain.seed_before_17(state)
+		_expect(await CampaignChain.commit_chain(self, "force_home", "partial", "granted"), "force_home chain must commit before the finale")
 
 	var station := packed_station.instantiate() as Station42A
 	root.add_child(station)
@@ -3018,11 +3047,10 @@ func _test_station_42b() -> void:
 
 	var state := root.get_node_or_null("GameStateManager")
 	if state:
-		state.reset_campaign(true)
-		state.record_decision(&"p9.method_commitment.method_committed", "close_equal_recover_local")
-		state.record_decision(&"method_committed", "close_equal_recover_local")
-		state.record_decision(&"marta_truth_state", "partial")
-		state.record_decision(&"jakub_consent_state", "limited")
+		# PKG-0242 (R1): the finale accepts only a chain a player can reach
+		# (scope → truth → proposal → Jakub's answer → commit, PKG-0239).
+		CampaignChain.seed_before_17(state)
+		_expect(await CampaignChain.commit_chain(self, "close_equal_recover_local", "partial", "limited"), "close_equal_recover_local chain must commit before the finale")
 
 	var station := packed_station.instantiate() as Station42B
 	root.add_child(station)
@@ -3057,8 +3085,12 @@ func _test_station_42b() -> void:
 		return
 
 	_expect(station.is_exit_unlocked, "station 42b exit stays open after close_equal")
-	_expect(station.execute_close_flow(), "station 42b flow closure must succeed")
+	# PKG-0239 (krok 01): B recovers the local Lena before closing the flow.
+	_expect(station.execute_close_flow(), "station 42b recovery must start")
+	_expect(not station.is_flow_closed, "station 42b first latch must not close the flow yet")
+	_expect(not station.read_household_consequence(), "station 42b consequence must wait for the closure")
 	_expect(station.read_local_lena_recovered(), "station 42b recovered local Lena must be readable")
+	_expect(station.execute_close_flow(), "station 42b flow closure must succeed")
 	_expect(station.read_household_consequence(), "station 42b household consequence must be readable")
 	_expect(station.is_flow_closed, "flow closure must be recorded")
 	_expect(station.is_local_lena_recovered, "recovered local Lena must be recorded")
@@ -3079,11 +3111,10 @@ func _test_station_42c() -> void:
 
 	var state := root.get_node_or_null("GameStateManager")
 	if state:
-		state.reset_campaign(true)
-		state.record_decision(&"p9.method_commitment.method_committed", "mutual_passage")
-		state.record_decision(&"method_committed", "mutual_passage")
-		state.record_decision(&"marta_truth_state", "partial")
-		state.record_decision(&"jakub_consent_state", "granted")
+		# PKG-0242 (R1): the finale accepts only a chain a player can reach
+		# (scope → truth → proposal → Jakub's answer → commit, PKG-0239).
+		CampaignChain.seed_before_17(state)
+		_expect(await CampaignChain.commit_chain(self, "mutual_passage", "full", "granted"), "mutual_passage chain must commit before the finale")
 
 	var station := packed_station.instantiate() as Station42C
 	root.add_child(station)

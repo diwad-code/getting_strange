@@ -399,9 +399,14 @@ func _resolve_cold_open(station: Station01, player: PrototypePlayer) -> void:
 			break
 		await physics_frame
 	_expect(not station.is_cold_open_active(), "PKG-0176 cold open must resolve into the Station 01 fork")
-	# Bez domykania dialogu przy rejestratorze: `OpeningActionPoint` dostaje
-	# `interact` przed `CRTDialogueBox`, wiec kolejne przycisniecie tutaj
-	# uruchomiloby juz powtorke pomiaru, nie przewinelo linii.
+	# PKG-0242 (R1): the press that advances Lena's gap line must not act on
+	# the rig. Before PKG-0242 `OpeningActionPoint` received `interact`
+	# before `CRTDialogueBox`, so skipping this line silently took the
+	# optional repeat (the broken promise). The line is advanced first now,
+	# and the next press at the rig is the player's own choice.
+	var said_before := station.is_measurement_repeated
+	await _advance_all_dialogue(station)
+	_expect(station.is_measurement_repeated == said_before, "Advancing Lena's line at the rig must not repeat the measurement")
 
 
 func _walk_right_to(player: PrototypePlayer, target_x: float, frame_limit: int) -> void:

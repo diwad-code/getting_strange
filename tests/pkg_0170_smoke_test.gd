@@ -29,24 +29,8 @@ const METHOD_FORCE_HOME := "force_home"
 const METHOD_CLOSE_EQUAL := "close_equal_recover_local"
 const METHOD_MUTUAL := "mutual_passage"
 
-const EXPECTED_LICENSE_LINES: Array[String] = [
-	"LICENCJE // MANIFEST RUNTIME",
-	"AUDIO: ZERO-ASSET SYNTH",
-	"ŚWIAT: PROCEDURAL PIXEL-STAGE",
-	"LENA 4.1: 22 PNG 64x104",
-	"PORTRETY CRT: 5 PNG",
-	"GODOT 4.7.2 (MIT)"
-]
-
-const EXPECTED_CREDITS_LINES: Array[String] = [
-	"CREDITS // PRODUCTION",
-	"GETTING STRANGE",
-	"LEAD PROGRAMMER & ART DIRECTOR",
-	"KANON FABUŁY 0.3",
-	"RENDER: PIXEL-STAGE 640x360",
-	"AUDIO: PROCEDURAL WAVEFORM SYNTH",
-	"PL / EN SHELL // SUBTITLES"
-]
+## PKG-0242 (release): Station 43 boards follow the release surface contract.
+const ReleaseSurface := preload("res://tests/support/release_surface_contract.gd")
 
 var _failures: Array[String] = []
 
@@ -128,16 +112,8 @@ func _test_scene_contract(state: Object) -> void:
 			_expect(blackout.prop_type == 202, "FinalBlackout prop_type must be 202")
 			_expect(blackout.resonance_id == "prop_final_blackout", "FinalBlackout id must be prop_final_blackout")
 	
-	var license_manifest := station.get_node_or_null("CrispDiegeticText_LicenseManifest") as CrispDiegeticText
-	var credits_manifest := station.get_node_or_null("CrispDiegeticText_CreditsManifest") as CrispDiegeticText
-	_expect(license_manifest != null, "License manifest must exist")
-	_expect(credits_manifest != null, "Credits manifest must exist")
-	if license_manifest != null:
-		for line in EXPECTED_LICENSE_LINES:
-			_expect(license_manifest.text.contains(line), "License manifest must contain '%s'" % line)
-	if credits_manifest != null:
-		for line in EXPECTED_CREDITS_LINES:
-			_expect(credits_manifest.text.contains(line), "Credits manifest must contain '%s'" % line)
+	for failure in ReleaseSurface.station_43_failures(station):
+		_expect(false, failure)
 	
 	_expect(station.has_signal(&"level_completed"), "level_completed signal must exist")
 	_expect(station.has_signal(&"previous_level_requested"), "previous_level_requested signal must exist")

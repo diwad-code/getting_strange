@@ -2,24 +2,10 @@ extends SceneTree
 
 var _failures: Array[String] = []
 
-const EXPECTED_LICENSE_LINES: Array[String] = [
-	"LICENCJE // MANIFEST RUNTIME",
-	"AUDIO: ZERO-ASSET SYNTH",
-	"ŚWIAT: PROCEDURAL PIXEL-STAGE",
-	"LENA 4.1: 22 PNG 64x104",
-	"PORTRETY CRT: 5 PNG",
-	"GODOT 4.7.2 (MIT)"
-]
-
-const EXPECTED_CREDITS_LINES: Array[String] = [
-	"CREDITS // PRODUCTION",
-	"GETTING STRANGE",
-	"LEAD PROGRAMMER & ART DIRECTOR",
-	"KANON FABUŁY 0.3",
-	"RENDER: PIXEL-STAGE 640x360",
-	"AUDIO: PROCEDURAL WAVEFORM SYNTH",
-	"PL / EN SHELL // SUBTITLES"
-]
+## PKG-0242 (release): the Station 43 boards and the Credits & Licences
+## screen follow tests/support/release_surface_contract.gd. The earlier
+## "runtime manifest" pins described developer telemetry, not credits.
+const ReleaseSurface := preload("res://tests/support/release_surface_contract.gd")
 
 
 func _initialize() -> void:
@@ -86,16 +72,18 @@ func _test_title_screen_runtime_version_label() -> void:
 	if build_label != null:
 		var pl_text := build_label.text
 		_expect(pl_text.contains(version), "PL build label must contain ProjectSettings version")
-		_expect(pl_text.contains("%dx%d" % [viewport_width, viewport_height]), "PL build label must contain logical viewport")
-		_expect(pl_text.contains(str(physics_hz)), "PL build label must contain physics tick rate")
+		# PKG-0242 (release): players see the version only — resolution and
+		# physics rate were developer telemetry on a public title screen.
+		_expect(not pl_text.contains("%dx%d" % [viewport_width, viewport_height]), "PL build label must not expose the logical viewport")
+		_expect(not pl_text.contains("%d Hz" % physics_hz), "PL build label must not expose the physics tick rate")
 
 		LocalizationManager.set_locale("en")
 		title.refresh_for_test()
 		await process_frame
 		var en_text := build_label.text
 		_expect(en_text.contains(version), "EN build label must contain ProjectSettings version")
-		_expect(en_text.contains("%dx%d" % [viewport_width, viewport_height]), "EN build label must contain logical viewport")
-		_expect(en_text.contains(str(physics_hz)), "EN build label must contain physics tick rate")
+		_expect(not en_text.contains("%dx%d" % [viewport_width, viewport_height]), "EN build label must not expose the logical viewport")
+		_expect(not en_text.contains("%d Hz" % physics_hz), "EN build label must not expose the physics tick rate")
 		_expect(en_text != pl_text, "Build label must localize between PL and EN")
 
 	LocalizationManager.set_locale(original_locale)
@@ -132,16 +120,10 @@ func _test_station_43_release_surface() -> void:
 	await process_frame
 	await physics_frame
 
-	var license_manifest := station.get_node_or_null("CrispDiegeticText_LicenseManifest") as CrispDiegeticText
-	var credits_manifest := station.get_node_or_null("CrispDiegeticText_CreditsManifest") as CrispDiegeticText
-	_expect(license_manifest != null, "Station 43 must expose a readable license manifest")
-	_expect(credits_manifest != null, "Station 43 must expose a readable credits manifest")
-	if license_manifest != null:
-		for line in EXPECTED_LICENSE_LINES:
-			_expect(license_manifest.text.contains(line), "Station 43 license manifest must contain '%s'" % line)
-	if credits_manifest != null:
-		for line in EXPECTED_CREDITS_LINES:
-			_expect(credits_manifest.text.contains(line), "Station 43 credits manifest must contain '%s'" % line)
+	for failure in ReleaseSurface.station_43_failures(station):
+		_expect(false, failure)
+	for failure in ReleaseSurface.credits_screen_failures():
+		_expect(false, failure)
 
 	_expect(station.has_method("inspect_notice"), "Station 43 must expose inspect_notice()")
 	_expect(station.has_method("inspect_credits"), "Station 43 must expose inspect_credits()")
