@@ -1,4 +1,4 @@
 cycle	loaded	object_count_before	object_count_after	delta	cache_after_clear	save_reload	pause_resume	status
-1	22	2096	2001	-95	0	true	true	PASS
-2	22	2141	2001	-140	0	true	true	PASS
-3	22	2141	2001	-140	0	true	true	PASS
+1	22	2110	2016	-94	0	true	true	PASS
+2	22	2156	2016	-140	0	true	true	PASS
+3	22	2156	2016	-140	0	true	true	PASS

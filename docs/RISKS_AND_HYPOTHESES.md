@@ -266,3 +266,15 @@ Brak dowodu fizycznego pada, dzwieku, DPI i wydajnosci na komputerze gracza; 60 
 Talk_0/talk_1 vendor pozostaja identyczne. Ciaglosc kostiumu Leny i detali winiet wymaga R3,
 nie losowej regeneracji. Ryzyko ponownego wykluczenia vendor ograniczono wyjatkiem gitignore.
 Nie ma PRODUCT GO ani nowego wydania. Plan R1–R4: docs/audits/PKG_0241_IMPLEMENTATION_PLAN.md.
+
+
+## PKG-0242 — ryzyka i hipotezy po gotowosci do premiery / 2026-09-24
+
+| ID | Status | Opis / dowod |
+| --- | --- | --- |
+| R-053 | CZĘŚCIOWO → ZAMKNIĘTE technicznie | claim-side 17/18: kroki w pokoju nazywaja brakujacy punkt, zamkniete drzwi 18/42 mowia, czego brakuje (bramka `pkg_0242`); odbior nieudowodniony (H-058) |
+| R-058 | OTWARTE | Dialogi i fabula tylko po polsku; EN tlumaczy powloke. Premiera poza rynkiem PL wymaga tlumaczenia ~wszystkich linii i ponownych pomiarow pudla CRT. |
+| R-059 | OTWARTE | Repozytorium sledzi `.godot/`, `reports/` i historyczne binaria Godot 4.6.3 (Windows); eksport je wyklucza, porzadki wymagaja decyzji wlasciciela (dowody historyczne). |
+| R-060 | OTWARTE | Profil tego pakietu: Linux, Dummy audio, Xvfb. Brak pomiaru na Windows/WASAPI, fizycznym padzie i DPI docelowym. |
+| R-061 | NISKIE | W progu drzwi skrzydlo rysowane nad graczem czesciowo zaslania Lene (warstwa progu z4). |
+| H-058 | HIPOTEZA | Legendy stron (←/→) i komunikaty krokow wystarcza nowej osobie do przejscia 17 ↔ 18 bez podpowiedzi L4. Brak testow z ludzmi (D-012) — nie wolno pisac, ze to potwierdzono. |

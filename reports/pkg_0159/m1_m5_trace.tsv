@@ -1,6 +1,6 @@
 case	elapsed_ms	result	note
-gate_01_repeat	9667	PASS	Nowa gra + dialogue/movement/interact only; 5 fact carriers and exit reached
-gate_05_repeat	26614	PASS	continuous Nowa gra route through Station 01-04; dialogue/movement/interact only
-gate_30_repeat	47025	PASS	continuous Nowa gra route through Station 01-08; dialogue/movement/interact only
-leave_branch	9621	PASS	semantic movement + interact; distinct bag state and exit reached
+gate_01_repeat	9678	PASS	Nowa gra + dialogue/movement/interact only; 5 fact carriers and exit reached
+gate_05_repeat	26606	PASS	continuous Nowa gra route through Station 01-04; dialogue/movement/interact only
+gate_30_repeat	47019	PASS	continuous Nowa gra route through Station 01-08; dialogue/movement/interact only
+leave_branch	9623	PASS	semantic movement + interact; distinct bag state and exit reached
 station08_stairs	0	PASS	move_right only; min_y=227.0 final=(475.8,268.9)

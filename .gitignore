@@ -95,3 +95,4 @@ Godot_v4.6.3-stable_win64.exe
 # PKG-0241: vendor is a game character here, not a dependency directory.
 !/assets/characters/vendor/
 !/assets/characters/vendor/*.png
+!/assets/characters/vendor/*.png.import

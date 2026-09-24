@@ -1,22 +1,22 @@
 sample_index	sim_time_s	station_id	player_pos	movement_dir	active_objective	menu_open	result
-1	22.47	station_01	(237.1,268.9)	right	Sprawdzić dziwną lukę w pomiarze przy Linii 4	false	PASS
-2	28.38	station_02	(70.0,269.0)	right	Przejść obejściem serwisowym i sprawdzić czas trasy	false	PASS
-3	36.87	station_02	(570.0,189.4)	up	Przejść obejściem serwisowym i sprawdzić czas trasy	false	PASS
-4	38.78	station_03	(70.0,269.0)	right	Odczytać rozkład jazdy i odpisać Marcie	false	PASS
-5	47.05	station_04	(70.0,269.0)	right	Przejechać wagonem Linii 4 i zabezpieczyć czytnik	false	PASS
-6	55.15	station_05	(60.0,269.0)	right	Dotrzeć ulicą w stronę domu i sprawdzić próbkę	false	PASS
-7	62.95	station_06	(60.0,269.0)	right	Sprawdzić rozkład na kiosku i zapytać sprzedawcę	false	PASS
-8	70.92	station_07	(60.0,269.0)	right	Porównać adres na papierze z domofonem na bazarze	false	PASS
-9	78.97	station_08	(60.0,269.0)	right	Wejść po schodach do mieszkania czternaście	false	PASS
-10	87.80	station_09	(70.0,269.0)	right	Zbadać mieszkanie i sprawdzić drugą filiżankę	false	PASS
-11	95.33	station_10	(70.0,269.0)	right	Porozmawiać z Martą i sprawdzić klucz w zamku	false	PASS
-12	103.65	station_11	(70.0,269.0)	right	Zbadać konsolę UCP i porozmawiać z Wierzbicką	false	PASS
-13	112.00	station_12	(70.0,269.0)	right	Odsłuchać nagranie i spotkać Jakuba w warsztacie	false	PASS
-14	120.37	station_13	(290.0,269.0)	right	Zestawić dokumenty i rozpoznać: To nie jest mój świat	false	PASS
-15	126.10	station_14	(70.0,269.0)	right	Zbadać obwód sekcji i zrozumieć Anchor oraz Yield	false	PASS
-16	132.03	station_15	(70.0,269.0)	right	Nadać impuls kontrolny i sprawdzić odpowiedź miejscowej Leny	false	PASS
-17	138.52	station_16	(88.0,261.0)	right	Przenieść sygnał do analizatora i wybrać mały koszt	false	PASS
-18	144.25	station_17	(60.0,261.0)	right	Odczytać rejestr kosztów i ustalić zakres zgody Jakuba	false	PASS
-19	149.93	station_18	(290.0,261.0)	right	Zestawić trzy prognozy, powiedzieć Marcie prawdę i zatwierdzić metodę	false	PASS
-20	160.87	station_42a	(60.0,261.0)	right	Wykonać wymuszenie powrotu do własnego świata	false	PASS
-21	172.50	station_43	(65.0,253.0)	right	Przeczytać tablicę miejską i zamknąć ewidencję nad Wisłą	false	PASS
+1	22.50	station_01	(237.1,268.9)	right	Sprawdzić dziwną lukę w pomiarze przy Linii 4	false	PASS
+2	28.52	station_02	(70.0,269.0)	right	Przejść obejściem serwisowym i sprawdzić czas trasy	false	PASS
+3	39.10	station02	(570.0,188.1)	up	Dotrzeć do wyjścia stacji	false	PASS
+4	41.07	station_03	(70.0,269.0)	right	Odczytać rozkład jazdy i odpisać Marcie	false	PASS
+5	49.83	station_04	(70.0,269.0)	right	Przejechać wagonem Linii 4 i zabezpieczyć czytnik	false	PASS
+6	58.65	station_05	(60.0,269.0)	right	Przejść ulicą w stronę domu	false	PASS
+7	67.17	station_06	(60.0,269.0)	right	Sprawdzić rozkład na kiosku i zapytać sprzedawcę	false	PASS
+8	75.98	station_07	(60.0,269.0)	right	Porównać adres na papierze z domofonem na bazarze	false	PASS
+9	84.73	station_08	(60.0,269.0)	right	Wejść po schodach do mieszkania czternaście	false	PASS
+10	98.97	station_09	(70.0,269.0)	right	Zbadać mieszkanie i sprawdzić drugą filiżankę	false	PASS
+11	107.57	station_10	(70.0,269.0)	right	Porozmawiać z Martą i sprawdzić klucz w zamku	false	PASS
+12	118.93	station_11	(70.0,269.0)	right	Zbadać konsolę UCP i porozmawiać z Wierzbicką	false	PASS
+13	128.07	station_12	(70.0,269.0)	right	Odsłuchać nagranie i spotkać Jakuba w warsztacie	false	PASS
+14	137.42	station_13	(290.0,269.0)	right	Zestawić dokumenty i rozpoznać: To nie jest mój świat	false	PASS
+15	153.77	station_14	(70.0,269.0)	right	Zbadać obwód sekcji i zrozumieć Anchor oraz Yield	false	PASS
+16	178.75	station_15	(70.0,269.0)	right	Nadać impuls kontrolny i sprawdzić odpowiedź miejscowej Leny	false	PASS
+17	203.22	station_16	(88.0,261.0)	right	Przenieść sygnał do analizatora i wybrać mały koszt	false	PASS
+18	212.05	station_17	(60.0,261.0)	right	Odczytać rejestr kosztów i ustalić zakres zgody Jakuba	false	PASS
+19	221.32	station_18	(290.0,261.0)	right	Zestawić trzy prognozy, powiedzieć Marcie prawdę i zatwierdzić metodę	false	PASS
+20	249.15	station_42a	(60.0,279.0)	right	Wykonać wymuszenie powrotu do własnego świata	false	PASS
+21	265.13	station_43	(65.0,253.0)	right	Przeczytać tablicę miejską i zamknąć ewidencję nad Wisłą	false	PASS

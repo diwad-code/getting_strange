@@ -1,3 +1,3 @@
 case	sim_seconds	wall_ms	result	note
-gate_intro_first_run	25.10	26037	PASS	Nowa gra -> layer A -> forced measurement; 5/5 carriers, concept order intact
+gate_intro_first_run	25.00	25540	PASS	Nowa gra -> layer A -> forced measurement; 5/5 carriers, concept order intact
 gate_intro_reduced_motion	17.98	0	PASS	reduced motion keeps 5/5 carriers

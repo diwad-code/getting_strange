@@ -1,4 +1,36 @@
-# AKTUALNY HANDOFF — PKG-0241 / 2026-09-22
+# AKTUALNY HANDOFF — PKG-0242 / 2026-09-24
+
+Pracuj na galezi `claude/vigilant-brahmagupta-eq594t` (albo na jej PR, jesli wlasciciel go otworzy).
+Najpierw odczytaj HEAD i diff wobec `ea61916`, potem `docs/audits/PKG_0242_REPORT.md`,
+`docs/CURRENT_STATE.md` (blok PKG-0242) i decyzje D-252..D-254.
+Nie powtarzaj R1/R2: stare bramki sa przepiete (tabela §4 raportu), 129/129 PASS w izolacji.
+
+CEL SESJI (mega-pakiet, nie mikrozadania):
+1. Profil Windows wlasciciela: `pwsh -NoProfile -File .\tools\verify.ps1` (WASAPI) i porownanie
+   z wynikiem Linux/Dummy z SESSION_LOG PKG-0242; kazda roznica = reprodukcja i przyczyna.
+2. R3 ciaglosc grafiki (kostium Leny, detale winiet, Lena zaslonieta skrzydlem drzwi — R-061),
+   z kadrami `tools/capture_pkg_0241.gd` i `tools/capture_pkg_0242.gd` przed/po.
+3. R4 sprzet: fizyczny pad, audio, DPI, pomiar klatki na docelowym PC (R-060).
+4. Decyzje wlasciciela do przygotowania (nie podejmowac za niego): tlumaczenie dialogow EN
+   (R-058), porzadki repo `.godot/`, `reports/`, binaria 4.6.3 (R-059), PRODUCT GO.
+
+SRODOWISKO I BASELINE: Godot 4.7.x, 640x360, fizyka 60 Hz, semantyczny InputMap.
+Baseline: `tools/verify.ps1` — 131 wywolan / 130 skryptow / 129 testow; helpery 0212: 4.
+Linux: `pwsh -NoProfile -File tools/verify.ps1 -AudioDriver Dummy` (Dummy nie certyfikuje dzwieku).
+Seed stanu dla bramek po 16: `tests/support/campaign_chain.gd` — nie pisz recznych faktow zgody.
+
+KRYTERIA AKCEPTACJI: `pkg_0242` i `pkg_0241` zielone; M1 `pkg_0177` przechodzi A, B i C wejsciem;
+zadna asercja nie znika bez kontraktu o tym samym celu (D-252); tresc PKG-0239 nietknieta bez
+dyspozycji wlasciciela; zero nowych przeszkod zrecznosciowych (D-099); zero prac webowych (D-098).
+
+KONIEC PAKIETU JEST OBOWIAZKOWY: testy i dowody, CURRENT_STATE, SESSION_LOG, NEXT_SESSION_PROMPT,
+DECISION_LOG/RISKS przy zmianie, snapshot `tools/snapshot.ps1 -Package PKG-NNNN`, commit i push
+na galaz sesji. Bez PRODUCT GO, eksportu i `.exe` (D-168) bez jawnej dyspozycji wlasciciela.
+
+---
+Nizej zachowany poprzedni handoff PKG-0241 (historia).
+
+# HANDOFF PKG-0241 / 2026-09-22 (historia)
 
 Pracuj na `fix/art-ux-audit-0241`, najpierw odczytaj jej aktualny HEAD i diff wobec main.
 Przeczytaj `docs/audits/PKG_0241_REPORT.md` i `PKG_0241_IMPLEMENTATION_PLAN.md`.

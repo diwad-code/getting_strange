@@ -1,6 +1,14 @@
 # Indeks dokumentacji
 
-## Biezacy pakiet — 2026-09-22 / PKG-0241
+## Biezacy pakiet — 2026-09-24 / PKG-0242
+
+Najpierw [raport gotowosci do premiery](audits/PKG_0242_REPORT.md) (ukonczalnosc wejsciem,
+priorytet naciśnięcia, powloka wydania, rozliczenie 39 bramek), potem CURRENT_STATE
+i NEXT_SESSION_PROMPT. Narzedzie kadrow: `tools/capture_pkg_0242.gd` (Xvfb, kadry poza repo).
+Wsparcie bramek: `tests/support/campaign_chain.gd` (prawdziwy lancuch 17 ↔ 18),
+`tests/support/release_surface_contract.gd`. Nie PRODUCT GO; D-168 obowiazuje.
+
+## Poprzedni pakiet — 2026-09-22 / PKG-0241
 
 Najpierw [raport audytu grafiki, animacji i UX](audits/PKG_0241_REPORT.md),
 [plan audytu](audits/PKG_0241_AUDIT_PLAN.md),

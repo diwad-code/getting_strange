@@ -315,3 +315,37 @@ historyczne; nie usuwa sie jego zapisu, lecz nie wolno przedstawiać go jako obe
 Dozwolona osobna galaz i PR, bez force-push/main merge/release. Zachowano Godot-only,
 640x360 i fizyke 60 Hz. Naprawy W1–W4 wedlug raportu PKG-0241; zadne nowe testy nie nadaja
 PRODUCT GO. W5 pozostaje z otwarta bramka calosciowa. D-168 nie zostaje uchylone.
+
+## D-252 — 2026-09-24 / PKG-0242: przepinanie bramek po PKG-0239
+
+ACCEPTED (Lead Programmer, w ramach zlecenia wlasciciela z 2026-09-24: gotowosc do premiery).
+Tresc PKG-0239 (lancuch zgody 17 → 18 → 17 → 18, teksty 13–18/42/43) jest nadrzedna wobec
+starszych pinow. Bramka, ktora opisuje stan nieosiagalny dla gracza po PKG-0239 (reczny seed
+`method_committed` bez odpowiedzi Jakuba, zgoda `refused` z przejsciem wzajemnym, zamkniecie 42B
+przed odpowiedzia miejscowej), zostaje przepieta na stan osiagalny przez prawdziwe sceny
+(`tests/support/campaign_chain.gd`, zapis z rozgrywki wejsciem 01–16) i na tekst wlasciciela,
+z ta sama intencja asercji. Tam, gdzie wlasciciel swiadomie odwrocil stary pin (Wierzbicka jako
+automat recytujacy „Stan:”, zacieranie autorstwa „ktos przerwal”), pin pilnuje reguly wlasciciela.
+Pin „projekt bez gita” (D-016) zastepuje D-251: wersjonowane drzewo nie moze sledzic `dist/`.
+Zadnej asercji nie usunieto bez kontraktu o tym samym celu; tabela w `docs/audits/PKG_0242_REPORT.md` §4.
+
+## D-253 — 2026-09-24 / PKG-0242: kto dostaje naciśnięcie i co mowia zamkniete drzwi
+
+ACCEPTED. (1) Z kilku punktow odczytu w zasiegu naciśnięcie dostaje najblizszy
+(`InteractionFocus`). (2) Otwarte wyjscie (D-227) ustepuje punktowi odczytu, ktory ma jeszcze
+cos do zrobienia (D-228: MRP > Threshold; `is_point_actionable`, domyslnie `not _is_resolved`);
+kazde wyjscie zachowuje odcinek wolny od punktow. (3) Strona wyboru 16/17/18 to pas ≥ 30 px
+(zasiegi 56/56/72 px, wlasna kopia ksztaltu kolizji w kazdym punkcie). (4) Wyjscie, ktorego stacja
+jeszcze nie moze uzyc, odmawia przed animacja i Lena mowi, czego brakuje (`forward_block_line`);
+sciezka testowa `complete_from_test` (instant) zostaje bez zmian. (5) Punkt nacisniety przed
+poprzednikiem w tym samym pokoju nazywa ten poprzednik; ogolna linia „wczesniejsze zrodlo”
+zostaje tylko dla zrodel spod innych adresow. Brak nowych przeszkod i faktow fabularnych (D-099).
+
+## D-254 — 2026-09-24 / PKG-0242: powloka wydania
+
+ACCEPTED. Tryb testowy i status „ODKRYTE / TRYB TESTOWY” istnieja tylko w powloce deweloperskiej
+(build debug bez `GS_RELEASE_SHELL=1`); wydanie pokazuje „ODWIEDZONE ADRESY: n/20”. Menu glowne
+ma „TWORCY I LICENCJE”: prawa gry, licencja MIT Godota, komponenty i pelne teksty licencji
+czytane z dzialajacego silnika. Stacja 43 nie niesie juz manifestu licencji w swiecie gry
+(tablica ogloszen + skrot tworcow z odeslaniem do menu). Wersja z `application/config/version`.
+Nie jest to wydanie: D-168 obowiazuje, eksport i `.exe` nadal zablokowane do PRODUCT GO.

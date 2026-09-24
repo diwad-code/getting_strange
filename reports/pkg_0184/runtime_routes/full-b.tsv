@@ -1,0 +1,21 @@
+station_id	sim_seconds	wall_ms	result	note
+station_01	28.15	22568	PASS	Cold open layer B + sample secured + Marta message read + ThresholdZone entry
+station_02	40.73	11827	PASS	Player-verb traversal completed
+station_03	49.50	8094	PASS	Player-verb traversal completed
+station_04	58.33	8066	PASS	Player-verb traversal completed
+station_05	66.82	7721	PASS	Player-verb traversal completed
+station_06	75.67	7839	PASS	Player-verb traversal completed
+station_07	84.43	8018	PASS	Player-verb traversal completed
+station_08	98.58	13325	PASS	Player-verb traversal completed
+station_09	107.23	7659	PASS	Player-verb traversal completed
+station_10	118.60	10072	PASS	Player-verb traversal completed
+station_11	127.73	7918	PASS	Player-verb traversal completed
+station_12	137.07	7993	PASS	Player-verb traversal completed
+station_13	153.32	13574	PASS	Player-verb traversal completed
+station_14	178.48	24240	PASS	Player-verb traversal completed
+station_15	202.88	21242	PASS	Player-verb traversal completed
+station_16	211.73	7652	PASS	Player-verb traversal completed
+station_17	221.07	8077	PASS	Player-verb traversal completed
+station_18	249.77	25711	PASS	Player-verb traversal completed
+station_42b	269.58	16751	PASS	Player-verb traversal completed
+station_43	276.42	5933	PASS	Player-verb traversal completed

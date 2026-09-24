@@ -1,5 +1,30 @@
 # Aktualny stan projektu
 
+## Aktualizacja nadrzedna — 2026-09-24 / PKG-0242
+
+Stan po pakiecie gotowosci do premiery na galezi `claude/vigilant-brahmagupta-eq594t`
+(baza `ea61916`, merge PKG-0241). Raport: [PKG_0242_REPORT](audits/PKG_0242_REPORT.md).
+
+- Kampania ukonczalna **wylacznie wejsciem gracza** na zakonczeniach A, B i C
+  (M1 `pkg_0177`: 01 → 18 → 17 → 18 → 42A/B/C → 43); 22 adresy fizycznie przechodnie
+  (nowa bramka `pkg_0242`).
+- Naprawy: cokol 14, arbitraz naciśnięcia (`InteractionFocus`), przewijanie CRT w `_input`,
+  otwory wyjsc na podlodze, legendy wyborow 16/17/18, pasy wyboru 40 px, drzwi ustepuja
+  punktom z niedokonczonym dzialaniem, zamkniete drzwi 18/42 mowia czego brakuje, kroki
+  w pokoju nazywaja poprzednika, blad skryptu 16 przy powrocie, slad 05.
+- Powloka wydania: pauza bez trybu testowego poza buildem deweloperskim, TWÓRCY I LICENCJE
+  z tekstami licencji z silnika, wersja 1.0.0, podpowiedz CRT z przypisanym klawiszem, 43 bez
+  manifestu licencji w swiecie.
+- 39 bramek przepietych na lancuch zgody PKG-0239 i tekst wlasciciela z zachowaniem intencji
+  (D-252); licznik 0207: 131/130/129/129; helper 0212: 4.
+- Weryfikacja: izolowane uruchomienia 129/129 bramek PASS; pelna `verify.ps1 -AudioDriver Dummy`
+  (Linux, sekwencyjnie): **PASS, exit 0, 140 sekcji** (`reports/pkg_0242/verify_full_linux_dummy.log`).
+  Nie jest to profil Windows/WASAPI.
+- Nadal: brak PRODUCT GO, D-168 blokuje eksport i `.exe`; dialogi tylko PL (R-058);
+  brak testow z ludzmi, fizycznego pada, audio i DPI (R-060).
+
+**Ponizszy zapis PKG-0241 to historia.**
+
 ## Aktualizacja nadrzedna — 2026-09-22 / PKG-0241
 
 Stan po audycie grafiki, animacji i UX na bazie main `71d937329385368e718b947b43f84fed00324d57`.
