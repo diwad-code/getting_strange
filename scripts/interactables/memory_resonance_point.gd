@@ -483,7 +483,11 @@ func _setup_collision() -> void:
 		add_child(_collision_shape)
 	
 	if _collision_shape.shape is CircleShape2D:
-		_circle_shape = _collision_shape.shape as CircleShape2D
+		# PKG-0242: scenes share one CircleShape2D sub-resource between props;
+		# resizing it in place gave every sibling the radius of whichever
+		# point ran _ready last. Each point sizes its own copy.
+		_circle_shape = (_collision_shape.shape as CircleShape2D).duplicate() as CircleShape2D
+		_collision_shape.shape = _circle_shape
 	else:
 		_circle_shape = CircleShape2D.new()
 		_collision_shape.shape = _circle_shape

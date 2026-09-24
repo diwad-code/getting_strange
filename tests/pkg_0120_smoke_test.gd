@@ -21,6 +21,8 @@ extends SceneTree
 ## 6. Błędna bezpieczna próba jest informacją, nie śmiercią — zostawia fakt i nie usuwa poszlak.
 
 const NarrativeGuidanceService := preload("res://scripts/core/narrative_guidance_service.gd")
+## PKG-0242 (R1): reachable post-16 state and the real 17/18 conversations.
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 
 const STATION_NUMBERS := [14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
 const EARLY_STATION_NUMBERS := [14, 15, 16, 17, 18, 19, 20]
@@ -332,18 +334,18 @@ func _test_station_17() -> void:
 		_expect(false, "station_17.tscn musi istnieć")
 		return
 	var state := root.get_node_or_null("GameStateManager")
-	_reset_with(state, {
-		"p7.work_history_and_record.institution_trial_result": "small_cost_and_home_echo_confirmed",
-		"p9.mechanics.small_cost.home_echo_verified": true,
-		"mechanic_cost_observed": true,
-	})
+	if state:
+		CampaignChain.seed_before_17(state)
 	var station := packed.instantiate() as Station17
 	root.add_child(station)
 	await process_frame
 	_expect(not station.reject_adaptation_offer(), "Oferta przed odczytem rejestru musi pozostać bezpieczna")
 	_expect(station.read_cost_ledger(), "Rejestr par Linii 4 musi zostać odczytany")
 	_expect(station.reject_adaptation_offer(), "Oferta adaptacji musi zostać odrzucona")
-	_expect(station.record_jakub_consent_refused(), "Odmowa zakresu musi być zapisem jak każda wartość")
+	# PKG-0239: prośba otwiera rozmowę; zakres zapisuje jej zakończenie.
+	_expect(station.record_jakub_consent_refused(), "Prośba o podłączenie musi otworzyć rozmowę")
+	station._on_narrative_dialogue_finished("consent_scope_desk")
+	_expect(station.is_consent_scope_recorded, "Odmowa zakresu musi być zapisem jak każda wartość")
 	if state:
 		_expect(state.decisions.get(&"ucp_cost_ledger_found", false) == true, "Rejestr par Linii 4 musi być kanoniczny")
 		_expect(state.decisions.get(&"jakub_consent_state", "") == "refused", "Stan zgody Jakuba musi być jawny")
@@ -366,18 +368,28 @@ func _test_station_18() -> void:
 		_expect(false, "station_18.tscn musi istnieć")
 		return
 	var state := root.get_node_or_null("GameStateManager")
-	_reset_with(state, {
-		"p7.work_history_and_record.trace": "cost_ledger_and_consent_scope_recorded",
-		"p9.consent_and_cost.cost_ledger_read": true,
-		"p9.consent_and_cost.adaptation_offer": "rejected",
-		"p9.consent_and_cost.jakub_consent_scope": "limited",
-		"jakub_consent_state": "limited",
-	})
+	if state:
+		CampaignChain.seed_before_17(state)
+	_expect(await CampaignChain.record_scope(self, "limited"), "Zakres ograniczony musi zostać zapisany w 17")
 	var station := packed.instantiate() as Station18
 	root.add_child(station)
 	await process_frame
 	_expect(station.compare_forecast_consent_dependencies(), "Trzy prognozy muszą zostać zestawione")
-	_expect(station.disclose_marta_truth_partial(), "Częściowa prawda Marty musi zostać zapisana")
+	_expect(station.disclose_marta_truth_partial(), "Rozmowa o części prawdy musi się otworzyć")
+	station._on_narrative_dialogue_finished("marta_truth_table")
+	_expect(station.is_marta_truth_disclosed, "Częściowa prawda Marty musi zostać zapisana")
+	# PKG-0239: wskazanie → odpowiedź Jakuba w 17 → zatwierdzenie.
+	var player := station.get_node("Player") as Node2D
+	player.global_position.x = (station.get_node("Props/MethodCommitPost") as Node2D).global_position.x
+	await physics_frame
+	_expect(station.choose_method_from_player_side(), "Słupek musi wskazać odzyskanie")
+	station.queue_free()
+	for frame in range(3):
+		await process_frame
+	_expect(await CampaignChain.answer_method(self, "accepted"), "Jakub musi odpowiedzieć na wskazaną metodę")
+	station = packed.instantiate() as Station18
+	root.add_child(station)
+	await process_frame
 	_expect(station.commit_close_equal(), "Metoda musi zostać zatwierdzona po zestawieniu")
 	if state:
 		_expect(state.decisions.get(&"route_hypotheses_mapped", false) == true, "Zestawienie prognoz musi być kanoniczne")

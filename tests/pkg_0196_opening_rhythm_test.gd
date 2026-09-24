@@ -216,7 +216,7 @@ func run() -> void:
 	expect(bool(state.decisions.get(&"home_sample_preserved", false)), "reload must keep the raw sample")
 	await run_05_08(state)
 	var joined_a := "\n".join(delivered)
-	for required in ["Marta poczeka dłużej", "Herbata stygnie", "Przez objazd będę później", "Odwracam czytnik ekranem do dołu", "Próbka jedzie w torbie", "Surowa próbka drgań jest w torbie", "Linia 4 jedzie inaczej", "Zwijam kiosk po tej zmianie", "Kto mieszka pod dwunastką?", "Pan Kowalczyk", "Klucz działa"]:
+	for required in ["Marta poczeka dłużej", "Herbata stygnie", "Do mojego opóźnienia doszedł objazd", "Odwracam czytnik ekranem do dołu", "Próbka jedzie w torbie", "Surowa próbka drgań jest w torbie", "Linia 4 jedzie inaczej", "Zwijam kiosk po tej zmianie", "Kto mieszka pod dwunastką?", "Pan Kowalczyk", "Klucz działa"]:
 		expect(joined_a.contains(required), "run A delivered line: " + required)
 	for removed in ["Będę później o dwanaście minut", "Miałaś wrócić wcześniej. Napisz tylko, czy jedziesz", "Marta czeka. Czytnik odkładam do domu", "Mój klucz wchodzi gładko", "Od lat pod czternastką", "przeniesiono pod 14", "mieszkam pod dwunastką"]:
 		expect(not joined_a.contains(removed), "run A must not serve the trimmed redundancy: " + removed)
@@ -235,7 +235,7 @@ func run() -> void:
 	await run_05_08(state)
 	expect(not bool(state.decisions.get(&"home_sample_preserved", true)), "leave must persist without the sample")
 	var joined_b := "\n".join(delivered)
-	for required in ["Spakowałam sprzęt. Jadę zgodnie z obietnicą", "Tym razem wyszłam z pracy wtedy, kiedy obiecałam", "W torbie spakowany czytnik", "Tyle z pracy na dziś", "Luka została bez drugiego pomiaru"]:
+	for required in ["Jeden odczyt. Spakowałam sprzęt i wychodzę", "Wyszłam po jednym odczycie. Teraz czekam przez objazd", "W torbie spakowany czytnik", "Tyle z pracy na dziś", "Luka została bez drugiego pomiaru"]:
 		expect(joined_b.contains(required), "run B delivered line: " + required)
 	expect(not joined_b.contains("Surowa próbka drgań jest w torbie"), "leave branch must never claim the raw carrier")
 	expect(not joined_b.contains("Próbka jedzie w torbie"), "leave branch must never claim the carried sample")
@@ -248,9 +248,11 @@ func run() -> void:
 	expect(not state.decisions.has(&"p7.sample_and_promise.route_time_confirmed"), "failed attempt must grant no route time")
 	await close_station(bare02)
 	var bare05 := await open_station(5)
-	await act(bare05, "check_sample_case")
-	expect(String(state.decisions.get(&"p7.return_under_control.safe_trial_feedback", "")) == "street_check_required", "sample case without the street check must stay informational")
-	expect(not state.decisions.has(&"p7.return_under_control.reader_secured"), "failed attempt must grant no secured reader")
+	# PKG-0242 (R1): PKG-0239 made the street and the bag optional reads;
+	# crossing without the bag check must not invent a secured reader.
+	await act(bare05, "cross_street_towards_home")
+	expect(String(state.decisions.get(&"p7.return_under_control.trace", "")) == "ordinary_street_crossed", "crossing without the bag check must leave the plain crossing trace")
+	expect(not state.decisions.has(&"p7.return_under_control.reader_secured"), "crossing without the bag check must grant no secured reader")
 	await close_station(bare05)
 	# Text scales through the same live action presentation.
 	for scale_value in [0.85, 1.0, 1.15]:

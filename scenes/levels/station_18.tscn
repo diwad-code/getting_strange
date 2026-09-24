@@ -170,7 +170,7 @@ script = ExtResource("2_resonance")
 resonance_id = "marta_truth_table"
 prop_title = "Witryna Marty"
 prop_subtitle = "Prawda, część albo wstrzymanie"
-interaction_radius = 44.0
+interaction_radius = 56.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/MartaTruthTable"]
 shape = SubResource("Circle_prop_medium")
@@ -182,7 +182,7 @@ resonance_id = "method_commit_post"
 prop_type = 16
 prop_title = "Słupek zatwierdzenia metody"
 prop_subtitle = "Jedna droga po zestawieniu kosztów"
-interaction_radius = 44.0
+interaction_radius = 72.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/MethodCommitPost"]
 shape = SubResource("Circle_prop_medium")

@@ -81,6 +81,9 @@ func _seed_donor_facts(state: Node) -> void:
 	state.record_decision(DONOR_HOME_ECHO_FACT, true)
 	state.record_decision(DONOR_MECHANIC_COST_FACT, true)
 	state.record_decision(DONOR_HOME_ECHO_CANONICAL, true)
+	# PKG-0242 (R1): 17 follows the recognition in 13; PKG-0239 gates the
+	# consent conversation behind it (knowledge gate D-211).
+	state.record_decision(&"world_recognized", true)
 
 
 func _open_station(state: Node, seed_donor: bool) -> Station17:
@@ -173,6 +176,9 @@ func _test_granted_scope_path(state: Node) -> void:
 	_expect(state.decisions.get(OFFER_FACT, "") == OFFER_REJECTED, "Odrzucona oferta musi zostawić fakt informacyjny")
 	_expect(not station.reject_adaptation_offer(), "Odrzuconej oferty nie wolno nadpisać")
 	_expect(station.record_jakub_consent_granted(), "Pełna zgoda musi być wykonalna")
+	# PKG-0239: prośba otwiera rozmowę; zakres zapisuje jej zakończenie.
+	_expect(not state.decisions.has(SCOPE_FACT), "Sama prośba nie może zapisać zakresu")
+	station._on_narrative_dialogue_finished("consent_scope_desk")
 	_expect(state.decisions.get(SCOPE_FACT, "") == SCOPE_GRANTED, "Namespaced zakres zgody musi być jawny")
 	_expect(state.decisions.get(CANONICAL_SCOPE_FACT, "") == SCOPE_GRANTED, "Kanoniczny jakub_consent_state musi przechować pełną zgodę")
 	_expect(state.decisions.get(TRACE_FACT, "") == "consent_scope_" + SCOPE_GRANTED, "Lokalny ślad zgody musi wskazywać zakres")
@@ -180,6 +186,10 @@ func _test_granted_scope_path(state: Node) -> void:
 	_expect(station.is_exit_unlocked, "Pełna ścieżka musi odblokować wyjście")
 	_expect(not station.is_level_completed, "Odblokowanie wyjścia nie może samo kończyć sceny")
 	_expect(not station.record_jakub_consent_limited(), "Zakresu zgody nie wolno nadpisać")
+	_expect(state.decisions.get(SCOPE_FACT, "") == SCOPE_GRANTED, "Nieudana ponowna prośba nie zmienia zakresu")
+	# The refusal line Jakub gives is queued like any conversation; the
+	# presenter closes it before the threshold accepts Lena.
+	station._on_narrative_dialogue_finished("consent_scope_desk")
 	var player := station.get_node_or_null("Player") as PrototypePlayer
 	if player != null:
 		_ThresholdBinder.install(station)
@@ -195,7 +205,10 @@ func _test_limited_scope_path(state: Node) -> void:
 	if station == null:
 		return
 	_expect(station.read_cost_ledger(), "Ścieżka ograniczonej zgody musi czytać rejestr")
+	_expect(not station.record_jakub_consent_limited(), "Prośba przed wysłuchaniem oferty musi pozostać bezpieczna (PKG-0239)")
+	_expect(station.reject_adaptation_offer(), "Ścieżka ograniczonej zgody musi odrzucić ofertę")
 	_expect(station.record_jakub_consent_limited(), "Ograniczona zgoda musi być wykonalna")
+	station._on_narrative_dialogue_finished("consent_scope_desk")
 	_expect(state.decisions.get(SCOPE_FACT, "") == SCOPE_LIMITED, "Ograniczona zgoda musi mieć własny zakres")
 	_expect(state.decisions.get(CANONICAL_SCOPE_FACT, "") == SCOPE_LIMITED, "Kanoniczny stan zgody musi przechować zakres ograniczony")
 	_expect(station.is_exit_unlocked, "Ograniczona zgoda musi odblokować wyjście")
@@ -212,7 +225,9 @@ func _test_refused_scope_path(state: Node) -> void:
 	if station == null:
 		return
 	_expect(station.read_cost_ledger(), "Ścieżka odmowy musi czytać rejestr")
+	_expect(station.reject_adaptation_offer(), "Ścieżka odmowy musi odrzucić ofertę")
 	_expect(station.record_jakub_consent_refused(), "Odmowa zakresu musi być wykonalna")
+	station._on_narrative_dialogue_finished("consent_scope_desk")
 	_expect(state.decisions.get(SCOPE_FACT, "") == SCOPE_REFUSED, "Odmowa musi być zapisana jako jawny zakres")
 	_expect(state.decisions.get(CANONICAL_SCOPE_FACT, "") == SCOPE_REFUSED, "Kanoniczny stan zgody musi przechować odmowę")
 	_expect(station.is_exit_unlocked, "Odmowa nie może softlockować wyjścia")

@@ -12,6 +12,16 @@ extends Node2D
 ## Opis prognozy nie jest zgodą na wykonanie. Z konkretną propozycją wraca
 ## do istniejącego łącza z Jakubem. Odmowa nie znika przy ponownym wejściu.
 
+## PRZESZKODA — dlaczego to tu jest: Marta czeka na ulicy z 05, a Lena przynosi
+## jej odpisy z hali i prognozy we własnym czytniku; tablica, okno i słupek
+## stoją tam, gdzie przed ruchem dalej trzeba pokazać ryzyko i usłyszeć odpowiedzi.
+## PRZESZKODA — czego wymaga od Leny: zestawienia trzech prognoz, przekazania
+## Marcie wybranego zakresu zapisu, wskazania jednej metody, powrotu do łącza
+## w 17 po odpowiedź Jakuba na tę metodę i drugiego podejścia do słupka.
+## PRZESZKODA — koszt porażki: samo wskazanie niczego nie zatwierdza; metoda bez
+## wymaganych odpowiedzi zostawia nazwaną lukę i kieruje z powrotem do 17, a próg
+## finału pozostaje zamknięty do zatwierdzenia (PKG-0239, restytucja PKG-0242).
+
 const NarrativeRules := preload("res://scripts/levels/narrative_repair_rules.gd")
 
 const NarrativeGuidanceService := preload("res://scripts/core/narrative_guidance_service.gd")
@@ -82,6 +92,8 @@ var committed_method: StringName = &""
 # PKG-0230 (P0-2, S-03): metoda wskazana pierwszym podejsciem do slupka.
 # Zatwierdza dopiero drugie podejscie do TEJ SAMEJ metody.
 var named_method: StringName = &""
+## PKG-0242 (UX): method whose risk table was already read in this visit.
+var reviewed_method := ""
 var jakub_consent_state := ""
 var forecasts: Dictionary = {}
 var is_exit_unlocked := false
@@ -109,6 +121,11 @@ func _ready() -> void:
 	_restore_commitment_from_decisions()
 	_refresh_commit_table()
 	_refresh_choice_legend()
+	# PKG-0242 (R1): 18 is visited twice (proposal, then commit after 17). A
+	# fresh instance must not offer the thought that the forecasts were
+	# never compared when the decisions already say they were.
+	if are_forecasts_compared and guidance_service:
+		guidance_service.close_hypothesis(&"single_route_sufficient")
 	if airlock_zone != null and not airlock_zone.body_entered.is_connected(_on_airlock_body_entered):
 		airlock_zone.body_entered.connect(_on_airlock_body_entered)
 	queue_redraw()
@@ -176,6 +193,13 @@ func _on_prop_resonance_triggered(id: String, prop_type: int, prop: MemoryResona
 
 func compare_forecast_consent_dependencies() -> bool:
 	if _snapshot_taken() or _any_finale_executed():
+		return false
+	# PKG-0242 (R1): writer exactly once (D-244). A second look at the board
+	# refreshes the table from the current answers but records nothing new.
+	if are_forecasts_compared:
+		forecasts = _build_forecasts(_read_jakub_consent())
+		_refresh_commit_table()
+		queue_redraw()
 		return false
 	if not _has_donor_context():
 		_record_feedback(&"consent_scope_required")
@@ -355,6 +379,12 @@ func _has_pending_narrative_dialogue(id: String) -> bool:
 		or (id == "method_commit_post" and not named_method.is_empty() and not is_method_committed)
 
 func _on_narrative_dialogue_finished(id: String) -> void:
+	if id == "method_commit_post":
+		# PKG-0242 (UX): the risk table for this method has been read in this
+		# visit; a repeated press gets only what is still missing.
+		if not is_method_committed:
+			reviewed_method = String(named_method)
+		return
 	if id != "marta_truth_table" or pending_marta_pairs.is_empty():
 		return
 	var decisions := _decisions()

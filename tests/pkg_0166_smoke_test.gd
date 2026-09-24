@@ -11,6 +11,8 @@ extends SceneTree
 const MemoryResonancePoint := preload("res://scripts/interactables/memory_resonance_point.gd")
 const PrototypePlayer := preload("res://scripts/player/prototype_player.gd")
 const _ThresholdBinder := preload("res://scripts/environment/threshold_binder.gd")
+## PKG-0242 (R1): reachable post-16 state and the real 17/18 conversations.
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 
 const DONOR_TRACE_FACT := &"p7.work_history_and_record.trace"
 const DONOR_LEDGER_FACT := &"p9.consent_and_cost.cost_ledger_read"
@@ -81,17 +83,15 @@ func _run() -> void:
 
 
 func _seed_donor_facts(state: Node, scope: String) -> void:
-	state.reset_campaign(true)
-	state.record_decision(DONOR_TRACE_FACT, DONOR_TRACE_VALUE)
-	state.record_decision(DONOR_LEDGER_FACT, true)
-	state.record_decision(DONOR_OFFER_FACT, DONOR_OFFER_VALUE)
-	state.record_decision(DONOR_SCOPE_FACT, scope)
-	state.record_decision(DONOR_CANONICAL_SCOPE_FACT, scope)
+	# PKG-0242 (R1): the donor is a real 17 scope conversation on the state of
+	# an input-only 01–16 run, not hand-written scope keys.
+	CampaignChain.seed_before_17(state)
+	_expect(await CampaignChain.record_scope(self, scope), "Donor 17 musi zapisać zakres %s" % scope)
 
 
 func _open_station(state: Node, seed_donor: bool, scope: String = SCOPE_GRANTED) -> Station18:
 	if seed_donor:
-		_seed_donor_facts(state, scope)
+		await _seed_donor_facts(state, scope)
 	else:
 		state.reset_campaign(true)
 	var packed := load("res://scenes/levels/station_18.tscn") as PackedScene
@@ -102,6 +102,16 @@ func _open_station(state: Node, seed_donor: bool, scope: String = SCOPE_GRANTED)
 	_expect(station != null, "Scena station_18 musi instantować jako Station18")
 	if station == null:
 		return null
+	root.add_child(station)
+	await process_frame
+	await physics_frame
+	return station
+
+
+## Second visit to 18 on the same campaign state (no reset).
+func _reopen_station() -> Station18:
+	var packed := load("res://scenes/levels/station_18.tscn") as PackedScene
+	var station := packed.instantiate() as Station18
 	root.add_child(station)
 	await process_frame
 	await physics_frame
@@ -153,6 +163,22 @@ func _test_donor_entry_requirement(state: Node) -> void:
 	await _close_station(station)
 
 
+## PKG-0242 (R1): helpers for the PKG-0239 sequence — the post names a
+## method, Jakub answers it at 17, a fresh 18 commits it.
+func _point_at_post(station: Station18, method: String) -> bool:
+	var post := station.get_node("Props/MethodCommitPost") as Node2D
+	var player := station.get_node("Player") as Node2D
+	player.global_position.x = post.global_position.x + float(CampaignChain.METHOD_X_OFFSET.get(method, 0.0))
+	await physics_frame
+	return station.choose_method_from_player_side()
+
+
+func _disclose(station: Station18, truth: String) -> bool:
+	var ok := bool(station.call("disclose_marta_truth_" + truth))
+	station._on_narrative_dialogue_finished("marta_truth_table")
+	return ok
+
+
 func _test_safe_rejections(state: Node) -> void:
 	var station := await _open_station(state, true, SCOPE_LIMITED)
 	if station == null:
@@ -160,20 +186,31 @@ func _test_safe_rejections(state: Node) -> void:
 	_expect(not station.disclose_marta_truth_partial(), "Prawda Marty przed prognozami musi być bezpieczna")
 	_expect(state.decisions.get(FEEDBACK_FACT, "") == "forecast_comparison_required", "Wczesna prawda Marty musi dać informację o braku prognoz")
 	_expect(not state.decisions.has(MARTA_FACT), "Wczesna prawda nie może zapisać stanu Marty")
-	# PKG-0230 (P0-1): commit bez zestawienia/prawdy nie przechodzi —
-	# zostawia istniejacy feedback i mowi luka, bez commita (S-02).
-	_expect(not station.commit_force_home(), "Zatwierdzenie bez zestawienia nie przechodzi")
-	_expect(state.decisions.get(FEEDBACK_FACT, "") == "forecast_and_consent_inventory_required", "Commit bez zestawienia zostawia luke inwentarza")
+	# PKG-0230 (P0-1): słupek przed zestawieniem nie wskazuje ani nie
+	# zatwierdza — zostawia informację (S-02). PKG-0239: bezpośredni commit bez
+	# wskazania metody też nie przechodzi.
+	_expect(not await _point_at_post(station, METHOD_FORCE_HOME), "Słupek przed zestawieniem nie przechodzi")
+	_expect(state.decisions.get(FEEDBACK_FACT, "") == "forecast_comparison_required", "Słupek bez zestawienia zostawia luke inwentarza")
+	_expect(not station.commit_force_home(), "Zatwierdzenie bez wskazania nie przechodzi")
+	_expect(state.decisions.get(FEEDBACK_FACT, "") == "method_proposal_required", "Commit bez wskazania zostawia luke propozycji")
 	_expect(not state.decisions.has(CANONICAL_METHOD_FACT), "Kanoniczny method_committed nie moze powstac bez zestawienia")
 	_expect(station.compare_forecast_consent_dependencies(), "Zestawienie trzech prognoz po donor faktach musi przejść")
 	_expect(state.decisions.get(FORECAST_FACT, false) == true, "Prognozy muszą być zapisane namespaced")
 	_expect(state.decisions.get(CANONICAL_MAPPED_FACT, false) == true, "Kanoniczny route_hypotheses_mapped powstaje po zestawieniu")
 	_expect(not station.compare_forecast_consent_dependencies(), "Prognoz nie wolno zestawiać dwukrotnie")
 	_expect(station.is_exit_unlocked, "Samo zestawienie prognoz nie może otworzyć wyjścia")
-	_expect(station.disclose_marta_truth_partial(), "Prawda po zestawieniu wychodzi")
+	_expect(_disclose(station, "partial"), "Prawda po zestawieniu wychodzi")
 	# PKG-0230 (P0-1): limited nie domyka force_home — luka zamiast commita.
-	_expect(not station.commit_force_home(), "Ograniczona zgoda blokuje force_home")
+	_expect(await _point_at_post(station, METHOD_FORCE_HOME), "Słupek musi wskazać force_home")
+	_expect(not await _point_at_post(station, METHOD_FORCE_HOME), "Ograniczona zgoda blokuje force_home")
 	_expect(state.decisions.get(FEEDBACK_FACT, "") == "jakub_consent_missing", "Blokada zostawia luke zgody")
+	_expect(not state.decisions.has(CANONICAL_METHOD_FACT), "Zablokowana metoda nie zapisuje commita")
+	_expect(await _point_at_post(station, METHOD_CLOSE_EQUAL), "Słupek musi wskazać close_equal")
+	await _close_station(station)
+	_expect(await CampaignChain.answer_method(self, "accepted"), "Jakub odpowiada na close_equal w zakresie ograniczonym")
+	station = await _reopen_station()
+	if station == null:
+		return
 	_expect(station.commit_close_equal(), "Ograniczona zgoda pozwala close_equal")
 	_expect(state.decisions.get(METHOD_FACT, "") == METHOD_CLOSE_EQUAL, "Namespaced metoda musi być close_equal")
 	_expect(not station.commit_close_equal(), "Zatwierdzonej metody nie wolno nadpisać")
@@ -185,10 +222,16 @@ func _test_granted_commit_path(state: Node) -> void:
 	if station == null:
 		return
 	_expect(station.compare_forecast_consent_dependencies(), "Pełna ścieżka musi zacząć od zestawienia trzech prognoz")
-	_expect(station.disclose_marta_truth_full(), "Pełna prawda Marty musi być wykonalna")
+	_expect(_disclose(station, "full"), "Pełna prawda Marty musi być wykonalna")
 	_expect(state.decisions.get(MARTA_FACT, "") == MARTA_FULL, "Namespaced stan prawdy Marty musi być jawny")
 	_expect(state.decisions.get(CANONICAL_MARTA_FACT, "") == MARTA_FULL, "Kanoniczny marta_truth_state musi przechować pełną prawdę")
 	_expect(not station.disclose_marta_truth_withheld(), "Stanu prawdy Marty nie wolno nadpisać")
+	_expect(await _point_at_post(station, METHOD_FORCE_HOME), "Słupek musi wskazać force_home")
+	await _close_station(station)
+	_expect(await CampaignChain.answer_method(self, "accepted"), "Jakub odpowiada na force_home w pełnym zakresie")
+	station = await _reopen_station()
+	if station == null:
+		return
 	_expect(station.commit_force_home(), "Zatwierdzenie metody po zestawieniu i zgodach musi przejść")
 	_expect(state.decisions.get(METHOD_FACT, "") == METHOD_FORCE_HOME, "Namespaced metoda musi być force_home")
 	_expect(state.decisions.get(CANONICAL_METHOD_FACT, "") == METHOD_FORCE_HOME, "Kanoniczny method_committed musi przechować force_home")
@@ -217,8 +260,14 @@ func _test_limited_commit_path(state: Node) -> void:
 		var body := JSON.stringify(forecasts)
 		_expect(body.contains(METHOD_FORCE_HOME) and body.contains(METHOD_CLOSE_EQUAL) and body.contains(METHOD_MUTUAL), "Słownik musi zawierać trzy kanoniczne metody")
 		_expect(body.contains("jakub_consent_missing") or body.contains("gap"), "Ograniczona zgoda musi zostawić jawny brak w prognozach")
-	_expect(station.disclose_marta_truth_partial(), "Częściowa prawda Marty musi być wykonalna")
+	_expect(_disclose(station, "partial"), "Częściowa prawda Marty musi być wykonalna")
 	_expect(state.decisions.get(CANONICAL_MARTA_FACT, "") == MARTA_PARTIAL, "Częściowa prawda musi mieć własny stan")
+	_expect(await _point_at_post(station, METHOD_CLOSE_EQUAL), "Słupek musi wskazać close_equal")
+	await _close_station(station)
+	_expect(await CampaignChain.answer_method(self, "accepted"), "Jakub odpowiada na close_equal")
+	station = await _reopen_station()
+	if station == null:
+		return
 	_expect(station.commit_close_equal(), "Ograniczona zgoda musi pozwalać zatwierdzić dostępną metodę")
 	_expect(state.decisions.get(CANONICAL_METHOD_FACT, "") == METHOD_CLOSE_EQUAL, "Kanoniczna metoda przy ograniczonej zgodzie to close_equal_recover_local")
 	_expect(station.is_exit_unlocked, "Ograniczona zgoda nie może softlockować wyjścia")
@@ -235,11 +284,12 @@ func _test_refused_and_withheld_path(state: Node) -> void:
 	if station == null:
 		return
 	_expect(station.compare_forecast_consent_dependencies(), "Ścieżka odmowy musi zestawić prognozy")
-	_expect(station.disclose_marta_truth_withheld(), "Wstrzymanie prawdy Marty musi być wykonalne i kontynuowalne")
+	_expect(_disclose(station, "withheld"), "Wstrzymanie prawdy Marty musi być wykonalne i kontynuowalne")
 	_expect(state.decisions.get(CANONICAL_MARTA_FACT, "") == MARTA_WITHHELD, "Kanoniczny stan prawdy musi przechować wstrzymanie")
-	# PKG-0230 (P0-1, S-02): odmowa Jakuba zamyka wszystkie trzy metody.
-	# Wyjscie ze stanu: powrot do 17 i renegocjacja (petla w 0194 run C).
-	_expect(not station.commit_mutual_passage(), "Odmowa Jakuba blokuje zatwierdzenie")
+	# PKG-0230 (P0-1, S-02): odmowa Jakuba zamyka metody wymagające jego
+	# udziału. PKG-0239: jedyna nowa propozycja to sam odczyt do B w 17.
+	_expect(await _point_at_post(station, METHOD_MUTUAL), "Słupek musi wskazać mutual_passage")
+	_expect(not await _point_at_post(station, METHOD_MUTUAL), "Odmowa Jakuba blokuje zatwierdzenie")
 	_expect(state.decisions.get(FEEDBACK_FACT, "") == "jakub_consent_missing", "Blokada zostawia luke zgody")
 	_expect(not state.decisions.has(CANONICAL_METHOD_FACT), "Kanoniczna metoda nie powstaje przy odmowie")
 	_expect(station.is_exit_unlocked, "Blokada commita nie zamyka drogi powrotu do 17")

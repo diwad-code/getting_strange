@@ -11,6 +11,8 @@ extends SceneTree
 const MemoryResonancePoint := preload("res://scripts/interactables/memory_resonance_point.gd")
 const PrototypePlayer := preload("res://scripts/player/prototype_player.gd")
 const _ThresholdBinder := preload("res://scripts/environment/threshold_binder.gd")
+## PKG-0242 (R1): the finale accepts only chains a player can reach (PKG-0239).
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 
 const DONOR_METHOD_FACT := &"p9.method_commitment.method_committed"
 const CANONICAL_METHOD_FACT := &"method_committed"
@@ -82,20 +84,17 @@ func _run() -> void:
 	_finish()
 
 
-func _seed_donor_facts(state: Node, method: String, marta: String, scope: String) -> void:
-	state.reset_campaign(true)
-	state.record_decision(DONOR_METHOD_FACT, method)
-	state.record_decision(CANONICAL_METHOD_FACT, method)
-	state.record_decision(DONOR_MAPPED_FACT, true)
-	state.record_decision(DONOR_MARTA_FACT, marta)
-	state.record_decision(CANONICAL_MARTA_FACT, marta)
-	state.record_decision(DONOR_SCOPE_FACT, scope)
-	state.record_decision(CANONICAL_SCOPE_FACT, scope)
+func _seed_donor_facts(state: Node, method: String, marta: String, scope: String) -> bool:
+	# PKG-0242 (R1): real 17 → 18 → 17 → 18 conversations on the state of an
+	# input-only 01–16 run; hand-written method/truth/scope keys no longer
+	# describe a reachable state after PKG-0239.
+	CampaignChain.seed_before_17(state)
+	return await CampaignChain.commit_chain(self, method, marta, scope)
 
 
 func _open_station(state: Node, seed_donor: bool, method: String = METHOD_CLOSE_EQUAL, marta: String = MARTA_FULL, scope: String = SCOPE_GRANTED) -> Station42B:
 	if seed_donor:
-		_seed_donor_facts(state, method, marta, scope)
+		_expect(await _seed_donor_facts(state, method, marta, scope), "Łańcuch %s/%s/%s musi się zatwierdzić" % [method, marta, scope])
 	else:
 		state.reset_campaign(true)
 	var packed := load("res://scenes/levels/station_42b.tscn") as PackedScene
@@ -163,7 +162,7 @@ func _test_donor_entry_requirement(state: Node) -> void:
 
 
 func _test_wrong_method_rejection(state: Node) -> void:
-	var station := await _open_station(state, true, METHOD_FORCE_HOME, MARTA_PARTIAL, SCOPE_LIMITED)
+	var station := await _open_station(state, true, METHOD_FORCE_HOME, MARTA_PARTIAL, SCOPE_GRANTED)
 	if station == null:
 		return
 	_expect(not station.execute_close_flow(), "Metoda force_home nie może wykonać 42B")
@@ -179,14 +178,18 @@ func _test_full_close_equal_path(state: Node) -> void:
 		return
 	_expect(station.is_exit_unlocked, "Wybrany wariant 42B musi zostawić drogę do 43 otwartą od wejścia")
 	_expect(state.decisions.get(LEGACY_CHAMBER_FACT, false) == true, "Wejście 42B musi zapisać dawcowy chamber_b_entered")
-	_expect(station.execute_close_flow(), "Zamknięcie przepływu po close_equal_recover_local musi przejść")
-	_expect(state.decisions.get(FLOW_CLOSED_FACT, false) == true, "Namespaced flow_closed musi powstać po zamknięciu")
+	# PKG-0242 (R1, PKG-0239 B order): the first use starts the recovery, the
+	# local Lena answers, and only the second use closes the flow.
+	_expect(station.execute_close_flow(), "Rozpoczęcie odzyskania po close_equal_recover_local musi przejść")
 	_expect(state.decisions.get(EXECUTED_FACT, false) == true, "Namespaced executed musi powstać")
 	_expect(state.decisions.get(ENDING_FAMILY_FACT, "") == ENDING_FAMILY_VALUE, "Kanoniczny ending_family musi być close_equal_recover_local")
-	_expect(not station.execute_close_flow(), "Zamknięcia przepływu nie wolno wykonać dwukrotnie")
+	_expect(not state.decisions.has(FLOW_CLOSED_FACT), "Kanał nie może się zamknąć, zanim miejscowa Lena odpowie")
 	_expect(station.read_local_lena_recovered(), "Odczyt odzyskanej miejscowej Leny musi przejść")
 	_expect(state.decisions.get(LOCAL_RECOVERED_FACT, false) == true, "Namespaced local_lena_recovered musi powstać")
 	_expect(state.decisions.get(LEGACY_WITNESSED_FACT, false) == true, "Dawca final_chamber_witnessed powstaje po odczycie odzyskania")
+	_expect(station.execute_close_flow(), "Zamknięcie przepływu po odzyskaniu musi przejść")
+	_expect(state.decisions.get(FLOW_CLOSED_FACT, false) == true, "Namespaced flow_closed musi powstać po zamknięciu")
+	_expect(not station.execute_close_flow(), "Zamknięcia przepływu nie wolno wykonać dwukrotnie")
 	_expect(station.read_household_consequence(), "Odczyt skutku nieindeksowanej obecności musi przejść")
 	var household: Variant = state.decisions.get(HOUSEHOLD_FACT, {})
 	_expect(household is Dictionary, "Skutek dla osób musi być JSON-safe słownikiem")
@@ -218,8 +221,9 @@ func _test_limited_and_withheld_path(state: Node) -> void:
 	if station == null:
 		return
 	_expect(station.is_exit_unlocked, "Ograniczona zgoda i wstrzymanie nie mogą zablokować 42B")
-	_expect(station.execute_close_flow(), "Zamknięcie przepływu przy wstrzymanej prawdzie musi przejść")
+	_expect(station.execute_close_flow(), "Rozpoczęcie odzyskania przy wstrzymanej prawdzie musi przejść")
 	_expect(station.read_local_lena_recovered(), "Odzyskanie Leny musi być czytelne przy ograniczonej zgodzie")
+	_expect(station.execute_close_flow(), "Zamknięcie przepływu przy wstrzymanej prawdzie musi przejść")
 	_expect(station.read_household_consequence(), "Skutek dla osób musi zapisać wstrzymanie i ograniczoną zgodę")
 	var household: Variant = state.decisions.get(HOUSEHOLD_FACT, {})
 	_expect(household is Dictionary, "Skutek przy wstrzymaniu musi pozostać słownikiem")
@@ -232,11 +236,13 @@ func _test_limited_and_withheld_path(state: Node) -> void:
 
 
 func _test_incomplete_attempt_keeps_exit(state: Node) -> void:
-	var station := await _open_station(state, true, METHOD_CLOSE_EQUAL, MARTA_PARTIAL, SCOPE_REFUSED)
+	var station := await _open_station(state, true, METHOD_CLOSE_EQUAL, MARTA_PARTIAL, SCOPE_LIMITED)
 	if station == null:
 		return
-	_expect(station.execute_close_flow(), "Niepełna próba może wykonać tylko zamknięcie przepływu")
-	_expect(state.decisions.get(FLOW_CLOSED_FACT, false) == true, "Niepełna próba zapisuje wykonane zamknięcie przepływu")
+	_expect(station.execute_close_flow(), "Niepełna próba może tylko rozpocząć odzyskanie")
+	_expect(state.decisions.get(EXECUTED_FACT, false) == true, "Niepełna próba zapisuje rozpoczęte wykonanie")
+	_expect(not station.execute_close_flow(), "Kanału nie da się zamknąć przed odpowiedzią miejscowej Leny")
+	_expect(not state.decisions.has(FLOW_CLOSED_FACT), "Niepełna próba nie fabrykuje zamknięcia przepływu")
 	_expect(not state.decisions.has(LOCAL_RECOVERED_FACT), "Niepełna próba nie fabrykuje odzyskania miejscowej Leny")
 	_expect(not state.decisions.has(HOUSEHOLD_FACT), "Niepełna próba nie fabrykuje skutku dla osób")
 	_expect(station.is_exit_unlocked, "Niepełna próba nie zamyka drogi do 43, jeśli 42B jest wybranym wariantem")
@@ -251,6 +257,7 @@ func _test_incomplete_attempt_keeps_exit(state: Node) -> void:
 	_expect(not station.is_level_completed, "Niepełna próba (samo zamknięcie) nie domyka progu 43")
 	_expect(String(station.get("last_feedback")) == "finale_sequence_incomplete", "Próg bez łańcucha nazywa lukę")
 	_expect(station.read_local_lena_recovered(), "Stan po wykonaniu przechodzi")
+	_expect(station.execute_close_flow(), "Zamknięcie po odzyskaniu przechodzi")
 	_expect(station.read_household_consequence(), "Skutek po stanie przechodzi")
 	_ThresholdBinder.complete_from_test(station, player)
 	await physics_frame

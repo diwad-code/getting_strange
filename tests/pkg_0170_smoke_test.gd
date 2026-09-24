@@ -189,9 +189,11 @@ func _test_branch_42a_flow(state: Object) -> void:
 	
 	_expect(station.ending_family == METHOD_FORCE_HOME, "Branch 42A ending_family recognized")
 	_expect(station.dialogue_lines.size() >= 5, "Branch 42A dialogue has >= 5 lines")
-	_expect(station.dialogue_lines[0]["text"].contains("Linia 4 zamknięta do odwołania"), "Branch 42A line 1 mentions Line 4 closure")
-	_expect(station.dialogue_lines[1]["text"].contains("Marta odłożyła klucze na blat"), "Branch 42A line 2 mentions Marta's consequence")
-	_expect(station.dialogue_lines[3]["text"].contains("Przybyła Lena"), "Branch 42A line 4 mentions arrived Lena")
+	# PKG-0242 (R1): pins follow the owner's PKG-0239 epilogue text (home
+	# Marta keeps the report, Lena came back alone, the cause stays blank).
+	_expect(station.dialogue_lines[0]["text"].contains("Zgłoszenia nie wyrzucę"), "Branch 42A line 1 keeps Marta's missing-person report")
+	_expect(station.dialogue_lines[1]["text"].contains("Wróciłam sama"), "Branch 42A line 2 names that Lena came back alone")
+	_expect(station.dialogue_lines[3]["text"].contains("Przyczyna: [puste]"), "Branch 42A line 4 leaves the cause blank")
 	
 	station.inspect_notice()
 	station.inspect_credits()
@@ -212,6 +214,8 @@ func _test_branch_42b_flow(state: Object) -> void:
 	state.record_decision(&"p9.method_commitment.marta_truth_state", "withheld")
 	state.record_decision(&"p9.consent_and_cost.jakub_consent_scope", "limited")
 	state.record_decision(&"p9.finale.close_equal.executed", true)
+	# PKG-0239: 42B counts as played only once the flow is closed.
+	state.record_decision(&"p9.finale.close_equal.flow_closed", true)
 	state.record_decision(&"p9.finale.close_equal.household_consequence", {
 		"marta": "withheld",
 		"jakub": "limited",
@@ -227,9 +231,9 @@ func _test_branch_42b_flow(state: Object) -> void:
 	
 	_expect(station.ending_family == METHOD_CLOSE_EQUAL, "Branch 42B ending_family recognized")
 	_expect(station.dialogue_lines.size() >= 5, "Branch 42B dialogue has >= 5 lines")
-	_expect(station.dialogue_lines[0]["text"].contains("Odcinek torowiska ustabilizowany"), "Branch 42B line 1 mentions stabilized ground")
-	_expect(station.dialogue_lines[1]["text"].contains("Miejscowa Lena wróciła"), "Branch 42B line 2 mentions local Lena's return")
-	_expect(station.dialogue_lines[3]["text"].contains("Płaszczyzna została zamknięta"), "Branch 42B line 4 mentions Plane closure")
+	_expect(station.dialogue_lines[0]["text"].contains("Zostań"), "Branch 42B line 1 is the local Marta keeping her Lena")
+	_expect(station.dialogue_lines[1]["text"].contains("Zaginęła"), "Branch 42B line 2 keeps the home report open")
+	_expect(station.dialogue_lines[3]["text"].contains("Nie znam tej ulicy"), "Branch 42B line 4 leaves the arrived Lena on an unknown street")
 	
 	station.inspect_notice()
 	station.inspect_credits()
@@ -248,11 +252,12 @@ func _test_branch_42c_flow(state: Object) -> void:
 	state.record_decision(&"ending_family", METHOD_MUTUAL)
 	state.record_decision(&"ending_stability", "withheld_or_refused_gaps")
 	state.record_decision(&"p9.method_commitment.marta_truth_state", "full")
-	state.record_decision(&"p9.consent_and_cost.jakub_consent_scope", "refused")
+	# PKG-0239: mutual passage requires Jakub's granted scope.
+	state.record_decision(&"p9.consent_and_cost.jakub_consent_scope", "granted")
 	state.record_decision(&"p9.finale.mutual_passage.executed", true)
 	state.record_decision(&"p9.finale.mutual_passage.household_consequence", {
 		"marta": "full",
-		"jakub": "refused",
+		"jakub": "granted",
 		"local_lena": "returned_to_marta_with_leak",
 		"arrived_lena": "returned_home_with_leak"
 	})
@@ -265,9 +270,9 @@ func _test_branch_42c_flow(state: Object) -> void:
 	
 	_expect(station.ending_family == METHOD_MUTUAL, "Branch 42C ending_family recognized")
 	_expect(station.dialogue_lines.size() >= 5, "Branch 42C dialogue has >= 5 lines")
-	_expect(station.dialogue_lines[0]["text"].contains("dwa równorzędne rozkłady"), "Branch 42C line 1 mentions twin schedules")
-	_expect(station.dialogue_lines[1]["text"].contains("Marta rozpoznaje kubek"), "Branch 42C line 2 mentions mug and empty shelf")
-	_expect(station.dialogue_lines[3]["text"].contains("Dwie Leny"), "Branch 42C line 4 mentions both Lenas")
+	_expect(station.dialogue_lines[0]["text"].contains("tamten kubek"), "Branch 42C line 1 is Marta reaching for the other mug")
+	_expect(station.dialogue_lines[1]["text"].contains("Półka jest pusta"), "Branch 42C line 2 names the empty shelf")
+	_expect(station.dialogue_lines[3]["text"].contains("Nie skończyłem napędu"), "Branch 42C line 4 carries Jakub's echo")
 	
 	station.inspect_notice()
 	station.inspect_credits()
@@ -285,6 +290,7 @@ func _test_persistence_round_trip(state: Object) -> void:
 	state.reset_campaign(true)
 	state.record_decision(&"ending_family", METHOD_MUTUAL)
 	state.record_decision(&"ending_stability", "named_gaps")
+	state.record_decision(&"p9.finale.mutual_passage.executed", true)
 	
 	var packed := load("res://scenes/levels/station_43.tscn") as PackedScene
 	var station := packed.instantiate() as Station43

@@ -159,7 +159,7 @@ resonance_id = "consent_scope_desk"
 prop_type = 16
 prop_title = "Biurko zakresu zgody"
 prop_subtitle = "Zapis jawnego zakresu z Jakubem"
-interaction_radius = 44.0
+interaction_radius = 56.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ConsentScopeDesk"]
 shape = SubResource("Circle_prop_medium")

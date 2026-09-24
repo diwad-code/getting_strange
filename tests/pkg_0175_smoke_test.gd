@@ -19,6 +19,9 @@ const ROUTE: Array[String] = [
 var _failures: Array[String] = []
 
 
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
+
+
 func _initialize() -> void:
 	call_deferred(&"_run")
 
@@ -60,7 +63,12 @@ func _test_catalog() -> void:
 	for gap_id in catalog.keys():
 		var spec: Dictionary = catalog[gap_id]
 		_expect(String(spec.get("thought_pl", "")).length() > 0, "%s missing thought_pl" % gap_id)
-		_expect(spec.get("blocks", []) is Array and not (spec.get("blocks", []) as Array).is_empty(), "%s missing blocks" % gap_id)
+		# PKG-0239 (owner): an optional reading (05 street/bag) blocks nothing
+		# and never opens; every other gap must name what it blocks.
+		if spec.get("optional", false) == true:
+			_expect(spec.get("blocks", []) is Array and (spec.get("blocks", []) as Array).is_empty(), "%s is optional and must block nothing" % gap_id)
+		else:
+			_expect(spec.get("blocks", []) is Array and not (spec.get("blocks", []) as Array).is_empty(), "%s missing blocks" % gap_id)
 		var origin := String(spec.get("origin_station", ""))
 		_expect(origin in ROUTE, "%s origin_station %s is not a campaign address" % [gap_id, origin])
 
@@ -102,20 +110,28 @@ func _test_minimal_playthrough(state: Node) -> void:
 		var station := await _open(station_id)
 		if station == null:
 			continue
-		# PKG-0232 (D-244, kontrolowana aktualizacja): kwartet donora 17 to
-		# fakty REQUIRED_FOR_NEXT_SCENE (nieodwracalny final). W biegu
-		# minimalnym reprezentuje je seed (wzor _seed_18_entry z PKG-0230);
-		# wszystkie czasowniki 18/42/43 wykonywane sa na zywo, zero odczytow
-		# OPTIONAL nie jest wymagane.
-		if station_id == "station_17" and state != null:
-			state.record_decision(&"p7.work_history_and_record.trace", "cost_ledger_and_consent_scope_recorded")
-			state.record_decision(&"p9.consent_and_cost.cost_ledger_read", true)
-			state.record_decision(&"p9.consent_and_cost.adaptation_offer", "rejected")
-			state.record_decision(&"p9.consent_and_cost.jakub_consent_scope", "granted")
-			state.record_decision(&"jakub_consent_state", "granted")
+		# PKG-0242 (R1, PKG-0239): the method is a conversation over two
+		# visits (17 scope → 18 names it → 17 Jakub answers → 18 commits).
+		# The minimal run plays that return trip live through the real
+		# scenes (CampaignChain); nothing about consent is seeded.
+		if station_id == "station_17":
+			station.queue_free()
+			await process_frame
+			# The minimal run performs no verbs in 01..16, so the inputs 17
+			# reads (as the old seed did for its outputs) are recorded here:
+			# recognition of the world and the 16 trial with its small cost.
+			if state != null:
+				state.record_decision(&"world_recognized", true)
+				state.record_decision(&"p7.work_history_and_record.institution_trial_result", "small_cost_and_home_echo_confirmed")
+				state.record_decision(&"p9.mechanics.small_cost.home_echo_verified", true)
+				state.record_decision(&"mechanic_cost_observed", true)
+			_expect(await CampaignChain.record_scope(self, "granted"), "17: zakres Jakuba (minimal)")
+			_expect(await CampaignChain.propose_method(self, "force_home", "partial"), "18: zestawienie, prawda i nazwanie metody (minimal)")
+			_expect(await CampaignChain.answer_method(self, "accepted"), "17: odpowiedź Jakuba na metodę (minimal)")
+			station = await _open(station_id)
+			if station == null:
+				continue
 		if station_id == "station_18":
-			_expect(bool(station.call("compare_forecast_consent_dependencies")), "18: zestawienie (minimal)")
-			_expect(bool(station.call("disclose_marta_truth_partial")), "18: prawda (minimal)")
 			_expect(bool(station.call("commit_force_home")), "18: commit (minimal)")
 		_ThresholdBinder.install(station)
 		_GapLedger.ensure_exit_open(station)

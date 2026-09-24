@@ -10,8 +10,12 @@ extends SceneTree
 ## three truth states and consent-dependent forecasts (18), missing sources,
 ## the D-211 knowledge gate replacing the old pkg_0165 static vocabulary ban,
 ## save/reload before/after commit, finale routing 18->42A/B/C, text scales.
+## PKG-0242 (R1): runs follow the PKG-0239 two-visit chain (17 scope → 18
+## names the method → 17 Jakub answers → 18 commits) and the owner's text.
 const _ThresholdBinder := preload("res://scripts/environment/threshold_binder.gd")
 const GapLedger := preload("res://scripts/campaign/gap_ledger.gd")
+const NarrativeRules := preload("res://scripts/levels/narrative_repair_rules.gd")
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 
 var failures: Array[String] = []
 var delivered: Array[String] = []
@@ -228,7 +232,11 @@ func run_17(state: Node, scope: String, with_completion: bool) -> void:
 	await close_station(station)
 
 
-func run_18(state: Node, truth: String, method: String, scope: String) -> void:
+## PKG-0242 (R1, PKG-0239): the method is a conversation across two visits.
+## First visit to 18: forecasts, Marta's truth by side, and one method named
+## at the post. A repeated press at the same side must not commit and must not
+## replay the risk table; for mutual passage Marta answers about the key.
+func run_18_propose(state: Node, truth: String, method: String, sync := "") -> void:
 	var station := await open_station(18)
 	await act(station, "forecast_comparator")
 	expect(bool(state.decisions.get(&"route_hypotheses_mapped", false)), "18 must map forecasts against the current consent")
@@ -242,18 +250,54 @@ func run_18(state: Node, truth: String, method: String, scope: String) -> void:
 		player.global_position = Vector2(table.global_position.x, 296.0)
 	await act(station, "marta_truth_table")
 	expect(String(state.decisions.get(&"marta_truth_state", "")) == truth, "18 must record the truth state " + truth)
+	await name_method(station, method)
+	expect(String(state.decisions.get(NarrativeRules.PROPOSED_KEY, "")) == method, "18 must name " + method)
+	expect(not state.decisions.has(&"method_committed"), "18 must name before committing")
+	var lines_before := delivered.size()
+	await act(station, "method_commit_post")
+	expect(not state.decisions.has(&"method_committed"), "a named method without Jakub's answer must not commit")
+	var repeat := "\n".join(delivered.slice(lines_before))
+	expect(not repeat.contains("CZYTNIK — PROGNOZA"), "a repeated press must not replay the risk table")
+	expect(repeat.contains("wrócę do Jakuba") or repeat.contains("odpowiedział: nie"), "a repeated press must say what is still missing")
+	if not sync.is_empty():
+		player.global_position = Vector2(table.global_position.x + (60.0 if sync == "accepted" else -60.0), 296.0)
+		await act(station, "marta_truth_table")
+		expect(String(state.decisions.get(NarrativeRules.SYNC_KEY, "")) == sync, "Marta must answer about the key: " + sync)
+	# No close_station gap check: the s18 gap is legitimately open until the
+	# method is committed on the return visit.
+	station.queue_free()
+	await process_frame
+
+
+func name_method(station: Node, method: String) -> void:
 	var post := station.get_node("Props/MethodCommitPost") as Node2D
+	var player := station.get_node("Player") as PrototypePlayer
 	if method == "force_home":
 		player.global_position = Vector2(post.global_position.x - 60.0, 296.0)
 	elif method == "mutual_passage":
 		player.global_position = Vector2(post.global_position.x + 60.0, 296.0)
 	else:
 		player.global_position = Vector2(post.global_position.x, 296.0)
-	# PKG-0230 (P0-2): wskazanie i zatwierdzenie to dwa podejscia —
-	# pierwszy akt nazywa, drugi (ta sama strefa) zatwierdza.
 	await act(station, "method_commit_post")
-	expect(not bool(state.decisions.has(&"method_committed")), "18 must name before committing")
-	await act(station, "method_commit_post")
+
+
+## Return visit to 17: Jakub answers the one proposed method at the desk
+## (right side: agreement, left side: refusal).
+func run_17_answer(state: Node, reply: String) -> void:
+	var station := await open_station(17)
+	var desk := station.get_node("Props/ConsentScopeDesk") as Node2D
+	var player := station.get_node("Player") as PrototypePlayer
+	player.global_position = Vector2(desk.global_position.x + (60.0 if reply == "accepted" else -60.0), 296.0)
+	await act(station, "consent_scope_desk")
+	var method := String(state.decisions.get(NarrativeRules.PROPOSED_KEY, ""))
+	expect(NarrativeRules.response(state.decisions, method) == reply, "17 must record Jakub's %s for %s" % [reply, method])
+	await close_station(station)
+
+
+## Return visit to 18: the same side commits.
+func run_18_commit(state: Node, method: String) -> void:
+	var station := await open_station(18)
+	await name_method(station, method)
 	expect(String(state.decisions.get(&"method_committed", "")) == method, "18 must commit " + method)
 	await close_station(station)
 
@@ -289,17 +333,22 @@ func run() -> void:
 	expect(String(state.decisions.get(&"p9.mechanics.small_cost.choice", "")) == "marta_memory", "reload must keep the cost choice")
 	expect(bool(state.decisions.get(&"home_echo_verified", false)), "reload must keep the home echo")
 	await run_17(state, "granted", true)
-	await run_18(state, "full", "force_home", "granted")
+	await run_18_propose(state, "full", "force_home")
+	await run_17_answer(state, "accepted")
+	await run_18_commit(state, "force_home")
 	expect(String(state.decisions.get(&"campaign_finale", "")) == "station_42a", "force_home must route 18->42A")
 	var joined_a := "\n".join(delivered)
-	for required in ["fala korekty co siedem sekund", "Zakotwiczenie i uległość", "Kontakt przy pierwszym odczycie", "Wyjście na czas: sam czytnik", "Próbę ktoś przerwał z zewnątrz", "Dwa identyczne echa", "poprawiła tylko mój celowy błąd", "Bez jej zgody nie powtarzaj", "kurtka na kaloryferze", "Twoja kurtka była", "zgłosiłam zaginięcie", "nie podmiana", "Ktoś utrzymuje zapis", "wygodnym zastępstwem", "przed końcem zmiany", "Dziesięć.", "Wiedziała czy zapytała", "Pomogę ją wyciągnąć", "Staję przy słupku sama"]:
+	# PKG-0242 (R1): pins follow the owner's PKG-0239 text (14-18 rewritten).
+	for required in ["Zakotwiczenie i uległość", "Kontakt nastąpił przy pierwszym odczycie", "Powtórka dała mi próbkę", "Próbę zaczęła ona", "Impuls kontrolny wraca identyczny", "Poprawiony został tylko mój błąd", "Bez jej zgody nie powtarzaj", "własną pamięć rozmowy o kurtce", "Powiedziałam: na kaloryferze", "Zgłosiłam twoje zaginięcie", "podważa prostą zamianę", "Linia 4: utrzymanie wyniku lokalnego", "Wpiszemy panią w miejsce Leny Wolskiej", "Nie podpiszę", "Najpierw pokaż konkretną metodę", "przed końcem zmiany", "Jakub dopuszcza rozmowę o próbie", "Chciała zmierzyć eksport kosztu", "Pomogę ją wyciągnąć", "wrócę do Jakuba", "Potwierdzę wskazanie", "Wybieram własny powrót"]:
 		expect(joined_a.contains(required), "run A delivered line: " + required)
-	ordered(joined_a, "Albo szczegół spotkania", "Twoja kurtka była", "alternatives must precede the concrete loss")
-	ordered(joined_a, "Dwa identyczne echa", "poprawiła tylko mój celowy błąd", "arming must precede the correction")
-	ordered(joined_a, "Ktoś utrzymuje zapis", "wygodnym zastępstwem", "ledger must precede the offer")
-	ordered(joined_a, "wygodnym zastępstwem", "Mój nadajnik, moja ręka na wyłączniku", "offer must precede the consent answer")
-	ordered(joined_a, "chroni mój powrót", "Wiedziała czy zapytała", "forecasts must precede the truth")
-	ordered(joined_a, "Pomogę ją wyciągnąć", "Staję przy słupku sama", "truth must precede the commit")
+	ordered(joined_a, "Wybierz nośnik ubytku", "Wybieram własną pamięć dzisiejszego zdania", "alternatives must precede the concrete loss")
+	ordered(joined_a, "W trzecim odwracam tylko ostatni impuls", "Poprawiony został tylko mój błąd", "arming must precede the correction")
+	ordered(joined_a, "Linia 4: utrzymanie wyniku lokalnego", "Wpiszemy panią w miejsce", "ledger must precede the offer")
+	ordered(joined_a, "Nie podpiszę", "Najpierw pokaż konkretną metodę", "offer must precede the consent answer")
+	ordered(joined_a, "Jakub dopuszcza rozmowę o próbie", "Chciała zmierzyć eksport kosztu", "forecasts must precede the truth")
+	ordered(joined_a, "Pomogę ją wyciągnąć", "wrócę do Jakuba", "truth must precede the proposal")
+	ordered(joined_a, "wrócę do Jakuba", "Potwierdzę wskazanie", "the proposal must precede Jakub's answer")
+	ordered(joined_a, "Potwierdzę wskazanie", "Wybieram własny powrót", "Jakub's answer must precede the commit")
 	expect(state.save_campaign(), "save after commit")
 	state.reset_campaign(false)
 	expect(state.reload_campaign_from_disk(), "reload after commit")
@@ -318,16 +367,19 @@ func run() -> void:
 	await run_15(state)
 	await run_16(state, "sample_second", true)
 	await run_17(state, "limited", false)
-	await run_18(state, "partial", "close_equal_recover_local", "limited")
+	await run_18_propose(state, "partial", "close_equal_recover_local")
+	await run_17_answer(state, "accepted")
+	await run_18_commit(state, "close_equal_recover_local")
 	expect(String(state.decisions.get(&"campaign_finale", "")) == "station_42b", "close_equal must route 18->42B")
 	var joined_b := "\n".join(delivered)
-	for required in ["Sekunda 20:40:07", "Pamięć Marty zostaje cała", "Nadajnika do mnie nie podłączysz", "Tyle wystarczy", "Wymuszenie domu: brak", "Mówię Marcie o sygnale", "Nie przy legendzie", "Oddaję jej miejsce"]:
+	for required in ["20:40:07 — fragment utracony", "Dzisiejszą rozmowę z Martą pamiętam", "bez podłączenia do człowieka", "Ten zakres zostaje", "Jakub dopuszcza tylko wskazania", "Mamy sposób, żeby spróbować ją odzyskać", "Na razie jej nie pokażę", "Tylko wskazania. Na to się zgadzam", "Wybieram odzyskanie miejscowej"]:
 		expect(joined_b.contains(required), "run B delivered line: " + required)
 	# Run C: no sample carried, sample cost from the reader buffer, refusal,
-	# withheld truth. PKG-0230 (P0-1): refusal now BLOCKS every method at 18;
-	# the run proves the block, walks back to 17, renegotiates to granted on
-	# a fresh instance, and commits mutual passage to 42C. Must never speak
-	# of a kept full carrier.
+	# withheld truth. After the refusal Jakub takes part in no method; mutual
+	# passage is named and blocked, then only the separate reading-only
+	# proposal for recovering the local Lena may be asked (PKG-0239) —
+	# Jakub accepts it and closure commits to 42B. The run must never speak of
+	# a kept full carrier.
 	state.reset_campaign(true)
 	state.cinematics_seen.clear()
 	delivered.clear()
@@ -344,25 +396,40 @@ func run() -> void:
 	bplayer.global_position = Vector2(btable.global_position.x - 60.0, 296.0)
 	await act(blocked, "marta_truth_table")
 	expect(String(state.decisions.get(&"marta_truth_state", "")) == "withheld", "blocked run keeps withheld truth")
-	var bpost := blocked.get_node("Props/MethodCommitPost") as Node2D
-	bplayer.global_position = Vector2(bpost.global_position.x + 60.0, 296.0)
-	await act(blocked, "method_commit_post")
-	await act(blocked, "method_commit_post")
+	await name_method(blocked, "mutual_passage")
+	await name_method(blocked, "mutual_passage")
 	expect(not state.decisions.has(&"method_committed"), "refusal must block the commit")
-	expect(String(state.decisions.get(&"p9.method_commitment.safe_trial_feedback", "")) == "jakub_consent_missing", "block must name the consent gap")
-	# No close_station here: the s18 gap is legitimately open mid-loop.
+	await name_method(blocked, "close_equal_recover_local")
+	expect(String(state.decisions.get(NarrativeRules.PROPOSED_KEY, "")) == "close_equal_recover_local", "after the block Lena may name the reading-only recovery")
 	blocked.queue_free()
 	await process_frame
-	await run_17(state, "granted", false)
-	await run_18(state, "withheld", "mutual_passage", "granted")
-	expect(String(state.decisions.get(&"campaign_finale", "")) == "station_42c", "mutual_passage must route 18->42C")
+	await run_17_answer(state, "accepted")
+	expect(String(state.decisions.get(&"p9.consent_and_cost.revised_reading_response", "")) == "accepted", "Jakub must answer the separate reading-only proposal")
+	expect(String(state.decisions.get(&"jakub_consent_state", "")) == "limited", "an accepted reading-only proposal narrows the scope to limited")
+	await run_18_commit(state, "close_equal_recover_local")
+	expect(String(state.decisions.get(&"campaign_finale", "")) == "station_42b", "revised reading must route 18->42B")
 	var joined_c := "\n".join(delivered)
-	for required in ["Próbki nie zabezpieczyłam", "Odmowa zamyka metody na jego relacji", "Nie ze mną, Lena", "Milczysz. To też jest odpowiedź", "Otwieram, nie zabieram"]:
+	for required in ["Nie mam pełnej próbki. Wybieram sekundę bufora", "Nie zgadzam się na podłączenie", "Mogę zaproponować osobno sam odczyt", "Nie zgodzę się w ciemno na twój plan", "Teraz proszę tylko o odczyt przy odzyskaniu jej", "Wybieram odzyskanie miejscowej"]:
 		expect(joined_c.contains(required), "run C delivered line: " + required)
 	expect(not joined_c.contains("surowej próbki"), "branch without a kept sample must not speak of a full carrier")
-	# PKG-0230: run C otwiera 18 dwa razy (proba blokady + commit po
-	# renegocjacji), ale winieta commit gra tylko po commicie: 2 + 2 + 2 = 6.
-	expect(vignette_count == 6, "routes must display and skip vignettes, got %d" % vignette_count)
+	# Run D: mutual passage needs Jakub's granted scope, the full record and
+	# Marta's separate answer about the key. 14-16 are the recorded pre-17
+	# input run (CampaignChain), so this run adds only the 18 vignette.
+	CampaignChain.seed_before_17(state, "repeat_sample", "marta_memory")
+	state.cinematics_seen.clear()
+	delivered.clear()
+	await run_17(state, "granted", false)
+	await run_18_propose(state, "full", "mutual_passage", "accepted")
+	await run_17_answer(state, "accepted")
+	await run_18_commit(state, "mutual_passage")
+	expect(String(state.decisions.get(&"campaign_finale", "")) == "station_42c", "mutual_passage must route 18->42C")
+	var joined_d := "\n".join(delivered)
+	for required in ["Pytasz o synchronizację", "Zgadzam się użyć klucza", "Biorę udział. Wyłącznik zostaje przy mnie", "Wybieram przejście wzajemne"]:
+		expect(joined_d.contains(required), "run D delivered line: " + required)
+	ordered(joined_d, "Zgadzam się użyć klucza", "Biorę udział. Wyłącznik zostaje przy mnie", "Marta's key must be asked before Jakub answers")
+	# Vignettes: runs A-C play the 15 signal and the 18 commit (2 + 2 + 2),
+	# run D only the 18 commit; the proposal visits play none.
+	expect(vignette_count == 7, "routes must display and skip vignettes, got %d" % vignette_count)
 	# Missing sources must stay informational and never invent content.
 	state.reset_campaign(true)
 	delivered.clear()

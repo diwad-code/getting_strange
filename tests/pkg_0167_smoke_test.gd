@@ -11,6 +11,8 @@ extends SceneTree
 const MemoryResonancePoint := preload("res://scripts/interactables/memory_resonance_point.gd")
 const PrototypePlayer := preload("res://scripts/player/prototype_player.gd")
 const _ThresholdBinder := preload("res://scripts/environment/threshold_binder.gd")
+## PKG-0242 (R1): the finale accepts only chains a player can reach (PKG-0239).
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 
 const DONOR_METHOD_FACT := &"p9.method_commitment.method_committed"
 const CANONICAL_METHOD_FACT := &"method_committed"
@@ -81,20 +83,17 @@ func _run() -> void:
 	_finish()
 
 
-func _seed_donor_facts(state: Node, method: String, marta: String, scope: String) -> void:
-	state.reset_campaign(true)
-	state.record_decision(DONOR_METHOD_FACT, method)
-	state.record_decision(CANONICAL_METHOD_FACT, method)
-	state.record_decision(DONOR_MAPPED_FACT, true)
-	state.record_decision(DONOR_MARTA_FACT, marta)
-	state.record_decision(CANONICAL_MARTA_FACT, marta)
-	state.record_decision(DONOR_SCOPE_FACT, scope)
-	state.record_decision(CANONICAL_SCOPE_FACT, scope)
+func _seed_donor_facts(state: Node, method: String, marta: String, scope: String) -> bool:
+	# PKG-0242 (R1): real 17 → 18 → 17 → 18 conversations on the state of an
+	# input-only 01–16 run; hand-written method/truth/scope keys no longer
+	# describe a reachable state after PKG-0239.
+	CampaignChain.seed_before_17(state)
+	return await CampaignChain.commit_chain(self, method, marta, scope)
 
 
 func _open_station(state: Node, seed_donor: bool, method: String = METHOD_FORCE_HOME, marta: String = MARTA_FULL, scope: String = SCOPE_GRANTED) -> Station42A:
 	if seed_donor:
-		_seed_donor_facts(state, method, marta, scope)
+		_expect(await _seed_donor_facts(state, method, marta, scope), "Łańcuch %s/%s/%s musi się zatwierdzić" % [method, marta, scope])
 	else:
 		state.reset_campaign(true)
 	var packed := load("res://scenes/levels/station_42a.tscn") as PackedScene
@@ -211,7 +210,7 @@ func _test_full_return_path(state: Node) -> void:
 
 
 func _test_limited_and_withheld_path(state: Node) -> void:
-	var station := await _open_station(state, true, METHOD_FORCE_HOME, MARTA_WITHHELD, SCOPE_LIMITED)
+	var station := await _open_station(state, true, METHOD_FORCE_HOME, MARTA_WITHHELD, SCOPE_GRANTED)
 	if station == null:
 		return
 	_expect(station.is_exit_unlocked, "Ograniczona zgoda i wstrzymanie nie mogą zablokować 42A")
@@ -223,13 +222,15 @@ func _test_limited_and_withheld_path(state: Node) -> void:
 	if household is Dictionary:
 		var body := JSON.stringify(household)
 		_expect(body.contains(MARTA_WITHHELD) or body.contains("withheld"), "Skutek musi przechować wstrzymanie Marty")
-		_expect(body.contains(SCOPE_LIMITED) or body.contains("limited"), "Skutek musi przechować ograniczoną zgodę Jakuba")
+		# PKG-0239: A requires Jakub's full scope; the reachable withheld path
+		# keeps Marta's withheld record next to Jakub's granted scope.
+		_expect(body.contains(SCOPE_GRANTED), "Skutek musi przechować zakres Jakuba")
 	_expect(station.is_exit_unlocked, "Wstrzymanie i ograniczona zgoda nie mogą softlockować wyjścia")
 	await _close_station(station)
 
 
 func _test_incomplete_attempt_keeps_exit(state: Node) -> void:
-	var station := await _open_station(state, true, METHOD_FORCE_HOME, MARTA_PARTIAL, SCOPE_REFUSED)
+	var station := await _open_station(state, true, METHOD_FORCE_HOME, MARTA_PARTIAL, SCOPE_GRANTED)
 	if station == null:
 		return
 	_expect(station.execute_forced_return(), "Niepełna próba może wykonać tylko rygiel")

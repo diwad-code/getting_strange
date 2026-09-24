@@ -24,6 +24,7 @@ enum Family { DOOR, VEHICLE, HATCH }
 @export var blocked_reason: StringName = &""
 @export var blocking_body_path: NodePath = NodePath("")
 
+const Focus := preload("res://scripts/interactables/interaction_focus.gd")
 const APPROACH_S := 0.32
 const DOOR_S := 0.95
 const VEHICLE_S := 1.40
@@ -36,6 +37,7 @@ var _sequence_player: Node2D
 var _approach_from := Vector2.ZERO
 var _approach_elapsed := 0.0
 var _phase: StringName = &""
+var _drawn_yield := false
 
 
 func _ready() -> void:
@@ -94,6 +96,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not is_player_in_range or _busy:
 		return
 	if not event.is_action_pressed(&"interact"):
+		return
+	# PKG-0242 (D-228 priority MRP > Threshold): with exits open from ready
+	# (D-227) the door used to take every press in its reach, so a reading
+	# point standing near it (18: the mutual-passage side of the method post)
+	# could not be used. A reading point in reach owns the press; one more
+	# step into the doorway leaves.
+	if _yields_to_reading_point():
 		return
 	var player := _find_player()
 	if player != null and trigger_entry(player):
@@ -174,6 +183,10 @@ func _process(delta: float) -> void:
 	var host := _get_station_host()
 	if host != null and host.get("is_exit_unlocked") == true and not is_open:
 		is_open = true
+	var yielding := _yields_to_reading_point()
+	if yielding != _drawn_yield:
+		_drawn_yield = yielding
+		queue_redraw()
 	if not _busy:
 		return
 	if _phase == &"approach":
@@ -231,12 +244,16 @@ func _draw() -> void:
 			_draw_hatch_aperture(rect, fill, edge)
 		_:
 			_draw_door_aperture(rect, fill, edge)
-	if is_ready_for_entry():
+	if is_ready_for_entry() and not _drawn_yield:
 		_draw_ready_notches(rect)
 
 
 func is_ready_for_entry() -> bool:
 	return is_player_in_range and is_open and not _busy
+
+
+func _yields_to_reading_point() -> bool:
+	return is_player_in_range and Focus.focused_point(self) != null
 
 
 func _draw_ready_notches(rect: Rect2) -> void:

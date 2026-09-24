@@ -12,7 +12,6 @@ const _ThresholdBinder := preload("res://scripts/environment/threshold_binder.gd
 const FORBIDDEN_STATION_15_TERMS: Array[String] = [
 	"inny świat",
 	"miejscowa lena",
-	"wierzbicka",
 	"anchor/yield",
 	"mechanic_cost_observed",
 	"duplikat",
@@ -198,6 +197,12 @@ func _test_vocabulary_and_input() -> void:
 	var source := FileAccess.get_file_as_string("res://scripts/levels/station_15.gd").to_lower()
 	for term in FORBIDDEN_STATION_15_TERMS:
 		_expect(not source.contains(term), "station_15.gd nie może zawierać terminu: %s" % term)
+	# PKG-0242 (R1): the owner's PKG-0239 text lets Lena read Wierzbicka's
+	# signature at 15. The name is earned only because Station 11 (earlier on
+	# the route) puts Wierzbicka at the counter by name; that is what is pinned.
+	if source.contains("wierzbick"):
+		var s11 := FileAccess.get_file_as_string("res://scenes/levels/station_11.tscn")
+		_expect(s11.contains("character_id = &\"wierzbicka\"") and s11.contains("Wierzbicka czeka"), "Nazwisko Wierzbickiej w 15 wymaga wcześniejszego przedstawienia w 11")
 	_expect(not source.contains("key_"), "station_15.gd nie może hardkodować klawiszy; wyłącznie semantyczny InputMap")
 	for station_number in range(1, 15):
 		var path := "res://scripts/levels/station_%02d.gd" % station_number

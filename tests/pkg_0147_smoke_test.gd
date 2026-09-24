@@ -10,6 +10,8 @@ extends SceneTree
 
 const NarrativeGuidanceService := preload("res://scripts/core/narrative_guidance_service.gd")
 const GuidanceBeat := preload("res://scripts/core/guidance_beat.gd")
+## PKG-0242 (R1): reachable post-16 state and the real 17/18 conversations.
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 
 const SEQUENCES: Array[Dictionary] = [
 	{
@@ -295,6 +297,9 @@ func _test_s06_work_history_and_record(state: Node) -> void:
 	## rejestr par kosztów i jawny zakres zgody Jakuba.
 	state.reset_campaign(true)
 	state.record_decision(&"p7.marta_threshold.trace", "dead_circuit_lesson_observed")
+	# PKG-0242 (R1): S06 follows the recognition in 13 (PKG-0239 gates 17/18
+	# conversations behind world_recognized, as the knowledge gate D-211 does).
+	state.record_decision(&"world_recognized", true)
 	var station := await _open_station(&"station_15")
 	if station == null:
 		return
@@ -346,7 +351,10 @@ func _test_s06_work_history_and_record(state: Node) -> void:
 	_expect(state.decisions.get(&"ucp_cost_ledger_found", false) == true, "Rejestr par Linii 4 musi być kanoniczny")
 	_expect(_call_bool(station, &"reject_adaptation_offer", "Station 17 musi pozwalać odrzucić ofertę adaptacji"), "S06/P9 musi mieć kontynuowalne odrzucenie oferty")
 	_expect(state.decisions.get(&"p9.consent_and_cost.adaptation_offer", "") == "rejected", "Odrzucona oferta musi zostać zapisana jako fakt")
-	_expect(_call_bool(station, &"record_jakub_consent_limited", "Station 17 musi wystawiać jawny zakres zgody"), "S06/P9 musi domknąć jawny zakres zgody Jakuba")
+	_expect(_call_bool(station, &"record_jakub_consent_limited", "Station 17 musi wystawiać jawny zakres zgody"), "S06/P9 musi otworzyć rozmowę o zakresie")
+	_expect(not state.decisions.has(&"jakub_consent_state"), "Sama prośba nie może zapisać zakresu (PKG-0239)")
+	station.call("_on_narrative_dialogue_finished", "consent_scope_desk")
+	_expect(bool(station.get("is_consent_scope_recorded")), "S06/P9 musi domknąć jawny zakres zgody Jakuba")
 	_expect(state.decisions.get(&"jakub_consent_state", "") == "limited", "Stan zgody Jakuba musi być jawny bez rankingu moralnego")
 	_expect(state.decisions.get(&"p9.consent_and_cost.jakub_consent_scope", "") == "limited", "Namespaced zakres zgody musi być zapisany")
 	_expect(bool(station.get("is_exit_unlocked")), "Jawny zakres zgody musi otworzyć wyjście")
@@ -357,25 +365,38 @@ func _test_s07_three_place_proofs(state: Node) -> void:
 	## Station 18 została przebudowana w P9 (BUNDLE-25, PKG-0166) na zestawienie
 	## trzech prognoz, stan prawdy Marty i fizyczne method_committed. Stacje
 	## 19–21 pozostają dawcą S07 i dostają jawny seed faktu publicznego.
-	state.reset_campaign(true)
-	state.record_decision(&"p7.work_history_and_record.trace", "cost_ledger_and_consent_scope_recorded")
-	state.record_decision(&"p9.consent_and_cost.cost_ledger_read", true)
-	state.record_decision(&"p9.consent_and_cost.adaptation_offer", "rejected")
-	state.record_decision(&"p9.consent_and_cost.jakub_consent_scope", "limited")
-	state.record_decision(&"jakub_consent_state", "limited")
+	CampaignChain.seed_before_17(state)
+	_expect(await CampaignChain.record_scope(self, "limited"), "S07/P9 wymaga zakresu zapisanego w 17")
 	var station := await _open_station(&"station_18")
 	if station == null:
 		return
 	_test_guidance(station, &"station_18")
 	_expect(_call_bool(station, &"compare_forecast_consent_dependencies", "Station 18 musi zestawiać trzy prognozy"), "S07/P9 musi zestawić trzy prognozy")
 	_expect(state.decisions.get(&"route_hypotheses_mapped", false) == true, "Zestawienie prognoz musi być kanoniczne")
-	_expect(_call_bool(station, &"disclose_marta_truth_partial", "Station 18 musi zapisywać stan prawdy Marty"), "S07/P9 musi mieć jawny stan prawdy Marty")
+	_expect(_call_bool(station, &"disclose_marta_truth_partial", "Station 18 musi zapisywać stan prawdy Marty"), "S07/P9 musi otworzyć rozmowę o prawdzie")
+	station.call("_on_narrative_dialogue_finished", "marta_truth_table")
 	_expect(state.decisions.get(&"marta_truth_state", "") == "partial", "Częściowa prawda Marty musi być zapisana")
+	# PKG-0239: wskazanie → odpowiedź Jakuba w 17 → zatwierdzenie.
+	(station.get_node("Player") as Node2D).global_position.x = (station.get_node("Props/MethodCommitPost") as Node2D).global_position.x
+	await physics_frame
+	_expect(_call_bool(station, &"choose_method_from_player_side", "Station 18 musi wskazywać metodę"), "S07/P9 musi wskazać jedną metodę")
+	await _close_station(station)
+	_expect(await CampaignChain.answer_method(self, "accepted"), "S07/P9: Jakub musi odpowiedzieć na wskazaną metodę")
+	station = await _open_station(&"station_18")
+	if station == null:
+		return
 	_expect(_call_bool(station, &"commit_close_equal", "Station 18 musi zatwierdzać metodę"), "S07/P9 musi fizycznie zatwierdzić jedną metodę")
 	_expect(state.decisions.get(&"method_committed", "") == "close_equal_recover_local", "Zatwierdzona metoda musi być kanoniczna")
 	_expect(bool(station.get("is_exit_unlocked")), "Zatwierdzenie metody musi otworzyć wyjście")
 	await _close_station(station)
 
+	# Legacy donors 19–21 keep their historical minimal seed (not active route).
+	state.reset_campaign(true)
+	state.record_decision(&"p7.work_history_and_record.trace", "cost_ledger_and_consent_scope_recorded")
+	state.record_decision(&"p9.consent_and_cost.cost_ledger_read", true)
+	state.record_decision(&"p9.consent_and_cost.adaptation_offer", "rejected")
+	state.record_decision(&"p9.consent_and_cost.jakub_consent_scope", "limited")
+	state.record_decision(&"jakub_consent_state", "limited")
 	state.record_decision(&"p7.three_place_proofs.public_trial_result", "two_systems_and_nine_years")
 	station = await _open_station(&"station_19")
 	if station == null:

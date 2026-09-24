@@ -31,6 +31,9 @@ const WALK_SPEED := 120.0
 var _failures: Array[String] = []
 
 
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
+
+
 func _initialize() -> void:
 	call_deferred(&"_run")
 
@@ -219,11 +222,16 @@ func _seed_sample_facts(gsm: Node) -> void:
 func _test_sample_playthrough() -> void:
 	for s_id in SAMPLE_STATIONS:
 		var gsm := root.get_node_or_null("GameStateManager")
+		# PKG-0242 (R1, PKG-0239): the method is a conversation across two
+		# visits (17 → 18 names it → 17 Jakub answers → 18 commits). The
+		# sample visits each address once, so the return trip between them is
+		# played by the same helper the finale gates use.
+		if s_id == "station_18" and gsm != null:
+			_expect(await CampaignChain.propose_method(self, "close_equal_recover_local", "partial"), "station_18 sample must name close_equal before Jakub answers")
+			_expect(await CampaignChain.answer_method(self, "accepted"), "station_17 return visit must record Jakub's answer")
 		if s_id == "station_42a" and gsm != null:
-			gsm.record_decision(&"p9.method_commitment.method_committed", "force_home")
-			gsm.record_decision(&"method_committed", "force_home")
-			gsm.record_decision(&"marta_truth_state", "partial")
-			gsm.record_decision(&"jakub_consent_state", "limited")
+			CampaignChain.seed_before_17(gsm)
+			_expect(await CampaignChain.commit_chain(self, "force_home", "partial", "granted"), "station_42a sample needs a committed force_home chain")
 		var p := load("res://scenes/levels/%s.tscn" % s_id) as PackedScene
 		if p == null:
 			_expect(false, "%s scene missing" % s_id)
@@ -312,10 +320,16 @@ func _walk_to(player: CharacterBody2D, target_x: float, max_frames: int = 300) -
 
 func _advance_any_active_dialogue(st: Node2D) -> void:
 	var box := _find(st, func(n): return n is CRTDialogueBox) as CRTDialogueBox
+	# PKG-0242: CreativeScenePresentation queues conversations (FIFO) and
+	# records their facts only when the exchange finishes.
+	var presenter := st.get_node_or_null("CreativeScenePresentation")
 	for _i in 50:
 		var advanced := false
 		if box and box.is_presenting():
 			box.advance_dialogue()
+			advanced = true
+		elif presenter != null and presenter.has_method("is_busy") and bool(presenter.call("is_busy")):
+			await process_frame
 			advanced = true
 		if _is_true(st, &"dialogue_active") and st.has_method("advance_dialogue"):
 			st.call("advance_dialogue")
@@ -476,8 +490,15 @@ func _perform_station_actions(st: Node2D, player: CharacterBody2D) -> void:
 			st.call(&"read_cost_ledger")
 		if st.has_method(&"reject_adaptation_offer"):
 			st.call(&"reject_adaptation_offer")
-		if st.has_method(&"record_jakub_consent_limited"):
-			st.call(&"record_jakub_consent_limited")
+		# PKG-0242 (R1): the scope is Jakub's answer in a conversation at the
+		# desk (PKG-0239); standing at its centre asks for the reading only.
+		var desk := st.get_node_or_null("Props/ConsentScopeDesk") as MemoryResonancePoint
+		if desk != null:
+			await _walk_to(player, desk.global_position.x, 150)
+			desk.is_player_in_range = true
+			desk.trigger_interaction()
+			await process_frame
+			await _advance_any_active_dialogue(st)
 	elif id.contains("18"):
 		if st.has_method(&"compare_forecast_consent_dependencies"):
 			st.call(&"compare_forecast_consent_dependencies")

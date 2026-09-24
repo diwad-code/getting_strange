@@ -7,6 +7,7 @@ extends SceneTree
 
 const NarrativeGuidanceService := preload("res://scripts/core/narrative_guidance_service.gd")
 const GuidanceBeat := preload("res://scripts/core/guidance_beat.gd")
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 
 const S14 := &"branch_clarity_and_irreversible_choice"
 const S15 := &"conscious_silence_and_presence"
@@ -244,8 +245,9 @@ func _test_station_41_flow(state: Object) -> void:
 
 
 func _test_station_42a_flow(state: Object) -> void:
-	state.record_decision(&"p9.method_commitment.method_committed", "force_home")
-	state.record_decision(&"method_committed", "force_home")
+	# PKG-0242 (R1): the finale accepts only the reachable PKG-0239 chain.
+	CampaignChain.seed_before_17(state)
+	_expect(await CampaignChain.commit_chain(self, "force_home", "partial", "granted"), "Chain for force_home must commit")
 	var packed: PackedScene = load("res://scenes/levels/station_42a.tscn")
 	var st: Node2D = packed.instantiate()
 	root.add_child(st)
@@ -271,8 +273,9 @@ func _test_station_42a_flow(state: Object) -> void:
 
 
 func _test_station_42b_flow(state: Object) -> void:
-	state.record_decision(&"p9.method_commitment.method_committed", "close_equal_recover_local")
-	state.record_decision(&"method_committed", "close_equal_recover_local")
+	# PKG-0242 (R1): the finale accepts only the reachable PKG-0239 chain.
+	CampaignChain.seed_before_17(state)
+	_expect(await CampaignChain.commit_chain(self, "close_equal_recover_local", "partial", "limited"), "Chain for close_equal_recover_local must commit")
 	var packed: PackedScene = load("res://scenes/levels/station_42b.tscn")
 	var st: Node2D = packed.instantiate()
 	root.add_child(st)
@@ -298,8 +301,9 @@ func _test_station_42b_flow(state: Object) -> void:
 
 
 func _test_station_42c_flow(state: Object) -> void:
-	state.record_decision(&"p9.method_commitment.method_committed", "mutual_passage")
-	state.record_decision(&"method_committed", "mutual_passage")
+	# PKG-0242 (R1): the finale accepts only the reachable PKG-0239 chain.
+	CampaignChain.seed_before_17(state)
+	_expect(await CampaignChain.commit_chain(self, "mutual_passage", "full", "granted"), "Chain for mutual_passage must commit")
 	var packed: PackedScene = load("res://scenes/levels/station_42c.tscn")
 	var st: Node2D = packed.instantiate()
 	root.add_child(st)

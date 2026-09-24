@@ -1348,7 +1348,7 @@ func _refresh_pause_localization() -> void:
 	var checkpoint := _pause_layer.get_node_or_null("PanelContainer/VBoxContainer/HBoxContainer/CheckpointButton") as Button
 	if checkpoint:
 		checkpoint.text = LocalizationManager.tr_key("PAUSE_CHECKPOINT")
-	var test_button := _pause_layer.get_node_or_null("PanelContainer/VBoxContainer/HBoxContainer/TestModeButton") as Button
+	var test_button := _pause_layer.find_child("TestModeButton", true, false) as Button
 	if test_button:
 		test_button.text = LocalizationManager.tr_key("PAUSE_TEST_MODE") % ("ON" if test_mode_enabled else "OFF")
 	var reset_button := _pause_layer.get_node_or_null("PanelContainer/VBoxContainer/HBoxContainer/ResetButton") as Button
@@ -1692,9 +1692,12 @@ func _ensure_pause_menu() -> void:
 	_add_menu_button(actions, "MENU GŁÓWNE", return_to_title, "MainMenuButton")
 	_add_menu_button(actions, "RESET ZAPISU", _request_reset_campaign, "ResetButton")
 	if is_developer_shell():
-		_add_menu_button(actions, "TRYB TESTOWY: OFF", _toggle_test_mode, "TestModeButton")
-	for child in actions.get_children():
-		(child as Button).custom_minimum_size.x = 86.0 if is_developer_shell() else 100.0
+		# Developer-only row: never part of an exported release build.
+		var debug_row := HBoxContainer.new()
+		debug_row.name = "DebugRow"
+		debug_row.alignment = BoxContainer.ALIGNMENT_CENTER
+		content.add_child(debug_row)
+		_add_menu_button(debug_row, "TRYB TESTOWY: OFF", _toggle_test_mode, "TestModeButton")
 	content.add_child(HSeparator.new())
 	_station_grid = GridContainer.new()
 	_station_grid.name = "StationGrid"
@@ -1825,7 +1828,7 @@ func _refresh_station_buttons() -> void:
 		button.pressed.connect(_on_station_requested.bind(station_id))
 		_station_grid.add_child(button)
 	_refresh_pause_status()
-	var test_button := _pause_layer.get_node_or_null("PanelContainer/VBoxContainer/HBoxContainer/TestModeButton") as Button
+	var test_button := _pause_layer.find_child("TestModeButton", true, false) as Button
 	if test_button:
 		test_button.text = LocalizationManager.tr_key("PAUSE_TEST_MODE") % ("ON" if test_mode_enabled else "OFF")
 	_refresh_pause_localization()
@@ -1866,6 +1869,11 @@ func _configure_pause_focus() -> void:
 	for child in _pause_layer.get_node("PanelContainer/VBoxContainer/HBoxContainer").get_children():
 		if child is Button:
 			action_buttons.append(child as Button)
+	var debug_row := _pause_layer.get_node_or_null("PanelContainer/VBoxContainer/DebugRow")
+	if debug_row != null:
+		for child in debug_row.get_children():
+			if child is Button:
+				action_buttons.append(child as Button)
 	var grid_buttons: Array[Button] = []
 	if is_instance_valid(_station_grid):
 		for child in _station_grid.get_children():

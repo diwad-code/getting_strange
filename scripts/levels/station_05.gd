@@ -122,7 +122,9 @@ func cross_street_towards_home() -> bool:
 		_record_feedback(&"sample_check_required")
 		return false
 	is_crossing_completed = true
-	_record(FACT_TRACE, "ordinary_street_crossed")
+	# PKG-0242: the bag stays optional (PKG-0239); the trace says what Lena
+	# actually did — checked the reader before the crossing, or just crossed.
+	_record(FACT_TRACE, "reader_secured_without_paranormal_claim" if is_sample_case_verified else "ordinary_street_crossed")
 	_record(&"ordinary_return_complete", true)
 	_record(&"p9.street.crossing_completed", true)
 	_resolve_action(&"cross_street_towards_home")

@@ -1,6 +1,7 @@
 extends SceneTree
 
 const _ThresholdBinder := preload("res://scripts/environment/threshold_binder.gd")
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 
 ## PKG-0107 gate: Station 42A..42C and 43 finale Vector-Stage presentation,
 ## conscious mechanical silence and preservation of the delivered finale logic.
@@ -122,24 +123,18 @@ func _check_finale_scenes(state: Node) -> void:
 
 		if state:
 			state.reset_campaign(true)
+			# PKG-0242 (R1): finales accept only a chain a player can reach
+			# (PKG-0239), so the seed is played through the real 17 → 18 scenes.
+			var chain: Array = []
 			if bool(case_data.get("seed_force_home", false)):
-				state.record_decision(&"p9.method_commitment.method_committed", "force_home")
-				state.record_decision(&"method_committed", "force_home")
-				state.record_decision(&"route_hypotheses_mapped", true)
-				state.record_decision(&"marta_truth_state", "partial")
-				state.record_decision(&"jakub_consent_state", "limited")
+				chain = ["force_home", "partial", "granted"]
 			elif bool(case_data.get("seed_close_equal", false)):
-				state.record_decision(&"p9.method_commitment.method_committed", "close_equal_recover_local")
-				state.record_decision(&"method_committed", "close_equal_recover_local")
-				state.record_decision(&"route_hypotheses_mapped", true)
-				state.record_decision(&"marta_truth_state", "partial")
-				state.record_decision(&"jakub_consent_state", "limited")
+				chain = ["close_equal_recover_local", "partial", "limited"]
 			elif bool(case_data.get("seed_mutual_passage", false)):
-				state.record_decision(&"p9.method_commitment.method_committed", "mutual_passage")
-				state.record_decision(&"method_committed", "mutual_passage")
-				state.record_decision(&"route_hypotheses_mapped", true)
-				state.record_decision(&"marta_truth_state", "partial")
-				state.record_decision(&"jakub_consent_state", "granted")
+				chain = ["mutual_passage", "full", "granted"]
+			if not chain.is_empty():
+				CampaignChain.seed_before_17(state)
+				_expect(await CampaignChain.commit_chain(self, chain[0], chain[1], chain[2]), "finale chain must commit: %s" % path)
 		var station := packed.instantiate() as Node2D
 		_expect(station != null, "finale scene root must be Node2D: %s" % path)
 		if station == null:
@@ -235,8 +230,10 @@ func _exercise_42b(station: Station42B, props: Node2D, player: PrototypePlayer) 
 	_expect(latch != null, "Station 42B flow closure latch is missing")
 	_expect(threshold != null, "Station 42B local lena threshold is missing")
 	_expect(table != null, "Station 42B household trace is missing")
-	_expect(station.execute_close_flow(), "Station 42B flow closure must remain available")
+	# PKG-0239 order: start the recovery, read the local Lena, then close.
+	_expect(station.execute_close_flow(), "Station 42B recovery must remain available")
 	_expect(station.read_local_lena_recovered(), "Station 42B recovered local Lena must remain readable")
+	_expect(station.execute_close_flow(), "Station 42B flow closure must remain available")
 	_expect(station.read_household_consequence(), "Station 42B household consequence must remain readable")
 	_expect(station.is_flow_closed, "Station 42B must record the closed flow")
 	_expect(station.is_local_lena_recovered, "Station 42B must record the recovered local Lena")

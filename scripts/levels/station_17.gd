@@ -83,6 +83,10 @@ func _ready() -> void:
 	_connect_props()
 	_restore_consent_state()
 	_refresh_choice_legend()
+	# PKG-0242 (R1): the second visit (Jakub's answer) restores a rejected
+	# offer; its hypothesis stays closed instead of reopening on re-entry.
+	if is_adaptation_offer_rejected and guidance_service:
+		guidance_service.close_hypothesis(&"cheap_adaptation")
 	if airlock_zone != null and not airlock_zone.body_entered.is_connected(_on_airlock_body_entered):
 		airlock_zone.body_entered.connect(_on_airlock_body_entered)
 	queue_redraw()

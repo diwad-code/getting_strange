@@ -76,7 +76,7 @@ text = "PRZYSTANEK // PIERWSZY KURS 5:12"
 font_size = 9
 text_color = Color(0.83, 0.6, 0.38, 1)
 
-[node name="CrispDiegeticText_LicenseManifest" type="Node2D" parent="."]
+[node name="CrispDiegeticText_NoticeBoard" type="Node2D" parent="."]
 position = Vector2(92, 108)
 script = ExtResource("12_crisp_text")
 text = "OGŁOSZENIA // LINIA 4\nZMIANA ROZKŁADU OD 1.12\nKURSY CO 12 MIN\nBIURO RZECZY ZNALEZIONYCH\nNIE ZOSTAWIAJ BAGAŻU"

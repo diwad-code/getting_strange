@@ -28,6 +28,8 @@ const SEQUENCE_SPECS := [
 const TECHNICAL_SCENE_IDS := [&"station_01", &"station_02", &"station_03", &"station_04", &"station_05", &"station_06", &"station_07", &"station_08", &"station_09", &"station_10", &"station_11", &"station_12", &"station_13", &"station_14", &"station_15", &"station_16", &"station_17", &"station_18", &"station_19", &"station_20", &"station_21", &"station_22", &"station_23", &"station_24", &"station_25", &"station_26", &"station_27", &"station_28", &"station_29", &"station_30", &"station_31", &"station_32", &"station_33", &"station_34", &"station_35", &"station_36", &"station_37", &"station_38", &"station_39", &"station_40", &"station_41", &"station_42a", &"station_42b", &"station_42c", &"station_43"]
 const STATION_SCRIPT_PATHS := ["res://scripts/levels/station_01.gd", "res://scripts/levels/station_02.gd", "res://scripts/levels/station_03.gd", "res://scripts/levels/station_04.gd", "res://scripts/levels/station_05.gd", "res://scripts/levels/station_06.gd", "res://scripts/levels/station_07.gd", "res://scripts/levels/station_08.gd", "res://scripts/levels/station_09.gd", "res://scripts/levels/station_10.gd", "res://scripts/levels/station_11.gd", "res://scripts/levels/station_12.gd", "res://scripts/levels/station_13.gd", "res://scripts/levels/station_14.gd", "res://scripts/levels/station_15.gd", "res://scripts/levels/station_16.gd", "res://scripts/levels/station_17.gd", "res://scripts/levels/station_18.gd", "res://scripts/levels/station_19.gd", "res://scripts/levels/station_20.gd", "res://scripts/levels/station_21.gd", "res://scripts/levels/station_22.gd", "res://scripts/levels/station_23.gd", "res://scripts/levels/station_24.gd", "res://scripts/levels/station_25.gd", "res://scripts/levels/station_26.gd", "res://scripts/levels/station_27.gd", "res://scripts/levels/station_28.gd", "res://scripts/levels/station_29.gd", "res://scripts/levels/station_30.gd", "res://scripts/levels/station_31.gd", "res://scripts/levels/station_32.gd", "res://scripts/levels/station_33.gd", "res://scripts/levels/station_34.gd", "res://scripts/levels/station_35.gd", "res://scripts/levels/station_36.gd", "res://scripts/levels/station_37.gd", "res://scripts/levels/station_38.gd", "res://scripts/levels/station_39.gd", "res://scripts/levels/station_40.gd", "res://scripts/levels/station_41.gd", "res://scripts/levels/station_42a.gd", "res://scripts/levels/station_42b.gd", "res://scripts/levels/station_42c.gd", "res://scripts/levels/station_43.gd"]
 const FINALE_EXPECTATIONS := {"A": &"station_42a", "B": &"station_42b", "C": &"station_42c"}
+const CHAIN_FOR_BRANCH := {"A": ["force_home", "partial", "granted"], "B": ["close_equal_recover_local", "partial", "limited"], "C": ["mutual_passage", "full", "granted"]}
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 
 var _failures: Array[String] = []
 
@@ -253,7 +255,8 @@ func _test_save_migrations_and_roundtrip(state: Node) -> void:
 func _test_finale_branch_flows(state: Node) -> void:
 	for branch in ["A", "B", "C"]:
 		var finale_id: StringName = FINALE_EXPECTATIONS[branch]
-		state.reset_campaign(true)
+		# PKG-0242 (R1): real pre-17 state instead of an empty campaign.
+		CampaignChain.seed_before_17(state)
 		state.campaign_auto_transition_enabled = false
 		state.record_decision(&"p7.consent_and_rescue_boundary.trace", "truth_disclosed_with_scope")
 		var station39 := await _open_station(&"station_39")
@@ -291,25 +294,23 @@ func _test_finale_branch_flows(state: Node) -> void:
 			state.select_finale_operation(branch)
 			_expect(state.get_selected_finale_id() == finale_id, "GameStateManager must route branch %s to %s" % [branch, String(finale_id)])
 			await _close_station(station41)
+		# PKG-0242 (R1): the finale accepts only a chain a player can reach
+		# (PKG-0239); it is played through the real 17 → 18 scenes.
+		var chain: Array = CHAIN_FOR_BRANCH[branch]
+		_expect(await CampaignChain.commit_chain(self, chain[0], chain[1], chain[2]), "chain for branch %s must commit" % branch)
 		var finale_station := await _open_station(finale_id)
 		_expect(finale_station != null, "%s must open for branch %s" % [String(finale_id), branch])
 		if finale_station != null:
 			match finale_id:
 				&"station_42a":
-					state.record_decision(&"p9.method_commitment.method_committed", "force_home")
-					state.record_decision(&"method_committed", "force_home")
 					_expect(_call_bool(finale_station, &"execute_forced_return", "station_42a missing execute_forced_return") or _call_bool(finale_station, &"inspect_cups", "station_42a missing inspect_cups"), "station_42a forced return must succeed")
 					_expect(_call_bool(finale_station, &"read_sealed_other_lena", "station_42a missing read_sealed_other_lena") or _call_bool(finale_station, &"witness_chamber_a", "station_42a missing witness_chamber_a"), "station_42a sealed other Lena must be readable")
 					_expect(state.decisions.get(&"p7.conscious_silence_and_presence.chamber_a_entered", false) == true, "station_42a must record chamber_a_entered")
 				&"station_42b":
-					state.record_decision(&"p9.method_commitment.method_committed", "close_equal_recover_local")
-					state.record_decision(&"method_committed", "close_equal_recover_local")
 					_expect(_call_bool(finale_station, &"execute_close_flow", "station_42b missing execute_close_flow") or _call_bool(finale_station, &"inspect_doorstep", "station_42b missing inspect_doorstep"), "station_42b flow closure must succeed")
 					_expect(_call_bool(finale_station, &"read_local_lena_recovered", "station_42b missing read_local_lena_recovered") or _call_bool(finale_station, &"witness_chamber_b", "station_42b missing witness_chamber_b"), "station_42b local Lena read must succeed")
 					_expect(state.decisions.get(&"p7.conscious_silence_and_presence.chamber_b_entered", false) == true, "station_42b must record chamber_b_entered")
 				_:
-					state.record_decision(&"p9.method_commitment.method_committed", "mutual_passage")
-					state.record_decision(&"method_committed", "mutual_passage")
 					_expect(_call_bool(finale_station, &"execute_mutual_passage", "station_42c missing execute_mutual_passage") or _call_bool(finale_station, &"inspect_tram", "station_42c missing inspect_tram"), "station_42c mutual passage must succeed")
 					_expect(_call_bool(finale_station, &"read_memory_leak", "station_42c missing read_memory_leak") or _call_bool(finale_station, &"witness_chamber_c", "station_42c missing witness_chamber_c"), "station_42c memory leak must be readable")
 					_expect(state.decisions.get(&"p7.conscious_silence_and_presence.chamber_c_entered", false) == true, "station_42c must record chamber_c_entered")

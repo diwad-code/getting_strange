@@ -187,19 +187,32 @@ static func lines_for(id: String, decisions: Dictionary, station: Node = null) -
 		if NarrativeRules.committed(decisions, method):
 			pairs = LINES.get("method_commit_post_" + method, FALLBACK_LINES)
 		else:
-			pairs = NarrativeRules.risk_pairs(method).duplicate(true)
-			for review_pair in _commit_review_table(decisions):
-				pairs.append(review_pair)
+			var needs: Array = []
 			if NarrativeRules.response(decisions, method).is_empty():
-				pairs.append(["Lena", "Z tą prognozą wrócę do Jakuba przy łączu w hali. Potrzebuję odpowiedzi na tę jedną metodę."])
+				needs.append(["Lena", "Z tą prognozą wrócę do Jakuba przy łączu w hali. Potrzebuję odpowiedzi na tę jedną metodę."])
 			elif NarrativeRules.response(decisions, method) == "refused":
-				pairs.append(["Lena", "Na tę propozycję odpowiedział: nie. Nie wykonam jej z jego udziałem."])
+				needs.append(["Lena", "Na tę propozycję odpowiedział: nie. Nie wykonam jej z jego udziałem."])
 			if method == "mutual_passage" and decisions.get(NarrativeRules.SYNC_KEY, "") != "accepted":
 				if decisions.get(NarrativeRules.SYNC_KEY, "") == "refused":
-					pairs.append(["Lena", "Marta odmówiła klucza do synchronizacji. Nie wykonam tej metody."])
+					needs.append(["Lena", "Marta odmówiła klucza do synchronizacji. Nie wykonam tej metody."])
 				else:
-					pairs.append(["Lena", "Muszę pokazać Marcie cały zapis i osobno zapytać przy stole o klucz."])
-					pairs.append(["WSKAZÓWKA", "Po pełnym zapisie: środek stołu przypomina ryzyko; lewa strona — odmowa, prawa — zgoda na klucz."])
+					needs.append(["Lena", "Muszę pokazać Marcie cały zapis i osobno zapytać przy stole o klucz."])
+					needs.append(["WSKAZÓWKA", "Po pełnym zapisie: środek stołu przypomina ryzyko; lewa strona — odmowa, prawa — zgoda na klucz."])
+			# PKG-0242 (UX): the full risk table plays once per named method in
+			# a visit; a repeated press at the same side only says what is
+			# still missing instead of replaying ten lines.
+			if station != null and str(station.get("reviewed_method")) == method:
+				pairs = needs
+				if pairs.is_empty():
+					pairs = [["Lena", _knot_state_line(decisions)]]
+					if NarrativeRules.truth(decisions).is_empty():
+						pairs.append(["Lena", "Jeszcze nie rozmawiałam z Martą o zapisie."])
+			else:
+				pairs = NarrativeRules.risk_pairs(method).duplicate(true)
+				for review_pair in _commit_review_table(decisions):
+					pairs.append(review_pair)
+				for need in needs:
+					pairs.append(need)
 	# --- CR-C (PKG-0195): finały 42A/B/C. Wykonanie i odczyt skutku mają
 	# własne klucze; wspólny "household_consequence" rozgałęzia się po stacji
 	# i stanie prawdy Marty (wzór gałęzi 18). Bez bramki wiedzy: zatwierdzona

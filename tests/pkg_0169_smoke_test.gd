@@ -11,6 +11,8 @@ extends SceneTree
 const MemoryResonancePoint := preload("res://scripts/interactables/memory_resonance_point.gd")
 const PrototypePlayer := preload("res://scripts/player/prototype_player.gd")
 const _ThresholdBinder := preload("res://scripts/environment/threshold_binder.gd")
+## PKG-0242 (R1): the finale accepts only chains a player can reach (PKG-0239).
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 
 const DONOR_METHOD_FACT := &"p9.method_commitment.method_committed"
 const CANONICAL_METHOD_FACT := &"method_committed"
@@ -82,20 +84,17 @@ func _run() -> void:
 	_finish()
 
 
-func _seed_donor_facts(state: Node, method: String, marta: String, scope: String) -> void:
-	state.reset_campaign(true)
-	state.record_decision(DONOR_METHOD_FACT, method)
-	state.record_decision(CANONICAL_METHOD_FACT, method)
-	state.record_decision(DONOR_MAPPED_FACT, true)
-	state.record_decision(DONOR_MARTA_FACT, marta)
-	state.record_decision(CANONICAL_MARTA_FACT, marta)
-	state.record_decision(DONOR_SCOPE_FACT, scope)
-	state.record_decision(CANONICAL_SCOPE_FACT, scope)
+func _seed_donor_facts(state: Node, method: String, marta: String, scope: String) -> bool:
+	# PKG-0242 (R1): real 17 → 18 → 17 → 18 conversations on the state of an
+	# input-only 01–16 run; hand-written method/truth/scope keys no longer
+	# describe a reachable state after PKG-0239.
+	CampaignChain.seed_before_17(state)
+	return await CampaignChain.commit_chain(self, method, marta, scope)
 
 
 func _open_station(state: Node, seed_donor: bool, method: String = METHOD_MUTUAL, marta: String = MARTA_FULL, scope: String = SCOPE_GRANTED) -> Station42C:
 	if seed_donor:
-		_seed_donor_facts(state, method, marta, scope)
+		_expect(await _seed_donor_facts(state, method, marta, scope), "Łańcuch %s/%s/%s musi się zatwierdzić" % [method, marta, scope])
 	else:
 		state.reset_campaign(true)
 	var packed := load("res://scenes/levels/station_42c.tscn") as PackedScene
@@ -163,7 +162,7 @@ func _test_donor_entry_requirement(state: Node) -> void:
 
 
 func _test_wrong_method_rejection(state: Node) -> void:
-	var station := await _open_station(state, true, METHOD_FORCE_HOME, MARTA_PARTIAL, SCOPE_LIMITED)
+	var station := await _open_station(state, true, METHOD_FORCE_HOME, MARTA_PARTIAL, SCOPE_GRANTED)
 	if station == null:
 		return
 	_expect(not station.execute_mutual_passage(), "Metoda force_home nie może wykonać 42C")
@@ -214,25 +213,27 @@ func _test_full_mutual_passage_path(state: Node) -> void:
 
 
 func _test_limited_and_withheld_path(state: Node) -> void:
-	var station := await _open_station(state, true, METHOD_MUTUAL, MARTA_WITHHELD, SCOPE_LIMITED)
-	if station == null:
-		return
-	_expect(station.is_exit_unlocked, "Ograniczona zgoda i wstrzymanie nie mogą zablokować 42C")
-	_expect(station.execute_mutual_passage(), "Otwarcie przejścia przy wstrzymanej prawdzie musi przejść")
-	_expect(station.read_memory_leak(), "Przeciek pamięci musi być czytelny przy ograniczonej zgodzie")
-	_expect(station.read_household_consequence(), "Skutek dla osób musi zapisać wstrzymanie i ograniczoną zgodę")
-	var household: Variant = state.decisions.get(HOUSEHOLD_FACT, {})
-	_expect(household is Dictionary, "Skutek przy wstrzymaniu musi pozostać słownikiem")
-	if household is Dictionary:
-		var body := JSON.stringify(household)
-		_expect(body.contains(MARTA_WITHHELD) or body.contains("withheld"), "Skutek musi przechować wstrzymanie Marty")
-		_expect(body.contains(SCOPE_LIMITED) or body.contains("limited"), "Skutek musi przechować ograniczoną zgodę Jakuba")
+	# PKG-0239 (krok 10): C needs Marta's full record and her separate yes for
+	# the key, plus Jakub's full scope. With a withheld record and a limited
+	# scope C is unreachable by design; the chain must not commit and 42C
+	# must refuse to execute on that state.
+	CampaignChain.seed_before_17(state)
+	var committed: bool = await CampaignChain.commit_chain(self, METHOD_MUTUAL, MARTA_WITHHELD, SCOPE_LIMITED)
+	_expect(not committed, "Wstrzymana prawda i ograniczona zgoda nie mogą zatwierdzić przejścia wzajemnego")
+	_expect(not state.decisions.has(CANONICAL_METHOD_FACT), "Nieosiągalne C nie zapisuje metody")
+	var packed := load("res://scenes/levels/station_42c.tscn") as PackedScene
+	var station := packed.instantiate() as Station42C
+	root.add_child(station)
+	await process_frame
+	await physics_frame
+	_expect(not station.execute_mutual_passage(), "42C odmawia wykonania bez zatwierdzonego łańcucha")
+	_expect(not state.decisions.has(EXECUTED_FACT), "Odmowa nie fabrykuje wykonania")
 	_expect(station.is_exit_unlocked, "Wstrzymanie i ograniczona zgoda nie mogą softlockować wyjścia")
 	await _close_station(station)
 
 
 func _test_incomplete_attempt_keeps_exit(state: Node) -> void:
-	var station := await _open_station(state, true, METHOD_MUTUAL, MARTA_PARTIAL, SCOPE_REFUSED)
+	var station := await _open_station(state, true, METHOD_MUTUAL, MARTA_FULL, SCOPE_GRANTED)
 	if station == null:
 		return
 	_expect(station.execute_mutual_passage(), "Niepełna próba może wykonać tylko otwarcie przejścia")
