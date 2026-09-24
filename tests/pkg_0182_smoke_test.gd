@@ -215,8 +215,12 @@ func _test_three_cycle_soak(state: Node) -> void:
 		var resume_ok: bool = not paused
 		ProceduralAudio.clear_sound_cache()
 		AtmosphereRig.clear_light_texture_cache()
-		await create_timer(0.05).timeout
-		var after := int(Performance.get_monitor(Performance.OBJECT_COUNT))
+		# PKG-0242 (R2): the pause fade and other short tweens are still alive
+		# 0.05 s after the menu closes; how many depends on frame timing (the
+		# count differed by a few objects between cycles under parallel load,
+		# never growing). Measure once transient objects have settled, so a
+		# difference between cycles means a real leak.
+		var after := await _settled_object_count()
 		var delta := after - before
 		var cache_size := ProceduralAudio.get_sound_cache_size()
 		var cycle_ok: bool = loaded == ACTIVE_IDS.size() and save_ok and reload_ok and pause_visible and resume_ok and cache_size == 0
@@ -254,7 +258,12 @@ func _test_json_safe_campaign(state: Node) -> void:
 
 func _test_scope_guards() -> void:
 	print("6. D-098/D-168 scope guards...")
-	_expect(not DirAccess.dir_exists_absolute(ProjectSettings.globalize_path("res://.git")), "project must remain unversioned")
+	# PKG-0242 (R2): D-251 (AGENTS.md, owner authority PKG-0241) made the git
+	# history part of the record, superseding the D-016 "no repository" rule
+	# this line pinned. What still holds for the versioned tree: exported
+	# builds stay out of it.
+	var ignore := FileAccess.get_file_as_string("res://.gitignore")
+	_expect(ignore.contains("\ndist/"), "build output (dist/) must stay out of version control")
 	_expect(not FileAccess.file_exists("res://index.html"), "Godot project root must not gain a web surface")
 	var unexpected_exe: Array[String] = []
 	_collect_unexpected_exe("res://", unexpected_exe)
@@ -298,3 +307,19 @@ func _finish() -> void:
 	else:
 		push_error("PKG-0182 SMOKE FAILED with %d failures" % _failures.size())
 		quit(1)
+
+
+## Object count after short-lived tweens/timers finish: at least 0.5 s and
+## 10 consecutive frames without change (capped at 5 s).
+func _settled_object_count() -> int:
+	var started := Time.get_ticks_msec()
+	var last := int(Performance.get_monitor(Performance.OBJECT_COUNT))
+	var steady := 0
+	while Time.get_ticks_msec() - started < 5000:
+		await process_frame
+		var now := int(Performance.get_monitor(Performance.OBJECT_COUNT))
+		steady = steady + 1 if now == last else 0
+		last = now
+		if steady >= 10 and Time.get_ticks_msec() - started >= 500:
+			break
+	return last

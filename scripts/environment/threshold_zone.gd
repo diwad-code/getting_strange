@@ -136,6 +136,17 @@ func trigger_entry(player: Node2D, instant: bool = false) -> bool:
 		return false
 	if not is_open:
 		return false
+	# PKG-0242 (UX): exits stay open (D-227) and the station guards its own
+	# completion. When it cannot be left yet (18 without a committed method,
+	# an unfinished finale), Lena says why at the door instead of walking in
+	# and standing there. Harness entries (instant) keep the D-227 path.
+	if not instant:
+		var host := _get_station_host()
+		if host != null and host.has_method("forward_block_line"):
+			var line := String(host.call("forward_block_line"))
+			if not line.is_empty():
+				preload("res://scripts/campaign/gap_ledger.gd").say(host, &"exit_not_yet", line)
+				return true
 	_busy = true
 	_sequence_player = player
 	sequence_started.emit()
@@ -252,8 +263,25 @@ func is_ready_for_entry() -> bool:
 	return is_player_in_range and is_open and not _busy
 
 
+## D-228 priority MRP > Threshold, for a point that still has something to
+## do. A read point near the door (18 after the commit) no longer holds the
+## doorway: the exit wins there. Stations can refine "still has something
+## to do" with is_point_actionable(id); otherwise it is not _is_resolved(id).
 func _yields_to_reading_point() -> bool:
-	return is_player_in_range and Focus.focused_point(self) != null
+	if not is_player_in_range:
+		return false
+	var point := Focus.focused_point(self)
+	if point == null:
+		return false
+	var host := _get_station_host()
+	var id: Variant = point.get("resonance_id")
+	if host == null or id == null:
+		return true
+	if host.has_method("is_point_actionable"):
+		return bool(host.call("is_point_actionable", String(id)))
+	if host.has_method("_is_resolved"):
+		return not bool(host.call("_is_resolved", String(id)))
+	return true
 
 
 func _draw_ready_notches(rect: Rect2) -> void:

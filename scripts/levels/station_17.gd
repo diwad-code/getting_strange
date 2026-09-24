@@ -413,6 +413,18 @@ func _record(key: StringName, value: Variant) -> void:
 		state.record_decision(key, value)
 
 
+## PKG-0242 (UX): the desk stays actionable on the return visit while
+## Jakub has not answered the proposed method, so the exit next to it does
+## not take that press.
+func is_point_actionable(id: String) -> bool:
+	if id == "consent_scope_desk" and is_consent_scope_recorded:
+		var decisions := _decisions()
+		var method := str(decisions.get(NarrativeRules.PROPOSED_KEY, ""))
+		return not NarrativeRules.locked(decisions) and NarrativeRules.METHODS.has(method) \
+			and NarrativeRules.response(decisions, method).is_empty()
+	return not _is_resolved(id)
+
+
 func _is_resolved(id: String) -> bool:
 	match id:
 		"cost_ledger_console": return is_cost_ledger_read

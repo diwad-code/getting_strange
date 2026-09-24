@@ -19,7 +19,12 @@ extends SceneTree
 ## * on every address the exit keeps a stretch where no reading point is in
 ##   reach, so a press there always leaves;
 ## * where a reading point and the open exit overlap (18: the mutual-passage
-##   side of the method post) the reading point owns the press;
+##   side of the method post) the reading point owns the press while it
+##   still has something to do; after the commit the exit wins there;
+## * an exit the station cannot use yet (18 without a committed method)
+##   refuses before the entry animation and Lena says what is missing;
+## * a reading point pressed before its in-room prerequisite names that
+##   step instead of sending Lena back to an earlier address;
 ## * each side of the 16/17/18 side-choices is a band at least MIN_SIDE_BAND
 ##   wide (the 18 post used to leave 12 px per side);
 ## * reading points no longer share one resized CircleShape2D.
@@ -37,6 +42,7 @@ const ROUTE: Array[String] = [
 const FRAME_BUDGET := 1500
 const APERTURE_FLOOR_TOLERANCE := 1.5
 const Focus := preload("res://scripts/interactables/interaction_focus.gd")
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 const MIN_SIDE_BAND := 30.0
 ## [station, point, dead zone of its side choice]
 const SIDE_CHOICES := [
@@ -74,8 +80,101 @@ func _run() -> void:
 	for choice in SIDE_CHOICES:
 		await _check_side_bands(state, choice)
 	await _check_post_beats_door(state)
+	await _check_door_after_commit(state)
+	await _check_door_refusal(state)
+	await _check_in_room_step_line(state)
 	await _check_unique_shapes(state)
 	_finish()
+
+
+func _press_interact() -> void:
+	var event := InputEventAction.new()
+	event.action = &"interact"
+	event.pressed = true
+	root.push_input(event, true)
+	var release := InputEventAction.new()
+	release.action = &"interact"
+	root.push_input(release, true)
+	await process_frame
+
+
+func _drain_dialogue(station: Node) -> void:
+	var box := station.get_node("CRTDialogueBox") as CRTDialogueBox
+	var presenter := station.get_node_or_null("CreativeScenePresentation")
+	for _i in range(120):
+		if box.is_presenting():
+			box.advance_dialogue()
+		elif presenter == null or not bool(presenter.call("is_busy")):
+			return
+		await process_frame
+
+
+func _check_door_after_commit(state: Node) -> void:
+	CampaignChain.seed_before_17(state)
+	_expect(await CampaignChain.commit_chain(self, "force_home", "partial", "granted"), "18: chain must commit for the after-commit door check")
+	var station := (load("res://scenes/levels/station_18.tscn") as PackedScene).instantiate() as Node2D
+	root.add_child(station)
+	for _f in range(4):
+		await physics_frame
+	ThresholdBinder.install(station)
+	await _drain_dialogue(station)
+	var post := station.get_node("Props/MethodCommitPost") as Node2D
+	var threshold := station.get_node("Threshold") as ThresholdZone
+	var player := station.get_node("Player") as CharacterBody2D
+	var overlap_x := -1.0
+	for x in range(int(post.global_position.x) + 42, int(post.global_position.x) + 90, 2):
+		await _stand(player, float(x))
+		if threshold.is_player_in_range and Focus.focused_point(station) == post:
+			overlap_x = float(x)
+			break
+	_expect(overlap_x > 0.0, "18: after the commit the post still reaches into the doorway")
+	if overlap_x > 0.0:
+		await _press_interact()
+		_expect(bool(threshold.get("_busy")) or bool(station.get("is_level_completed")), "18: after the commit the exit, not the read post, owns the press at x=%d" % int(overlap_x))
+	await _close(station)
+
+
+func _check_door_refusal(state: Node) -> void:
+	var station := await _open(state, "station_18")
+	await _drain_dialogue(station)
+	var threshold := station.get_node("Threshold") as ThresholdZone
+	var player := station.get_node("Player") as CharacterBody2D
+	await _stand(player, threshold.global_position.x)
+	_expect(threshold.is_player_in_range and Focus.focused_point(station) == null, "18: the doorway itself is free of reading points")
+	await _press_interact()
+	var thought := station.get_node_or_null("InnerThoughtSurface")
+	_expect(not bool(threshold.get("_busy")), "18: without a method the exit must not start the entry sequence")
+	_expect(not bool(station.get("is_level_completed")), "18: without a method the exit must not complete")
+	var said := ""
+	if thought != null:
+		for label in thought.find_children("*", "Label", true, false):
+			said += String((label as Label).text) + " "
+		for label in thought.find_children("*", "RichTextLabel", true, false):
+			said += String((label as RichTextLabel).text) + " "
+	_expect(thought != null and bool(thought.get("visible")) and said.contains("trzy prognozy na tablicy"), "18: the refused exit must say what is missing (got '%s')" % said.strip_edges())
+	await _close(station)
+
+
+func _check_in_room_step_line(state: Node) -> void:
+	CampaignChain.seed_before_17(state)
+	var station := (load("res://scenes/levels/station_17.tscn") as PackedScene).instantiate() as Node2D
+	root.add_child(station)
+	for _f in range(4):
+		await physics_frame
+	await _drain_dialogue(station)
+	var said: Array[String] = []
+	(station.get_node("CRTDialogueBox") as CRTDialogueBox).line_started.connect(func(_speaker: StringName, text: String) -> void: said.append(text))
+	var offer := station.get_node("Props/AdaptationOfferTerminal") as Node2D
+	var player := station.get_node("Player") as CharacterBody2D
+	await _stand(player, offer.global_position.x)
+	_expect(Focus.focused_point(station) == offer, "17: Lena stands at the offer terminal")
+	await _press_interact()
+	for _f in range(4):
+		await process_frame
+	var joined := " ".join(said)
+	_expect(joined.contains("Najpierw odczytam rejestr kosztów przy konsoli"), "17: the offer before the ledger names the ledger (got '%s')" % joined)
+	_expect(not joined.contains("Brakuje mi wcześniejszego źródła"), "17: an in-room step must not send Lena to an earlier address")
+	await _close(station)
 
 
 ## Physics positions only: Lena stands, the areas report overlap themselves.

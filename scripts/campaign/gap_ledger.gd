@@ -369,9 +369,28 @@ static func speak(station: Node, gap_id: StringName) -> void:
 	var text := String(spec.get("thought_pl", ""))
 	if text.is_empty():
 		return
+	_present_thought(surface, gap_id, text)
+
+
+## PKG-0242 (UX): one line of Lena's thought outside the gap catalogue (the
+## open exit refusing a departure the station cannot make yet). Same guards
+## as speak(): never over another thought or over CRT dialogue.
+static func say(station: Node, beat_id: StringName, text: String) -> void:
+	if station == null or text.is_empty():
+		return
+	var surface := station.get_node_or_null("InnerThoughtSurface")
+	if surface == null or bool(surface.get("visible")):
+		return
+	var dialogue := station.get_node_or_null("CRTDialogueBox")
+	if dialogue != null and dialogue.has_method("is_presenting") and bool(dialogue.call("is_presenting")):
+		return
+	_present_thought(surface, beat_id, text)
+
+
+static func _present_thought(surface: Node, beat_id: StringName, text: String) -> void:
 	if surface.has_method("present_thought"):
 		var beat = GuidanceBeatScript.new()
-		beat.beat_id = gap_id
+		beat.beat_id = beat_id
 		beat.tier = 2
 		beat.thought_kind = &"intention"
 		beat.truth_scope = &"fallible"

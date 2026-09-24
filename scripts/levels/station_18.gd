@@ -605,6 +605,37 @@ func _on_airlock_body_entered(_body: Node2D) -> void:
 	pass
 
 
+## PKG-0242 (UX): the open exit (D-227) says what the method still needs
+## instead of letting Lena walk into the doorway for nothing. The words follow
+## the PKG-0239 chain: forecasts, Marta, one named method, Jakub's answer at
+## 17 (and Marta's key for mutual passage), then the commit at the post.
+func forward_block_line() -> String:
+	if is_method_committed or is_level_completed:
+		return ""
+	if not are_forecasts_compared:
+		return "Zanim pójdę dalej: trzy prognozy na tablicy, potem Marta przy stole."
+	if not is_marta_truth_disclosed:
+		return "Zanim pójdę dalej, pokażę Marcie, co mam z zapisu."
+	if named_method.is_empty():
+		return "Zanim pójdę dalej, wskażę przy słupku jedną metodę."
+	var decisions := _decisions()
+	var method := String(named_method)
+	var reply := NarrativeRules.response(decisions, method)
+	if reply == "refused":
+		return "Jakub odmówił udziału w tej metodzie. Wskażę przy słupku inną."
+	if reply.is_empty():
+		var revised := NarrativeRules.scope(decisions) == "refused" and method == METHOD_CLOSE_EQUAL \
+			and not decisions.has(&"p9.consent_and_cost.revised_reading_response")
+		if not NarrativeRules.scope_allows(decisions, method) and not revised:
+			return "Jakub nie zgodził się na udział w tej metodzie. Wskażę przy słupku inną."
+		return "Z tą propozycją wrócę najpierw do Jakuba. Łącze jest w hali, za mną."
+	if method == METHOD_MUTUAL and decisions.get(NarrativeRules.SYNC_KEY, "") != "accepted":
+		if decisions.get(NarrativeRules.SYNC_KEY, "") == "refused":
+			return "Marta nie dała klucza. Tej metody nie wykonam; wskażę inną."
+		return "Przejście wzajemne wymaga klucza Marty. Zapytam ją przy stole."
+	return "Mam odpowiedzi. Zatwierdzę metodę przy słupku, zanim wyjdę."
+
+
 func _trigger_level_completion() -> void:
 	if is_level_completed:
 		return
@@ -690,6 +721,22 @@ func _record(key: StringName, value: Variant) -> void:
 	var state := get_node_or_null("/root/GameStateManager")
 	if state != null:
 		state.record_decision(key, value)
+
+
+## PKG-0242 (UX): Marta's table stays actionable while more of the record
+## can still be shown or her key is still unanswered; the exit near the post
+## never takes a press a point here still needs.
+func is_point_actionable(id: String) -> bool:
+	if _snapshot_taken() or _any_finale_executed():
+		return false
+	match id:
+		"marta_truth_table":
+			if marta_truth_state != MARTA_FULL:
+				return true
+			return named_method == METHOD_MUTUAL and not _decisions().has(NarrativeRules.SYNC_KEY)
+		"method_commit_post":
+			return not is_method_committed
+	return not _is_resolved(id)
 
 
 func _is_resolved(id: String) -> bool:

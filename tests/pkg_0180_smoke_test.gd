@@ -156,8 +156,16 @@ func _test_export_presets_and_dist() -> void:
 	var presets_text := FileAccess.get_file_as_string("res://export_presets.cfg")
 	_expect(presets_text.contains("Windows Desktop"), "export_presets.cfg must define Windows Desktop preset")
 	_expect(presets_text.contains("Linux Desktop") or presets_text.contains("Linux"), "export_presets.cfg must define Linux preset")
-	_expect(DirAccess.dir_exists_absolute("res://dist/windows"), "dist/windows directory must exist")
-	_expect(DirAccess.dir_exists_absolute("res://dist/linux"), "dist/linux directory must exist")
+	# PKG-0242 (R2, D-251): the project is now a git repository and exported
+	# builds are disposable output kept out of the project state (AGENTS.md),
+	# so a fresh checkout has no dist/. What release readiness needs from the
+	# source is a known destination: both presets export into dist/, and dist/
+	# is excluded from version control. A local dist/ is still scanned by the
+	# D-168 executable check below.
+	_expect(presets_text.contains("export_path=\"dist/windows/"), "Windows preset must export into dist/windows")
+	_expect(presets_text.contains("export_path=\"dist/linux/"), "Linux preset must export into dist/linux")
+	var ignore := FileAccess.get_file_as_string("res://.gitignore")
+	_expect(ignore.split("\n").has("dist/") or ignore.split("\r\n").has("dist/"), "dist/ (build output) must stay out of version control")
 
 
 const KNOWN_EXE_PATHS: Array[String] = [

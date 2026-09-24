@@ -120,6 +120,61 @@ const LINES := {
 	"household_c_withheld": [["CZYTNIK", "Brak pełnego zapisu i odpowiedzi Marty na synchronizację. Ta wersja przejścia nie jest dostępna."]],
 }
 
+## PKG-0242 (UX): a reading point pressed before the point it depends on in
+## the same room names that point, instead of the generic "earlier source"
+## line (which sent players back to earlier addresses for a step that stood
+## next to them). Each entry lists [prerequisite, line] in order; the first
+## unmet prerequisite speaks. A prerequisite is another point id of the room
+## (its `_is_resolved`) or "@property" of the station. Sources that live at
+## earlier addresses still get FALLBACK_LINES.
+const STEP_PREREQS := {
+	"relation_photo": [["two_lives", "Najpierw rozejrzę się w przedpokoju. Czyje rzeczy tu stoją?"]],
+	"private_boundary": [["two_lives", "Najpierw rozejrzę się w przedpokoju. Czyje rzeczy tu stoją?"], ["relation_photo", "Najpierw zdjęcie na komodzie."]],
+	"marta_day": [["home_task", "Marta o coś prosi przy stole. Najpierw jej pomogę."]],
+	"marta_boundary": [["home_task", "Marta o coś prosi przy stole. Najpierw jej pomogę."], ["marta_day", "Najpierw wysłucham, jak Marta pamięta tamten dzień."]],
+	"record_186_days": [["identity_card", "Najpierw karta przy czytniku na ladzie."]],
+	"minimal_report": [["identity_card", "Najpierw karta przy czytniku na ladzie."], ["record_186_days", "Najpierw historia wejść w rejestrze. Potem poproszę o wyciąg."]],
+	"jakub_meeting": [["jakub_questions", "Najpierw sprawdzę głos przez łącze. Zapytam o to, co wie tylko on."]],
+	"jakub_refusal": [["jakub_questions", "Najpierw sprawdzę głos przez łącze. Zapytam o to, co wie tylko on."], ["jakub_meeting", "Najpierw podejdę do niego przy imadle."]],
+	"synthesize": [["marta_source", "Najpierw położę na stole zaświadczenie."], ["institution_source", "Najpierw położę obok wyciąg UCP."]],
+	"signal_sender": [["loop_logbook", "Najpierw odczytam dziennik próby. Nie wyślę impulsu w ciemno."]],
+	"abort_note": [["loop_logbook", "Najpierw odczytam dziennik próby. Nie wyślę impulsu w ciemno."], ["signal_sender", "Najpierw muszę potwierdzić, że po drugiej stronie ktoś odpowiada."]],
+	"cost_selector": [["safe_analyzer", "Najpierw wprowadzę odpowiedź do analizatora."]],
+	"home_echo_receiver": [["safe_analyzer", "Najpierw wprowadzę odpowiedź do analizatora."], ["cost_selector", "Najpierw wybiorę przy selektorze, co może stracić ostrość."]],
+	"adaptation_offer_terminal": [["cost_ledger_console", "Najpierw odczytam rejestr kosztów przy konsoli."]],
+	"consent_scope_desk": [["cost_ledger_console", "Najpierw odczytam rejestr kosztów przy konsoli."], ["adaptation_offer_terminal", "Najpierw odpowiem na ofertę na terminalu."]],
+	"marta_truth_table": [["forecast_comparator", "Najpierw porównam trzy prognozy na tablicy. Potem pokażę je Marcie."]],
+	"method_commit_post": [["forecast_comparator", "Najpierw porównam trzy prognozy na tablicy."]],
+	"sealed_other_lena": [["forced_return_latch", "Najpierw wykonam powrót przy czytniku."]],
+	"local_lena_recovered": [["@is_recovery_started", "Najpierw wygaszę domową sygnaturę przy zatrzasku."]],
+	"memory_leak": [["mutual_passage", "Najpierw otworzę okno dla obu sygnatur."]],
+}
+## household_consequence depends on its own finale's order.
+const HOUSEHOLD_PREREQS := {
+	"Station42A": [["forced_return_latch", "Najpierw wykonam powrót przy czytniku."], ["sealed_other_lena", "Najpierw sprawdzę, co zostało po drugiej stronie."]],
+	"Station42B": [["@is_recovery_started", "Najpierw wygaszę domową sygnaturę przy zatrzasku."], ["local_lena_recovered", "Najpierw muszę usłyszeć, że odpowiedziała u siebie."], ["flow_closure", "Najpierw zamknę przepływ przy zatrzasku."]],
+	"Station42C": [["mutual_passage", "Najpierw otworzę okno dla obu sygnatur."], ["memory_leak", "Najpierw odczytam, co przeciekło między nami."]],
+}
+
+
+static func step_lines_for(id: String, station: Node) -> Array:
+	if station == null:
+		return []
+	var steps: Array = STEP_PREREQS.get(id, [])
+	if id == "household_consequence":
+		steps = HOUSEHOLD_PREREQS.get(String(station.name), [])
+	for step: Array in steps:
+		var prereq := String(step[0])
+		var met := false
+		if prereq.begins_with("@"):
+			met = _truthy(station.get(prereq.substr(1)))
+		elif station.has_method("_is_resolved"):
+			met = bool(station.call("_is_resolved", prereq))
+		if not met:
+			return [{"speaker": "Lena", "text": String(step[1])}]
+	return []
+
+
 static func lines_for(id: String, decisions: Dictionary, station: Node = null) -> Array:
 	var pairs: Array = LINES.get(id, []).duplicate(true)
 	if id == "marta_source":

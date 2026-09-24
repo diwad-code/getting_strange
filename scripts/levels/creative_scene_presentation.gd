@@ -47,14 +47,16 @@ func _on_action(id: String, _prop_type: int) -> void:
 		if closed.has(id):
 			_guidance.close_hypothesis(closed[id])
 	else:
-		lines = [{"speaker": "Lena", "text": "Brakuje mi wcześniejszego źródła. Mogę wrócić i je sprawdzić."}]
-		if id == "signal_sender":
+		# PKG-0242 (UX): a step that stands in this room is named; only a
+		# source from an earlier address gets the generic line.
+		lines = Lines.step_lines_for(id, _station)
+		if lines.is_empty() and id == "signal_sender":
 			# 15 drives its protocol through response arrivals; the phase
 			# lines (controls, explicit arming, correction) live in
 			# lines_for branched on live station state, not on resolution.
-			var phase: Array = Lines.lines_for(id, state.decisions, _station)
-			if not phase.is_empty():
-				lines = phase
+			lines = Lines.lines_for(id, state.decisions, _station)
+		if lines.is_empty():
+			lines = [{"speaker": "Lena", "text": "Brakuje mi wcześniejszego źródła. Mogę wrócić i je sprawdzić."}]
 	_pending.append({"id": id, "lines": lines})
 	if id == "safe_analyzer" and _station.call("_is_resolved", id):
 		var preview: Array = Lines.lines_for("cost_selector_preview", state.decisions, _station)
@@ -81,6 +83,11 @@ func _process(_delta: float) -> void:
 	_active_id = entry.id
 	var player := _station.get_node("Player") as PrototypePlayer
 	player.play_visual_cue(&"examine" if _active_id == "relation_photo" else &"interact", 0.6)
+	# PKG-0242 (UX): a blocked verb may have raised its gap thought in the
+	# same frame; the conversation on screen supersedes it.
+	var thought := _station.get_node_or_null("InnerThoughtSurface")
+	if thought != null and thought.has_method("dismiss") and bool(thought.get("visible")):
+		thought.call("dismiss")
 	_dialogue.present(entry.lines)
 
 func _input(event: InputEvent) -> void:

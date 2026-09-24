@@ -393,6 +393,22 @@ func _on_airlock_body_entered(_body: Node2D) -> void:
 	pass
 
 
+## PKG-0242 (UX): the open exit names the step still missing before 43
+## instead of letting Lena walk into the doorway for nothing.
+func forward_block_line() -> String:
+	if is_level_completed or not _has_close_equal():
+		return ""
+	if not (is_recovery_started or _decided(&"p9.finale.close_equal.recovery_started")):
+		return "Zanim wyjdę, wygaszę domową sygnaturę przy zatrzasku."
+	if not (is_local_lena_recovered or _decided(FACT_LOCAL_RECOVERED)):
+		return "Zanim wyjdę, muszę usłyszeć, że odpowiedziała u siebie."
+	if not (is_flow_closed or _decided(FACT_FLOW_CLOSED)):
+		return "Zanim wyjdę, zamknę przepływ przy zatrzasku."
+	if not (is_household_read or _decided(FACT_HOUSEHOLD)):
+		return "Zanim wyjdę, zobaczę, co zostało w progu."
+	return ""
+
+
 func _trigger_level_completion() -> void:
 	if is_level_completed:
 		return
