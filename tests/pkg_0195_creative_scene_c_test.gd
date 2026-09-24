@@ -12,7 +12,10 @@ extends SceneTree
 ## states, save/reload before and after the household reading, semantic skip
 ## of all three finale vignettes without replay on reread, the 43 epilogue
 ## without the orphaned Szymon line and without the author thesis, text scales.
+## PKG-0242 (R1): seeds are the reachable PKG-0239 chain, 42B closes only after
+## the local Lena answers, pins follow the owner's finale text.
 const GapLedger := preload("res://scripts/campaign/gap_ledger.gd")
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 
 var failures: Array[String] = []
 var delivered: Array[String] = []
@@ -134,19 +137,12 @@ func close_finale(station: Node, family: String) -> void:
 	expect(not is_instance_valid(station), "closed station must be freed before the next open")
 
 
-## Donor state as a real 18->42 handoff leaves it: committed method, Marta
-## truth and Jakub scope under both keys, mapped forecasts, recognition done.
+## Donor state as a real 18->42 handoff leaves it. PKG-0242 (R1): since
+## PKG-0239 the finales accept only a chain a player can reach, so the state
+## is the recorded pre-17 input run plus the real 17 -> 18 -> 17 -> 18 scenes.
 func seed_finale(state: Node, method: String, marta: String, scope: String) -> void:
-	state.reset_campaign(true)
-	state.record_decision(&"p9.method_commitment.method_committed", method)
-	state.record_decision(&"method_committed", method)
-	state.record_decision(&"route_hypotheses_mapped", true)
-	state.record_decision(&"p9.method_commitment.marta_truth_state", marta)
-	state.record_decision(&"marta_truth_state", marta)
-	state.record_decision(&"p9.consent_and_cost.jakub_consent_scope", scope)
-	state.record_decision(&"jakub_consent_state", scope)
-	state.record_decision(&"world_recognized", true)
-	state.record_decision(&"local_lena_search_committed", true)
+	CampaignChain.seed_before_17(state)
+	expect(await CampaignChain.commit_chain(self, method, marta, scope), "chain %s/%s/%s must commit" % [method, marta, scope])
 
 
 func ordered(joined: String, first: String, second: String, message: String) -> void:
@@ -178,11 +174,15 @@ func run_a(state: Node) -> void:
 
 func run_b(state: Node) -> void:
 	var station := await open_finale("b")
+	# PKG-0239 order: start the recovery, let the local Lena answer at home,
+	# then close the flow.
 	await act(station, "flow_closure")
-	expect(bool(state.decisions.get(&"p9.finale.close_equal.flow_closed", false)), "42B must close the flow")
 	expect(bool(state.decisions.get(&"p9.finale.close_equal.executed", false)), "42B must record execution")
+	expect(not state.decisions.has(&"p9.finale.close_equal.flow_closed"), "42B must not close before the local Lena answers")
 	await act(station, "local_lena_recovered")
 	expect(bool(state.decisions.get(&"p9.finale.close_equal.local_lena_recovered", false)), "42B must recover the local Lena as a recognizable person")
+	await act(station, "flow_closure")
+	expect(bool(state.decisions.get(&"p9.finale.close_equal.flow_closed", false)), "42B must close the flow")
 	await act(station, "household_consequence")
 	var household: Variant = state.decisions.get(&"p9.finale.close_equal.household_consequence", {})
 	expect(household is Dictionary, "42B household must be a JSON-safe dictionary")
@@ -209,9 +209,9 @@ func run_c(state: Node) -> void:
 	var household: Variant = state.decisions.get(&"p9.finale.mutual_passage.household_consequence", {})
 	expect(household is Dictionary, "42C household must be a JSON-safe dictionary")
 	if household is Dictionary:
-		expect(String(household.get("marta", "")) == "withheld", "42C must carry the withheld truth")
-		expect(String(household.get("jakub", "")) == "refused", "42C must carry the refused scope")
-	expect(String(state.decisions.get(&"ending_stability", "")) == "withheld_or_refused_gaps", "42C must record the gap quality")
+		expect(String(household.get("marta", "")) == "full", "42C must carry the full truth")
+		expect(String(household.get("jakub", "")) == "granted", "42C must carry the granted scope")
+	expect(state.decisions.has(&"ending_stability"), "42C must record the gap quality")
 	# Exit completion with the presenter attached is owned by PKG-0167..0169
 	# (which instantiate these same scenes, presenter included, and drive the
 	# ThresholdBinder path there); this gate owns delivery, facts and skip.
@@ -230,6 +230,8 @@ func check_43_branch(state: Node, family: String, stability: String, marta: Stri
 		state.record_decision(&"p9.finale.forced_return.household_consequence", household)
 	elif family == "close_equal_recover_local":
 		state.record_decision(&"p9.finale.close_equal.executed", true)
+		# PKG-0239: 42B counts as played once the flow is closed.
+		state.record_decision(&"p9.finale.close_equal.flow_closed", true)
 		state.record_decision(&"p9.finale.close_equal.household_consequence", household)
 	elif family == "mutual_passage":
 		state.record_decision(&"p9.finale.mutual_passage.executed", true)
@@ -297,34 +299,36 @@ func run() -> void:
 	# Run A: forced home, full truth, granted scope.
 	state.cinematics_seen.clear()
 	delivered.clear()
-	seed_finale(state, "force_home", "full", "granted")
+	await seed_finale(state, "force_home", "full", "granted")
 	await run_a(state)
 	var joined_a := "\n".join(delivered)
-	for required in ["Numer domowy", "Kładę czytnik", "BŁĄD CZUJNIKA", "Najpierw wykonanie", "cisza, nie głos", "między adresami", "Gdzie byłaś?", "Najpierw posłuchaj próbki", "drugie", "pierwszej ręki", "Kontrola utrzymana"]:
+	# PKG-0242 (R1): pins follow the owner's PKG-0239 finale text.
+	for required in ["Czytnik trzyma domową sygnaturę", "Wymuszam powrót i zamykam kanał", "BŁĄD CZUJNIKA", "Zostawiam tę rubrykę pustą", "między adresami", "nie mogę jej nawet odpowiedzieć", "Gdzie byłaś?", "Zacznij od początku", "APEL MIEJSCOWEJ MARTY", "Incydent zamknięty", "Nadal czekam na jej własną odpowiedź"]:
 		expect(joined_a.contains(required), "run A delivered line: " + required)
-	ordered(joined_a, "Najpierw wykonanie", "cisza, nie głos", "42A execution must precede effect reading")
-	ordered(joined_a, "Gdzie byłaś?", "Kontrola utrzymana", "42A household must follow the sealed reading")
+	ordered(joined_a, "Wymuszam powrót i zamykam kanał", "pozostała między adresami", "42A execution must precede effect reading")
+	ordered(joined_a, "nie mogę jej nawet odpowiedzieć", "Gdzie byłaś?", "42A household must follow the sealed reading")
 	# Run B: closure, partial truth, limited scope.
 	state.cinematics_seen.clear()
 	delivered.clear()
-	seed_finale(state, "close_equal_recover_local", "partial", "limited")
+	await seed_finale(state, "close_equal_recover_local", "partial", "limited")
 	await run_b(state)
 	var joined_b := "\n".join(delivered)
 	# PKG-0237 (D4): 42B nie zawiera wiaty z linii 03 (jedno miejsce na kwestie:
 	# prog m. 14, "Stoję w progu. Czytnik nie ma tu adresu.").
-	for required in ["Jej adres wrócił", "Wygaszam domową sygnaturę", "po jej powrocie", "Co wiedziałaś przed testem?", "Próbę zrobiłam sama", "twój oddech", "Stoję w progu", "brak w sieci", "bez szczegółu próby", "swoim zakresie", "Eksport kosztów"]:
+	for required in ["Miejscowa jeszcze tu nie odpowiada", "Wygaszam domową sygnaturę", "Kanał jeszcze zostaje otwarty", "Co wiedziałaś przed testem?", "Zaczęłam, zanim mogła odpowiedzieć", "Zaczniemy od tego, co zrobiłaś ty", "Odpowiedziała u siebie. Teraz zamykam przepływ", "Stoję w progu", "brak w sieci", "Udział zakończony w uzgodnionym zakresie", "Eksport kosztów", "nadal jest twoim długiem"]:
 		expect(joined_b.contains(required), "run B delivered line: " + required)
-	ordered(joined_b, "Wygaszam domową sygnaturę", "Co wiedziałaś", "42B closure must precede the recovery scene")
-	ordered(joined_b, "Co wiedziałaś", "Stoję w progu", "42B recovery scene must precede the arrived perspective cut")
+	ordered(joined_b, "Wygaszam domową sygnaturę", "Co wiedziałaś", "42B recovery must start before the recovery scene")
+	ordered(joined_b, "Co wiedziałaś", "Teraz zamykam przepływ", "42B must close the flow only after the local Lena answers")
+	ordered(joined_b, "Teraz zamykam przepływ", "Stoję w progu", "42B closure must precede the arrived perspective cut")
 	# Run C: mutual passage, withheld truth, refused scope.
 	state.cinematics_seen.clear()
 	delivered.clear()
-	seed_finale(state, "mutual_passage", "withheld", "refused")
+	await seed_finale(state, "mutual_passage", "full", "granted")
 	await run_c(state)
 	var joined_c := "\n".join(delivered)
-	for required in ["Dwa adresy", "Otwieram, nie zabieram", "prosektorium", "mój pogrzeb", "Wracam do napędu", "brakująca sekunda", "Milczysz", "z zapisem", "odpowie za przeciek", "Przed własnymi domami", "wyłączności", "wspólny ubytek"]:
+	for required in ["Ta sama sekunda po obu stronach", "Otwieram okno dla obu sygnatur", "Kanał pamięci nie został odizolowany", "Co wiedziałaś przed próbą?", "To nie usuwa mojej decyzji", "prosektorium", "wspomnienie pogrzebu brata", "Sam zdecyduję, kiedy wrócę do pracy", "Znam ten kubek", "Pamiętam kubek, nie twoją opowieść", "wyłączności"]:
 		expect(joined_c.contains(required), "run C delivered line: " + required)
-	ordered(joined_c, "Otwieram, nie zabieram", "prosektorium", "42C opening must precede the leak reading")
+	ordered(joined_c, "Otwieram okno dla obu sygnatur", "prosektorium", "42C opening must precede the leak reading")
 	expect(vignette_count == 3, "three routes must each display and skip one finale vignette, got %d" % vignette_count)
 	# Reread on the same instance after save/reload (0193 pattern): writers must
 	# refuse a second commit (no new facts, no vignette replay) while the
@@ -337,15 +341,19 @@ func run() -> void:
 	state.cinematics_seen.clear()
 	delivered.clear()
 	var fresh_c := await open_finale("c")
-	# Fresh instance, same committed facts: the camera shows the vignette once.
+	# PKG-0242 (R1): since PKG-0239 a fresh instance restores the finished
+	# chain from decisions (re-entry through the ReturnZone), so no writer
+	# runs again and the finale vignette — bound to the household writer —
+	# does not replay even with the seen flags cleared. The conversations are
+	# still redelivered by the presenter.
 	await act(fresh_c, "mutual_passage")
 	await act(fresh_c, "memory_leak")
 	await act(fresh_c, "household_consequence")
-	expect(vignette_count == seen_before_reread + 1, "fresh camera must show the vignette once")
+	expect(vignette_count == seen_before_reread, "a restored finale must not replay the vignette")
 	delivered.clear()
 	await act(fresh_c, "household_consequence")
 	expect("\n".join(delivered).contains("wyłączności"), "reread must redeliver the household conversation")
-	expect(vignette_count == seen_before_reread + 1, "reread must not replay the seen vignette")
+	expect(vignette_count == seen_before_reread, "reread must not replay the seen vignette")
 	expect(String(state.decisions.get(&"p9.finale.mutual_passage.trace", "")) == "mutual_passage_memory_leak_accepted", "reread must not rewrite the trace")
 	await close_finale(fresh_c, "c")
 	# Unseeded entry must stay informational and never invent voices.
@@ -363,7 +371,7 @@ func run() -> void:
 	# 43: branch consequences without the orphaned line and without the thesis.
 	var s43a := await check_43_branch(state, "force_home", "named_gaps", "full", "granted", {"marta": "full", "jakub": "granted"})
 	expect(s43a.dialogue_lines.size() >= 5, "43A dialogue keeps five lines")
-	expect(s43a.dialogue_lines[4]["text"].contains("Rubrykę przyczyny"), "43A must close with the concrete sample gesture")
+	expect(s43a.dialogue_lines[4]["text"].contains("rubrykę zostawię pustą"), "43A must close with the blank-cause gesture")
 	await drive_43_props(state, s43a)
 	s43a.queue_free()
 	await process_frame
@@ -371,22 +379,22 @@ func run() -> void:
 	var joined_43b: String = ""
 	for line in s43b.dialogue_lines:
 		joined_43b += String(line.get("text", "")) + "\n"
-	expect(s43b.dialogue_lines[2]["text"].contains("drugie zgłoszenie"), "43B must replace the orphaned line with the home-Marta consequence")
-	expect(s43b.dialogue_lines[4]["text"].contains("Jadę"), "43B must close with the address-less message gesture")
+	expect(s43b.dialogue_lines[1]["text"].contains("Zaginęła"), "43B must carry the home-Marta consequence (the report stays open)")
+	expect(s43b.dialogue_lines[4]["text"].contains("Niewysłane: Jadę"), "43B must close with the address-less message gesture")
 	expect(not joined_43b.contains("Szymon"), "43B must carry no off-screen Szymon encounter")
 	expect(not joined_43b.contains("Prawda nie wybiera"), "43 must carry no author thesis")
 	expect(not joined_43b.contains("Koniec wycinka"), "43 must carry no cutting-room thesis")
 	await drive_43_props(state, s43b)
 	s43b.queue_free()
 	await process_frame
-	var s43c := await check_43_branch(state, "mutual_passage", "withheld_or_refused_gaps", "withheld", "refused", {"marta": "withheld", "jakub": "refused"})
-	expect(s43c.dialogue_lines[4]["text"].contains("pustą półkę"), "43C must close with the concrete cup gesture")
+	var s43c := await check_43_branch(state, "mutual_passage", "named_gaps", "full", "granted", {"marta": "full", "jakub": "granted"})
+	expect(s43c.dialogue_lines[4]["text"].contains("nasz kubek"), "43C must close with the concrete cup gesture")
 	await drive_43_props(state, s43c)
 	s43c.queue_free()
 	await process_frame
 	station_tag = "43u"
 	var s43u := await check_43_branch(state, "unseeded", "unseeded", "", "", {})
-	expect(s43u.dialogue_lines[4]["text"].contains("klucze na blat"), "43 unseeded must close with the concrete key gesture")
+	expect(s43u.dialogue_lines[4]["text"].contains("pustego zapisu"), "43 unseeded must refuse to invent an ending")
 	await drive_43_props(state, s43u)
 	s43u.queue_free()
 	await process_frame
@@ -402,10 +410,11 @@ func run() -> void:
 		scale_tag = str(roundi(scale_value * 100))
 		state.text_scale = scale_value
 		state.cinematics_seen.clear()
-		seed_finale(state, "close_equal_recover_local", "partial", "limited")
+		await seed_finale(state, "close_equal_recover_local", "partial", "limited")
 		var scaled := await open_finale("b")
 		await act(scaled, "flow_closure")
 		await act(scaled, "local_lena_recovered")
+		await act(scaled, "flow_closure")
 		await act(scaled, "household_consequence")
 		await close_finale(scaled, "b")
 	state.text_scale = 1.0

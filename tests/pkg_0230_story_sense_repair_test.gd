@@ -18,6 +18,8 @@ extends SceneTree
 ## P2-3: naglowki i nazwy zgodne z runtime.
 
 const GapLedgerScript := preload("res://scripts/campaign/gap_ledger.gd")
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
+const NarrativeRules := preload("res://scripts/levels/narrative_repair_rules.gd")
 
 var _failures: Array[String] = []
 
@@ -93,16 +95,13 @@ func _close(station: Node) -> void:
 	await process_frame
 
 
-func _seed_donor(state: Node, scope: String) -> void:
-	state.record_decision(&"p9.consent_and_cost.jakub_consent_scope", scope)
-	state.record_decision(&"jakub_consent_state", scope)
-
-
+## PKG-0242 (R1): since PKG-0239 the donor of 18 is Jakub's scope
+## conversation at 17 and the commit needs his separate answer to the named
+## method. Seeds are the recorded pre-17 input run plus the real 17/18 scenes
+## (CampaignChain); nothing about consent is hand-written.
 func _seed_18_entry(state: Node, scope: String) -> void:
-	state.record_decision(&"p7.work_history_and_record.trace", "cost_ledger_and_consent_scope_recorded")
-	state.record_decision(&"p9.consent_and_cost.cost_ledger_read", true)
-	state.record_decision(&"p9.consent_and_cost.adaptation_offer", "rejected")
-	_seed_donor(state, scope)
+	CampaignChain.seed_before_17(state)
+	_expect(await CampaignChain.record_scope(self, scope), "17 zapisuje zakres %s" % scope)
 
 
 # ─── P0-4 ────────────────────────────────────────────────────────────────
@@ -115,10 +114,15 @@ func _test_epilogue_line(state: Node) -> void:
 	_expect(String(station.get("ending_family")) == "unseeded", "golas 43 to unseeded")
 	var lines: Array = station.get("dialogue_lines") as Array
 	_expect(lines.size() >= 5, "unseeded ma >= 5 linii")
-	var second := String((lines[1] as Dictionary).get("text", ""))
-	_expect(not second.contains("nigdy nie istnia"), "epilog nie zaprzecza istnieniu Linii 4")
-	_expect(second.contains("Linia 4"), "epilog mowi o Linii 4")
-	_expect(second.contains("odbudowano"), "roznica w statusie linii, nie w istnieniu")
+	# PKG-0242 (R1): the owner's PKG-0239 unseeded branch is a bare record of
+	# the missing method (PKG-0237 D7); it must still never deny Line 4 and
+	# must not invent an ending.
+	var joined := ""
+	for line in lines:
+		joined += String((line as Dictionary).get("text", "")) + "\n"
+	_expect(not joined.contains("nigdy nie istnia"), "epilog nie zaprzecza istnieniu Linii 4")
+	_expect(joined.contains("Brak potwierdzonej metody"), "golas 43 nazywa brak metody")
+	_expect(joined.contains("Nie dopiszę zakończenia do pustego zapisu"), "golas 43 nie dopisuje zakonczenia")
 	await _close(station)
 
 
@@ -146,13 +150,16 @@ func _test_return_mechanism(state: Node) -> void:
 # ─── P0-1 ────────────────────────────────────────────────────────────────
 
 func _commit_attempt(state: Node, scope: String, method: StringName) -> Array:
-	state.reset_campaign(true)
+	await _seed_18_entry(state, scope)
+	var truth := "full" if method == &"mutual_passage" else "partial"
+	_expect(await CampaignChain.propose_method(self, String(method), truth), "18 nazywa %s" % String(method))
+	# Jakub answers only a proposal his scope allows; otherwise 17 records no
+	# reply and the method stays blocked at the post.
+	if NarrativeRules.scope_allows(state.decisions, String(method)):
+		_expect(await CampaignChain.answer_method(self, "accepted"), "17 odpowiada na %s" % String(method))
 	var station := await _open(state, 18)
 	if station == null:
 		return [false, "", false]
-	_seed_18_entry(state, scope)
-	station.call("compare_forecast_consent_dependencies")
-	station.call("disclose_marta_truth_partial")
 	var result := bool(station.call(_commit_name(method)))
 	var out := [result, String(station.get("last_feedback")), bool(station.get("is_method_committed"))]
 	await _close(station)
@@ -187,14 +194,17 @@ func _test_consent_gates(state: Node) -> void:
 		var g := await _commit_attempt(state, "granted", method)
 		_expect(g[0] and g[2], "granted pozwala %s" % String(method))
 	# Brak zestawienia / prawdy blokuje.
-	state.reset_campaign(true)
+	await _seed_18_entry(state, "granted")
 	var bare := await _open(state, 18)
 	if bare != null:
-		_seed_18_entry(state, "granted")
-		_expect(not bool(bare.call("commit_force_home")), "commit bez zestawienia nie przechodzi")
-		_expect(String(bare.get("last_feedback")) == "forecast_and_consent_inventory_required", "brak zestawienia mowi luka")
+		var bpost := bare.get_node("Props/MethodCommitPost") as Node2D
+		var bplayer := bare.get_node("Player") as Node2D
+		bplayer.global_position = Vector2(bpost.global_position.x - 60.0, 296.0)
+		_expect(not bool(bare.call("choose_method_from_player_side")), "slupek bez zestawienia nie przechodzi")
+		_expect(String(bare.get("last_feedback")) == "forecast_comparison_required", "brak zestawienia mowi luka")
 		_expect(bool(bare.call("compare_forecast_consent_dependencies")), "zestawienie wychodzi")
-		_expect(not bool(bare.call("commit_force_home")), "commit bez prawdy nie przechodzi")
+		_expect(bool(bare.call("choose_method_from_player_side")), "po zestawieniu slupek nazywa metode")
+		_expect(not bool(bare.call("choose_method_from_player_side")), "commit bez prawdy nie przechodzi")
 		_expect(String(bare.get("last_feedback")) == "marta_truth_required", "brak prawdy mowi luka")
 		await _close(bare)
 	# Mapa feedback -> luka istnieje (bramka 0215 fail-closed).
@@ -205,13 +215,13 @@ func _test_consent_gates(state: Node) -> void:
 # ─── P0-2 ────────────────────────────────────────────────────────────────
 
 func _test_two_step(state: Node) -> void:
-	state.reset_campaign(true)
+	await _seed_18_entry(state, "limited")
 	var station := await _open(state, 18)
 	if station == null:
 		return
-	_seed_18_entry(state, "limited")
 	_expect(bool(station.call("compare_forecast_consent_dependencies")), "zestawienie wychodzi")
 	_expect(bool(station.call("disclose_marta_truth_partial")), "prawda wychodzi")
+	station.call("_on_narrative_dialogue_finished", "marta_truth_table")
 	var post := station.get_node("Props/MethodCommitPost") as Node2D
 	var player := station.get_node("Player") as Node2D
 	_expect(post != null and player != null, "slupek i gracz istnieja")
@@ -226,23 +236,34 @@ func _test_two_step(state: Node) -> void:
 	# Drugie podejscie do tej samej: proba commita, ale limited blokuje force_home.
 	_expect(not bool(station.call("choose_method_from_player_side")), "limited blokuje force_home przy slupku")
 	_expect(not bool(station.get("is_method_committed")), "nadal nie commit")
-	# Srodek: nazwij, potem zatwierdz.
+	# Srodek: nazwij; bez odpowiedzi Jakuba drugie podejscie nie zatwierdza.
 	player.global_position = Vector2(post.global_position.x, 296.0)
 	_expect(bool(station.call("choose_method_from_player_side")), "srodek nazywa od nowa")
 	_expect(StringName(station.get("named_method")) == &"close_equal_recover_local", "wskazana close_equal")
-	_expect(bool(station.call("choose_method_from_player_side")), "drugie podejscie zatwierdza")
-	_expect(bool(station.get("is_method_committed")), "commit po nazwaniu")
-	_expect(String(state.decisions.get(&"method_committed", "")) == "close_equal_recover_local", "kanoniczna metoda")
-	_expect(not bool(station.call("choose_method_from_player_side")), "po commicie slupek milczy")
+	_expect(not bool(station.call("choose_method_from_player_side")), "bez odpowiedzi Jakuba drugie podejscie nie zatwierdza")
+	_expect(String(station.get("last_feedback")) == "method_specific_response_required", "brak odpowiedzi Jakuba mowi luka")
 	await _close(station)
+	# Powrot do 17: Jakub odpowiada na te jedna metode; ta sama strona zatwierdza.
+	_expect(await CampaignChain.answer_method(self, "accepted"), "17 odpowiada na close_equal")
+	var back := await _open(state, 18)
+	if back == null:
+		return
+	var bpost := back.get_node("Props/MethodCommitPost") as Node2D
+	var bplayer := back.get_node("Player") as Node2D
+	bplayer.global_position = Vector2(bpost.global_position.x, 296.0)
+	_expect(bool(back.call("choose_method_from_player_side")), "podejscie po odpowiedzi zatwierdza")
+	_expect(bool(back.get("is_method_committed")), "commit po nazwaniu")
+	_expect(String(state.decisions.get(&"method_committed", "")) == "close_equal_recover_local", "kanoniczna metoda")
+	_expect(not bool(back.call("choose_method_from_player_side")), "po commicie slupek milczy")
+	await _close(back)
 	# Martwa strefa +-40: prog nie lezy w sylwetce.
-	state.reset_campaign(true)
+	await _seed_18_entry(state, "granted")
 	var probe := await _open(state, 18)
 	if probe == null:
 		return
-	_seed_18_entry(state, "granted")
 	probe.call("compare_forecast_consent_dependencies")
 	probe.call("disclose_marta_truth_partial")
+	probe.call("_on_narrative_dialogue_finished", "marta_truth_table")
 	var p2 := probe.get_node("Props/MethodCommitPost") as Node2D
 	var pl2 := probe.get_node("Player") as Node2D
 	pl2.global_position = Vector2(p2.global_position.x + 30.0, 296.0)
@@ -274,7 +295,7 @@ func _test_entry_exit_links() -> void:
 	_expect(_cue("res://scenes/levels/station_15.tscn").contains("czytnika brak w rejestrze"), "15 wchodzi wyciagiem z 11")
 	_expect(_cue("res://scenes/levels/station_16.tscn").contains("poza obwodem"), "16 wchodzi przyrzadem spoza petli")
 	_expect(_cue("res://scenes/levels/station_17.tscn").contains("rejestru par"), "17 wchodzi rejestrem par")
-	_expect(_cue("res://scenes/levels/station_18.tscn").contains("Marta przy oknie"), "18 wchodzi ulica i Marta")
+	_expect(_cue("res://scenes/levels/station_18.tscn").contains("Marta czeka na znanej ulicy"), "18 wchodzi ulica i Marta")
 	var beats := {
 		"res://scripts/levels/station_10.gd": "s10_exit_ucp_record",
 		"res://scripts/levels/station_12.gd": "s12_exit_back_home",
@@ -315,7 +336,7 @@ func _test_bodies(state: Node) -> void:
 	var lines: Dictionary = ((load("res://scripts/levels/creative_scene_lines.gd") as GDScript).get_script_constant_map().get("LINES", {}) as Dictionary)
 	for key in ["consent_scope_desk_granted", "consent_scope_desk_limited", "consent_scope_desk_refused"]:
 		var joined := JSON.stringify(lines.get(key, []))
-		_expect(joined.contains("JAKUB (") and not joined.contains("\"JAKUB\""), "%s mowi przez lacze" % key)
+		_expect(joined.contains("Jakub (łącze)") and not joined.to_lower().contains("\"jakub\""), "%s mowi przez lacze" % key)
 	_expect(_read("res://scripts/levels/station_17.gd").contains("lacze"), "17 rysuje terminal lacza")
 
 

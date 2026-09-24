@@ -28,10 +28,13 @@ const VIGNETTE_STATIONS: Array[String] = [
 	"station_42a", "station_42b", "station_42c",
 ]
 
+# PKG-0242 (R1): the owner's PKG-0239 epilogue closes each branch on a
+# concrete act or an identifiable source (KROK 16 acceptance), not on the
+# narrator's paraphrase that PKG-0225 pinned.
 const EXPECTED_LAST_LINES := {
-	"force_home": "Lena oznacza próbkę datą. Rubrykę przyczyny zostawia pustą.",
-	"close_equal_recover_local": "Na obcym przystanku Lena chowa czytnik do torby. Wiadomość `Jadę` zostaje bez adresata.",
-	"mutual_passage": "Lena odkłada kubek na pustą półkę. Drugi zostaje po jej stronie.",
+	"force_home": "Wpiszę datę. Tę rubrykę zostawię pustą.",
+	"close_equal_recover_local": "Niewysłane: Jadę. Adresat: brak w sieci.",
+	"mutual_passage": "Postaw tutaj nasz kubek.",
 }
 
 const THESIS_STEMS: Array[String] = [

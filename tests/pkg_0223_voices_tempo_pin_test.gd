@@ -85,35 +85,45 @@ func _run() -> void:
 	_finish()
 
 
-# --- N4: loop_logbook ≤2 par + slad przyczyny, bez niejasnego "ja" ---
+# PKG-0242 (R1): PKG-0239 (owner narrative repair, authoritative for
+# content) rewrote the 15 log, the 17 ledger/offer and the 18 commit lines.
+# The pins keep each N-contract's intent on the owner's text; where the owner
+# reversed a pin on purpose (KROK 11: do not blur authorship with "someone
+# interrupted"; KROK 12: Wierzbicka is not an automaton reciting "stan") the
+# pin now guards the owner's rule.
+
+# --- N4: loop_logbook — contact, the local's purpose, attributed UCP order ---
 
 func _test_loop_logbook() -> void:
-	print("1. loop_logbook 15: 2 pary, kontakt/powtorka/wyjscie/przyczyna...")
+	print("1. loop_logbook 15: kontakt, cel miejscowej, polecenie UCP z autorem...")
 	var pairs: Array = CreativeLines.LINES.get("loop_logbook", [])
-	_expect(pairs.size() == 2, "loop_logbook must keep exactly 2 pairs (got %d)" % pairs.size())
+	_expect(pairs.size() == 5, "loop_logbook keeps the owner's 5 pairs (got %d)" % pairs.size())
 	var joined: String = _join(pairs)
-	_expect(joined.contains("Kontakt przy pierwszym odczycie"), "log keeps the contact line")
-	_expect(joined.contains("Wyjście na czas: sam czytnik"), "log keeps the on-time exit line")
-	_expect(joined.contains("przerwał") and joined.contains("z zewnątrz"), "log keeps the outside cause")
-	_expect(joined.contains("20:40"), "log keeps the 20:40 register anchor")
+	_expect(joined.contains("20:40 — kontakt przy pierwszym odczycie"), "log keeps the contact line and the 20:40 register anchor")
+	_expect(joined.contains("niezależny od UCP odczyt"), "log names the local Lena's own purpose")
+	_expect(joined.contains("Po utracie kontaktu: utrzymać wynik lokalny. Wierzbicka."), "the later UCP order carries its author")
+	_expect(not joined.contains("ktoś przerwał") and not joined.contains("Próbę ktoś przerwał"), "log must not blur authorship (owner KROK 11)")
 	_expect(not joined.contains(AMBIGUOUS), "log must not keep the ambiguous pronoun (N10)")
 	for pair: Variant in pairs:
 		if pair is Array and (pair as Array).size() >= 2:
 			_expect(String((pair as Array)[1]).length() <= 115, "loop line must fit the CRT box")
+	var kept: String = _join(CreativeLines.lines_for("loop_logbook", {&"home_sample_preserved": true}))
+	var left: String = _join(CreativeLines.lines_for("loop_logbook", {&"home_sample_preserved": false}))
+	_expect(kept.contains("Powtórka dała mi próbkę i opóźniła wyjście"), "the repeat branch names the delay it caused")
+	_expect(left.contains("Wyszłam bez powtórki; w czytniku został bufor"), "the on-time branch names what the reader kept")
 
 
-# --- N10: rejestr z obrazem + powiazany koszt ---
+# --- N10: rejestr — powiazany koszt, bez sensacji i golego kryptonimu ---
 
 func _test_ledger() -> void:
-	print("2. cost_ledger_console: obraz pary + powiazany koszt...")
+	print("2. cost_ledger_console: powiazany koszt, bez sensacji...")
 	var pairs: Array = CreativeLines.LINES.get("cost_ledger_console", [])
-	_expect(pairs.size() == 3, "ledger keeps 3 pairs")
+	_expect(pairs.size() == 5, "ledger keeps the owner's 5 pairs")
 	var joined: String = _join(pairs)
-	_expect(joined.contains("04/17"), "ledger keeps numbers/dates 04/17 (pin 0217)")
+	_expect(joined.contains("Linia 4:"), "ledger keeps the Line 4 record identifier")
 	_expect(not joined.contains(BARE_CODENAME), "ledger must not keep the bare codename (N10)")
-	_expect(joined.contains("jedną ręką") or joined.contains("jedna reka"), "ledger names the image (one hand)")
-	_expect(joined.contains("Ktoś utrzymuje zapis"), "ledger keeps the pkg_0194 line")
-	_expect(joined.contains("powiązanego kosztu"), "ledger replaces sensation with the linked cost (N10)")
+	_expect(joined.contains("powiązany koszt"), "ledger replaces sensation with the linked cost (N10)")
+	_expect(joined.contains("Nie dowód, że konkretna osoba postanowiła zabić Jakuba"), "ledger separates knowledge of the cost from a murder claim")
 	_expect(not joined.contains(SENSATIONAL), "ledger must not keep the sensational line (N10)")
 
 
@@ -128,11 +138,11 @@ func _test_method_commits() -> void:
 	_expect(not all_text.contains(MANTRA), "mantra must read grep 0 across LINES (N10)")
 	_expect(not all_text.contains(SENSATIONAL), "sensation must read grep 0 across LINES (N10)")
 	_expect(not all_text.contains(BARE_CODENAME), "bare codename must read grep 0 across LINES (N10)")
-	_expect(_join(lines_dict.get("method_commit_post_force_home", [])).contains("Staję przy słupku sama"), "force_home commits at the post")
-	_expect(_join(lines_dict.get("method_commit_post_close_equal_recover_local", [])).contains("Oddaję jej miejsce"), "close_equal keeps the pkg_0194 marker")
-	_expect(_join(lines_dict.get("method_commit_post_close_equal_recover_local", [])).contains("jej klucz"), "close_equal waits for her key")
-	_expect(_join(lines_dict.get("method_commit_post_mutual_passage", [])).contains("Otwieram, nie zabieram"), "mutual keeps the pkg_0194 marker")
-	_expect(_join(lines_dict.get("method_commit_post_mutual_passage", [])).contains("Mostu nie gaszę"), "mutual keeps the bridge lit")
+	_expect(_join(lines_dict.get("method_commit_post_force_home", [])).contains("Wybieram własny powrót"), "force_home commits at the post")
+	_expect(_join(lines_dict.get("method_commit_post_close_equal_recover_local", [])).contains("Wybieram odzyskanie miejscowej"), "close_equal names the recovery first")
+	_expect(_join(lines_dict.get("method_commit_post_close_equal_recover_local", [])).contains("Najpierw musi odpowiedzieć u siebie"), "close_equal waits for her own answer")
+	_expect(_join(lines_dict.get("method_commit_post_mutual_passage", [])).contains("Wybieram przejście wzajemne"), "mutual names the passage")
+	_expect(_join(lines_dict.get("method_commit_post_mutual_passage", [])).contains("przeciek zostaje"), "mutual keeps the leak it costs")
 
 
 # --- N7-reszta: urzadzenia poza prognozami 18 ---
@@ -146,7 +156,7 @@ func _test_devices_rest() -> void:
 	_expect(report_joined.contains("186"), "register carries numbers (186 days)")
 	_expect(report_joined.contains("warsztat") or report_joined.contains("warsztatu"), "service register names the workshop")
 	var minimal: Array = lines_dict.get("minimal_report", [])
-	_expect(minimal.size() == 4, "minimal_report keeps 4 pairs (pin 0217)")
+	_expect(minimal.size() == 5, "minimal_report keeps the owner's 5 pairs")
 	_expect(_join(minimal).contains("20:40"), "extract carries numbers/dates (20:40)")
 	var card: Array = lines_dict.get("identity_card", [])
 	_expect(card.size() == 4, "identity_card keeps 4 pairs (pin 0217)")
@@ -156,10 +166,10 @@ func _test_devices_rest() -> void:
 	_expect(_join(lines_dict.get("jakub_refusal", [])).contains("Nie będę cię więcej prosić o bliznę"), "jakub_refusal keeps the boundary line")
 
 
-# --- N7-reszta: Wierzbicka bezosobowa na trasie ---
+# --- N7-reszta: Wierzbicka — argument, nie recytacja stanu ---
 
 func _test_wierzbicka_all() -> void:
-	print("5. Wierzbicka impersonal across the route scope...")
+	print("5. Wierzbicka defends the result across the route scope...")
 	var lines_dict: Dictionary = CreativeLines.LINES
 	var spoken: String = ""
 	for key: String in ["identity_card", "minimal_report", "adaptation_offer_terminal"]:
@@ -167,9 +177,9 @@ func _test_wierzbicka_all() -> void:
 			if pair is Array and String((pair as Array)[0]).to_lower().contains("wierzbicka"):
 				spoken += String((pair as Array)[1]) + "\n"
 	var lower: String = spoken.to_lower()
-	_expect(lower.contains("stan:"), "Wierzbicka keeps the impersonal state form")
-	_expect(lower.contains("zakres") or lower.contains("dopuszczaln") or lower.contains("stabilno") or lower.contains("procedur"), "Wierzbicka keeps qualifiers")
-	for phrase: String in ["proszę położyć", "wydam wyciąg", "wpiszemy", "wygładzimy"]:
+	_expect(not lower.contains("stan:"), "Wierzbicka is not an automaton reciting state (owner KROK 12)")
+	_expect(lower.contains("wynik"), "Wierzbicka answers for the maintained result")
+	for phrase: String in ["proszę położyć", "wydam wyciąg", "wygładzimy"]:
 		_expect(not lower.contains(phrase), "no reception phrasing: " + phrase)
 	var s40: String = _read("res://scripts/levels/station_40.gd").to_lower()
 	for phrase: String in ["proszę położyć", "wydam wyciąg", "wpiszemy", "wygładzimy"]:
@@ -273,7 +283,7 @@ func _test_fail_closed() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("PKG-0223 VOICES TEMPO PASS: loop 2 pairs + image, ledger image + linked cost, 3 concrete commits, devices, impersonal Wierzbicka, photo hub, K4 margin, budgets intact.")
+		print("PKG-0223 VOICES TEMPO PASS: attributed 15 log, linked-cost ledger, 3 concrete commits, devices, Wierzbicka defends the result, photo hub, K4 margin, budgets intact.")
 		quit(0)
 	else:
 		print("PKG-0223 VOICES TEMPO FAIL (%d)" % _failures.size())

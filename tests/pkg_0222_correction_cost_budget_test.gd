@@ -24,10 +24,11 @@ const FACT_15_CORRECTIVE := &"p9.mechanics.mutual_signal.corrective_response_obs
 const FACT_15_NOTE := &"p9.mechanics.mutual_signal.abort_note_read"
 const FACT_18_METHOD := &"p9.method_commitment.method_committed"
 const DONOR_TRACE := &"p7.work_history_and_record.trace"
-const DONOR_TRACE_VALUE := "cost_ledger_and_consent_scope_recorded"
 const DONOR_LEDGER := &"p9.consent_and_cost.cost_ledger_read"
 const DONOR_OFFER := &"p9.consent_and_cost.adaptation_offer"
 const DONOR_SCOPE := &"p9.consent_and_cost.jakub_consent_scope"
+
+const CampaignChain := preload("res://tests/support/campaign_chain.gd")
 
 var _failures: Array[String] = []
 var _op_seen: Array[String] = []
@@ -181,14 +182,6 @@ func _test_15_cost_and_budget(state: Node) -> void:
 
 # ─── M10+M5: stacja 18 — select bez auto-domykania + budzet ───────────────
 
-func _seed_donor(state: Node) -> void:
-	state.record_decision(DONOR_TRACE, DONOR_TRACE_VALUE)
-	state.record_decision(DONOR_LEDGER, true)
-	state.record_decision(DONOR_OFFER, "rejected")
-	state.record_decision(DONOR_SCOPE, "limited")
-	state.record_decision(&"jakub_consent_state", "limited")
-
-
 func _test_18_select_and_budget(state: Node) -> void:
 	# M10: golas (bez donora) — routing dziala, tresci brak, luka mowi.
 	state.reset_campaign(true)
@@ -212,14 +205,18 @@ func _test_18_select_and_budget(state: Node) -> void:
 	_expect(_op_seen.size() == 1 and _op_seen[0] == "B", "18 select musi emitowac wybor operacji")
 	await _close_station(bare)
 	# M10: pelny inwentarz — select routuje cicho, bez luk i bez tresci.
-	state.reset_campaign(true)
+	# PKG-0242 (R1): the donor is the real pre-17 input run plus Jakub's scope
+	# conversation at 17 (CampaignChain), not hand-written facts; Marta's
+	# truth is recorded when her conversation finishes (PKG-0239).
+	CampaignChain.seed_before_17(state)
+	_expect(await CampaignChain.record_scope(self, "limited"), "17 zakres Jakuba musi sie zapisac")
 	_op_seen.clear()
 	var full := await _open_station(state, 18)
 	if full == null:
 		return
-	_seed_donor(state)
 	_expect(bool(full.call(&"compare_forecast_consent_dependencies")), "18 zestawienie musi wyjsc")
 	_expect(bool(full.call(&"disclose_marta_truth_partial")), "18 prawda musi wyjsc")
+	full.call(&"_on_narrative_dialogue_finished", "marta_truth_table")
 	full.connect(&"operation_selected", _on_op_selected)
 	full.call(&"select_operation", "C")
 	_expect(String(state.call(&"get_selected_finale_id")) == "station_42c",
@@ -227,17 +224,19 @@ func _test_18_select_and_budget(state: Node) -> void:
 	_expect(String(full.get("last_feedback")) == "", "18 select z inwentarzem nie otwiera luki")
 	_expect(not bool(full.get("is_method_committed")), "18 select nigdy nie zatwierdza metody")
 	await _close_station(full)
-	# M5: jawna sciezka tresci = 3 czasowniki (zestawienie / prawda / zatwierdzenie).
-	state.reset_campaign(true)
+	# M5: jawna sciezka tresci = 3 punkty (zestawienie / prawda / slupek).
+	# Since PKG-0239 the post names the method on the first visit and commits
+	# on the return after Jakub's answer at 17; the budget stays 3 points.
+	CampaignChain.seed_before_17(state)
+	_expect(await CampaignChain.record_scope(self, "limited"), "17 zakres musi sie zapisac")
+	_expect(await CampaignChain.propose_method(self, "close_equal_recover_local", "partial"), "18 krok 1-2/3 (zestawienie, prawda, nazwanie) musi wyjsc")
+	_expect(await CampaignChain.answer_method(self, "accepted"), "17 odpowiedz Jakuba musi sie zapisac")
 	var path := await _open_station(state, 18)
 	if path == null:
 		return
-	_seed_donor(state)
-	_expect(bool(path.call(&"compare_forecast_consent_dependencies")), "18 krok 1/3 musi wyjsc")
-	_expect(bool(path.call(&"disclose_marta_truth_partial")), "18 krok 2/3 musi wyjsc")
 	_expect(bool(path.call(&"commit_close_equal")), "18 krok 3/3 musi wyjsc")
 	_expect(String(state.decisions.get(FACT_18_METHOD, "")) == "close_equal_recover_local",
-		"18 trzy czasowniki domykaja metode")
+		"18 trzy punkty domykaja metode")
 	_expect(_mrp_count(path) == 3, "18 musi miec dokladnie 3 interakcje MRP")
 	await _close_station(path)
 
