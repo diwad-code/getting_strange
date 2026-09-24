@@ -1,0 +1,257 @@
+[
+	{
+		"detail": "",
+		"id": "full_text_layout",
+		"pass": true
+	},
+	{
+		"detail": "1",
+		"id": "skip_finishes_once",
+		"pass": true
+	},
+	{
+		"detail": "0 -> 0",
+		"id": "paused_typewriter_frozen",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "settings_footer_pl_85",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "settings_footer_pl_100",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "settings_footer_pl_115",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "settings_footer_en_85",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "settings_footer_en_100",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "settings_footer_en_115",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "capture_enter_before_gui",
+		"pass": true
+	},
+	{
+		"detail": "PRZYWRÓCONO DOMYŚLNE MAPOWANIA",
+		"id": "defaults_feedback",
+		"pass": true
+	},
+	{
+		"detail": "/root/@Node2D@14/@Panel@18/RemapPanel/RemapGrid/ActionButton_jump",
+		"id": "tab_stays_in_remap",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "same_animation_state_preserves_phase",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "reduced_motion_stops_npc_breath",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "vendor_asset_idle",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "vendor_asset_listen",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "vendor_asset_talk_0",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "vendor_asset_talk_1",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "thought_fits_85",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "thought_fits_100",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "thought_fits_115",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "paused_thought_frozen",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "paused_cold_open_frozen",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "paused_vignette_frozen",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "paused_vignette_cannot_skip",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "reduced_motion_stops_lena_breath",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "confirmation_default_is_cancel",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "confirmation_escape_never_accepts",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "confirmation_accepts_only_once",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "sprite_canvas_board_vehicle_0",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "no_baked_scenery_board_vehicle_0",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "sprite_canvas_board_vehicle_1",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "no_baked_scenery_board_vehicle_1",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "sprite_canvas_climb_back_0",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "no_baked_scenery_climb_back_0",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "new_game_requires_confirmation",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "cancel_new_game_preserves_progress",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "title_cannot_open_campaign_pause",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "pause_settings_hides_selector",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "pause_settings_restores_launch_focus",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "reset_requires_confirmation",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "cancel_reset_preserves_progress",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "station_42a_floor_matches_art",
+		"pass": true
+	},
+	{
+		"detail": "278.961181640625",
+		"id": "station_42a_player_supported",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "station_42a_marta_supported",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "station_42b_floor_matches_art",
+		"pass": true
+	},
+	{
+		"detail": "278.961181640625",
+		"id": "station_42b_player_supported",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "station_42b_marta_supported",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "station_42c_floor_matches_art",
+		"pass": true
+	},
+	{
+		"detail": "278.961181640625",
+		"id": "station_42c_player_supported",
+		"pass": true
+	},
+	{
+		"detail": "",
+		"id": "station_42c_marta_supported",
+		"pass": true
+	}
+]
