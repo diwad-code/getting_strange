@@ -6,6 +6,12 @@ Aktualizacja board verdict: 2026-08-31
 Status aktywny projektu: P9 Product Rescue & Hybrid Rebuild (`CURRENT_STATE.md`, `ROADMAP.md`, ADR-008).  
 Zweryfikowany dawca techniczny: Godot Engine v4.7.2.stable.official.ed1daf0bf (GL Compatibility, 640x360, 60 Hz).
 
+> **Aktualizacja PKG-0242 (2026-09-24), nie jest wydaniem.** Aktywny kształt to 20 adresów
+> (22 sceny: 01–18, 42A/B/C, 43), ukończalny wejściem gracza na trzech zakończeniach.
+> Twórcy i licencje są w menu głównym (TWÓRCY I LICENCJE, teksty z silnika); stacja 43
+> nie niesie już manifestu licencji. D-168 nadal blokuje eksport i `.exe`;
+> szczegóły: `docs/audits/PKG_0242_REPORT.md`. Poniższy tekst to zapis historyczny.
+
 ## 1. Podsumowanie wydania
 
 Ten plik łączy cztery porządki:

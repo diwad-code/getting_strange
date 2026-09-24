@@ -87,7 +87,7 @@ backdrop_color = Color(0.04, 0.07, 0.09, 0.9)
 [node name="CrispDiegeticText_CreditsManifest" type="Node2D" parent="."]
 position = Vector2(320, 108)
 script = ExtResource("12_crisp_text")
-text = "GETTING STRANGE\nGETTING STRANGE TEAM\nSCENARIUSZ • OBRAZ • DŹWIĘK\nSILNIK: GODOT ENGINE\nLICENCJE: MENU GŁÓWNE\nDZIĘKUJEMY ZA GRĘ"
+text = "GETTING STRANGE\nAUTORZY: GETTING STRANGE TEAM\nSCENARIUSZ • OBRAZ • DŹWIĘK\nSILNIK: GODOT ENGINE\nLICENCJE: MENU GŁÓWNE\nDZIĘKUJEMY ZA GRĘ"
 font_size = 7
 text_color = Color(0.46, 0.78, 0.76, 1)
 backdrop_color = Color(0.04, 0.07, 0.09, 0.9)

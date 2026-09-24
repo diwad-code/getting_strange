@@ -40,6 +40,13 @@ Fraza **Zero-Asset Architecture / Zero-Asset SFX** pozostaje prawdziwa dla warst
 
 Gra została zbudowana przy użyciu silnika **Godot Engine** (zweryfikowany runtime: 4.7.2).
 
+PKG-0242 (D-254): gra pokazuje te informacje sama — menu główne → **TWÓRCY I LICENCJE**
+(`scripts/ui/credits_panel.gd`). Panel czyta licencję MIT, listę komponentów stron trzecich
+i pełne teksty ich licencji z działającego silnika (`Engine.get_license_text()`,
+`Engine.get_copyright_info()`, `Engine.get_license_info()`), więc build eksportowany
+innym wydaniem 4.7.x pokaże teksty zgodne ze swoim silnikiem. Stacja 43 odsyła do menu
+(„LICENCJE: MENU GŁÓWNE”) zamiast wyświetlać skrót licencji w świecie gry.
+
 ### Licencja Godot Engine (MIT)
 
 ```text

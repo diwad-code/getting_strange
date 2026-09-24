@@ -74,7 +74,11 @@ func _ready() -> void:
 	_setup_audio()
 	var state := get_node_or_null("/root/GameStateManager")
 	if state != null:
-		is_response_transferred = state.decisions.get(FACT_RESPONSE, false) == true
+		# PKG-0242: the writer stores "living_response_loaded" (a String);
+		# comparing it with `true` raised a script error on every return to
+		# 16 and aborted the rest of this restore.
+		var response: Variant = state.decisions.get(FACT_RESPONSE, "")
+		is_response_transferred = (response is bool and response) or (response is String and not String(response).is_empty())
 		var prior_cost := str(state.decisions.get(FACT_COST_CHOICE, ""))
 		is_cost_selected = prior_cost in ["marta_memory", "sample_second"]
 		if is_cost_selected:

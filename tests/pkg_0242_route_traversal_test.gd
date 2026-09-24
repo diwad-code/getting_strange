@@ -27,7 +27,10 @@ extends SceneTree
 ##   step instead of sending Lena back to an earlier address;
 ## * each side of the 16/17/18 side-choices is a band at least MIN_SIDE_BAND
 ##   wide (the 18 post used to leave 12 px per side);
-## * reading points no longer share one resized CircleShape2D.
+## * reading points no longer share one resized CircleShape2D;
+## * every address re-opens cleanly after each finished route (revisit by
+##   the ReturnZone): Station 16 used to raise a script error there and
+##   abort its restore. Any error fails this gate through the log policy.
 ##
 ## Proves physics, placement and input routing only; it does not prove
 ## comprehension or fun.
@@ -84,7 +87,25 @@ func _run() -> void:
 	await _check_door_refusal(state)
 	await _check_in_room_step_line(state)
 	await _check_unique_shapes(state)
+	await _check_revisits(state)
 	_finish()
+
+
+func _check_revisits(state: Node) -> void:
+	for spec in [["force_home", "partial"], ["close_equal_recover_local", "partial"], ["mutual_passage", "full"]]:
+		CampaignChain.seed_before_17(state)
+		_expect(await CampaignChain.commit_chain(self, spec[0], spec[1], "granted"), "revisit: %s chain must commit" % spec[0])
+		var finale := CampaignChain.finale_for(spec[0])
+		_expect(await CampaignChain.play_finale(self, finale), "revisit: %s must play" % finale)
+		for id in ROUTE:
+			if id.begins_with("station_42") and id != finale:
+				continue
+			var station := (load("res://scenes/levels/%s.tscn" % id) as PackedScene).instantiate() as Node2D
+			root.add_child(station)
+			for _f in range(6):
+				await physics_frame
+			_expect(bool(station.get("is_exit_unlocked")) or id == "station_43", "revisit %s after %s: the exit must stay open" % [id, spec[0]])
+			await _close(station)
 
 
 func _press_interact() -> void:
@@ -135,24 +156,26 @@ func _check_door_after_commit(state: Node) -> void:
 
 
 func _check_door_refusal(state: Node) -> void:
-	var station := await _open(state, "station_18")
-	await _drain_dialogue(station)
-	var threshold := station.get_node("Threshold") as ThresholdZone
-	var player := station.get_node("Player") as CharacterBody2D
-	await _stand(player, threshold.global_position.x)
-	_expect(threshold.is_player_in_range and Focus.focused_point(station) == null, "18: the doorway itself is free of reading points")
-	await _press_interact()
-	var thought := station.get_node_or_null("InnerThoughtSurface")
-	_expect(not bool(threshold.get("_busy")), "18: without a method the exit must not start the entry sequence")
-	_expect(not bool(station.get("is_level_completed")), "18: without a method the exit must not complete")
-	var said := ""
-	if thought != null:
-		for label in thought.find_children("*", "Label", true, false):
-			said += String((label as Label).text) + " "
-		for label in thought.find_children("*", "RichTextLabel", true, false):
-			said += String((label as RichTextLabel).text) + " "
-	_expect(thought != null and bool(thought.get("visible")) and said.contains("trzy prognozy na tablicy"), "18: the refused exit must say what is missing (got '%s')" % said.strip_edges())
-	await _close(station)
+	for spec in [["station_18", "trzy prognozy na tablicy"], ["station_43", "ogłoszenia i napisy"]]:
+		var id: String = spec[0]
+		var station := await _open(state, id)
+		await _drain_dialogue(station)
+		var threshold := station.get_node("Threshold") as ThresholdZone
+		var player := station.get_node("Player") as CharacterBody2D
+		await _stand(player, threshold.global_position.x)
+		_expect(threshold.is_player_in_range and Focus.focused_point(station) == null, "%s: the doorway itself is free of reading points" % id)
+		await _press_interact()
+		var thought := station.get_node_or_null("InnerThoughtSurface")
+		_expect(not bool(threshold.get("_busy")), "%s: an exit the station cannot use yet must not start the entry sequence" % id)
+		_expect(not bool(station.get("is_level_completed")), "%s: the refused exit must not complete" % id)
+		var said := ""
+		if thought != null:
+			for label in thought.find_children("*", "Label", true, false):
+				said += String((label as Label).text) + " "
+			for label in thought.find_children("*", "RichTextLabel", true, false):
+				said += String((label as RichTextLabel).text) + " "
+		_expect(thought != null and bool(thought.get("visible")) and said.contains(String(spec[1])), "%s: the refused exit must say what is missing (got '%s')" % [id, said.strip_edges()])
+		await _close(station)
 
 
 func _check_in_room_step_line(state: Node) -> void:

@@ -49,6 +49,7 @@ func _ready() -> void:
 	_back.position = Vector2(18.0, 264.0)
 	_back.size = Vector2(200.0, 26.0)
 	_back.focus_mode = Control.FOCUS_ALL
+	TitleScreen.style_menu_button(_back)
 	_back.pressed.connect(close_panel)
 	add_child(_back)
 	_body.focus_neighbor_bottom = _back.get_path()
@@ -106,7 +107,7 @@ static func build_text() -> String:
 		lines.append("Story, design, visuals and sound: Getting Strange Team.")
 		lines.append("All sound is synthesised in-game; the game uses no third-party samples or artwork.")
 	lines.append("")
-	lines.append("Godot Engine — " + ("licencja" if polish else "licence") + " MIT")
+	lines.append("Godot Engine — " + ("licencja" if polish else "license") + " MIT")
 	lines.append(Engine.get_license_text().strip_edges())
 	lines.append("")
 	lines.append("Godot Engine — " + ("komponenty stron trzecich" if polish else "third-party components"))

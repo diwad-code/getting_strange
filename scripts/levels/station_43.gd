@@ -438,6 +438,16 @@ func _activate_prop_by_id(id: String) -> void:
 				child.queue_redraw()
 
 
+## PKG-0242 (UX): the stop's exit never ends the campaign (the reader at the
+## box does); Lena says what is left instead of walking into the doorway.
+func forward_block_line() -> String:
+	if is_level_completed:
+		return ""
+	if not _epilogue_requirements_met():
+		return "Zanim odejdę, przeczytam ogłoszenia i napisy na wiacie."
+	return "Został ostatni zapis w czytniku przy skrzynce. Potem go odłożę."
+
+
 func _complete_campaign() -> bool:
 	if is_level_completed:
 		return false
@@ -602,9 +612,11 @@ func _draw_state_layer() -> void:
 func _draw_branch_changed_fact() -> void:
 	match ending_family:
 		METHOD_FORCE_HOME:
-			# Pusta ławka z taśmą zamknięcia linii na słupie
-			draw_line(Vector2(50.0, 142.0), Vector2(68.0, 184.0), VectorStageStyle.CORRECTION_OXIDE, 2.5)
-			draw_line(Vector2(52.0, 146.0), Vector2(66.0, 180.0), VectorStageStyle.HUMAN_AMBER, 1.0)
+			# Pusta ławka z taśmą zamknięcia linii na słupie. PKG-0242: taśma na
+			# prawym słupie wiaty, nie na lewym, gdzie stoi Lena na starcie
+			# (przecinała jej głowę w pierwszym kadrze).
+			draw_line(Vector2(294.0, 200.0), Vector2(312.0, 242.0), VectorStageStyle.CORRECTION_OXIDE, 2.5)
+			draw_line(Vector2(296.0, 204.0), Vector2(310.0, 238.0), VectorStageStyle.HUMAN_AMBER, 1.0)
 		METHOD_CLOSE_EQUAL:
 			# Skrzynka narzędziowa na ławce i spoina naprawionego gruntu
 			draw_rect(Rect2(124.0, 222.0, 22.0, 14.0), VectorStageStyle.MID_PLANE)

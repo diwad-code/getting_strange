@@ -201,6 +201,11 @@ func _make_panel_style(background: Color, border: Color) -> StyleBoxFlat:
 
 
 func _style_button(button: Button) -> void:
+	style_menu_button(button)
+
+
+## Shared with CreditsPanel so every shell button reads the same.
+static func style_menu_button(button: Button) -> void:
 	var normal := StyleBoxFlat.new()
 	normal.bg_color = VectorStageStyle.DEEP_PLANE
 	normal.border_color = VectorStageStyle.MID_PLANE
